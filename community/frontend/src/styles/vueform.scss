@@ -1,0 +1,16 @@
+@import '@vueform/vueform/themes/vueform/scss/index.scss';
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    background-color: #222;
+  }
+
+  :root, :before, :after, * {
+    @include vf-dark-vars;
+    --vf-ring-color: none;
+    --vf-primary: #e79600;
+    --vf-primary-darker: #c98600;
+    --vf-success: #ffa800;
+    --vf-success-lighter: #ffd786;
+  }
+}
