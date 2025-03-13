@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "serve": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vue-tsc -b && vite build --emptyOutDir",
+    "watch": "vite build --watch --base=/js/vue --emptyOutDir",
     "preview": "vite preview"
   },
   "dependencies": {

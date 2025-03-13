@@ -103,7 +103,7 @@ const submit = async (FormData, form$) => {
   // Setting cancel token
   form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
 
-  return await form$.$vueform.services.axios.post(Constants.EDITHIRE,
+  return await form$.$vueform.services.axios.post(Constants.EDIT_HIRE,
   data,
     {
       cancelToken: form$.cancelToken.token,

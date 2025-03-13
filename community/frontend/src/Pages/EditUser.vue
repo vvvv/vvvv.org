@@ -1,14 +1,14 @@
 <script setup>
+import { ref, shallowRef, watch } from 'vue'
 
 import Basics from '../components/Basics.vue'
 import Company from '../components/Company.vue'
 import Hire from '../components/Hire.vue'
-import { ref, shallowRef, onMounted, watchEffect } from 'vue'
 import axios from 'axios'
 import Constants from '../constants'
-import KC from '../keycloak'
 
-var keycloak = null
+const { keycloak } = defineProps(['keycloak'])
+
 var mail = null
 var username = null
 
@@ -35,6 +35,26 @@ const emptyProfile = {
   edu: {},
   social: {}
 }
+
+watch (()=>keycloak, async(newValue, oldValue) => {
+    if (keycloak != null)
+    {
+      try{
+        mail = keycloak.getMail()
+        await reload()
+        await loadConstants()
+        dataLoaded.value = true
+      }
+      catch (error) {
+        failure.value = "Can't get data, please try login later."
+        console.log (error)
+      }
+      finally{
+        loading.value = false;
+      }
+    }
+})
+
 
 const loadConstants = async () => {
   const res = await axios.get(Constants.GET_CONSTANTS)
@@ -66,48 +86,10 @@ const reload = async () =>{
     data.value = res.data
   }
 }
-
-onMounted( async ()=> {
-  keycloak = new KC()
-
-  keycloak.onAuth = async ()=> {
-    loading.value = true;
-    try{
-      mail = keycloak.getMail()
-      await reload()
-      await loadConstants()
-      dataLoaded.value = true
-    }
-    catch (error) {
-      failure.value = "Can't get data, please try login later."
-    }
-    finally{
-      loading.value = false;
-    }
-  }
-  
-  // keycloak.onReady = ()=> {
-  // }
-
-})
-
-const login = ()=> {
-  keycloak.login(window.location.href)
-}
-
-const logout = ()=> {
-  keycloak.logout()
-}
-
 </script>
 
 <template>
   <div id="profile" class="container">
-    <template v-if="data == null && !loading">
-    <Vueform>
-      <ButtonElement name="login" button-label="Login" @click="login"/>
-    </Vueform>
-    </template>
     <template v-if="loading">
       <div class="spinner-border text-light" role="status">
         <span class="sr-only">Loading...</span>
@@ -119,13 +101,10 @@ const logout = ()=> {
         <div class="col">
           <div class="h1">{{ data.user.username }}</div>
         </div>
-        <div class="col-1">
-          <div class="vf-btn vf-btn-secondary" @click="logout">Logout</div>
-        </div>
       </div>
       <hr/>
       <div class="row">
-        <div class="col-12 col-md-3 mb-md-0 mb-5 menu">
+        <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">
           <template v-for="item in Object.keys(menu)">
             <div :class="[itemClass, selected==menu[item] ? selectedClass : '']" @click="selected=menu[item]">{{item}}</div>
           </template>

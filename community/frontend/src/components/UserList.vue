@@ -5,9 +5,9 @@ import UserListTable from './UserListTable.vue'
 
 const props = defineProps(['isMap'])
 
-const UserMap = defineAsyncComponent(() =>
-  import('./UserMap.vue')
-)
+// const UserMap = defineAsyncComponent(() =>
+//   import('./UserMap.vue')
+// )
 
 var stateObject = {
     isMap: props.isMap,

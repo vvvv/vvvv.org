@@ -31,14 +31,14 @@ onMounted(async ()=>
 
 function edit(username)
 {
-    window.location.href = '/community/users/profile?user='+ username
+    window.location.href = '/users/edit/profile?user='+ username
 }
 
 
 </script>
 
 <template>
-    <a href="/community/users/#" class="btn btn-secondary">< List</a>
+    <a href="/user/" class="btn btn-secondary">< List</a>
     <div v-if="UserData" class="card mt-3">
         <div class="card-header">
             <div class="row mx-1">

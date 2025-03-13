@@ -134,7 +134,7 @@ const submit = async (FormData, form$) => {
   // Setting cancel token
   form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
 
-  return await form$.$vueform.services.axios.post(Constants.EDITBASICS,
+  return await form$.$vueform.services.axios.post(Constants.EDIT_BASICS,
   data,
     {
       cancelToken: form$.cancelToken.token,
@@ -147,7 +147,7 @@ const removeFile = async (value, el$) => {
     console.log (value)
 
     await el$.$vueform.services.axios.request({
-      url: Constants.REMOVEFILE,
+      url: Constants.FILE_REMOVE,
       method: 'POST',
       data: el$.form$.convertFormData({
         id: value.tmp,
@@ -219,7 +219,7 @@ const formatDataForSumbit = async (requestData) => {
             'max:1024',
           ]"
           :upload-temp-endpoint="{
-            url: Constants.UPLOADFILE,
+            url: Constants.FILE_UPLOAD,
             method: 'POST'
             }"
           :remove-temp-endpoint="removeFile"

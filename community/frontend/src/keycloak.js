@@ -22,12 +22,12 @@ class KC
     
     logout(url)
     {
-        this.keycloak.logout({ redirectUri: url })
+        return this.keycloak.logout({ redirectUri: url })
     }
 
     login(redirectURL)
     {
-        this.keycloak.login({redirectUri: redirectURL })
+        return this.keycloak.login({redirectUri: redirectURL })
     }
 
     init(redirectURL)
@@ -48,7 +48,7 @@ class KC
             {
                 this.keycloak.init({
                     onLoad: 'check-sso',
-                    silentCheckSsoRedirectUri: `${location.origin}/profile/sso.html`,
+                    silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`,
                     token: this.tokens.at, 
                     refreshToken: this.tokens.rt, 
                     checkLoginIframe: false
@@ -58,7 +58,7 @@ class KC
             {
                 this.keycloak.init({
                     onLoad: 'check-sso',
-                    silentCheckSsoRedirectUri: `${location.origin}/profile/sso.html`
+                    silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`
                 })
             }
         }
