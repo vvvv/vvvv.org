@@ -1,6 +1,7 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue'
   import Constants from '../constants'
+  import { submitForm, removeFile, uploadTempFile }  from '../utils'
 
   const emit = defineEmits(['reload'])
 
@@ -118,41 +119,13 @@ const handleError = (error, details, form$) => {
   }
 }
 
-const formChanged = (data)=>
-{
+const formChanged = (data)=> {
   isChanged.value = true
 }
 
 const submit = async (FormData, form$) => {
-
-  form$.messageBag.clear()
-
-  // Using form$.data will INCLUDE conditional elements and it
-  // will submit the form as "Content-Type: application/json".
   const data = await formatDataForSumbit(form$.data)
-
-  // Setting cancel token
-  form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
-
-  return await form$.$vueform.services.axios.post(Constants.EDIT_BASICS,
-  data,
-    {
-      cancelToken: form$.cancelToken.token,
-    }
-  )
-}
-
-const removeFile = async (value, el$) => {
-
-    console.log (value)
-
-    await el$.$vueform.services.axios.request({
-      url: Constants.FILE_REMOVE,
-      method: 'POST',
-      data: el$.form$.convertFormData({
-        id: value.tmp,
-      }),
-    })
+  return submitForm (form$, data, Constants.EDIT_BASICS, keycloak)
 }
 
 const formatDataForSumbit = async (requestData) => { 
@@ -164,10 +137,7 @@ const formatDataForSumbit = async (requestData) => {
       delete requestData.basics.avatar_upload
     }
 
-    const token = await keycloak.getAccessToken()
-
     var postData = {
-      token: token,
       basics: requestData.basics,
       social: {
         nuget: requestData.social.nuget,
@@ -182,6 +152,16 @@ const formatDataForSumbit = async (requestData) => {
     throw error // this will cancel the submit process
   }
 }
+
+const upload = async (value, el$) => {
+  return uploadTempFile(value, el$, keycloak)
+}
+
+const remove = async (value, el$) => {
+  removeFile(value, el$, keycloak)
+}
+
+
 
 </script>
 
@@ -218,12 +198,9 @@ const formatDataForSumbit = async (requestData) => {
           :rules="[
             'max:1024',
           ]"
-          :upload-temp-endpoint="{
-            url: Constants.FILE_UPLOAD,
-            method: 'POST'
-            }"
-          :remove-temp-endpoint="removeFile"
-          :remove-endpoint="removeFile"
+          :upload-temp-endpoint="upload"
+          :remove-temp-endpoint="remove"
+          :remove-endpoint="remove"
         />
 
         <TextElement name="username" label="Username" :columns="columns" disabled/>

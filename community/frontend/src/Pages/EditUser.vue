@@ -1,5 +1,5 @@
 <script setup>
-import { ref, shallowRef, watch } from 'vue'
+import { ref, shallowRef, watch, onMounted } from 'vue'
 
 import Basics from '../components/Basics.vue'
 import Company from '../components/Company.vue'
@@ -7,16 +7,14 @@ import Hire from '../components/Hire.vue'
 import axios from 'axios'
 import Constants from '../constants'
 
-const { keycloak } = defineProps(['keycloak'])
+const { keycloak, logged } = defineProps(['keycloak', 'logged'])
 
-var mail = null
-var username = null
+const mail = ref(null)
 
 const data = ref(null)
-const loading = ref(false)
+const loading = ref(true)
 const constants = ref(null)
-const dataLoaded = ref (false)
-const failure = ref (null)
+const failure = ref ("")
 const newProfile = ref (false)
 const selected = shallowRef(Basics)
 const menu = {
@@ -36,26 +34,6 @@ const emptyProfile = {
   social: {}
 }
 
-watch (()=>keycloak, async(newValue, oldValue) => {
-    if (keycloak != null)
-    {
-      try{
-        mail = keycloak.getMail()
-        await reload()
-        await loadConstants()
-        dataLoaded.value = true
-      }
-      catch (error) {
-        failure.value = "Can't get data, please try login later."
-        console.log (error)
-      }
-      finally{
-        loading.value = false;
-      }
-    }
-})
-
-
 const loadConstants = async () => {
   const res = await axios.get(Constants.GET_CONSTANTS)
   if (res.status != 200)
@@ -69,8 +47,16 @@ const loadConstants = async () => {
 }
 
 const reload = async () =>{
+
   const token = await keycloak.getAccessToken()
-  const res = await axios.post(Constants.GET_USERINFO, {token: token})
+
+  const res = await axios.post(Constants.GET_USERINFO, {}, {
+        headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': token
+                }
+      })
+
   if (res.status != 200)
   {
     if (res.data.code == 1)
@@ -78,7 +64,7 @@ const reload = async () =>{
       data.value = emptyProfile
       newProfile.value = true
       data.value.user.username = keycloak.getUsername()
-      data.value.user.email = keycloak.getMail()
+      data.value.user.email = mail.value
     }
   }
   else
@@ -86,17 +72,48 @@ const reload = async () =>{
     data.value = res.data
   }
 }
+
+// onMounted(async() => {
+//   if (keycloak !== null)
+//     {
+//       try{
+//         mail.value = keycloak.getMail()
+//         await reload()
+//         //await loadConstants()
+//       }
+//       catch (error) {
+//         failure.value = "Can't get data, please try login later."
+//       }
+//       loading.value = false;
+//     }
+// })
+
+watch (()=>logged, async(value)=>{
+
+  if (logged && keycloak !=null)
+  {
+      try{
+        mail.value = keycloak.getMail()
+        await reload()
+        await loadConstants()
+      }
+      catch (error) {
+        failure.value = "Can't get data, please try login later."
+      }
+      loading.value = false;
+    }
+
+}, { immediate: true })
+
 </script>
 
 <template>
-  <div id="profile" class="container">
-    <template v-if="loading">
-      <div class="spinner-border text-light" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </template>
-    <div v-if="failure" class="mt-4">{{ failure }}</div>
-    <template v-if="dataLoaded">
+  <div id="profile">
+    <div v-if="loading" class="spinner-border text-light" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
+    <template v-if="!loading && mail!=null">
       <div class="row mb-2">
         <div class="col">
           <div class="h1">{{ data.user.username }}</div>

@@ -3,20 +3,22 @@ import Constants from './constants'
 
 class KC
 {
-    getMail = () => this.keycloak.idTokenParsed.email
+    getMail = () => this.keycloak.idTokenParsed?.email
     getUsername = () => this.keycloak.tokenParsed?.preferred_username;
     // isLogged = () => !!this.keycloak.token
 
-    constructor(redirectURL)
+    constructor()
     {
         this.tokens = null
         this.initOptions = Constants.LOGIN_OPTIONS
-        this.init(redirectURL)
     }
 
     async getAccessToken()
     {
-        await this.keycloak.updateToken()
+        await this.keycloak.updateToken().catch(()=>{
+            throw ('Failed to refresh the token, or the session has expired');
+        })
+        
         return this.keycloak.token
     }
     
@@ -25,17 +27,17 @@ class KC
         return this.keycloak.logout({ redirectUri: url })
     }
 
-    login(redirectURL)
+    login(url)
     {
-        return this.keycloak.login({redirectUri: redirectURL })
+        return this.keycloak.login({redirectUri: url })
     }
 
-    init(redirectURL)
+    init()
     {
         this.keycloak = new Keycloak(this.initOptions)
 
         this.keycloak.onReady = (auth) => {
-            // this.onReady()
+            this.onReady()
         }
 
         this.keycloak.onAuthSuccess = () =>{
@@ -50,8 +52,7 @@ class KC
                     onLoad: 'check-sso',
                     silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`,
                     token: this.tokens.at, 
-                    refreshToken: this.tokens.rt, 
-                    checkLoginIframe: false
+                    refreshToken: this.tokens.rt
                 })
             }
             else

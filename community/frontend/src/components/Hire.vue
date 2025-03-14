@@ -2,6 +2,7 @@
 import { email } from '@vueform/vueform';
 import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
+import { submitForm }  from '../utils'
 
   const emit = defineEmits(['reload'])
 
@@ -39,8 +40,8 @@ import Constants from '../constants'
 const formatLoadedData = (data) => {
 
   var d = {
-        available: data.hire.available,
-        types: data.hire.types.map((e)=>{return e.value}),
+        available: data.hire[0].available,
+        types: data.hire[0].types.map((e)=>{return e.value}),
         // workFor: data.hire.workFor.map ((e)=>{
         //   return {
         //     status: e.status,
@@ -49,6 +50,7 @@ const formatLoadedData = (data) => {
         //   }
         // })
     }
+   
   return d
 }
 
@@ -95,29 +97,13 @@ const handleError = (error, details, form$) => {
 }
 
 const submit = async (FormData, form$) => {
-
-  // Using form$.data will INCLUDE conditional elements and it
-  // will submit the form as "Content-Type: application/json".
   const data = await formatDataForSumbit(form$.data)
-
-  // Setting cancel token
-  form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
-
-  return await form$.$vueform.services.axios.post(Constants.EDIT_HIRE,
-  data,
-    {
-      cancelToken: form$.cancelToken.token,
-    }
-  )
+  return submitForm (form$, data, Constants.EDIT_HIRE, keycloak)
 }
 
 const formatDataForSumbit = async (requestData) => { 
-  try {
-    
-    const token = await keycloak.getAccessToken()
-
+  try {   
     return {
-      token: token,
       available: requestData.available,
       types: requestData.types
       // workFor: requestData.workFor.map((c, index)=>{

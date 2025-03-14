@@ -12,7 +12,7 @@ function image (l)
     return `${Constants.ASSETS}${l}?withoutEnlargement`;
 }
 
-function fetchData()
+onMounted( async ()=>
 {
     fetch (request)
         .then((response) =>{
@@ -24,11 +24,6 @@ function fetchData()
         .catch ((err) => {
             console.log (err)
         })
-}
-
-onMounted(()=>
-{
-    fetchData()
 })
 
 </script>
@@ -38,12 +33,13 @@ onMounted(()=>
     <template v-if="count > 0">
         <p>This is a list of {{ count }} businesses that use vvvv.</p>
         <div class="row">
-            <div v-for="{ name, website, profilepic } in companies" track-by="username" class="company col-md-3 col-lg-4 py-3 border-bottom">
+            <div v-for="{ name, website, description, logo } in companies" track-by="username" class="company col-md-3 col-lg-4 py-3 border-bottom">
                 <div class="logo">
-                    <img :src="image(profilepic.image_id)" v-if="profilepic !== null"/>
+                    <img :src="image(logo)" v-if="profilepic !== null"/>
                 </div>
                 <p class="name">{{ name }}</p>
-                <a :href="website" target="_blank">Website</a>
+                <a :href="website" target="_blank">{{ website }}</a>
+                <p>{{ Description }}</p>
             </div>
         </div>
     </template>

@@ -5,6 +5,29 @@ const client = createDirectus(process.env.DIRECTUSURL)
 .with(staticToken(process.env.DIRECTUSTOKEN))
 .with(rest());
 
+async function getItemID (collection, userID)
+{
+	var id = await client.request(readItems (collection, {
+		fields: [
+			'id'
+		],
+		filter: {
+			user_id: {
+				_eq: userID
+			}
+		}
+	}));
+
+	if ( id.length > 0)
+	{
+		return id[0].id;
+	}
+	{
+		throw ("Can't find entry for this users")
+	}
+
+}
+
 async function getConstants()
 {
 	const companyRoles = await client.request(readItems ('Company_Roles', {
@@ -210,7 +233,7 @@ async function getSocialNetworks (user_id)
 	return result[0];
 }
 
-export { getUserID, getUserInfo, getConstants }
+export { getUserID, getUserInfo, getConstants, getItemID }
 
 ///WORKS FOR
 // var workFor = await client.request(readItems ('User_Company', {

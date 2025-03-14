@@ -5,12 +5,14 @@ import Constants from '../constants'
 import Field from './Field.vue'
 import { isEmpty } from '../utils'
 
-const props = defineProps(['username'])
+const props = defineProps(['username', 'keycloak', 'logged'])
 const UserData = ref(null)
 const imageParams = "?quality=90&fit=cover&width=120"
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${props.username}&fields=*,hire.*.Hire_Types_id.type,social.*`
 
-async function getData()
+const username = ref("")
+
+onMounted(async ()=>
 {
     fetch(url)
     .then((response) => {
@@ -21,17 +23,19 @@ async function getData()
     .catch((err) => {
         console.error(err);
     });
-}
 
-onMounted(async ()=>
-{
-    await getData();
-    //UserData.value = {"Hire":{"type":"undefined","available":"undefined","description":"undefined"},"User":{"email":"florian.geierstanger@web.de","homepage":null,"realname":null,"username":"fgeierst","statement":null,"profilepic":"undefined","coordinates":null},"SocialNetworks":{"nuget":"undefined","fields":"undefined","github":"undefined"}}
+    if (props.logged)
+    {
+        if (props.keycloak != null)
+        {
+            username.value = props.keycloak.getUsername()
+        }
+    }
 })
 
-function edit(username)
+function edit()
 {
-    window.location.href = '/users/edit/profile?user='+ username
+    window.location.href = '/user/edit/'
 }
 
 
@@ -43,7 +47,7 @@ function edit(username)
         <div class="card-header">
             <div class="row mx-1">
                 <div class="h4 mr-auto">{{ UserData.username }}</div>
-                <button class="btn btn-sm btn-primary px-2" @click="edit(UserData.username)">Edit</button>    
+                <button v-if="UserData.username == username" class="btn btn-sm btn-primary px-2" @click="edit()">Edit</button>    
             </div>
         </div>
         <div class="card-body">

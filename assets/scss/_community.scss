@@ -6,13 +6,27 @@ $label: #888;
     min-height: 30rem;
     padding-bottom: 5rem;
     
-    .nav-link.active
-    {
-        background-color: #555;
+    .nav-link {
+        color: #444;
+        text-decoration: underline;
+        text-underline-offset: 0.5em;
+        text-decoration-color: #aaa;
+
+        &.active
+        {
+            color: #eee;
+            background-color: #555;
+            text-decoration: none;
+        }
     }
 
     &.dark{
         background-color: #222;
+
+        .nav-link {
+            color: #eee;
+            text-decoration-color: #555;
+        }
     }
 }
 

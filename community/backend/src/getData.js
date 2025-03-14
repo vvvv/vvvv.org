@@ -1,25 +1,22 @@
 import { getUserInfo, getConstants } from "./helper.js"
 
 const userInfo = async (req, res, JWT) =>
-{
-    var mail
-    
+{   
     try{
-        mail = JWT.verify(req.token)
+        const mail = JWT.verify(req.get('Authorization'))
+        try{
+            const info = await getUserInfo(mail)
+            return res.status(200).send(info);
+        }
+        catch (err)
+        {
+            console.log (err)
+            return res.status(400).send({message: "Profile doesn't exist", code: 1})
+        }
     }
     catch (err)
     {
         return res.status(400).send({message: "Login failed", code: 0})
-    }
-
-    try{
-        const info = await getUserInfo(mail)
-        return res.status(200).send(info);
-    }
-    catch (err)
-    {
-        console.log (err)
-        return res.status(400).send({message: "Profile doesn't exist", code: 1})
     }
 }
 

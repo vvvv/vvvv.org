@@ -34,6 +34,9 @@ function fetchData(url)
             }
             state.value.totalPages = Math.ceil(state.value.totalCount / state.value.pageLimit)  || state.value.totalPages
         })
+        .catch((err) => {
+            throw (err);
+        })
     })
     .catch((err) => {
         console.error(err);
@@ -82,8 +85,6 @@ watchEffect(async () => {
 
     var paramString = params.join('&')
 
-    console.log (paramString)
-
     const url = `${Constants.GET_USERS}?${paramString}`
 
     fetchData(url)
@@ -108,7 +109,7 @@ watchEffect(async () => {
             </thead>
             <tbody>
                 <tr v-for="u in users" track-by="id">
-                    <td><img :src="link(u.userpic)" v-if="u.userpic !== null" class="rounded-circle"/></td> 
+                    <td><a :href="`?user=${u.username}`"><img :src="link(u.userpic)" v-if="u.userpic !== null" class="rounded-circle"/></a></td> 
                     <td><a :href="`?user=${u.username}`">{{u.username}}</a></td>
                     <td><template v-if="u.hire.length > 0">{{ u.hire[0].available ? 'Yes' : 'No' }}</template></td>
                 </tr>

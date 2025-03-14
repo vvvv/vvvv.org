@@ -32,7 +32,7 @@ app.listen (port, function(){
 // Getter Endpoints
 app.options('/v1/userinfo', cors()) 
 app.post ('/v1/userinfo', cors(), express.json(), async (req, res) => {
-    await userInfo(req.body, res, JWT);
+    await userInfo(req, res, JWT);
 });
  
 app.options('/v1/constants', cors()) 
@@ -43,23 +43,26 @@ app.get ('/v1/constants', cors(), express.json(), async (req, res) => {
 // Edit Endpoints
 app.options('/v1/edit/basics', cors())
 app.post ('/v1/edit/basics', cors(), express.json(), async (req, res) => {
-    await editBasics(req.body, res, JWT)
+    await editBasics(req, res, JWT)
 });
 
 app.options('/v1/edit/hire', cors())
 app.post ('/v1/edit/hire', cors(), express.json(), async (req, res) => {
-    await editHire(req.body, res, JWT)
+    await editHire(req, res, JWT)
 });
 
 app.options('/v1/edit/company', cors())
 app.post ('/v1/edit/company', cors(), express.json(), async (req, res) => {
-    await editCompany(req.body, res, JWT)
+    await editCompany(req, res, JWT)
 });
- 
+
+// File Endpoints
 app.options('/v1/uploadFile', cors()) 
 app.post ('/v1/uploadFile', cors(), async (req, res) => {
     await uploadFile(req, res, JWT)
 });
 
 app.options('/v1/removeFile', cors()) 
-app.post ('/v1/removeFile', cors(), multer().none(), removeFile)
+app.post ('/v1/removeFile', cors(), multer().none(), async (req, res) => {
+    await removeFile(req, res, JWT)
+});

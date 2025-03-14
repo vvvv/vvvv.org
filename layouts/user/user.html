@@ -8,7 +8,7 @@
     <div class="main">
         {{ partial "nav" . }}
 
-        <div id="community" class="dark">    
+        <div id="community" class="{{ .Params.theme }}">    
             <div id="app" class="container" page="{{ .Params.page }}"></div>
         </div>
 

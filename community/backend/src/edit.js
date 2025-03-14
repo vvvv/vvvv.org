@@ -1,38 +1,43 @@
 import { createDirectus, rest, createItem, updateItem, deleteItems, readItems, staticToken } from '@directus/sdk';
 import 'dotenv/config'
-import { getUserID } from "./helper.js"
+import { getUserID, getItemID } from "./helper.js"
 
 const client = createDirectus('http://localhost:8055')
 .with(staticToken(process.env.DIRECTUSTOKEN))
 .with(rest());
 
 const editBasics = async (req, res, JWT) => {
-    try{
-        
-        const mail = JWT.verify(req.token)
-
+    
+    try{   
+        const mail = JWT.verify(req.get('Authorization'))
         var user = await getUserID(mail)
-        var userID
-        var basics = req.basics
-        var social = req.social
+
+        var userID = null
+        var basics = req.body.basics
+        var social = req.body.social
+        var userpic = req.body.basics.userpic
     
         if (user.length > 0)
         {        
             userID = user[0].id 
             await client.request(updateItem ('User', userID, basics))
-            await client.request(updateItem ('SocialNetworks2', userID, social))
+
+            var socialNetworksID = await getItemID ('SocialNetworks2', userID)
+
+            await client.request(updateItem ('SocialNetworks2', socialNetworksID, social))
         }
         else
         {
-            userID = (await client.request(createItem ('User', basics))).id
+            var result = await client.request(createItem ('User', basics))
+            userID = result.id
             social.user_id = userID
             await client.request(createItem ('SocialNetworks2', social))
         }
 
-        if (req.basics.userpic)
+        if (userID != null && userpic)
         {
             var userImage = {
-                image: req.basics.userpic,
+                image: userpic,
                 user_id: userID
             }
         
@@ -40,7 +45,7 @@ const editBasics = async (req, res, JWT) => {
         }
 
         return res.status(200).send({
-            error: "Updated"
+            result: "Updated"
         });
     }
     catch (error){ 
@@ -52,14 +57,15 @@ const editBasics = async (req, res, JWT) => {
 
 }
 
-const editCompany = async (req, res) =>{
+const editCompany = async (req, res, JWT) =>{
 
     var user = null
     var company = null
     
     try
     {
-        user = await getUserID(req.email)
+        const mail = JWT.verify(req.get('Authorization'))
+        user = await getUserID(mail)
     }
     catch (error) { 
         console.log (error);
@@ -80,7 +86,7 @@ const editCompany = async (req, res) =>{
                         {
                             company: {
                                     uuid: {
-                                    _eq: req.company.uuid,
+                                    _eq: req.body.company.uuid,
                                 }
                             }
                         },
@@ -109,15 +115,15 @@ const editCompany = async (req, res) =>{
         {
             try{
                 await client.request(updateItem ('Company', company[0].company.id, {
-                    logo: req.company.logo,
-                    description: req.company.description,
-                    website: req.company.website,
-                    fields: req.company.fields
+                    logo: req.body.company.logo,
+                    description: req.body.company.description,
+                    website: req.body.company.website,
+                    fields: req.body.company.fields
                 }))
     
-                if (req.company.hasOwnProperty('employees'))
+                if (req.body.company.hasOwnProperty('employees'))
                 {
-                    for (const item of req.company.employees)
+                    for (const item of req.body.company.employees)
                         {
                             if (item.role > 1)
                             {
@@ -153,14 +159,12 @@ const editCompany = async (req, res) =>{
         {            
             try{
                 const companyID = await client.request(createItem ('Company', {
-                    name: req.company.name,
-                    logo: req.company.logo,
-                    description: req.company.description,
-                    website: req.company.website,
-                    fields: req.company.fields
+                    name: req.body.company.name,
+                    logo: req.body.company.logo,
+                    description: req.body.company.description,
+                    website: req.body.company.website,
+                    fields: req.body.company.fields
                 }))
-
-                console.log (companyID)
 
                 await client.request(createItem ('User_Company', {
                         user: user[0].id,
@@ -220,25 +224,26 @@ const editEmployee = async ( employee, companyId )=> {
 }
 
 const editHire = async (req, res, JWT) =>{
-    try{
-        
-        const mail = JWT.verify(req.token)
+    try{       
+        const mail = JWT.verify(req.get('Authorization'))
         const user = await getUserID(mail)
     
         if (user.length > 0)
         {
             const userID = user[0].id
             
-            var hire = {
-                available: req.available,
-                types: req.types
+            const hire = {
+                available: req.body.available,
+                types: req.body.types
             }
 
-            await client.request(updateItem ('Hire', userID, hire))
+            const hireID = await getItemID ('Hire', userID)
+
+            await client.request(updateItem ('Hire', hireID, hire))
             
-            if (req.hasOwnProperty ('workFor'))
+            if (req.body.hasOwnProperty ('workFor'))
             {
-                for (var company of req.workFor)
+                for (var company of req.body.workFor)
                     {
                         const item = await client.request(readItems ('User_Company', {
                                 fields: [
@@ -269,7 +274,7 @@ const editHire = async (req, res, JWT) =>{
             }
 
             return res.status(200).send({
-                error: "Updated"
+                result: "Updated"
             });
         }
     }

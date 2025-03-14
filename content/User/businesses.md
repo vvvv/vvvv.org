@@ -1,7 +1,7 @@
 ---
-title: User
+title: Businesses
 type: user
 layout: user
-page: users
+page: businesses
 theme:
 ---

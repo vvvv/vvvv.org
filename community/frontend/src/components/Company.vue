@@ -1,6 +1,7 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue'
   import Constants from '../constants'
+  import { submitForm, removeFile, uploadTempFile }  from '../utils'
 
   const emit = defineEmits(['reload'])
 
@@ -128,8 +129,6 @@ const handleError = (error, details, form$) => {
 const formatDataForSumbit = async ({company, logo_upload}) => { 
   try {
 
-    const token = await keycloak.getAccessToken()
-
     if (logo_upload != null)
     {
       company.logo = logo_upload.tmp
@@ -137,7 +136,6 @@ const formatDataForSumbit = async ({company, logo_upload}) => {
     }
 
     return {
-      token: token,
       company: company,
     }
 
@@ -157,33 +155,16 @@ const formChanged = (data)=>
 }
 
 const submit = async (FormData, form$) => {
-
-  // Using form$.data will INCLUDE conditional elements and it
-  // will submit the form as "Content-Type: application/json".
   const data = await formatDataForSumbit(form$.data)
-
-  // Setting cancel token
-  form$.cancelToken = form$.$vueform.services.axios.CancelToken.source()
-
-  return await form$.$vueform.services.axios.post(Constants.EDIT_COMPANY,
-  data /* | data | requestData */,
-    {
-      cancelToken: form$.cancelToken.token,
-    }
-  )
+  return submitForm (form$, data, Constants.EDIT_COMPANY, keycloak)
 }
 
-const removeFile = async (value, el$) => {
+const upload = async (value, el$) => {
+  return uploadTempFile(value, el$, keycloak)
+}
 
-    console.log (value)
-
-    await el$.$vueform.services.axios.request({
-      url: Constants.FILE_REMOVE,
-      method: 'POST',
-      data: el$.form$.convertFormData({
-        id: value.tmp,
-      }),
-    })
+const remove = async (value, el$) => {
+  removeFile(value, el$, keycloak)
 }
 
 </script>
@@ -224,12 +205,9 @@ const removeFile = async (value, el$) => {
         :rules="[
           'max:1024',
         ]"
-        :upload-temp-endpoint="{
-          url: Constants.FILE_UPLOAD,
-          method: 'POST'
-          }"
-        :remove-temp-endpoint="removeFile"
-        :remove-endpoint="removeFile"
+        :upload-temp-endpoint="upload"
+        :remove-temp-endpoint="remove"
+        :remove-endpoint="remove"
       />
 
       <ObjectElement name="company">

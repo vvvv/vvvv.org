@@ -6,7 +6,12 @@ import { FormData, Blob } from "formdata-node"
 
 const uploadFile = async(req, res, JWT) => {
 
-    // TODO: CHECK TOKEN FIRST, IF WRONG, THEN FAIL
+    try{
+        JWT.verify(req.get('Authorization'))
+    }
+    catch (error){
+        return res.status(400).send("Can't upload file");
+    }
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {

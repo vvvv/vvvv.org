@@ -1,6 +1,7 @@
+import Constants from './constants'
+
 export function isEmpty(d)
 {
-
     return (d !== null && d !== '' && d !== 'undefined') ? d : "---"
 }
 
@@ -17,6 +18,31 @@ export function cleanup(obj)
     const removeFields = ['date_updated', 'date_created']
     removeProps(obj, removeFields)
     return obj
+}
+
+export async function submitForm(form, data, url, keycloak)
+{
+    form.messageBag.clear()
+    form.cancelToken = form.$vueform.services.axios.CancelToken.source()
+  
+    try{
+        const token = await keycloak.getAccessToken()
+        
+        return await form.$vueform.services.axios.post(url,
+            data,
+            {
+                headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token
+                        },
+                cancelToken: form.cancelToken.token,
+            }
+            )
+    }
+    catch (err)
+    {
+        console.log (err)
+    }
 }
 
 export async function post(url, payload, token)
@@ -39,4 +65,36 @@ export async function post(url, payload, token)
             }
         return data
     })
+}
+
+export async function removeFile(value, el$, keycloak)
+{
+    const token = await keycloak.getAccessToken()
+    await el$.$vueform.services.axios.request({
+      url: Constants.FILE_REMOVE,
+      method: 'POST',
+      headers: {'Authorization ': token},
+      data: el$.form$.convertFormData({
+        id: value.tmp,
+      }),
+    })
+}
+
+export async function uploadTempFile(value, el$, keycloak)
+{
+  const token = await keycloak.getAccessToken()
+  const response = await el$.$vueform.services.axios.request({
+    url: Constants.FILE_UPLOAD,
+    method: 'POST',
+    headers: {'Authorization ': token},
+    data: el$.form$.convertFormData({
+      file: value,
+    }),
+    onUploadProgress: (e) => {
+      el$.progress = Math.round((e.loaded * 100) / e.total)
+    },
+    cancelToken: el$.$vueform.services.axios.CancelToken.source().token,
+  }) // errors are handled automatically
+
+  return response.data
 }
