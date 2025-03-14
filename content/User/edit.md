@@ -1,5 +1,5 @@
 ---
-title: Edit Profile
+title: Community
 type: user
 layout: user
 page: edit

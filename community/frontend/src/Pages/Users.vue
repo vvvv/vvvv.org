@@ -15,6 +15,10 @@ const username = params.get("user")
 const edit = params.get("edit")
 const map = params.get("map")
 
+// TODO add emit to the UserList with the username, if set, UserInfo should be visible.
+// This will avoid page reload on selecting a user from the list.
+// idividual page `/user/?user=username` will be still available
+
 </script>
 
 <template>

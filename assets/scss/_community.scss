@@ -20,14 +20,14 @@ $label: #888;
         }
     }
 
-    // &.dark{
-    //     background-color: #222;
+    &.dark{
+        background-color: #222;
 
-    //     .nav-link {
-    //         color: #eee;
-    //         text-decoration-color: #555;
-    //     }
-    // }
+        .nav-link {
+            color: #eee;
+            text-decoration-color: #555;
+        }
+    }
 }
 
 #app {

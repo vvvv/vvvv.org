@@ -61,10 +61,9 @@ const logout = () => {
 </script>
 
 <template>
-    <div v-if="loading" class="container px-4 py-2">
-      <div class="spinner-border text-light" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
+  <div class="container px-4 py-2">
+    <div v-if="loading" class="spinner-border text-light" role="status">
+        <span class="sr-only">Loading...</span>
     </div>
     <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
     <template v-if="!loading">
@@ -80,18 +79,19 @@ const logout = () => {
         <template v-if="mail == null">
           <ul class="nav nav-pills navbar-right">
             <li class="nav-item">
-              <a class="nav-link" href="#" @click="login">Login</a>
+              <div class="btn btn-primary" @click="login">Login</div>
             </li>
           </ul>
         </template>  
         <template v-if="mail != null">
           <ul class="nav nav-pills navbar-right">
-            <li class="nav-item">
+            <li class="nav-item mr-4">
                 <a class="nav-link" :class="{active: currentView == EditUser}" href="/user/edit">Profile</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" @click="logout">Logout</a>
-              </li>
+            <li class="nav-item">
+              <div class="btn btn-outline-secondary" @click="logout">Logout</div>
+              <!-- <a class="nav-link" href="#" @click="logout">Logout</a> -->
+            </li>
           </ul>
         </template>
       </nav>
@@ -99,5 +99,5 @@ const logout = () => {
         <component :is="currentView" :keycloak="keycloak" :logged="logged"/>
       </div>
     </template>
-
+  </div>
 </template>
