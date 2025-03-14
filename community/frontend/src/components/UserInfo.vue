@@ -42,11 +42,11 @@ function edit()
 </script>
 
 <template>
-    <a href="/user/" class="btn btn-secondary">< List</a>
     <div v-if="UserData" class="card mt-3">
         <div class="card-header">
             <div class="row mx-1">
-                <div class="h4 mr-auto">{{ UserData.username }}</div>
+                <a href="/user/" class="btn btn-outline-secondary dark-text">< List</a>
+                <div class="h4 mr-auto ml-4">{{ UserData.username }}</div>
                 <button v-if="UserData.username == username" class="btn btn-sm btn-primary px-2" @click="edit()">Edit</button>    
             </div>
         </div>
