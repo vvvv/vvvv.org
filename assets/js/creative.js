@@ -8,7 +8,7 @@
 (function($) {
 
     "use strict"; // Start of use strict
-
+    
     // Closes the Responsive Menu on Menu Item Click
     $('#navbar-links ul li a').click(function() {
       $('#navbar-links').collapse('hide')

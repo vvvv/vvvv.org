@@ -1,3 +1,56 @@
+// Platform Dropdown
+
+const platformTexts=['ARM64', '64-bit']
+
+var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[0] : platformTexts[1]
+
+const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
+platformButtons.forEach((b)=>{
+    b.textContent = platform
+})
+
+const platformLink = document.querySelectorAll("[data-platformType]")[0];
+const platformLinks = []
+
+document.getElementById('stableDownload').addEventListener('click', (event) => {
+    plausible ('download')
+    const link = platform == platformTexts[0] ? event.target.dataset.linkarm : event.target.dataset.link64    
+    window.location.href = link
+})
+
+const platformDropdowns = Array.from(document.getElementsByClassName('dropdown-menu'))
+platformDropdowns.forEach((d)=>{
+    platformTexts.forEach(name => {
+        const link = d.appendChild (platformLink.cloneNode())
+        platformLinks.push(link)
+        link.removeAttribute('hidden')
+        link.textContent = name
+        if (name.toLowerCase() == platform.toLowerCase())
+        {
+            link.classList.add('active')
+        }
+        link.addEventListener('click', function() {
+            platform = name      
+            platformButtons.forEach(b=>{
+                b.textContent = name
+            })
+            setActiveClass()
+        })
+    })
+})
+
+function setActiveClass()
+{
+    platformLinks.forEach(p=>{
+        p.classList.remove('active')
+        if (p.innerText.toLowerCase() == platform.toLowerCase())
+        {
+            p.classList.add('active')
+        }
+    })
+}
+
+
 function getTeamcity()
 {
     var teamcity = "https://teamcity.vvvv.org";
@@ -5,7 +58,7 @@ function getTeamcity()
     return teamcity;
 }
 
-function getBuildsLink(buildType, branch)
+function getBuildsLink(buildType, branch, platform)
 {
     if (branch != "")
     {
@@ -16,7 +69,7 @@ function getBuildsLink(buildType, branch)
         _b = '%3Cdefault%3E';
     }
 
-    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
+    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4,platform:${platform}`;
 }
 
 var tip = tippy('#previewButton', {
@@ -35,33 +88,30 @@ var tip = tippy('#previewButton', {
       },
 
     onShow(instance) {
-        if (!instance._isLoaded)
-        {
-            const currentPreviewBuildType = instance.reference.getAttribute("data-currentPreviewBuildType");
+        const currentPreviewBuildType = instance.reference.getAttribute("data-currentPreviewBuildType");
             
-            Promise.allSettled([getLatestBuild(currentPreviewBuildType, "")])
-            .then((result) => {
-                
-                var div=`
-                <div class="row">
-                    <div class="col mx-0 mb-4">
-                        ${result[0].value}
-                    </div>
+        Promise.allSettled([getLatestBuild(currentPreviewBuildType, "")])
+        .then((result) => {
+            
+            var div=`
+            <div class="row">
+                <div class="col mx-0 mb-4">
+                    ${result[0].value}
                 </div>
-                `;
-                
-                document.getElementById('gammaPreviews').innerHTML = div;
-                var content = document.getElementById('previewDownloadTemplate').innerHTML;
+            </div>
+            `;
+            
+            document.getElementById('gammaPreviews').innerHTML = div;
+            var content = document.getElementById('previewDownloadTemplate').innerHTML;
 
-                instance.setContent(content);
-                instance._isLoaded = true;
-                var closeButton = instance.popper.getElementsByClassName('close')[0];
-                closeButton.onclick = function() {
-                    instance.hide();
-                }
-                
-            });
-        }
+            instance.setContent(content);
+            instance._isLoaded = true;
+            var closeButton = instance.popper.getElementsByClassName('close')[0];
+            closeButton.onclick = function() {
+                instance.hide();
+            }
+            
+        });
       },
   });
 
@@ -69,7 +119,9 @@ async function getLatestBuild(buildType, branch)
 {
     var previews = [];
 
-    var previews = await fetchData(getBuildsLink(buildType, branch));
+    var platformType = platform == platformTexts[0] ? 'arm' : 'win'
+
+    var previews = await fetchData(getBuildsLink(buildType, branch, platformType));
 
     var div="<table>";
 

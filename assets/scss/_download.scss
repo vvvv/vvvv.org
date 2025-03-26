@@ -1,105 +1,170 @@
-#PreviewDownloads 
-{
-    .modal-header
-    {
-        padding-left: 0;
-        padding-right: 0;
-        border: none;
+#Download{
+
+    .btn-primary{
+        background-color: $orange;
+        border-color: $orange;
     }
 
-    p
-    {
-        color: #ddd;
+    .windowsIcon {
+        background: url(../img/windows_20px.png) no-repeat center;
+        margin-left: 1em;
+        padding: 20px 20px 20px 0px;
     }
 
-    h3
-    {
-        font-size: 1.1em;
-        font-weight: 600;
-        color: #fff;
-        margin-bottom: 0;
+    .windowsLink{
+        padding-left: 1em;
+        text-transform: none;
+        background-color: #ddd;
+        border-color: #ddd;
+        color: #000;
     }
 
-    hr {
-        max-width: 100%;
-        border-color: #999;
-        border-width: 1px;
-        margin-bottom: 1.5em;
+    .dropdown-menu{
+        background-color: #ddd;
+    }
+
+    .dropdown-item{
+        &.active
+        {
+            background-color: $orange;
+        }
+    }
+
+    .windowsLink::before {
+        content: url("../img/windows_20px_black.png");
+        display: inline-block;
+        height: 15px;
+        margin-right: 1rem;
+        vertical-align: -5px;
+    }
+
+    .windowsLinkBlack::before {
+        content: url("../img/windows_20px_black.png");
+        display: inline-block;
+        height: 15px;
+        margin-right: 1rem;
+        vertical-align: -5px;
+    }
+
+    .pill-left{
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        margin-right: 1px;
+        width: 13rem;
     }
     
-    a
-    {
-        border-bottom: 1px solid #bbb;
+    .pill-right{
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;    
+        margin-left: 1px;
     }
 
-    td
+    #PreviewDownloads 
     {
-        padding: 0 0.5em 1.5em 0;
-        font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
-
-        font-size: 1em;
-
-        &.date
+        .modal-header
         {
-            font-size: 0.8em;
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+        }
+
+        p
+        {
+            color: #ddd;
+        }
+
+        h3
+        {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        hr {
+            max-width: 100%;
+            border-color: #999;
+            border-width: 1px;
+            margin-bottom: 1.5em;
+        }
+        
+        a
+        {
+            border-bottom: 1px solid #bbb;
+        }
+
+        td
+        {
+            padding: 0 0.5em 1.5em 0;
+            font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+
+            font-size: 1em;
+
+            &.date
+            {
+                font-size: 0.8em;
+                color: #aaa;
+                padding: 0;
+                vertical-align: top;
+            }
+        }
+
+        .changes
+        {
+            /* font-size: 0.8em; */
+            border-bottom: 1px solid #bbb;
             color: #aaa;
-            padding: 0;
-            vertical-align: top;
+
+            &:hover
+            {
+                border-bottom: 1px solid #fff;
+            }
         }
-    }
 
-    .changes
-    {
-        /* font-size: 0.8em; */
-        border-bottom: 1px solid #bbb;
-        color: #aaa;
-
-        &:hover
+        .previewButton
         {
-            border-bottom: 1px solid #fff;
+            border-radius: 0.4em;
+            border-bottom: 0;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 1em;
+            padding: 0.6em 0.6em;
+        }
+
+        .modal-dialog a
+        {
+            color: #000;
+            text-decoration: underline;
+            border: none;
+        }
+
+        ul
+        {
+            margin-bottom: 1.5em;
         }
     }
 
-    .previewButton
+    #PreviousReleases
     {
-        border-radius: 0.4em;
-        border-bottom: 0;
-        text-decoration: none;
-        font-weight: normal;
-        font-size: 1em;
-        padding: 0.6em 0.6em;
+        color: #ccc;
+        
+        a
+        {
+            border-bottom: 1px solid #888;
+            text-decoration: none;
+        }
+    }
+    
+    
+    .tippy-tooltip {
+        background-color: #444;
+        min-width: 500px;
+    }
+      
+    .tippy-tooltip[data-placement^='right'] > .tippy-arrow{
+        border-right-color: #444;
     }
 
-    .modal-dialog a
-    {
-        color: #000;
-        text-decoration: underline;
-        border: none;
-    }
-
-    ul
-    {
-        margin-bottom: 1.5em;
-    }
 }
 
-#PreviousReleases
-{
-  color: #ccc;
-  
-  a
-  {
-    border-bottom: 1px solid #888;
-    text-decoration: none;
-  }
-}
-
-.tippy-tooltip {
-    background-color: #444;
-    min-width: 500px;
-  }
-  
-.tippy-tooltip[data-placement^='right'] > .tippy-arrow{
-    border-right-color: #444;
-}
   
