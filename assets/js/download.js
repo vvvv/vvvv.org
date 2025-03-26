@@ -1,80 +1,4 @@
-// Platform Dropdown
-
-const platformTexts=['ARM64', '64-bit']
-
-var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[0] : platformTexts[1]
-
-const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
-platformButtons.forEach((b)=>{
-    b.textContent = platform
-})
-
-const platformLink = document.querySelectorAll("[data-platformType]")[0];
-const platformLinks = []
-
-document.getElementById('stableDownload').addEventListener('click', (event) => {
-    event.preventDefault()
-    plausible ('download')
-    const link = platform == platformTexts[0] ? event.target.dataset.linkarm : event.target.dataset.link64    
-    window.location.href = link
-})
-
-const platformDropdowns = Array.from(document.getElementsByClassName('dropdown-menu'))
-platformDropdowns.forEach((d)=>{
-    platformTexts.forEach(name => {
-        const link = d.appendChild (platformLink.cloneNode())
-        platformLinks.push(link)
-        link.removeAttribute('hidden')
-        link.textContent = name
-        if (name.toLowerCase() == platform.toLowerCase())
-        {
-            link.classList.add('active')
-        }
-        link.addEventListener('click', function(event) {
-            platform = name      
-            platformButtons.forEach(b=>{
-                b.textContent = name
-            })
-            setActiveClass()
-            event.preventDefault()
-        }, false)
-    })
-})
-
-function setActiveClass()
-{
-    platformLinks.forEach(p=>{
-        p.classList.remove('active')
-        if (p.innerText.toLowerCase() == platform.toLowerCase())
-        {
-            p.classList.add('active')
-        }
-    })
-}
-
-
-function getTeamcity()
-{
-    var teamcity = "https://teamcity.vvvv.org";
-    
-    return teamcity;
-}
-
-function getBuildsLink(buildType, branch)
-{
-    if (branch != "")
-    {
-        _b = branch;
-    }
-    else
-    {
-        _b = '%3Cdefault%3E';
-    }
-
-    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
-}
-
-var tip = tippy('#previewButton', {
+const tip = tippy('#previewButton', {
     content: 'Loading...',
     placement:'right',
     arrow:true,
@@ -117,6 +41,102 @@ var tip = tippy('#previewButton', {
         });
       },
   });
+
+// Platform Dropdown
+
+const platformTexts=['ARM64', '64-bit']
+
+var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[0] : platformTexts[1]
+
+const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
+platformButtons.forEach((b)=>{
+    b.textContent = platform
+})
+
+const platformLink = document.querySelectorAll("[data-platformType]")[0];
+const platformLinks = []
+
+const stableButton = document.getElementById('stableDownload')
+const linkArm = stableButton.dataset.linkarm
+const link64 = stableButton.dataset.link64
+
+stableButton.addEventListener('click', (event) => {
+    event.preventDefault()
+    plausible ('download')
+    downloadStable()
+})
+
+function downloadStable()
+{
+    const link = platform == platformTexts[0] ? linkArm : link64 
+    window.location.href = link
+}
+
+const platformDropdowns = Array.from(document.getElementsByClassName('dropdown-menu'))
+platformDropdowns.forEach((d)=>{
+    const isStable = d.dataset.stable !== ""
+    platformTexts.forEach(name => {
+        const link = d.appendChild (platformLink.cloneNode())
+        platformLinks.push(link)
+        link.removeAttribute('hidden')
+        link.textContent = name
+        if (name.toLowerCase() == platform.toLowerCase())
+        {
+            link.classList.add('active')
+        }
+        link.addEventListener('click', function(event) {
+            platform = name      
+            platformButtons.forEach(b=>{
+                b.textContent = name
+            })
+            
+            if (isStable)
+            {
+                downloadStable()
+            }
+            else
+            {
+                tip[0].show()
+            }
+
+            setActiveClass()
+            event.preventDefault()
+        }, false)
+    })
+})
+
+function setActiveClass()
+{
+    platformLinks.forEach(p=>{
+        p.classList.remove('active')
+        if (p.innerText.toLowerCase() == platform.toLowerCase())
+        {
+            p.classList.add('active')
+        }
+    })
+}
+
+
+function getTeamcity()
+{
+    var teamcity = "https://teamcity.vvvv.org";
+    
+    return teamcity;
+}
+
+function getBuildsLink(buildType, branch)
+{
+    if (branch != "")
+    {
+        _b = branch;
+    }
+    else
+    {
+        _b = '%3Cdefault%3E';
+    }
+
+    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
+}
 
 async function getLatestBuild(buildType, branch)
 {

@@ -17,12 +17,12 @@
             {{ end }}
         </div>
         <div class="row">
-            <div class="col-lg-7 mb-5">
+            <div class="col-xl-7 mb-5">
                 {{ with .Site.Params.download.gamma }}
                 <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4>
                 <p>{{ .Copy }}</p>
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-12 col-lg-7">
                         <!-- DropdownItem Template -->
                         <a class="dropdown-item windowsLinkBlack" href="#" data-platformType hidden></a>
                         <!-- DropdownItem Template -->
@@ -49,25 +49,24 @@
                             </a>
                             <div class="dropdown platforms">
                                 <a class="btn btn-primary dropdown-toggle btn-xl pill-right windowsLink platformButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu" aria-labelledby="platformButton"></div>
+                                <div class="dropdown-menu" aria-labelledby="platformButton" data-stable></div>
                             </div>
                         </div>
                         <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
 
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-12 col-lg-5 mt-4 mt-lg-0">
                         <a href="{{ .LibrariesLink }}" class="btn btn-secondary btn-xl font-weight-normal mt-4 mt-md-0"  target="{{ .LibrariesTarget }}" onclick="plausible('additionalpacks')">{{ .LibrariesText }}</a>
                         
-                        <div class="mt-5 btn btn-xl font-weight-normal text-left pl-0 mr-5 mr-lg-0" id="PreviousReleases">
+                        <div class="col-12 mt-2 mt-lg-5 btn btn-xl font-weight-normal text-left pl-0 mr-5 mr-lg-0" id="PreviousReleases">
                             <a href="{{ .ChangeLogLink }}" target="{{ .ChangeLogTarget }}">{{ .ChangeLogText }}</a>
                         </div>
-                        
                     </div>
                 </div>
                {{ end }}
             </div>
 
-            <div class="col-lg-4 ml-auto mt-5 mt-sm-0">
+            <div class="col-xl-4 ml-auto mt-5 mt-sm-0">
                 {{ with .Site.Params.download.beta }}
                 <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4> 
                 <p>{{ .Copy }}</p>

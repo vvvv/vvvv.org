@@ -47,17 +47,28 @@
     }
 
     .pill-left{
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
         margin-right: 1px;
         width: 13rem;
     }
     
     .pill-right{
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;    
         margin-left: 1px;
     }
+
+    @media (min-width: 350px) {
+        .pill-left{
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            margin-right: 1px;
+            width: 13rem;
+        }
+        
+        .pill-right{
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;    
+            margin-left: 1px;
+        }
+      }
 
     #PreviewDownloads 
     {
