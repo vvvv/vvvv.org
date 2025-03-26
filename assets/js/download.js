@@ -58,7 +58,7 @@ function getTeamcity()
     return teamcity;
 }
 
-function getBuildsLink(buildType, branch, platform)
+function getBuildsLink(buildType, branch)
 {
     if (branch != "")
     {
@@ -69,7 +69,7 @@ function getBuildsLink(buildType, branch, platform)
         _b = '%3Cdefault%3E';
     }
 
-    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4,platform:${platform}`;
+    return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
 }
 
 var tip = tippy('#previewButton', {
@@ -88,9 +88,10 @@ var tip = tippy('#previewButton', {
       },
 
     onShow(instance) {
-        const currentPreviewBuildType = instance.reference.getAttribute("data-currentPreviewBuildType");
+
+        const buildType = platform == platformTexts[0] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
             
-        Promise.allSettled([getLatestBuild(currentPreviewBuildType, "")])
+        Promise.allSettled([getLatestBuild(buildType, "")])
         .then((result) => {
             
             var div=`
@@ -119,9 +120,7 @@ async function getLatestBuild(buildType, branch)
 {
     var previews = [];
 
-    var platformType = platform == platformTexts[0] ? 'arm' : 'win'
-
-    var previews = await fetchData(getBuildsLink(buildType, branch, platformType));
+    var previews = await fetchData(getBuildsLink(buildType, branch));
 
     var div="<table>";
 

@@ -115,14 +115,15 @@ blog = '/blog/:sections[1]/:slug'
 
 		StableText  = "Download: Stable"
     		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
-			StableLinkARM = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup_ARM.exe"
+			StableLinkARM = "https://teamcity.vvvv.org/repository/download/vvvv_gamma_BuildWinArm64/38949:id/vvvv_gamma_7.0-0262-g359ae76748-win-arm64_setup.exe"
 		StableVersion = "Version: 6.7"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
 		
-		CurrentPreviewBuildType = "vvvv_gamma_Build20225"
+		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
+		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"
