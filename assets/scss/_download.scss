@@ -5,12 +5,6 @@
         border-color: $orange;
     }
 
-    .windowsIcon {
-        background: url(../img/windows_20px.png) no-repeat center;
-        margin-left: 1em;
-        padding: 20px 20px 20px 0px;
-    }
-
     .windowsLink{
         padding-left: 1em;
         text-transform: none;
@@ -31,24 +25,15 @@
     }
 
     .windowsLink::before {
-        content: url("../img/windows_20px_black.png");
+        content: url("../img/icons/windows_17px_black.png");
         display: inline-block;
-        height: 15px;
-        margin-right: 1rem;
-        vertical-align: -5px;
-    }
-
-    .windowsLinkBlack::before {
-        content: url("../img/windows_20px_black.png");
-        display: inline-block;
-        height: 15px;
-        margin-right: 1rem;
-        vertical-align: -5px;
+        height: 17px;
+        margin-right: 0.6rem;
+        vertical-align: -3px;
     }
 
     .pill-left{
         margin-right: 1px;
-        width: 13rem;
     }
     
     .pill-right{
@@ -59,14 +44,11 @@
         .pill-left{
             border-top-right-radius: 0px;
             border-bottom-right-radius: 0px;
-            margin-right: 1px;
-            width: 13rem;
         }
         
         .pill-right{
             border-top-left-radius: 0px;
             border-bottom-left-radius: 0px;    
-            margin-left: 1px;
         }
       }
 

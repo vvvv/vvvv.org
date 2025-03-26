@@ -15,7 +15,7 @@ const tip = tippy('#previewButton', {
 
     onShow(instance) {
 
-        const buildType = platform == platformTexts[0] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
+        const buildType = platform == platformTexts[1] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
             
         Promise.allSettled([getLatestBuild(buildType, "")])
         .then((result) => {
@@ -44,9 +44,9 @@ const tip = tippy('#previewButton', {
 
 // Platform Dropdown
 
-const platformTexts=['ARM64', '64-bit']
+const platformTexts=['64-bit', 'ARM64']
 
-var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[0] : platformTexts[1]
+var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[1] : platformTexts[0]
 
 const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
 platformButtons.forEach((b)=>{
@@ -68,7 +68,7 @@ stableButton.addEventListener('click', (event) => {
 
 function downloadStable()
 {
-    const link = platform == platformTexts[0] ? linkArm : link64 
+    const link = platform == platformTexts[1] ? linkArm : link64 
     window.location.href = link
 }
 
@@ -90,14 +90,14 @@ platformDropdowns.forEach((d)=>{
                 b.textContent = name
             })
             
-            if (isStable)
-            {
-                downloadStable()
-            }
-            else
-            {
-                tip[0].show()
-            }
+            // if (isStable)
+            // {
+            //     downloadStable()
+            // }
+            // else
+            // {
+            //     tip[0].show()
+            // }
 
             setActiveClass()
             event.preventDefault()
