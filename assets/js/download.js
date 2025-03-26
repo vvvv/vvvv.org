@@ -13,6 +13,7 @@ const platformLink = document.querySelectorAll("[data-platformType]")[0];
 const platformLinks = []
 
 document.getElementById('stableDownload').addEventListener('click', (event) => {
+    event.preventDefault()
     plausible ('download')
     const link = platform == platformTexts[0] ? event.target.dataset.linkarm : event.target.dataset.link64    
     window.location.href = link
@@ -29,13 +30,14 @@ platformDropdowns.forEach((d)=>{
         {
             link.classList.add('active')
         }
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(event) {
             platform = name      
             platformButtons.forEach(b=>{
                 b.textContent = name
             })
             setActiveClass()
-        })
+            event.preventDefault()
+        }, false)
     })
 })
 
