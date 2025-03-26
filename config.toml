@@ -1,7 +1,7 @@
-baseURL = "https://visualprogramming.net/"
+baseURL = "https://vvvv.org/"
 languageCode = "en-us"
-paginate = 20
-paginatePath = "page"
+pagination.pagerSize = 20
+pagination.path = "page"
 summaryLength = 20
 title = "vvvv - visual live-programming for .NET"
 relativeURLs = "true"
@@ -10,7 +10,6 @@ relativeURLs = "true"
   changefreq = 'daily'
   filename = 'sitemap.xml'
   priority = -1 # priority omitted from rendered sitemap
-
 
 [Services.RSS]
   limit = 10
@@ -63,18 +62,30 @@ blog = '/blog/:sections[1]/:slug'
 
 		# Navigation
 		[params.navigation]
-		brand 		= "visualprogramming.net"
+		home = "vvvv.org"
 
-		[params.navigation.links]
-		features  = "Features"
-		blog = "Blog"
-		download  = "Download"
-		showcase = "Showcase"
-		Learn = "Learn"
-		community = "Community"
-		licensing = "Licensing"
-		support = "Support"
-		contact   = "contact"
+		[params.menu]
+			[[params.menu.main]]
+				name = 'features'
+			[[params.menu.main]]
+				name = 'blog'
+			[[params.menu.main]]
+				name = 'showcase'
+			[[params.menu.main]]
+				name = 'learn'
+				url = 'https://thegraybook.vvvv.org/'
+			[[params.menu.main]]
+				name = 'community'
+				url = 'https://forum.vvvv.org/'
+			[[params.menu.main]]
+				name = 'licensing'
+				url = 'https://store.vvvv.org/'
+			[[params.menu.main]]
+				name = 'support'
+			[[params.menu.main]]
+				name = 'download'
+				style = 'download'
+
 
 		# Hero section
 		[params.Hero]
@@ -103,14 +114,16 @@ blog = '/blog/:sections[1]/:slug'
 		Copy = "First released in April 2020, vvvv gamma is the next generation of vvvv, entirely rewritten from scratch."
 
 		StableText  = "Download: Stable"
-    		StableLink = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38435/artifacts/content/vvvv_gamma_6.6_setup.exe"
-		StableVersion = "Version: 6.6"
+    		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
+			StableLinkARM = "https://teamcity.vvvv.org/repository/download/vvvv_gamma_BuildWinArm64/38949:id/vvvv_gamma_7.0-0262-g359ae76748-win-arm64_setup.exe"
+		StableVersion = "Version: 6.7"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
 		
-		CurrentPreviewBuildType = "vvvv_gamma_Build20225"
+		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
+		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"
@@ -125,14 +138,14 @@ blog = '/blog/:sections[1]/:slug'
 		[params.Download.gamma.previewWindow]
 		Title = "Latest Previews"
 		Subtitle ="Don't use for production!"
-		Text = 'These are daily development builds. If you find one to be broken, try an earlier one.<p>Please mark problems you report in the <a href="https://discourse.vvvv.org/c/vvvv-gamma/" target="_blank">forum</a> with the *preview* tag or visit us in the <a href="https://app.element.io/#/room/#vvvv:matrix.org" target="_blank">chat</a> to talk about issues you encounter.</p>'
+		Text = 'These are daily development builds. If you find one to be broken, try an earlier one.<p>Please mark problems you report in the <a href="https://forum.vvvv.org/c/vvvv-gamma/" target="_blank">forum</a> with the *preview* tag or visit us in the <a href="https://app.element.io/#/room/#vvvv:matrix.org" target="_blank">chat</a> to talk about issues you encounter.</p>'
 
 		
 		[params.Download.beta]
 		Headline = "vvvv beta"
 		Copy = "In development since 2001, vvvv beta has been used by many companies worldwide to create large media environments."
-		Text  = "Go to vvvv.org"
-		Link = "https://vvvv.org/downloads"
+		Text  = "Download vvvv beta"
+		Link = "https://legacy.vvvv.org/downloads"
 		Target = "_blank"
 
 		[params.Showcase]
@@ -157,32 +170,8 @@ blog = '/blog/:sections[1]/:slug'
 		Devvvvs = ["devvvv", "joreg", "gregsn", "tonfilm", "robotanton", "untone", "elias", "azeno", "oschatz", "max"]
 
 	#Community section
-	  [params.Community]
-		headline = "Community"
-
-		[[params.Community.list]]
-		img = "/img/icons/Discourse-32x32_gray.png"
-		imgAlt = "vvvv Forum"
-		title = "Forum"
-		description = "Get answers to your questions or find them in existing discussions in the vvvv forum."
-		link = "https://discourse.vvvv.org/c/vvvv-gamma"
-		text = "Open Forum"
-
-		[[params.Community.list]]
-		img = "/img/icons/element-32x32-black.png"
-		imgAlt = "vvvv on Matrix"
-		title = "Chat"
-		description = "Join us for a chat: Get help 24/7 or just hang out with your fellow patchers."
-		link = "https://matrix.to/#/#vvvv:matrix.org"
-		text = "Open Chat"
-
-		[[params.Community.list]]
-		img = "/img/icons/logo-mbz-gray.png"
-		imgAlt = "vvvv Mobilizon"
-		title = "Meetups"
-		description = "Join us for a meetup: real-world, in-person drinks and presentations around vvvv."
-		link = "https://mobilize.berlin/@vvvvmeetups"
-		text = "Open Meetups"
+	    [params.Community]
+	    headline = "Community"
 
 	# Learn section
 		[params.Learn]

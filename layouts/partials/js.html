@@ -5,11 +5,14 @@
 <script src="{{"/js/jquery.easing.min.js" | relURL}}"></script>
 <script src="{{"/js/swiper-bundle.min.js" | relURL}}"></script>
 
+
+
 {{ "<!-- Custom Theme JavaScript -->" | safeHTML }}
-{{ $build := resources.Get "js/creative.js" | js.Build "js/creative.js" | minify}}
-<script type="text/javascript" src="{{ $build.RelPermalink }}" defer></script>
-{{ $build := resources.Get "js/download.js" | js.Build "js/download.js" | minify}}
-<script type="text/javascript" src="{{ $build.RelPermalink }}" defer></script>
+{{- $creativejs := resources.Get "js/creative.js" -}}
+{{- $downloadjs := resources.Get "js/download.js" -}}
+{{- $headerjs := resources.Get "js/header.js" -}}
+{{- $jsfiles := slice $creativejs $downloadjs $headerjs | resources.Concat "js/vvvv.js" | js.Build | minify -}}
+<script type="text/javascript" src="{{ $jsfiles.RelPermalink | relURL }}" defer></script>
 
 {{ "<!-- DSGVO Video Blocker -->" | safeHTML }}
 <script src="{{"/js/dsgvo-video-embed.js" | relURL}}"></script>
@@ -30,10 +33,6 @@
 </script>
 <script src="https://sibforms.com/forms/end-form/build/main.js"></script>
 <script src="https://www.google.com/recaptcha/api.js?hl=en"></script>
-
-{{ "<!-- Plausible -->" | safeHTML }}
-<script async defer data-domain="visualprogramming.net" src="https://plausible.io/js/plausible.js"></script>
-<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 
 {{ "<!-- DocSearch -->" | safeHTML }}
 <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
