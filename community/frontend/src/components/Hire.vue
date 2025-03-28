@@ -2,40 +2,40 @@
 import { email } from '@vueform/vueform';
 import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
-import { submitForm }  from '../utils'
+import { submitForm, errorHandler }  from '../utils'
 
-  const emit = defineEmits(['reload'])
+const emit = defineEmits(['reload'])
 
-  const { data, constants, keycloak } = defineProps(['data', 'constants', 'keycloak'])
-  const hiretypes = ref([])
-  const isChanged = ref(false)
-  const form$ = ref(null)
-  const columns = {
-    sm: { container: 12, label: 4, wrapper: 12 },
-    lg: { container: 12, label: 4, wrapper: 12 }
-  }
+const { data, constants, keycloak } = defineProps(['data', 'constants', 'keycloak'])
+const hiretypes = ref([])
+const isChanged = ref(false)
+const form$ = ref(null)
+const columns = {
+  sm: { container: 12, label: 4, wrapper: 12 },
+  lg: { container: 12, label: 4, wrapper: 12 }
+}
   
-  onMounted(async ()=>{
-    setFormData();
-  })
+onMounted(async ()=>{
+  setFormData();
+})
 
-  const setFormData = async ()=>{
-    hiretypes.value = constants.hireTypes
+const setFormData = async ()=>{
+  hiretypes.value = constants.hireOptions
 
-    if (form$.value != null)
-    {
-      await form$.value.load(data, true)
-      form$.value.clean()
-      isChanged.value=false;
-    }
+  if (form$.value != null)
+  {
+    await form$.value.load(data, true)
+    form$.value.clean()
+    isChanged.value=false;
   }
+}
 
-  watch (()=>data, async(newValue, oldValue) => {
-    if (form$.value != null)
-    {
-      setFormData()
-    }
-  }, { immediate: true })
+watch (()=>data, async(newValue, oldValue) => {
+  if (form$.value != null)
+  {
+    setFormData()
+  }
+}, { immediate: true })
 
 const formatLoadedData = (data) => {
 
@@ -61,62 +61,15 @@ const handleSuccess = (response, form$) => {
   emit ('reload')
 }
 
-const handleError = (error, details, form$) => {
-  switch (details.type) {
-    // Error occured while preparing elements (no submit happened)
-    case 'prepare':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Could not prepare form')
-      break
-
-    // Error occured because response status is outside of 2xx
-    case 'submit':
-      console.log(error) // AxiosError object
-      console.log(error.response) // axios response
-      console.log(error.response.status) // HTTP status code
-      console.log(error.response.data) // response data
-
-      form$.messageBag.append('Some error from the backend')
-      break
-
-    // Request cancelled (no response object)
-    case 'cancel':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Request cancelled')
-      break
-
-    // Some other errors happened (no response object)
-    case 'other':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Couldn\'t submit form')
-      break
-  }
-}
+const handleError = errorHandler
 
 const submit = async (FormData, form$) => {
-  const data = await formatDataForSumbit(form$.data)
-  return submitForm (form$, data, Constants.EDIT_HIRE, keycloak)
-}
-
-const formatDataForSumbit = async (requestData) => { 
-  try {   
-    return {
-      available: requestData.available,
-      types: requestData.types
-      // workFor: requestData.workFor.map((c, index)=>{
-      //   return {
-      //     status: c.status,
-      //     uuid: data.hire.workFor[index].uuid
-      //   }
-      // })
-    }
-
-  } catch (error) {
-    throw error // this will cancel the submit process
+  const data = {
+      available: FormData.available,
+      types: FormData.types
   }
+  const result = submitForm (form$, data, Constants.EDIT_HIRE, keycloak)
+  return result
 }
 
 const handleChange = () => {
@@ -143,8 +96,7 @@ const disable = (form$) => ({
     @error="handleError"
     @change="handleChange"
     :endpoint="submit"
-    :format-load="formatLoadedData" 
-    :format-data="formatDataForSumbit"
+    :format-load="formatLoadedData"
     >
 
     <!-- <StaticElement

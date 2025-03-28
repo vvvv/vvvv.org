@@ -66,3 +66,9 @@ app.options('/v1/removeFile', cors())
 app.post ('/v1/removeFile', cors(), multer().none(), async (req, res) => {
     await removeFile(req, res, JWT)
 });
+
+
+/// TESTS
+app.get ('/v1/test/constants', cors(), express.json(), async (req, res) => {
+    await constants(res)
+});

@@ -1,4 +1,9 @@
-import { getUserInfo, getConstants } from "./helper.js"
+import { createDirectus, rest, readItem, readItems, readField, staticToken } from '@directus/sdk';
+import { getUserInfo } from "./helper.js"
+
+const client = createDirectus(process.env.DIRECTUSURL)
+.with(staticToken(process.env.DIRECTUSTOKEN))
+.with(rest());
 
 const userInfo = async (req, res, JWT) =>
 {   
@@ -22,11 +27,25 @@ const userInfo = async (req, res, JWT) =>
 
 const constants = async (res) =>
 {
-    const info = await getConstants().catch (()=>{
-        return res.status(400).send({message: "Can't get constants", code: 2})
-    })
+    try {
+		const hireOptions = await client.request(readItems ('AvailableFor_Options'));
 
-    return res.status(200).send(info);
+		const hireOptionsMapped = hireOptions.map( o => {
+			return {
+				value: o.id,
+				label: o.option
+			}
+		})
+
+        const info = {
+            hireOptions: hireOptionsMapped
+		}
+
+		res.status(200).send(info);	
+	}
+	catch (message) {
+		res.status(400).send({message: "Can't get constants", code: 2})
+	}
 }
 
 export { userInfo, constants }

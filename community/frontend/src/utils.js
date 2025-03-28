@@ -45,6 +45,42 @@ export async function submitForm(form, data, url, keycloak)
     }
 }
 
+export function errorHandler(error, details, form$) 
+{
+    switch (details.type) {
+      // Error occured while preparing elements (no submit happened)
+      case 'prepare':
+        console.log(error) // Error object
+  
+        form$.messageBag.append('Could not prepare form')
+        break
+  
+      // Error occured because response status is outside of 2xx
+      case 'submit':
+        console.log(error) // AxiosError object
+        console.log(error.response) // axios response
+        console.log(error.response.status) // HTTP status code
+        console.log(error.response.data) // response data
+  
+        form$.messageBag.append('Some error from the backend')
+        break
+  
+      // Request cancelled (no response object)
+      case 'cancel':
+        console.log(error) // Error object
+  
+        form$.messageBag.append('Request cancelled')
+        break
+  
+      // Some other errors happened (no response object)
+      case 'other':
+        console.log(error) // Error object
+  
+        form$.messageBag.append('Couldn\'t submit form')
+        break
+    }
+}
+
 export async function post(url, payload, token)
 {
     var body = JSON.stringify({

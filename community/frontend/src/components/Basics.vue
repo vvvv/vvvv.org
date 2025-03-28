@@ -1,7 +1,7 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue'
   import Constants from '../constants'
-  import { submitForm, removeFile, uploadTempFile }  from '../utils'
+  import { submitForm, removeFile, uploadTempFile, errorHandler }  from '../utils'
 
   const emit = defineEmits(['reload'])
 
@@ -80,77 +80,28 @@ const handleSuccess = (response, form$) => {
   emit ('reload')
 }
 
-const handleError = (error, details, form$) => {
-  switch (details.type) {
-    // Error occured while preparing elements (no submit happened)
-    case 'prepare':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Could not prepare form')
-      break
-
-    // Error occured because response status is outside of 2xx
-    case 'submit':
-      console.log(error) // AxiosError object
-      console.log(error.response) // axios response
-      console.log(error.response.status) // HTTP status code
-      console.log(error.response.data) // response data
-
-      form$.messageBag.append('Some error from the backend')
-      break
-
-    // Request cancelled (no response object)
-    case 'cancel':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Request cancelled')
-      break
-
-    // Some other errors happened (no response object)
-    case 'other':
-      console.log(error) // Error object
-
-      form$.messageBag.append('Couldn\'t submit form')
-      if (error)
-      {
-        form$.messageBag.append(error)
-      }
-      break
-  }
-}
-
 const formChanged = (data)=> {
   isChanged.value = true
 }
 
 const submit = async (FormData, form$) => {
-  const data = await formatDataForSumbit(form$.data)
-  return submitForm (form$, data, Constants.EDIT_BASICS, keycloak)
-}
 
-const formatDataForSumbit = async (requestData) => { 
-  try {
-
-    if (requestData.basics.avatar_upload)
+  if (FormData.basics.avatar_upload)
     {
-      requestData.basics.userpic = tempUserpic = requestData.basics.avatar_upload.tmp;
-      delete requestData.basics.avatar_upload
+      FormData.basics.userpic = tempUserpic = FormData.basics.avatar_upload.tmp;
+      delete FormData.basics.avatar_upload
     }
 
     var postData = {
-      basics: requestData.basics,
+      basics: FormData.basics,
       social: {
-        nuget: requestData.social.nuget,
-        github: requestData.social.github,
-        fields: requestData.fields
+        nuget: FormData.social.nuget,
+        github: FormData.social.github,
+        fields: FormData.fields
       }
     }
 
-    return postData;
-
-  } catch (error) {
-    throw error // this will cancel the submit process
-  }
+  return submitForm (form$, data, Constants.EDIT_BASICS, keycloak)
 }
 
 const upload = async (value, el$) => {
@@ -171,11 +122,10 @@ const remove = async (value, el$) => {
     form-key="basics"
     method="post"
     @success="handleSuccess"
-    @error="handleError"
+    @error="errorHandler"
     @change="formChanged"
     :endpoint="submit"
     :format-load="formatLoadedData" 
-    :format-data="formatDataForSumbit"
     :previewUrl="Constants.ASSETS"
     >
 

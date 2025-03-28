@@ -28,42 +28,6 @@ async function getItemID (collection, userID)
 
 }
 
-async function getConstants()
-{
-	const companyRoles = await client.request(readItems ('Company_Roles', {
-		fields: [
-			"id",
-			"role"
-		]
-	}));
-
-	var eduRoles = await client.request(readItems ('Edu_Roles', {
-		fields: [
-			'id', 'role'
-		]
-	}));
-
-	const hireTypes = await client.request(readItems ('Hire_Types', {
-		fields: [
-			"id",
-			"type"
-		]
-	}));
-
-	var mappedHireTypes = hireTypes.map((e)=>{
-		return {
-			value: e.id,
-			label: e.type
-		}
-	})
-
-	return {
-		companyRoles: companyRoles,
-		eduRoles: eduRoles,
-		hireTypes: mappedHireTypes
-	}
-}
-
 async function getAvatar(user_id)
 {
 	var image = await client.request(readItems ('User_Image', {
@@ -233,7 +197,7 @@ async function getSocialNetworks (user_id)
 	return result[0];
 }
 
-export { getUserID, getUserInfo, getConstants, getItemID }
+export { getUserID, getUserInfo, getItemID }
 
 ///WORKS FOR
 // var workFor = await client.request(readItems ('User_Company', {
