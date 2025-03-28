@@ -1,8 +1,52 @@
+const tip = tippy('#previewButton', {
+    content: 'Loading...',
+    placement:'right',
+    arrow:true,
+    trigger:'click',
+    animation: 'fade',
+    allowHTML: true,
+    hideOnClick: true,
+    interactive: true,
+    maxWidth: 'none',
+    duration: [200, 0],
+    onCreate(instance) {
+        instance._isLoaded = false;
+      },
+
+    onShow(instance) {
+
+        const buildType = platform == platformTexts[1] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
+            
+        Promise.allSettled([getLatestBuild(buildType, "")])
+        .then((result) => {
+            
+            var div=`
+            <div class="row">
+                <div class="col mx-0 mb-4">
+                    ${result[0].value}
+                </div>
+            </div>
+            `;
+            
+            document.getElementById('gammaPreviews').innerHTML = div;
+            var content = document.getElementById('previewDownloadTemplate').innerHTML;
+
+            instance.setContent(content);
+            instance._isLoaded = true;
+            var closeButton = instance.popper.getElementsByClassName('close')[0];
+            closeButton.onclick = function() {
+                instance.hide();
+            }
+            
+        });
+      },
+  });
+
 // Platform Dropdown
 
-const platformTexts=['ARM64', '64-bit']
+const platformTexts=['64-bit', 'ARM64']
 
-var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[0] : platformTexts[1]
+var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[1] : platformTexts[0]
 
 const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
 platformButtons.forEach((b)=>{
@@ -12,14 +56,25 @@ platformButtons.forEach((b)=>{
 const platformLink = document.querySelectorAll("[data-platformType]")[0];
 const platformLinks = []
 
-document.getElementById('stableDownload').addEventListener('click', (event) => {
+const stableButton = document.getElementById('stableDownload')
+const linkArm = stableButton.dataset.linkarm
+const link64 = stableButton.dataset.link64
+
+stableButton.addEventListener('click', (event) => {
+    event.preventDefault()
     plausible ('download')
-    const link = platform == platformTexts[0] ? event.target.dataset.linkarm : event.target.dataset.link64    
-    window.location.href = link
+    downloadStable()
 })
+
+function downloadStable()
+{
+    const link = platform == platformTexts[1] ? linkArm : link64 
+    window.location.href = link
+}
 
 const platformDropdowns = Array.from(document.getElementsByClassName('dropdown-menu'))
 platformDropdowns.forEach((d)=>{
+    const isStable = d.dataset.stable !== ""
     platformTexts.forEach(name => {
         const link = d.appendChild (platformLink.cloneNode())
         platformLinks.push(link)
@@ -29,13 +84,24 @@ platformDropdowns.forEach((d)=>{
         {
             link.classList.add('active')
         }
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function(event) {
             platform = name      
             platformButtons.forEach(b=>{
                 b.textContent = name
             })
+            
+            // if (isStable)
+            // {
+            //     downloadStable()
+            // }
+            // else
+            // {
+            //     tip[0].show()
+            // }
+
             setActiveClass()
-        })
+            event.preventDefault()
+        }, false)
     })
 })
 
@@ -71,50 +137,6 @@ function getBuildsLink(buildType, branch)
 
     return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
 }
-
-var tip = tippy('#previewButton', {
-    content: 'Loading...',
-    placement:'right',
-    arrow:true,
-    trigger:'click',
-    animation: 'fade',
-    allowHTML: true,
-    hideOnClick: true,
-    interactive: true,
-    maxWidth: 'none',
-    duration: [200, 0],
-    onCreate(instance) {
-        instance._isLoaded = false;
-      },
-
-    onShow(instance) {
-
-        const buildType = platform == platformTexts[0] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
-            
-        Promise.allSettled([getLatestBuild(buildType, "")])
-        .then((result) => {
-            
-            var div=`
-            <div class="row">
-                <div class="col mx-0 mb-4">
-                    ${result[0].value}
-                </div>
-            </div>
-            `;
-            
-            document.getElementById('gammaPreviews').innerHTML = div;
-            var content = document.getElementById('previewDownloadTemplate').innerHTML;
-
-            instance.setContent(content);
-            instance._isLoaded = true;
-            var closeButton = instance.popper.getElementsByClassName('close')[0];
-            closeButton.onclick = function() {
-                instance.hide();
-            }
-            
-        });
-      },
-  });
 
 async function getLatestBuild(buildType, branch)
 {
