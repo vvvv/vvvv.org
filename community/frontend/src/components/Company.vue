@@ -5,7 +5,7 @@
 
   const emit = defineEmits(['reload'])
 
-  const { data, constants, keycloak } = defineProps(['data', 'constants', 'keycloak'])
+  const { data, constants } = defineProps(['data', 'constants'])
   const isChanged = ref(false)
   const form$ = ref(null)
   const logo = ref(null)
@@ -156,15 +156,15 @@ const formChanged = (data)=>
 
 const submit = async (FormData, form$) => {
   const data = await formatDataForSumbit(form$.data)
-  return submitForm (form$, data, Constants.EDIT_COMPANY, keycloak)
+  return submitForm (form$, data, Constants.EDIT_COMPANY)
 }
 
 const upload = async (value, el$) => {
-  return uploadTempFile(value, el$, keycloak)
+  return uploadTempFile(value, el$)
 }
 
 const remove = async (value, el$) => {
-  removeFile(value, el$, keycloak)
+  removeFile(value, el$)
 }
 
 </script>

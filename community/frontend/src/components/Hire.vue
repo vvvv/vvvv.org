@@ -6,7 +6,7 @@ import { submitForm, errorHandler }  from '../utils'
 
 const emit = defineEmits(['reload'])
 
-const { data, constants, keycloak } = defineProps(['data', 'constants', 'keycloak'])
+const { data, constants } = defineProps(['data', 'constants'])
 const hiretypes = ref([])
 const isChanged = ref(false)
 const form$ = ref(null)
@@ -68,7 +68,7 @@ const submit = async (FormData, form$) => {
       available: FormData.available,
       types: FormData.types
   }
-  const result = submitForm (form$, data, Constants.EDIT_HIRE, keycloak)
+  const result = submitForm (form$, data, Constants.EDIT_HIRE)
   return result
 }
 

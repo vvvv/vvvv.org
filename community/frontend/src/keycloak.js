@@ -3,6 +3,55 @@ import Constants from './constants'
 
 const keycloak = new Keycloak(Constants.LOGIN_OPTIONS);
 
+export function isAuthenticated() {
+    return keycloak.authenticated;
+  }
+
+export function getUsername() {
+    if (keycloak.authenticated) {
+        return keycloak.tokenParsed.preferred_username;
+    }
+    return null;
+}
+
+export function getMail()
+{
+    if (keycloak.authenticated) {
+        return keycloak.idTokenParsed.email
+    }
+    return null;
+}
+
+export async function getAccessToken()
+{
+    try {
+        // Ensure the Keycloak instance is initialized
+        if (!keycloak.authenticated) {
+          await keycloak.login();
+        }
+    
+        // Update the token if needed
+        await keycloak.updateToken(30); // Update token if it will expire in less than 30 seconds
+    
+        // Return the token
+        return keycloak.token;
+      } catch (error) {
+        console.error('Failed to get access token:', error);
+        throw error;
+      }
+}
+
+//     logout(url)
+//     {
+//         return this.keycloak.logout({ redirectUri: url })
+//     }
+
+//     login(url)
+//     {
+//         return this.keycloak.login({redirectUri: url })
+//     }
+  
+
 export default keycloak;
 
 

@@ -4,8 +4,9 @@ import { ref, watchEffect, onMounted, computed } from 'vue'
 import Constants from '../constants'
 import Field from './Field.vue'
 import { isEmpty } from '../utils'
+import keycloak from '../keycloak'
 
-const props = defineProps(['username', 'keycloak', 'logged'])
+const props = defineProps(['username', 'logged'])
 const UserData = ref(null)
 const imageParams = "?quality=90&fit=cover&width=120"
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${props.username}&fields=*,hire.*.Hire_Types_id.type,social.*`
@@ -26,9 +27,9 @@ onMounted(async ()=>
 
     if (props.logged)
     {
-        if (props.keycloak != null)
+        if (keycloak.isAuthenticated())
         {
-            username.value = props.keycloak.getUsername()
+            username.value = keycloak.getUsername()
         }
     }
 })

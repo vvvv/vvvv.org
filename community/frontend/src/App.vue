@@ -9,54 +9,19 @@ import Constants from './constants'
 import KC from './keycloak'
 
 const props = defineProps(['page'])
-var keycloak = null
 
-const logged = ref(false)
-const loading = ref(true)
+const loading = ref(false)
 const data = ref(null)
 const failure = ref ("")
 
 const mail = ref(null)
 
-const currentView = computed(() => {
-  return routes[props.page]
-})
-
-const routes = {
-  '': Users,
-  'edit': EditUser,
-  'community': Users,
-  'users': Users,
-  'businesses': Business
-}
-
-onMounted( async ()=> {
-  keycloak = new KC()
-
-  keycloak.onAuth = async ()=> {
-    try{
-      mail.value = keycloak.getMail()
-      logged.value = true
-    }
-    catch (error) {
-      failure.value = "Can't get data, please try login later."
-    }
-  }
-
-  keycloak.onReady = async ()=> {
-    loading.value = false
-  }
-
-  keycloak.init()
-
-})
-
 const login = ()=> {
-  keycloak.login(window.location.href)
+  this.$keycloak.logout(window.location.href)
 }
 
 const logout = () => {
-  keycloak.logout(`${location.origin}/user`)
+  this.$keycloak.logout(`${location.origin}/user`)
 }
 </script>
 
@@ -70,10 +35,10 @@ const logout = () => {
       <nav class="navbar">
         <ul class="nav nav-pills">
           <li class="nav-item">
-              <a class="nav-link" :class="{active: currentView == Users}" href="/user">Users</a>
+              <router-link to="/user">Users</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" :class="{active: currentView == Business}" href="/user/businesses">Businesses</a>
+            <router-link to="/user/businesses">Businesses</router-link>
           </li>
         </ul>  
         <template v-if="mail == null">
@@ -86,17 +51,16 @@ const logout = () => {
         <template v-if="mail != null">
           <ul class="nav nav-pills navbar-right">
             <li class="nav-item mr-4">
-                <a class="nav-link" :class="{active: currentView == EditUser}" href="/user/edit">Profile</a>
-              </li>
+                <router-link to="/user/edit">Profile</router-link>
+            </li>
             <li class="nav-item">
               <div class="btn btn-outline-secondary" @click="logout">Logout</div>
-              <!-- <a class="nav-link" href="#" @click="logout">Logout</a> -->
             </li>
           </ul>
         </template>
       </nav>
       <div class="container px-4">
-        <component :is="currentView" :keycloak="keycloak" :logged="logged"/>
+        <router-view></router-view>
       </div>
     </template>
   </div>

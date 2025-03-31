@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router';
-import Vueform from '@vueform/vueform'
 import vueformConfig from '../vueform.config'
 import keycloak from './keycloak';
 
@@ -9,9 +8,6 @@ import keycloak from './keycloak';
 // import './styles/bootstrap.min.css'
 // import './styles/_header.min.css'
 import './styles/style.scss'
-import './styles/vueform.scss'
-
-const page = document.getElementById("app").getAttribute("page")
 
 keycloak
 .init({
@@ -20,7 +16,7 @@ keycloak
 })
 .then(authenticated => {
     if (authenticated) {
-      // Make Keycloak instance available globally
+      
       Vue.prototype.$keycloak = keycloak;
   
       new Vue({
@@ -38,8 +34,9 @@ keycloak
 // Conditionally load VueForm plugin
 router.beforeEach((to, from, next) => {
     if (to.name === 'Form') {
+      import('./styles/vueform.scss')
       import('@vueform/vueform').then(VueForm => {
-        Vue.use(VueForm);
+        Vue.use(VueForm, vueformConfig);
         next();
       });
     } else {

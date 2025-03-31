@@ -6,10 +6,7 @@ import Company from '../components/Company.vue'
 import Hire from '../components/Hire.vue'
 import axios from 'axios'
 import Constants from '../constants'
-
-const { keycloak, logged } = defineProps(['keycloak', 'logged'])
-
-const mail = ref(null)
+import keycloak from '../keycloak'
 
 const data = ref(null)
 const loading = ref(true)
@@ -48,6 +45,8 @@ const loadConstants = async () => {
 
 const reload = async () =>{
 
+  loading.value = true
+
   const token = await keycloak.getAccessToken()
 
   const res = await axios.post(Constants.GET_USERINFO, {}, {
@@ -64,36 +63,19 @@ const reload = async () =>{
       data.value = emptyProfile
       newProfile.value = true
       data.value.user.username = keycloak.getUsername()
-      data.value.user.email = mail.value
+      data.value.user.email = keycloak.getMail()
     }
   }
   else
   {
     data.value = res.data
   }
+
+  loading.value = false
 }
 
-// onMounted(async() => {
-//   if (keycloak !== null)
-//     {
-//       try{
-//         mail.value = keycloak.getMail()
-//         await reload()
-//         //await loadConstants()
-//       }
-//       catch (error) {
-//         failure.value = "Can't get data, please try login later."
-//       }
-//       loading.value = false;
-//     }
-// })
-
-watch (()=>logged, async(value)=>{
-
-  if (logged && keycloak !=null)
-  {
-      try{
-        mail.value = keycloak.getMail()
+onMounted(async() => {
+  try{
         await reload()
         await loadConstants()
       }
@@ -101,9 +83,7 @@ watch (()=>logged, async(value)=>{
         failure.value = "Can't get data, please try login later."
       }
       loading.value = false;
-    }
-
-}, { immediate: true })
+})
 
 </script>
 
@@ -113,7 +93,7 @@ watch (()=>logged, async(value)=>{
       <span class="sr-only">Loading...</span>
     </div>
     <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
-    <template v-if="!loading && mail!=null">
+    <template v-if="!loading">
       <div class="row mb-2">
         <div class="col">
           <div class="h1">{{ data.user.username }}</div>
@@ -127,7 +107,7 @@ watch (()=>logged, async(value)=>{
           </template>
         </div>
         <div class="col-12 col-md-8 ml-md-1">
-            <component :is="selected" :data="data" :constants="constants" :keycloak="keycloak" :reload="reload" @reload="reload"/>
+            <component :is="selected" :data="data" :constants="constants" :reload="reload" @reload="reload"/>
         </div>
       </div>
     </template>
