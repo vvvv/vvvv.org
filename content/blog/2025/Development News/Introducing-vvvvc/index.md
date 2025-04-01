@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2024-04-01"
+date: "2025-04-01"
 title: "Introducing: vvvvc.exe"
 description: "A commandline compiler for your patches"
 ---
