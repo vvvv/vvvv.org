@@ -1,16 +1,13 @@
 <script setup>
-import { ref, defineAsyncComponent } from 'vue'
+import { ref } from 'vue'
 import UserListNavi from './UserListNavi.vue'
 import UserListTable from './UserListTable.vue'
-
-const props = defineProps(['isMap'])
 
 // const UserMap = defineAsyncComponent(() =>
 //   import('./UserMap.vue')
 // )
 
 var stateObject = {
-    isMap: props.isMap,
     currentPage: 1,
     totalPages: 0,
     pageLimit: 10,

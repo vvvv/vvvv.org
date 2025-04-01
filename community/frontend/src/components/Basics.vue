@@ -2,6 +2,10 @@
   import { ref, watch, onMounted } from 'vue'
   import Constants from '../constants'
   import { submitForm, removeFile, uploadTempFile, errorHandler }  from '../utils'
+  import vueformConfig from '../../vueform.config'
+  import '../styles/vueform.scss'
+
+  const VueForm = ref(null);
 
   const emit = defineEmits(['reload'])
 
@@ -17,6 +21,9 @@
   }
 
   onMounted(async ()=>{
+    const { default: VueFormComponent } = await import('@vueform/vueform');
+    VueForm.value = VueFormComponent;
+
     fields = fields.map ((e)=>{
       return {
         key: "",

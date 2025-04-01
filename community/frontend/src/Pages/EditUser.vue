@@ -1,12 +1,12 @@
 <script setup>
-import { ref, shallowRef, watch, onMounted } from 'vue'
+import { ref, shallowRef, watch, onMounted, inject } from 'vue'
 
 import Basics from '../components/Basics.vue'
 import Company from '../components/Company.vue'
 import Hire from '../components/Hire.vue'
 import axios from 'axios'
 import Constants from '../constants'
-import keycloak from '../keycloak'
+import { getAccessToken, getMail, getUsername } from '../keycloak'
 
 const data = ref(null)
 const loading = ref(true)
@@ -35,7 +35,7 @@ const loadConstants = async () => {
   const res = await axios.get(Constants.GET_CONSTANTS)
   if (res.status != 200)
   {
-    throw (res.data.message) 
+    throw ("Can't load constants") 
   }
   else
   {
@@ -47,7 +47,7 @@ const reload = async () =>{
 
   loading.value = true
 
-  const token = await keycloak.getAccessToken()
+  const token = await getAccessToken()
 
   const res = await axios.post(Constants.GET_USERINFO, {}, {
         headers: {
@@ -62,8 +62,8 @@ const reload = async () =>{
     {
       data.value = emptyProfile
       newProfile.value = true
-      data.value.user.username = keycloak.getUsername()
-      data.value.user.email = keycloak.getMail()
+      data.value.user.username = getUsername()
+      data.value.user.email = getMail()
     }
   }
   else
@@ -93,7 +93,7 @@ onMounted(async() => {
       <span class="sr-only">Loading...</span>
     </div>
     <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
-    <template v-if="!loading">
+    <template v-if="!loading && failure!== ''">
       <div class="row mb-2">
         <div class="col">
           <div class="h1">{{ data.user.username }}</div>

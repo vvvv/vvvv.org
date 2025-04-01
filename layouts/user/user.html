@@ -17,10 +17,8 @@
         {{ partial "contact" . }}
         
         {{ partial "footer" . }}
-
-        {{ partial "js" . }}
-
-        <script type="module" src="{{"/js/vue/app.js" | relURL}}" defer></script>
     </div>
+    {{ partial "js" . }}
+    <script type="module" src="{{"/js/vue/app.js" | relURL}}" defer></script>
 </body>
 </html>

@@ -1,28 +1,28 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, inject } from 'vue'
 import EditUser from './Pages/EditUser.vue'
 import Business from './Pages/Business.vue'
 import Users from './Pages/Users.vue'
-import Professionals from './Pages/Professionals.vue'
-import axios from 'axios'
 import Constants from './constants'
-import KC from './keycloak'
-
-const props = defineProps(['page'])
+import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
 
 const loading = ref(false)
 const data = ref(null)
 const failure = ref ("")
-
-const mail = ref(null)
+const authenticated = ref (false)
 
 const login = ()=> {
-  this.$keycloak.logout(window.location.href)
+  kclogin(window.location.href)
 }
 
-const logout = () => {
-  this.$keycloak.logout(`${location.origin}/user`)
+const logout = ()=> {
+  kclogout(`${location.origin}/user`)
 }
+
+onMounted(()=>{
+  authenticated.value = isAuthenticated()
+})
+
 </script>
 
 <template>
@@ -35,23 +35,23 @@ const logout = () => {
       <nav class="navbar">
         <ul class="nav nav-pills">
           <li class="nav-item">
-              <router-link to="/user">Users</router-link>
+              <RouterLink to="/user">Users</RouterLink>
           </li>
           <li class="nav-item">
-            <router-link to="/user/businesses">Businesses</router-link>
+            <RouterLink to="/user/businesses">Businesses</RouterLink>
           </li>
         </ul>  
-        <template v-if="mail == null">
+        <template v-if="!authenticated">
           <ul class="nav nav-pills navbar-right">
             <li class="nav-item">
               <div class="btn btn-primary" @click="login">Login</div>
             </li>
           </ul>
         </template>  
-        <template v-if="mail != null">
+        <template v-else>
           <ul class="nav nav-pills navbar-right">
-            <li class="nav-item mr-4">
-                <router-link to="/user/edit">Profile</router-link>
+            <li class="nav-item mr-4 mt-2">
+                <RouterLink to="/user/edit">Profile</RouterLink>
             </li>
             <li class="nav-item">
               <div class="btn btn-outline-secondary" @click="logout">Logout</div>
@@ -60,7 +60,7 @@ const logout = () => {
         </template>
       </nav>
       <div class="container px-4">
-        <router-view></router-view>
+        <RouterView />
       </div>
     </template>
   </div>

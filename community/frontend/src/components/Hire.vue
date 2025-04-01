@@ -14,6 +14,9 @@ const columns = {
   sm: { container: 12, label: 4, wrapper: 12 },
   lg: { container: 12, label: 4, wrapper: 12 }
 }
+
+const { default: VueForm } = await import('@vueform/vueform');
+      this.dynamicComponent = VueForm;
   
 onMounted(async ()=>{
   setFormData();

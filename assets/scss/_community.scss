@@ -6,17 +6,26 @@ $label: #888;
     min-height: 30rem;
     padding-bottom: 5rem;
     
-    .nav-link {
+    .nav-item {
         color: #444;
-        text-decoration: underline;
-        text-underline-offset: 0.5em;
-        text-decoration-color: #aaa;
+        transition: none;
+        -webkit-transition: none;
 
-        &.active
-        {
+        a{
+            text-decoration: underline;
+            text-underline-offset: 0.5em;
+            text-decoration-color: #aaa;    
+            margin-right: 0.7rem;
+            transition: none;
+            -webkit-transition: none;
+            padding: 0.3rem 1rem;
+        }
+
+        a.router-link-active{
             color: #eee;
             background-color: #555;
             text-decoration: none;
+            border-radius: 4px;
         }
     }
 

@@ -3,6 +3,19 @@ import Constants from './constants'
 
 const keycloak = new Keycloak(Constants.LOGIN_OPTIONS);
 
+export async function initKeycloak()
+{
+    const result = keycloak.init({
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`
+    })
+    .catch(() => {
+        console.error('Failed to initialize Keycloak');
+    });
+
+    return result
+}
+
 export function isAuthenticated() {
     return keycloak.authenticated;
   }
@@ -20,6 +33,16 @@ export function getMail()
         return keycloak.idTokenParsed.email
     }
     return null;
+}
+
+export function kclogout(url)
+{
+    return keycloak.logout({ redirectUri: url })
+}
+
+export function kclogin(url)
+{
+    return keycloak.login({ redirectUri: url })
 }
 
 export async function getAccessToken()
@@ -41,6 +64,9 @@ export async function getAccessToken()
       }
 }
 
+export default keycloak;
+
+
 //     logout(url)
 //     {
 //         return this.keycloak.logout({ redirectUri: url })
@@ -52,7 +78,6 @@ export async function getAccessToken()
 //     }
   
 
-export default keycloak;
 
 
 // class KC
