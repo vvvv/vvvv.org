@@ -28,18 +28,12 @@ To remind yourself of the options, simply call:
 
 And please consult The Gray Book on [Exporting Applications](https://thegraybook.vvvv.org/reference/hde/exporting.html) for more details on the options.
 
-## Does it auto-restore NuGets?
-
-Not at this point, meaning you'll have to make sure all NuGets your patches reference are already installed. 
-
-But with Package Manager planned for a later 7.x release, we're aiming to have this solved as well.
-
 ## How do i get it?
 
 It ships with the usual vvvv installer. Available for testing in [latest previews](https://vvvv.org/download/). As always, we appreciate your thoughts and prayers!
 
 ## Sponsor credits
 
-For the sponsoring of this [open-source](https://github.com/vvvv/VL.Devices.Axis) development we bow to [Refik Anadol Studio](https://refikanadol.com/).
+For the sponsoring of this development we bow to [Refik Anadol Studio](https://refikanadol.com/).
 
 If you also have a request for custom development, [get in touch](mailto:devvvvs@vvvv.org)!
