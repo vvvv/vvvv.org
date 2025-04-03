@@ -8,6 +8,7 @@ const client = createDirectus(process.env.DIRECTUSURL)
 const userInfo = async (req, res, JWT) =>
 {   
     try{
+        
         const mail = JWT.verify(req.get('Authorization'))
         try{
             const info = await getUserInfo(mail)

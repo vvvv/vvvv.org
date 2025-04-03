@@ -1,11 +1,10 @@
 <script setup>
-  import { ref, watch, onMounted } from 'vue'
-  import Constants from '../constants'
-  import { submitForm, removeFile, uploadTempFile, errorHandler }  from '../utils'
-  import vueformConfig from '../../vueform.config'
-  import '../styles/vueform.scss'
+import { ref, watch, onMounted, computed } from 'vue'
+import Constants from '../constants'
+import { clone, submitForm, removeFile, errorHandler, uploadFile }  from '../utils'
 
-  const VueForm = ref(null);
+import { NButton, NUpload, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput, NModal, NAvatar } from 'naive-ui'
+import { isElementAccessExpression } from 'typescript'
 
   const emit = defineEmits(['reload'])
 
@@ -13,72 +12,41 @@
   const isChanged = ref(false)
   const form$ = ref(null)
   const userpic = ref(null)
-  var fields = new Array(4)
-  var tempUserpic = ""
-  const columns = {
-    sm: { container: 12, label: 4, wrapper: 12 },
-    lg: { container: 12, label: 4, wrapper: 12 }
+  const tempUserpic = ref(null)
+  const form = ref(null)
+
+  const handleFileChange = (data) => {
+    console.log (data)
+
+    if (data.file.status != 'removed')
+    {
+      uploadFile(data.file, tempUserpic);
+    }
+    else
+    {
+      removeFile(tempUserpic.value);
+    }
   }
-
+  
   onMounted(async ()=>{
-    const { default: VueFormComponent } = await import('@vueform/vueform');
-    VueForm.value = VueFormComponent;
 
-    fields = fields.map ((e)=>{
-      return {
-        key: "",
-        value: ""
+    form.value = clone(data)
+    form.value.status = form.value.status == "1"
+    
+    userpic.value = Constants.ASSETS + form.value.userpic.id;
+
+    var fields = form.value.related[0].social.fields
+    const missingFields = 4 - fields.length
+    if (missingFields > 0)
+    {
+      for (var i=0; i<missingFields; i++)
+      {
+        fields.push ({key:"", value:""}) 
       }
-    })
-
-    setFormData()
+      form.value.related[0].social.fields = fields
+    }
 
   })
-
-  const setFormData = async ()=>{
-    if (form$.value != null)
-    {
-      await form$.value.load(data, true)
-      form$.value.clean()
-      isChanged.value=false;
-    }
-  }
-
-  watch (()=>data, async(newValue, oldValue) => {
-    if (form$.value != null)
-    {
-      setFormData()
-    }
-  }, { immediate: true })
-
-const formatLoadedData = (data) => {
-
-  if (data.user.userpic != null)
-  {
-    userpic.value = Constants.ASSETS + data.user.userpic;
-  }
-
-  var d = {
-      basics:{
-        name: data.user.name,
-        surname: data.user.surname,
-        username: data.user.username,
-        statement: data.user.statement,
-        homepage: data.user.homepage,
-        email: data.user.email,
-        newsletter: data.user.newsletter,
-        userpic: data.user.userpic,
-      },
-      social:
-      {
-        github: data.social.github,
-        nuget: data.social.nuget
-      },
-      fields: data.social.fields
-    }
-
-  return d
-}
 
 const handleSuccess = (response, form$) => {
   form$.messageBag.clear() // clear message bag
@@ -111,136 +79,101 @@ const submit = async (FormData, form$) => {
   return submitForm (form$, data, Constants.EDIT_BASICS)
 }
 
-const upload = async (value, el$) => {
-  return uploadTempFile(value, el$)
+const createThumbnailUrl = (file)=>{
+  if (file && tempUserpic.value !== null)
+  {
+    const url = Constants.ASSETS + tempUserpic.value
+    return url
+  }
+
+  return undefined
 }
-
-const remove = async (value, el$) => {
-  removeFile(value, el$)
-}
-
-
 
 </script>
 
 <template>
-  <Vueform 
-    ref="form$" 
-    form-key="basics"
-    method="post"
-    @success="handleSuccess"
-    @error="errorHandler"
-    @change="formChanged"
-    :endpoint="submit"
-    :format-load="formatLoadedData" 
-    :previewUrl="Constants.ASSETS"
-    >
-
-    <StaticElement v-if="userpic != null"
-        name="userpic" 
-        tag="img"
+  <n-row :gutter="[0, 24]">
+    <n-col :span="6">
+      <n-avatar
+        round
+        :size="64"
         :src="userpic"
-        :width="`${100}`"
+        fallback-src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+      />
+    </n-col>
+    <n-col :span="18">
+        <n-upload
+        list-type="image"
+        :max="1"
+        accept="image/*"
+        :default-upload="false"
+        @change="handleFileChange"
+        :create-thumbnail-url="createThumbnailUrl"
         >
-    </StaticElement>
+          <n-button type="primary">Upload New Avatar</n-button>
+        </n-upload>
+    </n-col>
+  </n-row>
 
-    <ObjectElement name="basics">
-
-        <!-- TODO: ADD TOKEN FOR UPLOADING -->
-        <FileElement
-          view="image"
-          name="avatar_upload"
-          accept="image/*"
-          description="Choose an avatar"
-          :rules="[
-            'max:1024',
-          ]"
-          :upload-temp-endpoint="upload"
-          :remove-temp-endpoint="remove"
-          :remove-endpoint="remove"
-        />
-
-        <TextElement name="username" label="Username" :columns="columns" disabled/>
-        <TextElement name="email" :columns="columns" label="Email" disabled/>
-        <TextElement name="name" :columns="columns" label="Name"/>
-        <TextElement name="surname" :columns="columns" label="Surname"/>
-        <TextElement name="homepage" :columns="columns" label="Homepage"/>
-        <TextareaElement name="statement" :columns="columns" label="Statement"/>
-        <ToggleElement name="newsletter" true-value="true" false-value="false" :columns="columns" label="Newsletter"/>
-      </ObjectElement>
-      <ObjectElement name="social" label="Social" :columns="columns">
-          <TextElement
-          name="github"
-          placeholder="GitHub"
-          size="lg"
-          :columns="{
-            default: 12,
-            sm: 6
-          }"
+<n-form
+    v-if="form !== null"
+    ref="formRef"
+    :model="form"
+    label-placement="left"
+    :label-width="160"
+    require-mark-placement="right-hanging"
+    >
+    <n-form-item label="Confirmed" path="status">
+      <n-switch v-model:value="form.status" placeholder="Confirmed" disabled/>
+    </n-form-item>
+    <n-form-item label="E-Mail" path="email">
+      <n-input v-model:value="form.email" placeholder="E-Mail" disabled/>
+    </n-form-item>
+    <n-form-item label="Profile is public" path="public">
+      <n-switch v-model:value="form.public" placeholder="Newsletter"/>
+    </n-form-item>
+    <n-form-item label="Name" path="name">
+      <n-input v-model:value="form.name" placeholder="Name" />
+    </n-form-item>
+    <n-form-item label="Surname" path="surname">
+      <n-input v-model:value="form.surname" placeholder="Surname" />
+    </n-form-item>
+    <n-form-item label="Newsletter" path="newsletter">
+      <n-switch v-model:value="form.newsletter" placeholder="Newsletter"/>
+    </n-form-item>
+    <n-form-item label="Website" path="website">
+      <n-input v-model:value="form.related[0].social.website" placeholder="Website"/>
+    </n-form-item>
+    <n-form-item label="Github" path="github">
+      <n-input v-model:value="form.related[0].social.github" placeholder="Github"/>
+    </n-form-item>
+    <n-form-item label="NuGet" path="nuget">
+      <n-input v-model:value="form.related[0].social.nuget" placeholder="NuGet"/>
+    </n-form-item>
+    <n-form-item label="Custom Fields">
+      <n-flex v-for="(field, index) in form.related[0].social.fields" :key="index" class="field-row">
+          <n-input 
+            v-model="field.key" 
+            placeholder="Key" 
+            style="margin-right: 10px;" 
           />
-          <TextElement
-            name="nuget"
-            placeholder="NuGet"
-            size="lg"
-            :columns="{
-              default: 12,
-              sm: 6
-            }"
+          <n-input 
+            v-model="field.value" 
+            placeholder="Value" 
           />
-        </ObjectElement>
+      </n-flex>
+    </n-form-item>
+    <n-row :gutter="[0, 24]">
+      <n-col :span="24">
+        <div style="display: flex; justify-content: flex-end">
+          <n-form-item>
+            <n-button @click="handleValidateClick">
+              Validate
+            </n-button>
+          </n-form-item>
+        </div>
+      </n-col>
+    </n-row>
+</n-form>
 
-        <!-- Fields -->
-        <ObjectElement name="fields" label="Custom Fields" :columns="columns">
-          <template v-for="(item, index) in fields">
-              <ObjectElement :name="index">
-                <TextElement
-                name="key"
-                placeholder="Key"
-                size="lg"
-                :columns="{
-                  default: 12,
-                  sm: 6
-                }"
-                />
-                <TextElement
-                  name="value"
-                  placeholder="Value"
-                  size="lg"
-                  :columns="{
-                    default: 12,
-                    sm: 6
-                  }"
-                />
-              </ObjectElement>
-          </template>
-        </ObjectElement>
-      
-      <StaticElement tag="hr" name="separator"/>
-
-      <GroupElement :columns="columns" name="buttons">
-
-        <ButtonElement full
-          name="submit"
-          :submits="true"
-          button-label="Update"
-          :columns="{
-            default: 12,
-            sm: 6
-          }"
-          :disabled="!isChanged"
-          size="sm"/>
-
-        <ButtonElement secondary
-          name="reset"
-          button-label="Revert"
-          align="right"
-          :resets="true"
-          :columns="{
-            default: 12,
-            sm: 6
-          }"/>
-
-      </GroupElement>
-
-  </Vueform>
 </template>

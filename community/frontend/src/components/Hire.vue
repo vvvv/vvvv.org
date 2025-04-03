@@ -1,5 +1,4 @@
 <script setup>
-import { email } from '@vueform/vueform';
 import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
 import { submitForm, errorHandler }  from '../utils'
@@ -14,9 +13,6 @@ const columns = {
   sm: { container: 12, label: 4, wrapper: 12 },
   lg: { container: 12, label: 4, wrapper: 12 }
 }
-
-const { default: VueForm } = await import('@vueform/vueform');
-      this.dynamicComponent = VueForm;
   
 onMounted(async ()=>{
   setFormData();

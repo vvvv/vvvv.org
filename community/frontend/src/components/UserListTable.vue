@@ -1,13 +1,87 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { ref, watchEffect, h } from 'vue'
 import Constants from '../constants'
+import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag } from "naive-ui"
+
+const emit = defineEmits(['showProfile'])
 
 const state = defineModel()
-const users = ref(null)
 
-function link (l)
+const pagination = ref(20)
+const tableData = ref([])
+const loading = ref(true)
+
+const columns = [
+    {
+        width: "60",
+        key: 'avatar',
+        render(row) {
+            return h(
+                'div',
+                {
+                    style: { cursor: 'pointer' },
+                    onClick: ()=> emit('showProfile', row.username)
+                },
+                h(
+                    NAvatar,
+                    {
+                        objectFit: 'contain',
+                        round: true,
+                        size: 48,
+                        src: row.src
+                    }
+                )
+            )
+        }
+    },
+    {
+        title: 'Username',
+        key: 'username',
+        render(row) {
+            return h(
+                'a',
+                {
+                    href: '#',
+                    onClick: ()=> emit('showProfile', row.username)
+                },
+                row.username
+            )
+        }
+    },
+    {
+        title: 'Available',
+        key: 'available',
+        render(row) {
+            if (row.available)
+            {
+                return h(
+                    NTag,
+                    {
+                        round: "true",
+                        bordered: "false",
+                        type: "success"
+                    },
+                    "available"
+                )
+            }
+            else
+            {
+                return null
+            }
+            
+        }
+    }
+]
+
+
+function userpicLink (l)
 {
     return `${Constants.ASSETS}${l}?width=40&quality=90&fit=cover`;
+}
+
+function showProfile(u)
+{
+    emit('showProfile', u)
 }
 
 
@@ -23,10 +97,19 @@ function jumpToPage()
 
 function fetchData(url)
 {
-    fetch(url)
-    .then((response) => {
+    loading.value = true
+
+    fetch(url).then((response) => {
         response.json().then((data) => {
-            users.value = data.data
+            tableData.value = []
+            data.data.forEach((u) => {
+                const row = {
+                    src: userpicLink(u.userpic),
+                    username: u.username,
+                    available: u.related[0].hire !== null ? u.related[0].hire.available : false 
+                }
+                tableData.value.push (row)
+            })
 
             if (data.hasOwnProperty("meta"))
             {
@@ -40,21 +123,25 @@ function fetchData(url)
     })
     .catch((err) => {
         console.error(err);
-    });
+    })
+    .finally(()=>{
+        loading.value = false
+    })
 }
 
+const _sort = "sort=username"
+const _fields =`fields[]=username,userpic,related.hire.available`
+const _hireFilter=`[related.hire][available][_eq]=true` 
 
 watchEffect(async () => { 
+
     var _filter = ""
     var params = []
-    const _sort = "sort=username"
     const _pages =`limit=${state.value.pageLimit}&page=${state.value.currentPage}`
-    const _fields =`fields=username,userpic,hire.available` 
     var _count = ""
 
     const _usernameFilter=`[username][_contains]=${state.value.filter}`
-    const _hireFilter=`[hire][available][_eq]=true`
-
+    
     var filters = new Array()
 
     if (state.value.availableForHire) filters.push(_hireFilter)
@@ -93,27 +180,13 @@ watchEffect(async () => {
 </script>
 
 <template>
-    <div class="table-responsive">
-        <table class="table table-sm">
-            <colgroup>
-                <col class="col-md-1">
-                <col class="col-md-3">
-                <col class="col-md-8">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th scope="col" class="picsize"></th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Available for hire</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="u in users" track-by="id">
-                    <td><a :href="`?user=${u.username}`"><img :src="link(u.userpic)" v-if="u.userpic !== null" class="rounded-circle"/></a></td> 
-                    <td><a :href="`?user=${u.username}`">{{u.username}}</a></td>
-                    <td><template v-if="u.hire.length > 0">{{ u.hire[0].available ? 'Yes' : 'No' }}</template></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <n-space vertical :size="12">
+        <n-data-table
+            :loading="loading"
+            :bordered="false"
+            :columns="columns"
+            :data="tableData"
+            :pagination="pagination"
+            />
+    </n-space>
 </template>

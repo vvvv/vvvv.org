@@ -1,7 +1,7 @@
-const BASEURL="http://localhost:8055/"
+const BASEURL="http://localhost:8058/"
 const BACKENDURL="http://localhost:4050/v1/"
 
-export default Object.freeze({   
+export default Object({   
 
     //DIRECTUS DIRECT
     ASSETS: BASEURL + "assets/",
@@ -9,8 +9,8 @@ export default Object.freeze({
     GET_USERS: BASEURL + 'items/User',
 
     //BACKEND
-    GET_USERINFO: BACKENDURL + "userinfo",
-    GET_CONSTANTS: BACKENDURL + "constants",
+    BACKEND_GET_USER: BACKENDURL + "userinfo",
+    BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
     EDIT_COMPANY: BACKENDURL + "edit/company",
     EDIT_BASICS: BACKENDURL + "edit/basics",
     EDIT_HIRE: BACKENDURL + "edit/hire",
@@ -21,7 +21,7 @@ export default Object.freeze({
         realm: 'vvvv', 
         clientId: 'weblogin'
     },
-    LOGIN_REDIRECT: 'http://localhost:5173/',
+    LOGIN_REDIRECT: 'http://localhost:1313/',
     
     PROFILEPIC_PARAMS: "?quality=90&fit=cover&width=120"
 

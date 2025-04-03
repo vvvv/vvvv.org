@@ -1,4 +1,6 @@
 import Constants from './constants'
+import axios from 'axios';
+import { getAccessToken } from './keycloak'
 
 export function isEmpty(d)
 {
@@ -13,20 +15,13 @@ export const replaceEmpty = obj => Object.entries(obj).map((p)=>(p !== "undefine
 
 export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop])
 
-export function cleanup(obj)
-{
-    const removeFields = ['date_updated', 'date_created']
-    removeProps(obj, removeFields)
-    return obj
-}
-
 export async function submitForm(form, data, url, keycloak)
 {
     form.messageBag.clear()
     form.cancelToken = form.$vueform.services.axios.CancelToken.source()
   
     try{
-        const token = await keycloak.getAccessToken()
+        const token = await getAccessToken()
         
         return await form.$vueform.services.axios.post(url,
             data,
@@ -103,34 +98,74 @@ export async function post(url, payload, token)
     })
 }
 
-export async function removeFile(value, el$, keycloak)
+export async function removeFile(id)
 {
-    const token = await keycloak.getAccessToken()
-    await el$.$vueform.services.axios.request({
-      url: Constants.FILE_REMOVE,
-      method: 'POST',
-      headers: {'Authorization ': token},
-      data: el$.form$.convertFormData({
-        id: value.tmp,
-      }),
-    })
+  const token = await getAccessToken()
+  const formData = new FormData();
+  formData.append('id', id)
+
+  axios.request({
+    url: Constants.FILE_REMOVE,
+    method: 'POST',
+    headers: {'Authorization ': token},
+    data: formData
+  })
 }
 
-export async function uploadTempFile(value, el$, keycloak)
+export async function getAuthHeader()
 {
-  const token = await keycloak.getAccessToken()
-  const response = await el$.$vueform.services.axios.request({
+  const token = await getAccessToken()
+  return {'Authorization ': token}
+}
+
+export async function uploadFile(file, tempFile)
+{
+  const formData = new FormData();
+  formData.append('folder', 'dfd274cc-651b-4bef-89c9-1fe9ed070a47')
+  formData.append('file', file.file);
+
+  const token = await getAccessToken()
+  const request = {
     url: Constants.FILE_UPLOAD,
     method: 'POST',
     headers: {'Authorization ': token},
-    data: el$.form$.convertFormData({
-      file: value,
-    }),
-    onUploadProgress: (e) => {
-      el$.progress = Math.round((e.loaded * 100) / e.total)
-    },
-    cancelToken: el$.$vueform.services.axios.CancelToken.source().token,
-  }) // errors are handled automatically
+    data: formData,
+    onUploadProgress: (progressEvent) => {
+      file.percentage = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+    }
+  }
 
-  return response.data
+  axios.request(request)
+  .then(response => {
+    file.status = 'finished'
+    file.percentage = 100
+    tempFile.value = response.data.tmp
+    file.url = Constants.ASSETS + tempFile.value
+    console.log (tempFile.value)
+  })
+  .catch(error => {
+    console.error('Error uploading file:', error);
+    tempFile.value = null
+    file.status = 'error'
+    file.percentage = 0
+  });
 }
+
+// export async function uploadTempFile(value, el$, keycloak)
+// {
+//   const token = await getAccessToken()
+//   const response = await el$.$vueform.services.axios.request({
+//     url: Constants.FILE_UPLOAD,
+//     method: 'POST',
+//     headers: {'Authorization ': token},
+//     data: el$.form$.convertFormData({
+//       file: value,
+//     }),
+//     onUploadProgress: (e) => {
+//       el$.progress = Math.round((e.loaded * 100) / e.total)
+//     },
+//     cancelToken: el$.$vueform.services.axios.CancelToken.source().token,
+//   }) // errors are handled automatically
+
+//   return response.data
+// }

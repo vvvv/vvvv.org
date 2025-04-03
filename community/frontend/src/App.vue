@@ -1,8 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, inject } from 'vue'
-import EditUser from './Pages/EditUser.vue'
-import Business from './Pages/Business.vue'
-import Users from './Pages/Users.vue'
+import EditUser from './components/EditUser.vue'
 import Constants from './constants'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
 
@@ -10,6 +8,7 @@ const loading = ref(false)
 const data = ref(null)
 const failure = ref ("")
 const authenticated = ref (false)
+const businessesCount = ref (0)
 
 const login = ()=> {
   kclogin(window.location.href)
@@ -38,7 +37,7 @@ onMounted(()=>{
               <RouterLink to="/user">Users</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/user/businesses">Businesses</RouterLink>
+            <RouterLink to="/user/businesses">Businesses<span v-if="businessesCount>0" class="pl-1">{{(businessesCount)}}</span></RouterLink>
           </li>
         </ul>  
         <template v-if="!authenticated">
@@ -60,7 +59,7 @@ onMounted(()=>{
         </template>
       </nav>
       <div class="container px-4">
-        <RouterView />
+        <RouterView @setCount="c => { businessesCount = c }"/>
       </div>
     </template>
   </div>

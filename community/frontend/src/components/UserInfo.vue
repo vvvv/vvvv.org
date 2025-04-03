@@ -1,37 +1,50 @@
 <script setup>
 
-import { ref, watchEffect, onMounted, computed } from 'vue'
+import { ref, watchEffect, onMounted, computed, watch} from 'vue'
 import Constants from '../constants'
 import Field from './Field.vue'
 import { isEmpty } from '../utils'
-import keycloak from '../keycloak'
 
-const props = defineProps(['username', 'logged'])
+defineEmits(['showList'])
+
+const { username } = defineProps(['username'])
+
 const UserData = ref(null)
-const imageParams = "?quality=90&fit=cover&width=120"
-const url = `${Constants.GET_USERS}?filter[username][_eq]=${props.username}&fields=*,hire.*.Hire_Types_id.type,social.*`
+const hire = ref (null)
+const social = ref (null)
 
-const username = ref("")
+const imageParams = "?quality=90&fit=cover&width=120"
+const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}&fields=*,related.hire.*.Hire_Types_id.type,related.social.*`
 
 onMounted(async ()=>
 {
     fetch(url)
     .then((response) => {
-        response.json().then((data) => {
-            UserData.value = data.data[0]
+        response.json().then((d) => {
+            const data = d.data[0]
+            UserData.value = data 
+            if (data.related[0].hire !== null)
+            {
+                hire.value = data.related[0].hire
+            }
+
+            if (data.related[0].social !== null)
+            {
+                social.value = data.related[0].social
+            }
         })
     })
     .catch((err) => {
         console.error(err);
     });
 
-    if (props.logged)
-    {
-        if (keycloak.isAuthenticated())
-        {
-            username.value = keycloak.getUsername()
-        }
-    }
+    // if (props.logged)
+    // {
+    //     if (keycloak.isAuthenticated())
+    //     {
+    //         username.value = keycloak.getUsername()
+    //     }
+    // }
 })
 
 function edit()
@@ -46,7 +59,7 @@ function edit()
     <div v-if="UserData" class="card mt-3">
         <div class="card-header">
             <div class="row mx-1">
-                <a href="/user/" class="btn btn-outline-secondary dark-text">< List</a>
+                <a href="#" class="btn btn-outline-secondary dark-text" @click="$emit('showList')">< List</a>
                 <div class="h4 mr-auto ml-4">{{ UserData.username }}</div>
                 <button v-if="UserData.username == username" class="btn btn-sm btn-primary px-2" @click="edit()">Edit</button>    
             </div>
@@ -62,9 +75,10 @@ function edit()
                         <div class="col-12 col-md-6">
                             <Field label="Real Name" :value="UserData.name"/>                            
                         </div>
-                        <div class="col-12 col-md-6" v-if="UserData.social.length > 0">
-                            <Field label="Github Account" :value="UserData.social[0].github"/>
-                            <Field label="Nuget Account" :value="UserData.social[0].nuget"/>
+                        <div class="col-12 col-md-6" v-if="social">
+                            <Field label="Website" :value="social.website"/>
+                            <Field label="Github Account" :value="social.github"/>
+                            <Field label="Nuget Account" :value="social.nuget"/>
                         </div>
                     </div>
                 </div>
@@ -72,26 +86,21 @@ function edit()
 
             <Field label="Statement" :value="UserData.statement" class="mt-md-3" multi="true"/>
 
-            <div class="row" v-if="UserData.social.length > 0">
-                <template v-for="f in UserData.social[0].fields">
+            <div class="row" v-if="social">
+                <template v-for="f in social.fields">
                         <Field :label="f.key" :value="f.value" class="col-12 col-md-6"/>
                 </template>
             </div>
 
             <hr/>
 
-            <template v-if="UserData.hire.length > 0">
-                <template v-if="edit">
-                    <input type="checkbox" v-model="UserData.hire[0].available" disabled/>
-                    <span class="label">Available for Hire</span>
-                </template>
-                <template v-else>
-                    <div v-if="UserData.hire[0].available">Available for Hire</div>
-                </template>
-                <fieldset :disabled="!UserData.hire[0].available">
-                    <div class="row">
+            <template v-if="hire">
+                <input type="checkbox" v-model="hire.available" disabled/>
+                <span class="label">Available for Hire</span>
+                
+                <div class="row">
                         <div class="col-12 col-md-6">
-                            <Field label="Description" :value="UserData.hire[0].description" :multi="true"/>
+                            <Field label="Description" :value="hire.description" :multi="true"/>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="field">
@@ -99,15 +108,18 @@ function edit()
                                     Available for:
                                 </div>
                                 <div class="value">
-                                    <template v-for="(t, index) in UserData.hire[0].types">
-                                        <span>{{ isEmpty(t.Hire_Types_id.type) }}</span><template v-if="index+1 < UserData.hire[0].types.length">, </template>
+                                    <template v-for="(t, index) in hire.available_for">
+                                        <span>{{ isEmpty(t) }}</span><template v-if="index+1 < hire.available_for.length">, </template>
                                     </template>
                                 </div>
                             </div> 
                         </div>
-                    </div>
-                </fieldset>
-            <hr/>
+                </div>
+                <hr/>
+            </template>
+            <template v-else>
+                <input type="checkbox" value="false" disabled/>
+                <span class="label">Available for Hire</span>
             </template>
         </div>
     </div>

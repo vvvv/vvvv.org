@@ -1,10 +1,12 @@
 <script setup>
 
-import {ref} from 'vue'
+import { ref } from 'vue'
+import { NSwitch, NButton, NInput } from "naive-ui"
 
 const state = defineModel()
 
 const filterField = ref("")
+const columns = ref(null)
 const filterFieldForHire = ref(false)
 
 function applyFilter()
@@ -33,20 +35,23 @@ function resetFilter()
                     </li>
                 </ul>
             <div class="mr-auto"></div> -->
-            <div class="">
-                <ul class="navbar-nav nav">
-                    <li class="nav-item">
-                        <form class="form-inline" @submit.prevent="onSubmit">
-                            <input @submit="applyFilter" style="width: 8em"class="form-control form-control-sm mr-sm-1 ml-2" v-model="filterField" placeholder="Filter" aria-label="Filter" type="text" inputmode="search">
-                            <input type="checkbox" v-model="filterFieldForHire" class="form-check-input"/><span class="ml-2">Only available For Hire</span>
-                            <button class="btn btn-sm btn-outline-secondary my-2 my-sm-0" @click="applyFilter" type="button">Apply</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" />
+            <n-switch v-model:value="filterFieldForHire" class="ml-md-2"/><span class="ml-2">Only available For Hire</span>
+            <n-button strong secondary @click="applyFilter" size="large" class="ml-md-2">Search</n-button>
         </nav>
     </div>
-    <template v-if="!state.isMap">
+    <template>
+
+        <n-space vertical :size="12">
+            <n-data-table
+                :bordered="false"
+                :single-line="false"
+                :columns="columns"
+                :data="data"
+                :pagination="pagination"
+                />
+        </n-space>
+
         <nav class="navbar navbar-expand-lg navbar-color border-top">
                 <ul class="navbar-nav nav nav-pills mr-auto mt-1" role="tablist">       
                     <li class="nav-item">

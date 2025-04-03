@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Business from './Pages/Business.vue'
-import Users from './Pages/Users.vue'
-const EditUser = () => import('./Pages/EditUser.vue')
+import Business from './components/Businesses.vue'
+const EditUser = () => import('./components/EditUser.vue')
+const Users = () => import('./components/Users.vue')
 
 const routes = [
     {
@@ -11,7 +11,7 @@ const routes = [
     },
     {
         path: '/user',
-        name: 'Users',
+        name: 'User',
         component: Users
     },
     {
@@ -20,7 +20,7 @@ const routes = [
         component: EditUser
     },
     {
-        path: '/user/buisnesses',
+        path: '/user/businesses',
         name: 'Businesses',
         component: Business
     }

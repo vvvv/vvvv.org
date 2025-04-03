@@ -1,7 +1,7 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue'
   import Constants from '../constants'
-  import { submitForm, removeFile, uploadTempFile }  from '../utils'
+  import { submitForm, removeFile }  from '../utils'
 
   const emit = defineEmits(['reload'])
 

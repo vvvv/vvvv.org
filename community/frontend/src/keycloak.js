@@ -6,8 +6,10 @@ const keycloak = new Keycloak(Constants.LOGIN_OPTIONS);
 export async function initKeycloak()
 {
     const result = keycloak.init({
-        onLoad: 'check-sso',
-        silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri: `${location.origin}/user/silent-check-sso.html`,
+            checkLoginIframe: false,
+            responseMode: 'fragment',
     })
     .catch(() => {
         console.error('Failed to initialize Keycloak');

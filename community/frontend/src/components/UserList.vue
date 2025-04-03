@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import UserListNavi from './UserListNavi.vue'
 import UserListTable from './UserListTable.vue'
 
-// const UserMap = defineAsyncComponent(() =>
-//   import('./UserMap.vue')
-// )
+const emit = defineEmits(['showProfile'])
 
 var stateObject = {
     currentPage: 1,
@@ -22,6 +20,5 @@ const state = ref (stateObject)
 <template>
     <div class="h2">Users</div>
         <UserListNavi v-model="state"/>
-        <UserListTable v-model="state" v-if="!state.isMap"/>
-        <UserMap v-model="state" v-else/>
+        <UserListTable v-model="state" @showProfile="(e) => emit('showProfile', e)"/>
 </template>

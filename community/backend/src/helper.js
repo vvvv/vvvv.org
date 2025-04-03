@@ -51,42 +51,37 @@ function getImageURL(id)
 
 async function getUserInfo(mail)
 {
-	const id = (await getUserID(mail))[0].id
-	const user = await client.request(readItem ('User', id))
-	const hire = await getHire(id)
-	const companies = await getCompanies(id)
-	const institutions = await getInstitutions(id)
-	const social = await getSocialNetworks(id)
-
-	return {
-		user: user,
-		hire: hire,
-		companies: companies,
-		edu: institutions,
-		social: social
-	}
-
-}
-
-async function getHire (user_id)
-{
-	var hire = await client.request(readItems ('Hire', {
-		fields: [
-			'types.Hire_Types_id.*',
-			'available'
-		],
+	const user = await client.request(readItems ('User', {
+		fields:['*.*.*'],
 		filter: {
-			user_id: {
-				_eq: user_id,
+			email: {
+				_eq: mail,
 			}
-		},
-	}));
+		}
+	}))
 
-	return hire.map((e) => ({
-		available: e.available,
-		types: prepareTypes(e.types)
-	}));
+	return user
 }
+
+// async function getHire (user_id)
+// {
+// 	var hire = await client.request(readItems ('Hire', {
+// 		fields: [
+// 			'types.Hire_Types_id.*',
+// 			'available'
+// 		],
+// 		filter: {
+// 			user_id: {
+// 				_eq: user_id,
+// 			}
+// 		},
+// 	}));
+
+// 	return hire.map((e) => ({
+// 		available: e.available,
+// 		types: prepareTypes(e.types)
+// 	}));
+// }
 
 function prepareTypes(input)
 {
