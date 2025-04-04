@@ -76,21 +76,21 @@ export function errorHandler(error, details, form$)
     }
 }
 
-export async function post(url, payload, token)
+export async function post(url, payload)
 {
-    var body = JSON.stringify({
-            Token: token,
-            Payload: payload
-        })
+  const token = await getAccessToken()
 
-    return fetch(url, {
-        headers: { "Content-Type": "application/json" },
+  return fetch(url, {
+        headers: { 
+          "Content-Type": "application/json",
+          'Authorization': token
+        },
         method: "POST",
-        body: body
+        body: JSON.stringify(payload)
     })
     .then((response) => response.json())
     .then((data) => {
-        if (Object.hasOwn(data.response, 'error'))
+        if (Object.hasOwn(data, 'error'))
             {
                 throw new Error (data.response.error)
             }

@@ -2,47 +2,47 @@ import { createDirectus, rest, createItem, updateItem, deleteItems, readItems, s
 import 'dotenv/config'
 import { getUserID, getItemID } from "./helper.js"
 
-const client = createDirectus('http://localhost:8055')
-.with(staticToken(process.env.DIRECTUSTOKEN))
+const client = createDirectus(process.env.DIRECTUSURL)
+.with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
 .with(rest());
 
 const editBasics = async (req, res, JWT) => {
     
     try{   
         const mail = JWT.verify(req.get('Authorization'))
-        var user = await getUserID(mail)
-
-        var userID = null
-        var basics = req.body.basics
-        var social = req.body.social
-        var userpic = req.body.basics.userpic
-    
-        if (user.length > 0)
-        {        
-            userID = user[0].id 
-            await client.request(updateItem ('User', userID, basics))
-
-            var socialNetworksID = await getItemID ('SocialNetworks2', userID)
-
-            await client.request(updateItem ('SocialNetworks2', socialNetworksID, social))
-        }
-        else
-        {
-            var result = await client.request(createItem ('User', basics))
-            userID = result.id
-            social.user_id = userID
-            await client.request(createItem ('SocialNetworks2', social))
-        }
-
-        if (userID != null && userpic)
-        {
-            var userImage = {
-                image: userpic,
-                user_id: userID
-            }
         
-            await client.request(createItem ('User_Image', userImage))
+        const user = req.body.user
+
+        if (mail != user.email) throw ("Emails doesn't match")
+
+        delete user.id
+        delete user.status
+        delete user.username
+        delete user.email
+
+        var userID = await getUserID(mail)
+            
+        var social = req.body.social
+        delete social.id
+
+        if (userID.length > 0)
+        {   
+            const id = userID[0].id
+            await client.request(updateItem ('User', id, user))
+
+            const socialNetworksID = await getItemID ('Social', id)
+            await client.request(updateItem ('Social', socialNetworksID, social))
         }
+        // else
+        // {
+        //     const result = await client.request(createItem ('User', user))
+        //     await client.request(createItem ('Social', user))
+        //     await client.request(createItem ('User', user))
+
+        //     userID = result.id
+        //     social.user_id = userID
+        //     await client.request(createItem ('SocialNetworks2', social))
+        // }
 
         return res.status(200).send({
             result: "Updated"
