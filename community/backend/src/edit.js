@@ -1,4 +1,4 @@
-import { createDirectus, rest, createItem, updateItem, deleteItems, readItems, staticToken } from '@directus/sdk';
+import { createDirectus, rest, readItem, createItem, updateItem, deleteItems, readItems, staticToken } from '@directus/sdk';
 import 'dotenv/config'
 import { getUserID, getItemID } from "./helper.js"
 
@@ -20,8 +20,8 @@ const editBasics = async (req, res, JWT) => {
         delete user.username
         delete user.email
 
-        var userID = await getUserID(mail)
-            
+        var userID = await getUserID(mail, client)
+        
         var social = req.body.social
         delete social.id
 
@@ -30,7 +30,7 @@ const editBasics = async (req, res, JWT) => {
             const id = userID[0].id
             await client.request(updateItem ('User', id, user))
 
-            const socialNetworksID = await getItemID ('Social', id)
+            const socialNetworksID = await getItemID ('Social', id, client)
             await client.request(updateItem ('Social', socialNetworksID, social))
         }
         // else
@@ -224,59 +224,26 @@ const editEmployee = async ( employee, companyId )=> {
 }
 
 const editHire = async (req, res, JWT) =>{
-    try{       
-        const mail = JWT.verify(req.get('Authorization'))
-        const user = await getUserID(mail)
-    
-        if (user.length > 0)
-        {
-            const userID = user[0].id
-            
-            const hire = {
-                available: req.body.available,
-                types: req.body.types
-            }
+    try{  
+        const mail = JWT.verify(req.get('Authorization'))     
+        const hire = req.body
 
-            const hireID = await getItemID ('Hire', userID)
+        const user = await getUserID(mail, client)
+        const userID = user[0].id
+        console.log (userID)
 
-            await client.request(updateItem ('Hire', hireID, hire))
-            
-            if (req.body.hasOwnProperty ('workFor'))
-            {
-                for (var company of req.body.workFor)
-                    {
-                        const item = await client.request(readItems ('User_Company', {
-                                fields: [
-                                    'id'
-                                ],
-                                filter: {
-                                    _and: [
-                                        {
-                                            uuid: {
-                                                _eq: company.uuid,
-                                            }
-                                        },
-                                        {
-                                            user: {
-                                                _eq: userID
-                                            }
-                                        }
-                                    ]
-                                }
-                        }));
-        
-                        await client.request(updateItem ('User_Company', userID, 
-                            {
-                                status: company.status
-                            }
-                        ))
-                    } 
-            }
+        const userData = await client.request(readItem ('User', userID, {
+            fields: [
+                'related.hire.id'
+            ]
+        }))
 
+        const hireID = userData.related[0].hire.id
+
+        await client.request(updateItem ('Hire', hireID, hire))
             return res.status(200).send({
-                result: "Updated"
-            });
-        }
+            result: "Updated"
+        });
     }
     catch (error){ 
         console.log (error);
@@ -284,6 +251,39 @@ const editHire = async (req, res, JWT) =>{
             error: "Can't update Hire"
         });
     }
+
+                // if (req.body.hasOwnProperty ('workFor'))
+            // {
+            //     for (var company of req.body.workFor)
+            //         {
+            //             const item = await client.request(readItems ('User_Company', {
+            //                     fields: [
+            //                         'id'
+            //                     ],
+            //                     filter: {
+            //                         _and: [
+            //                             {
+            //                                 uuid: {
+            //                                     _eq: company.uuid,
+            //                                 }
+            //                             },
+            //                             {
+            //                                 user: {
+            //                                     _eq: userID
+            //                                 }
+            //                             }
+            //                         ]
+            //                     }
+            //             }));
+        
+            //             await client.request(updateItem ('User_Company', userID, 
+            //                 {
+            //                     status: company.status
+            //                 }
+            //             ))
+            //         } 
+            // }
+
 }
 
 export { editBasics, editCompany, editHire }

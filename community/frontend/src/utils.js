@@ -15,67 +15,6 @@ export const replaceEmpty = obj => Object.entries(obj).map((p)=>(p !== "undefine
 
 export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop])
 
-export async function submitForm(form, data, url, keycloak)
-{
-    form.messageBag.clear()
-    form.cancelToken = form.$vueform.services.axios.CancelToken.source()
-  
-    try{
-        const token = await getAccessToken()
-        
-        return await form.$vueform.services.axios.post(url,
-            data,
-            {
-                headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': token
-                        },
-                cancelToken: form.cancelToken.token,
-            }
-            )
-    }
-    catch (err)
-    {
-        console.log (err)
-    }
-}
-
-export function errorHandler(error, details, form$) 
-{
-    switch (details.type) {
-      // Error occured while preparing elements (no submit happened)
-      case 'prepare':
-        console.log(error) // Error object
-  
-        form$.messageBag.append('Could not prepare form')
-        break
-  
-      // Error occured because response status is outside of 2xx
-      case 'submit':
-        console.log(error) // AxiosError object
-        console.log(error.response) // axios response
-        console.log(error.response.status) // HTTP status code
-        console.log(error.response.data) // response data
-  
-        form$.messageBag.append('Some error from the backend')
-        break
-  
-      // Request cancelled (no response object)
-      case 'cancel':
-        console.log(error) // Error object
-  
-        form$.messageBag.append('Request cancelled')
-        break
-  
-      // Some other errors happened (no response object)
-      case 'other':
-        console.log(error) // Error object
-  
-        form$.messageBag.append('Couldn\'t submit form')
-        break
-    }
-}
-
 export async function post(url, payload)
 {
   const token = await getAccessToken()
@@ -118,7 +57,12 @@ export async function getAuthHeader()
   return {'Authorization ': token}
 }
 
-export async function uploadFile(file, tempFile)
+export function createAssetUrl(id)
+{
+  return Constants.ASSETS + id
+}
+
+export async function uploadFile(file)
 {
   const formData = new FormData();
   formData.append('folder', 'dfd274cc-651b-4bef-89c9-1fe9ed070a47')
@@ -135,20 +79,21 @@ export async function uploadFile(file, tempFile)
     }
   }
 
-  axios.request(request)
+  const result = axios.request(request)
   .then(response => {
     file.status = 'finished'
     file.percentage = 100
-    tempFile.value = response.data.tmp
-    file.url = Constants.ASSETS + tempFile.value
-    console.log (tempFile.value)
+    file.url = Constants.ASSETS + response.data.tmp
+    return response.data.tmp
   })
   .catch(error => {
     console.error('Error uploading file:', error);
-    tempFile.value = null
     file.status = 'error'
     file.percentage = 0
-  });
+    return null
+  })
+
+  return result
 }
 
 // export async function uploadTempFile(value, el$, keycloak)

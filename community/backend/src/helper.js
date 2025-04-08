@@ -5,7 +5,7 @@ const client = createDirectus(process.env.DIRECTUSURL)
 .with(staticToken(process.env.DIRECTUSTOKEN))
 .with(rest());
 
-async function getItemID (collection, userID)
+async function getItemID (collection, userID, client)
 {
 	var id = await client.request(readItems (collection, {
 		fields: [
@@ -161,9 +161,9 @@ async function getInstitutions (user_id)
 	}));
 }
 
-async function getUserID (mail)
+async function getUserID (mail, client)
 {
-	var result = await client.request(readItems ('User', {
+	var result = client.request(readItems ('User', {
 			fields: [
 				"id"
 			],

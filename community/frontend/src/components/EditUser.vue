@@ -1,13 +1,15 @@
 <script setup>
 import { ref, shallowRef, watch, onMounted, inject } from 'vue'
+import { useMessage } from 'naive-ui'
+import { getAccessToken, getMail, getUsername } from '../keycloak'
 
 import Basics from './Basics.vue'
 import Company from './Company.vue'
 import Hire from './Hire.vue'
-import axios from 'axios'
 import Constants from '../constants'
-import { getAccessToken, getMail, getUsername } from '../keycloak'
 
+const message = useMessage()
+const messageDuration = 2000
 const data = ref(null)
 const loading = ref(true)
 const constants = ref(null)
@@ -31,32 +33,63 @@ const emptyProfile = {
   social: {}
 }
 
-// const loadConstants = async () => {
-//   const res = await axios.get(Constants.BACKEND_GET_USER)
-//   if (res.status != 200)
-//   {
-//     throw ("Can't load constants") 
-//   }
-//   else
-//   {
-//     constants.value = res.data
-//   }
-// }
+const showMessage = (m) => {
 
-const reload = async () =>{
+  if (m.type=='error')
+  {
+    message.error(m.string, {duration: messageDuration})
+  }
 
-  loading.value = true
+  if (m.type=='success')
+  {
+    message.success(m.string, {duration: messageDuration})
+  }
+
+}
+
+const loadConstants = async () => {
+  const res = await fetch(Constants.BACKEND_GET_CONSTANTS, {
+        method: "GET",
+        headers: { 
+          "Content-Type": "application/json"
+        }
+  }).then(async (response) => {
+    return {
+      status: response.status,
+      data: await response.json()
+    }
+  })
+  .catch((error)=>{console.log(error)})
+
+  if (res.status != 200)
+  {
+    throw ("Can't load constants") 
+  }
+  else
+  {
+    constants.value = res.data
+  }
+}
+
+const loadData = async () =>{
 
   const token = await getAccessToken()
 
   if (token == null) throw ('token is null')
 
-  const res = await axios.post(Constants.BACKEND_GET_USER, {}, {
-        headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': token
-                }
+  const res = await fetch(Constants.BACKEND_GET_USER, {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          'Authorization': token
+        },
+  }).then(async (response) => {
+    return {
+      status: response.status,
+      data: (await response.json())[0]
+    }
   })
+  .catch((error)=>{console.log(error)})
 
   if (res.status != 200)
   {
@@ -70,20 +103,56 @@ const reload = async () =>{
   }
   else
   {
-    data.value = res.data[0]
+    //data.value = res.data
+    const related = res.data.related[0]
+    const hire = related.hire
+    const social = related.social
+    
+    const user = res.data
+    delete user.related
+        
+    var fields = social.fields
+    const missingFields = 4 - fields.length
+    if (missingFields > 0)
+    {
+      for (var i=0; i<missingFields; i++)
+      {
+        fields.push ({key:"", value:""}) 
+      }
+      social.fields = fields
+    }
+
+    data.value = {
+      user: user,
+      social: social,
+      hire: hire
+    }
   }
 }
 
-onMounted(async() => {
-  try{
-        await reload()
+const reload = async ()=>{
+  try {
+      loading.value = true
+      await loadData()
+      await loadConstants()
   }
   catch {
     failure.value = "Can't get data, please try login later."
   }
+  finally{
+    loading.value = false;
+  }
+}
 
-  loading.value = false;
+onMounted(async() => {
+  reload()
 })
+
+const updateData = (d)=>{
+  data.value = d
+
+  console.log (data.value)
+}
 
 </script>
 
@@ -106,7 +175,7 @@ onMounted(async() => {
           </template>
         </div>
         <div class="col-12 col-md-8 ml-md-1">
-            <component :is="selected" :data="data" :constants="constants" :reload="reload" @reload="reload"/>
+            <component :is="selected" :data="data" :constants="constants" @reload="reload" @message="showMessage" @updateData="updateData"/>
         </div>
       </div>
     </template>

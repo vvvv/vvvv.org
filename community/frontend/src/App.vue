@@ -3,6 +3,7 @@ import { ref, onMounted, computed, inject } from 'vue'
 import EditUser from './components/EditUser.vue'
 import Constants from './constants'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
+import { NMessageProvider } from 'naive-ui'
 
 const loading = ref(false)
 const data = ref(null)
@@ -59,7 +60,9 @@ onMounted(()=>{
         </template>
       </nav>
       <div class="container px-4">
-        <RouterView @setCount="c => { businessesCount = c }"/>
+        <n-message-provider>
+          <RouterView @setCount="c => { businessesCount = c }"/>
+        </n-message-provider>
       </div>
     </template>
   </div>

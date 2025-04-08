@@ -34,7 +34,7 @@ const constants = async (res) =>
 		const hireOptionsMapped = hireOptions.map( o => {
 			return {
 				value: o.id,
-				label: o.option
+				label: o.value
 			}
 		})
 

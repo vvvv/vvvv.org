@@ -1,143 +1,118 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
-import {  }  from '../utils'
+import SubmitRevertButtons from './SubmitRevertButtons.vue'
+import { clone, post }  from '../utils'
+import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
-const emit = defineEmits(['reload'])
+const emit = defineEmits(['reload', 'message', 'updateData'])
 
 const { data, constants } = defineProps(['data', 'constants'])
-const hiretypes = ref([])
+const hireOptions = ref([])
 const isChanged = ref(false)
-const form$ = ref(null)
-const columns = {
-  sm: { container: 12, label: 4, wrapper: 12 },
-  lg: { container: 12, label: 4, wrapper: 12 }
+const form = ref(null)
+const formRef = ref(null)
+const formRef2 = ref(null)
+const updating = ref(false)
+
+const prepareData = () =>{
+  const temp = clone(data)
+  form.value = temp.hire
+  hireOptions.value = constants.hireOptions
 }
-  
+
+const submit = async () => {
+
+  updating.value = true
+  const formValue = clone(form.value)
+
+  post(Constants.EDIT_HIRE, formValue)
+  .then((response)=>{
+    if (response.result == 'Updated')
+    {
+      // Update Data
+      data.hire = formValue
+      emit('updateData', data)
+      emit('message', { type: 'success', string: 'Updated'})
+    }
+  })
+  .catch((error)=>{
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
+  })
+  .finally(()=>{
+    updating.value = false
+  })
+}
+
 onMounted(async ()=>{
-  setFormData();
+  prepareData();
 })
 
-const setFormData = async ()=>{
-  hiretypes.value = constants.hireOptions
+// watch (()=>data, async(newValue, oldValue) => {
+//   if (form$.value != null)
+//   {
+//     setFormData()
+//   }
+// }, { immediate: true })
 
-  if (form$.value != null)
-  {
-    await form$.value.load(data, true)
-    form$.value.clean()
-    isChanged.value=false;
-  }
-}
+// const formatLoadedData = (data) => {
 
-watch (()=>data, async(newValue, oldValue) => {
-  if (form$.value != null)
-  {
-    setFormData()
-  }
-}, { immediate: true })
-
-const formatLoadedData = (data) => {
-
-  var d = {
-        available: data.hire[0].available,
-        types: data.hire[0].types.map((e)=>{return e.value}),
-        // workFor: data.hire.workFor.map ((e)=>{
-        //   return {
-        //     status: e.status,
-        //     company: e.company,
-        //     role: constants.companyRoles.find((el)=> el.id == e.role).role
-        //   }
-        // })
-    }
+//   var d = {
+//         available: data.hire[0].available,
+//         types: data.hire[0].types.map((e)=>{return e.value}),
+//         // workFor: data.hire.workFor.map ((e)=>{
+//         //   return {
+//         //     status: e.status,
+//         //     company: e.company,
+//         //     role: constants.companyRoles.find((el)=> el.id == e.role).role
+//         //   }
+//         // })
+//     }
    
-  return d
-}
+//   return d
+// }
 
-const handleSuccess = (response, form$) => {
-  form$.messageBag.clear() // clear message bag
-  form$.messageBag.append('Updated', 'message') // add success message
+// const handleSuccess = (response, form$) => {
+//   emit ('reload')
+// }
 
-  emit ('reload')
-}
+// const handleError = errorHandler
 
-const handleError = errorHandler
-
-const submit = async (FormData, form$) => {
-  const data = {
-      available: FormData.available,
-      types: FormData.types
-  }
-  const result = submitForm (form$, data, Constants.EDIT_HIRE)
-  return result
-}
 
 const handleChange = () => {
   isChanged.value = true
 }
 
-const disable = (form$) => ({
-  ElementLayout: {
-    container: [
-      { 'disabled': form$.el$('hire.available')?.value === 'false' }
-    ],
-  }
-})
-
 </script>
 
 <template>
-  <Vueform
-    size="md"
-    ref="form$" 
-    form-key="hire"
-    method="post"
-    @success="handleSuccess"
-    @error="handleError"
-    @change="handleChange"
-    :endpoint="submit"
-    :format-load="formatLoadedData"
-    >
-
-    <!-- <StaticElement
-      name="hire_title"
-      content="Hire"
-      tag="h2"
-    /> -->
-    
-    <GroupElement name="hire">
-        <ToggleElement name="available" true-value="true" false-value="false" :columns="columns" label="Available for Hire"/>
-    
-        <GroupElement name="hiregroup" :add-classes="disable">
-            <CheckboxgroupElement 
-                :columns="columns"
-                name="types" 
-                label="Available For"
-                :items="hiretypes"/>
-        </GroupElement>
-    </GroupElement>
-
-    <GroupElement :columns="columns" name="buttons">
-      <ButtonElement full
-      name="submit"
-      :submits="true"
-      button-label="Update"
-      :columns="{
-        default: 12,
-        sm: 6
-      }"
-      :disabled="!isChanged"
-      size="sm"/>
-
-      <ButtonElement secondary
-        name="reset"
-        button-label="Revert"
-        align="right"
-        :resets="true"
-        :columns="{
-          default: 12,
-          sm: 6
-        }"/>
-    </GroupElement>
-
-  </Vueform>
+  <n-form
+      v-if="form !== null"
+      ref="formRef"
+      :model="form"
+      label-placement="left"
+      :label-width="160"
+      require-mark-placement="right-hanging"
+      >
+    <n-form-item label="Available for Hire" path="available">
+      <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
+    </n-form-item>
+  </n-form>
+  <n-form
+      v-if="form !== null"
+      ref="formRef2"
+      :model="form"
+      label-placement="left"
+      :label-width="160"
+      require-mark-placement="right-hanging"
+      :disabled="!form.available"
+      >
+    <n-form-item label="Description" path="description">
+      <n-input v-model:value="form.description" type="textarea" placeholder="Description"/>
+    </n-form-item>
+    <n-form-item label="Available for" path="availableFor">
+      <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
+    </n-form-item>
+  </n-form>
+  <SubmitRevertButtons @revert="prepareData" @submit="submit"/>
 </template>
