@@ -1,6 +1,19 @@
 import Constants from './constants'
 import axios from 'axios';
 import { getAccessToken } from './keycloak'
+import Showdown from 'showdown'
+
+const converter = new Showdown.Converter()
+
+export function toHtml(d)
+{
+  return converter.makeHtml(d)
+}
+
+export function toMd(d)
+{
+  return converter.makeMarkdown(d)
+}
 
 export function isEmpty(d)
 {

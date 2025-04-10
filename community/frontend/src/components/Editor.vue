@@ -7,6 +7,7 @@ const editorContainer = ref(null);
 let quill = null;
 
 const emit = defineEmits(['update'])
+const { id } = defineProps (['id'])
 
 const model = defineModel()
 
@@ -15,7 +16,7 @@ onMounted(async ()=>{
           theme: 'snow', // Use the 'snow' theme
           modules: {
             toolbar: [
-              ['bold', 'italic', 'underline'], // Text formatting
+              ['bold', 'italic'], // Text formatting
               [{ list: 'bullet' }], // Lists
               ['link'], // Links and images
             ],
@@ -33,6 +34,6 @@ onMounted(async ()=>{
 
 <template>
     <div>
-        <div ref="editorContainer" style="z-index: 1000;"></div>
+        <div ref="editorContainer" style="z-index: 1000;" :id="id"></div>
     </div>
 </template>

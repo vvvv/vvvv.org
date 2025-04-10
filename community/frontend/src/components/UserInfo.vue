@@ -3,7 +3,7 @@
 import { ref, watchEffect, onMounted, computed, watch} from 'vue'
 import Constants from '../constants'
 import Field from './Field.vue'
-import { isEmpty } from '../utils'
+import { isEmpty, toHtml, clone } from '../utils'
 
 defineEmits(['showList'])
 
@@ -25,7 +25,11 @@ onMounted(async ()=>
             UserData.value = data 
             if (data.related[0].hire !== null)
             {
-                hire.value = data.related[0].hire
+                const temp = clone(data.related[0].hire)
+                temp.description = toHtml(temp.description)
+                temp.skills_vvvv = toHtml(temp.skills_vvvv)
+                temp.skills_other = toHtml(temp.skills_other)
+                hire.value = temp
             }
 
             if (data.related[0].social !== null)
@@ -37,14 +41,6 @@ onMounted(async ()=>
     .catch((err) => {
         console.error(err);
     });
-
-    // if (props.logged)
-    // {
-    //     if (keycloak.isAuthenticated())
-    //     {
-    //         username.value = keycloak.getUsername()
-    //     }
-    // }
 })
 
 function edit()
@@ -100,7 +96,13 @@ function edit()
                 
                 <div class="row">
                         <div class="col-12 col-md-6">
-                            <Field label="Description" :value="hire.description" :multi="true"/>
+                            <span v-html="hire.description"></span> 
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span v-html="hire.skills_vvvv"></span> 
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <span v-html="hire.skills_other"></span> 
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="field">

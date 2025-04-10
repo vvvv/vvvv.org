@@ -2,6 +2,7 @@
 import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
 import Userpic from './Userpic.vue'
+import FieldInput from './FieldInput.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { clone, post, removeFile, uploadFile, createAssetUrl, makeFields }  from '../utils'
 import { NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
@@ -113,53 +114,87 @@ const submit = async () => {
         ref="formRef"
         :model="form"
         label-placement="left"
-        :label-width="160"
+        :label-width="120"
         require-mark-placement="right-hanging"
         >
         <n-form-item label="Status" path="status" v-if="form.user.status != '1'">
           <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
           <n-tag :bordered="false" type="error" v-if="form.user.status == '2'">Disabled</n-tag>
         </n-form-item>
-        <n-form-item label="Username" path="username">
-          <n-input v-model:value="form.user.username" disabled/>
-        </n-form-item>
-        <n-form-item label="E-Mail" path="email">
-          <n-input v-model:value="form.user.email" disabled/>
-        </n-form-item>
-        <n-form-item label="Name" path="name">
-          <n-input v-model:value="form.user.name" placeholder="Name" />
-        </n-form-item>
-        <n-form-item label="Surname" path="surname">
-          <n-input v-model:value="form.user.surname" placeholder="Surname" />
-        </n-form-item>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <n-form-item label="Username" path="username">
+              <n-input v-model:value="form.user.username" disabled/>
+            </n-form-item>
+          </div>
+          <div class="col-12 col-lg-6">
+            <n-form-item label="E-Mail" path="email">
+              <n-input v-model:value="form.user.email" disabled/>
+            </n-form-item>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <n-form-item label="Name" path="name">
+              <n-input v-model:value="form.user.name" placeholder="Name" />
+            </n-form-item>
+          </div>
+          <div class="col-12 col-lg-6">
+            <n-form-item label="Surname" path="surname">
+              <n-input v-model:value="form.user.surname" placeholder="Surname" />
+            </n-form-item>
+          </div>
+        </div>
         <n-form-item label="Contact" path="contact">
-          <n-input v-model:value="form.social.contact" placeholder="Contact" />
+          <n-input v-model:value="form.social.contact" placeholder="Prefered way of contact in human readable forms" />
         </n-form-item>
         <n-form-item label="Newsletter" path="newsletter">
           <n-switch v-model:value="form.user.newsletter" placeholder="Newsletter"/>
         </n-form-item>
-        <n-form-item label="Website" path="website">
-          <n-input v-model:value="form.social.website" placeholder="Website"/>
-        </n-form-item>
-        <n-form-item label="Github" path="github">
-          <n-input v-model:value="form.social.github" placeholder="Github"/>
-        </n-form-item>
-        <n-form-item label="NuGet" path="nuget">
-          <n-input v-model:value="form.social.nuget" placeholder="NuGet"/>
-        </n-form-item>
-        <n-form-item label="Custom Fields">
-          <n-flex v-for="(field, index) in form.social.fields" :key="index" class="field-row">
-              <n-input 
-                v-model="field.key" 
-                placeholder="Key" 
-                style="margin-right: 10px;" 
-              />
-              <n-input 
-                v-model="field.value" 
-                placeholder="Value" 
-              />
-          </n-flex>
-        </n-form-item>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <n-form-item label="Website" path="website">
+              <n-input v-model:value="form.social.website" placeholder="Website"/>
+            </n-form-item>
+            <n-form-item label="Github" path="github">
+              <n-input v-model:value="form.social.github" placeholder="Github"/>
+            </n-form-item>
+            <n-form-item label="NuGet" path="nuget">
+              <n-input v-model:value="form.social.nuget" placeholder="NuGet"/>
+            </n-form-item>
+          </div>
+          <div class="col-12 col-lg-6">
+            <n-form-item label="Mastodon" path="mastodon">
+              <n-input v-model:value="form.social.mastodon" placeholder="mastodon.xyz/@vvvv"/>
+            </n-form-item>
+            <n-form-item label="Instagram" path="instagram">
+              <n-input v-model:value="form.social.instagram" placeholder="@madewithvvvv"/>
+            </n-form-item>
+            <n-form-item label="Pixelfed" path="pixelfed">
+              <n-input v-model:value="form.social.pixelfed" placeholder="pixelfed.social/madewithvvvv"/>
+            </n-form-item>
+          </div>
+        </div>
+
+        <template v-for="(field, index) in form.social.fields" :key="index">
+          <n-form-item label="Custom Fields">
+            <div class="row">
+              <div class="col-12 col-lg-6">
+                <n-input 
+                  v-model="field.key" 
+                  placeholder="Key"
+                />
+              </div>
+              <div class="col-12 col-lg-6">
+                <n-input 
+                  v-model="field.value" 
+                  placeholder="Value" 
+                />
+              </div>
+            </div>
+          </n-form-item>
+        </template>
+
         <SubmitRevertButtons @revert="revert" @submit="submit"/>
     </n-form>
   </template>
