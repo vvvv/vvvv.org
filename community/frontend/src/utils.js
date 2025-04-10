@@ -96,6 +96,31 @@ export async function uploadFile(file)
   return result
 }
 
+export const makeFields = (f, count) => {
+
+  console.log (f)
+
+  var fields = (f !== null) ? clone(f) : []
+  
+  console.log (fields)
+  
+  const missingFields = count - fields.length
+  if (missingFields > 0)
+  {
+    for (var i=0; i<=missingFields; i++)
+    {
+      fields.push ({key:"", value:""}) 
+    }
+  }
+
+  if (missingFields < 0)
+  {
+    fields = fields.slice(0,count)
+  }
+
+  return fields
+}
+
 // export async function uploadTempFile(value, el$, keycloak)
 // {
 //   const token = await getAccessToken()

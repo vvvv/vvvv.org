@@ -1,6 +1,6 @@
 import { createDirectus, rest, readItem, createItem, updateItem, deleteItems, readItems, staticToken } from '@directus/sdk';
 import 'dotenv/config'
-import { getUserID, getItemID } from "./helper.js"
+import { getUserID, getItemID, clone } from "./helper.js"
 
 const client = createDirectus(process.env.DIRECTUSURL)
 .with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
@@ -61,11 +61,13 @@ const editCompany = async (req, res, JWT) =>{
 
     var user = null
     var company = null
+
+    console.log (req.body)
     
     try
     {
         const mail = JWT.verify(req.get('Authorization'))
-        user = await getUserID(mail)
+        user = await getUserID(mail, client)
     }
     catch (error) { 
         console.log (error);
@@ -77,27 +79,20 @@ const editCompany = async (req, res, JWT) =>{
     if (user.length > 0)
     {
         try{
-            company = await client.request(readItems ('User_Company', {
+            company = await client.request(readItems ('Company', {
                 fields: [
-                    'company.id'
+                    'id'
                 ],
                 filter: {
                     _and: [
                         {
-                            company: {
-                                    uuid: {
-                                    _eq: req.body.company.uuid,
-                                }
+                            name: {
+                                _eq: req.body.name,
                             }
                         },
                         {
-                            user: {
+                            owner: {
                                 _eq: user[0].id
-                            }
-                        },
-                        {
-                            role: {
-                                _eq: 1
                             }
                         }
                     ]
@@ -114,35 +109,15 @@ const editCompany = async (req, res, JWT) =>{
         if (company.length > 0 )
         {
             try{
-                await client.request(updateItem ('Company', company[0].company.id, {
-                    logo: req.body.company.logo,
-                    description: req.body.company.description,
-                    website: req.body.company.website,
-                    fields: req.body.company.fields
-                }))
-    
-                if (req.body.company.hasOwnProperty('employees'))
-                {
-                    for (const item of req.body.company.employees)
-                        {
-                            if (item.role > 1)
-                            {
-                                const user = await getUserID(item.email)
-                            
-                                if (user.length > 0)
-                                {
-                                    const employee = {
-                                        id: user[0].id,
-                                        uuid: item.uuid,
-                                        role: item.role,
-                                        action: item.action
-                                    }
-            
-                                    await editEmployee ( employee, company[0].company.id )
-                                } 
-                            }
-                        }
-                }
+
+                const data = clone (req.body)
+                delete data.owner
+                delete data.name
+
+                if (data.logo == '')
+                    delete data.logo
+
+                await client.request(updateItem ('Company', company[0].id, data))
     
                 return res.status(200).send({
                     result: "Updated"
@@ -156,21 +131,19 @@ const editCompany = async (req, res, JWT) =>{
             }
         }
         else
-        {            
-            try{
-                const companyID = await client.request(createItem ('Company', {
-                    name: req.body.company.name,
-                    logo: req.body.company.logo,
-                    description: req.body.company.description,
-                    website: req.body.company.website,
-                    fields: req.body.company.fields
-                }))
+        {
+            const newCompany = clone (req.body)
+            newCompany.owner = user[0].id
+            
+            if (newCompany.logo == '')
+                delete newCompany.logo
 
-                await client.request(createItem ('User_Company', {
-                        user: user[0].id,
-                        role: 1,
-                        company: companyID.id
-                    }))
+            try{
+                await client.request(createItem ('Company', newCompany))
+                
+                return res.status(200).send({
+                    result: "Created new Company"
+                });
             }
             catch (error) { 
                 console.log (error);
@@ -178,10 +151,6 @@ const editCompany = async (req, res, JWT) =>{
                     error: "Can't create Company"
                 });
             }
-
-            return res.status(200).send({
-                result: "Updated"
-            });
         }
     }
 
@@ -230,7 +199,6 @@ const editHire = async (req, res, JWT) =>{
 
         const user = await getUserID(mail, client)
         const userID = user[0].id
-        console.log (userID)
 
         const userData = await client.request(readItem ('User', userID, {
             fields: [

@@ -2,6 +2,7 @@
 import { ref, shallowRef, watch, onMounted, inject } from 'vue'
 import { useMessage } from 'naive-ui'
 import { getAccessToken, getMail, getUsername } from '../keycloak'
+import { clone, makeFields } from '../utils'
 
 import Basics from './Basics.vue'
 import Company from './Company.vue'
@@ -27,10 +28,9 @@ const selectedClass = ref ('selected')
 
 const emptyProfile = {
   user:{},
-  hide:{},
+  social:{},
+  hire:{},
   companies: {},
-  edu: {},
-  social: {}
 }
 
 const showMessage = (m) => {
@@ -103,29 +103,25 @@ const loadData = async () =>{
   }
   else
   {
-    //data.value = res.data
     const related = res.data.related[0]
     const hire = related.hire
     const social = related.social
+    const companies = res.data.companies
     
-    const user = res.data
+    const user = clone (res.data)
     delete user.related
-        
-    var fields = social.fields
-    const missingFields = 4 - fields.length
-    if (missingFields > 0)
-    {
-      for (var i=0; i<missingFields; i++)
-      {
-        fields.push ({key:"", value:""}) 
-      }
-      social.fields = fields
-    }
+    delete user.companies
+
+    social.fields = makeFields(social.fields, 4)
+    companies.forEach((c)=>{
+      c.fields = makeFields(c.fields, 4)
+    })
 
     data.value = {
       user: user,
       social: social,
-      hire: hire
+      hire: hire,
+      companies: companies
     }
   }
 }
@@ -150,8 +146,6 @@ onMounted(async() => {
 
 const updateData = (d)=>{
   data.value = d
-
-  console.log (data.value)
 }
 
 </script>

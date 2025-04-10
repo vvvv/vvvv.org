@@ -3,7 +3,7 @@ import { ref, watch, onMounted, computed } from 'vue'
 import Constants from '../constants'
 import Userpic from './Userpic.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { clone, post, removeFile, uploadFile, createAssetUrl }  from '../utils'
+import { clone, post, removeFile, uploadFile, createAssetUrl, makeFields }  from '../utils'
 import { NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData'])
@@ -17,12 +17,23 @@ const tempUserpic = ref(null)
 const updating = ref(false)
 
 const prepareData = ()=>{
-  form.value = clone(data)
-  
-  if (form.value.user.hasOwnProperty('userpic'))
+
+  var temp = clone(data)
+
+  if (temp.user.hasOwnProperty('userpic'))
   {
-    userpic.value = createAssetUrl(form.value.user.userpic.id)
+    userpic.value = createAssetUrl(temp.user.userpic.id)
   }
+
+  console.log (temp)
+  temp.social.fields = makeFields(temp.social.fields, 4)
+  console.log (temp)
+
+  form.value = {
+    user: temp.user,
+    social: temp.social
+  }
+
 }
  
 onMounted(()=>{
@@ -47,6 +58,7 @@ const updateTempUserpic = (id) =>{
     emit('message', { type: 'error', string: 'Something went wrong'})
   } 
 }
+
 const submit = async () => {
 
   updating.value = true
@@ -61,12 +73,12 @@ const submit = async () => {
     formValue.user.userpic = tempUserpic.value
   }
     
-  const data = {
+  const body = {
     user: formValue.user,
     social: formValue.social
   }
 
-  post(Constants.EDIT_BASICS, data)
+  post(Constants.EDIT_BASICS, body)
   .then((response)=>{
     if (response.result == 'Updated')
     {
@@ -94,57 +106,61 @@ const submit = async () => {
 </script>
 
 <template>
-  <Userpic :src="userpic" buttonText="Upload new" @change="updateTempUserpic" round="true"/>
-  
-  <n-form
-      v-if="form !== null"
-      ref="formRef"
-      :model="form"
-      label-placement="left"
-      :label-width="160"
-      require-mark-placement="right-hanging"
-      >
-      <n-form-item label="Status" path="status" v-if="form.user.status != '1'">
-        <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
-        <n-tag :bordered="false" type="error" v-if="form.user.status == '2'">Disabled</n-tag>
-      </n-form-item>
-      <n-form-item label="E-Mail" path="email">
-        <n-input v-model:value="form.user.email" placeholder="E-Mail" disabled/>
-      </n-form-item>
-      <n-form-item label="Profile is public" path="public">
-        <n-switch v-model:value="form.user.public" placeholder="Newsletter"/>
-      </n-form-item>
-      <n-form-item label="Name" path="name">
-        <n-input v-model:value="form.user.name" placeholder="Name" />
-      </n-form-item>
-      <n-form-item label="Surname" path="surname">
-        <n-input v-model:value="form.user.surname" placeholder="Surname" />
-      </n-form-item>
-      <n-form-item label="Newsletter" path="newsletter">
-        <n-switch v-model:value="form.user.newsletter" placeholder="Newsletter"/>
-      </n-form-item>
-      <n-form-item label="Website" path="website">
-        <n-input v-model:value="form.social.website" placeholder="Website"/>
-      </n-form-item>
-      <n-form-item label="Github" path="github">
-        <n-input v-model:value="form.social.github" placeholder="Github"/>
-      </n-form-item>
-      <n-form-item label="NuGet" path="nuget">
-        <n-input v-model:value="form.social.nuget" placeholder="NuGet"/>
-      </n-form-item>
-      <n-form-item label="Custom Fields">
-        <n-flex v-for="(field, index) in form.social.fields" :key="index" class="field-row">
-            <n-input 
-              v-model="field.key" 
-              placeholder="Key" 
-              style="margin-right: 10px;" 
-            />
-            <n-input 
-              v-model="field.value" 
-              placeholder="Value" 
-            />
-        </n-flex>
-      </n-form-item>
-      <SubmitRevertButtons @revert="revert" @submit="submit"/>
-  </n-form>
+  <template v-if="form !== null">
+    <Userpic :src="userpic" buttonText="Upload new" @change="updateTempUserpic" round="true"/>
+    
+    <n-form
+        ref="formRef"
+        :model="form"
+        label-placement="left"
+        :label-width="160"
+        require-mark-placement="right-hanging"
+        >
+        <n-form-item label="Status" path="status" v-if="form.user.status != '1'">
+          <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
+          <n-tag :bordered="false" type="error" v-if="form.user.status == '2'">Disabled</n-tag>
+        </n-form-item>
+        <n-form-item label="Username" path="username">
+          <n-input v-model:value="form.user.username" disabled/>
+        </n-form-item>
+        <n-form-item label="E-Mail" path="email">
+          <n-input v-model:value="form.user.email" disabled/>
+        </n-form-item>
+        <n-form-item label="Name" path="name">
+          <n-input v-model:value="form.user.name" placeholder="Name" />
+        </n-form-item>
+        <n-form-item label="Surname" path="surname">
+          <n-input v-model:value="form.user.surname" placeholder="Surname" />
+        </n-form-item>
+        <n-form-item label="Contact" path="contact">
+          <n-input v-model:value="form.social.contact" placeholder="Contact" />
+        </n-form-item>
+        <n-form-item label="Newsletter" path="newsletter">
+          <n-switch v-model:value="form.user.newsletter" placeholder="Newsletter"/>
+        </n-form-item>
+        <n-form-item label="Website" path="website">
+          <n-input v-model:value="form.social.website" placeholder="Website"/>
+        </n-form-item>
+        <n-form-item label="Github" path="github">
+          <n-input v-model:value="form.social.github" placeholder="Github"/>
+        </n-form-item>
+        <n-form-item label="NuGet" path="nuget">
+          <n-input v-model:value="form.social.nuget" placeholder="NuGet"/>
+        </n-form-item>
+        <n-form-item label="Custom Fields">
+          <n-flex v-for="(field, index) in form.social.fields" :key="index" class="field-row">
+              <n-input 
+                v-model="field.key" 
+                placeholder="Key" 
+                style="margin-right: 10px;" 
+              />
+              <n-input 
+                v-model="field.value" 
+                placeholder="Value" 
+              />
+          </n-flex>
+        </n-form-item>
+        <SubmitRevertButtons @revert="revert" @submit="submit"/>
+    </n-form>
+  </template>
 </template>

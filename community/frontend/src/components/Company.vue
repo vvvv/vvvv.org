@@ -1,274 +1,181 @@
 <script setup>
-  import { ref, watch, onMounted } from 'vue'
-  import Constants from '../constants'
-  import { removeFile }  from '../utils'
+import { ref, watch, onMounted } from 'vue'
+import Constants from '../constants'
+import Userpic from './Userpic.vue'
+import SubmitRevertButtons from './SubmitRevertButtons.vue'
+import { clone, post, removeFile, uploadFile, createAssetUrl, makeFields }  from '../utils'
+import { NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
-  const emit = defineEmits(['reload'])
+const emit = defineEmits(['reload', 'message', 'updateData'])
+const { data, constants } = defineProps(['data', 'constants'])
 
-  const { data, constants } = defineProps(['data', 'constants'])
-  const isChanged = ref(false)
-  const form$ = ref(null)
-  const logo = ref(null)
-  const CompaniesEmpty = ref(true)
-  const CompanyExists = ref(false)
+const isChanged = ref(false)
+const formRef = ref(null)
+const form = ref(null)
+const logo = ref(null)
+const tempLogo = ref(null)
+const updating = ref(false)
+const companyExists = ref(false)
 
-  var tempLogo = ""
-  const columns = { container: 12, label: 3, wrapper: 12 }
-  var fields = new Array(4)
-  var roles = ref ([])
+const prepareData = ()=>{
+  const temp = clone(data)
 
-  onMounted( async ()=> {
-    fields = fields.map ((e)=>{
-      return {
-        key: "",
-        value: ""
-      }
-    })
+  if (temp.companies.length > 0)
+  {
+    if (temp.companies[0].hasOwnProperty('logo'))
+    {
+      logo.value = createAssetUrl(temp.companies[0].logo)
+    }
 
-    roles.value = constants.companyRoles
-    .filter((i)=>{
-      return i.id > 1
-    })
-    .map((i) =>{
-     return  {
-        value: i.id,
-        label: i.role
-      }
-    }) 
-    
-    setFormData()
+    companyExists.value = true
+  }
+  else
+  {
+    form.value = [clone(emptyCompany)]
+    form.value[0].fields = makeFields(null, 4)
+
+    companyExists.value = false
+  }
+
+  form.value = temp.companies
+}
+
+const emptyCompany = {
+  logo: "",
+  name: "",
+  description: "",
+  status: 0,
+  website: "",
+  fields: []
+}
+
+const rules = {
+  name: {
+    required: true,
+    message: "Name is required",
+    trigger: ['blur', 'input']
+  }
+}
+
+onMounted(()=>{
+  prepareData()
+})
+
+const updateTempLogo = (id) =>{
+  if (id !== null)
+  {
+    tempLogo.value = id
+    emit('message', { type: 'success', string: 'New image uploaded'})
+  }
+  else{
+    emit('message', { type: 'error', string: 'Something went wrong'})
+  } 
+}
+
+const submit = async () => {
+
+  const valid = await formRef.value?.validate((errors) => {
+    if (errors) {
+      emit('message', "Please fill requiered fields")
+    }
   })
 
-  const setFormData = async ()=>{
+  if (!valid) return
 
-    if (form$.value != null)
-    {
-      await form$.value.load(data, true)
-      form$.value.clean()
-      isChanged.value=false;
-    }
+  updating.value = true
+  const formValue = clone(form.value[0])
+
+  console.log (formValue)
+
+
+  if (tempLogo.value == null)
+  {
+    delete formValue.logo
+  }
+  else
+  {
+    formValue.logo = tempLogo.value
   }
 
-  watch (()=>data, async(newValue, oldValue) => {
-    if (form$.value != null)
-    {
-      setFormData()
-    }
-  }, { immediate: true })
-
-const formatLoadedData = (loadedData) => {
-  
-  var data = ""
-  
-  if (loadedData.companies.length > 0)
-  {
-    CompaniesEmpty.value = false
-    CompanyExists.value = true
-
-    data = {
-        company: loadedData.companies[0]
+  post(Constants.EDIT_COMPANY, formValue)
+  .then((response)=>{
+    if (tempLogo.value !== null)
+      {
+        logo.value = createAssetUrl(tempLogo.value)
+        tempLogo.value = null
       }
 
-    if (loadedData.companies[0].logo != null)
-    {
-      logo.value = Constants.ASSETS + loadedData.companies[0].logo
-    }
-    
-  }
-
-  return data
-}
-
-const handleSuccess = (response, form$) => {
-  form$.messageBag.clear() // clear message bag
-  form$.messageBag.append('Updated', 'message') // add success message
-
-  emit ('reload')
-}
-
-const handleError = (error, details, form$) => {
-
-  // if (error.response && error.response.status === 400) {
-  //   console.log (error.response.data.error)
-  // }
-
-  switch (details.type) {
-    // Error occured while preparing elements (no submit happened)
-    case 'prepare':
-      // console.log(error) // Error object
-
-      form$.messageBag.append('Could not prepare form')
-      break
-
-    // Error occured because response status is outside of 2xx
-    case 'submit':
-      // console.log(error) // AxiosError object
-      // console.log(error.response) // axios response
-      // console.log(error.response.status) // HTTP status code
-      // console.log(error.response.data) // response data
-
-      form$.messageBag.append(error.response.data.error)
-      break
-
-    // Request cancelled (no response object)
-    case 'cancel':
-      // console.log(error) // Error object
-
-      form$.messageBag.append('Request cancelled')
-      break
-
-    // Some other errors happened (no response object)
-    case 'other':
-      // console.log(error) // Error object
-
-      form$.messageBag.append('Couldn\'t submit form')
-      break
-  }
-}
-
-const formatDataForSumbit = async ({company, logo_upload}) => { 
-  try {
-
-    if (logo_upload != null)
-    {
-      company.logo = logo_upload.tmp
-      tempLogo = company.logo
-    }
-
-    return {
-      company: company,
-    }
-
-  } catch (error) {
-    throw error // this will cancel the submit process
-  }
-}
-
-const handleReset = async ()=>
-{
-  await setFormData();
-}
-
-const formChanged = (data)=>
-{
-  isChanged.value = true
-}
-
-const submit = async (FormData, form$) => {
-  const data = await formatDataForSumbit(form$.data)
-  return submitForm (form$, data, Constants.EDIT_COMPANY)
-}
-
-const upload = async (value, el$) => {
-  return uploadTempFile(value, el$)
-}
-
-const remove = async (value, el$) => {
-  removeFile(value, el$)
+      //Update fields in data
+      data.companies[0] = formValue
+      emit('updateData', data)
+      emit('message', { type: 'success', string: 'Updated'})
+  })
+  .catch((error)=>{
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
+  })
+  .finally(()=>{
+    updating.value = false
+  })
 }
 
 </script>
 
 <template>
-  <Vueform 
-    ref="form$" 
-    form-key="company"
-    :format-load="formatLoadedData" 
-    :endpoint="submit" 
-    method="post"
-    @success="handleSuccess"
-    @error="handleError"
-    @reset="handleReset"
-    @change="formChanged"
-    :format-data="formatDataForSumbit"
-    :previewUrl="Constants.ASSETS"
-    >
 
-    <template v-if="CompaniesEmpty">
-      <ButtonElement name="addCompany" description="Add a Company if you own one." button-label="Add Company" @click="CompaniesEmpty = false"/>
-    </template>
-    <template v-else>
+      <n-form
+          v-if="form !== null"
+          ref="formRef"
+          :model="form"
+          label-placement="left"
+          :label-width="160"
+          require-mark-placement="right-hanging"
+          >
+          <n-form-item label="I own a company" path="available">
+            <n-switch v-model:value="companyExists" placeholder="I own a company"/>
+          </n-form-item>
+      </n-form>
 
-      <StaticElement v-if="logo != null"
-        name="logo"
-        :src="logo" 
-        tag="img"
-        :width="`${100}`"
-        >
-      </StaticElement>
+      <Userpic :src="logo" buttonText="Upload new" @change="updateTempLogo" round="false" v-if="companyExists"/>
 
-      <FileElement
-        view="image"
-        description="Choose a logo"
-        name="logo_upload"
-        accept="image/*"
-        :rules="[
-          'max:1024',
-        ]"
-        :upload-temp-endpoint="upload"
-        :remove-temp-endpoint="remove"
-        :remove-endpoint="remove"
-      />
-
-      <ObjectElement name="company">
-        <TextElement name="name" label="Name" :columns="columns" :disabled="CompanyExists"/>
-        <TextElement name="status" label="Status" :columns="columns" v-if="CompanyExists" disabled/>
-        <TextElement name="description" label="Description" :columns="columns"/>
-        <TextElement name="website" label="Website" :columns="columns"/>
-
-        <!-- Fields -->
-        <ObjectElement name="fields" label="Custom Fields" :columns="columns">
-          <template v-for="(item, index) in fields">
-              <ObjectElement :name="index">
-                <TextElement
-                name="key"
-                placeholder="Key"
-                size="lg"
-                :columns="{
-                  default: 12,
-                  sm: 6
-                }"
-                />
-                <TextElement
-                  name="value"
-                  placeholder="Value"
-                  size="lg"
-                  :columns="{
-                    default: 12,
-                    sm: 6
-                  }"
-                />
-              </ObjectElement>
-          </template>
-        </ObjectElement>
-      </ObjectElement>
-          
-      <GroupElement :columns="columns" name="buttons">
-
-        <ButtonElement full
-        name="submit"
-        :submits="true"
-        button-label="Update"
-        :columns="{
-          default: 12,
-          sm: 6
-        }"
-        :disabled="!isChanged"
-        size="sm"/>
-
-        <ButtonElement secondary
-          name="reset"
-          button-label="Revert"
-          align="right"
-          :resets="true"
-          :columns="{
-          default: 12,
-          sm: 6
-        }"
-        />
-
-      </GroupElement>
-    </template>
-
-  </Vueform>
+      <NForm
+          v-if="form !== null && companyExists"
+          ref="formRef"
+          :model="form[0]"
+          :rules="rules"
+          label-placement="left"
+          :label-width="160"
+          require-mark-placement="right-hanging"
+          :disabled="!companyExists"
+          >
+        <template v-if="companyExists">
+          <n-form-item label="Status" path="status" v-if="form[0].status != '1'">
+            <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
+            <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
+          </n-form-item>
+        </template>
+        <n-form-item label="Name" path="name" v-if="!companyExists">
+          <n-input v-model:value="form[0].name" placeholder="Name"/>
+        </n-form-item>
+        <div v-else style="margin-left: 160px">{{ form[0].name }}</div>
+        <n-form-item label="Description" path="description">
+          <n-input v-model:value="form[0].description" type="textarea" placeholder="Description" />
+        </n-form-item>
+        <n-form-item label="Website" path="website">
+          <n-input v-model:value="form[0].website" placeholder="Name" />
+        </n-form-item>
+        <n-form-item label="Custom Fields">
+          <n-flex v-for="(field, index) in form[0].fields" :key="index" class="field-row">
+              <n-input 
+                v-model="field.key" 
+                placeholder="Key" 
+                style="margin-left: 10px;" 
+              />
+              <n-input 
+                v-model="field.value" 
+                placeholder="Value" 
+              />
+          </n-flex>
+        </n-form-item>
+      </NForm>
+      <SubmitRevertButtons @revert="prepareData" @submit="submit"/>
 </template>

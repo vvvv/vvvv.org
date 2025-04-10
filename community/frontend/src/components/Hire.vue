@@ -1,7 +1,8 @@
 <script setup>
-import { ref, watch, onMounted, computed } from 'vue'
+import { ref, watch, onMounted, computed, onBeforeUnmount } from 'vue'
 import Constants from '../constants'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
+import Editor from './Editor.vue'
 import { clone, post }  from '../utils'
 import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
@@ -48,37 +49,6 @@ onMounted(async ()=>{
   prepareData();
 })
 
-// watch (()=>data, async(newValue, oldValue) => {
-//   if (form$.value != null)
-//   {
-//     setFormData()
-//   }
-// }, { immediate: true })
-
-// const formatLoadedData = (data) => {
-
-//   var d = {
-//         available: data.hire[0].available,
-//         types: data.hire[0].types.map((e)=>{return e.value}),
-//         // workFor: data.hire.workFor.map ((e)=>{
-//         //   return {
-//         //     status: e.status,
-//         //     company: e.company,
-//         //     role: constants.companyRoles.find((el)=> el.id == e.role).role
-//         //   }
-//         // })
-//     }
-   
-//   return d
-// }
-
-// const handleSuccess = (response, form$) => {
-//   emit ('reload')
-// }
-
-// const handleError = errorHandler
-
-
 const handleChange = () => {
   isChanged.value = true
 }
@@ -108,7 +78,13 @@ const handleChange = () => {
       :disabled="!form.available"
       >
     <n-form-item label="Description" path="description">
-      <n-input v-model:value="form.description" type="textarea" placeholder="Description"/>
+      <Editor v-model="form.description"/>
+    </n-form-item>
+    <n-form-item label="VVVV skills" path="vvvv_skills">
+      <Editor v-model="form.vvvv_skills"/>
+    </n-form-item>
+    <n-form-item label="Other skills" path="other_skills">
+      <Editor v-model="form.other_skills"/>
     </n-form-item>
     <n-form-item label="Available for" path="availableFor">
       <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />

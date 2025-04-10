@@ -51,7 +51,7 @@ function getImageURL(id)
 
 async function getUserInfo(mail)
 {
-	const user = await client.request(readItems ('User', {
+	var user = await client.request(readItems ('User', {
 		fields:['*.*.*'],
 		filter: {
 			email: {
@@ -60,7 +60,24 @@ async function getUserInfo(mail)
 		}
 	}))
 
+	const companies = await client.request(readItems ('Company', {
+		filter: {
+			owner: {
+				email: {
+					_eq: mail,
+				}
+			}
+		}
+	}))
+
+	user[0].companies = companies
+
 	return user
+}
+
+function clone(o)
+{
+	return JSON.parse(JSON.stringify(o));
 }
 
 // async function getHire (user_id)
@@ -192,7 +209,7 @@ async function getSocialNetworks (user_id)
 	return result[0];
 }
 
-export { getUserID, getUserInfo, getItemID }
+export { getUserID, getUserInfo, getItemID, clone }
 
 ///WORKS FOR
 // var workFor = await client.request(readItems ('User_Company', {
