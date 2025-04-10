@@ -13,7 +13,6 @@ function applyFilter()
 {
     state.value.currentPage = 1
     state.value.filter = filterField.value
-    state.value.availableForHire = filterFieldForHire.value
 }
 
 function resetFilter()
@@ -36,7 +35,6 @@ function resetFilter()
                 </ul>
             <div class="mr-auto"></div> -->
             <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" />
-            <n-switch v-model:value="filterFieldForHire" class="ml-md-2"/><span class="ml-2">Only available For Hire</span>
             <n-button strong secondary @click="applyFilter" size="large" class="ml-md-2">Search</n-button>
         </nav>
     </div>

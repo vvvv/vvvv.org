@@ -1,6 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, defineAsyncComponent } from 'vue'
 import Constants from '../constants'
+
+const Map = defineAsyncComponent(() =>
+  import('./Map.vue')
+)
 
 const emit = defineEmits (['setCount'])
 
@@ -40,6 +44,7 @@ onMounted( async ()=>
             response.json().then((data) =>{
                 companies.value = data.data
                 count.value = data.meta.filter_count
+                queryCoordinates()
 
                 if (count.value > 0)
                 {
@@ -56,11 +61,34 @@ onMounted( async ()=>
         })
 })
 
+const queryCoordinates=()=>{
+    companies.value.forEach((c) =>{
+        const baseUrl = 'https://nominatim.openstreetmap.org/search';
+        const params = {
+        city: c.location_city,
+        country: c.location_country,
+        format: 'geojson'
+        };
+
+        const queryString = Object.keys(params)
+        .map(key => `${key}=${encodeURIComponent(params[key])}`)
+        .join('&');
+
+        const url = `${baseUrl}?${queryString}`;
+
+        console.log (url)
+    })
+}
+
+const state=ref(null)
+
 </script>
 
 <template>
     <div class="h2">Businesses</div>
     <template v-if="!loading">
+        <Map v-model:state="state"/>
+
         <p>This is a list of {{ count }} businesses that use vvvv.</p>
         <div class="row">
             <div v-for="{ name, website, description, logo } in companies" track-by="username" class="company col-md-3 col-lg-4 py-3 border-bottom">

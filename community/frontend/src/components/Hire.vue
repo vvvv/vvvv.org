@@ -16,6 +16,7 @@ const form = ref(null)
 const formRef = ref(null)
 const formRef2 = ref(null)
 const updating = ref(false)
+const limit = 500
 
 const prepareData = () =>{
   const temp = clone(data)
@@ -89,10 +90,10 @@ const handleChange = () => {
       :disabled="!form.available"
       >
 
-    <FieldEditor v-model="form.description" id="description" label="Description"/>
-    <FieldEditor v-model="form.skills_vvvv" id="vvvv_skills" label="VVVV skills"/>
-    <FieldEditor v-model="form.skills_other" id="other_skills" label="Other skills"/>
-    
+    <FieldEditor v-model="form.description" id="description" label="Description" :limit="limit"/>
+    <FieldEditor v-model="form.skills_vvvv" id="vvvv_skills" label="VVVV skills" :limit="limit"/>
+    <FieldEditor v-model="form.skills_other" id="other_skills" label="Other skills" :limit="limit"/>
+
     <n-form-item label="Available for" path="availableFor">
       <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
     </n-form-item>

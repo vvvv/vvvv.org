@@ -38,6 +38,9 @@ onMounted(()=>{
               <RouterLink to="/user">Users</RouterLink>
           </li>
           <li class="nav-item">
+            <RouterLink to="/user/forhire">For Hire</RouterLink>
+          </li>
+          <li class="nav-item">
             <RouterLink to="/user/businesses">Businesses<span v-if="businessesCount>0" class="pl-1">{{(businessesCount)}}</span></RouterLink>
           </li>
         </ul>  

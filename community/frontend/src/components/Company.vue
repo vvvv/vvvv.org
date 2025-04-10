@@ -2,9 +2,10 @@
 import { ref, watch, onMounted } from 'vue'
 import Constants from '../constants'
 import Userpic from './Userpic.vue'
+import { countries } from '../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { clone, post, removeFile, uploadFile, createAssetUrl, makeFields }  from '../utils'
-import { NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData'])
 const { data, constants } = defineProps(['data', 'constants'])
@@ -135,10 +136,12 @@ const submit = async () => {
           </n-form-item>
       </n-form>
 
+      <hr class="my-1"/>
+
       <Userpic :src="logo" buttonText="Upload new" @change="updateTempLogo" round="false" v-if="companyExists"/>
 
       <NForm
-          v-if="form !== null && companyExists"
+          v-if="form !== null"
           ref="formRef"
           :model="form[0]"
           :rules="rules"
@@ -157,11 +160,28 @@ const submit = async () => {
           <n-input v-model:value="form[0].name" placeholder="Name"/>
         </n-form-item>
         <div v-else style="margin-left: 160px">{{ form[0].name }}</div>
-        <n-form-item label="Description" path="description">
-          <n-input v-model:value="form[0].description" type="textarea" placeholder="Description" />
+        <n-form-item label="Tagline" path="description">
+          <n-input v-model:value="form[0].description" placeholder="Tagline" />
         </n-form-item>
         <n-form-item label="Website" path="website">
           <n-input v-model:value="form[0].website" placeholder="Name" />
+        </n-form-item>
+        <n-form-item label="Address" path="address">
+          <div class="row">
+            <div class="col">
+              <n-input v-model:value="form[0].location_street" placeholder="Street and house number" class="mb-1" />
+              <n-input v-model:value="form[0].location_street_addon" placeholder="Additional Info" class="mb-1"/>
+              <div class="row mb-1">
+                <div class="col-4">
+                  <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
+                </div>
+                <div class="col-8">
+                  <n-input v-model:value="form[0].location_city" placeholder="City" />
+                </div>
+              </div>
+              <n-select :options="countries" filterable v-model:value="form[0].location_country" placeholder="Country"/>
+            </div>
+          </div>
         </n-form-item>
         <n-form-item label="Custom Fields">
           <n-flex v-for="(field, index) in form[0].fields" :key="index" class="field-row">

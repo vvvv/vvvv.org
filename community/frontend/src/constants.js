@@ -5,6 +5,7 @@ export default Object({
 
     //DIRECTUS DIRECT
     ASSETS: BASEURL + "assets/",
+    GET_FORHIRE: BASEURL + 'items/User?fields=*,related.hire.*&filter[related][hire][available][_eq]=true',
     GET_COMPANIES: BASEURL + 'items/Company',
     GET_USERS: BASEURL + 'items/User',
 

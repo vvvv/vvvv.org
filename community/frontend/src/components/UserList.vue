@@ -9,8 +9,7 @@ var stateObject = {
     currentPage: 1,
     totalPages: 0,
     pageLimit: 10,
-    filter: "",
-    availableForHire: false
+    filter: ""
 }
 
 const state = ref (stateObject)
