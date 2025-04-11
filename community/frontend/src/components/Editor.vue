@@ -1,7 +1,7 @@
 <script setup>
-import { ref, onMounted, defineModel } from 'vue'
-import Quill from 'quill';
-import 'quill/dist/quill.snow.css'; // Import Quill's Snow theme CSS
+import { ref, watch, onMounted, defineModel } from 'vue'
+import { toHtml, toMd } from '../utils.js'
+import { NInput } from 'naive-ui';
 
 const editorContainer = ref(null);
 let quill = null;
@@ -11,42 +11,40 @@ const { id, limit } = defineProps (['id', 'limit'])
 
 const count = ref(0)
 const model = defineModel()
+const html = ref('')
+const field = ref(null)
 
 onMounted(async ()=>{
 
-    count.value = limit || 0
+    html.value = toHtml(model.value)
 
-    quill = new Quill(editorContainer.value, {
-          theme: 'snow', // Use the 'snow' theme
-          modules: {
-            toolbar: [
-              [{ list: 'bullet' }], // Lists
-              ['link'], // Links and images
-            ],
-          },
-        });
+    if (limit != 0)
+    {
+      count.value = Math.max (limit - model.value,0)
+    }
 
-        quill.root.innerHTML = model.value
-  
-        // Listen for text changes and emit updates
-        quill.on('text-change', () => {
-          if (limit != 0) {
-            count.value = Math.max(limit - quill.getLength(), 0)
-          }
-          model.value = quill.root.innerHTML
-        });
-
-        quill.root.addEventListener('keydown', function(event) {
-          if (quill.getLength() > limit && event.key !== 'Backspace' && event.key !== 'Delete') {
+    if (field.value)
+    {
+      field.value.addEventListener('keydown', function(event) {
+          if (model.value.length > limit && event.key !== 'Backspace' && event.key !== 'Delete') {
             event.preventDefault();
           }
-        })
-  })
+      })
+    }
+})
+
+watch (model, (newValue)=>{
+  html.value = toHtml(model.value)
+})
+
 </script>
 
 <template>
-    <div>
-        <div ref="editorContainer" style="z-index: 1000;" :id="id"></div>
-        <div class="" v-if="limit != 0">Limit: {{count}}</div>
+    <div class="row">
+      <div class="col">
+        <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable rows="5"/>
+      </div>
+      <div class="col overflow-auto border rounded field-preview py-1" v-html="html" style="max-height: 200px;">
+      </div>
     </div>
 </template>

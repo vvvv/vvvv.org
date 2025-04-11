@@ -61,6 +61,7 @@ async function getUserInfo(mail)
 	}))
 
 	const companies = await client.request(readItems ('Company', {
+		fields:['*, social.*'],
 		filter: {
 			owner: {
 				email: {

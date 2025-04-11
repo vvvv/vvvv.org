@@ -113,8 +113,9 @@ const loadData = async () =>{
     delete user.companies
 
     social.fields = makeFields(social.fields, 4)
+    
     companies.forEach((c)=>{
-      c.fields = makeFields(c.fields, 4)
+       c.social.fields = makeFields(c.social.fields, 4)
     })
 
     data.value = {
@@ -132,7 +133,8 @@ const reload = async ()=>{
       await loadData()
       await loadConstants()
   }
-  catch {
+  catch (error){
+    console.log (error)
     failure.value = "Can't get data, please try login later."
   }
   finally{

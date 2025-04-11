@@ -4,6 +4,12 @@ import path from 'path'
 import fs from 'fs'
 import { FormData, Blob } from "formdata-node"
 
+const folders = {
+    avatar: process.env.AVATARSFOLDER,
+    logo: process.env.LOGOSFOLDER,
+    hire: process.env.HIREFOLDER,
+  };
+
 const uploadFile = async(req, res, JWT) => {
 
     try{
@@ -22,7 +28,7 @@ const uploadFile = async(req, res, JWT) => {
             cb(null, 'vvvv-' + uniqueSuffix + path.extname(file.originalname))
         }
     })
-        
+
     const upload = multer({ storage: storage }).single('file')
 
     upload (req, res, async (err) => {
@@ -39,8 +45,8 @@ const uploadFile = async(req, res, JWT) => {
         else if (err) {
             return res.status(400).send(err);
         }
-        
-        await toDirectus(req.file)
+     
+        await toDirectus(req.file, folders[req.body.folder])
         .then ((response)=>{
 
             deleteFile (req.file.path);
@@ -65,17 +71,17 @@ const deleteFile = (file) => {
     });
 }
 
-const toDirectus = async (file) => {
+const toDirectus = async (file, folder) => {
 
     const client = createDirectus(process.env.DIRECTUSURL)
-    .with(staticToken(process.env.DIRECTUSTOKEN))
+    .with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
     .with(rest());
 
     const fileBuffer = fs.readFileSync(file.path);
     const blob = new Blob([fileBuffer], { type: 'image/png' });
 
     const form = new FormData()
-    form.append("folder", process.env.AVATARSFOLDER)
+    form.append("folder", folder)
     form.append("file", blob, file.originalname)
 
     return client.request(uploadFiles(form))

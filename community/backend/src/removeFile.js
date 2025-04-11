@@ -10,13 +10,13 @@ const removeFile = async(req, res, JWT) => {
     }
 
     const client = createDirectus(process.env.DIRECTUSURL)
-    .with(staticToken(process.env.DIRECTUSTOKEN))
+    .with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
     .with(rest());
 
     try{
        await client.request(deleteFile(req.body.id))
     }
-    catch
+    catch (error)
     {
         return res.status(400).send("Can't delete file");
     } 

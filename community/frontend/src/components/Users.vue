@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import UserList from './UserList.vue'
 import UserInfo from './UserInfo.vue'
 import '../styles/style.scss'
@@ -12,21 +13,22 @@ import '../styles/style.scss'
 
 const url = new URL(window.location.href)
 const params = url.searchParams
-const username = ref(params.get("user"))
+const username = ref(params.get("u"))
 const edit = params.get("edit")
 const map = params.get("map")
 
-function showProfile(u)
-{
-    username.value = u
-    
-    // Change URL
-    // window.history.pushState({ additionalInformation: `User Profile: ${u}`}, `Profile: ${u}`, `/user/${u}`);
+const router = useRouter()
+
+const showProfile = (n)=>{
+    username.value = n
+    router.push(`/user/?u=${n}`)
 }
 
-// TODO add emit to the UserList with the username, if set, UserInfo should be visible.
-// This will avoid page reload on selecting a user from the list.
-// idividual page `/user/?user=username` will be still available
+const showList = ()=>{
+    username.value = null
+    router.push(`/user/`)
+}
+
 </script>
 
 <template>

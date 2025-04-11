@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import Constants from '../constants'
-import { toHtml } from '../utils'
+import HireSection from './HireSection.vue'
+import { toHtml, createAssetUrl } from '../utils'
 import { NButton } from 'naive-ui'
 
 const emit = defineEmits(['showProfile'])
@@ -9,6 +11,7 @@ const emit = defineEmits(['showProfile'])
 const loading = ref (true)
 const users = ref([])
 const request = `${Constants.GET_FORHIRE}&sort=name&meta=filter_count`
+const router = useRouter()
 
 onMounted( async ()=>
 {
@@ -20,9 +23,12 @@ onMounted( async ()=>
                         u.hire.description = toHtml(u.hire.description)
                         u.hire.skills_vvvv = toHtml(u.hire.skills_vvvv)
                         u.hire.skills_other = toHtml(u.hire.skills_other)
+                        u.hire.image = createAssetUrl(u.hire.image)
                         delete u.related
+
+                        console.log(u)
                         users.value.push(u)
-                    })
+                    }) 
                 }).catch( err => { throw (err) })
             })
         .catch ((err) => {
@@ -32,6 +38,10 @@ onMounted( async ()=>
             loading.value = false
         })
 })
+
+const openProfile = (username)=>{
+    router.push (`/user?u=${username}`)
+}
 
 </script>
 
@@ -45,22 +55,11 @@ onMounted( async ()=>
                         {{ user.name }} {{ user.surname }}
                     </div>
                     <div>
-                        <NButton @click="">Show Full Profile</NButton>
+                        <NButton @click="openProfile(user.username)">Show Full Profile</NButton>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <p class="card-text" v-html="user.hire.description"></p>
-                        </div>
-                        <div class="col">
-                            <h4>vvvv skills</h4>
-                            <p class="card-text" v-html="user.hire.skills_vvvv"></p>
-
-                            <h4>other skills</h4>
-                            <p class="card-text" v-html="user.hire.skills_other"></p>
-                        </div>
-                    </div>
+                    <HireSection :data="user"/>
                 </div>
             </div>
             <hr/>

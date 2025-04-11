@@ -7,6 +7,24 @@
 #profile{
   text-align: left;
 
+  .col-form-label
+  {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+
+  .field-preview{
+    font-size: 0.9rem;
+
+    p {
+      font-size: inherit;
+    }
+
+    ul{
+      padding-left: 1rem;
+    }
+  }
+
   .field-row {
     display: flex;
     margin-bottom: 1rem;
@@ -49,5 +67,11 @@
         background-color: #bbb;
       }
     }
+  }
+}
+
+.businesses{
+  .company{
+    cursor: pointer;
   }
 }

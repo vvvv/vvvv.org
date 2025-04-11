@@ -20,13 +20,15 @@ export function isEmpty(d)
     return (d !== null && d !== '' && d !== 'undefined') ? d : "---"
 }
 
-export const removeEmpty = obj => Object.entries(obj).reduce((a, [k, v]) => (v == null || v == "undefined" ? a : (a[k] = v, a)), {});
-export const toJson = obj => JSON.stringify(removeEmpty(obj))
-export const clone = obj => JSON.parse(toJson(obj))
+// export const removeEmpty = obj => Object.entries(obj).reduce((a, [k, v]) => (v == null || v == "undefined" ? a : (a[k] = v, a)), {});
+export const toJson = obj => obj && JSON.stringify(obj)
+export const clone = obj => obj && JSON.parse(toJson(obj))
 
 export const replaceEmpty = obj => Object.entries(obj).map((p)=>(p !== "undefined" ? p : "---"))
 
 export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop])
+
+export const createAssetUrl = (id) => id && Constants.ASSETS + id
 
 export async function post(url, payload)
 {
@@ -56,11 +58,17 @@ export async function removeFile(id)
   const formData = new FormData();
   formData.append('id', id)
 
-  axios.request({
+  return axios.request({
     url: Constants.FILE_REMOVE,
     method: 'POST',
     headers: {'Authorization ': token},
     data: formData
+  }).then(()=>{
+    return true
+  })
+  .catch((error)=>{
+    console.log (error)
+    return false
   })
 }
 
@@ -70,15 +78,10 @@ export async function getAuthHeader()
   return {'Authorization ': token}
 }
 
-export function createAssetUrl(id)
-{
-  return Constants.ASSETS + id
-}
-
-export async function uploadFile(file)
+export async function uploadFile(file, folder)
 {
   const formData = new FormData();
-  formData.append('folder', 'dfd274cc-651b-4bef-89c9-1fe9ed070a47')
+  formData.append('folder', folder)
   formData.append('file', file.file);
 
   const token = await getAccessToken()
@@ -111,16 +114,12 @@ export async function uploadFile(file)
 
 export const makeFields = (f, count) => {
 
-  console.log (f)
-
   var fields = (f !== null) ? clone(f) : []
-  
-  console.log (fields)
   
   const missingFields = count - fields.length
   if (missingFields > 0)
   {
-    for (var i=0; i<=missingFields; i++)
+    for (var i=0; i<missingFields; i++)
     {
       fields.push ({key:"", value:""}) 
     }

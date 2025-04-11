@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vicons/ionicons5": "^0.13.0",
     "keycloak-js": "^26.1.2",
     "leaflet": "^1.9.4",
     "quill": "^2.0.3",

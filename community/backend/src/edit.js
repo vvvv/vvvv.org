@@ -61,8 +61,6 @@ const editCompany = async (req, res, JWT) =>{
 
     var user = null
     var company = null
-
-    console.log (req.body)
     
     try
     {
@@ -106,16 +104,16 @@ const editCompany = async (req, res, JWT) =>{
             });
         }
 
+        const data = clone (req.body)
+        data.social.fields = data.social.fields.slice(0,4)
+        if (data.logo == '')
+            delete data.logo
+
         if (company.length > 0 )
         {
             try{
-
-                const data = clone (req.body)
                 delete data.owner
                 delete data.name
-
-                if (data.logo == '')
-                    delete data.logo
 
                 await client.request(updateItem ('Company', company[0].id, data))
     
@@ -132,14 +130,10 @@ const editCompany = async (req, res, JWT) =>{
         }
         else
         {
-            const newCompany = clone (req.body)
-            newCompany.owner = user[0].id
-            
-            if (newCompany.logo == '')
-                delete newCompany.logo
+            data.owner = user[0].id
 
             try{
-                await client.request(createItem ('Company', newCompany))
+                await client.request(createItem ('Company', data))
                 
                 return res.status(200).send({
                     result: "Created new Company"

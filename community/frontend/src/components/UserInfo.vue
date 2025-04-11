@@ -2,6 +2,7 @@
 
 import { ref, watchEffect, onMounted, computed, watch} from 'vue'
 import Constants from '../constants'
+import HireSection from './HireSection.vue'
 import Field from './Field.vue'
 import { isEmpty, toHtml, clone } from '../utils'
 
@@ -91,33 +92,7 @@ function edit()
             <hr/>
 
             <template v-if="hire">
-                <input type="checkbox" v-model="hire.available" disabled/>
-                <span class="label">Available for Hire</span>
-                
-                <div class="row">
-                        <div class="col-12 col-md-6">
-                            <span v-html="hire.description"></span> 
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <span v-html="hire.skills_vvvv"></span> 
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <span v-html="hire.skills_other"></span> 
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="field">
-                                <div class="label">
-                                    Available for:
-                                </div>
-                                <div class="value">
-                                    <template v-for="(t, index) in hire.available_for">
-                                        <span>{{ isEmpty(t) }}</span><template v-if="index+1 < hire.available_for.length">, </template>
-                                    </template>
-                                </div>
-                            </div> 
-                        </div>
-                </div>
-                <hr/>
+                <HireSection :data="user" v-if="hire.available"/>
             </template>
             <template v-else>
                 <input type="checkbox" value="false" disabled/>

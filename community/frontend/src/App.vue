@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, inject } from 'vue'
+import { ref, onMounted, computed, inject, watch } from 'vue'
 import EditUser from './components/EditUser.vue'
 import Constants from './constants'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
@@ -12,7 +12,7 @@ const authenticated = ref (false)
 const businessesCount = ref (0)
 
 const login = ()=> {
-  kclogin(window.location.href)
+  kclogin(window.location.origin + window.location.pathname)
 }
 
 const logout = ()=> {
@@ -41,7 +41,7 @@ onMounted(()=>{
             <RouterLink to="/user/forhire">For Hire</RouterLink>
           </li>
           <li class="nav-item">
-            <RouterLink to="/user/businesses">Businesses<span v-if="businessesCount>0" class="pl-1">{{(businessesCount)}}</span></RouterLink>
+            <RouterLink :to="{ path: '/user/businesses' }">Businesses<span v-if="businessesCount>0" class="pl-1">{{(businessesCount)}}</span></RouterLink>
           </li>
         </ul>  
         <template v-if="!authenticated">

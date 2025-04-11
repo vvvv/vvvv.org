@@ -1,11 +1,13 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
+import { countries } from '../countries.js'
 import Constants from '../constants'
-import Userpic from './Userpic.vue'
+import SocialFields from './SocialFields.vue'
+import FileUploader from './FileUploader.vue'
 import FieldInput from './FieldInput.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { clone, post, removeFile, uploadFile, createAssetUrl, makeFields }  from '../utils'
-import { NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { clone, post, createAssetUrl, makeFields }  from '../utils'
+import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData'])
 
@@ -16,6 +18,7 @@ const form = ref(null)
 const userpic = ref(null)
 const tempUserpic = ref(null)
 const updating = ref(false)
+const uploader = ref(null)
 
 const prepareData = ()=>{
 
@@ -25,10 +28,6 @@ const prepareData = ()=>{
   {
     userpic.value = createAssetUrl(temp.user.userpic.id)
   }
-
-  console.log (temp)
-  temp.social.fields = makeFields(temp.social.fields, 4)
-  console.log (temp)
 
   form.value = {
     user: temp.user,
@@ -52,12 +51,10 @@ const revert = ()=>{
 const updateTempUserpic = (id) =>{
   if (id !== null)
   {
-    tempUserpic.value = id
     emit('message', { type: 'success', string: 'New image uploaded'})
   }
-  else{
-    emit('message', { type: 'error', string: 'Something went wrong'})
-  } 
+
+  tempUserpic.value = id
 }
 
 const submit = async () => {
@@ -92,24 +89,47 @@ const submit = async () => {
       //Update fields in data
       data.user = formValue.user
       data.social = formValue.social
+
+      if (uploader.value)
+      {
+        uploader.value.reset() 
+      }
+
       emit('updateData', data)
       emit('message', { type: 'success', string: 'Updated'})
     }
   })
   .catch((error)=>{
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
+    console.log (error)
   })
   .finally(()=>{
     updating.value = false
   })
 }
 
+const avatarButtonText = computed(()=>{
+  return userpic.value !== null ? "Upload new" : "Upload avatar" 
+})
+
 </script>
 
 <template>
   <template v-if="form !== null">
-    <Userpic :src="userpic" buttonText="Upload new" @change="updateTempUserpic" round="true"/>
-    
+    <div class="form-group row mb-2">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-2" v-if="userpic !== null">
+            <n-avatar :round="true" :size="64" :src="userpic" object-fit="cover"/>
+          </div>    
+          <div class="col-10">
+            <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <n-form
         ref="formRef"
         :model="form"
@@ -148,52 +168,21 @@ const submit = async () => {
         <n-form-item label="Contact" path="contact">
           <n-input v-model:value="form.social.contact" placeholder="Prefered way of contact in human readable forms" />
         </n-form-item>
+        <n-form-item label="Location" path="location">
+          <div class="row">
+            <div class="col">
+              <n-input v-model:value="form.user.location_city" placeholder="City" clearable/>
+            </div>
+            <div class="col">
+              <n-select :options="countries" filterable clearable v-model:value="form.user.location_country" placeholder="Country"/>
+            </div>
+          </div>
+        </n-form-item>
         <n-form-item label="Newsletter" path="newsletter">
           <n-switch v-model:value="form.user.newsletter" placeholder="Newsletter"/>
         </n-form-item>
-        <div class="row">
-          <div class="col-12 col-lg-6">
-            <n-form-item label="Website" path="website">
-              <n-input v-model:value="form.social.website" placeholder="Website"/>
-            </n-form-item>
-            <n-form-item label="Github" path="github">
-              <n-input v-model:value="form.social.github" placeholder="Github"/>
-            </n-form-item>
-            <n-form-item label="NuGet" path="nuget">
-              <n-input v-model:value="form.social.nuget" placeholder="NuGet"/>
-            </n-form-item>
-          </div>
-          <div class="col-12 col-lg-6">
-            <n-form-item label="Mastodon" path="mastodon">
-              <n-input v-model:value="form.social.mastodon" placeholder="mastodon.xyz/@vvvv"/>
-            </n-form-item>
-            <n-form-item label="Instagram" path="instagram">
-              <n-input v-model:value="form.social.instagram" placeholder="@madewithvvvv"/>
-            </n-form-item>
-            <n-form-item label="Pixelfed" path="pixelfed">
-              <n-input v-model:value="form.social.pixelfed" placeholder="pixelfed.social/madewithvvvv"/>
-            </n-form-item>
-          </div>
-        </div>
 
-        <template v-for="(field, index) in form.social.fields" :key="index">
-          <n-form-item label="Custom Fields">
-            <div class="row">
-              <div class="col-12 col-lg-6">
-                <n-input 
-                  v-model="field.key" 
-                  placeholder="Key"
-                />
-              </div>
-              <div class="col-12 col-lg-6">
-                <n-input 
-                  v-model="field.value" 
-                  placeholder="Value" 
-                />
-              </div>
-            </div>
-          </n-form-item>
-        </template>
+        <SocialFields v-model:value="form.social"/>
 
         <SubmitRevertButtons @revert="revert" @submit="submit"/>
     </n-form>

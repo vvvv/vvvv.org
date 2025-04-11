@@ -1,7 +1,8 @@
 <script setup>
 import { ref, watchEffect, h } from 'vue'
 import Constants from '../constants'
-import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag } from "naive-ui"
+import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag, NIcon } from "naive-ui"
+import { CheckmarkCircle } from '@vicons/ionicons5'
 
 const emit = defineEmits(['showProfile'])
 
@@ -49,19 +50,16 @@ const columns = [
         }
     },
     {
-        title: 'Available',
+        title: 'Available for Hire',
         key: 'available',
         render(row) {
             if (row.available)
             {
                 return h(
-                    NTag,
+                    NIcon,
                     {
-                        round: "true",
-                        bordered: "false",
-                        type: "success"
-                    },
-                    "available"
+                        component: "CheckmarkCircle"
+                    }
                 )
             }
             else
@@ -106,7 +104,7 @@ function fetchData(url)
                 const row = {
                     src: userpicLink(u.userpic),
                     username: u.username,
-                    available: u.related[0].hire !== null ? u.related[0].hire.available : false 
+                    available: u.related[0].hire !== null ? u.related[0].hire.available : false
                 }
                 tableData.value.push (row)
             })
@@ -131,7 +129,7 @@ function fetchData(url)
 
 const _sort = "sort=username"
 const _fields =`fields[]=username,userpic,related.hire.available`
-const _hireFilter=`[related.hire][available][_eq]=true` 
+const _hireFilter=`[related][hire][available][_eq]=true` 
 
 watchEffect(async () => { 
 
@@ -144,7 +142,6 @@ watchEffect(async () => {
     
     var filters = new Array()
 
-    if (state.value.availableForHire) filters.push(_hireFilter)
     if (state.value.filter != "") filters.push(_usernameFilter)
     
     if (filters.length == 1)
