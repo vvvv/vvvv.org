@@ -26,6 +26,4 @@ export default Object({
     },
     LOGIN_REDIRECT: 'http://localhost:1313/',
     
-    PROFILEPIC_PARAMS: "?quality=90&fit=cover&width=120"
-
 })

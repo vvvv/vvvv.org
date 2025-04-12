@@ -1,13 +1,13 @@
 <script setup>
 import { ref, shallowRef, watch, onMounted, inject } from 'vue'
 import { useMessage } from 'naive-ui'
-import { getAccessToken, getMail, getUsername } from '../keycloak'
-import { clone, makeFields } from '../utils'
+import { getAccessToken, getMail, getUsername } from '../../keycloak'
+import { clone, makeFields } from '../../utils'
+import Constants from '../../constants'
 
 import Basics from './Basics.vue'
 import Company from './Company.vue'
 import Hire from './Hire.vue'
-import Constants from '../constants'
 
 const message = useMessage()
 const messageDuration = 2000

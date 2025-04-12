@@ -1,6 +1,6 @@
-import { createDirectus, rest, deleteFile, staticToken } from '@directus/sdk';
+import { deleteFile } from '@directus/sdk';
 
-const removeFile = async(req, res, JWT) => {
+const removeFile = async(req, res, JWT, client) => {
 
     try{
         JWT.verify(req.get('Authorization'))
@@ -8,10 +8,6 @@ const removeFile = async(req, res, JWT) => {
     catch (error){
         return res.status(400).send("Can't upload file");
     }
-
-    const client = createDirectus(process.env.DIRECTUSURL)
-    .with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
-    .with(rest());
 
     try{
        await client.request(deleteFile(req.body.id))

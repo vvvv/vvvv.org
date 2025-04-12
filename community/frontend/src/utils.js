@@ -5,18 +5,10 @@ import Showdown from 'showdown'
 
 const converter = new Showdown.Converter()
 
-export function toHtml(d)
-{
-  return converter.makeHtml(d)
-}
+export const toHtml = d => converter.makeHtml(d)
+export const toMd = d => converter.makeMarkdown(d)
 
-export function toMd(d)
-{
-  return converter.makeMarkdown(d)
-}
-
-export function isEmpty(d)
-{
+export const isEmpty = (d) =>{
     return (d !== null && d !== '' && d !== 'undefined') ? d : "---"
 }
 
@@ -28,10 +20,9 @@ export const replaceEmpty = obj => Object.entries(obj).map((p)=>(p !== "undefine
 
 export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop])
 
-export const createAssetUrl = (id) => id && Constants.ASSETS + id
+export const createAssetUrl = id => id && Constants.ASSETS + id
 
-export async function post(url, payload)
-{
+export const post = async (url, payload) =>{
   const token = await getAccessToken()
 
   return fetch(url, {
@@ -52,8 +43,7 @@ export async function post(url, payload)
     })
 }
 
-export async function removeFile(id)
-{
+export const removeFile = async (id) =>{
   const token = await getAccessToken()
   const formData = new FormData();
   formData.append('id', id)
@@ -72,14 +62,12 @@ export async function removeFile(id)
   })
 }
 
-export async function getAuthHeader()
-{
+export const getAuthHeader = async ()=>{
   const token = await getAccessToken()
   return {'Authorization ': token}
 }
 
-export async function uploadFile(file, folder)
-{
+export const uploadFile = async (file, folder) => {
   const formData = new FormData();
   formData.append('folder', folder)
   formData.append('file', file.file);
@@ -132,22 +120,3 @@ export const makeFields = (f, count) => {
 
   return fields
 }
-
-// export async function uploadTempFile(value, el$, keycloak)
-// {
-//   const token = await getAccessToken()
-//   const response = await el$.$vueform.services.axios.request({
-//     url: Constants.FILE_UPLOAD,
-//     method: 'POST',
-//     headers: {'Authorization ': token},
-//     data: el$.form$.convertFormData({
-//       file: value,
-//     }),
-//     onUploadProgress: (e) => {
-//       el$.progress = Math.round((e.loaded * 100) / e.total)
-//     },
-//     cancelToken: el$.$vueform.services.axios.CancelToken.source().token,
-//   }) // errors are handled automatically
-
-//   return response.data
-// }

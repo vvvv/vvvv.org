@@ -1,9 +1,10 @@
 <script setup>
 
 import { ref, onMounted} from 'vue'
-import Constants from '../constants'
-import Field from './Field.vue'
-import { clone, createAssetUrl } from '../utils'
+import Constants from '../../constants'
+import Field from '../profile/Field.vue'
+import SocialView from '../partials/SocialView.vue'
+import { clone, createAssetUrl } from '../../utils'
 
 defineEmits(['showList'])
 
@@ -61,11 +62,7 @@ onMounted(async ()=>
                             {{ company.name}}                            
                         </div>
                         <div class="col-12 col-md-6" v-if="social">
-                            {{ social.website }}
-                            {{ social.github }}
-                            {{ social.nuget }}
-                            {{ social.mastodon }}
-                            {{ social.pixelfed }}
+                            <SocialView :data="social"/>
                         </div>
                     </div>
                 </div>

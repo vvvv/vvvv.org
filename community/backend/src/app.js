@@ -1,4 +1,5 @@
-import { userInfo, constants } from './getData.js'
+import { createDirectus, rest, staticToken } from '@directus/sdk';
+import { userInfo, constants } from './helper.js'
 import { editBasics, editHire, editCompany } from './edit.js'
 import uploadFile from './uploadFile.js'
 import removeFile from './removeFile.js'
@@ -22,6 +23,14 @@ const limiter = rateLimit({
 
 const port = process.env.PORT;
 
+const directusReader = createDirectus(process.env.DIRECTUSURL)
+.with(staticToken(process.env.DIRECTUSTOKEN))
+.with(rest());
+
+const directusUpdater = createDirectus(process.env.DIRECTUSURL)
+.with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
+.with(rest());
+
 //app.use(limiter)
 app.use(cors());
 
@@ -32,39 +41,39 @@ app.listen (port, function(){
 // Getter Endpoints
 app.options('/v1/userinfo', cors()) 
 app.post ('/v1/userinfo', cors(), express.json(), async (req, res) => {
-    await userInfo(req, res, JWT);
+    await userInfo(req, res, JWT, directusReader);
 });
  
 app.options('/v1/constants', cors()) 
 app.get ('/v1/constants', cors(), express.json(), async (req, res) => {
-    await constants(res)
+    await constants(res, directusReader)
 });
 
 // Edit Endpoints
 app.options('/v1/edit/basics', cors())
 app.post ('/v1/edit/basics', cors(), express.json(), async (req, res) => {
-    await editBasics(req, res, JWT)
+    await editBasics(req, res, JWT, directusUpdater)
 });
 
 app.options('/v1/edit/hire', cors())
 app.post ('/v1/edit/hire', cors(), express.json(), async (req, res) => {
-    await editHire(req, res, JWT)
+    await editHire(req, res, JWT, directusUpdater)
 });
 
 app.options('/v1/edit/company', cors())
 app.post ('/v1/edit/company', cors(), express.json(), async (req, res) => {
-    await editCompany(req, res, JWT)
+    await editCompany(req, res, JWT, directusUpdater)
 });
 
 // File Endpoints
 app.options('/v1/uploadFile', cors()) 
 app.post ('/v1/uploadFile', cors(), async (req, res) => {
-    await uploadFile(req, res, JWT)
+    await uploadFile(req, res, JWT, directusUpdater)
 });
 
 app.options('/v1/removeFile', cors()) 
 app.post ('/v1/removeFile', cors(), multer().none(), async (req, res) => {
-    await removeFile(req, res, JWT)
+    await removeFile(req, res, JWT, directusUpdater)
 });
 
 

@@ -1,9 +1,9 @@
 import Keycloak from 'keycloak-js'
 import Constants from './constants'
 
-const keycloak = new Keycloak(Constants.LOGIN_OPTIONS);
+const keycloak = new Keycloak(Constants.LOGIN_OPTIONS)
 
-export async function initKeycloak()
+export const initKeycloak = async () =>
 {
     const result = keycloak.init({
             onLoad: 'check-sso',
@@ -12,43 +12,32 @@ export async function initKeycloak()
             responseMode: 'fragment',
     })
     .catch(() => {
-        console.error('Failed to initialize Keycloak');
+        console.error('Failed to initialize Keycloak')
     });
 
     return result
 }
 
-export function isAuthenticated() {
-    return keycloak.authenticated;
-  }
+export const isAuthenticated = () => keycloak.authenticated
+export const kclogout = (url) => keycloak.logout({ redirectUri: url })
+export const kclogin = (url) => keycloak.login({ redirectUri: url })
 
-export function getUsername() {
+export const getUsername = () => {
     if (keycloak.authenticated) {
         return keycloak.tokenParsed.preferred_username;
     }
     return null;
 }
 
-export function getMail()
-{
+export const getMail = () => {
     if (keycloak.authenticated) {
         return keycloak.idTokenParsed.email
     }
     return null;
 }
 
-export function kclogout(url)
-{
-    return keycloak.logout({ redirectUri: url })
-}
 
-export function kclogin(url)
-{
-    return keycloak.login({ redirectUri: url })
-}
-
-export async function getAccessToken()
-{
+export const getAccessToken = async () => {
     try {
         // Ensure the Keycloak instance is initialized
         if (!keycloak.authenticated) {
@@ -61,93 +50,9 @@ export async function getAccessToken()
         // Return the token
         return keycloak.token;
       } catch (error) {
-        console.error('Failed to get access token:', error);
-        throw error;
+        console.error('Failed to get access token:', error)
+        throw error
       }
 }
 
-export default keycloak;
-
-
-//     logout(url)
-//     {
-//         return this.keycloak.logout({ redirectUri: url })
-//     }
-
-//     login(url)
-//     {
-//         return this.keycloak.login({redirectUri: url })
-//     }
-  
-
-
-
-// class KC
-// {
-//     getMail = () => this.keycloak.idTokenParsed?.email
-//     getUsername = () => this.keycloak.tokenParsed?.preferred_username;
-//     // isLogged = () => !!this.keycloak.token
-
-//     constructor()
-//     {
-//         this.tokens = null
-//         this.initOptions = Constants.LOGIN_OPTIONS
-//     }
-
-//     async getAccessToken()
-//     {
-//         await this.keycloak.updateToken().catch(()=>{
-//             throw ('Failed to refresh the token, or the session has expired');
-//         })
-        
-//         return this.keycloak.token
-//     }
-    
-//     logout(url)
-//     {
-//         return this.keycloak.logout({ redirectUri: url })
-//     }
-
-//     login(url)
-//     {
-//         return this.keycloak.login({redirectUri: url })
-//     }
-
-//     init()
-//     {
-//         this.keycloak = new Keycloak(this.initOptions)
-
-//         this.keycloak.onReady = (auth) => {
-//             this.onReady()
-//         }
-
-//         this.keycloak.onAuthSuccess = () =>{
-//             this.onAuth()
-//         }
-
-//         try 
-//         {
-//             if (this.tokens !== null )
-//             {
-//                 this.keycloak.init({
-//                     onLoad: 'check-sso',
-//                     silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`,
-//                     token: this.tokens.at, 
-//                     refreshToken: this.tokens.rt
-//                 })
-//             }
-//             else
-//             {
-//                 this.keycloak.init({
-//                     onLoad: 'check-sso',
-//                     silentCheckSsoRedirectUri: `${location.origin}/user/sso.html`
-//                 })
-//             }
-//         }
-//             catch {
-//             console.log ("Can't init Keycloak")
-//         }
-//     }   
-// }
-
-// export default KC
+export default keycloak

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, defineModel } from 'vue'
-import { toHtml, toMd } from '../utils.js'
+import { toHtml, toMd } from '../../utils.js'
 import { NInput } from 'naive-ui';
 
 const editorContainer = ref(null);

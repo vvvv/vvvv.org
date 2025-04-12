@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import BusinessList from './BusinessList.vue'
-import BusinessInfo from './BusinessInfo.vue'
+import BusinessList from './lists/BusinessList.vue'
+import BusinessInfo from './views/BusinessView.vue'
 import '../styles/style.scss'
 
 // Usermap

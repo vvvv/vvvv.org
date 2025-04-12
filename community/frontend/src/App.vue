@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, inject, watch } from 'vue'
-import EditUser from './components/EditUser.vue'
+import EditUser from './components/profile/EditUser.vue'
 import Constants from './constants'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
 import { NMessageProvider } from 'naive-ui'

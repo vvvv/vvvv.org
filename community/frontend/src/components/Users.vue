@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import UserList from './UserList.vue'
-import UserInfo from './UserInfo.vue'
+import UserList from './lists/UserList.vue'
+import UserInfo from './views/UserView.vue'
 import '../styles/style.scss'
 
 // Usermap

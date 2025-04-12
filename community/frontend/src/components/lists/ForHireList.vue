@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Constants from '../constants'
-import HireSection from './HireSection.vue'
-import { toHtml, createAssetUrl } from '../utils'
+import Constants from '../../constants'
+import HireView from '../partials/HireView.vue'
+import { toHtml, createAssetUrl } from '../../utils'
 import { NButton } from 'naive-ui'
 
 const emit = defineEmits(['showProfile'])
@@ -59,7 +59,7 @@ const openProfile = (username)=>{
                     </div>
                 </div>
                 <div class="card-body">
-                    <HireSection :data="user"/>
+                    <HireView :data="user.hire"/>
                 </div>
             </div>
             <hr/>

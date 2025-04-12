@@ -1,11 +1,11 @@
 <script setup>
 import { ref, watch, onMounted, computed, onBeforeUnmount } from 'vue'
-import Constants from '../constants'
+import Constants from '../../constants'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import FieldEditor from './FieldEditor.vue'
 import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
-import { clone, post, toHtml, toMd, removeFile, createAssetUrl }  from '../utils'
+import { clone, post, toHtml, toMd, removeFile, createAssetUrl }  from '../../utils'
 import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData'])

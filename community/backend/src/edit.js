@@ -1,12 +1,8 @@
-import { createDirectus, rest, readItem, createItem, updateItem, deleteItems, readItems, staticToken } from '@directus/sdk';
+import { readItem, createItem, updateItem, deleteItems, readItems } from '@directus/sdk';
 import 'dotenv/config'
 import { getUserID, getItemID, clone } from "./helper.js"
 
-const client = createDirectus(process.env.DIRECTUSURL)
-.with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
-.with(rest());
-
-const editBasics = async (req, res, JWT) => {
+export const editBasics = async (req, res, JWT, client) => {
     
     try{   
         const mail = JWT.verify(req.get('Authorization'))
@@ -57,7 +53,7 @@ const editBasics = async (req, res, JWT) => {
 
 }
 
-const editCompany = async (req, res, JWT) =>{
+export const editCompany = async (req, res, JWT, client) =>{
 
     var user = null
     var company = null
@@ -186,7 +182,7 @@ const editEmployee = async ( employee, companyId )=> {
 
 }
 
-const editHire = async (req, res, JWT) =>{
+export const editHire = async (req, res, JWT, client) =>{
     try{  
         const mail = JWT.verify(req.get('Authorization'))     
         const hire = req.body
@@ -247,5 +243,3 @@ const editHire = async (req, res, JWT) =>{
             // }
 
 }
-
-export { editBasics, editCompany, editHire }

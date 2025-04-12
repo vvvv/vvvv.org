@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watchEffect, h } from 'vue'
-import Constants from '../constants'
+import Constants from '../../constants'
 import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag, NIcon } from "naive-ui"
 import { CheckmarkCircle } from '@vicons/ionicons5'
 

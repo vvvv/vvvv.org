@@ -1,5 +1,5 @@
 <script setup>
-import { isEmpty } from '../utils'
+import { isEmpty } from '../../utils'
 
 const props = defineProps({
     label: String,

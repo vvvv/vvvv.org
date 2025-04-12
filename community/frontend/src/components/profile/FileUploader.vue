@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, defineExpose } from 'vue'
-import { removeFile, uploadFile, createAssetUrl } from '../utils.js'
+import { removeFile, uploadFile, createAssetUrl } from '../../utils.js'
 import { NButton, NUpload } from 'naive-ui'
 
 const { buttonText, folder } = defineProps(['buttonText','folder'])

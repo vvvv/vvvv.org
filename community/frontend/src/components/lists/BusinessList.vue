@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from 'vue'
-import Constants from '../constants'
+import Constants from '../../constants'
 
 // const Map = defineAsyncComponent(() =>
 //   import('./Map.vue')
@@ -14,6 +14,7 @@ const companies = ref(null)
 const count = ref (0)
 const loading = ref (true)
 const logoSettings = 'withoutEnlargement=true&fit=inside&height=50&quality=90&format=auto'
+
 function image (l)
 {
     return `${Constants.ASSETS}${l}?${logoSettings}`;

@@ -1,4 +1,4 @@
-import { createDirectus, rest, uploadFiles, staticToken } from '@directus/sdk';
+import { uploadFiles } from '@directus/sdk';
 import multer from 'multer'
 import path from 'path'
 import fs from 'fs'
@@ -10,7 +10,7 @@ const folders = {
     hire: process.env.HIREFOLDER,
   };
 
-const uploadFile = async(req, res, JWT) => {
+const uploadFile = async(req, res, JWT, client) => {
 
     try{
         JWT.verify(req.get('Authorization'))
@@ -46,10 +46,10 @@ const uploadFile = async(req, res, JWT) => {
             return res.status(400).send(err);
         }
      
-        await toDirectus(req.file, folders[req.body.folder])
+        await toDirectus(req.file, folders[req.body.folder], client)
         .then ((response)=>{
 
-            deleteFile (req.file.path);
+            deleteLocalFile (req.file.path);
 
             return res.json({ 
                 tmp: response.id,
@@ -65,17 +65,13 @@ const uploadFile = async(req, res, JWT) => {
 }
 
 // Delete temp file
-const deleteFile = (file) => {
+const deleteLocalFile = (file) => {
     fs.unlink(file,(err) => {
         if (err) throw err;
     });
 }
 
-const toDirectus = async (file, folder) => {
-
-    const client = createDirectus(process.env.DIRECTUSURL)
-    .with(staticToken(process.env.DIRECTUS_UPDATER_TOKEN))
-    .with(rest());
+const toDirectus = async (file, folder, client) => {
 
     const fileBuffer = fs.readFileSync(file.path);
     const blob = new Blob([fileBuffer], { type: 'image/png' });
