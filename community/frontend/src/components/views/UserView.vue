@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 import Constants from '../../constants'
 import HireView from '../partials/HireView.vue'
 import SocialView from '../partials/SocialView.vue'
-import Field from '../profile/Field.vue'
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry } from '../../utils'
 
 const router = useRouter()
@@ -23,7 +22,8 @@ const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelf
 
 
 const imageParams = "?quality=90&fit=cover&width=120&height=120"
-const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}&fields=*,related.hire.*.Hire_Types_id.type,related.social.*`
+const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
+            &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`
 
 onMounted(async ()=>
 {
@@ -46,16 +46,7 @@ onMounted(async ()=>
 
     userpic.value = `${createAssetUrl(user.value.userpic)}${imageParams}`
 
-    if (data.related[0].hire !== null)
-    {
-        const temp = clone(data.related[0].hire)
-        temp.description = toHtml(temp.description)
-        temp.skills_vvvv = toHtml(temp.skills_vvvv)
-        temp.skills_other = toHtml(temp.skills_other)
-        temp.image = createAssetUrl(temp.image)
-        hire.value = temp
-    }
-
+    hire.value = data.related[0].hire || null
     social.value = data.related[0].social || null
   }
   catch (error)
@@ -88,7 +79,7 @@ const fullName = computed(() => {
 <template>
   <div v-if="loading">Loading</div>
 
-  <template v-if="user">
+  <div v-if="user">
     <div class="row">
       <div class="col">
         <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
@@ -112,10 +103,17 @@ const fullName = computed(() => {
       </div>
       <div class="col-lg-8">
         <SocialView :social="social" :order="socialKeys" v-if="social" />
-        <div class="row">
-          <HireView :hire="hire"/>
+        <div class="row mt-4">
+          <h4 class="h4">Available for hire</h4>
+          <div class="row" v-if="hire">
+            <div class="col">
+              <div class="card">
+                <HireView :data="hire" v-if="hire"/>
+              </div>
+            </div>
+          </div>
         </div>  
       </div>
     </div>
-  </template>
+  </div>
 </template>

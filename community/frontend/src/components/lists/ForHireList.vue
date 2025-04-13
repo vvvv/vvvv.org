@@ -15,28 +15,25 @@ const router = useRouter()
 
 onMounted( async ()=>
 {
-    fetch (request)
-        .then((response) =>{
-            response.json().then((data) =>{                
-                    data.data.forEach((u)=>{
-                        u.hire = u.related[0].hire
-                        u.hire.description = toHtml(u.hire.description)
-                        u.hire.skills_vvvv = toHtml(u.hire.skills_vvvv)
-                        u.hire.skills_other = toHtml(u.hire.skills_other)
-                        u.hire.image = createAssetUrl(u.hire.image)
-                        delete u.related
-
-                        console.log(u)
-                        users.value.push(u)
-                    }) 
-                }).catch( err => { throw (err) })
-            })
-        .catch ((err) => {
-            console.log (err)
+    loading.value = true
+    try{
+        const response = await fetch(request)
+        const json = await response.json()
+        users.value = json.data
+        
+        users.value.forEach((u)=>{
+            const name = [u.name, u.surname].filter(Boolean).join(" ")
+            u.title = name ? `${name} (${u.username})` : u.username
+            u.contact = u.related[0].social ? u.related[0].social.contact : null
+            u.hire = u.related[0].hire ? u.related[0].hire : null
         })
-        .finally(()=>{
-            loading.value = false
-        })
+    }
+    catch (error){
+        console.log(error)
+    }
+    finally{
+        loading.value = false
+    }
 })
 
 const openProfile = (username)=>{
@@ -46,23 +43,16 @@ const openProfile = (username)=>{
 </script>
 
 <template>
-    <div class="h2">For Hire</div>
     <template v-if="!loading">
         <div id="UsersForHire" v-for="(user, index) in users" :key="index">
-            <div class="card mb-3">
+            <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <div>
-                        {{ user.name }} {{ user.surname }}
-                    </div>
-                    <div>
-                        <NButton @click="openProfile(user.username)">Show Full Profile</NButton>
+                        <h3>{{ user.title }}</h3>
                     </div>
                 </div>
-                <div class="card-body">
-                    <HireView :data="user.hire"/>
-                </div>
+                <HireView :data="user.hire" :contact="user.contact" v-if="user.hire"/>
             </div>
-            <hr/>
         </div>
     </template>
     <template v-else>

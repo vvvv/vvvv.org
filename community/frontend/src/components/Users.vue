@@ -5,12 +5,6 @@ import UserList from './lists/UserList.vue'
 import UserView from './views/UserView.vue'
 import '../styles/style.scss'
 
-// Usermap
-// const UserMap = defineAsyncComponent(() =>
-//   import('../components/UserMap.vue')
-// )
-// const isMap = ref(false)
-
 const url = new URL(window.location.href)
 const params = url.searchParams
 const username = ref(params.get("u"))

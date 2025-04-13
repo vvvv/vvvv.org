@@ -17,7 +17,6 @@ const state = ref (stateObject)
 </script>
 
 <template>
-    <div class="h2">Users</div>
-        <UserListNavi v-model="state"/>
-        <UserListTable v-model="state" @showProfile="(e) => emit('showProfile', e)"/>
+    <UserListNavi v-model="state"/>
+    <UserListTable v-model="state" @showProfile="(e) => emit('showProfile', e)"/>
 </template>
