@@ -39,70 +39,70 @@ $label: #888;
     }
 }
 
-#app {
-    hr {
-        margin: 0;
-        border: 0;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
-        max-width: 100%;
-    }
+// #app {
+//     hr {
+//         margin: 0;
+//         border: 0;
+//         border-top: 1px solid rgba(0, 0, 0, 0.1);
+//         max-width: 100%;
+//     }
 
-    .card
-    {
-        &.personCard
-        {
-            background-color: #4a4a4a;
+//     .card
+//     {
+//         &.personCard
+//         {
+//             background-color: #4a4a4a;
 
-            &.active{
-                background-color: #555;
-            }
-        }
+//             &.active{
+//                 background-color: #555;
+//             }
+//         }
 
-        background-color: #f9f9f9;
-        border-color: #ddd;
+//         background-color: #f9f9f9;
+//         border-color: #ddd;
 
-        .dark-text{
-            color: #333 !important;
-        }
+//         .dark-text{
+//             color: #333 !important;
+//         }
 
-        .label
-        {
-            color: #aaa;
-            font-size: 0.8rem;
-        }
+//         .label
+//         {
+//             color: #aaa;
+//             font-size: 0.8rem;
+//         }
 
-        .value
-        {
-            color: #333;
-            margin-bottom: 0.5rem;
-        }
+//         .value
+//         {
+//             color: #333;
+//             margin-bottom: 0.5rem;
+//         }
         
 
-        input, textarea {
-            background-color: #333;
-            color: #ddd;
-        }
+//         input, textarea {
+//             background-color: #333;
+//             color: #ddd;
+//         }
 
-        .h4{
-            color: #000;
-        }
+//         .h4{
+//             color: #000;
+//         }
 
-        .btn-outline-secondary
-        {
-            color: #ccc;
-            border-color: #666;
-        }
+//         .btn-outline-secondary
+//         {
+//             color: #ccc;
+//             border-color: #666;
+//         }
 
    
-    }
+//     }
 
-    .emptypic
-    {
-        width: 120px;
-        height: 120px;
-        background-color: $label;
-    }
-}
+//     .emptypic
+//     {
+//         width: 120px;
+//         height: 120px;
+//         background-color: $label;
+//     }
+// }
 
 // #ProfileEditor{
 

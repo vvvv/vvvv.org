@@ -62,7 +62,7 @@ onMounted(()=>{
           </ul>
         </template>
       </nav>
-      <div class="container px-4">
+      <div class="container">
         <n-message-provider placement="bottom-right">
           <RouterView @setCount="c => { businessesCount = c }"/>
         </n-message-provider>

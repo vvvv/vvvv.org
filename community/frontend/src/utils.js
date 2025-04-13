@@ -2,6 +2,7 @@ import Constants from './constants'
 import axios from 'axios';
 import { getAccessToken } from './keycloak'
 import Showdown from 'showdown'
+import { countries } from './countries'
 
 const converter = new Showdown.Converter()
 
@@ -23,24 +24,29 @@ export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop
 export const createAssetUrl = id => id && Constants.ASSETS + id
 
 export const post = async (url, payload) =>{
-  const token = await getAccessToken()
-
-  return fetch(url, {
-        headers: { 
-          "Content-Type": "application/json",
-          'Authorization': token
-        },
-        method: "POST",
-        body: JSON.stringify(payload)
+  try{
+    const token = await getAccessToken()
+    const response = await fetch(url, {
+      headers: { 
+        "Content-Type": "application/json",
+        'Authorization': token
+      },
+      method: "POST",
+      body: JSON.stringify(payload)
     })
-    .then((response) => response.json())
-    .then((data) => {
-        if (Object.hasOwn(data, 'error'))
-            {
-                throw new Error (data.response.error)
-            }
-        return data
-    })
+  
+    const json = await response.json()
+  
+    if (Object.hasOwn(json, 'error'))
+      {
+          throw new Error (data.response.error)
+      }
+    
+    return json
+  }
+  catch(error) {
+    throw new Error (error)
+  }
 }
 
 export const removeFile = async (id) =>{
@@ -119,4 +125,28 @@ export const makeFields = (f, count) => {
   }
 
   return fields
+}
+
+export function ensureHttps(url) {
+    // Check if the URL starts with "http://" or "https://"
+    if (/^https?:\/\//i.test(url)) {
+        return url; // If it does, return the URL as is
+    }
+    // Otherwise, prepend "https://"
+    return `https://${url}`;
+}
+
+export function getCountry(value) {
+    const country = countries.find(country => country.value === value)
+    return country ? country.label : null
+}
+
+export const getProperties = (obj, keys) => {
+    var result = {}
+    keys.forEach(key => {
+          if (key in obj) {
+              result[key] = obj[key];
+          }
+      });
+    return result
 }

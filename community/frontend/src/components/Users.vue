@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import UserList from './lists/UserList.vue'
-import UserInfo from './views/UserView.vue'
+import UserView from './views/UserView.vue'
 import '../styles/style.scss'
 
 // Usermap
@@ -32,6 +32,6 @@ const showList = ()=>{
 </script>
 
 <template>
-    <UserInfo v-if="username" :username="username" @showList="username = null"/>
+    <UserView v-if="username" :username="username" @showList="username = null"/>
     <UserList v-else @showProfile="showProfile"/>
 </template>

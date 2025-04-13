@@ -76,8 +76,9 @@ const submit = async () => {
     social: formValue.social
   }
 
-  post(Constants.EDIT_BASICS, body)
-  .then((response)=>{
+  try {
+    const response = await post(Constants.EDIT_BASICS, body)
+
     if (response.result == 'Updated')
     {
       if (tempUserpic.value !== null)
@@ -98,14 +99,14 @@ const submit = async () => {
       emit('updateData', data)
       emit('message', { type: 'success', string: 'Updated'})
     }
-  })
-  .catch((error)=>{
+  }
+  catch (error) {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
     console.log (error)
-  })
-  .finally(()=>{
+  }
+  finally {
     updating.value = false
-  })
+  }
 }
 
 const avatarButtonText = computed(()=>{
