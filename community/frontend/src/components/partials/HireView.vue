@@ -13,6 +13,7 @@ const hire = computed(()=>{
 
     return {
         description: toHtml(data.description),
+        contact: data.contact,
         skills_vvvv: toHtml(data.skills_vvvv),
         skills_other: toHtml(data.skills_other),
         image: createAssetUrl(data.image),
@@ -47,9 +48,9 @@ const hire = computed(()=>{
                     <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>other skills</b></p>
                     <p class="card-text" v-html="hire.skills_other"></p>
                 </template>
-                <template v-if="contact">
+                <template v-if="hire.contact">
                     <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>contact</b></p>
-                    <p class="card-text">{{ contact }}</p>
+                    <p class="card-text">{{ hire.contact }}</p>
                 </template>
             </div>
         </div>
