@@ -1,8 +1,8 @@
 <script setup>
 import { defineModel } from 'vue'
 
-const { label } = defineProps(['id', 'label'])
-const model = defineModel('value')
+const { label } = defineProps(['id', 'label']);
+const model = defineModel('value');
 
 </script>
 <template>

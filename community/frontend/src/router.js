@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Users from './components/Users.vue'
-const EditUser = () => import('./components/profile/EditUser.vue')
-const Businesses = () => import('./components/Businesses.vue')
-const ForHireList = () => import('./components/lists/ForHireList.vue')
+const Users = () => import('./routes/Users.vue')
+const EditUser = () => import('./routes/EditUser.vue')
+const Businesses = () => import('./routes/Businesses.vue')
+const ForHireList = () => import('./routes/ForHireList.vue')
 
 const routes = [
     {

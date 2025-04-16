@@ -1,6 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, inject, watch } from 'vue'
-import EditUser from './components/profile/EditUser.vue'
+import { ref, onMounted } from 'vue'
 import Constants from './constants'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
 import { NMessageProvider } from 'naive-ui'
@@ -16,7 +15,7 @@ const login = ()=> {
 }
 
 const logout = ()=> {
-  kclogout(`${location.origin}/user`)
+  kclogout(window.location.origin + `/user`)
 }
 
 onMounted(()=>{
@@ -54,7 +53,7 @@ onMounted(()=>{
         <template v-else>
           <ul class="nav nav-pills navbar-right">
             <li class="nav-item mr-4 mt-2">
-                <RouterLink to="/user/edit">Profile</RouterLink>
+                <RouterLink :to="{ path: '/user/edit' }">Profile</RouterLink>
             </li>
             <li class="nav-item">
               <div class="btn btn-outline-secondary" @click="logout">Logout</div>

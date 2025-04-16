@@ -1,79 +1,90 @@
 <script setup>
 
-import { ref, onMounted} from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Constants from '../../constants'
-import Field from '../profile/Field.vue'
 import SocialView from '../partials/SocialView.vue'
-import { clone, createAssetUrl } from '../../utils'
+import { clone, createAssetUrl, getCountry } from '../../utils'
 
-defineEmits(['showList'])
+defineEmits(['showList']);
 
-const { name } = defineProps(['name'])
+const { name = 'MyCompany' } = defineProps({ name: String });
 
-const company = ref(null)
-const social = ref(null)
+const company = ref(null);
+const social = ref(null);
+const loading = ref(null);
+const logo = ref(null);
 
-const imageParams = "?quality=90&fit=cover&width=120"
-const url = `${Constants.BASEURL}items/Company?fields=*,social.*&filter[name][_eq]=${name}`
-
-console.log (url)
+const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
+const imageParams = '?withoutEnlargement=true&quality=90&fit=cover&width=120';
+const url = Constants.BASEURL+`items/Company?fields=*,social.*&filter[name][_eq]=${name}`;
 
 onMounted(async ()=>
 {
-    fetch(url)
-    .then((response) => {
-        response.json().then((d) => {
-            const data = clone(d.data[0])
+    loading.value = true;
+
+    try{
+        const response = await fetch(url);
+        const json = await response.json();
+    
+        if (json.data.length == 0)
+        {
+            throw ("Can't find a profile for this company") 
+        }
+
+        const data = clone(json.data[0]);
             
-            if (data.social !== null)
-            {
-                social.value = data.social
-            }
+        if (data?.social)
+        {
+            social.value = data.social;
+        }
+    
+        if (data?.logo)
+        {
+            logo.value = createAssetUrl(data.logo)+imageParams;
+        }
+    
+        company.value = data;
+    }
+    catch (error) {
+        console.error(error);
+    }
+    finally{
+        loading.value = false;
+    }
+})
 
-            data.logo = createAssetUrl(data.logo)+imageParams
-
-            company.value = data
-        })
-    })
-    .catch((err) => {
-        console.error(err);
-    });
+const location = computed(() => {
+    const location = [company.value.location_city, getCountry(company.value.location_country)].filter(Boolean).join(", ")
+    return location ?? null
 })
 
 </script>
 
 <template>
-    <div v-if="company" class="card mt-3">
-        <div class="card-header">
-            <div class="row mx-1">
-                <a href="#" class="btn btn-outline-secondary dark-text" @click="$emit('showList')">< List</a>
-                <div class="h4 mr-auto ml-4">{{ company.name }}</div>
+    <div v-if="loading">Loading</div>
+
+    <div v-if="company">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="#" @click="$emit('showList')">Companies List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ company.name }}</li>
+                </ol>
+                </nav>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <img :src="company.logo" v-if="company.logo !== null" class="rounded-circle img-fluid"/>
-                    <div class="emptypic rounded-circle" v-else></div>
-                </div>
-                <div class="col-12 col-md-9">
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            {{ company.name}}                            
-                        </div>
-                        <div class="col-12 col-md-6" v-if="social">
-                            <SocialView :data="social"/>
-                        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center mb-3">
+                    <img :src="logo" alt="logo" v-if="logo" class="img-fluid"/>
+                    <div class="my-3">
+                    <h5>{{ company.name }}</h5>
                     </div>
-                </div>
+                    <p class="text-muted mb-4" v-if="location">{{ location }}</p>
+                    <p class="text-muted mb-1">{{ company.description ?? ''}}</p>
             </div>
-
-            {{ company.description }}
-
-            <div class="row" v-if="social">
-                <template v-for="f in social.fields">
-                        <Field :label="f.key" :value="f.value" class="col-12 col-md-6"/>
-                </template>
+            <div class="col-lg-8">
+                <SocialView :social="company.social" :order="socialKeys" v-if="social" />
             </div>
         </div>
     </div>

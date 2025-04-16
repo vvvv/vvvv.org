@@ -4,13 +4,13 @@ import { ensureHttps, getProperties } from '../../utils'
 
 const { social, order } = defineProps({ social: Object, order: Array })
 
-const socialLinks = ref(null)
-const socialFields = ref(null)
+const socialLinks = ref(null);
+const socialFields = ref(null);
 
 if  (social)
 {
-	socialLinks.value = getProperties(social, order)
-	socialFields.value = social.fields
+	socialLinks.value = getProperties(social, order);
+	socialFields.value = social.fields;
 }
 
 </script>
@@ -30,7 +30,7 @@ if  (social)
 				</div>
 			</div>
 		</div>
-		<div class="col-12 col-lg-6 pr-lg-0">
+		<div class="col-12 col-lg-6 pr-lg-0" v-if="socialFields">
 			<div class="card mb-4 mb-lg-0">
 				<div class="card-body p-0">
 					<ul class="list-group list-group-flush rounded-2">

@@ -9,3 +9,6 @@
 /themes/hugo-creative-theme-master/static/img/portfolio/6.jpg
 /vue/node_modules/*
 /static/js/vue/*
+/community/layout/*
+**/package-lock.json
+**/extensions.json

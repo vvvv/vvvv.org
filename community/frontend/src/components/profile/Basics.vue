@@ -9,24 +9,24 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { clone, post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
-const emit = defineEmits(['reload', 'message', 'updateData'])
+const emit = defineEmits(['reload', 'message', 'updateData']);
 
-const { data, constants } = defineProps(['data', 'constants'])
-const isChanged = ref(false)
-const formRef = ref(null)
-const form = ref(null)
-const userpic = ref(null)
-const tempUserpic = ref(null)
-const updating = ref(false)
-const uploader = ref(null)
+const { data, constants } = defineProps(['data', 'constants']);
+const isChanged = ref(false);
+const formRef = ref(null);
+const form = ref(null);
+const userpic = ref(null);
+const tempUserpic = ref(null);
+const updating = ref(false);
+const uploader = ref(null);
 
 const prepareData = ()=>{
 
-  var temp = clone(data)
+  var temp = clone(data);
 
-  if (temp.user.hasOwnProperty('userpic'))
+  if (temp.user.hasOwnProperty('userpic'));
   {
-    userpic.value = createAssetUrl(temp.user.userpic.id)
+    userpic.value = createAssetUrl(temp.user?.userpic?.id);
   }
 
   form.value = {
@@ -59,8 +59,8 @@ const updateTempUserpic = (id) =>{
 
 const submit = async () => {
 
-  updating.value = true
-  const formValue  = clone(form.value)
+  updating.value = true;
+  const formValue  = clone(form.value);
   
   if (tempUserpic.value == null)
   {
@@ -77,32 +77,32 @@ const submit = async () => {
   }
 
   try {
-    const response = await post(Constants.EDIT_BASICS, body)
+    const response = await post(Constants.EDIT_BASICS, body);
 
     if (response.result == 'Updated')
     {
       if (tempUserpic.value !== null)
       {
-        userpic.value = createAssetUrl(tempUserpic.value)
-        tempUserpic.value = null
+        userpic.value = createAssetUrl(tempUserpic.value);
+        tempUserpic.value = null;
       }
 
       //Update fields in data
-      data.user = formValue.user
-      data.social = formValue.social
+      data.user = formValue.user;
+      data.social = formValue.social;
 
       if (uploader.value)
       {
         uploader.value.reset() 
       }
 
-      emit('updateData', data)
-      emit('message', { type: 'success', string: 'Updated'})
+      emit('updateData', data);
+      emit('message', { type: 'success', string: 'Updated'});
     }
   }
   catch (error) {
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
-    console.log (error)
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+    console.log (error);
   }
   finally {
     updating.value = false

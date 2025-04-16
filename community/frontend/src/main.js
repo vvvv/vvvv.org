@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router';
-import { initKeycloak } from './keycloak';
+import router from './router'
+import { initKeycloak } from './keycloak'
 import './styles/style.scss'
 
 await initKeycloak()

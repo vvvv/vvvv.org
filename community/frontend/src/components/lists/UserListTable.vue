@@ -2,7 +2,6 @@
 import { ref, watchEffect, h } from 'vue'
 import Constants from '../../constants'
 import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag, NIcon } from "naive-ui"
-import { CheckmarkCircle } from '@vicons/ionicons5'
 
 const emit = defineEmits(['showProfile'])
 
@@ -93,38 +92,38 @@ function jumpToPage()
     }        
 }
 
-function fetchData(url)
+async function fetchData(url)
 {
     loading.value = true
 
-    fetch(url).then((response) => {
-        response.json().then((data) => {
-            tableData.value = []
-            data.data.forEach((u) => {
-                const row = {
-                    src: userpicLink(u.userpic),
-                    username: u.username,
-                    available: u.related[0].hire !== null ? u.related[0].hire.available : false
-                }
-                tableData.value.push (row)
-            })
+    try{
+        const response = await fetch(url);
+        const data = await response.json();
 
-            if (data.hasOwnProperty("meta"))
-            {
-                state.value.totalCount = data.meta.total_count || data.meta.filter_count || state.value.totalCount      
+        tableData.value = []
+        data.data.forEach((u) => {
+            const row = {
+                src: u.userpic ? userpicLink(u.userpic) : null,
+                username: u.username,
+                available: u.related[0]?.hire?.available ?? false
             }
-            state.value.totalPages = Math.ceil(state.value.totalCount / state.value.pageLimit)  || state.value.totalPages
+            tableData.value.push (row)
         })
-        .catch((err) => {
-            throw (err);
-        })
-    })
-    .catch((err) => {
-        console.error(err);
-    })
-    .finally(()=>{
+
+        if (data.hasOwnProperty("meta"))
+            {
+                state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount    
+            }
+
+        state.value.totalPages = Math.ceil(state.value.totalCount / state.value.pageLimit) ?? state.value.totalPages
+    }
+    catch(error)
+    {
+        console.error(error)
+    }
+    finally{
         loading.value = false
-    })
+    }
 }
 
 const _sort = "sort=username"

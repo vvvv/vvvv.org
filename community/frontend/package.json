@@ -6,21 +6,22 @@
   "scripts": {
     "serve": "vite",
     "build": "vue-tsc -b && vite build --emptyOutDir",
-    "watch": "vite build --watch --base=/js/vue --emptyOutDir",
+    "watch": "vite build --watch --base=/js/vue",
     "preview": "vite preview"
   },
   "dependencies": {
     "keycloak-js": "^26.1.2",
+    "leaflet": "^1.9.4",
     "showdown": "^2.1.0",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0",
-    "leaflet": "^1.9.4"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/tsconfig": "^0.7.0",
     "axios": "^1.7.9",
     "naive-ui": "^2.41.0",
+    "rollup-plugin-visualizer": "^5.14.0",
     "sass": "^1.83.4",
     "sass-embedded": "^1.83.4",
     "sass-loader": "^16.0.4",

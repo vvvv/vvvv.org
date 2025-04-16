@@ -27,9 +27,9 @@ const hire = computed(()=>{
 <template>
     <div class="card-body">
         <div class="row">
-            <div class="col-12 col-lg-6">
-                <img :src="hire.image" class="img-fluid pt-2 mb-2" v-if="hire.image !== null"/>
-                <template v-if="hire.availableFor !== null">
+            <div class="col-12 col-lg-6" v-if="hire.image || hire.availableFor.length > 0">
+                <img :src="hire.image" class="img-fluid pt-2 mb-2" v-if="hire.image"/>
+                <template v-if="hire.availableFor.length > 0">
                     <p class="py-0 mb-2 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>Available for</b></p>
                     <NSpace>
                         <NTag class="mr-2" v-for="t in hire.availableFor" :bordered="false" type="success">{{ t }}</NTag>

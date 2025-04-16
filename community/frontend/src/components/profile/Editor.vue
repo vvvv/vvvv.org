@@ -4,7 +4,6 @@ import { toHtml, toMd } from '../../utils.js'
 import { NInput } from 'naive-ui';
 
 const editorContainer = ref(null);
-let quill = null;
 
 const emit = defineEmits(['update'])
 const { id, limit } = defineProps (['id', 'limit'])
@@ -16,11 +15,11 @@ const field = ref(null)
 
 onMounted(async ()=>{
 
-    html.value = toHtml(model.value)
+    html.value = toHtml(model.value);
 
     if (limit != 0)
     {
-      count.value = Math.max (limit - model.value,0)
+      count.value = Math.max (limit - model.value,0);
     }
 
     if (field.value)
@@ -44,7 +43,7 @@ watch (model, (newValue)=>{
       <div class="col">
         <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable rows="5"/>
       </div>
-      <div class="col overflow-auto border rounded field-preview py-1" v-html="html" style="max-height: 200px;">
+      <div class="col overflow-auto rounded field-preview py-1" v-html="html" style="max-height: 200px;">
       </div>
     </div>
 </template>

@@ -1,13 +1,8 @@
 <script setup>
 import { ref, onMounted, defineModel } from 'vue'
 import { NFormItem, NInput } from 'naive-ui'
-import { ShareSocial } from '@vicons/ionicons5'
 
 const model = defineModel('value')
-
-onMounted(()=>{
-    console.log(model.value.fields)
-})
 
 </script>
 <template>

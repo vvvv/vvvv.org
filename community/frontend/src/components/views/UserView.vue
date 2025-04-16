@@ -11,17 +11,16 @@ const router = useRouter()
 
 defineEmits(['showList'])
 
-const { username = 'testuser1'} = defineProps({username: String})
+const { username = 'someuser'} = defineProps({username: String})
 
 const user = ref(null)
 const hire = ref (null)
 const social = ref (null)
 const userpic = ref(null)
 const loading = ref(false)
+
 const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"]
-
-
-const imageParams = "?quality=90&fit=cover&width=120&height=120"
+const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
             &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`
 
@@ -34,8 +33,6 @@ onMounted(async ()=>
     const response = await fetch(url)
     const json = await response.json()
 
-    console.log (json)
-
     if (json.data.length == 0)
     {
       throw ("Can't find a profile for this user") 
@@ -44,10 +41,10 @@ onMounted(async ()=>
     const data = json.data[0]
     user.value = data
 
-    userpic.value = `${createAssetUrl(user.value.userpic)}${imageParams}`
+    userpic.value = user.value.userpic ? `${createAssetUrl(user.value.userpic)}${imageParams}` : null;
 
-    hire.value = data.related[0].hire || null
-    social.value = data.related[0].social || null
+    hire.value = data.related[0]?.hire
+    social.value = data.related[0]?.social
   }
   catch (error)
   {
@@ -103,12 +100,12 @@ const fullName = computed(() => {
       </div>
       <div class="col-lg-8">
         <SocialView :social="social" :order="socialKeys" v-if="social" />
-        <div class="row mt-4">
+        <div class="row mt-4" v-if="hire">
           <h4 class="h4">Available for hire</h4>
-          <div class="row" v-if="hire">
+          <div class="row">
             <div class="col">
               <div class="card">
-                <HireView :data="hire" v-if="hire"/>
+                <HireView :data="hire"/>
               </div>
             </div>
           </div>

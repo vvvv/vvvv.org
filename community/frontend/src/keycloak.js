@@ -49,10 +49,11 @@ export const getAccessToken = async () => {
     
         // Return the token
         return keycloak.token;
-      } catch (error) {
+    } 
+    catch (error) {
         console.error('Failed to get access token:', error)
         throw error
-      }
+    }
 }
 
 export default keycloak

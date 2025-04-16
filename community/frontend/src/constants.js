@@ -1,15 +1,19 @@
-const BASEURL="http://localhost:8058/"
-const BACKENDURL="http://localhost:4050/v1/"
+const DIRECTUS_LOCAL="http://localhost:8058/"
+const DIRECTUS_REMOTE="https://data.vvvv.org/"
+
+const BACKEND_LOCAL="http://localhost:4050/v1/"
+const BACKEND_REMOTE="https://io.vvvv.org/v1/"
+
+const DIRECTUSURL = DIRECTUS_REMOTE
+const BACKENDURL = BACKEND_LOCAL
 
 export default Object({   
 
-    //DIRECTUS DIRECT
-    BASEURL: BASEURL, 
-    ASSETS: BASEURL + "assets/",
-    GET_FORHIRE: BASEURL + 'items/User?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value&filter[related][hire][available][_eq]=true',
-    GET_COMPANIES: BASEURL + 'items/Company',
-    GET_USERS: BASEURL + 'items/User',
-    GET_COMPANY: BASEURL + 'items/Company?fields=*,social.*&filter[name][_eq]=',
+    //DIRECTUS
+    BASEURL: DIRECTUSURL, 
+    ASSETS: DIRECTUSURL + "assets/",
+    GET_COMPANIES: DIRECTUSURL + 'items/Company',
+    GET_USERS: DIRECTUSURL + 'items/User',
 
     //BACKEND
     BACKEND_GET_USER: BACKENDURL + "userinfo",
@@ -17,8 +21,7 @@ export default Object({
     EDIT_COMPANY: BACKENDURL + "edit/company",
     EDIT_BASICS: BACKENDURL + "edit/basics",
     EDIT_HIRE: BACKENDURL + "edit/hire",
-    FILE_REMOVE: BACKENDURL + "removeFile",
-    FILE_UPLOAD: BACKENDURL + "uploadFile",
+    FILE: BACKENDURL + "file",
     LOGIN_OPTIONS: {
         url: 'https://login.vvvv.org/',
         realm: 'vvvv', 

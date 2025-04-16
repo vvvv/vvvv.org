@@ -1,37 +1,34 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Constants from '../../constants'
-import HireView from '../partials/HireView.vue'
-import { toHtml, createAssetUrl } from '../../utils'
-import { NButton } from 'naive-ui'
+import Constants from '../constants'
+import HireView from '../components/partials/HireView.vue'
 
-const emit = defineEmits(['showProfile'])
+const router = useRouter();
+const emit = defineEmits(['showProfile']);
 
-const loading = ref (true)
-const users = ref([])
-const request = `${Constants.GET_FORHIRE}&sort=name&meta=filter_count`
-const router = useRouter()
+const loading = ref (true);
+const users = ref([]);
+const url = Constants.BASEURL+`items/User?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value
+&filter[related][hire][available][_eq]=true&sort=name&meta=filter_count`;
 
 onMounted( async ()=>
 {
-    loading.value = true
+    loading.value = true;
     try{
-        const response = await fetch(request)
-        const json = await response.json()
-        users.value = json.data
+        const response = await fetch(url);
+        const json = await response.json();
+        users.value = json.data;
         
         users.value.forEach((u)=>{
-            const name = [u.name, u.surname].filter(Boolean).join(" ")
-            u.title = name ? `${name} (${u.username})` : u.username
-            u.contact = u.related[0].social ? u.related[0].social.contact : null
-            u.hire = u.related[0].hire ? u.related[0].hire : null
+            const name = [u.name, u.surname].filter(Boolean).join(" ");
+            u.title = name ? `${name} (${u.username})` : u.username;
+            u.contact = u.related[0].social ?? null;
+            u.hire = u.related[0].hire ?? null;
         })
-    }
-    catch (error){
+    } catch (error){
         console.log(error)
-    }
-    finally{
+    } finally{
         loading.value = false
     }
 })

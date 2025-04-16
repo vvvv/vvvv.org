@@ -37,10 +37,10 @@ export const post = async (url, payload) =>{
   
     const json = await response.json()
   
-    if (Object.hasOwn(json, 'error'))
-      {
-          throw new Error (data.response.error)
-      }
+    if (json.error)
+    {
+        throw new Error (data.response.error)
+    }
     
     return json
   }
@@ -55,13 +55,11 @@ export const removeFile = async (id) =>{
   formData.append('id', id)
 
   return axios.request({
-    url: Constants.FILE_REMOVE,
-    method: 'POST',
+    url: Constants.FILE,
+    method: 'DELETE',
     headers: {'Authorization ': token},
     data: formData
-  }).then(()=>{
-    return true
-  })
+  }).then(()=> true)
   .catch((error)=>{
     console.log (error)
     return false
@@ -80,7 +78,7 @@ export const uploadFile = async (file, folder) => {
 
   const token = await getAccessToken()
   const request = {
-    url: Constants.FILE_UPLOAD,
+    url: Constants.FILE,
     method: 'POST',
     headers: {'Authorization ': token},
     data: formData,

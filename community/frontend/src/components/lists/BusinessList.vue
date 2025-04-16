@@ -6,18 +6,18 @@ import Constants from '../../constants'
 //   import('./Map.vue')
 // )
 
-const emit = defineEmits (['setCount', 'showProfile'])
+const emit = defineEmits (['setCount', 'showProfile']);
 
-const request = `${Constants.GET_COMPANIES}?fields=*&sort=name&meta=filter_count`
+const url = Constants.BASEURL+`items/Company?fields=*&sort=name&meta=filter_count`;
+const logoSettings = 'withoutEnlargement=true&fit=inside&height=50&quality=90&format=auto';
 
-const companies = ref(null)
-const count = ref (0)
-const loading = ref (true)
-const logoSettings = 'withoutEnlargement=true&fit=inside&height=50&quality=90&format=auto'
+const companies = ref(null);
+const count = ref (0);
+const loading = ref (true);
 
-function image (l)
+function logoLink (l)
 {
-    return `${Constants.ASSETS}${l}?${logoSettings}`;
+    return l ? `${Constants.ASSETS}${l}?${logoSettings}` : null;
 }
 
 function openLink(l)
@@ -40,30 +40,30 @@ function removeHttp(l)
 
 onMounted( async ()=>
 {
-    fetch (request)
-        .then((response) =>{
-            response.json().then((data) =>{
-                companies.value = data.data
-
-                companies.value.forEach ((c)=>{
-                    c.logo = image(c.logo)
-                })
-                count.value = data.meta.filter_count
-                //queryCoordinates()
-
-                if (count.value > 0)
-                {
-                    emit ('setCount', count.value)    
-                }
-
-                }).catch( err => { throw (err) })
-            })
-        .catch ((err) => {
-            console.log (err)
+    loading.value = true
+    try{
+        const response = await fetch (url);
+        const data = await response.json();
+    
+        companies.value = data.data;
+    
+        companies.value.forEach ((c)=>{
+            c.logo = logoLink(c.logo)
         })
-        .finally(()=>{
-            loading.value = false
-        })
+        count.value = data.meta.filter_count;
+        //queryCoordinates()
+    
+        if (count.value > 0)
+        {
+            emit ('setCount', count.value)    
+        }
+    }
+    catch (error) {
+        console.log ("error")
+    }
+    finally{
+        loading.value = false
+    }
 })
 
 const queryCoordinates=()=>{

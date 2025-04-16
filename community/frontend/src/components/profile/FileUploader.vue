@@ -3,16 +3,16 @@ import { ref, watch, defineExpose } from 'vue'
 import { removeFile, uploadFile, createAssetUrl } from '../../utils.js'
 import { NButton, NUpload } from 'naive-ui'
 
-const { buttonText, folder } = defineProps(['buttonText','folder'])
+const { buttonText, folder } = defineProps(['buttonText','folder']);
 
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change']);
 
-const fileList = ref([])
-const tempFile = ref(null)
+const fileList = ref([]);
+const tempFile = ref(null);
 
 const reset = () => {
-    fileList.value = []
-    tempFile.value = null
+    fileList.value = [];
+    tempFile.value = null;
 }
 
 defineExpose({

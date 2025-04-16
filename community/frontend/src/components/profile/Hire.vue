@@ -8,26 +8,26 @@ import Editor from './Editor.vue'
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl }  from '../../utils'
 import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
-const emit = defineEmits(['reload', 'message', 'updateData'])
+const emit = defineEmits(['reload', 'message', 'updateData']);
 
-const { data, constants } = defineProps(['data', 'constants'])
-const hireOptions = ref([])
-const isChanged = ref(false)
-const form = ref(null)
-const formRef = ref(null)
-const formRef2 = ref(null)
-const updating = ref(false)
-const limit = 500
-const uploader = ref(null)
-const tempImage = ref(null)
-const image = ref (null)
+const { data, constants } = defineProps(['data', 'constants']);
+const hireOptions = ref([]);
+const isChanged = ref(false);
+const form = ref(null);
+const formRef = ref(null);
+const formRef2 = ref(null);
+const updating = ref(false);
+const limit = 500;
+const uploader = ref(null);
+const tempImage = ref(null);
+const image = ref (null);
 
 const prepareData = () =>{
-  const temp = clone(data)
-  form.value = temp.hire
-  hireOptions.value = constants.hireOptions
+  const temp = clone(data);
+  form.value = temp.hire;
+  hireOptions.value = constants.hireOptions;
 
-  if (temp.hire.hasOwnProperty('image') && temp.hire.image !== null)
+  if (temp.hire?.image)
   {
     image.value = createAssetUrl(temp.hire.image)
   }
@@ -56,8 +56,9 @@ const submit = async () => {
     delete formValue.image
   }
 
-  post(Constants.EDIT_HIRE, formValue)
-  .then((response)=>{
+  try{
+    const response = await post(Constants.EDIT_HIRE, formValue)
+
     if (response.result == 'Updated')
     {
       // Update Data
@@ -78,13 +79,13 @@ const submit = async () => {
       emit('updateData', data)
       emit('message', { type: 'success', string: 'Updated'})
     }
-  })
-  .catch((error)=>{
+  }
+  catch (error) {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
-  })
-  .finally(()=>{
+  }
+  finally{
     updating.value = false
-  })
+  }
 }
 
 onMounted(async ()=>{
@@ -93,10 +94,10 @@ onMounted(async ()=>{
 
 const removeImage = async () => {
 
-  const result = await removeFile(form.value.image)
+  const result = await removeFile(form.value.image);
 
-  image.value = null
-  tempImage.value = null 
+  image.value = null;
+  tempImage.value = null;
 
   if (result)
   {

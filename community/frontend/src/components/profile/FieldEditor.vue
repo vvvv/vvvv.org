@@ -2,8 +2,8 @@
 import { defineModel } from 'vue'
 import Editor from './Editor.vue'
 
-const { id, label, limit } = defineProps(['id', 'label', 'limit'])
-const model = defineModel()
+const { id, label, limit } = defineProps(['id', 'label', 'limit']);
+const model = defineModel();
 
 </script>
 <template>

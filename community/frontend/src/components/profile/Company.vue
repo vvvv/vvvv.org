@@ -5,57 +5,57 @@ import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { clone, post, createAssetUrl }  from '../../utils.js'
+import { clone, post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
-const emit = defineEmits(['reload', 'message', 'updateData'])
-const { data, constants } = defineProps(['data', 'constants'])
+const emit = defineEmits(['reload', 'message', 'updateData']);
+const { data, constants } = defineProps(['data', 'constants']);
 
-const isChanged = ref(false)
-const formRef = ref(null)
-const formRef2 = ref(null)
-const form = ref(null)
-const logo = ref(null)
-const tempLogo = ref(null)
-const updating = ref(false)
-const companyExists = ref(false)
-const uploader = ref(null)
-
-const prepareData = ()=>{
-  const temp = clone(data)
-
-  if (temp.companies.length > 0)
-  {
-    if (temp.companies[0].hasOwnProperty('logo'))
-    {
-      logo.value = createAssetUrl(temp.companies[0].logo)
-    }
-
-    if (temp.companies[0].social === null)
-    {
-      temp.companies[0].social = {}
-    }
-
-    companyExists.value = true
-  }
-  else
-  {
-    form.value = [clone(emptyCompany)]
-
-    companyExists.value = false
-  }
-
-  form.value = temp.companies
-}
+const isChanged = ref(false);
+const formRef = ref(null);
+const formRef2 = ref(null);
+const form = ref(null);
+const logo = ref(null);
+const tempLogo = ref(null);
+const updating = ref(false);
+const companyExists = ref(false);
+const uploader = ref(null);
 
 const emptyCompany = {
-  logo: "",
+  enabled: false,
+  logo: null,
   name: "",
   description: "",
   status: 0,
   website: "",
   social: {}
 }
+
+const prepareData = ()=>{
+  const temp = clone(data);
+
+  if (temp.companies?.length > 0)
+  {
+    logo.value = createAssetUrl(temp.companies[0].logo)
+
+    if (!temp.companies[0].social)
+    {
+      temp.companies[0].social = {}
+    }
+
+    companyExists.value = true;
+  }
+  else
+  {
+    temp.companies = [clone(emptyCompany)];
+    temp.companies[0].social.fields = makeFields([], 4);
+    companyExists.value = false;
+  }
+
+  form.value = temp.companies
+}
+
+
 
 const rules = {
   name: {
@@ -100,28 +100,34 @@ const submit = async () => {
     formValue.logo = tempLogo.value
   }
 
-  post(Constants.EDIT_COMPANY, formValue)
-  .then((response)=>{
-    if (tempLogo.value !== null)
-      {
-        logo.value = createAssetUrl(tempLogo.value)
-        tempLogo.value = null
-      }
+  try{
+    const response = await post(Constants.EDIT_COMPANY, formValue)
+  
+    if (tempLogo.value)
+    {
+      logo.value = createAssetUrl(tempLogo.value);
+      tempLogo.value = null;
+    }
+  
+    //Update fields in data
+    data.companies[0] = formValue;
 
-      //Update fields in data
-      data.companies[0] = formValue
-      if (uploader.value) uploader.value.reset()
-
-      emit('updateData', data)
-      emit('message', { type: 'success', string: 'Updated'})
-  })
-  .catch((error)=>{
-    console.log (error)
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
-  })
-  .finally(()=>{
+    if (uploader.value) 
+    {
+      uploader.value.reset()
+    }
+  
+    emit('updateData', data);
+    emit('message', { type: 'success', string: 'Updated'});
+  }
+  catch (error)
+  {
+    console.log (error);
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+  }
+  finally{
     updating.value = false
-  })
+  }
 }
 
 const logoButtonText = computed(()=>{
@@ -141,7 +147,7 @@ const logoButtonText = computed(()=>{
           require-mark-placement="right-hanging"
           >
           <n-form-item label="I own a company" path="available">
-            <n-switch v-model:value="companyExists" placeholder="I own a company"/>
+            <n-switch v-model:value="form[0].enabled" placeholder="I own a company"/>
           </n-form-item>
       </n-form>
       
@@ -193,7 +199,7 @@ const logoButtonText = computed(()=>{
           <div class="row">
             <div class="col">
               <n-input v-model:value="form[0].location_street" placeholder="Street and house number" class="mb-1" />
-              <n-input v-model:value="form[0].location_street_addon" placeholder="Additional Info" class="mb-1"/>
+              <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info" class="mb-1"/>
               <div class="row mb-1">
                 <div class="col-4">
                   <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
