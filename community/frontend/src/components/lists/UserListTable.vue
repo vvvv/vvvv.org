@@ -49,6 +49,10 @@ const columns = [
         }
     },
     {
+        title: 'Registered since',
+        key: 'date_created',
+    },
+    {
         title: 'Available for Hire',
         key: 'available',
         render(row) {
@@ -105,15 +109,16 @@ async function fetchData(url)
             const row = {
                 src: u.userpic ? userpicLink(u.userpic) : null,
                 username: u.username,
-                available: u.related[0]?.hire?.available ?? false
+                available: u.related[0]?.hire?.available ?? false,
+                date_created: new Date(u.date_created).toDateString()
             }
             tableData.value.push (row)
         })
 
-        if (data.hasOwnProperty("meta"))
-            {
-                state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount    
-            }
+        if (data?.meta)
+        {
+            state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount    
+        }
 
         state.value.totalPages = Math.ceil(state.value.totalCount / state.value.pageLimit) ?? state.value.totalPages
     }
@@ -127,48 +132,33 @@ async function fetchData(url)
 }
 
 const _sort = "sort=username"
-const _fields =`fields[]=username,userpic,related.hire.available`
-const _hireFilter=`[related][hire][available][_eq]=true` 
+const _fields =`fields[]=username,userpic,related.hire.available,date_created`
 
 watchEffect(async () => { 
 
-    var _filter = ""
-    var params = []
-    const _pages =`limit=${state.value.pageLimit}&page=${state.value.currentPage}`
-    var _count = ""
+    const buildFilter = () => {
+        if (!state.value.filter) return "";
+        const usernameFilter = `[username][_contains]=${state.value.filter}`;
+        //return `filter === 1 ? usernameFilter : filters.map((f, index) => `&filter[_and][${index}]${f}`).join("")}`;
+        return `filter${usernameFilter}`
+    };
 
-    const _usernameFilter=`[username][_contains]=${state.value.filter}`
-    
-    var filters = new Array()
+    const buildParams = () => {
+        const params = [];
+        if (_fields) params.push(_fields);
+        if (_filter) params.push(_filter);
+        if (_sort) params.push(_sort);
+        if (_pages) params.push(_pages);
+        if (_count) params.push(_count);
+        return params.join("&");
+    };
 
-    if (state.value.filter != "") filters.push(_usernameFilter)
-    
-    if (filters.length == 1)
-    {
-        _filter = `filter${filters[0]}`   
-    }
-    else
-    {
-        for (const [index, f] of filters.entries())
-        {
-            _filter += `&filter[_and][${index}]${f}`   
-        }
-    }
+    const _filter = buildFilter();
+    const _pages = `limit=${state.value.pageLimit}&page=${state.value.currentPage}`;
+    const _count = state.value.currentPage === 1 ? (_filter ? "meta=filter_count" : "meta=total_count") : "";
 
-    if (state.value.currentPage == 1)
-    {
-        _count = _filter != "" ? "meta=filter_count" :  "meta=total_count"
-    }
-
-    if (_fields !="") params.push (_fields)
-    if (_filter != "") params.push (_filter)
-    if (_sort != "") params.push (_sort)
-    if (_pages != "") params.push (_pages)
-    if (_count != "") params.push (_count)
-
-    var paramString = params.join('&')
-
-    const url = `${Constants.GET_USERS}?${paramString}`
+    const paramString = buildParams();
+    const url = `${Constants.GET_USERS}?${paramString}`;
 
     fetchData(url)
 })

@@ -97,7 +97,7 @@ const submit = async () => {
       }
 
       emit('updateData', data);
-      emit('message', { type: 'success', string: 'Updated'});
+      emit('message', { type: 'success', string: response.result});
     }
   }
   catch (error) {
