@@ -23,21 +23,19 @@ function resetFilter()
 </script>
 
 <template>
-    <div class="border-top">
-        <nav class="navbar navbar-expand-lg navbar-color">
-                <!-- <ul class="navbar-nav nav nav-pills" role="tablist">
-                    <li class="nav-item mr-1" :class="{active: !state.isMap}">
-                        <a class="nav-link px-4" :class="{active: !state.isMap}" href="#" @click="state.isMap=false">List</a>
-                    </li>
-                    <li class="nav-item" :class="{active: state.isMap}">
-                        <a class="nav-link px-4" :class="{active: state.isMap}" href="#" @click="state.isMap=true">Map</a>
-                    </li>
-                </ul>
-            <div class="mr-auto"></div> -->
-            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" />
-            <n-button strong secondary @click="applyFilter" size="large" class="ml-md-2">Search</n-button>
-        </nav>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-color">
+            <!-- <ul class="navbar-nav nav nav-pills" role="tablist">
+                <li class="nav-item mr-1" :class="{active: !state.isMap}">
+                    <a class="nav-link px-4" :class="{active: !state.isMap}" href="#" @click="state.isMap=false">List</a>
+                </li>
+                <li class="nav-item" :class="{active: state.isMap}">
+                    <a class="nav-link px-4" :class="{active: state.isMap}" href="#" @click="state.isMap=true">Map</a>
+                </li>
+            </ul>
+        <div class="mr-auto"></div> -->
+        <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" />
+        <n-button strong secondary @click="applyFilter" size="large" class="ml-md-2">Search</n-button>
+    </nav>
     <template>
 
         <n-space vertical :size="12">

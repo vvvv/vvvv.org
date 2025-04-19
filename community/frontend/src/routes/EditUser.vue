@@ -1,15 +1,26 @@
 <script setup>
-import { ref, shallowRef, onMounted } from 'vue'
-import { useMessage } from 'naive-ui'
-import { getAccessToken, getMail, getUsername } from '../keycloak'
+
+import { ref, shallowRef, onMounted, h } from 'vue'
+import { useMessage, NIcon, NMenu, NSpin } from 'naive-ui'
+import {
+  PersonCircleOutline as PersonIcon,
+  HomeOutline as HomeIcon,
+  WalletOutline as WalletIcon,
+  StorefrontOutline as CompanyIcon
+} from '@vicons/ionicons5'
+import { getAccessToken, getMail, getUsername } from '../keycloak-helper'
 import { clone, makeFields } from '../utils'
 import Constants from '../constants'
+import { useRouter, useRoute } from 'vue-router'
 
 import Basics from '../components/profile/Basics.vue'
 import Company from '../components/profile/Company.vue'
 import Hire from '../components/profile/Hire.vue'
 
+const router = useRouter();
+const route = useRoute();
 const message = useMessage();
+
 const messageDuration = 2000;
 const data = ref(null);
 const loading = ref(true);
@@ -17,11 +28,6 @@ const constants = ref(null);
 const failure = ref ("");
 const newProfile = ref (false);
 const selected = shallowRef(Basics);
-const menu = {
-  "Basics": Basics,
-  "Hire": Hire,
-  "Company": Company
-}
 
 const itemClass = ref ('item');
 const selectedClass = ref ('selected');
@@ -68,9 +74,18 @@ const loadConstants = async () => {
 
 const loadData = async () =>{
   
+  let token;
+
+  try{
+    token = await getAccessToken()
+  }
+  catch {
+    failure.value = "Session expired. Please try to login again."
+  }
+
   try
   {
-      const token = await getAccessToken()
+      token = await getAccessToken()
 
       if (token === null) throw new Error (`Can't get a Token`)
 
@@ -146,30 +161,58 @@ const updateData = (d)=>{
   data.value = d
 }
 
+// Sync the active tab with the current route
+const activeTab = ref(route.path);
+
+const renderIcon = (icon) => h(NIcon, null, { default: () => h(icon) });
+
+const menuOptions = [
+  {
+    label: "Basics",
+    component: Basics,
+    key: "basics",
+    icon: renderIcon(PersonIcon)
+  },
+  {
+    label: 'Hire',
+    component: Hire,
+    key: "hire",
+    icon: renderIcon(WalletIcon)
+  },
+  {
+    label: 'Company',
+    component: Company,
+    key: "company",
+    icon: renderIcon(CompanyIcon)
+  }
+];
+
+const handleUpdateValue = (key, item) => {
+  console.log (item)
+  selected.value = item.component
+}
+
 </script>
 
 <template>
   <div id="profile">
-    <div v-if="loading" class="spinner-border text-light" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-    <div v-if="!loading && failure !== ''" class="mt-4">{{ failure }}</div>
-    <template v-if="!loading && failure == ''">
-      <div class="row mb-2">
-        <div class="col">
-          <div class="h1">{{ data.username }}</div>
+      <n-spin :show="loading">
+      <div v-if="!loading && failure !== ''" class="mt-4">{{ failure }}</div>
+      <template v-if="!loading && failure == ''">
+        <div class="row mb-2">
+          <div class="col">
+            <div class="h1">{{ data.username }}</div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">
-          <template v-for="item in Object.keys(menu)">
-            <div :class="[itemClass, selected==menu[item] ? selectedClass : '']" @click="selected=menu[item]">{{item}}</div>
-          </template>
-        </div>
-        <div class="col-12 col-md-8 ml-md-1">
-            <component :is="selected" :data="data" :constants="constants" @reload="reload" @message="showMessage" @updateData="updateData"/>
-        </div>
-      </div>
-    </template>
+        <div class="row">
+          <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">  
+            <n-menu :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
+          </div>
+          <div class="col-12 col-md-8 ml-md-1">
+              <component :is="selected" :data="data" :constants="constants" @reload="reload" @message="showMessage" @updateData="updateData"/>
+            </div>
+          </div>
+        </template>
+      </n-spin>
   </div>
 </template>

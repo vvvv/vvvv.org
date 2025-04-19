@@ -15,9 +15,9 @@ const companies = ref(null);
 const count = ref (0);
 const loading = ref (true);
 
-function logoLink (l)
+function logoSrc (src)
 {
-    return l ? `${Constants.ASSETS}${l}?${logoSettings}` : null;
+    return src ? `${Constants.ASSETS}${src}?${logoSettings}` : null;
 }
 
 function openLink(l)
@@ -48,7 +48,7 @@ onMounted( async ()=>
         companies.value = data.data;
     
         companies.value.forEach ((c)=>{
-            c.logo = logoLink(c.logo)
+            c.logo = logoSrc(c.logo)
         })
         count.value = data.meta.filter_count;
         //queryCoordinates()

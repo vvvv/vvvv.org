@@ -5,11 +5,12 @@
   "type": "module",
   "scripts": {
     "serve": "vite",
-    "build": "vue-tsc -b && vite build --emptyOutDir",
+    "build": "vue-tsc -b && vite build --base=/js/vue",
     "watch": "vite build --watch --base=/js/vue",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vicons/ionicons5": "^0.13.0",
     "keycloak-js": "^26.1.2",
     "leaflet": "^1.9.4",
     "showdown": "^2.1.0",

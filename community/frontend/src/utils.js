@@ -1,6 +1,6 @@
 import Constants from './constants'
 import axios from 'axios';
-import { getAccessToken } from './keycloak'
+import { getAccessToken } from './keycloak-helper'
 import Showdown from 'showdown'
 import { countries } from './countries'
 

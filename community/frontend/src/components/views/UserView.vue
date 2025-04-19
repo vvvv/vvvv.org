@@ -78,16 +78,6 @@ const fullName = computed(() => {
 
   <div v-if="user">
     <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="#" @click="$emit('showList')">User List</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ user.username }}</li>
-          </ol>
-        </nav>
-      </div>
-    </div>
-    <div class="row">
       <div class="col-lg-4 text-center mb-3">
             <img :src="userpic" alt="userpic" v-if="userpic" class="rounded-circle img-fluid"/>
             <div class="emptypic rounded-circle" v-else></div>

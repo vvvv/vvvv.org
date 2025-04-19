@@ -1,17 +1,22 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import Constants from './constants'
-import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak'
-import { NMessageProvider } from 'naive-ui'
+import { useRouter, useRoute } from 'vue-router'
+import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
+import { NMessageProvider, NTab, NTabs, NConfigProvider } from 'naive-ui'
 
-const loading = ref(false)
-const data = ref(null)
-const failure = ref ("")
-const authenticated = ref (false)
-const businessesCount = ref (0)
+const router = useRouter();
+const route = useRoute();
+
+const loading = ref(false);
+const data = ref(null);
+const failure = ref ("");
+const authenticated = ref (false);
+const businessesCount = ref (0);
+const activeTab = ref(null);
 
 const login = ()=> {
-  kclogin(window.location.origin + window.location.pathname)
+  kclogin(window.location.origin + window.location.pathname.split('#')[0])
 }
 
 const logout = ()=> {
@@ -19,53 +24,81 @@ const logout = ()=> {
 }
 
 onMounted(()=>{
+  console.log (window.location.pathname)
+  activeTab.value = tabs.find(t => t.path === window.location.pathname).name
   authenticated.value = isAuthenticated()
 })
+
+// Sync the active tab with the current route
+
+const handleTabChange = (tab) => {
+  const route = tabs.find(t => t.name === tab)
+  activeTab.value = tab;
+  router.push( route.path ); // Navigate to the selected tab's route
+};
+
+
+const openProfile = ()=>{
+  activeTab.value = null;
+  router.push('/user/edit');
+}
+
+const tabs = [
+  { name: 'Users', path: '/user/' },
+  { name: 'For Hire', path: '/user/forhire/' },
+  { name: 'Businesses', path: '/user/businesses/' },
+];
+
+const themeOverrides = {
+  "common": {
+    "primaryColor": "#DE950BFF"
+  }
+}
 
 </script>
 
 <template>
-  <div class="container px-4 py-2">
-    <div v-if="loading" class="spinner-border text-light" role="status">
-        <span class="sr-only">Loading...</span>
-    </div>
-    <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
-    <template v-if="!loading">
-      <nav class="navbar">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-              <RouterLink to="/user">Users</RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink to="/user/forhire">For Hire</RouterLink>
-          </li>
-          <li class="nav-item">
-            <RouterLink :to="{ path: '/user/businesses' }">Businesses<span v-if="businessesCount>0" class="pl-1">{{(businessesCount)}}</span></RouterLink>
-          </li>
-        </ul>  
-        <template v-if="!authenticated">
-          <ul class="nav nav-pills navbar-right">
-            <li class="nav-item">
-              <div class="btn btn-primary" @click="login">Login</div>
-            </li>
-          </ul>
-        </template>  
-        <template v-else>
-          <ul class="nav nav-pills navbar-right">
-            <li class="nav-item mr-4 mt-2">
-                <RouterLink :to="{ path: '/user/edit' }">Profile</RouterLink>
-            </li>
-            <li class="nav-item">
-              <div class="btn btn-outline-secondary" @click="logout">Logout</div>
-            </li>
-          </ul>
-        </template>
-      </nav>
-      <div class="container">
-        <n-message-provider placement="bottom-right">
-          <RouterView/>
-        </n-message-provider>
+  <n-config-provider :theme-overrides="themeOverrides">
+    <div class="container py-2">
+      <div v-if="loading" class="spinner-border text-light" role="status">
+          <span class="sr-only">Loading...</span>
       </div>
-    </template>
-  </div>
+      <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
+      <template v-if="!loading">
+  
+        <div class="row">
+          <div class="col">
+            <n-tabs v-model:value="activeTab" type="line" size="large" animated @update:value="handleTabChange" :default-value="activeTab">
+              <n-tab v-for="tab in tabs" :key="tab.path" :name="tab.name">
+                {{  tab.name }}
+              </n-tab>
+            </n-tabs>
+          </div>
+          <div class="col">
+            <template v-if="!authenticated">
+              <ul class="nav nav-pills navbar-right">
+                <li class="nav-item">
+                  <div class="btn btn-primary" @click="login">Login</div>
+                </li>
+              </ul>
+            </template>  
+            <template v-else>
+              <ul class="nav nav-pills navbar-right mt-2">
+                <li class="nav-item mr-4">
+                  <div class="btn btn-outline-secondary" @click="openProfile">Profile</div>
+                </li>
+                <li class="nav-item">
+                  <div class="btn btn-outline-secondary" @click="logout">Logout</div>
+                </li>
+              </ul>
+            </template>
+          </div>
+        </div>
+          
+        <n-message-provider placement="bottom-right">
+            <RouterView/>
+        </n-message-provider>
+      </template>
+    </div>
+  </n-config-provider>
 </template>
