@@ -18,37 +18,36 @@ const requireAuth = (to, from, next) => {
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: { template: '<h1>Home</h1>' }
+        path: '/user/',
+        name: 'Users',
+        component: Users,
+        meta: { tabName: 'Users', isLeft: true }
     },
     {
-        path: '/user',
-        name: 'User',
-        component: Users
+        path: '/user/businesses/',
+        name: 'Businesses',
+        component: Businesses,
+        meta: { tabName: 'Businesses', isLeft: true }
     },
     {
-        path: '/user/edit',
+        path: '/user/forhire/',
+        name: 'For Hire',
+        component: ForHireList,
+        meta: { tabName: 'For Hire', isLeft: true }
+    },
+    {
+        path: '/user/edit/',
         name: 'Edit',
         component: EditUser,
-        beforeEnter: requireAuth
+        beforeEnter: requireAuth,
+        meta: { tabName: 'Profile', isLeft: false }
     },
-    {
-        path: '/user/businesses',
-        name: 'Businesses',
-        component: Businesses
-    },
-    {
-        path: '/user/forhire',
-        name: 'For Hire',
-        component: ForHireList
-    }
-
 ]
 
 const router = createRouter({
     history: createWebHistory(),
-    routes 
+    routes,
+    strict: false
 });
 
 export default router;

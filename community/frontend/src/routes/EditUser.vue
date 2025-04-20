@@ -2,12 +2,14 @@
 
 import { ref, shallowRef, onMounted, h } from 'vue'
 import { useMessage, NIcon, NMenu, NSpin } from 'naive-ui'
+
 import {
   PersonCircleOutline as PersonIcon,
   HomeOutline as HomeIcon,
   WalletOutline as WalletIcon,
   StorefrontOutline as CompanyIcon
 } from '@vicons/ionicons5'
+
 import { useRouter, useRoute } from 'vue-router'
 import { fetchProfileData } from './fetchProfileData.js'
 
@@ -54,7 +56,9 @@ const updateData = (d)=>{
 // Sync the active tab with the current route
 const activeTab = ref(route.path);
 
-const renderIcon = (icon) => h(NIcon, null, { default: () => h(icon) });
+function renderIcon(icon) {
+  return () => h(NIcon, null, { default: () => h(icon) });
+}
 
 const menuOptions = [
   {
@@ -85,10 +89,11 @@ const handleUpdateValue = (key, item) => {
 </script>
 
 <template>
+
   <div id="profile">
       <n-spin :show="loading">
-      <div v-if="!loading && failure !== ''" class="mt-4">{{ failure }}</div>
-      <template v-if="!loading && failure == ''">
+      <div v-if="!loading && failure" class="mt-4">{{ failure }}</div>
+      <template v-if="data">
         <div class="row mb-2">
           <div class="col">
             <div class="h1">{{ data.username }}</div>
@@ -96,7 +101,7 @@ const handleUpdateValue = (key, item) => {
         </div>
         <div class="row">
           <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">  
-            <n-menu :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
+            <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
           </div>
           <div class="col-12 col-md-8 ml-md-1">
               <component :is="selected" :data="data" :constants="constants" @reload="reload" @message="showMessage" @updateData="updateData"/>

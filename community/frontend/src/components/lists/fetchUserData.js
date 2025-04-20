@@ -17,7 +17,7 @@ export async function fetchUserData ( loading, tableData, state)
                 {
                     src: u.userpic ? userpicLink(u.userpic) : null,
                     username: u.username,
-                    available: Array.isArray(u.related[0]) ? u.realted[0]?.hire?.available ?? false : false,
+                    available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
                     date_created: new Date(u.date_created).toDateString()
                 }
             ))

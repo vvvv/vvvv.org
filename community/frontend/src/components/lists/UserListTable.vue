@@ -2,7 +2,9 @@
 import { ref, watchEffect, h } from 'vue'
 import { useRouter } from 'vue-router'
 import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
+import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
+
 
 const router = useRouter()
 
@@ -60,20 +62,7 @@ const columns = [
         title: 'Available for Hire',
         key: 'available',
         render(row) {
-            if (row.available)
-            {
-                return h(
-                    NIcon,
-                    {
-                        component: "CheckmarkCircle"
-                    }
-                )
-            }
-            else
-            {
-                return null
-            }
-            
+            return row.available ? h(NIcon, {color: "#0e7a0d", size: "20"}, [h(Check)]) : null
         }
     }
 ]
