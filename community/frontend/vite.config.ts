@@ -17,15 +17,15 @@ export default defineConfig({
   },
   base: "http://localhost:1313/",
     build: {
-      outDir: "../../static/js/vue/",
+      outDir: "../../public/js/vue/",
     rollupOptions: {
       output: {
-        manualChunks: {
-          vue: ['vue', 'vue-router'],
-          showdown: ['showdown'],
-          keycloak: ['keycloak-js'],
-          leaflet: ['leaflet']
-        },
+        // manualChunks: {
+        //   vue: ['vue', 'vue-router'],
+        //   showdown: ['showdown'],
+        //   keycloak: ['keycloak-js'],
+        //   leaflet: ['leaflet']
+        // },
         entryFileNames: `app.js`,
         chunkFileNames: '[name].js',
         assetFileNames: '[name].[ext]'

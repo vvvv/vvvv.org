@@ -8,7 +8,6 @@ import { NMessageProvider, NTab, NTabs, NConfigProvider } from 'naive-ui'
 const router = useRouter();
 const route = useRoute();
 
-const loading = ref(false);
 const data = ref(null);
 const failure = ref ("");
 const authenticated = ref (false);
@@ -31,9 +30,9 @@ onMounted(()=>{
 
 // Sync the active tab with the current route
 
-const handleTabChange = (tab) => {
-  const route = tabs.find(t => t.name === tab)
-  activeTab.value = tab;
+const handleTabChange = ( tabName ) => {
+  const route = tabs.find(t => t.name === tabName)
+  activeTab.value = tabName;
   router.push( route.path ); // Navigate to the selected tab's route
 };
 
@@ -60,16 +59,11 @@ const themeOverrides = {
 <template>
   <n-config-provider :theme-overrides="themeOverrides">
     <div class="container py-2">
-      <div v-if="loading" class="spinner-border text-light" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
       <div v-if="failure !== ''" class="mt-4">{{ failure }}</div>
-      <template v-if="!loading">
-  
-        <div class="row">
+      <div v-else class="row mb-4">
           <div class="col">
             <n-tabs v-model:value="activeTab" type="line" size="large" animated @update:value="handleTabChange" :default-value="activeTab">
-              <n-tab v-for="tab in tabs" :key="tab.path" :name="tab.name">
+              <n-tab v-for="tab in tabs" :key="tab.path" :name="tab.name" @click="handleTabChange(tab.name)">
                 {{  tab.name }}
               </n-tab>
             </n-tabs>
@@ -93,12 +87,10 @@ const themeOverrides = {
               </ul>
             </template>
           </div>
-        </div>
-          
+        </div>     
         <n-message-provider placement="bottom-right">
             <RouterView/>
         </n-message-provider>
-      </template>
     </div>
   </n-config-provider>
 </template>

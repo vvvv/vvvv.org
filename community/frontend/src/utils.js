@@ -148,3 +148,16 @@ export const getProperties = (obj, keys) => {
       });
     return result
 }
+
+export function addHttp(l)
+{
+    return (l.startsWith ("http://") || l.startsWith("https://")) ? l : "https://"+l
+}
+
+export function removeHttp(l)
+{
+    if (l.startsWith ("http://"))
+        return l.substr(7)
+    if (l.startsWith("https://"))
+        return l.substr(8)
+}

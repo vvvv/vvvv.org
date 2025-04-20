@@ -1,15 +1,11 @@
 <script setup>
 
 import { ref, watchEffect, onMounted, computed, watch} from 'vue'
-import { useRouter } from 'vue-router'
 import Constants from '../../constants'
+import { NSpin } from 'naive-ui'
 import HireView from '../partials/HireView.vue'
 import SocialView from '../partials/SocialView.vue'
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry } from '../../utils'
-
-const router = useRouter()
-
-defineEmits(['showList'])
 
 const { username = 'someuser'} = defineProps({username: String})
 
@@ -74,33 +70,33 @@ const fullName = computed(() => {
 </script>
 
 <template>
-  <div v-if="loading">Loading</div>
-
-  <div v-if="user">
-    <div class="row">
-      <div class="col-lg-4 text-center mb-3">
-            <img :src="userpic" alt="userpic" v-if="userpic" class="rounded-circle img-fluid"/>
-            <div class="emptypic rounded-circle" v-else></div>
-            <div class="my-3">
-              <h5>{{ user.username }}</h5>
-              <p class="text-muted mb-1" v-if="fullName">{{ fullName }}</p>
-            </div>
-            <p class="text-muted mb-4" v-if="location">{{ location }}</p>
-            <p class="text-muted mb-1">{{ user.statement ?? ''}}</p>
-      </div>
-      <div class="col-lg-8">
-        <SocialView :social="social" :order="socialKeys" v-if="social" />
-        <div class="row mt-4" v-if="hire">
-          <h4 class="h4">Available for hire</h4>
-          <div class="row">
-            <div class="col">
-              <div class="card">
-                <HireView :data="hire"/>
+  <n-spin :show="loading">
+    <div v-if="user">
+      <div class="row">
+        <div class="col-lg-4 text-center mb-3">
+              <img :src="userpic" alt="userpic" v-if="userpic" class="rounded-circle img-fluid"/>
+              <div class="emptypic rounded-circle" v-else></div>
+              <div class="my-3">
+                <h5>{{ user.username }}</h5>
+                <p class="text-muted mb-1" v-if="fullName">{{ fullName }}</p>
+              </div>
+              <p class="text-muted mb-4" v-if="location">{{ location }}</p>
+              <p class="text-muted mb-1">{{ user.statement ?? ''}}</p>
+        </div>
+        <div class="col-lg-8">
+          <SocialView :social="social" :order="socialKeys" v-if="social" />
+          <div class="row mt-4" v-if="hire">
+            <h4 class="h4">Available for hire</h4>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <HireView :data="hire"/>
+                </div>
               </div>
             </div>
-          </div>
-        </div>  
+          </div>  
+        </div>
       </div>
     </div>
-  </div>
+  </n-spin>
 </template>

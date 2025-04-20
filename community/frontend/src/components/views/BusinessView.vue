@@ -1,56 +1,21 @@
 <script setup>
 
 import { ref, onMounted, computed } from 'vue'
-import Constants from '../../constants'
+import { NSpin } from 'naive-ui'
 import SocialView from '../partials/SocialView.vue'
-import { clone, createAssetUrl, getCountry } from '../../utils'
-
-defineEmits(['showList']);
+import { getCountry } from '../../utils'
+import { fetchBusinessData } from './fetchBusinessData.js'
 
 const { name = 'MyCompany' } = defineProps({ name: String });
 
 const company = ref(null);
-const social = ref(null);
-const loading = ref(null);
-const logo = ref(null);
+const loading = ref(false);
 
 const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
-const imageParams = '?withoutEnlargement=true&quality=90&fit=cover&width=120';
-const url = Constants.BASEURL+`items/Company?fields=*,social.*&filter[name][_eq]=${name}`;
 
 onMounted(async ()=>
 {
-    loading.value = true;
-
-    try{
-        const response = await fetch(url);
-        const json = await response.json();
-    
-        if (json.data.length == 0)
-        {
-            throw ("Can't find a profile for this company") 
-        }
-
-        const data = clone(json.data[0]);
-            
-        if (data?.social)
-        {
-            social.value = data.social;
-        }
-    
-        if (data?.logo)
-        {
-            logo.value = createAssetUrl(data.logo)+imageParams;
-        }
-    
-        company.value = data;
-    }
-    catch (error) {
-        console.error(error);
-    }
-    finally{
-        loading.value = false;
-    }
+    company.value = await fetchBusinessData (loading, name);
 })
 
 const location = computed(() => {
@@ -61,21 +26,21 @@ const location = computed(() => {
 </script>
 
 <template>
-    <div v-if="loading">Loading</div>
-
-    <div v-if="company">
-        <div class="row">
-            <div class="col-lg-4 text-center mb-3">
-                    <img :src="logo" alt="logo" v-if="logo" class="img-fluid"/>
+    <n-spin :show="loading">
+        <div v-if="company">
+            <div class="row">
+                <div class="col-lg-4 text-center mb-3">
+                    <img v-if="company.logo" :src="company.logo" alt="logo" class="img-fluid"/>
                     <div class="my-3">
                     <h5>{{ company.name }}</h5>
                     </div>
                     <p class="text-muted mb-4" v-if="location">{{ location }}</p>
                     <p class="text-muted mb-1">{{ company.description ?? ''}}</p>
-            </div>
-            <div class="col-lg-8">
-                <SocialView :social="company.social" :order="socialKeys" v-if="social" />
+                </div>
+                <div class="col-lg-8">
+                    <SocialView v-if="company.social" :social="company.social" :order="socialKeys"/>
+                </div>
             </div>
         </div>
-    </div>
+    </n-spin>
 </template>
