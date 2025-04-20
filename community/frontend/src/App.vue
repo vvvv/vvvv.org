@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Constants from './constants'
 import { useRouter, useRoute } from 'vue-router'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
@@ -10,7 +10,6 @@ const route = useRoute();
 
 const data = ref(null);
 const failure = ref ("");
-const authenticated = ref (false);
 const businessesCount = ref (0);
 const activeTab = ref(null);
 
@@ -25,8 +24,9 @@ const logout = ()=> {
 onMounted(()=>{
   console.log (window.location.pathname)
   activeTab.value = tabs.find(t => t.path === window.location.pathname).name
-  authenticated.value = isAuthenticated()
 })
+
+const authenticated = computed(isAuthenticated)
 
 // Sync the active tab with the current route
 
