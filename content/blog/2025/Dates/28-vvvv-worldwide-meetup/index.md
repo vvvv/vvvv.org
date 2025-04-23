@@ -9,12 +9,12 @@ where:
     city: "Wipperstrasse 13, 12055 Berlin"
     country: "de"
     country_name: "Germany"
-    from_date: "1747335600"
-    to_date: "1747346400"
+    from_date: "1747328400"
+    to_date: "1747342800"
 thumb: "vvvvmeetup-thumbnail.png"
 ---
 
-![](vvvvmeetup-28.png)
+![](vvvvmeetup-28.jpg)
 *Artwork by F3*
 
 Here's to announce the 28th vvvv worldwide meetup on **May 15th, 7pm CET**, hosted by **The NODE Institute**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
