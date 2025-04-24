@@ -3,7 +3,7 @@ title: Learn
 firstColumn:
   - item: 
       text: > 
-            <a https://thenodeinstitute.org/courses/#uagb-tabs__tab1" target="_blank">Courses at The NODE Institute</a>
+            <a href="https://thenodeinstitute.org/courses/#uagb-tabs__tab1" target="_blank">Courses at The NODE Institute</a>
       image: /img/icons/mortarboard-fill.svg
 secondColumn:
   - item: 
