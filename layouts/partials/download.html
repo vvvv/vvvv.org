@@ -22,40 +22,73 @@
                 <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4>
                 <p>{{ .Copy }}</p>
                 <div class="row">
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-6">
                         <!-- DropdownItem Template -->
                         <a class="dropdown-item windowsLink" href="#" data-platformType hidden></a>
                         <!-- DropdownItem Template -->
 
-                        <!-- Stable Download -->
-                        <div class="row ml-1">
-                            <a href="#" class="btn btn-primary btn-xl mb-2 pill-left" id="stableDownload" target="{{ .Target }}" data-link64="{{.StableLink64}}" data-linkArm="{{.StableLinkArm}}">{{ .StableText }}</a>
-                            <div class="dropdown platforms">
-                                <a class="btn btn-primary dropdown-toggle btn-xl pill-right windowsLink platformButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu" aria-labelledby="platformButton"></div>
+                        <ul class="nav mb-3" id="download-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <button class="btn btn-link tab x64 active" href="#" id="tabs-download-x64" data-toggle="pill" data-target="#download-x64" role="tab" aria-controls="download-x64" aria-selected="true">{{ .Tab64bit }}</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                              <button class="btn btn-link tab arm" href="#" id="tabs-download-arm" data-toggle="pill" data-target="#download-arm" role="tab" aria-controls="download-arm" aria-selected="false">{{ .TabARM }}</button>
+                            </li>
+                        </ul>                          
+                        <div class="tab-content" id="download-tabContent">
+                            <!-- 64bit Tab -->
+                            <div class="tab-pane fade show active" id="download-x64" role="tabpanel" aria-labelledby="tabs-download-x64">
+                                <!-- Stable Download -->
+                                <div class="mb-4">
+                                    <a 
+                                        href="{{ .StableLink64 }}" 
+                                        class="btn btn-primary btn-xl mb-2" 
+                                        id="stableDownload"
+                                        onclick="plausible('download')" 
+                                        target="{{ .Target }}">
+                                        {{ .StableText }}
+                                    </a>
+                                    <div class="version text">&nbsp;&nbsp;{{ .StableVersion | markdownify }}</div>
+                                </div>
+                                <!-- Preview Download -->
+                                <a  
+                                    data-link="{{ .CurrentPreview64BuildType }}"
+                                    data-currentPreviewTitle="{{ .CurrentPreviewTitle }}"
+                                    class="btn btn-secondary btn-xl previewButton mb-2">
+                                    {{ .PreviewText }}
+                                </a>
+                                <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
+                            </div>
+                            <!-- ARM Tab -->
+                            <div class="tab-pane fade" id="download-arm" role="tabpanel" aria-labelledby="tabs-download-arm">
+                                <!-- Stable Download -->
+                                {{ if not (eq .StableLinkARM "") }}
+                                    <div class="mb-4">
+                                        <a 
+                                            href="{{ .StableLinkARM }}" 
+                                            class="btn btn-primary btn-xl mb-2" 
+                                            id="stableDownload" 
+                                            target="{{ .Target }}">
+                                            {{ .StableText }}
+                                        </a>
+                                        <div class="version text">&nbsp;&nbsp;{{ .StableVersion | markdownify }}</div>
+                                    </div>
+                                {{ end }}
+                                
+                                <!-- Preview Download -->
+                                <a 
+                                    data-link="{{ .CurrentPreviewArmBuildType }}"
+                                    data-currentPreviewTitle="{{ .CurrentPreviewTitle }}"
+                                    class="btn btn-secondary btn-xl previewButton mb-2"
+                                    onclick="plausible('download')">
+                                    {{ .PreviewText }}
+                                </a>
+                                <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
                             </div>
                         </div>
-                        <div class="version text">&nbsp;&nbsp;{{ .StableVersion | markdownify }}</div>
-                        
-                        <!-- Preview Download -->
-                        <div class="row ml-1 mt-4">
-                            <a 
-                            data-link64="{{ .CurrentPreview64BuildType }}"
-                            data-linkArm="{{ .CurrentPreviewArmBuildType }}"  
-                            data-currentPreviewTitle="{{ .CurrentPreviewTitle }}"  
-                            id="previewButton" 
-                            class="btn btn-secondary btn-xl mb-2 pill-left">
-                            {{ .PreviewText }}
-                            </a>
-                            <div class="dropdown platforms">
-                                <a class="btn btn-primary dropdown-toggle btn-xl pill-right windowsLink platformButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu" aria-labelledby="platformButton" data-stable></div>
-                            </div>
-                        </div>
-                        <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
-
+                          
                     </div>
-                    <div class="col-12 col-lg-5 mt-4 mt-lg-0">
+                    <div class="col-12 col-lg-5 mt-6 mt-lg-0">
                         <a href="{{ .LibrariesLink }}" class="btn btn-secondary btn-xl font-weight-normal mt-4 mt-md-0"  target="{{ .LibrariesTarget }}" onclick="plausible('additionalpacks')">{{ .LibrariesText }}</a>
                         
                         <div class="col-12 mt-2 mt-lg-5 btn btn-xl font-weight-normal text-left pl-0 mr-5 mr-lg-0" id="PreviousReleases">

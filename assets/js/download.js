@@ -1,4 +1,9 @@
-const tip = tippy('#previewButton', {
+const tabs = ['#tabs-download-x64', '#tabs-download-arm']
+const selectedTab = navigator.userAgent.toLowerCase().includes('arm') ? tabs[1] : tabs[0];
+
+$(selectedTab).tab('show')
+
+const tip = tippy('.previewButton', {
     content: 'Loading...',
     placement:'right',
     arrow:true,
@@ -15,7 +20,7 @@ const tip = tippy('#previewButton', {
 
     onShow(instance) {
 
-        const buildType = platform == platformTexts[1] ? instance.reference.dataset.linkarm : instance.reference.dataset.link64
+        const buildType = instance.reference.dataset.link;
             
         Promise.allSettled([getLatestBuild(buildType, "")])
         .then((result) => {
@@ -41,81 +46,6 @@ const tip = tippy('#previewButton', {
         });
       },
   });
-
-// Platform Dropdown
-
-const platformTexts=['64-bit', 'ARM64']
-
-var platform = navigator.userAgent.toLowerCase().includes('arm') ? platformTexts[1] : platformTexts[0]
-
-const platformButtons = Array.from(document.getElementsByClassName('platformButton'))
-platformButtons.forEach((b)=>{
-    b.textContent = platform
-})
-
-const platformLink = document.querySelectorAll("[data-platformType]")[0];
-const platformLinks = []
-
-const stableButton = document.getElementById('stableDownload')
-const linkArm = stableButton.dataset.linkarm
-const link64 = stableButton.dataset.link64
-
-stableButton.addEventListener('click', (event) => {
-    event.preventDefault()
-    plausible ('download')
-    downloadStable()
-})
-
-function downloadStable()
-{
-    const link = platform == platformTexts[1] ? linkArm : link64 
-    window.location.href = link
-}
-
-const platformDropdowns = Array.from(document.getElementsByClassName('dropdown-menu'))
-platformDropdowns.forEach((d)=>{
-    const isStable = d.dataset.stable !== ""
-    platformTexts.forEach(name => {
-        const link = d.appendChild (platformLink.cloneNode())
-        platformLinks.push(link)
-        link.removeAttribute('hidden')
-        link.textContent = name
-        if (name.toLowerCase() == platform.toLowerCase())
-        {
-            link.classList.add('active')
-        }
-        link.addEventListener('click', function(event) {
-            platform = name      
-            platformButtons.forEach(b=>{
-                b.textContent = name
-            })
-            
-            // if (isStable)
-            // {
-            //     downloadStable()
-            // }
-            // else
-            // {
-            //     tip[0].show()
-            // }
-
-            setActiveClass()
-            event.preventDefault()
-        }, false)
-    })
-})
-
-function setActiveClass()
-{
-    platformLinks.forEach(p=>{
-        p.classList.remove('active')
-        if (p.innerText.toLowerCase() == platform.toLowerCase())
-        {
-            p.classList.add('active')
-        }
-    })
-}
-
 
 function getTeamcity()
 {
