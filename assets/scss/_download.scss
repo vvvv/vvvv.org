@@ -5,52 +5,51 @@
         border-color: $orange;
     }
 
-    .windowsLink{
-        padding-left: 1em;
-        text-transform: none;
-        background-color: #ddd;
-        border-color: #ddd;
-        color: #000;
-    }
+    #download-tabs{
+        .tab{
+            margin-right: 1rem;
+            text-transform: none;
+            color: #ccc;
+            font-weight: 600;
+            border-bottom: #444 2px solid;
+            border-radius: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
 
-    .dropdown-menu{
-        background-color: #ddd;
-    }
+            &:hover{
+                border-bottom: #888 2px solid;
+            }
 
-    .dropdown-item{
-        &.active
-        {
-            background-color: $orange;
+            &.active{
+                border-bottom: $orange 2px solid;
+                color: #fff;
+            }
+
+            text-decoration: none;
         }
-    }
-
-    .windowsLink::before {
-        content: url("../img/icons/windows_17px_black.png");
-        display: inline-block;
-        height: 17px;
-        margin-right: 0.6rem;
-        vertical-align: -3px;
-    }
-
-    .pill-left{
-        margin-right: 1px;
-    }
     
-    .pill-right{
-        margin-left: 1px;
+        // .x64::before {
+        //     content: url("../img/icons/windows_17px_white.png");
+        //     display: inline-block;
+        //     height: 17px;
+        //     margin-right: 0.6rem;
+        //     vertical-align: -3px;
+        // }
+    
+        // .arm::before {
+        //     content: url("../img/icons/windows_17px_black.png");
+        //     display: inline-block;
+        //     height: 17px;
+        //     margin-right: 0.6rem;
+        //     vertical-align: -3px;
+        // }
+
     }
 
-    @media (min-width: 350px) {
-        .pill-left{
-            border-top-right-radius: 0px;
-            border-bottom-right-radius: 0px;
-        }
-        
-        .pill-right{
-            border-top-left-radius: 0px;
-            border-bottom-left-radius: 0px;    
-        }
-      }
+    .tab-content
+    {
+        min-height: 11rem;
+    }
 
     #PreviewDownloads 
     {
@@ -114,15 +113,15 @@
             }
         }
 
-        .previewButton
-        {
-            border-radius: 0.4em;
-            border-bottom: 0;
-            text-decoration: none;
-            font-weight: normal;
-            font-size: 1em;
-            padding: 0.6em 0.6em;
-        }
+        // .previewButton
+        // {
+        //     border-radius: 0.4em;
+        //     border-bottom: 0;
+        //     text-decoration: none;
+        //     font-weight: normal;
+        //     font-size: 1em;
+        //     padding: 0.6em 0.6em;
+        // }
 
         .modal-dialog a
         {

@@ -4,7 +4,6 @@ pagination.pagerSize = 20
 pagination.path = "page"
 summaryLength = 20
 title = "vvvv - visual live-programming for .NET"
-relativeURLs = "true"
 
 [sitemap]
   changefreq = 'daily'
@@ -110,20 +109,23 @@ blog = '/blog/:sections[1]/:slug'
 		Copy = 'vvvv is free without any restrictions for non-commercial use.<br/>Commercial use requires a <a href="https://store.vvvv.org/" target="_blank">License</a>.'
 
 		[params.Download.gamma]
+
+		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
+		StableLinkARM = ""
+		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
+		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
+
 		Headline = "vvvv gamma"
 		Copy = "First released in April 2020, vvvv gamma is the next generation of vvvv, entirely rewritten from scratch."
+		Tab64bit = "Windows"
+		TabARM = "Windows ARM64"
 
 		StableText  = "Download: Stable"
-    		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
-			StableLinkARM = "https://teamcity.vvvv.org/repository/download/vvvv_gamma_BuildWinArm64/38949:id/vvvv_gamma_7.0-0262-g359ae76748-win-arm64_setup.exe"
 		StableVersion = "Version: 6.7"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
-		
-		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
-		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"
