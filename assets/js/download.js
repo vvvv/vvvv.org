@@ -1,5 +1,18 @@
-const tabs = ['#tabs-download-x64', '#tabs-download-arm']
-const selectedTab = navigator.userAgent.toLowerCase().includes('arm') ? tabs[1] : tabs[0];
+let selectedTab;
+const userAgent = navigator.userAgent.toLowerCase();
+
+if (userAgent.includes('macintosh'))
+{
+    selectedTab = '#tabs-download-mac'
+}
+else if (userAgent.includes('arm'))
+{
+    selectedTab = '#tabs-download-arm'
+}
+else
+{
+    selectedTab = '#tabs-download-x64';
+}
 
 $(selectedTab).tab('show')
 
