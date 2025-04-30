@@ -27,10 +27,29 @@
 
             text-decoration: none;
         }
-    
     }
 
-    #PreviewDownloads 
+    .tab-content{
+        .smallerText p
+        {
+            a{
+                text-decoration: underline;
+                text-underline-offset: 0.3rem;
+                text-decoration-color: #999;
+                color: #fff;
+
+                &:hover{
+                    color: $orange;
+                }
+            }
+
+            font-size: 0.95rem;
+            color: #ddd;
+            margin-right: 1rem;
+        }
+    }
+
+    #PreviewDownloads
     {
         .modal-header
         {

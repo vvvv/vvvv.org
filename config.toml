@@ -117,8 +117,10 @@ blog = '/blog/:sections[1]/:slug'
 
 		Headline = "vvvv gamma"
 		Copy = "First released in April 2020, vvvv gamma is the next generation of vvvv, entirely rewritten from scratch."
+
 		Tab64bit = "Windows"
 		TabARM = "Windows ARM64"
+		TabMac = "Mac / Parallels"
 
 		StableText  = "Download: Stable"
 		StableVersion = "Version: 6.7"
@@ -126,6 +128,8 @@ blog = '/blog/:sections[1]/:slug'
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
+
+		MacText = '<p>vvvv does not have a native version for macOS!</p><p>But if using <a href="https://www.parallels.com/de/products/desktop/" target="_blank">Parallels</a> is an option for you you can use the Windows Arm64 builds.</p><p>See <a href="https://thegraybook.vvvv.org/reference/best-practice/vvvv-on-mac.html" target="_blank">Running vvvv on a Mac</a> for details.</p>'
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"
