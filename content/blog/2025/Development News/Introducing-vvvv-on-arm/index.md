@@ -26,7 +26,7 @@ We're rolling out Arm-builds of vvvv in two phases:
 - Phase 1: Without support for our 3d engine VL.Stride **<- now**
 - Phase 2: With support for VL.Stride <- still to come
   
-Unfortunately though, even after Phase 2, you'll not get the full feature-set of vvvv on Arm-builds, since not all libraries will work on Arm out of the box and libraries supporting some special hardware might never work since they depend on the device makers support for Arm. 
+Unfortunately though, even after Phase 2, you'll not get the full feature-set of vvvv with the Arm-builds, since not all libraries will work on Arm out of the box and libraries supporting some special hardware might never work since they depend on the device makers support for Arm. 
 
 For a list of limitations, please see the "Limitations" section in our article: [Running vvvv on an Arm CPU](https://thegraybook.vvvv.org/reference/best-practice/vvvv-on-arm.html).
 
