@@ -6,17 +6,23 @@ categories: Monthly Reviews
 author: joreg
 ---
 
+Still,
 
-///joreg's
+no stable 7.0 release, but we're getting closer and closer. Here's what you can testdrive in recent previews:
+- [Introducing: vvvv on Arm for Windows and Mac, Phase 1/2](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/)
+- The export dialog features new targets for Arm and macOS console apps and also new options for error handling while building and at runtime
+- We've released an update to VL.Augmenta to add support for pointclouds and zones (still deserves extra blogpost)
+- We've released an update to VL.CEF updating to version 132 of the chromium embedded framework (still deserves extra blogpost)
 
+What we still want to get right for the 7.0 release is the way you can do bindings (think OSC, Midi, Redis...) to channels and also the way you can work with presets. Both has been available in previews since a while now. We haven't talked much about it because it needed a final polish. Finally this is in full swing and we're hoping to be able to show this off soon!
 
+And anyway, upcoming: **[vvvv meetup on May 15th](https://vvvv.org/blog/2025/28.-vvvv-worldwide-meetup/)**
 
 ## Learning vvvv
-For Human Robot Interaction, Robot visualisation, Simulation and realtime control:
-- Starting on May 7: [Creative Robotics Masterclass](https://thenodeinstitute.org/courses/ss25-cm-creative-robotics/)
-
-And ongoing:
-- Since March 24: [12 session beginner to intermediate course](https://thenodeinstitute.org/vvvv-beginner-class-summer-2025/) is running everyweek, online!
+- Starting on May 7: [Creative Robotics Masterclass](https://thenodeinstitute.org/courses/ss25-cm-creative-robotics/) For Human Robot Interaction, Robot visualisation, Simulation and realtime control
+- Since March 24: [12 session beginner to intermediate course](https://thenodeinstitute.org/vvvv-beginner-class-summer-2025/) is running every week, online!
+- Ongoing: [vvvvTv Season 2](
+https://www.youtube.com/watch?v=uvLNZsStve8&list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi) 10 episodes and counting, covering different topics
 
 ## Contributions
 
@@ -30,14 +36,10 @@ We got updates to the following:
 - [VL.Interpolator.Addons](https://www.nuget.org/packages/VL.Interpolator.Addons)
 - [VL.Audio.VST](https://www.nuget.org/packages/VL.Audio.VST)
 - [VL.Augmenta](https://www.nuget.org/packages/VL.Augmenta)
-- [VL.Audio.UI](https://www.nuget.org/packages/VL.Audio.UI)
-- [VL.Audio](https://www.nuget.org/packages/VL.Audio)
 - [VL.CEF.Stride](https://www.nuget.org/packages/VL.CEF.Stride)
 - [VL.CEF.Skia](https://www.nuget.org/packages/VL.CEF.Skia)
 - [VL.MediaPipe](https://www.nuget.org/packages/VL.MediaPipe)
-- [VL.IO.Midi](https://www.nuget.org/packages/VL.IO.Midi)
 - [VL.IO.MQTT](https://www.nuget.org/packages/VL.IO.MQTT)
-- [VL.MediaPipe](https://www.nuget.org/packages/VL.MediaPipe)
 - [VL.IO.WebSocket](https://www.nuget.org/packages/VL.IO.WebSocket)
 - [VL.MiDi.Music.Utils](https://www.nuget.org/packages/VL.MiDi.Music.Utils)
 
