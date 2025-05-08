@@ -1,7 +1,10 @@
 import Constants from '../../constants'
+import { createAssetUrl } from '../../utils'
 
 const SORT = "sort=username"
 const FIELDS =`fields[]=username,userpic,related.hire.available,date_created`
+
+const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 
 export async function fetchUserData ( loading, tableData, state)
 {
@@ -15,7 +18,7 @@ export async function fetchUserData ( loading, tableData, state)
     
             tableData.value = data.data.map((u) => (
                 {
-                    src: u.userpic ? userpicLink(u.userpic) : null,
+                    src: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
                     username: u.username,
                     available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
                     date_created: new Date(u.date_created).toDateString()

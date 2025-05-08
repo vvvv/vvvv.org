@@ -31,8 +31,8 @@ const model = defineModel('value')
     <n-form-item label="Custom Fields">
         <div class="d-flex flex-column">
             <template v-for="(field, index) in model.fields" :key="index">
-                <div class="row mb-2">
-                    <div class="col-12 col-lg-6">
+                <div class="row mb-3 mb-lg-2">
+                    <div class="col-12 col-lg-6 mb-2 mb-lg-0">
                         <n-input 
                             v-model:value="field.key" 
                             placeholder="Key"

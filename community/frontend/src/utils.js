@@ -87,21 +87,19 @@ export const uploadFile = async (file, folder) => {
     }
   }
 
-  const result = axios.request(request)
-  .then(response => {
+  try{
+    const response = await axios.request(request)
     file.status = 'finished'
     file.percentage = 100
     file.url = Constants.ASSETS + response.data.tmp
     return response.data.tmp
-  })
-  .catch(error => {
-    console.error('Error uploading file:', error);
+  }
+  catch (err) {
+    console.error('Error uploading file:', err);
     file.status = 'error'
     file.percentage = 0
     return null
-  })
-
-  return result
+  }
 }
 
 export const makeFields = (f, count) => {

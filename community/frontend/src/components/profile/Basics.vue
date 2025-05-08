@@ -6,7 +6,7 @@ import SocialFields from './SocialFields.vue'
 import FileUploader from './FileUploader.vue'
 import FieldInput from './FieldInput.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { clone, post, createAssetUrl, makeFields }  from '../../utils.js'
+import { post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -22,7 +22,7 @@ const uploader = ref(null);
 
 const prepareData = ()=>{
 
-  var temp = clone(data);
+  var temp = { ...data };
 
   if (temp.user.hasOwnProperty('userpic'));
   {
@@ -60,7 +60,7 @@ const updateTempUserpic = (id) =>{
 const submit = async () => {
 
   updating.value = true;
-  const formValue  = clone(form.value);
+  const formValue  = { ...form.value };
   
   if (tempUserpic.value == null)
   {
@@ -126,6 +126,7 @@ const avatarButtonText = computed(()=>{
           </div>    
           <div class="col-10">
             <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
+            <p class="text-muted" v-if="tempUserpic">Press submit to confirm your new avatar.</p>
           </div>
         </div>
       </div>

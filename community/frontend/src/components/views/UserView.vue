@@ -7,64 +7,64 @@ import HireView from '../partials/HireView.vue'
 import SocialView from '../partials/SocialView.vue'
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry } from '../../utils'
 
-const { username = 'someuser'} = defineProps({username: String})
+const { username = 'someuser'} = defineProps({username: String});
 
-const user = ref(null)
-const hire = ref (null)
-const social = ref (null)
-const userpic = ref(null)
-const loading = ref(false)
+const user = ref(null);
+const hire = ref (null);
+const social = ref (null);
+const userpic = ref(null);
+const loading = ref(false);
 
-const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"]
-const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
+const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"];
+const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120";
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
-            &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`
+            &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`;
 
 onMounted(async ()=>
 {
-  loading.value = true
+  loading.value = true;
 
   try
   {
-    const response = await fetch(url)
-    const json = await response.json()
+    const response = await fetch(url);
+    const json = await response.json();
 
     if (json.data.length == 0)
     {
       throw ("Can't find a profile for this user") 
     }
     
-    const data = json.data[0]
-    user.value = data
+    const data = json.data[0];
+    user.value = data;
 
     userpic.value = user.value.userpic ? `${createAssetUrl(user.value.userpic)}${imageParams}` : null;
 
-    hire.value = data.related[0]?.hire
-    social.value = data.related[0]?.social
+    hire.value = data.related[0]?.hire;
+    social.value = data.related[0]?.social;
   }
   catch (error)
   {
-    console.error(error)
+    console.error(error);
   }
   finally
   {
-    loading.value = false
+    loading.value = false;
   }
 })
 
 function edit()
 {
-    router.push ('/user/edit/')
+    router.push ('/user/edit/');
 }
 
 const location = computed(() => {
-    const location = [user.value.location_city, getCountry(user.value.location_country)].filter(Boolean).join(", ")
-    return location ? location : null
+    const location = [user.value.location_city, getCountry(user.value.location_country)].filter(Boolean).join(", ");
+    return location ? location : null;
 })
 
 const fullName = computed(() => {
-    const name = [user.value.name, user.value.surname].filter(Boolean).join(" ")
-    return name ? name : null
+    const name = [user.value.name, user.value.surname].filter(Boolean).join(" ");
+    return name ? name : null;
 })
 
 </script>
