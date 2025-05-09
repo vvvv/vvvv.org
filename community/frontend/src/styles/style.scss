@@ -7,6 +7,14 @@
 #profile{
   text-align: left;
 
+  hr{
+    max-width: 100%;
+    border-color: #ddd;
+    border-width: 1px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
   .col-form-label
   {
     font-size: 0.9rem;

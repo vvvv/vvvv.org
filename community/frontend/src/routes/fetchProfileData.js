@@ -24,10 +24,12 @@ export async function fetchProfileData( loading, failure )
             constantsData
         }
 
-      } catch (error){
+      } 
+      catch (error){
         console.log (error)
         failure.value = error.message || "Can't get data, please try login later."
-      } finally{
+      } 
+      finally{
         loading.value = false;
       }
 }

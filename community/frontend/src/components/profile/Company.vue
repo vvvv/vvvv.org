@@ -151,7 +151,7 @@ const logoButtonText = computed(()=>{
           </n-form-item>
       </n-form>
       
-      <hr class="mt-1 mb-3"/>
+      <hr class="mt-1 mb-4"/>
 
       <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
       

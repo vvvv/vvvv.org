@@ -82,7 +82,6 @@ const menuOptions = [
 ];
 
 const handleUpdateValue = (key, item) => {
-  console.log (item)
   selected.value = item.component
 }
 
@@ -104,7 +103,7 @@ const handleUpdateValue = (key, item) => {
             <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
           </div>
           <div class="col-12 col-md-8 ml-md-1">
-              <component :is="selected" :data="data" :constants="constants" @reload="reload" @message="showMessage" @updateData="updateData"/>
+              <component :is="selected" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
             </div>
           </div>
         </template>

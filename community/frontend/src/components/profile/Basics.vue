@@ -10,6 +10,7 @@ import { post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
+const avatarSize = 120;
 
 const { data, constants } = defineProps(['data', 'constants']);
 const isChanged = ref(false);
@@ -20,13 +21,15 @@ const tempUserpic = ref(null);
 const updating = ref(false);
 const uploader = ref(null);
 
+const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
+
 const prepareData = ()=>{
 
   var temp = { ...data };
 
-  if (temp.user.hasOwnProperty('userpic'));
+  if (!userpic.value && temp.user.hasOwnProperty('userpic'));
   {
-    userpic.value = createAssetUrl(temp.user?.userpic?.id);
+    userpic.value = createAssetUrl(temp.user.userpic.id) + imageParams;
   }
 
   form.value = {
@@ -83,11 +86,12 @@ const submit = async () => {
     {
       if (tempUserpic.value !== null)
       {
-        userpic.value = createAssetUrl(tempUserpic.value);
+        userpic.value = createAssetUrl(tempUserpic.value) + imageParams;
         tempUserpic.value = null;
       }
 
       //Update fields in data
+      formValue.user.userpic = { id: formValue.user.userpic } // data has userpic as an object with id
       data.user = formValue.user;
       data.social = formValue.social;
 
@@ -121,12 +125,12 @@ const avatarButtonText = computed(()=>{
       <div class="col-sm-2"></div>
       <div class="col-sm-10">
         <div class="row">
-          <div class="col-2" v-if="userpic !== null">
-            <n-avatar :round="true" :size="64" :src="userpic" object-fit="cover"/>
+          <div class="col-3" v-if="userpic !== null">
+            <n-avatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
           </div>    
-          <div class="col-10">
+          <div class="col-9 align-self-center">
             <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
-            <p class="text-muted" v-if="tempUserpic">Press submit to confirm your new avatar.</p>
+            <p class="text-muted" v-if="tempUserpic">Submit the Form to update the Avatar.</p>
           </div>
         </div>
       </div>

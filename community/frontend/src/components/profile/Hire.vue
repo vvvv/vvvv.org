@@ -133,7 +133,7 @@ const imageButtonText = computed(()=>{
     </n-form-item>
   </n-form>
 
-  <hr class="mt-1 mb-3"/>
+  <hr class="mt-1 mb-4"/>
 
   <div class="form-group row mb-2">
       <label class="col-sm-2 col-form-label">Image</label>
