@@ -15,7 +15,7 @@ const router = useRouter();
 
 const companies = ref(null);
 const count = ref (0);
-const loading = ref (false);
+const loading = ref (true);
 
 onMounted( async ()=>
 {

@@ -86,12 +86,10 @@ const fullName = computed(() => {
         <div class="col-lg-8">
           <SocialView :social="social" :order="socialKeys" v-if="social" />
           <div class="row mt-4" v-if="hire">
-            <h4 class="h4">Available for hire</h4>
-            <div class="row">
-              <div class="col">
-                <div class="card">
-                  <HireView :data="hire"/>
-                </div>
+            <div class="col">
+              <h4 class="h4">Available for hire</h4>
+              <div class="card">
+                <HireView :data="hire"/>
               </div>
             </div>
           </div>  

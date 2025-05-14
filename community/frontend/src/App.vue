@@ -63,10 +63,11 @@ const handleTabChange = ( tabName ) => {
   }
 };
 
-
 const themeOverrides = {
   "common": {
-    "primaryColor": "#DE950BFF"
+    "primaryColor": "#DE950BFF",
+    "colorFocusPrimary": "#FFA600FF",
+    "primaryColorHover": "#FFA600FF"
   }
 }
 
@@ -76,33 +77,27 @@ const themeOverrides = {
   <n-config-provider :theme-overrides="themeOverrides">
     <div class="container py-2">
       <div v-if="failure" class="mt-4">{{ failure }}</div>
-      <div v-else class="d-flex justify-content-between mb-4">
-          <div class="col-auto">
+      <div v-else class="row mb-4">
+          <div class="col-12 col-md-9 order-2 order-md-1">
             <n-tabs v-model:value="activeTab" type="line" size="large" animated @update:value="handleTabChange">
               <n-tab v-for="tab in leftTabs" :key="tab.path" :name="tab.name" @click="handleTabChange(tab.name)">
                 {{  tab.name }}
               </n-tab>
             </n-tabs>
           </div>
-          <div class="col-auto">
-            <div class="row">
-              <div class="col">
-                <n-tabs v-model:value="activeTab" type="line" size="large" :default-value="activeTab">
-                  <n-tab name="Profile" @click="handleTabChange('Profile')" class="px-2">
-                    <NIcon size="20" class="mr-2">
-                      <PersonIcon/>
-                    </NIcon>
-                    Profile
-                  </n-tab>
-                  <n-tab v-if="authenticated" name="Logout" @click="logout" class="px-2">
-                    Logout
-                  </n-tab>
-                </n-tabs>
-              </div>
-              <div class="col" v-if="!authenticated">
-                <div class="btn btn-primary mt-2" @click="login">Login</div>
-              </div>
-            </div>
+          <div class="col-12 col-md-3 order-1 order-md-2">
+            <n-tabs v-model:value="activeTab" type="line" size="large" :default-value="activeTab">
+              <n-tab name="Profile" @click="handleTabChange('Profile')">
+                <NIcon size="20" class="mr-2">
+                  <PersonIcon/>
+                </NIcon>
+                Profile
+              </n-tab>
+              <template #suffix>
+                <div v-if="authenticated" @click="logout">Logout</div>
+                <div v-else="authenticated" class="btn btn-primary" @click="login">Login</div>
+              </template>
+            </n-tabs>
           </div>
        </div>     
         <n-message-provider placement="bottom-right">

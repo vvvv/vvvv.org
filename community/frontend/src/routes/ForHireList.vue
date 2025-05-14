@@ -8,7 +8,7 @@ import { fetchHireData } from './fetchHireData.js'
 const router = useRouter();
 const emit = defineEmits(['showProfile']);
 
-const loading = ref (false);
+const loading = ref (true);
 const users = ref([]);
 
 onMounted( async ()=> {
@@ -16,7 +16,7 @@ onMounted( async ()=> {
 })
 
 const openProfile = (username)=>{
-    router.push (`/user?u=${username}`)
+    router.push(`/user?u=${username}`)
 }
 
 </script>
@@ -24,12 +24,11 @@ const openProfile = (username)=>{
 <template>
     <n-spin :show="loading">
         <div id="UsersForHire" v-for="(user, index) in users" :key="index">
-            <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
-                    <div>
-                        <h3>{{ user.title }}</h3>
-                    </div>
-                </div>
+            <div class="d-flex flex-row mb-3">
+                <h3 class="mr-4">{{ user.title }}</h3>
+                <button class="btn btn-sm btn-outline-secondary" @click="openProfile(user.username)">Profile</button>
+            </div>
+            <div class="card mb-5">
                 <HireView :data="user.hire" :contact="user.contact" v-if="user.hire"/>
             </div>
         </div>

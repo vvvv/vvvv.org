@@ -1,21 +1,67 @@
 <script setup>
-import { ref, watchEffect, h } from 'vue'
+import { ref, watchEffect, h, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { NDataTable, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
+import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
 
-
 const router = useRouter()
+
+const pageSizes = [
+    { label: '10 per page', value: 10 },
+    { label: '20 per page', value: 20 },
+    { label: '50 per page', value: 50 }
+]
+
+const state = ref({
+    currentPage: 1,
+    totalPages: 0,
+    totalCount: 0,
+    pageSize: 10,
+    filter: ""
+})
+
+const paginationRef = ref({
+    pageSize: pageSizes[0].value,
+    pageSizes: pageSizes,
+    page: 2,
+    showSizePicker: true,
+    pageCount: 10
+})
 
 const showProfile = (username)=>{
     router.push(`/user/?u=${username}`);
 }
 
-const state = defineModel()
-const pagination = ref(20)
+const filterField = ref("");
+const filterFieldForHire = ref(false);
+
+function applyFilter()
+{
+    state.value.currentPage = 1;
+    state.value.filter = filterField.value;
+}
+
+function resetFilter()
+{
+    state.value.filter = filterField.value = '';
+}
+
+const isLess = ref(false)
+
+const handlePageChange = (curPage) => {
+      state.value.currentPage = curPage
+    };
+
+const handlePageSizeChange = (pageSize) => {
+    isLess.value = pageSize < state.value.pageSize;
+
+    state.value.pageSize = pageSize;
+    state.value.currentPage = 1;
+};
+
 const tableData = ref([])
-const loading = ref(false)
+const loading = ref(true)
 
 const columns = [
     {
@@ -77,22 +123,64 @@ function jumpToPage()
     }        
 }
 
-
-
 watchEffect(async () => { 
-    fetchUserData( loading, tableData, state );
+    await fetchUserData( loading, tableData, state );
+
+    if (state.value.totalPages > 0)
+    {
+        paginationRef.value = {
+            pageSize: state.value.pageSize,
+            pageSizes: pageSizes,
+            page: state.value.currentPage,
+            showSizePicker: true,
+            pageCount: state.value.totalPages || 1
+        }
+    }
+
+    if (isLess.value){
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        isLess.value = false;
+    }
 })
+
 
 </script>
 
 <template>
+    <div class="row mb-3">
+        <div class="col">
+            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;"/>
+            <n-button strong secondary @click="applyFilter" class="ml-xs-0 ml-2">Search</n-button>
+        </div>
+        <div class="ml-auto mr-1">
+            <n-pagination 
+                :page="state.currentPage" 
+                :page-count="state.totalPages"
+                :page-sizes="pageSizes"
+                show-size-picker
+                :on-update:page="handlePageChange"
+                :on-update:page-size="handlePageSizeChange"
+            />
+        </div>
+    </div>
     <n-space vertical :size="12">
         <n-data-table
             :loading="loading"
             :bordered="false"
             :columns="columns"
             :data="tableData"
-            :pagination="pagination"
             />
     </n-space>
+        <div class="row mt-3">
+            <div class="ml-auto">
+                <n-pagination 
+                    :page="state.currentPage" 
+                    :page-count="state.totalPages"
+                    :page-sizes="pageSizes"
+                    show-size-picker
+                    :on-update:page="handlePageChange"
+                    :on-update:page-size="handlePageSizeChange"
+                />
+            </div>
+        </div>
 </template>

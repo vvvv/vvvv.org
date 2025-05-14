@@ -14,6 +14,7 @@ export async function fetchHireData (loading)
         const users = json.data.map((u)=>{
             const name = [u.name, u.surname].filter(Boolean).join(" ");
             return {
+                    username: u.username,
                     title: name ? `${name} (${u.username})` : u.username,
                     contact: u.related[0].social ?? null,
                     hire: u.related[0].hire ?? null,

@@ -4,7 +4,7 @@ import { ref, onMounted, computed } from 'vue'
 import { NSpin } from 'naive-ui'
 import SocialView from '../partials/SocialView.vue'
 import { getCountry } from '../../utils'
-import { fetchBusinessData } from './fetchBusinessData.js'
+import { fetchCompanyData } from './fetchCompanyData.js'
 
 const { name = 'MyCompany' } = defineProps({ name: String });
 
@@ -15,7 +15,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 onMounted(async ()=>
 {
-    company.value = await fetchBusinessData (loading, name);
+    company.value = await fetchCompanyData (loading, name);
 })
 
 const location = computed(() => {

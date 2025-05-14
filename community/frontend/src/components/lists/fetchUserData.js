@@ -27,10 +27,10 @@ export async function fetchUserData ( loading, tableData, state)
     
             if (data?.meta)
             {
-                state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount;    
+                state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount ?? 0;
             }
     
-            state.value.totalPages = Math.ceil(state.value.totalCount / state.value.pageLimit) ?? state.value.totalPages
+            state.value.totalPages = Math.max(1, Math.ceil(state.value.totalCount / state.value.pageSize));
         }
         catch(error)
         {
@@ -46,7 +46,7 @@ function makeURL( state )
 {
     const filter = state.value.filter ? `filter[username][_contains]=${state.value.filter}` : null
 
-    const pages = state.value.pageLimit ? `limit=${state.value.pageLimit}&page=${state.value.currentPage}` : null;
+    const pages = state.value.pageSize ? `limit=${state.value.pageSize}&page=${state.value.currentPage}` : null;
     const count = state.value.currentPage === 1 ? (filter ? "meta=filter_count" : "meta=total_count") : "";
 
     const params = [FIELDS, SORT, filter, pages, count].filter(Boolean);

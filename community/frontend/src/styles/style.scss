@@ -4,6 +4,13 @@
   }
 }
 
+#community
+{
+  h3{
+    margin-bottom: 0px;
+  }
+}
+
 #profile{
   text-align: left;
 
@@ -15,14 +22,24 @@
     margin-right: 0px;
   }
 
+  a {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+      text-decoration-color: #bbb;
+  }
+
   .col-form-label
   {
     font-size: 0.9rem;
-    text-align: right;
+  }
+
+  .field-input{
+    height: 8rem;
   }
 
   .field-preview{
     font-size: 0.9rem;
+    max-height: 8rem;
 
     p {
       font-size: inherit;

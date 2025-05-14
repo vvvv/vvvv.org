@@ -12,28 +12,43 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': '/src'
+      '@': '/src',
+      '@scss': '/external/scss', // Alias for the symbolic link to the SCSS folder
+      '@css': '/external/css',   // Alias for the symbolic link to the CSS folder
     },
   },
-  base: "http://localhost:1313/",
-    build: {
-      outDir: "../../public/js/vue/",
-    rollupOptions: {
-      output: {
-        // manualChunks: {
-        //   vue: ['vue', 'vue-router'],
-        //   showdown: ['showdown'],
-        //   keycloak: ['keycloak-js'],
-        //   leaflet: ['leaflet']
-        // },
-        entryFileNames: `app.js`,
-        chunkFileNames: '[name].js',
-        assetFileNames: '[name].[ext]'
-      },
-      treeshake: true
+  base: "http://localhost:5173/",
+  // css: {
+  //   preprocessorOptions: {
+  //     scss: {
+  //       additionalData: `@import "@scss/main.scss";`, // Automatically include variables or mixins
+  //     },
+  //   },
+  // },
+  server: {
+    watch: {
+      followSymlinks: true // Watch to symbolic links
+    }
+  },
+  build: {
+    outDir: "../../public/js/vue/",
+  rollupOptions: {
+    output: {
+      // manualChunks: {
+      //   vue: ['vue', 'vue-router'],
+      //   showdown: ['showdown'],
+      //   keycloak: ['keycloak-js'],
+      //   leaflet: ['leaflet']
+      // },
+      entryFileNames: `app.js`,
+      chunkFileNames: '[name].js',
+      assetFileNames: '[name].[ext]'
     },
-    target: 'esnext',
-    minify: true,
-    sourcemap: true
+    treeshake: true
+  },
+  cssCodeSplit: true, // Ensure CSS is split into a separate file
+  target: 'esnext',
+  minify: true,
+  sourcemap: true
   },
 })

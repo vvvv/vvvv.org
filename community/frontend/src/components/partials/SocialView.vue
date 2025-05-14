@@ -17,7 +17,7 @@ if  (social)
 
 <template>
 	<div class="row">
-		<div class="col-12 col-lg-6 pl-lg-0">
+		<div class="col-12 col-lg-6">
 			<div class="card mb-4 mb-lg-0">
 				<div class="card-body p-0">   
 					<ul class="list-group list-group-flush rounded-2">

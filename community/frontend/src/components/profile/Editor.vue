@@ -33,17 +33,17 @@ onMounted(async ()=>{
 })
 
 watch (model, (newValue)=>{
-  html.value = toHtml(model.value)
+  html.value = model.value ? toHtml(model.value) : "Preview"
 })
 
 </script>
 
 <template>
     <div class="row">
-      <div class="col">
-        <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable rows="5"/>
+      <div class="col px-0 ml-3">
+        <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable class="field-input"/>
       </div>
-      <div class="col overflow-auto rounded field-preview py-1" v-html="html" style="max-height: 200px;">
+        <div class="col overflow-auto rounded field-preview py-1 text-muted" v-html="html">
       </div>
     </div>
 </template>

@@ -1,9 +1,10 @@
 import Constants from '../../constants'
+import { createAssetUrl } from '../../utils'
 
 const IMAGE_PARAMS = '?withoutEnlargement=true&quality=90&fit=cover&width=120';
 const URL = Constants.BASEURL+`items/Company?fields=*,social.*&filter[name][_eq]=`;
 
-export async function fetchBusinessData( loading, name )
+export async function fetchCompanyData ( loading, name )
 {
 
     loading.value = true;
