@@ -6,14 +6,14 @@ export const kclogin = (url) => keycloak.login({ redirectUri: url })
 
 export const getUsername = () => {
     if (keycloak.authenticated) {
-        return keycloak.tokenParsed.preferred_username;
+        return keycloak.tokenParsed?.preferred_username;
     }
     return null;
 }
 
 export const getMail = () => {
     if (keycloak.authenticated) {
-        return keycloak.idTokenParsed.email
+        return keycloak.idTokenParsed?.email
     }
     return null;
 }

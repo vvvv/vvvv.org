@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { isAuthenticated, kclogin } from './keycloak-helper.js'
+import { isRouteLoading } from "./globalState.js";
 
 const Users = () => import('./routes/Users.vue')
 const EditUser = () => import('./routes/EditUser.vue')
@@ -49,5 +50,16 @@ const router = createRouter({
     routes,
     strict: false
 });
+
+// Add global navigation guards for loading state
+router.beforeEach((to, from, next) => {
+    isRouteLoading.value = true; // Start loading
+    next();
+});
+
+router.afterEach(() => {
+    isRouteLoading.value = false; // Stop loading
+});
+
 
 export default router;

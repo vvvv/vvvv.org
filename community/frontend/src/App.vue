@@ -1,12 +1,14 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import Constants from './constants'
 import { useRouter, useRoute } from 'vue-router'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
-import { NMessageProvider, NTab, NTabs, NConfigProvider, NIcon } from 'naive-ui'
+import { NMessageProvider, NTab, NTabs, NConfigProvider, NIcon, NSpin } from 'naive-ui'
 import {
   PersonCircleOutline as PersonIcon,
 } from '@vicons/ionicons5'
+
+import { isRouteLoading } from "./globalState.js";
 
 const router = useRouter();
 const route = useRoute();
@@ -23,6 +25,8 @@ const login = ()=> {
 const logout = ()=> {
   kclogout(window.location.origin + `/user`)
 }
+
+const authenticated = computed(()=>isAuthenticated())
 
 const leftTabs = computed(() =>
   router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => ({
@@ -52,8 +56,6 @@ onMounted(() => {
   const matchedTab = tabs.value.find(t => t.path === route.path);
   activeTab.value = matchedTab ? matchedTab.name : tabs.value[0]?.name;
 });
-
-const authenticated = computed(()=>isAuthenticated())
 
 const handleTabChange = ( tabName ) => {
   const tab = tabs.value.find(t => t.name === tabName)
@@ -94,14 +96,16 @@ const themeOverrides = {
                 Profile
               </n-tab>
               <template #suffix>
-                <div v-if="authenticated" @click="logout">Logout</div>
-                <div v-else="authenticated" class="btn btn-primary" @click="login">Login</div>
+                <div v-if="authenticated" @click="logout" class="btn btn-outline-secondary">Logout</div>
+                <div v-else class="btn btn-primary" @click="login">Login</div>
               </template>
             </n-tabs>
           </div>
        </div>     
         <n-message-provider placement="bottom-right">
+          <n-spin :show="isRouteLoading" :delay="100">
             <RouterView/>
+          </n-spin>
         </n-message-provider>
     </div>
   </n-config-provider>

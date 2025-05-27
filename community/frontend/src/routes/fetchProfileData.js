@@ -9,36 +9,21 @@ const CONSTANTS_REQ = {
     }
 }
 
-export async function fetchProfileData( loading, failure )
+export async function fetchProfileData()
 {
-    loading.value = true
-
-    try {
-        const [ profileData, constantsData ] = await Promise.all([ 
+    const result = await Promise.all([ 
             loadProfile(), 
             loadConstants() 
         ]);
 
-        return {
-            profileData,
-            constantsData
-        }
-
-      } 
-      catch (error){
-        console.log (error)
-        failure.value = error.message || "Can't get data, please try login later."
-      } 
-      finally{
-        loading.value = false;
-      }
+    return result;
 }
 
 async function loadConstants() 
 {
     const response = await fetch(Constants.BACKEND_GET_CONSTANTS, CONSTANTS_REQ)
 
-    if (response.status != 200)
+    if (!response.ok)
     {
       throw new Error ("Can't load constants") 
     }
@@ -65,19 +50,35 @@ async function loadProfile() {
             },
     })
 
-    if (response.status != 200)
+    if (!response.ok)
     {
-        return {
-            user: {
-                username: getUsername(),
-                email: getMail(),
-            },
-            social: {
-                fields: makeFields([], 4)
-            },
-            hire: {},
-            companies: [],
-        };
+        const error = await response.json();
+
+        let mail = getMail(); 
+
+        if ( !mail || error.code === 'NO_MAIL')
+            throw new Error ("Mail is not set for the account.");
+
+        if (error.code === 'NO_USER')
+            return {
+                user: {
+                    username: getUsername(),
+                    email: mail
+                },
+                social: {
+                    fields: makeFields([], 4)
+                },
+                hire: {},
+                companies: [],
+            };
+
+        if (error.code === 'ERROR')
+        {
+            throw new Error ( error.message );
+        }
+
+        throw new Error(error.message || "Unknown error occurred.");
+
     }
 
     const json = await response.json();

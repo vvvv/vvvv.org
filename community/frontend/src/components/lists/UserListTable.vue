@@ -60,6 +60,11 @@ const handlePageSizeChange = (pageSize) => {
     state.value.currentPage = 1;
 };
 
+function clearFilter()
+{
+    state.value.filter = "";
+}
+
 const tableData = ref([])
 const loading = ref(true)
 
@@ -149,7 +154,7 @@ watchEffect(async () => {
 <template>
     <div class="row mb-3">
         <div class="col">
-            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;"/>
+            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" @clear="clearFilter" clearable/>
             <n-button strong secondary @click="applyFilter" class="ml-xs-0 ml-2">Search</n-button>
         </div>
         <div class="ml-auto mr-1">

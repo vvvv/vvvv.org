@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref, shallowRef, onMounted, h } from 'vue'
-import { useMessage, NIcon, NMenu, NSpin } from 'naive-ui'
+import { useMessage, NIcon, NMenu, NSpin, NButton } from 'naive-ui'
 
 import {
   PersonCircleOutline as PersonIcon,
@@ -16,6 +16,8 @@ import { fetchProfileData } from './fetchProfileData.js'
 import Basics from '../components/profile/Basics.vue'
 import Company from '../components/profile/Company.vue'
 import Hire from '../components/profile/Hire.vue'
+
+const emit = defineEmits(['logout']);
 
 const router = useRouter();
 const route = useRoute();
@@ -46,7 +48,18 @@ const showMessage = (m) => {
 }
 
 onMounted(async() => {
-  ({ profileData: data.value, constantsData: constants.value } = await fetchProfileData( loading, failure ));
+  try{
+    loading.value = true;
+
+    [ data.value, constants.value ] = await fetchProfileData();  
+  }
+  catch (error) {
+    failure.value = error.message;
+  }
+  finally
+  {
+    loading.value = false;
+  }
 })
 
 const updateData = (d)=>{
@@ -91,21 +104,27 @@ const handleUpdateValue = (key, item) => {
 
   <div id="profile">
       <n-spin :show="loading">
-      <div v-if="!loading && failure" class="mt-4">{{ failure }}</div>
-      <template v-if="data">
-        <div class="row mb-2">
-          <div class="col">
-            <div class="h1">{{ data.username }}</div>
-          </div>
+        <!-- On Failure -->
+        <div v-if="!loading && failure" class="mt-4">
+          {{ failure }}
+          <div class="mt-2"><n-button @click="auth.logout()">Logout</n-button></div>
         </div>
-        <div class="row">
-          <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">  
-            <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
-          </div>
-          <div class="col-12 col-md-8 ml-md-1">
-              <component :is="selected" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
+
+        <!--  On Data -->
+        <template v-if="data">
+          <div class="row mb-2">
+            <div class="col">
+              <div class="h1">{{ data.username }}</div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">  
+              <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
+            </div>
+            <div class="col-12 col-md-8 ml-md-1">
+                <component :is="selected" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
+              </div>
+            </div>
         </template>
       </n-spin>
   </div>
