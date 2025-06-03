@@ -42,6 +42,6 @@ export default defineConfig({
   cssCodeSplit: true, // Ensure CSS is split into a separate file
   target: 'esnext',
   minify: true,
-  sourcemap: true
+  sourcemap: false
   },
 })
