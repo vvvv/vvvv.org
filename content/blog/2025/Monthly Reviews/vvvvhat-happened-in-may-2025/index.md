@@ -6,25 +6,20 @@ categories: Monthly Reviews
 author: joreg
 ---
 
-///
+There goes another month...
 
-- [28th vvvv meetup](https://www.youtube.com/watch?v=rXaUijAvuWw&ab_channel=TheNODEInstitute)
+First off, we had [a great vvvv meetup](https://www.youtube.com/watch?v=rXaUijAvuWw&ab_channel=TheNODEInstitute) again, with many inspiring contributions!
 
-- [vvvv on Arm for Windows and Mac, Phase 1/2](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/)
+Then we officially released the [Arm builds of vvvv](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/) that also allow you to run vvvv quite smoothly on recent Macs (via Parallels).
 
-- [VL.OpenCV 4.0.0](https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/)
+And finally we released [an update to VL.OpenCV](https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/) with a lot of little improvements. While at it, we also recorded two new episodes for vvvvTv:
 
-///
+- [S02 E11: Introduction to OpenCV](https://www.youtube.com/watch?v=fjw2m8w6RNU&ab_channel=vvvvTv)
+- [S02 E12: AR using OpenCV with ArUco Markers](https://www.youtube.com/watch?v=j7DWMET-qM8&ab_channel=vvvvTv)
 
+In the background we're still shaping the upcoming vvvv gamma 7.0 release. One of the things we're still finalizing is the way we create bindings to different protocols. Here is a glimpse at the new Channel Browser Binding section. In most cases establishing a binding should not be more than the click of a checkbox. Again I'm afraid we'll have to ask for some more patience though...  
 
-## Learning vvvv
-
-For vvvvTv fans May had two new episodes on Computer Vision:
-- [S02 E11 Introduction to OpenCV](https://www.youtube.com/watch?v=fjw2m8w6RNU&ab_channel=vvvvTv)
-- [S02 E12 AR using OpenCV with ArUco Markers](https://www.youtube.com/watch?v=j7DWMET-qM8&ab_channel=vvvvTv)
-
-And ongoing:
-- Since March 24: [12 session beginner to intermediate course](https://thenodeinstitute.org/vvvv-beginner-class-summer-2025/) is running everyweek, online!
+![alt text](image.png)
 
 ## Contributions
 
@@ -41,13 +36,11 @@ We got updates to the following:
 - [VL.OpenCV](https://www.nuget.org/packages/VL.OpenCV)
 - [VL.CEF.Stride](https://www.nuget.org/packages/VL.CEF.Stride)
 - [VL.CEF.Skia](https://www.nuget.org/packages/VL.CEF.Skia)
-- [VL.Audio.UI](https://www.nuget.org/packages/VL.Audio.UI)
-- [VL.Audio](https://www.nuget.org/packages/VL.Audio)
 
 Plus two new entries in the forum’s work-in-progress section:
 
 - [VL.Bunraku](https://forum.vvvv.org/t/introducing-vl-bunraku/24323)
-- [Installation Guideline for Windows11 ARM on Apple Silicon / macOS with VMwareFusion (on an external SSD)](https://forum.vvvv.org/t/installation-guideline-for-windows11-arm-on-apple-silicon-macos-with-vmwarefusion-on-an-external-ssd/24328)
+- [Installation Guideline for Windows11 ARM on Apple Silicon / macOS with VMwareFusion](https://forum.vvvv.org/t/installation-guideline-for-windows11-arm-on-apple-silicon-macos-with-vmwarefusion-on-an-external-ssd/24328)
 
 ## Gallery
 
@@ -60,5 +53,4 @@ Plus two new entries in the forum’s work-in-progress section:
 - There maybe some more on [The Interactive & Immersive Job Board](https://jobs.interactiveimmersive.io/jobs/) and [dasauge.de](https://dasauge.de/sta/Vvvv/)
 - If you need a vvvv specialist or are one yourself, check out this listing of [vvvv specialists available for hire](https://legacy.vvvv.org/documentation/vvvv-specialists-available-for-hire)
 
-That was it for March. Anything to add? Please do so in the comments!
-
+That was it for May. Anything to add? Please do so in the comments!
