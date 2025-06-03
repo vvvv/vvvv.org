@@ -18,20 +18,13 @@ export default defineConfig({
     },
   },
   base: "http://localhost:5173/",
-  // css: {
-  //   preprocessorOptions: {
-  //     scss: {
-  //       additionalData: `@import "@scss/main.scss";`, // Automatically include variables or mixins
-  //     },
-  //   },
-  // },
   server: {
     watch: {
       followSymlinks: true // Watch to symbolic links
     }
   },
   build: {
-    outDir: "../../public/js/vue/",
+    outDir: "../../static/js/vue/",
   rollupOptions: {
     output: {
       // manualChunks: {

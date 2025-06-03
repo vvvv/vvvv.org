@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "serve": "vite",
-    "build": "vue-tsc -b && vite build --base=/js/vue",
+    "build": "vue-tsc -b && vite build --base=/js/vue --emptyOutDir",
     "watch": "vite build --watch --base=/js/vue",
     "preview": "vite preview"
   },

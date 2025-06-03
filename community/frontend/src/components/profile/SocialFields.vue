@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, defineModel } from 'vue'
+import { ref, onMounted } from 'vue'
 import { NFormItem, NInput } from 'naive-ui'
 
 const model = defineModel('value')

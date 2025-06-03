@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, defineModel } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { toHtml, toMd } from '../../utils.js'
 import { NInput } from 'naive-ui';
 
