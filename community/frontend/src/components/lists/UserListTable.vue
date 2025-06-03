@@ -129,7 +129,12 @@ function jumpToPage()
 }
 
 watchEffect(async () => { 
-    await fetchUserData( loading, tableData, state );
+
+    loading.value = true;
+    
+    await fetchUserData( tableData, state );
+
+    loading.value = false;
 
     if (state.value.totalPages > 0)
     {

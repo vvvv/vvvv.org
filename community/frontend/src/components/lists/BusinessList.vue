@@ -4,6 +4,7 @@ import { NSpin } from 'naive-ui'
 import Constants from '../../constants'
 import { fetchBusinessData } from "./fetchBusinessData.js";
 import { useRouter } from 'vue-router'
+import defaultLogo from '../../assets/defaultLogo.png'
 
 
 // const Map = defineAsyncComponent(() =>
@@ -19,7 +20,9 @@ const loading = ref (true);
 
 onMounted( async ()=>
 {
-    fetchBusinessData(loading, companies, count, emit)
+    loading.value = true;
+    fetchBusinessData(companies, count, emit)
+    loading.value = false;
 })
 
 const handleClick = (name) => {
@@ -59,8 +62,8 @@ const queryCoordinates=()=>{
                     @click="handleClick(name)"
                     >
                     <div class="company">
-                        <div class="logo" style="height:60px">
-                            <img :src="logo" v-if="profilepic !== null"/>
+                        <div class="logo">
+                            <img :src="logo || defaultLogo" v-if="profilepic !== null"/>
                         </div>
                         <p class="name">{{ name }}</p>
                         <p>{{ description }}</p>

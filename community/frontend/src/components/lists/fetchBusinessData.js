@@ -9,11 +9,8 @@ function logoSrc (src)
     return src ? `${Constants.ASSETS}${src}?${LOGO_SETTINGS}` : null;
 }
 
-export async function fetchBusinessData( loading, companies, count, emit)
+export async function fetchBusinessData( companies, count, emit)
 {
-
-    loading.value = true
-
 
     try{
         const response = await fetch (URL);
@@ -34,8 +31,5 @@ export async function fetchBusinessData( loading, companies, count, emit)
     }
     catch (error) {
         console.log("error")
-    }
-    finally{
-        loading.value = false
     }
 }

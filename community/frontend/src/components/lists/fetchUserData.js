@@ -6,9 +6,8 @@ const FIELDS =`fields[]=username,userpic,related.hire.available,date_created`
 
 const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 
-export async function fetchUserData ( loading, tableData, state)
+export async function fetchUserData (tableData, state)
 {
-        loading.value = true
 
         const url = makeURL(state)
 
@@ -36,9 +35,6 @@ export async function fetchUserData ( loading, tableData, state)
         {
             console.error(error)
             state.value.error = "Failed to fetch user data";
-        }
-        finally{
-            loading.value = false
         }
 }
 
