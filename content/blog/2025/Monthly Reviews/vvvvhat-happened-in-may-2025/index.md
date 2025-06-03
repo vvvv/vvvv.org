@@ -44,9 +44,10 @@ We got updates to the following:
 - [VL.Audio.UI](https://www.nuget.org/packages/VL.Audio.UI)
 - [VL.Audio](https://www.nuget.org/packages/VL.Audio)
 
-Plus a new entriy in the forum’s work-in-progress section:
+Plus two new entries in the forum’s work-in-progress section:
 
 - [VL.Bunraku](https://forum.vvvv.org/t/introducing-vl-bunraku/24323)
+- [Installation Guideline for Windows11 ARM on Apple Silicon / macOS with VMwareFusion (on an external SSD)](https://forum.vvvv.org/t/installation-guideline-for-windows11-arm-on-apple-silicon-macos-with-vmwarefusion-on-an-external-ssd/24328)
 
 ## Gallery
 
