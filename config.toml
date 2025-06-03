@@ -4,7 +4,6 @@ pagination.pagerSize = 20
 pagination.path = "page"
 summaryLength = 20
 title = "vvvv - visual live-programming for .NET"
-relativeURLs = "true"
 
 [sitemap]
   changefreq = 'daily'
@@ -110,18 +109,27 @@ blog = '/blog/:sections[1]/:slug'
 		Copy = 'vvvv is free without any restrictions for non-commercial use.<br/>Commercial use requires a <a href="https://store.vvvv.org/" target="_blank">License</a>.'
 
 		[params.Download.gamma]
+
+		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
+		StableLinkARM = ""
+		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
+		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
+
 		Headline = "vvvv gamma"
 		Copy = "First released in April 2020, vvvv gamma is the next generation of vvvv, entirely rewritten from scratch."
 
+		Tab64bit = "Windows"
+		TabARM = "Windows Arm"
+		TabMac = "Mac / Parallels"
+
 		StableText  = "Download: Stable"
-    		StableLink = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
 		StableVersion = "Version: 6.7"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
-		
-		CurrentPreviewBuildType = "vvvv_gamma_Build20225"
+
+		MacText = '<p>vvvv does not have a native version for macOS!</p><p>But if you`re running on Apple silicon and using <a href="https://www.parallels.com/de/products/desktop/" target="_blank">Parallels</a> is an option for you, please use the "Windows Arm" builds and see <a href="https://thegraybook.vvvv.org/reference/best-practice/vvvv-on-mac.html" target="_blank">Running vvvv on a Mac</a> for some fine-print!</p>'
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"

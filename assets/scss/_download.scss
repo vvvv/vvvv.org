@@ -1,105 +1,161 @@
-#PreviewDownloads 
-{
-    .modal-header
-    {
-        padding-left: 0;
-        padding-right: 0;
-        border: none;
+#Download{
+
+    .btn-primary{
+        background-color: $orange;
+        border-color: $orange;
     }
 
-    p
-    {
-        color: #ddd;
+    #download-tabs{
+        .tab{
+            margin-right: 1rem;
+            text-transform: none;
+            color: #ccc;
+            font-weight: 600;
+            border-bottom: #444 2px solid;
+            border-radius: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            font-size: 1rem;
+
+            &:hover{
+                border-bottom: #888 2px solid;
+            }
+
+            &.active{
+                border-bottom: $orange 2px solid;
+                color: #fff;
+            }
+
+            text-decoration: none;
+        }
     }
 
-    h3
-    {
-        font-size: 1.1em;
-        font-weight: 600;
-        color: #fff;
-        margin-bottom: 0;
+    .tab-content{
+        .smallerText p
+        {
+            a{
+                text-decoration: underline;
+                text-underline-offset: 0.3rem;
+                text-decoration-color: #999;
+                color: #fff;
+
+                &:hover{
+                    color: $orange;
+                }
+            }
+
+            font-size: 0.95rem;
+            color: #ddd;
+            margin-right: 1rem;
+        }
     }
 
-    hr {
-        max-width: 100%;
-        border-color: #999;
-        border-width: 1px;
-        margin-bottom: 1.5em;
+    #PreviewDownloads
+    {
+        .modal-header
+        {
+            padding-left: 0;
+            padding-right: 0;
+            border: none;
+        }
+
+        p
+        {
+            color: #ddd;
+        }
+
+        h3
+        {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        hr {
+            max-width: 100%;
+            border-color: #999;
+            border-width: 1px;
+            margin-bottom: 1.5em;
+        }
+        
+        a
+        {
+            border-bottom: 1px solid #bbb;
+        }
+
+        td
+        {
+            padding: 0 0.5em 1.5em 0;
+            font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+
+            font-size: 1em;
+
+            &.date
+            {
+                font-size: 0.8em;
+                color: #aaa;
+                padding: 0;
+                vertical-align: top;
+            }
+        }
+
+        .changes
+        {
+            /* font-size: 0.8em; */
+            border-bottom: 1px solid #bbb;
+            color: #aaa;
+
+            &:hover
+            {
+                border-bottom: 1px solid #fff;
+            }
+        }
+
+        // .previewButton
+        // {
+        //     border-radius: 0.4em;
+        //     border-bottom: 0;
+        //     text-decoration: none;
+        //     font-weight: normal;
+        //     font-size: 1em;
+        //     padding: 0.6em 0.6em;
+        // }
+
+        .modal-dialog a
+        {
+            color: #000;
+            text-decoration: underline;
+            border: none;
+        }
+
+        ul
+        {
+            margin-bottom: 1.5em;
+        }
+    }
+
+    #PreviousReleases
+    {
+        color: #ccc;
+        
+        a
+        {
+            border-bottom: 1px solid #888;
+            text-decoration: none;
+        }
     }
     
-    a
-    {
-        border-bottom: 1px solid #bbb;
+    
+    .tippy-tooltip {
+        background-color: #444;
+        min-width: 500px;
+    }
+      
+    .tippy-tooltip[data-placement^='right'] > .tippy-arrow{
+        border-right-color: #444;
     }
 
-    td
-    {
-        padding: 0 0.5em 1.5em 0;
-        font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
-
-        font-size: 1em;
-
-        &.date
-        {
-            font-size: 0.8em;
-            color: #aaa;
-            padding: 0;
-            vertical-align: top;
-        }
-    }
-
-    .changes
-    {
-        /* font-size: 0.8em; */
-        border-bottom: 1px solid #bbb;
-        color: #aaa;
-
-        &:hover
-        {
-            border-bottom: 1px solid #fff;
-        }
-    }
-
-    .previewButton
-    {
-        border-radius: 0.4em;
-        border-bottom: 0;
-        text-decoration: none;
-        font-weight: normal;
-        font-size: 1em;
-        padding: 0.6em 0.6em;
-    }
-
-    .modal-dialog a
-    {
-        color: #000;
-        text-decoration: underline;
-        border: none;
-    }
-
-    ul
-    {
-        margin-bottom: 1.5em;
-    }
 }
 
-#PreviousReleases
-{
-  color: #ccc;
-  
-  a
-  {
-    border-bottom: 1px solid #888;
-    text-decoration: none;
-  }
-}
-
-.tippy-tooltip {
-    background-color: #444;
-    min-width: 500px;
-  }
-  
-.tippy-tooltip[data-placement^='right'] > .tippy-arrow{
-    border-right-color: #444;
-}
   
