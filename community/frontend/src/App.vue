@@ -28,12 +28,27 @@ const logout = ()=> {
 
 const authenticated = computed(()=>isAuthenticated())
 
-const leftTabs = computed(() =>
-  router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => ({
+const leftTabs = computed(() => {
+  let tabs = router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => ({
     name: r.meta.tabName,
     path: r.path,
   }))
-);
+
+  addTabs(tabs);
+
+  return tabs;
+});
+
+function addTabs(tabs) 
+{  
+  tabs.unshift(
+    {
+        name: "Forum",
+        external: true,
+        path: "http://forum.vvvv.org"
+    }
+  );
+}
 
 const rightTabs = computed(() =>
   router.getRoutes().filter((r) => !r.meta?.isLeft).map((r) => ({
@@ -47,7 +62,6 @@ const tabs = computed(()=>
 )
 
 onMounted(() => {
-
   if (route.path === '/')
   {
     router.currentRoute.value.path = window.location.pathname
@@ -61,7 +75,14 @@ const handleTabChange = ( tabName ) => {
   const tab = tabs.value.find(t => t.name === tabName)
   if (tab) {
     activeTab.value = tabName;
-    router.push(tab.path); // Navigate to the selected tab's route
+    if (tab?.external)
+    {
+       window.location = tab.path;
+    }
+    else
+    {
+      router.push(tab.path); // Navigate to the selected tab's route
+    }
   }
 };
 

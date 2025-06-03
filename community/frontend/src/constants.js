@@ -1,19 +1,22 @@
-const DIRECTUS_LOCAL="http://localhost:8058/"
-const DIRECTUS_REMOTE="https://data.vvvv.org/"
+const DATA_LOCAL="http://localhost:8058/"
+const DATA_REMOTE="https://data.vvvv.org/"
 
 const BACKEND_LOCAL="http://localhost:4050/v1/"
 const BACKEND_REMOTE="https://io.vvvv.org/v1/"
 
-const DIRECTUSURL = DIRECTUS_REMOTE
-const BACKENDURL = BACKEND_LOCAL
+const DATAURL = DATA_REMOTE
+const BACKENDURL = BACKEND_REMOTE
 
 export default Object({   
 
-    //DIRECTUS
-    BASEURL: DIRECTUSURL, 
-    ASSETS: DIRECTUSURL + "assets/",
-    GET_COMPANIES: DIRECTUSURL + 'items/Company',
-    GET_USERS: DIRECTUSURL + 'items/User',
+    //LINKS
+    FORUM:"https://forum.vvvv.org/",
+
+    //DATA
+    BASEURL: DATAURL, 
+    ASSETS: DATAURL + "assets/",
+    GET_COMPANIES: DATAURL + 'items/Company',
+    GET_USERS: DATAURL + 'items/User',
 
     //BACKEND
     BACKEND_GET_USER: BACKENDURL + "userinfo",
@@ -26,7 +29,5 @@ export default Object({
         url: 'https://login.vvvv.org/',
         realm: 'vvvv', 
         clientId: 'weblogin'
-    },
-    LOGIN_REDIRECT: 'http://localhost:1313/',
-    
+    }
 })
