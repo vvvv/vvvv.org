@@ -44,7 +44,7 @@ Plus two new entries in the forum’s work-in-progress section:
 
 ## Gallery
 
-{{< mastodon "mastodon.xyz/@3e8/114522194621342818" 550 >}}
+{{< mastodon "mastodon.xyz/@3e8/114522194399375178" 550 >}}
 
 [3e8](https://3e8.studio/en/) is in the process of finalizing experiments with spatial sound synthesis and visualization, in close collaboration with artist and composer Ben Wesch - making use of #puredata, vvvv and a 20 speaker dodecahedron provided by OTTOsonics and the [Tangible Music Lab Linz](https://tamlab.kunstuni-linz.at/).
 
