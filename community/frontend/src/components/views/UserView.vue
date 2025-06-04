@@ -90,7 +90,7 @@ const forumLink = computed(()=>
         </div>
         <div class="col-lg-8">
           <SocialView :social="social" :order="socialKeys" v-if="social" />
-          <div class="row mt-4" v-if="hire">
+          <div class="row mt-4" v-if="hire && hire.available">
             <div class="col">
               <h4 class="h4">Available for hire</h4>
               <div class="card">

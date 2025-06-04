@@ -1,10 +1,15 @@
 import Constants from './constants'
-import axios from 'axios';
+import axios from 'axios'
 import { getAccessToken } from './keycloak-helper'
 import Showdown from 'showdown'
 import { countries } from './countries'
+import router from './router'
 
-const converter = new Showdown.Converter()
+const converter = new Showdown.Converter();
+
+export const showProfile = (username) => {
+    router.push(`/user/list/?u=${username}`);
+}
 
 export const toHtml = d => converter.makeHtml(d)
 export const toMd = d => converter.makeMarkdown(d)

@@ -16,6 +16,7 @@ const isChanged = ref(false);
 const form = ref(null);
 const formRef = ref(null);
 const formRef2 = ref(null);
+const formImage = ref(null);
 const updating = ref(false);
 const limit = 500;
 const uploader = ref(null);
@@ -135,32 +136,43 @@ const imageButtonText = computed(()=>{
 
   <hr class="mt-1 mb-4"/>
 
-  <div class="form-group row mb-2">
-      <label class="col-sm-2 col-form-label">Image</label>
-      <div class="col-sm-10">
-        <div class="row">
-          <div class="col-6" v-if="image !== null">
-            <img :src="image" class="img-fluid"/>
+  <n-form
+      ref="formImage"
+      :model="form"
+      label-placement="left"
+      :label-width="120"
+      require-mark-placement="right-hanging"
+      >
+      <n-form-item label="Image">
+          <div class="row">
+            <div class="col-6" v-if="image !== null">
+              <img :src="image" class="img-fluid"/>
+            </div>
+            <div class="col-6">
+              <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
+              <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
+            </div>
           </div>
-          <div class="col-6">
-            <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
-            <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
-          </div>
-        </div>
-      </div>
-  </div>
+      </n-form-item>
+  </n-form>
 
   <n-form
       v-if="form !== null"
       ref="formRef2"
       :model="form"
       label-placement="left"
-      :label-width="160"
+      :label-width="120"
       require-mark-placement="right-hanging"
       >
-    <FieldEditor v-model="form.description" id="description" label="Description" :limit="limit"/>
-    <FieldEditor v-model="form.skills_vvvv" id="vvvv_skills" label="VVVV skills" :limit="limit"/>
-    <FieldEditor v-model="form.skills_other" id="other_skills" label="Other skills" :limit="limit"/>
+    <n-form-item label="Description">
+      <Editor v-model="form.description" class="fullWidth" :limit="limit"/>
+    </n-form-item>
+    <n-form-item label="VVVV skills">
+      <Editor v-model="form.skills_vvvv" class="fullWidth" :limit="limit"/>
+    </n-form-item>
+    <n-form-item label="Other skills">
+      <Editor v-model="form.skills_other" class="fullWidth" :limit="limit"/>
+    </n-form-item>
 
     <div class="form-group row mb-2">
       <label class="col-sm-2 col-form-label">Available for</label>
