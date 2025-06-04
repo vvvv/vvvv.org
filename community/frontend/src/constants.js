@@ -5,7 +5,7 @@ const BACKEND_LOCAL="http://localhost:4050/v1/"
 const BACKEND_REMOTE="https://io.vvvv.org/v1/"
 
 const DATAURL = DATA_REMOTE
-const BACKENDURL = BACKEND_REMOTE
+const BACKENDURL = import.meta.env.DEV ? BACKEND_LOCAL: BACKEND_REMOTE
 
 export default Object({   
 
