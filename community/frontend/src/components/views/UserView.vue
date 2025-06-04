@@ -67,6 +67,10 @@ const fullName = computed(() => {
     return name ? name : null;
 })
 
+const forumLink = computed(()=>
+  'https://forum.vvvv.org/u/'+ user.value.username + '/summary'
+)
+
 </script>
 
 <template>
@@ -82,6 +86,7 @@ const fullName = computed(() => {
               </div>
               <p class="text-muted mb-4" v-if="location">{{ location }}</p>
               <p class="text-muted mb-1">{{ user.statement ?? ''}}</p>
+              <p class="mb-1"><a class="btn btn-outline-secondary" :href="forumLink">Open Forum Profile</a></p>
         </div>
         <div class="col-lg-8">
           <SocialView :social="social" :order="socialKeys" v-if="social" />

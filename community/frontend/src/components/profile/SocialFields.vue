@@ -1,6 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { NFormItem, NInput } from 'naive-ui'
+import InfoButton from "../InfoButton.vue";
+import InputField from "../InputField.vue";
 
 const model = defineModel('value')
 
@@ -8,27 +10,21 @@ const model = defineModel('value')
 <template>
     <div class="row">
         <div class="col-12 col-lg-6">
-            <n-form-item label="Website" path="website">
-                <n-input v-model:value="model.website" placeholder="Website"/>
-            </n-form-item>
-            <n-form-item label="Github" path="github">
-                <n-input v-model:value="model.github" placeholder="Github"/>
-            </n-form-item>
-            <n-form-item label="NuGet" path="nuget">
-                <n-input v-model:value="model.nuget" placeholder="NuGet"/>
-            </n-form-item>
+            <InputField path="website" label="Website" info="Website" v-model="model.website"/>
+            <InputField path="github" label="Github" info="Github" placeholder="Github" v-model="model.github"/>
+            <InputField path="nuget" label="NuGet" info="Nuget" placeholder="NuGet" v-model="model.nuget"/>
         </div>
         <div class="col-12 col-lg-6">
-            <n-form-item label="Mastodon" path="mastodon">
-                <n-input v-model:value="model.mastodon" placeholder="mastodon.xyz/@vvvv"/>
-            </n-form-item>
-            <n-form-item label="Pixelfed" path="pixelfed">
-                <n-input v-model:value="model.pixelfed" placeholder="pixelfed.social/madewithvvvv"/>
-            </n-form-item>
+            <InputField path="mastodon" label="Mastodon" info="Mastodon" placeholder="mastodon.xyz/@vvvv" v-model="model.mastodon"/>
+            <InputField path="pixelfed" label="Pixelfed" info="Pixelfed" placeholder="pixelfed.social/madewithvvvv" v-model="model.pixelfed"/>
         </div>
     </div>
 
-    <n-form-item label="Custom Fields">
+    <n-form-item>
+        <template #label>
+            Custom Fields
+            <InfoButton info="Custom Fields"/>
+        </template>
         <div class="d-flex flex-column">
             <template v-for="(field, index) in model.fields" :key="index">
                 <div class="row mb-3 mb-lg-2">

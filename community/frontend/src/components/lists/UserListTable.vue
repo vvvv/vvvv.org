@@ -171,6 +171,7 @@ watchEffect(async () => {
                 style="width: 10rem;" 
                 @clear="clearFilter" 
                 @keyup.enter="applyFilter"
+                @keyup.esc="clearFilter"
                 clearable/>
             <n-button 
                 strong 
