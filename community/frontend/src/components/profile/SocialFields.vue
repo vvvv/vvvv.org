@@ -1,8 +1,9 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { NFormItem, NInput } from 'naive-ui'
+import { ref, onMounted } from 'vue';
+import { NFormItem, NInput } from 'naive-ui';
 import InfoButton from "../InfoButton.vue";
 import InputField from "../InputField.vue";
+import Helps from "./helps.js";
 
 const model = defineModel('value')
 
@@ -23,7 +24,7 @@ const model = defineModel('value')
     <n-form-item>
         <template #label>
             Custom Fields
-            <InfoButton info="Custom Fields"/>
+            <InfoButton :info="Helps['customFields']"/>
         </template>
         <div class="d-flex flex-column">
             <template v-for="(field, index) in model.fields" :key="index">

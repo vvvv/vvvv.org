@@ -2,11 +2,15 @@
 import { computed } from 'vue'
 import { NButton, NRow, NCol } from 'naive-ui'
 
-const { ml = 100 } = defineProps({ ml: Number});
+const { ml = 100, updating = false } = defineProps({ ml: Number, updating: Boolean});
 
 const style = computed(()=>{
   return `margin-left: ${ml}px`;
 });
+
+const buttonLabel = computed(()=>
+  updating ? 'Updating...' : 'Submit'
+);
 
 const emit = defineEmits(['submit', 'revert'])
 
@@ -16,7 +20,7 @@ const emit = defineEmits(['submit', 'revert'])
   <div class="row" :style="style">
     <div class="col-6 col-md-2 mb-2">
       <n-button @click="emit('submit')" :disabled="updating" type="primary">
-        Submit
+        {{ buttonLabel }}
       </n-button>
     </div>
     <div class="col-6 col-md-2">
