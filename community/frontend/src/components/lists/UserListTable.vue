@@ -128,6 +128,11 @@ function jumpToPage()
     }        
 }
 
+watchEffect(() => {
+    if (filterField.value === "")
+        applyFilter();
+}); 
+
 watchEffect(async () => { 
 
     loading.value = true;
@@ -158,19 +163,29 @@ watchEffect(async () => {
 
 <template>
     <div class="row mb-3">
-        <div class="col">
-            <n-input v-model:value="filterField" type="text" placeholder="Username" style="width: 10rem;" @clear="clearFilter" clearable/>
-            <n-button strong secondary @click="applyFilter" class="ml-xs-0 ml-2">Search</n-button>
+        <div class="col-12 mb-3 mb-md-0 col-md">
+            <n-input 
+                v-model:value="filterField" 
+                type="text" 
+                placeholder="Username" 
+                style="width: 10rem;" 
+                @clear="clearFilter" 
+                @keyup.enter="applyFilter"
+                clearable/>
+            <n-button 
+                strong 
+                secondary 
+                @click="applyFilter" 
+                class="ml-xs-0 ml-2">Search</n-button>
         </div>
-        <div class="ml-auto mr-1">
+        <div class="ml-3 ml-md-auto mr-3">
             <n-pagination 
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
                 show-size-picker
                 :on-update:page="handlePageChange"
-                :on-update:page-size="handlePageSizeChange"
-            />
+                :on-update:page-size="handlePageSizeChange"/>
         </div>
     </div>
     <n-space vertical :size="12">
@@ -178,8 +193,7 @@ watchEffect(async () => {
             :loading="loading"
             :bordered="false"
             :columns="columns"
-            :data="tableData"
-            />
+            :data="tableData"/>
     </n-space>
         <div class="row mt-3">
             <div class="ml-auto">
