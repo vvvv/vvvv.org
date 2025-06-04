@@ -214,5 +214,5 @@ const logoButtonText = computed(()=>{
         </n-form-item>
         <SocialFields v-model:value="form[0].social"/>
       </NForm>
-      <SubmitRevertButtons @revert="prepareData" @submit="submit"/>
+      <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

@@ -43,7 +43,7 @@ watch (model, (newValue)=>{
       <div class="col px-0 ml-3">
         <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable class="field-input"/>
       </div>
-        <div class="col overflow-auto rounded field-preview py-1 text-muted" v-html="html">
+        <div class="col overflow-auto rounded field-preview py-1 text-muted bg-light" v-html="html">
       </div>
     </div>
 </template>

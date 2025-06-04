@@ -109,7 +109,7 @@ const submit = async () => {
     console.log (error);
   }
   finally {
-    updating.value = false
+    updating.value = false;
   }
 }
 
@@ -190,7 +190,7 @@ const avatarButtonText = computed(()=>{
 
         <SocialFields v-model:value="form.social"/>
 
-        <SubmitRevertButtons @revert="revert" @submit="submit"/>
+        <SubmitRevertButtons @revert="revert" @submit="submit" :updating="updating"/>
     </n-form>
   </template>
 </template>

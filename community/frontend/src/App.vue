@@ -28,27 +28,15 @@ const logout = ()=> {
 
 const authenticated = computed(()=>isAuthenticated())
 
-const leftTabs = computed(() => {
-  let tabs = router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => ({
-    name: r.meta.tabName,
-    path: r.path,
-  }))
-
-  addTabs(tabs);
-
-  return tabs;
-});
-
-function addTabs(tabs) 
-{  
-  tabs.unshift(
+const leftTabs = computed(() => 
+  router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => (
     {
-        name: "Forum",
-        external: true,
-        path: "http://forum.vvvv.org"
+      name: r.meta.tabName,
+      path: r.path,
     }
-  );
-}
+  ))
+);
+
 
 const rightTabs = computed(() =>
   router.getRoutes().filter((r) => !r.meta?.isLeft).map((r) => ({

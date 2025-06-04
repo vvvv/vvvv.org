@@ -169,5 +169,5 @@ const imageButtonText = computed(()=>{
       </div>
     </div>
   </n-form>
-  <SubmitRevertButtons @revert="prepareData" @submit="submit"/>
+  <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>
