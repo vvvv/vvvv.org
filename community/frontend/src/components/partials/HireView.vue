@@ -4,7 +4,11 @@ import { NTag, NSpace } from 'naive-ui'
 import { toHtml, createAssetUrl } from '../../utils'
 
 const { data, contact } = defineProps({ data: Object, contact: String })
-const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=512";
+
+// Use image as is
+// or set the params to control how to transform it before download
+// "?withoutEnlargement=true&quality=90&fit=cover&width=512"
+const imageParams = "";
 
 const hire = computed(()=>{
 
