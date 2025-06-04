@@ -27,7 +27,7 @@ const prepareData = ()=>{
 
   var temp = { ...data };
 
-  if (!userpic.value && temp.user?.userpic?.id);
+  if (!userpic.value && temp.user?.userpic?.id)
   {
     userpic.value = createAssetUrl(temp.user.userpic.id) + imageParams;
   }
@@ -143,7 +143,7 @@ const avatarButtonText = computed(()=>{
         :label-width="120"
         require-mark-placement="right-hanging"
         >
-        <n-form-item label="Status" path="status" v-if="form.user?.status != '1'">
+        <n-form-item label="Status" path="status" v-if="form.user && form.user.status !== undefined && form.user.status != '1'">
           <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
           <n-tag :bordered="false" type="error" v-else-if="form.user.status == '2'">Disabled</n-tag>
         </n-form-item>
