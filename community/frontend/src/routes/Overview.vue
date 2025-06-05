@@ -1,39 +1,38 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import NewestUsers from "../components/overview/NewestUsers.vue"
+import Businesses from "../components/overview/Businesses.vue"
+import ForHire from "../components/overview/ForHire.vue"
 import '../styles/style.scss'
+import { fetchOverview } from '../routes/fetchOverview.js'
+
+const data = ref (null);
+
+onMounted(async ()=>{
+    try{
+        data.value = await fetchOverview();
+    }
+    catch (error)
+    {
+        console.log (error);
+    }
+})
+
+const columnClass='col-12 col-md-6 col-lg mb-3 mb-lg-0';
 
 </script>
 
 <template>
     <h1>Overview</h1>
-    <div class="row">
-        <div class="col">
-            <NewestUsers/>
+    <div class="row" v-if="data">
+        <div :class="columnClass">
+            <NewestUsers :data="data.users"/>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    Businesses
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
-            </div>
+        <div :class="columnClass">
+            <Businesses :data="data.businesses"/>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    For Hire!
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
-            </div>
+        <div :class="columnClass">
+            <ForHire :data="data.forHire"/>
         </div>
     </div>
 </template>

@@ -11,7 +11,7 @@ const router = useRouter();
 
 function showAll()
 {
-    router.push('/user/list');
+    router.push('/user/forhire');
 }
 
 </script>
@@ -19,7 +19,7 @@ function showAll()
 <template>
     <div class="card" v-if="data.length > 0">
         <div class="card-header">
-            Newest Profiles
+            Newly updated Professionals
         </div>
         <div class="card-body">
             <div class="row mb-1" v-for="user in data" :key="user.username">

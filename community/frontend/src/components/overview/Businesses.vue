@@ -11,7 +11,7 @@ const router = useRouter();
 
 function showAll()
 {
-    router.push('/user/list');
+    router.push('/users/businesses');
 }
 
 </script>
@@ -19,15 +19,15 @@ function showAll()
 <template>
     <div class="card" v-if="data.length > 0">
         <div class="card-header">
-            Newest Profiles
+            Newly updated Businesses
         </div>
         <div class="card-body">
-            <div class="row mb-1" v-for="user in data" :key="user.username">
+            <div class="row mb-1" v-for="business in data" :key="business.name">
                 <div class="col-2">
-                    <NAvatar objectFit="contain" round="true" :src="user.userpic"/>
+                    <NAvatar objectFit="contain" round="true" :src="business.logo"/>
                 </div>
                 <div class="col-10">
-                    <a @click="showProfile(user.username)">{{ user.username }}</a>
+                    <a @click="showProfile(business.name)">{{ business.name }}</a>
                 </div>
             </div>
         </div>

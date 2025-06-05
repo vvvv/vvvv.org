@@ -33,11 +33,11 @@ const hire = computed(()=>{
     <div class="card-body">
         <div class="row">
             <div class="col-12 col-lg-6" v-if="hire.image">
-                <img :src="hire.image" class="img-fluid pt-2 mb-2"/>
+                <img :src="hire.image" class="img-fluid pt-2 mb-4"/>
+                <p class="card-text" v-html="hire.description"></p>
             </div>
             <hr class="d-lg-none mt-3 mt-lg-0"/>
             <div class="col-12 col-lg-6">
-                <p class="card-text" v-html="hire.description"></p>
                 <template v-if="hire.skills_vvvv">
                     <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>vvvv skills</b></p>
                     <p class="card-text" v-html="hire.skills_vvvv"></p>
