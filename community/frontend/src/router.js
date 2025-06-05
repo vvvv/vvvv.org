@@ -1,11 +1,12 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 import { isAuthenticated, kclogin } from './keycloak-helper.js'
-import { isRouteLoading } from "./globalState.js";
+import { isRouteLoading } from "./globalState.js"
+import Overview from "./routes/Overview.vue"
 
-const Users = () => import('./routes/Users.vue')
-const EditUser = () => import('./routes/EditUser.vue')
-const Businesses = () => import('./routes/Businesses.vue')
-const ForHireList = () => import('./routes/ForHireList.vue')
+const Users = () => import('./routes/Users.vue');
+const EditUser = () => import('./routes/EditUser.vue');
+const Businesses = () => import('./routes/Businesses.vue');
+const ForHireList = () => import('./routes/ForHireList.vue');
 
 const requireAuth = (to, from, next) => {
     if (isAuthenticated()){
@@ -20,21 +21,27 @@ const requireAuth = (to, from, next) => {
 const routes = [
     {
         path: '/user/',
+        name: 'Overview',
+        component: Overview,
+        meta: { tabName: 'Overview', isLeft: true, order: 0 }
+    },
+    {
+        path: '/user/list',
         name: 'Users',
         component: Users,
-        meta: { tabName: 'Users', isLeft: true }
+        meta: { tabName: 'Users', isLeft: true, order: 1 }
     },
     {
         path: '/user/businesses/',
         name: 'Businesses',
         component: Businesses,
-        meta: { tabName: 'Businesses', isLeft: true }
+        meta: { tabName: 'Businesses', isLeft: true, order: 2 }
     },
     {
         path: '/user/forhire/',
         name: 'For Hire',
         component: ForHireList,
-        meta: { tabName: 'For Hire', isLeft: true }
+        meta: { tabName: 'For Hire', isLeft: true, order: 3 }
     },
     {
         path: '/user/edit/',

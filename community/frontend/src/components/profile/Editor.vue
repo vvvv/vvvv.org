@@ -6,7 +6,7 @@ import { NInput } from 'naive-ui';
 const editorContainer = ref(null);
 
 const emit = defineEmits(['update'])
-const { id, limit } = defineProps (['id', 'limit'])
+const { limit } = defineProps (['limit'])
 
 const count = ref(0)
 const model = defineModel()
@@ -40,7 +40,7 @@ watch (model, (newValue)=>{
 
 <template>
     <div class="row">
-      <div class="col px-0 ml-3">
+      <div class="col px-0">
         <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable class="field-input"/>
       </div>
         <div class="col overflow-auto rounded field-preview py-1 text-muted bg-light" v-html="html">

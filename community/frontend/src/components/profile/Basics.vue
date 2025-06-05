@@ -5,6 +5,7 @@ import Constants from '../../constants.js'
 import SocialFields from './SocialFields.vue'
 import FileUploader from './FileUploader.vue'
 import FieldInput from './FieldInput.vue'
+import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
@@ -20,6 +21,7 @@ const userpic = ref(null);
 const tempUserpic = ref(null);
 const updating = ref(false);
 const uploader = ref(null);
+const limit = 256;
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
 
@@ -174,6 +176,11 @@ const avatarButtonText = computed(()=>{
         <n-form-item label="Contact" path="contact">
           <n-input v-model:value="form.social.contact" placeholder="Prefered way of contact in human readable forms" />
         </n-form-item>
+
+        <n-form-item label="Statement" path="statement">
+          <Editor class="fullWidth" v-model="form.user.statement" label="Statement" :limit="limit"/>
+        </n-form-item>
+
         <n-form-item label="Location" path="location">
           <div class="row">
             <div class="col">

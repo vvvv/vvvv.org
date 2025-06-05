@@ -5,7 +5,8 @@ import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { clone, post, createAssetUrl, makeFields }  from '../../utils.js'
+import Editor from './Editor.vue'
+import { post, createAssetUrl, makeFields }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -25,6 +26,7 @@ const emptyCompany = {
   enabled: false,
   logo: null,
   name: "",
+  tagline: "",
   description: "",
   status: 0,
   website: "",
@@ -32,7 +34,7 @@ const emptyCompany = {
 }
 
 const prepareData = ()=>{
-  const temp = clone(data);
+  const temp = { ...data };
 
   if (temp.companies?.length > 0)
   {
@@ -47,7 +49,7 @@ const prepareData = ()=>{
   }
   else
   {
-    temp.companies = [clone(emptyCompany)];
+    temp.companies = [{ ...emptyCompany}];
     temp.companies[0].social.fields = makeFields([], 4);
     companyExists.value = false;
   }
@@ -88,8 +90,8 @@ const submit = async () => {
 
   if (!valid) return
 
-  updating.value = true
-  const formValue = clone(form.value[0])
+  updating.value = true;
+  const formValue = { ...form.value[0]};
 
   if (tempLogo.value == null)
   {
@@ -190,8 +192,8 @@ const logoButtonText = computed(()=>{
         </n-form-item>
         <div class="row">
           <div class="col">
-            <n-form-item label="Tagline" path="description">
-              <n-input v-model:value="form[0].description" placeholder="Tagline" />
+            <n-form-item label="Tagline" path="tagline">
+              <n-input v-model:value="form[0].tagline" placeholder="Tagline" />
             </n-form-item>
           </div>
         </div>
@@ -212,6 +214,11 @@ const logoButtonText = computed(()=>{
             </div>
           </div>
         </n-form-item>
+
+        <n-form-item label="Description" path="description">
+          <Editor class="fullWidth" v-model="form[0].description" label="Description" :limit="limit"/>
+        </n-form-item>
+
         <SocialFields v-model:value="form[0].social"/>
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>

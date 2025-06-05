@@ -1,11 +1,9 @@
 <script setup>
 import { ref, watchEffect, h, computed } from 'vue'
-import { useRouter } from 'vue-router'
 import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
-
-const router = useRouter()
+import { showProfile } from "../../utils.js"
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
@@ -28,10 +26,6 @@ const paginationRef = ref({
     showSizePicker: true,
     pageCount: 10
 })
-
-const showProfile = (username)=>{
-    router.push(`/user/?u=${username}`);
-}
 
 const filterField = ref("");
 const filterFieldForHire = ref(false);

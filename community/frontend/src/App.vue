@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, watchEffect } from 'vue'
 import Constants from './constants'
 import { useRouter, useRoute } from 'vue-router'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
@@ -29,12 +29,12 @@ const logout = ()=> {
 const authenticated = computed(()=>isAuthenticated())
 
 const leftTabs = computed(() => 
-  router.getRoutes().filter((r) => r.meta?.isLeft).map((r) => (
+  router.getRoutes().filter((r) => r.meta?.isLeft).sort((r)=> r.meta?.order).map((r) => (
     {
       name: r.meta.tabName,
       path: r.path,
     }
-  ))
+  )).sort()
 );
 
 
@@ -49,15 +49,14 @@ const tabs = computed(()=>
   leftTabs.value.concat(rightTabs.value)
 )
 
-onMounted(() => {
-  if (route.path === '/')
-  {
-    router.currentRoute.value.path = window.location.pathname
-  }
-
+watchEffect(()=>{
+  console.log (route.path);
+  console.log (tabs.value);
+  console.log (route);
   const matchedTab = tabs.value.find(t => t.path === route.path);
-  activeTab.value = matchedTab ? matchedTab.name : tabs.value[0]?.name;
-});
+  console.log(matchedTab);
+  activeTab.value = matchedTab ? matchedTab.name : null;
+})
 
 const handleTabChange = ( tabName ) => {
   const tab = tabs.value.find(t => t.name === tabName)

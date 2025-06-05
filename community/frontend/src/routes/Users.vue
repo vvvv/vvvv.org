@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
-import UserList from '../components/lists/UserList.vue'
+import UserListTable from '../components/lists/UserListTable.vue'
 import UserView from '../components/views/UserView.vue'
 import '../styles/style.scss'
 
@@ -12,5 +12,5 @@ const username = computed(()=> route.query.u || null);
 
 <template>
     <UserView v-if="username" :username="username"/>
-    <UserList v-else @showProfile="showProfile"/>
+    <UserListTable v-else/>
 </template>

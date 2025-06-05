@@ -17,6 +17,7 @@ export default Object({
     ASSETS: DATAURL + "assets/",
     GET_COMPANIES: DATAURL + 'items/Company',
     GET_USERS: DATAURL + 'items/User',
+    GET_HIRE: DATAURL + 'items/Hire',
 
     //BACKEND
     BACKEND_GET_USER: BACKENDURL + "userinfo",
