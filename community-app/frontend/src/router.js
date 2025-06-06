@@ -1,0 +1,88 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import { isAuthenticated, kclogin } from './keycloak-helper.js'
+import { isRouteLoading } from "./globalState.js"
+import Overview from "./routes/Overview.vue"
+
+const UserList = () => import('./routes/UserList.vue');
+const UserView = () => import('./routes/UserView.vue');
+
+const BusinessList = () => import('./routes/BusinessList.vue');
+const BusinessView = () => import('./routes/BusinessView.vue');
+
+const ForHireList = () => import('./routes/ForHireList.vue');
+const EditUser = () => import('./routes/EditUser.vue');
+
+const requireAuth = (to, from, next) => {
+    if (isAuthenticated()){
+        next();
+    } 
+    else {
+        kclogin(window.location.origin + to.fullPath.split('#')[0]);
+    }
+}
+
+
+const routes = [
+    {
+        path: '/community/',
+        name: 'Overview',
+        component: Overview,
+        meta: { tabName: 'Overview', visible: true, isLeft: true, order: 0 }
+    },
+    {
+        path: '/user/',
+        name: 'Users',
+        component: UserList,
+        meta: { tabName: 'Users', visible: true, isLeft: true, order: 1 },
+    },
+    {
+        path: '/user/:username',
+        name: 'User Profile',
+        component: UserView,
+        meta: { tabName: 'Users' },
+    },
+    {
+        path: '/business/',
+        name: 'Businesses',
+        component: BusinessList,
+        meta: { tabName: 'Businesses', visible: true, isLeft: true, order: 2 },
+    },
+        {
+        path: '/business/:name',
+        name: 'Business Profile',
+        component: BusinessView,
+        meta: { tabName: 'Businesses' }
+    },
+    {
+        path: '/forhire/',
+        name: 'For Hire',
+        component: ForHireList,
+        meta: { tabName: 'For Hire', visible: true, isLeft: true, order: 3 }
+    },
+    {
+        path: '/user/edit/',
+        name: 'Edit',
+        component: EditUser,
+        beforeEnter: requireAuth,
+        meta: { tabName: 'Profile', visible: true, isLeft: false }
+    },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
+    strict: false
+});
+
+// Add global navigation guards for loading state
+router.beforeEach((to, from, next) => {
+    isRouteLoading.value = true; // Start loading
+    next();
+});
+
+router.afterEach(() => {
+    isRouteLoading.value = false; // Stop loading
+});
+
+
+export default router;

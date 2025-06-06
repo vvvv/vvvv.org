@@ -78,7 +78,6 @@ blog = '/blog/:sections[1]/:slug'
 				url = 'https://forum.vvvv.org/'
 			[[params.menu.main]]
 				name = 'community'
-				localurl = 'user'
 			[[params.menu.main]]
 				name = 'licensing'
 				url = 'https://store.vvvv.org/'
