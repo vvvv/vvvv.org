@@ -11,7 +11,7 @@ const router = useRouter();
 
 function showAll()
 {
-    router.push('/user/list');
+    router.push({name: 'Users'});
 }
 
 </script>

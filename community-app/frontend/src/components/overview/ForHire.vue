@@ -11,7 +11,7 @@ const router = useRouter();
 
 function showAll()
 {
-    router.push('/user/forhire');
+    router.push({name: 'For Hire'});
 }
 
 </script>
