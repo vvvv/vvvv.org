@@ -24,13 +24,12 @@ const login = ()=> {
 }
 
 const logout = ()=> {
-  kclogout(window.location.origin + `/user`)
+  kclogout(window.location.origin + `/community`)
 }
 
 const authenticated = computed(()=>isAuthenticated())
 
 const leftTabs = computed(() => {
-  console.log (router.getRoutes());
 
   const tabs =  router.getRoutes().filter((r) => r.meta?.isLeft && r.meta?.visible).map((r) => (
       {
