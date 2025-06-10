@@ -25,9 +25,14 @@ const limit = 256;
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
 
+function clone(obj)
+{
+  return JSON.parse(JSON.stringify(obj))
+}
+
 const prepareData = ()=>{
 
-  var temp = { ...data };
+  var temp = clone(data);
 
   if (!userpic.value && temp.user?.userpic?.id)
   {
@@ -67,18 +72,36 @@ const submit = async () => {
   updating.value = true;
   const formValue  = { ...form.value };
   
+  let discourse = {};
+
   if (tempUserpic.value == null)
   {
     delete formValue.user.userpic
   }
   else
   {
-    formValue.user.userpic = tempUserpic.value
+    formValue.user.userpic = tempUserpic.value;
   }
-    
+
+  const infoChanged = formValue.user?.statement != data.user?.statement ||
+      formValue.social?.website != data.social?.website ||
+      formValue.user?.location_city != data.user?.location_city ||
+      formValue.user?.location_country != data.user?.location_country;
+
+  if (infoChanged) 
+    discourse.info = true;
+
+  if (formValue.user?.userpic && (formValue.user.userpic != data.user?.userpic))
+    discourse.avatar = true;
+ 
   const body = {
     user: formValue.user,
     social: formValue.social
+  }
+
+  if (Object.keys(discourse).length > 0)
+  {
+    body.discourse = discourse;
   }
 
   try {
@@ -94,8 +117,8 @@ const submit = async () => {
 
       //Update fields in data
       formValue.user.userpic = { id: formValue.user.userpic } // data has userpic as an object with id
-      data.user = formValue.user;
-      data.social = formValue.social;
+      data.user = clone (formValue.user);
+      data.social = clone (formValue.social);
 
       if (uploader.value)
       {
