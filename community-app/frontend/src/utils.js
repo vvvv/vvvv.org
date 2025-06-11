@@ -30,15 +30,36 @@ export const stripBeforeLastSlash = (url) => {
 
 export const ensurePrefix = (url, prefix) => {
   if (!url) return '';
+  if (!prefix) return url;
+
   const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  // Remove any existing protocol and github.com/
+  // Remove any existing protocol and prefix
   const regex = new RegExp(`^(https?:\\/\\/)?${escaped}`, 'i');
   const stripped = url.replace(regex, '');
   return `https://${prefix}${stripped}`;
 }
 
-export const stripHttp = (url) => {
-  return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+export const stripHttp = (value) => {
+  return value.replace(/^https?:\/\//, '').replace(/\/$/, '');
+}
+
+export function ensureHttps(url) {
+    return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+}
+
+export const getURL = (value) => {
+
+  if (!value) return { text: '' };
+  
+  if (/^https?:\/\//i.test(value)) {
+    return { 
+      text: stripHttp(value), 
+      url: value 
+    }
+  }
+  return {
+    text: value
+  }
 }
 
 export const toHtml = d => converter.makeHtml(d)
@@ -158,14 +179,6 @@ export const makeFields = (f, count) => {
   return fields
 }
 
-export function ensureHttps(url) {
-    // Check if the URL starts with "http://" or "https://"
-    if (/^https?:\/\//i.test(url)) {
-        return url; // If it does, return the URL as is
-    }
-    // Otherwise, prepend "https://"
-    return `https://${url}`;
-}
 
 export function getCountry(value) {
     const country = countries.find(country => country.value === value)

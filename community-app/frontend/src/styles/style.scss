@@ -2,9 +2,64 @@ $orange: #ffa800;
 $orange-link-hover: #ff8800;
 $orange-hover: #ee4b28;
 
+.socialHeader{
+  .socialItem{
+    border-radius: 4px;
+    background-color: #fafafa;
+
+    font-size: 0.9rem;
+
+    img{
+      width: 24px;
+      height: 24px;
+    }
+
+    .link{
+      background-color: inherit;
+    }
+
+    a:hover{
+      text-decoration: underline;
+    }
+
+    h6{
+      font-weight: 600;
+    }
+  }
+}
+
 #UsersForHire{
   .card{
+
+    .imageContainer
+    {
+      overflow: hidden;
+    }
+
     color: inherit;
+    cursor: pointer;
+
+    border: 0px;
+
+
+    &:hover{
+      background-color: #eee;
+      img{
+        transform: scale(1.1);
+      }
+    }
+   
+    border-radius: 3px;
+    background-color: #f6f6f6;
+
+    img{
+      transition: transform 0.1s ease;
+
+      height: 150px;
+      overflow: hidden;
+      object-fit: cover;
+      transform: scale(1);
+    }
   }
 }
 
@@ -19,10 +74,12 @@ $orange-hover: #ee4b28;
   a {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
-    text-decoration-color: #aaa;
+    text-decoration-color: #bbb;
     
     &:hover{
       text-decoration-color: #000;
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
     }
   }
 }
@@ -39,8 +96,10 @@ $orange-hover: #ee4b28;
   }
 
   a {
+      color: inherit;
+
       text-decoration: underline;
-      text-underline-offset: 0.2em;
+      text-underline-offset: 0.3em;
       text-decoration-color: #bbb;
   }
 
@@ -126,13 +185,9 @@ $orange-hover: #ee4b28;
   .key{
     font-variant-caps: all-small-caps;
     color: #666;
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
-  a{
-    color: $orange;
-    text-decoration: none;
-  }
 }
 
 .businesses{

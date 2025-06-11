@@ -5,7 +5,7 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import FieldEditor from './FieldEditor.vue'
 import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
-import { clone, post, toHtml, toMd, removeFile, createAssetUrl }  from '../../utils'
+import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
 import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -121,65 +121,72 @@ const imageButtonText = computed(()=>{
 </script>
 
 <template>
-  <n-form
-      v-if="form !== null"
-      ref="formRef"
-      :model="form"
-      label-placement="left"
-      :label-width="160"
-      require-mark-placement="right-hanging"
-      >
-    <n-form-item label="Available for Hire" path="available">
-      <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
-    </n-form-item>
-  </n-form>
-
-  <hr class="mt-1 mb-4"/>
-
-  <n-form
-      ref="formImage"
-      :model="form"
-      label-placement="left"
-      :label-width="120"
-      require-mark-placement="right-hanging"
-      >
-      <n-form-item label="Image">
-          <div class="row">
-            <div class="col-6" v-if="image !== null">
-              <img :src="image" class="img-fluid"/>
-            </div>
-            <div class="col-6">
-              <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
-              <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
-            </div>
-          </div>
-      </n-form-item>
-  </n-form>
-
-  <n-form
-      v-if="form !== null"
-      ref="formRef2"
-      :model="form"
-      label-placement="left"
-      :label-width="120"
-      require-mark-placement="right-hanging"
-      >
-    <n-form-item label="Description">
-      <Editor v-model="form.description" class="fullWidth" :limit="limit"/>
-    </n-form-item>
-    <n-form-item label="VVVV skills">
-      <Editor v-model="form.skills_vvvv" class="fullWidth" :limit="limit"/>
-    </n-form-item>
-    <n-form-item label="Other skills">
-      <Editor v-model="form.skills_other" class="fullWidth" :limit="limit"/>
-    </n-form-item>
-
-    <div class="form-group row mb-2">
-      <label class="col-sm-2 col-form-label">Available for</label>
-      <div class="col-sm-10">
-        <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
+  <template v-if="form !== null">
+    <div class="row justify-content-between">
+      <div class="col">
+      <n-form
+          ref="formRef"
+          :model="form"
+          label-placement="left"
+          :label-width="160"
+          require-mark-placement="right-hanging"
+          >
+        <n-form-item label="Available for Hire" path="available">
+          <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
+        </n-form-item>
+      </n-form>
+      </div>
+      <div class="col text-right" v-if="form.available && data.user.visible">
+        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
       </div>
     </div>
-  </n-form>
-  <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
+
+    <hr class="mt-1 mb-4"/>
+
+    <n-form
+        ref="formImage"
+        :model="form"
+        label-placement="left"
+        :label-width="120"
+        require-mark-placement="right-hanging"
+        >
+        <n-form-item label="Image">
+            <div class="row">
+              <div class="col-6" v-if="image !== null">
+                <img :src="image" class="img-fluid"/>
+              </div>
+              <div class="col-6">
+                <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
+                <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
+              </div>
+            </div>
+        </n-form-item>
+    </n-form>
+
+    <n-form
+        ref="formRef2"
+        :model="form"
+        label-placement="left"
+        :label-width="120"
+        require-mark-placement="right-hanging"
+        >
+      <n-form-item label="Description">
+        <Editor v-model="form.description" class="fullWidth" :limit="limit"/>
+      </n-form-item>
+      <n-form-item label="VVVV skills">
+        <Editor v-model="form.skills_vvvv" class="fullWidth" :limit="limit"/>
+      </n-form-item>
+      <n-form-item label="Other skills">
+        <Editor v-model="form.skills_other" class="fullWidth" :limit="limit"/>
+      </n-form-item>
+
+      <div class="form-group row mb-2">
+        <label class="col-sm-2 col-form-label">Available for</label>
+        <div class="col-sm-10">
+          <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
+        </div>
+      </div>
+    </n-form>
+    <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
+  </template>
 </template>

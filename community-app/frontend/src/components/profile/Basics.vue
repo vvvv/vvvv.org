@@ -7,7 +7,7 @@ import FileUploader from './FileUploader.vue'
 import FieldInput from './FieldInput.vue'
 import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { post, createAssetUrl, makeFields }  from '../../utils.js'
+import { post, createAssetUrl, makeFields, showUserProfile }  from '../../utils.js'
 import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -86,7 +86,10 @@ const submit = async () => {
   const infoChanged = formValue.user?.statement != data.user?.statement ||
       formValue.social?.website != data.social?.website ||
       formValue.user?.location_city != data.user?.location_city ||
-      formValue.user?.location_country != data.user?.location_country;
+      formValue.user?.location_country != data.user?.location_country ||
+      formValue.user?.name != data.user?.name ||
+      formValue.user?.surname != data.user?.surname ||
+      formValue.user?.visible != data.user?.visible;
 
   if (infoChanged) 
     discourse.info = true;
@@ -146,6 +149,28 @@ const avatarButtonText = computed(()=>{
 
 <template>
   <template v-if="form !== null">
+
+    <div class="row justify-content-between">
+      <div class="col">
+        <n-form
+            ref="formRef"
+            :model="form"
+            label-placement="left"
+            :label-width="160"
+            require-mark-placement="right-hanging"
+            >
+            <n-form-item label="Profile publicly visible" path="visible">
+              <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
+            </n-form-item>
+        </n-form>
+      </div>
+      <div class="col text-right" v-if="form.user.visible">
+        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
+      </div>
+    </div>
+
+    <hr class="mt-1 mb-4"/>
+
     <div class="form-group row mb-2">
       <div class="col-sm-2"></div>
       <div class="col-sm-10">

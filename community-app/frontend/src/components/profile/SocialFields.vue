@@ -32,13 +32,13 @@ const model = defineModel('value')
                     <div class="col-12 col-lg-6 mb-2 mb-lg-0">
                         <n-input 
                             v-model:value="field.key" 
-                            placeholder="Key"
+                            placeholder="Label"
                         />
                     </div>
                     <div class="col-12 col-lg-6">
                         <n-input 
                             v-model:value="field.value" 
-                            placeholder="Value" 
+                            placeholder="Content" 
                         />
                     </div>
                 </div>

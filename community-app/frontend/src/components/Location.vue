@@ -14,7 +14,7 @@ const text = computed(() => {
 </script>
 <template>
     <div v-if="location.city || location.country" class="location">
-        <n-icon><LocationOutline /></n-icon>
+        <NIcon size="18"><LocationOutline /></NIcon>
         {{ text }} 
     </div>
 </template>

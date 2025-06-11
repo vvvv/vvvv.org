@@ -1,37 +1,29 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { NPerformantEllipsis } from 'naive-ui'
 
 const { text, maxLength, clippedLength } = defineProps(['text', 'maxLength', 'clippedLength']);
 
 const buttonTexts = ['Show More', 'Show Less']
 
-const content = ref(null);
 const buttonState = ref(0);
 const tooLong = ref(false);
+const content = ref(text);
 
 onMounted(()=>{
-
     if (text.length > maxLength)
-    {
-        content.value = text.slice(0, clippedLength).trim();
         tooLong.value = true;
-    }
-    else
-    {
-        content.value = text;
-    }
+    content.value = text.trim();
 })
 
 function toggleText()
 {
     if (buttonState.value)
     {
-        content.value = text.slice(0, clippedLength).trim();
         buttonState.value = 0;   
     }
     else
     {
-        content.value = text;
         buttonState.value = 1; 
     }
 }
@@ -39,6 +31,9 @@ function toggleText()
 </script>
 
 <template>
-    <span v-html="content"></span><span v-if="tooLong && buttonState == 0">...</span>
+    <NPerformantEllipsis line-clamp="3" v-if="tooLong && buttonState == 0">
+        <span v-html="text" tooltip=false></span>
+    </NPerformantEllipsis>
+    <span v-else v-html="text" tooltip=false></span>
     <div><a href="#" v-if="tooLong" @click.prevent="toggleText"> {{ buttonTexts[buttonState] }}</a></div>
 </template>
