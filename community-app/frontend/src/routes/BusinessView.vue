@@ -68,7 +68,7 @@ const colStyle = "col-12 col-sm-6 col-md-4"
     <n-spin :show="loading">
         <div v-if="company">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-3 text-center mb-sm-4">
+                <div class="col-12 col-md-6 col-lg-4 text-center mb-sm-4">
                     <div class="text-center mb-3">
                         <img v-if="company.logo" :src="company.logo" alt="logo" class="img-fluid"/>
                         <div class="my-3">
@@ -93,10 +93,10 @@ const colStyle = "col-12 col-sm-6 col-md-4"
                                 <a :href="'/user/'+company.owner.username" @click="(event) => showUserProfile(company.owner.username, event)">{{ company.owner.username }}</a>
                             </div>
                         </div>
+                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="company.social" :social="company.social" :order="socialKeys"/>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-9">
-                    <SocialView  class="text-left mb-4" v-if="company.social" :social="company.social" :order="socialKeys"/>
+                <div class="col-12 col-md-6 col-lg-8">
                     <p v-html="description"></p>
                 </div>
             </div>

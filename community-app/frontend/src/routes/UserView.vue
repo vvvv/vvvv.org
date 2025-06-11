@@ -2,7 +2,7 @@
 
 import { ref, watchEffect, onMounted, computed, watch} from 'vue'
 import Constants from '../constants'
-import { NSpin, NAvatar, NIcon, esAR } from 'naive-ui'
+import { NSpin, NAvatar, NIcon } from 'naive-ui'
 import HireView from '../components/HireView.vue'
 import SocialView from '../components/SocialView.vue'
 import Location from '../components/Location.vue'
@@ -23,9 +23,7 @@ const social = ref (null);
 const userpic = ref(null);
 const loading = ref(false);
 const company = ref(null);
-const showMore = ref("Show More");
 const statement = ref(null);
-const textLong = ref(false);
 
 const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"];
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userpicSize}&height=${userpicSize}`;
@@ -44,7 +42,7 @@ onMounted(async ()=>
     let response = await fetch(url);
     let json = await response.json();
 
-    if (json.data.length == 0)
+    if (!response.ok || json.data.length == 0)
     {
       throw ("Can't find a profile for this user") 
     }
@@ -58,13 +56,14 @@ onMounted(async ()=>
     social.value = data.related[0]?.social;
 
     statement.value = user.value.statement;
-    toggleStatement();
 
     // Fetch Company
     response = await fetch(companyURL);
     json = await response.json();
 
-    if (json.data.length > 0)
+    console.log (response);
+
+    if (!response.ok || json.data.length > 0)
     {
       company.value = json.data[0].name
     }
@@ -78,6 +77,8 @@ onMounted(async ()=>
     loading.value = false;
   }
 })
+
+
 
 function edit()
 {
@@ -93,29 +94,10 @@ const fullName = computed(() => {
   return name ? name : null;
 })
 
-const statementTooLong = computed(()=>{
-  console.log (user.value.statement.length)
-  return user.value.statement.length > 200
-})
-
 const forumLink = computed(()=>
   'https://forum.vvvv.org/u/'+ user.value.username + '/summary'
 )
 
-const toggleStatement = ()=>{
-  if (textLong.value)
-  {
-    showMore.value = "Show Less";
-    statement.value = user.value.statement;
-  }
-  else
-  {
-    showMore.value = "Show More";
-    statement.value = user.value.statement.slice(0, 100);
-  }
-
-  textLong.value = !textLong.value;
-}
 
 </script>
 
@@ -123,7 +105,7 @@ const toggleStatement = ()=>{
   <n-spin :show="loading">
     <div v-if="user" class="userView">
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-3 text-center mb-sm-4">
+        <div class="col-12 col-md-6 col-lg-4 text-center mb-sm-4">
               <NAvatar objectFit="contain" round :size="userpicSize" :src="userpic"/>
 
               <div class="my-3">
@@ -141,10 +123,10 @@ const toggleStatement = ()=>{
                 <div>Owner of</div>
                 <a :href="'/business/'+company" @click="(event) => showBusinessProfile(company, event)">{{ company }}</a>
               </div>
+              <SocialView class="text-left mt-4 mb-4 pt-3 border-top" :social="social" :order="socialKeys" v-if="social" />
 
         </div>
-        <div class="col-12 col-md-6 col-lg-9">
-          <SocialView class="text-left mb-4" :social="social" :order="socialKeys" v-if="social" />
+        <div class="col-12 col-md-6 col-lg-8">
 
           <div v-if="statement" class="mb-4 statement">
             <ClippedText :text="user.statement" :maxLength="255" :clippedLength="100"/>

@@ -6,7 +6,7 @@ import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
-import { post, createAssetUrl, makeFields }  from '../../utils.js'
+import { post, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -139,9 +139,9 @@ const logoButtonText = computed(()=>{
 </script>
 
 <template>
-
+  <div class="row justify-content-between" v-if="form !== null">
+    <div class="col">
       <n-form
-          v-if="form !== null"
           ref="formRef"
           :model="form"
           label-placement="left"
@@ -152,7 +152,12 @@ const logoButtonText = computed(()=>{
             <n-switch v-model:value="form[0].enabled" placeholder="I own a company"/>
           </n-form-item>
       </n-form>
-      
+    </div>
+    <div class="col text-right" v-if="companyExists && form[0].enabled">
+        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">Open Company Profile</a>
+    </div> 
+  </div>
+
       <hr class="mt-1 mb-4"/>
 
       <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
