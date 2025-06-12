@@ -1,49 +1,83 @@
 import Constants from '../constants'
 import { createAssetUrl } from '../utils'
 
-const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=40&height=40";
-const limit = 5;
-const usersURL = Constants.GET_USERS+"?sort=-date_created&fields[]=username,userpic&limit=" + limit;
-const businessesURL = Constants.GET_COMPANIES+"?sort=-date_updated&fields[]=name,logo&limit=" + limit;
-const forHireURL = Constants.GET_HIRE+"?sort=-date_updated&fields[]=user_id.username,user_id.userpic&limit=" + limit +
-"&filter[available][_eq]=true&filter[user_id][_null]=false";
+const imageParamsLogos = "?withoutEnlargement=true&quality=90&fit=cover&height=40";
+const imageParamsAvatars = "?withoutEnlargement=true&quality=90&fit=cover&height=60&width=60";
+const limit = 10;
+const businessesURL = Constants.GET_COMPANIES+"?fields[]=name,logo&meta=filter_count";
+const forHireURL = Constants.GET_HIRE+"?fields[]=user_id.username,user_id.userpic&meta=filter_count";
+const contentURL = Constants.BASEURL+"items/Community";
+
+function shuffle(array)
+{
+    return array.sort(() => 0.5 - Math.random());
+}
 
 export async function fetchOverview()
 {
 
-    let response = await fetch(usersURL);
-    let data = await response.json();
+    try{
+        
+        let response;
+        let data;
+        
+        const result = {
+            businesses: null,
+            forHire: null,
+            content: null
+        };
 
-    const users = data.data.map((u) => (
+        // Fetch for Business
+        response = await fetch(businessesURL);
+        
+        if (response.ok)
         {
-            userpic: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
-            username: u.username,
+            data = await response.json();
+            const items = data.data?.map((b) => (
+                {
+                    img: b.logo ? createAssetUrl(b.logo) + imageParamsLogos : null,
+                    text: b.name,
+                }
+            ));
+        
+            result.businesses = {
+                items: shuffle(items).slice(0, limit), 
+                total: data.meta?.filter_count ?? 0
+            }
         }
-    ))
-
-    response = await fetch(businessesURL);
-    data = await response.json();
-
-    const businesses = data.data.map((b) => (
+    
+        // Fetch for Hire
+        response = await fetch(forHireURL);
+        
+        if (response.ok)
         {
-            logo: b.logo ? createAssetUrl(b.logo) + imageParams : null,
-            name: b.name,
+            data = await response.json();
+            const forHireItems = data.data?.map((h) => (
+                {
+                    img: h.user_id.userpic ? createAssetUrl(h.user_id.userpic) + imageParamsAvatars : null,
+                    text: h.user_id.username,
+                }
+            ));
+        
+            result.forHire = {
+                items: shuffle(forHireItems).slice(0, limit),
+                total: data.meta?.filter_count ?? 0
+            }
         }
-    ))
+        
+        // Fetch for Content
+        response = await fetch (contentURL);
 
-    response = await fetch(forHireURL);
-    data = await response.json();
-
-    const forHire = data.data.map((h) => (
+        if (response.ok)
         {
-            username: h.user_id.username,
-            userpic: h.user_id.userpic ? createAssetUrl(h.user_id.userpic) + imageParams : null,
+            const content = await response.json();
+            result.content = content.data;
         }
-    ))
 
-    return {
-        users: users,
-        businesses: businesses,
-        forHire: forHire
+        return result;
+    }
+    catch (error) {
+        console.log (error); 
+        return {};
     }
 }

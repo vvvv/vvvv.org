@@ -36,26 +36,4 @@ const prefix = "https://vvvv.org";
             </div>
         </div>
     </div>
-    <!-- <div class="col-2 socialItem mr-1 mb-1 p-3">
-        <NTooltip trigger="hover" :key="connection.name">
-            <template #trigger>
-                <h1>{{connection.title}}</h1>
-                <div class="row">
-                    <div class="col-2 mr-3">
-                        <a :href="connection.link" :alt="connection.alt">
-                            <img v-if="connection.logo" :src="connection.logo" :alt="connection.alt"/>
-                        </a>
-                    </div>
-                    <div class="col-7">
-                        <a :href="connection.link" :alt="connection.alt">
-                            {{ connection.name }}
-                        </a>
-                    </div>
-                </div>
-            </template>
-            {{ connection.tooltip ?? connection.alt }}
-        </NTooltip>
-        <SocialHeaderItem v-if="connection.children" v-for="item in connection.children" :item="item" :key="item.name"/> 
-    </div>
-    -->
 </template>

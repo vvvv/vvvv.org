@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { NAvatar } from "naive-ui"
+import { NAvatar, NTooltip } from "naive-ui"
 import '../../styles/style.scss'
 import { showBusinessProfile } from "../../utils.js"
 import { useRouter } from 'vue-router'
@@ -17,22 +17,27 @@ function showAll()
 </script>
 
 <template>
-    <div class="card" v-if="data.length > 0">
-        <div class="card-header">
-            Newly updated Businesses
-        </div>
-        <div class="card-body">
-            <div class="row mb-1" v-for="business in data" :key="business.name">
-                <div class="col-2">
-                    <NAvatar objectFit="contain" round="true" :src="business.logo"/>
-                </div>
-                <div class="col-10">
-                    <a :href="'/business/'+business.name" @click="(event)=>showBusinessProfile(business.name, event)">{{ business.name }}</a>
-                </div>
+    <div v-if="data.items.length > 0" class="section">
+        <div class="row pb-2 mb-2 border-bottom">
+            <div class="col-auto mr-auto">
+                <h2>Businesses using VVVV</h2>
+            </div>
+            <div class="col-auto">
+                <a href="#" class="btn btn-sm btn-secondary" @click.prevent="showAll">Show all ({{ data.total }})</a>
             </div>
         </div>
-        <div class="card-body">
-            <a href="#" class="card-link" @click.prevent="showAll">Show all...</a>
+
+        <div class="row pt-2 pb-2 mb-2 align-items-center justify-content-between">
+            <div class="text-center" v-for="business in data.items" :key="business.text">
+                <a :href="'/business/'+business.text" @click="(event)=>showBusinessProfile(business.text, event)">
+                    <NTooltip trigger="hover" placement="top">
+                        <template #trigger>
+                            <img :src="business.img" class="m-3" :alt="business.text"/>
+                        </template>
+                        {{ business.text }}
+                    </NTooltip>
+                </a>
+            </div>
         </div>
     </div>
 </template>

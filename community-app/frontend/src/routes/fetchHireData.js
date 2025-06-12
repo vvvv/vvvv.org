@@ -15,6 +15,10 @@ export async function fetchHireData (loading)
                 username: u.username,
                 name: name ?? null,
                 contact: u.related[0].social ?? null,
+                location: {
+                    city: u.location_city,
+                    country: u.location_country
+                },
                 hire: u.related[0].hire ?? null,
             };
     })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { shallowRef, computed, onMounted } from 'vue'
 import { ensureHttps, getProperties, stripPrefix, ensurePrefix, stripBeforeLastAt, stripBeforeLastSlash, getURL } from '../utils'
 import { NIcon } from 'naive-ui'
 import { LogoGithub, LogoMastodon } from '@vicons/ionicons5'
@@ -8,8 +8,8 @@ import LogoPixelfed from './logos/LogoPixelfed'
 
 const { social, order } = defineProps({ social: Object, order: Array })
 
-const socialLinks = ref([]);
-const socialFields = ref([]);
+const socialLinks = shallowRef([]);
+const socialFields = shallowRef([]);
 
 const media = [
 	{ key: 'github', prefix: 'github.com/', logo: LogoGithub },
@@ -44,7 +44,7 @@ onMounted(()=>{
 					name: key,
 					text: stripped,
 					url: url,
-					icon: getLogo (key)
+					icon: getLogo(key)
 				}
 			});
 

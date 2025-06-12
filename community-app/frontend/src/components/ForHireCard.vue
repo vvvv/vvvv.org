@@ -1,8 +1,10 @@
 <script setup>
 
 import { ref, computed, onMounted } from 'vue'
-import { NTag, NSpace } from 'naive-ui'
+import { NTag, NSpace, NPerformantEllipsis } from 'naive-ui'
 import { toHtml, createAssetUrl, showUserProfile } from '../utils'
+import Location from './Location.vue';
+import ClippedText from './ClippedText.vue';
 
 const { data } = defineProps({
     data: Object,
@@ -38,12 +40,15 @@ onMounted(()=>{
             <div class="card-body">
                 <h4 class="card-title">{{ data.username }}</h4>
                 <p class="card-text"> {{ data.title }}</p>
-                <template v-if="hire.availableFor.length > 0">
-                    <p class="py-0 mb-2 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>Available for</b></p>
+                <NPerformantEllipsis line-clamp="3" tooltip=false>
+                    <span v-html="hire.skills_vvvv"></span>
+                </NPerformantEllipsis>
+                <div v-if="hire.availableFor.length > 0" class="mt-2">
                     <NSpace>
-                        <NTag class="mr-2" v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
+                        <NTag v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
                     </NSpace>
-                </template>
+                </div>
+                <Location :location="data.location" class="border-top pt-2 mt-3"/>
             </div>
         </div>
     </template>
