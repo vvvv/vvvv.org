@@ -61,8 +61,6 @@ onMounted(async ()=>
     response = await fetch(companyURL);
     json = await response.json();
 
-    console.log (response);
-
     if (!response.ok || json.data.length > 0)
     {
       company.value = json.data[0].name

@@ -115,6 +115,13 @@ export const connections = [
                 logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/@vvvvTv42',
                 alt: 'Watch tutorials on YouTube',
+            },
+           {
+                name: "VVVV TV",
+                description: 'Watch Episodes',
+                logo: "/img/icons/youtube-32x32.png",
+                link: 'https://www.youtube.com/@vvvvTv42',
+                alt: 'Watch Eposides',
             }
         ],
         order: 7

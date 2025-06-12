@@ -1,12 +1,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import NewestUsers from "../components/overview/NewestUsers.vue"
 import Businesses from "../components/overview/Businesses.vue"
 import ForHire from "../components/overview/ForHire.vue"
 import SocialHeader from '../components/SocialHeader.vue'
 import '../styles/style.scss'
 import { fetchOverview } from '../routes/fetchOverview.js'
 import { NSpin } from 'naive-ui'
+import YouTubePlayer from '../components/YouTubePlayer.vue'
 
 const data = ref (null);
 const loading = ref(false);
@@ -23,31 +23,41 @@ onMounted(async ()=>{
     }
 })
 
-const columnClass='col-12 col-md-6 col-lg mb-3 mb-lg-0';
+
+const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
 
 </script>
 
 <template>
     <n-spin :show="loading">
-        <div class="row">
-            <div class="col-12">
-                <h4>Connections</h4>
-                <SocialHeader class="mt-2 mb-4"/>
+        <div class="row overview" v-if="data">
+            <div class="col-12 mb-3">
+                <div class="row">
+                    <div class="col-12 col-md-6" v-if="data.content?.video">
+                        <h4 class="border-bottom pb-2">Staff picks</h4>
+                        <YouTubePlayer :id="data.content.video"/>
+                    </div>
+                    <div class="col-12 col-md-6">
+        
+                    </div>
+                </div>
             </div>
-            
-            <div class="col-12">
-                <h4>Overview</h4>
-                <div class="row" v-if="data">
-                    <div :class="columnClass">
-                        <NewestUsers :data="data.users"/>
+            <div class="col-12 mb-4">
+                <div class="row">
+                    <div v-if="data.businesses" :class="columnClass">
+                        <ForHire :data="data.forHire"/>
                     </div>
-                    <div :class="columnClass">
-                        <Businesses :data="data.businesses"/>
-                    </div>
-                    <div :class="columnClass">
+                    <div v-if="data.forHire" :class="columnClass">
                         <ForHire :data="data.forHire"/>
                     </div>
                 </div>
+            </div>
+            <div class="col-12 mb-4" v-if="data.businesses">
+                <Businesses :data="data.businesses"/>
+            </div>
+            <div class="col-12">
+                <h4>Connections</h4>
+                <SocialHeader class="mt-2 mb-4"/>
             </div>
         </div>
     </n-spin>

@@ -98,10 +98,12 @@ const themeOverrides = {
           <div class="col-12 col-md-3 order-1 order-md-2">
             <n-tabs v-model:value="activeTab" type="line" size="large" :default-value="activeTab">
               <n-tab name="Profile" @click="handleTabChange('Profile')">
-                <NIcon size="20" class="mr-2">
-                  <PersonIcon/>
-                </NIcon>
-                Profile
+                <div>
+                  <NIcon size="20" class="mr-2">
+                    <PersonIcon/>
+                  </NIcon>
+                  Profile  
+                </div>
               </n-tab>
               <template #suffix>
                 <div v-if="authenticated" @click="logout" class="btn btn-outline-secondary">Logout</div>
