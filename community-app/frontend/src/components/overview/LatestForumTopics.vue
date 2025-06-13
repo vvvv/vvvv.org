@@ -7,15 +7,17 @@ import Constants from '../../constants.js';
 
 const topics = ref([]);
 
-const link = (slug) => {
-    return Constants.FORUM+'t/'+slug;
-}
-
 onMounted(async ()=>{
     try
     {
-        topics.value = await fetchLatestTopics();
-        console.log (topics.value);
+        const data = await fetchLatestTopics();
+        topics.value = data.map((t)=>{
+            return {
+                id: t.id,
+                title: t.title,
+                link: Constants.FORUM+'t/'+t.slug
+            }
+        })
     }
     catch(error)
     {
@@ -38,7 +40,7 @@ onMounted(async ()=>{
             <ul class="list-group list-group-flush">
                 <li v-for="topic in topics" :key="topic.id" class="list-group-item mt-0 mb-0 py-2 forumLink">
                     <NEllipsis line-clamp="1">
-                        <a :href="link">{{ topic.title }}</a>
+                        <a :href="topic.link">{{ topic.title }}</a>
                     </NEllipsis>
                 </li>
             </ul> 
