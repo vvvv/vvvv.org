@@ -11,15 +11,16 @@ export default Object({
 
     //LINKS
     FORUM:"https://forum.vvvv.org/",
-
+    
     //DATA
     BASEURL: DATAURL, 
     ASSETS: DATAURL + "assets/",
     GET_COMPANIES: DATAURL + 'items/Company',
     GET_USERS: DATAURL + 'items/User',
     GET_HIRE: DATAURL + 'items/Hire',
-
+    
     //BACKEND
+    FORUM_TOPICS: BACKENDURL + 'discourseTopics',
     BACKEND_GET_USER: BACKENDURL + "userinfo",
     BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
     EDIT_COMPANY: BACKENDURL + "edit/company",
