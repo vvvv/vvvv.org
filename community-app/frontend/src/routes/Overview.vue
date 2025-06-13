@@ -7,6 +7,7 @@ import '../styles/style.scss'
 import { fetchOverview } from '../routes/fetchOverview.js'
 import { NSpin } from 'naive-ui'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
+import LatestForumTopics from '../components/overview/LatestForumTopics.vue'
 
 const data = ref (null);
 const loading = ref(false);
@@ -38,7 +39,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
                         <YouTubePlayer :id="data.content.video"/>
                     </div>
                     <div class="col-12 col-md-6">
-        
+                        <LatestForumTopics/>
                     </div>
                 </div>
             </div>
