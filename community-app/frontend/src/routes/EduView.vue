@@ -1,30 +1,43 @@
 <script setup>
 
 import { ref, onMounted, computed } from 'vue'
-import { NSpin, NIcon } from 'naive-ui'
+import { NSpin, NIcon, NAlert } from 'naive-ui'
+import { useRoute } from "vue-router"
 import { LocationOutline, PersonCircleOutline } from '@vicons/ionicons5'
-import { fetchEduData } from './fetchEduData.js'
+import fetchEduProfile from './fetchEduProfile.js'
 import { toHtml, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
-import { useRoute } from "vue-router";
 import SocialView from '../components/SocialView.vue'
+import LocationFull from '../components/LocationFull.vue'
 
 const route = useRoute();
 const name = route.params.name;
 
 const edu = ref(null);
 const loading = ref(false);
-
-let description;
+const error = ref(null);
 
 const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 onMounted(async ()=>
 {
-    loading.value = true;
-    edu.value = await fetchEduData (name);
-    loading.value = false;
+    try{
+        loading.value = true;
+        error.value = null;
 
-    description = toHtml(edu.value.description);
+        edu.value = await fetchEduProfile (name);
+        
+        edu.value.description = toHtml(edu.value.description);
+    }
+    catch (err)
+    {
+        console.log (err);
+        error.value = "Something went wrong. Maybe an Institutional Institution is simply not yet confirmed.";
+    }
+    finally
+    {
+        loading.value = false;
+    }
+
 })
 
 const url = computed(()=>{
@@ -42,22 +55,13 @@ const url = computed(()=>{
     return url;
 })
 
-const addressFields = [
-  'location_street',
-  'location_additionalInfo',
-  'location_postalcode',
-  'location_country',
-  'location_city'
-];
-
-const addressExists = computed(() =>
-  addressFields.some(key => edu.value && edu.value[key])
-);
-
 </script>
 
 <template>
     <n-spin :show="loading">
+        <NAlert v-if="error" title="Hoppala" type="warning">
+            {{ error }}
+        </NAlert>
         <div v-if="edu">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 text-center mb-sm-4">
@@ -66,13 +70,7 @@ const addressExists = computed(() =>
                         <div class="my-3">
                             <h5>{{ edu.name }}</h5>
                         </div>                     
-                        <div class="address mb-3" v-if="addressExists">
-                            <n-icon class="mb-2"><LocationOutline /></n-icon>
-                            <div v-if="edu.location_street">{{ edu.location_street }}</div>
-                            <div v-if="edu.location_additionalInfo">{{ edu.location_additionalInfo }}</div>
-                            <div v-if="edu.location_postalcode || edu.location_city">{{ edu.location_postalcode }} {{ edu.location_city }}</div>
-                            <div v-if="edu.location_country">{{ getCountry(edu.location_country) }}</div>
-                        </div>
+                        <LocationFull :data="edu"/>
 
                         <a v-if="url" :href="url.link">{{ url.name }}</a>
                         
@@ -89,7 +87,7 @@ const addressExists = computed(() =>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-8">
-                    <p v-html="description"></p>
+                    <p v-html="edu.description"></p>
                 </div>
             </div>
         </div>

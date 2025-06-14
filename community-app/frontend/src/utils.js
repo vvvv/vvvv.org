@@ -23,7 +23,7 @@ export const showBusinessProfile = (name, event) => {
 }
 
 export const showEduProfile = (name, event) => {
-    router.push({name: 'Educational Insitution Profile', params: { name: name }});
+    router.push({name: 'Educational Institution Profile', params: { name: name }});
     if (event) event.preventDefault();
 }
 

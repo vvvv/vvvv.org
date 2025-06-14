@@ -6,7 +6,7 @@ import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
-import { post, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
+import { post, createAssetUrl, makeFields, showEduProfile }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -19,14 +19,13 @@ const form = ref(null);
 const logo = ref(null);
 const tempLogo = ref(null);
 const updating = ref(false);
-const companyExists = ref(false);
+const eduExists = ref(false);
 const uploader = ref(null);
 
-const emptyCompany = {
+const emptyData = {
   enabled: false,
   logo: null,
   name: "",
-  tagline: "",
   description: "",
   status: 0,
   website: "",
@@ -36,25 +35,25 @@ const emptyCompany = {
 const prepareData = ()=>{
   const temp = { ...data };
 
-  if (temp.companies?.length > 0)
+  if (temp.edus?.length > 0)
   {
-    logo.value = createAssetUrl(temp.companies[0].logo)
+    logo.value = createAssetUrl(temp.edus[0].logo)
 
-    if (!temp.companies[0].social)
+    if (!temp.edus[0].social)
     {
-      temp.companies[0].social = {}
+      temp.edus[0].social = {}
     }
 
-    companyExists.value = true;
+    eduExists.value = true;
   }
   else
   {
-    temp.companies = [{ ...emptyCompany}];
-    temp.companies[0].social.fields = makeFields([], 4);
-    companyExists.value = false;
+    temp.edus = [{ ...emptyData}];
+    temp.edus[0].social.fields = makeFields([], 4);
+    eduExists.value = false;
   }
 
-  form.value = temp.companies
+  form.value = temp.edus
 }
 
 
@@ -103,7 +102,7 @@ const submit = async () => {
   }
 
   try{
-    const response = await post(Constants.EDIT_COMPANY, formValue)
+    const response = await post(Constants.EDIT_EDU, formValue)
   
     if (tempLogo.value)
     {
@@ -112,7 +111,7 @@ const submit = async () => {
     }
   
     //Update fields in data
-    data.companies[0] = formValue;
+    data.edus[0] = formValue;
 
     if (uploader.value) 
     {
@@ -148,19 +147,19 @@ const logoButtonText = computed(()=>{
           :label-width="160"
           require-mark-placement="right-hanging"
           >
-          <n-form-item label="I own a company" path="available">
-            <n-switch v-model:value="form[0].enabled" placeholder="I own a company"/>
+          <n-form-item label="I'm in charge for an Educational Institution" path="available">
+            <n-switch v-model:value="form[0].enabled" placeholder="I'm in charge for an Educational Institution"/>
           </n-form-item>
       </n-form>
     </div>
-    <div class="col text-right" v-if="companyExists && form[0].enabled">
-        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">Open Company Profile</a>
+    <div class="col text-right" v-if="eduExists && form[0].enabled">
+        <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">Open an Insitution Profile</a>
     </div> 
   </div>
 
       <hr class="mt-1 mb-4"/>
 
-      <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
+      <div class="h2" v-if="eduExists">{{ form[0].name }}</div>
       
       <div class="form-group row mb-2">
         <div class="col-sm-2"></div>
@@ -186,22 +185,15 @@ const logoButtonText = computed(()=>{
           :label-width="120"
           require-mark-placement="right-hanging"
           >
-        <template v-if="companyExists">
+        <template v-if="eduExists">
           <n-form-item label="Status" path="status" v-if="form[0].status != '1'">
             <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
             <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
           </n-form-item>
         </template>
-        <n-form-item label="Name" path="name" v-if="!companyExists">
+        <n-form-item label="Name" path="name" v-if="!eduExists">
           <n-input v-model:value="form[0].name" placeholder="Name"/>
         </n-form-item>
-        <div class="row">
-          <div class="col">
-            <n-form-item label="Tagline" path="tagline">
-              <n-input v-model:value="form[0].tagline" placeholder="Tagline" />
-            </n-form-item>
-          </div>
-        </div>
         <n-form-item label="Address" path="address">
           <div class="row">
             <div class="col">

@@ -41,7 +41,7 @@ function showAll()
                 </div>
                 <div class="col-auto">
                     <a href="/forhire/" class="all" @click.prevent="showAll">For Hire</a>
-                    <NBadge v-if="!loading && store.items" :value="store.items.total" color="grey" class="ml-2"/>
+                    <NBadge v-if="!loading && store.total" :value="store.total" color="grey" class="ml-2"/>
                 </div>
             </div>
             <div class="row pt-2 pb-2 mb-2 align-items-center">

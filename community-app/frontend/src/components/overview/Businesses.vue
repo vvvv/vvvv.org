@@ -41,9 +41,9 @@ function showAll()
             <div class="col-auto mr-auto">
                 <h2>Businesses using VVVV</h2>
             </div>
-            <div v-if="!loading && store" class="col-auto">
+            <div class="col-auto">
                 <a href="/businesses/" class="all" @click.prevent="showAll">Businesses</a>
-                <NBadge v-if="!loading && store" :value="store.total" color="grey" class="ml-2"/>
+                <NBadge v-if="!loading && store.total" :value="store.total" color="grey" class="ml-2"/>
             </div>
         </div>
         <div class="overflow-auto">

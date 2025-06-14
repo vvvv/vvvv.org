@@ -70,6 +70,7 @@ async function loadProfile() {
                 },
                 hire: {},
                 companies: [],
+                edus: []
             };
 
         if (error.code === 'ERROR')
@@ -91,9 +92,14 @@ async function loadProfile() {
     
     delete user.related;
     delete user.companies; 
+    delete user.edus
 
     social.fields = makeFields(social.fields ?? [], 4);
     companies.forEach((c)=>{
+        c.social.fields = makeFields(c.social.fields ?? [], 4);
+    })
+
+    edus.forEach((c)=>{
         c.social.fields = makeFields(c.social.fields ?? [], 4);
     })
 
