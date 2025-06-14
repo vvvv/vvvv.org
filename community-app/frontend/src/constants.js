@@ -23,9 +23,10 @@ export default Object({
     FORUM_TOPICS: BACKENDURL + 'discourseTopics',
     BACKEND_GET_USER: BACKENDURL + "userinfo",
     BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
-    EDIT_COMPANY: BACKENDURL + "edit/company",
     EDIT_BASICS: BACKENDURL + "edit/basics",
     EDIT_HIRE: BACKENDURL + "edit/hire",
+    EDIT_COMPANY: BACKENDURL + "edit/company",
+    EDIT_EDU: BACKENDURL + "edit/edu",
     FILE: BACKENDURL + "file",
     LOGIN_OPTIONS: {
         url: 'https://login.vvvv.org/',

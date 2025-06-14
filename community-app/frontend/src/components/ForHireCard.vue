@@ -40,7 +40,7 @@ onMounted(()=>{
             <div class="card-body">
                 <h4 class="card-title">{{ data.username }}</h4>
                 <p class="card-text"> {{ data.title }}</p>
-                <NPerformantEllipsis line-clamp="3" tooltip=false>
+                <NPerformantEllipsis line-clamp="3" :tooltip="false">
                     <span v-html="hire.skills_vvvv"></span>
                 </NPerformantEllipsis>
                 <div v-if="hire.availableFor.length > 0" class="mt-2">

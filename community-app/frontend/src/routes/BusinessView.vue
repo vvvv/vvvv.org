@@ -3,11 +3,11 @@
 import { ref, onMounted, computed } from 'vue'
 import { NSpin, NIcon } from 'naive-ui'
 import { LocationOutline, PersonCircleOutline } from '@vicons/ionicons5'
-import { fetchCompanyData } from './fetchCompanyData.js'
+import fetchCompanyProfile from './fetchCompanyProfile.js'
 import { toHtml, createAssetUrl, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
 import { useRoute } from "vue-router";
 import SocialView from '../components/SocialView.vue'
-import Location from "../components/Location.vue"
+import LocationFull from '../components/LocationFull.vue'
 
 const route = useRoute();
 const name = route.params.name;
@@ -22,7 +22,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 onMounted(async ()=>
 {
     loading.value = true;
-    company.value = await fetchCompanyData (name);
+    company.value = await fetchCompanyProfile (name);
     loading.value = false;
 
     description = toHtml(company.value.description);
@@ -43,25 +43,6 @@ const url = computed(()=>{
     return url;
 })
 
-const location = computed(()=>{
-    return {city: company.value.location_city, country: company.value.location_country}
-})
-
-const addressFields = [
-  'location_street',
-  'location_additionalInfo',
-  'location_postalcode',
-  'location_country',
-  'location_city'
-];
-
-const addressExists = computed(() =>
-  addressFields.some(key => company.value && company.value[key])
-);
-
-
-const colStyle = "col-12 col-sm-6 col-md-4"
-
 </script>
 
 <template>
@@ -74,13 +55,7 @@ const colStyle = "col-12 col-sm-6 col-md-4"
                         <div class="my-3">
                             <h5>{{ company.name }}</h5>
                         </div>                     
-                        <div class="address mb-3" v-if="addressExists">
-                            <n-icon class="mb-2"><LocationOutline /></n-icon>
-                            <div v-if="company.location_street">{{ company.location_street }}</div>
-                            <div v-if="company.location_additionalInfo">{{ company.location_additionalInfo }}</div>
-                            <div v-if="company.location_postalcode || company.location_city">{{ company.location_postalcode }} {{ company.location_city }}</div>
-                            <div v-if="company.location_country">{{ getCountry(company.location_country) }}</div>
-                        </div>
+                        <LocationFull :data="company"/>
 
                         <a v-if="url" :href="url.link">{{ url.name }}</a>
                         

@@ -19,6 +19,8 @@ const businessesCount = ref (0);
 
 const activeTab = ref(router.getRoutes()[0]);
 
+console.log (isRouteLoading);
+
 const login = ()=> {
   kclogin(window.location.origin + window.location.pathname.split('#')[0])
 }
@@ -88,35 +90,34 @@ const themeOverrides = {
     <div class="container py-2">
       <div v-if="failure" class="mt-4">{{ failure }}</div>
       <div v-else class="row mb-4">
-          <div class="col-12 col-md-9 order-2 order-md-1">
-            <n-tabs v-model:value="activeTab" type="line" size="large" animated @update:value="handleTabChange">
-              <n-tab v-for="tab in leftTabs" :key="tab.path" :name="tab.name" @click="handleTabChange(tab.name)">
-                {{  tab.name }}
-              </n-tab>
-            </n-tabs>
-          </div>
-          <div class="col-12 col-md-3 order-1 order-md-2">
-            <n-tabs v-model:value="activeTab" type="line" size="large" :default-value="activeTab">
-              <n-tab name="Profile" @click="handleTabChange('Profile')">
-                <div>
-                  <NIcon size="20" class="mr-2">
-                    <PersonIcon/>
-                  </NIcon>
-                  Profile  
-                </div>
-              </n-tab>
-              <template #suffix>
-                <div v-if="authenticated" @click="logout" class="btn btn-outline-secondary">Logout</div>
-                <div v-else class="btn btn-primary" @click="login">Login</div>
-              </template>
-            </n-tabs>
-          </div>
-       </div>     
+        <div class="col-12 col-md-9 order-2 order-md-1">
+              <n-tabs v-model:value="activeTab" type="line" size="large" animated @update:value="handleTabChange">
+                <n-tab v-for="tab in leftTabs" :key="tab.path" :name="tab.name" @click="handleTabChange(tab.name)">
+                  {{  tab.name }}
+                </n-tab>
+              </n-tabs>
+            </div>
+            <div class="col-12 col-md-3 order-1 order-md-2">
+              <n-tabs v-model:value="activeTab" type="line" size="large" :default-value="activeTab">
+                <n-tab name="Profile" @click="handleTabChange('Profile')">
+                  <div>
+                    <NIcon size="20" class="mr-2">
+                      <PersonIcon/>
+                    </NIcon>
+                    Profile  
+                  </div>
+                </n-tab>
+                <template #suffix>
+                  <div v-if="authenticated" @click="logout" class="btn btn-outline-secondary">Logout</div>
+                  <div v-else class="btn btn-primary" @click="login">Login</div>
+                </template>
+              </n-tabs>
+            </div>
+        </div>     
         <n-message-provider placement="bottom-right">
-          <n-spin :show="isRouteLoading" :delay="10">
+            <n-spin v-if="isRouteLoading" :delay="10"/>
             <RouterView/>
-          </n-spin>
         </n-message-provider>
-    </div>
+      </div>
   </n-config-provider>
 </template>

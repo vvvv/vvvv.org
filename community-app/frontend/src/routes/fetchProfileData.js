@@ -70,6 +70,7 @@ async function loadProfile() {
                 },
                 hire: {},
                 companies: [],
+                edus: []
             };
 
         if (error.code === 'ERROR')
@@ -82,17 +83,23 @@ async function loadProfile() {
     }
 
     const json = await response.json();
-    const user = { ...json[0]};
-    const companies = [ ...json[0].companies];
-    const related = {...json[0].related[0]};
+    const user = { ...json};
+    const companies = [ ...json.companies];
+    const edus = [ ...json.edus];
+    const related = {...json.related[0]};
     const hire = related.hire || {};
     const social = related.social || {};
     
     delete user.related;
     delete user.companies; 
+    delete user.edus
 
     social.fields = makeFields(social.fields ?? [], 4);
     companies.forEach((c)=>{
+        c.social.fields = makeFields(c.social.fields ?? [], 4);
+    })
+
+    edus.forEach((c)=>{
         c.social.fields = makeFields(c.social.fields ?? [], 4);
     })
 
@@ -100,6 +107,7 @@ async function loadProfile() {
         user,
         social,
         hire,
-        companies
+        companies,
+        edus
     };
   }

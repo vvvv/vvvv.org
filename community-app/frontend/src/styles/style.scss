@@ -220,14 +220,15 @@ $orange-hover: #ee4b28;
 
 .socialView{
   .key{
-    font-variant-caps: all-small-caps;
+    text-transform: uppercase;
     color: #666;
-    font-size: 1rem;
+    font-size: 0.8rem;
+    margin: 0.3rem 0rem 0.2rem;
   }
 
 }
 
-.businesses{
+.logoListView{
 
   .name{
     margin-bottom: 0.5rem;

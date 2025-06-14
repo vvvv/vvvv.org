@@ -22,6 +22,11 @@ export const showBusinessProfile = (name, event) => {
     if (event) event.preventDefault();
 }
 
+export const showEduProfile = (name, event) => {
+    router.push({name: 'Educational Institution Profile', params: { name: name }});
+    if (event) event.preventDefault();
+}
+
 export const stripPrefix = (url, prefix) => {
   if (!url) return '';
   const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
