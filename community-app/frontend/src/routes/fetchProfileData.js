@@ -82,9 +82,10 @@ async function loadProfile() {
     }
 
     const json = await response.json();
-    const user = { ...json[0]};
-    const companies = [ ...json[0].companies];
-    const related = {...json[0].related[0]};
+    const user = { ...json};
+    const companies = [ ...json.companies];
+    const edus = [ ...json.edus];
+    const related = {...json.related[0]};
     const hire = related.hire || {};
     const social = related.social || {};
     
@@ -100,6 +101,7 @@ async function loadProfile() {
         user,
         social,
         hire,
-        companies
+        companies,
+        edus
     };
   }

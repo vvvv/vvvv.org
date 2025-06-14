@@ -9,6 +9,9 @@ const UserView = () => import('./routes/UserView.vue');
 const BusinessList = () => import('./routes/BusinessList.vue');
 const BusinessView = () => import('./routes/BusinessView.vue');
 
+const EduList = () => import('./routes/EduList.vue');
+const EduView = () => import('./routes/EduView.vue');
+
 const ForHireList = () => import('./routes/ForHireList.vue');
 const EditUser = () => import('./routes/EditUser.vue');
 
@@ -33,31 +36,43 @@ const routes = [
         path: '/user/',
         name: 'Users',
         component: UserList,
-        meta: { tabName: 'Users', visible: true, isLeft: true, order: 1 },
+        meta: { tabName: 'Users', visible: true, isLeft: true, order: 1 }
     },
     {
         path: '/user/:username',
         name: 'User Profile',
         component: UserView,
-        meta: { tabName: 'Users' },
+        meta: { tabName: 'Users' }
     },
     {
         path: '/business/',
         name: 'Businesses',
         component: BusinessList,
-        meta: { tabName: 'Businesses', visible: true, isLeft: true, order: 2 },
+        meta: { tabName: 'Businesses', visible: true, isLeft: true, order: 2 }
     },
-        {
+    {
         path: '/business/:name',
         name: 'Business Profile',
         component: BusinessView,
         meta: { tabName: 'Businesses' }
     },
     {
+        path: '/edu/',
+        name: 'Educational Institutions',
+        component: EduList,
+        meta: { tabName: 'Educational Institutions', visible: true, isLeft: true, order: 3 }
+    },
+    {
+        path: '/edu/:name',
+        name: 'Educational Institution Profile',
+        component: EduView,
+        meta: { tabName: 'Educational Institutions' }
+    },
+    {
         path: '/forhire/',
         name: 'For Hire',
         component: ForHireList,
-        meta: { tabName: 'For Hire', visible: true, isLeft: true, order: 3 }
+        meta: { tabName: 'For Hire', visible: true, isLeft: true, order: 4 }
     },
     {
         path: '/user/edit/',

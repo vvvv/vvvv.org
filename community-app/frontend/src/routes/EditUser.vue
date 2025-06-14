@@ -7,7 +7,8 @@ import {
   PersonCircleOutline as PersonIcon,
   HomeOutline as HomeIcon,
   WalletOutline as WalletIcon,
-  StorefrontOutline as CompanyIcon
+  StorefrontOutline as CompanyIcon,
+  SchoolOutline as EduIcon,
 } from '@vicons/ionicons5'
 
 import { useRouter, useRoute } from 'vue-router'
@@ -15,6 +16,7 @@ import { fetchProfileData } from './fetchProfileData.js'
 
 import Basics from '../components/profile/Basics.vue'
 import Company from '../components/profile/Company.vue'
+import Edu from '../components/profile/Edu.vue'
 import Hire from '../components/profile/Hire.vue'
 
 const emit = defineEmits(['logout']);
@@ -91,6 +93,12 @@ const menuOptions = [
     component: Company,
     key: "company",
     icon: renderIcon(CompanyIcon)
+  },
+  {
+    label: 'Educational Institution',
+    component: Edu,
+    key: "edu",
+    icon: renderIcon(EduIcon)
   }
 ];
 

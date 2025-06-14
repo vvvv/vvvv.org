@@ -3,15 +3,15 @@
 import { ref, onMounted, computed } from 'vue'
 import { NSpin, NIcon } from 'naive-ui'
 import { LocationOutline, PersonCircleOutline } from '@vicons/ionicons5'
-import { fetchCompanyData } from './fetchCompanyData.js'
-import { toHtml, createAssetUrl, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
+import { fetchEduData } from './fetchEduData.js'
+import { toHtml, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
 import { useRoute } from "vue-router";
 import SocialView from '../components/SocialView.vue'
 
 const route = useRoute();
 const name = route.params.name;
 
-const company = ref(null);
+const edu = ref(null);
 const loading = ref(false);
 
 let description;
@@ -21,21 +21,21 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 onMounted(async ()=>
 {
     loading.value = true;
-    company.value = await fetchCompanyData (name);
+    edu.value = await fetchEduData (name);
     loading.value = false;
 
-    description = toHtml(company.value.description);
+    description = toHtml(edu.value.description);
 })
 
 const url = computed(()=>{
 
     let url = null;
 
-    if (company.value.social && company.value.social?.website !== '')
+    if (edu.value.social && edu.value.social?.website !== '')
     {
         url = {
-            name: stripHttp(company.value.social.website),
-            link: ensureHttps(company.value.social.website)
+            name: stripHttp(edu.value.social.website),
+            link: ensureHttps(edu.value.social.website)
         }
     }
 
@@ -51,41 +51,41 @@ const addressFields = [
 ];
 
 const addressExists = computed(() =>
-  addressFields.some(key => company.value && company.value[key])
+  addressFields.some(key => edu.value && edu.value[key])
 );
 
 </script>
 
 <template>
     <n-spin :show="loading">
-        <div v-if="company">
+        <div v-if="edu">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 text-center mb-sm-4">
                     <div class="text-center mb-3">
-                        <img v-if="company.logo" :src="company.logo" alt="logo" class="img-fluid"/>
+                        <img v-if="edu.logo" :src="edu.logo" alt="logo" class="img-fluid"/>
                         <div class="my-3">
-                            <h5>{{ company.name }}</h5>
+                            <h5>{{ edu.name }}</h5>
                         </div>                     
                         <div class="address mb-3" v-if="addressExists">
                             <n-icon class="mb-2"><LocationOutline /></n-icon>
-                            <div v-if="company.location_street">{{ company.location_street }}</div>
-                            <div v-if="company.location_additionalInfo">{{ company.location_additionalInfo }}</div>
-                            <div v-if="company.location_postalcode || company.location_city">{{ company.location_postalcode }} {{ company.location_city }}</div>
-                            <div v-if="company.location_country">{{ getCountry(company.location_country) }}</div>
+                            <div v-if="edu.location_street">{{ edu.location_street }}</div>
+                            <div v-if="edu.location_additionalInfo">{{ edu.location_additionalInfo }}</div>
+                            <div v-if="edu.location_postalcode || edu.location_city">{{ edu.location_postalcode }} {{ edu.location_city }}</div>
+                            <div v-if="edu.location_country">{{ getCountry(edu.location_country) }}</div>
                         </div>
 
                         <a v-if="url" :href="url.link">{{ url.name }}</a>
                         
-                        <div class="maintained mt-4 pt-3 border-top" v-if="company.owner">
+                        <div class="maintained mt-4 pt-3 border-top" v-if="edu.owner">
                             This page is maintained by:
                             <div>
                                 <NIcon size="20" class="mr-2">
                                     <PersonCircleOutline/>
                                 </NIcon>
-                                <a :href="'/user/'+company.owner.username" @click="(event) => showUserProfile(company.owner.username, event)">{{ company.owner.username }}</a>
+                                <a :href="'/user/'+edu.owner.username" @click="(event) => showUserProfile(edu.owner.username, event)">{{ edu.owner.username }}</a>
                             </div>
                         </div>
-                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="company.social" :social="company.social" :order="socialKeys"/>
+                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="edu.social" :social="edu.social" :order="socialKeys"/>
                     </div>
                 </div>
                 <div class="col-12 col-md-6 col-lg-8">
