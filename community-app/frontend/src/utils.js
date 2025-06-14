@@ -12,6 +12,11 @@ export const showUserProfile = (username, event) => {
     if (event) event.preventDefault();
 }
 
+export function shuffle(array)
+{
+    return array.sort(() => 0.5 - Math.random());
+}
+
 export const showBusinessProfile = (name, event) => {
     router.push({name: 'Business Profile', params: { name: name }});
     if (event) event.preventDefault();
