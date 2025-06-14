@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NEllipsis, NSkeleton } from 'naive-ui'
+import { NEllipsis, NSkeleton, NBadge } from 'naive-ui'
 import { useLatestTopicsStore } from './LatestTopicsStore.js';
 import Constants from '../../constants.js';
 
@@ -38,10 +38,11 @@ onMounted(async ()=>{
             </template>
             <template v-else>
                 <ul v-if="store.topics.length > 0" class="list-group list-group-flush">
-                    <li v-for="topic in store.topics" :key="topic.id" class="list-group-item mt-0 mb-0 py-2 forumLink">
+                    <li v-for="topic in store.topics" :key="topic.id" class="list-group-item d-flex flex-nowrap mt-0 mb-0 py-2 forumLink">
                         <NEllipsis :line-clamp="1" :tooltip=false>
                             <a :href="topic.link" target="_blank">{{ topic.title }}</a>
                         </NEllipsis>
+                        <NBadge :value="topic.count" color="DarkGray" class="ml-2"/>
                     </li>
                 </ul> 
                 <div v-else>No topics found.</div>
