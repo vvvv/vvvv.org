@@ -2,19 +2,16 @@
 
 import { ref, onMounted } from 'vue';
 import { NEllipsis, NSkeleton } from 'naive-ui'
-import { fetchLatestTopics } from './fetchOverview.js';
+import { useLatestTopicsStore } from './LatestTopicsStore.js';
 import Constants from '../../constants.js';
-import { formatDiagnosticsWithColorAndContext } from 'typescript';
 
-const topics = ref([]);
+const store = useLatestTopicsStore();
 const loading = ref(false);
 
-onMounted(async ()=>{
-
-    loading.value = true;
-
+onMounted(async ()=>{   
     try {
-        topics.value = await fetchLatestTopics();
+        loading.value = true;
+        store.fetch();         
     }
     catch(error) {
         console.log (error);
@@ -40,8 +37,8 @@ onMounted(async ()=>{
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
             </template>
             <template v-else>
-                <ul v-if="topics.length > 0" class="list-group list-group-flush">
-                    <li v-for="topic in topics" :key="topic.id" class="list-group-item mt-0 mb-0 py-2 forumLink">
+                <ul v-if="store.topics.length > 0" class="list-group list-group-flush">
+                    <li v-for="topic in store.topics" :key="topic.id" class="list-group-item mt-0 mb-0 py-2 forumLink">
                         <NEllipsis :line-clamp="1" :tooltip=false>
                             <a :href="topic.link" target="_blank">{{ topic.title }}</a>
                         </NEllipsis>

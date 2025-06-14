@@ -3,18 +3,20 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { NAvatar, NTooltip, NSkeleton, NBadge } from "naive-ui"
 import { showBusinessProfile } from "../../utils.js"
-import { fetchBusinesses } from './fetchOverview.js';
+import { useBusinessesStore } from './businessesStore.js'
 
-const data = ref({});
 const loading = ref(false);
 const router = useRouter();
 const limit = 10;
 
+const store = useBusinessesStore();
+
 onMounted(async ()=>{
+
     try
     {
         loading.value = true;
-        data.value = await fetchBusinesses();
+        store.fetch();
     }
     catch (error)
     {
@@ -39,9 +41,9 @@ function showAll()
             <div class="col-auto mr-auto">
                 <h2>Businesses using VVVV</h2>
             </div>
-            <div v-if="!loading && data" class="col-auto">
+            <div v-if="!loading && store" class="col-auto">
                 <a href="/businesses/" class="all" @click.prevent="showAll">Businesses</a>
-                <NBadge v-if="!loading && data" :value="data.total" color="grey" class="ml-2"/>
+                <NBadge v-if="!loading && store" :value="store.total" color="grey" class="ml-2"/>
             </div>
         </div>
         <div class="overflow-auto">
@@ -49,8 +51,8 @@ function showAll()
                 <template v-if="loading">
                         <NSkeleton v-for="n in 8" :key="n" :width="50" :sharp="false" size="medium" class="m-3"/>
                 </template>
-                <template v-else-if="data">
-                    <div v-if="data.items?.length > 0" v-for="business in data.items" class="text-center" :key="business.text">
+                <template v-else-if="store">
+                    <div v-if="store.items?.length > 0" v-for="business in store.items" class="text-center" :key="business.text">
                         <a :href="business.url" @click="(event)=>showBusinessProfile(business.text, event)">
                             <NTooltip trigger="hover" placement="top">
                                 <template #trigger>

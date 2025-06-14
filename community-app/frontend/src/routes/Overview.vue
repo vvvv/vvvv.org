@@ -6,7 +6,7 @@ import Businesses from "../components/overview/Businesses.vue"
 import ForHire from "../components/overview/ForHire.vue"
 import SocialHeader from '../components/SocialHeader.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
-import LatestForumTopics from '../components/overview/LatestForumTopics.vue'
+import LatestTopics from '../components/overview/LatestTopics.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -52,7 +52,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
                     </template>
                 </div>
                 <div class="col-12 col-md-6">
-                    <LatestForumTopics/>
+                    <LatestTopics/>
                 </div>
             </div>
         </div>
