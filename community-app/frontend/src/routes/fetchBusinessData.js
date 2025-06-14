@@ -9,27 +9,27 @@ function logoSrc (src)
     return src ? `${Constants.ASSETS}${src}?${LOGO_SETTINGS}` : null;
 }
 
-export async function fetchBusinessData( companies, count, emit)
+export async function fetchBusinessData()
 {
+    const response = await fetch (URL);
 
-    try{
-        const response = await fetch (URL);
-        const data = await response.json();
+    if (response.ok)
+    {
+        const json = await response.json();
     
-        companies.value = data.data;
+        const companies = json.data;
     
-        companies.value.forEach ((c)=>{
+        companies.forEach ((c)=>{
             c.logo = logoSrc(c.logo)
         })
-        count.value = data.meta.filter_count;
-        //queryCoordinates()
     
-        if (count.value > 0)
-        {
-            emit('setCount', count.value)    
+        return {
+            companies: companies,
+            count: json.meta?.filter_count ?? 0
         }
     }
-    catch (error) {
-        console.log("error")
+    else{
+        throw Error ("Connection Error");
     }
+
 }

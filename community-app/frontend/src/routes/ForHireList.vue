@@ -11,19 +11,17 @@ const emit = defineEmits(['showProfile']);
 
 const loading = ref (true);
 const users = ref([]);
-const count = ref(0);
 
 onMounted( async ()=> {
     try{
         loading.value = true;
         users.value = await fetchHireData(loading)
-        loading.value = false;
-
-        count.value = users.value.length;
     }
-    catch (error)
-    {
+    catch (error){
         console.log (error);
+    }
+    finally{
+        loading.value = false;
     }
 })
 
@@ -31,7 +29,7 @@ onMounted( async ()=> {
 
 <template>
     <n-spin :show="loading">
-        <p v-if="count > 0">A list of {{ count }} professionals available for hire.</p>
+        <p v-if="users && users.length > 0">A list of {{ users.length }} professionals available for hire.</p>
         <div class="row">
             <div id="UsersForHire" class="col-md-6 col-lg-4 col-12" v-for="user in users" :key="user.username">
                 <ForHireCard :data="user"/>
