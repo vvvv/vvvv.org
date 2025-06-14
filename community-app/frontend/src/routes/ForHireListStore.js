@@ -1,10 +1,39 @@
+import Constants from "../constants.js"
+import { defineStore } from 'pinia'
 
-import Constants from '../constants'
+export const useForHireListStore = defineStore ('forHireList',{
+    state: ()=>{
+        return {
+            items: [],
+            total: 0,
+            fetched: false
+        }
+    },
+    actions: {
+        async fetch(force = false){
+
+            if (this.fetched && !force) return;
+
+            try{
+                const { items, total } = await fetchHireData();
+                this.items = items;
+                this.total = total;
+                this.fetched = true;
+            }
+            catch (error){
+                this.items = [];
+                this.total = 0;
+                this.fetched = false;
+            }
+
+        }
+    }
+})
 
 const url = Constants.BASEURL+`items/User?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value
 &filter[related][hire][available][_eq]=true&sort=username&meta=filter_count`;
 
-export async function fetchHireData () 
+async function fetchHireData () 
 {
     const response = await fetch(url);
     const json = await response.json();
@@ -25,7 +54,10 @@ export async function fetchHireData ()
                 };
         })
     
-        return users;
+        return {
+            items: users,
+            total: json.meta?.filter_count ?? 0
+        }
     }
     else
     {
