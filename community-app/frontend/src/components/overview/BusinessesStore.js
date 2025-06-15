@@ -27,8 +27,6 @@ export const useBusinessesStore = defineStore ('businesses',{
                 this.fetched = false;
             }
 
-            console.log (this.total);
-
         }
     }
 })

@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted } from 'vue';
-import { NTooltip } from 'naive-ui';
+import { NTooltip, NIcon } from 'naive-ui';
+import { logos } from './logos/logos.js'
 
 const props = defineProps ({
     item: Object
@@ -21,6 +22,9 @@ const prefix = "https://vvvv.org";
                 <div class="row mt-2 pb-2 border-bottom">
                     <div class="col-2">
                         <img v-if="c.logo" :src="prefix+c.logo" />
+                        <NIcon v-else size="25">
+                            <component :is="c.icon"/>
+                        </NIcon>
                     </div>
                     <div class="col-10">
                         <div class="list-group list-group-flush">

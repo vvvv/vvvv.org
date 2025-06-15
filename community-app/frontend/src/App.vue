@@ -5,10 +5,7 @@ import { isRouteLoading } from "./globalState.js";
 import { useRouter, useRoute } from 'vue-router'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
 import { NMessageProvider, NTab, NTabs, NConfigProvider, NIcon, NSpin } from 'naive-ui'
-import {
-  PersonCircleOutline as PersonIcon,
-} from '@vicons/ionicons5'
-
+import { PersonCircleOutline } from '@vicons/ionicons5'
 
 const router = useRouter();
 const route = useRoute();
@@ -18,8 +15,6 @@ const failure = ref ("");
 const businessesCount = ref (0);
 
 const activeTab = ref(router.getRoutes()[0]);
-
-console.log (isRouteLoading);
 
 const login = ()=> {
   kclogin(window.location.origin + window.location.pathname.split('#')[0])
@@ -102,7 +97,7 @@ const themeOverrides = {
                 <n-tab name="Profile" @click="handleTabChange('Profile')">
                   <div>
                     <NIcon size="20" class="mr-2">
-                      <PersonIcon/>
+                      <PersonCircleOutline/>
                     </NIcon>
                     Profile  
                   </div>

@@ -8,7 +8,7 @@ import FieldInput from './FieldInput.vue'
 import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, createAssetUrl, makeFields, showUserProfile }  from '../../utils.js'
-import { NAvatar, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { NAvatar, NAlert, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -174,13 +174,15 @@ const avatarButtonText = computed(()=>{
     <div class="form-group row mb-2">
       <div class="col-sm-2"></div>
       <div class="col-sm-10">
-        <div class="row">
-          <div class="col-3" v-if="userpic !== null">
-            <n-avatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
+        <div class="d-flex">
+          <div v-if="userpic !== null">
+            <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
           </div>    
-          <div class="col-9 align-self-center">
+          <div class="ml-3 align-self-center">
             <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
-            <p class="text-muted" v-if="tempUserpic">Submit the Form to update the Avatar.</p>
+            <NAlert v-if="tempUserpic" title="Uploaded" type="success">
+                Submit the Form to update the Avatar.
+            </NAlert>
           </div>
         </div>
       </div>

@@ -1,32 +1,26 @@
 <script setup>
 import { computed } from 'vue'
-import { NButton, NRow, NCol } from 'naive-ui'
+import { NButton } from 'naive-ui'
 
-const { ml = 100, updating = false } = defineProps({ ml: Number, updating: Boolean});
+const { updating = false } = defineProps({ updating: Boolean});
 
-const style = computed(()=>{
-  return `margin-left: ${ml}px`;
-});
+const emit = defineEmits(['submit', 'revert'])
 
 const buttonLabel = computed(()=>
   updating ? 'Updating...' : 'Submit'
 );
 
-const emit = defineEmits(['submit', 'revert'])
+const style="margin-left: 120px;"
 
 </script>
 
 <template>
-  <div class="row" :style="style">
-    <div class="col-6 col-md-2 mb-2">
-      <n-button @click="emit('submit')" :disabled="updating" type="primary">
-        {{ buttonLabel }}
-      </n-button>
-    </div>
-    <div class="col-6 col-md-2">
-      <n-button @click="emit('revert')" :disabled="updating">
-        Revert
-      </n-button>
-    </div>
+  <div class="d-flex" :style="style">
+    <NButton @click="emit('submit')" :disabled="updating" type="primary" class="mr-5">
+      {{ buttonLabel }}
+    </NButton>
+    <NButton @click="emit('revert')" :disabled="updating">
+      Revert
+    </NButton>
   </div>
 </template>
