@@ -16,7 +16,7 @@ onMounted(async ()=>{
     try
     {
         loading.value = true;
-        store.fetch();
+        await store.fetch();
     }
     catch (error)
     {

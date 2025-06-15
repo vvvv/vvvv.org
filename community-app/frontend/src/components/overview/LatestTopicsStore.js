@@ -18,7 +18,6 @@ export const useLatestTopicsStore = defineStore ('latestTopics',{
                 this.fetched = true;
             }
             catch (error){
-                this.topics = [];
                 this.fetched = false;
             }
 
