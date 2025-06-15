@@ -21,8 +21,6 @@ export const useCompanyListStore = defineStore ('companyList',{
                 this.fetched = true;
             }
             catch (error){
-                this.items = [];
-                this.total = null;
                 this.fetched = false;
             }
 

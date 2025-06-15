@@ -21,15 +21,13 @@ export const useEduListStore = defineStore ('eduList',{
                 this.fetched = true;
             }
             catch (error){
-                this.items = [];
-                this.total = null;
                 this.fetched = false;
             }
         }
     }
 })
 
-const url = Constants.BASEURL+`items/Edu?fields=*&sort=name&meta=filter_count`;
+const url = Constants.GET_EDUS+`?fields=*&sort=name&meta=filter_count`;
 const LOGO_SETTINGS = 'withoutEnlargement=true&fit=inside&height=50&quality=90&format=auto';
 
 async function fetchEduList()

@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { NSpin } from 'naive-ui'
 import Constants from '../constants.js'
 import Businesses from "../components/overview/Businesses.vue"
+import Edus from "../components/overview/Edus.vue"
 import ForHire from "../components/overview/ForHire.vue"
 import SocialHeader from '../components/SocialHeader.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
@@ -59,7 +60,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
         <div class="col-12 mb-4">
             <div class="row">
                 <div :class="columnClass">
-                    <ForHire/>
+                    <Edus/>
                 </div>
                 <div :class="columnClass">
                     <ForHire/>
