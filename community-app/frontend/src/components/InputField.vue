@@ -1,7 +1,7 @@
 <script setup>
 import { NFormItem, NInput } from 'naive-ui';
 import InfoButton from "./InfoButton.vue";
-import Helps from "./profile/helps.js";
+import Helps from "./profile/HelpTexts.js";
 
 const model = defineModel();
 const { path, placeholder, label, info } = defineProps(['path', 'placeholder', 'label', 'info']);
