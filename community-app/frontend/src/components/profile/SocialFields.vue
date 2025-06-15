@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 import { NFormItem, NInput } from 'naive-ui';
 import InfoButton from "../InfoButton.vue";
 import InputField from "../InputField.vue";
-import Helps from "./helps.js";
+import Helps from "./HelpTexts.js";
 
 const model = defineModel('value')
 
