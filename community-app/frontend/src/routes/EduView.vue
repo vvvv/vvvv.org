@@ -44,7 +44,7 @@ const url = computed(()=>{
 
     let url = null;
 
-    if (edu.value.social?.website !== '')
+    if (edu.value.social?.website && edu.value.social.website !== '')
     {
         url = {
             name: stripHttp(edu.value.social.website),

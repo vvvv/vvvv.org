@@ -100,7 +100,7 @@ const website = computed(()=>{
 
     let url = null;
 
-    if (social.value.website !== '')
+    if (social.value?.website && social.value.website !== '')
     {
         url = {
             name: stripHttp(social.value.website),

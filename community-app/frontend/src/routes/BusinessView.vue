@@ -32,7 +32,7 @@ const url = computed(()=>{
 
     let url = null;
 
-    if (company.value.social?.website !== '')
+    if (company.value.social?.website && company.value.social.website !== '')
     {
         url = {
             name: stripHttp(company.value.social.website),
