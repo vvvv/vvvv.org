@@ -73,7 +73,7 @@ const url = computed(()=>{
                         <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="company.social" :social="company.social" :order="socialKeys"/>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-8">
+                <div v-if="description" class="col-12 col-md-6 col-lg-8">
                     <p v-html="description"></p>
                 </div>
             </div>
