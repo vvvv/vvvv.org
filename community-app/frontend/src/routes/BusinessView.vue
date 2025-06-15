@@ -32,7 +32,7 @@ const url = computed(()=>{
 
     let url = null;
 
-    if (company.value.social && company.value.social?.website !== '')
+    if (company.value.social?.website !== '')
     {
         url = {
             name: stripHttp(company.value.social.website),
@@ -57,8 +57,10 @@ const url = computed(()=>{
                         </div>                     
                         <LocationFull :data="company"/>
 
-                        <a v-if="url" :href="url.link">{{ url.name }}</a>
-                        
+                        <div class="my-3">
+                            <a v-if="url" :href="url.link" target="_blank">{{ url.name }}</a>
+                        </div>
+
                         <div class="maintained mt-4 pt-3 border-top" v-if="company.owner">
                             This page is maintained by:
                             <div>

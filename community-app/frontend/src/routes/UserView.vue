@@ -8,7 +8,7 @@ import SocialView from '../components/SocialView.vue'
 import Location from '../components/Location.vue'
 import ClippedText from '../components/ClippedText.vue'
 import { useRoute, useRouter } from 'vue-router'
-import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile } from '../utils'
+import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
 
 
 const route = useRoute();
@@ -42,7 +42,7 @@ onMounted(async ()=>
     let response = await fetch(url);
     let json = await response.json();
 
-    if (!response.ok || json.data.length == 0)
+    if (!response.ok || json.data?.length == 0)
     {
       throw ("Can't find a profile for this user") 
     }
@@ -61,7 +61,7 @@ onMounted(async ()=>
     response = await fetch(companyURL);
     json = await response.json();
 
-    if (!response.ok || json.data.length > 0)
+    if (response.ok && json.data?.length > 0)
     {
       company.value = json.data[0].name
     }
@@ -93,8 +93,23 @@ const fullName = computed(() => {
 })
 
 const forumLink = computed(()=>
-  'https://forum.vvvv.org/u/'+ user.value.username + '/summary'
+  `${Constants.FORUM}u/${user.value.username}/summary`
 )
+
+const website = computed(()=>{
+
+    let url = null;
+
+    if (social.value.website !== '')
+    {
+        url = {
+            name: stripHttp(social.value.website),
+            link: ensureHttps(social.value.website)
+        }
+    }
+
+    return url;
+})
 
 
 </script>
@@ -112,8 +127,11 @@ const forumLink = computed(()=>
               </div>
 
               <Location :location="location"/>
+              <div class="my-3">
+                <a v-if="website" :href="website.link" target="_blank">{{ website.name }}</a>
+              </div>
 
-              <p class="mb-1">
+              <p class="my-1">
                 <a :href="forumLink">Forum Profile</a>
               </p>
 

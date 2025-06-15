@@ -44,7 +44,7 @@ const url = computed(()=>{
 
     let url = null;
 
-    if (edu.value.social && edu.value.social?.website !== '')
+    if (edu.value.social?.website !== '')
     {
         url = {
             name: stripHttp(edu.value.social.website),
@@ -72,8 +72,10 @@ const url = computed(()=>{
                         </div>                     
                         <LocationFull :data="edu"/>
 
-                        <a v-if="url" :href="url.link">{{ url.name }}</a>
-                        
+                        <div class="my-3">                            
+                            <a v-if="url" :href="url.link" target="_blank">{{ url.name }}</a>
+                        </div>
+
                         <div class="maintained mt-4 pt-3 border-top" v-if="edu.owner">
                             This page is maintained by:
                             <div>
@@ -86,7 +88,7 @@ const url = computed(()=>{
                         <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="edu.social" :social="edu.social" :order="socialKeys"/>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-8">
+                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8">
                     <p v-html="edu.description"></p>
                 </div>
             </div>
