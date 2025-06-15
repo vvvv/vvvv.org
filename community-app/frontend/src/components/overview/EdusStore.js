@@ -2,7 +2,7 @@ import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 import { createAssetUrl, shuffle } from "../../utils.js"
 
-export const useBusinessesStore = defineStore ('businesses',{
+export const useEdusStore = defineStore ('edus',{
     state: ()=>{
         return {
             items: [],
@@ -16,7 +16,7 @@ export const useBusinessesStore = defineStore ('businesses',{
             if (this.fetched && !force) return;
 
             try{
-                const {items, total} = await fetchBusinesses();
+                const {items, total} = await fetchEdus();
                 this.items = items;
                 this.total = total;
                 this.fetched = true;
@@ -29,10 +29,10 @@ export const useBusinessesStore = defineStore ('businesses',{
     }
 })
 
-async function fetchBusinesses(){
+async function fetchEdus(){
         
     const imageParamsLogos = "?withoutEnlargement=true&quality=90&fit=cover&height=40";
-    const url = Constants.GET_COMPANIES+"?fields[]=name,logo&meta=filter_count";
+    const url = Constants.GET_EDUS+"?fields[]=name,logo&meta=filter_count";
 
     const limit = 8;
     
@@ -44,7 +44,7 @@ async function fetchBusinesses(){
         const items = json.data?.map((b) => (
             {
                 img: b.logo ? createAssetUrl(b.logo) + imageParamsLogos : null,
-                url: '/business/'+b.name,
+                url: '/edu/'+b.name,
                 text: b.name,
             }
         ));

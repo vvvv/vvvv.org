@@ -2,13 +2,13 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { NTooltip, NSkeleton, NBadge } from "naive-ui"
-import { showBusinessProfile } from "../../utils.js"
-import { useBusinessesStore } from './businessesStore.js'
+import { showEduProfile } from "../../utils.js"
+import { useEdusStore } from './EdusStore.js'
 
 const loading = ref(false);
 const router = useRouter();
 
-const store = useBusinessesStore();
+const store = useEdusStore();
 
 onMounted(async ()=>{
 
@@ -29,7 +29,7 @@ onMounted(async ()=>{
 
 function showAll()
 {
-    router.push({name: 'Businesses'});
+    router.push({name: 'Educational Institutions'});
 }
 
 </script>
@@ -38,10 +38,10 @@ function showAll()
     <div class="section">
         <div class="row pb-2 mb-2 border-bottom">
             <div class="col-auto mr-auto">
-                <h2>Businesses using VVVV</h2>
+                <h2>VVVV is taught at </h2>
             </div>
             <div class="col-auto">
-                <a href="/businesses/" class="all" @click.prevent="showAll">Businesses</a>
+                <a href="/businesses/" class="all" @click.prevent="showAll">Educational Institutions</a>
                 <NBadge v-if="!loading && store.total" :value="store.total" color="grey" class="ml-2"/>
             </div>
         </div>
@@ -52,7 +52,7 @@ function showAll()
                 </template>
                 <template v-else-if="store">
                     <div v-if="store.items?.length > 0" v-for="item in store.items" class="text-center" :key="item.text">
-                        <a :href="item.url" @click="(event)=>showBusinessProfile(item.text, event)">
+                        <a :href="item.url" @click="(event)=>showEduProfile(item.text, event)">
                             <NTooltip trigger="hover" placement="top">
                                 <template #trigger>
                                     <img :src="item.img" class="m-3" :alt="item.text"/>

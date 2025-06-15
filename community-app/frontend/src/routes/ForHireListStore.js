@@ -21,8 +21,6 @@ export const useForHireListStore = defineStore ('forHireList',{
                 this.fetched = true;
             }
             catch (error){
-                this.items = [];
-                this.total = 0;
                 this.fetched = false;
             }
 
@@ -30,7 +28,7 @@ export const useForHireListStore = defineStore ('forHireList',{
     }
 })
 
-const url = Constants.BASEURL+`items/User?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value
+const url = Constants.GET_USERS+`?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value
 &filter[related][hire][available][_eq]=true&sort=username&meta=filter_count`;
 
 async function fetchHireData () 
