@@ -1,17 +1,24 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NEllipsis, NSkeleton, NBadge } from 'naive-ui'
-import { useLatestTopicsStore } from './LatestTopicsStore.js';
-import Constants from '../../constants.js';
+import { NIcon, NEllipsis, NSkeleton, NBadge, NTooltip } from 'naive-ui'
+import { SyncSharp } from '@vicons/ionicons5'
+import { useLatestTopicsStore } from './LatestTopicsStore.js'
+import Constants from '../../constants.js'
+import SyncButton from "../SyncButton.vue"
 
 const store = useLatestTopicsStore();
 const loading = ref(false);
 
-onMounted(async ()=>{   
+onMounted(()=>{   
+    sync();
+})
+
+async function sync(force)
+{
     try {
         loading.value = true;
-        store.fetch();         
+        await store.fetch(force);         
     }
     catch(error) {
         console.log (error);
@@ -19,14 +26,16 @@ onMounted(async ()=>{
     finally {
         loading.value = false;
     }
-})
+}
 </script>
 
 <template>
     <div class="section">
         <div class="row pb-2 mb-2 border-bottom">
-            <div class="col-auto mr-auto">
+            <div class="d-flex col-auto mr-auto">
                 <h2>Latest Forum Topics</h2>
+                <SyncButton v-if="!loading" @click="sync(true)" class="ml-3"/>
+                <span v-else class="ml-3">...</span>
             </div>
             <div class="col-auto">
                 <a :href="Constants.FORUM" class="all">Forum</a>
