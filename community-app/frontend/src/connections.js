@@ -1,6 +1,6 @@
 export const connections = [
     {   
-        title: "Chat",
+        title: "Chat & Forum",
         children: [
             {
                 name: "Element",
@@ -11,9 +11,8 @@ export const connections = [
                 alt: 'Join us for a chat'
             },
             {
-                name: "Forum",
+                name: "Discourse",
                 description: 'Use the Forum',
-                logo: "/img/icons/element-32x32-black.png", 
                 tooltip: '',
                 link: 'https://forum.vvvv.org',
                 alt: 'Use the Forum'
@@ -33,7 +32,6 @@ export const connections = [
         children:[
             {
                 name: "GitHub",
-                logo: "/img/icons/github32x32.png",
                 children: [
                     {
                         description: 'Open sources of vvvv',
@@ -54,7 +52,6 @@ export const connections = [
             },
             {
                 name: "Nuget",
-                logo: "/img/icons/github32x32.png",
                 children: [
                     {   
                         description: 'NuGets tagged with "VL"',
@@ -75,8 +72,7 @@ export const connections = [
         title: "Social Networks",
         children:[
             {
-                name: "Mastodon", 
-                logo: "/img/icons/mastodon32x32.png",
+                name: "Mastodon",
                 children: [
                     {
                         description: 'Follow our news',
@@ -91,6 +87,7 @@ export const connections = [
                 ]
             },
             {
+                name: "LinkedIn",
                 description: "Follow our posts", 
                 logo: "/img/icons/linkedin32x32.png",
                 link: 'https://www.linkedin.com/company/vvvv-group',
@@ -99,7 +96,6 @@ export const connections = [
             {
                 name: "Pixelfed",
                 description: 'Screenshot gallery',
-                logo: "/img/icons/pixelfed32x32.png",
                 link: 'https://pixelfed.social/madewithvvvv',
                 alt: 'Follow a shared screenshot gallery on Pixelfed',
             }

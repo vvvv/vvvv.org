@@ -3,20 +3,24 @@ import { shallowRef, computed, onMounted } from 'vue'
 import { ensureHttps, getProperties, stripPrefix, ensurePrefix, stripBeforeLastAt, stripBeforeLastSlash, getURL } from '../utils'
 import { NIcon } from 'naive-ui'
 import { LogoGithub, LogoMastodon } from '@vicons/ionicons5'
-import LogoNuget  from './logos/LogoNuget'
-import LogoPixelfed from './logos/LogoPixelfed'
-
+import { logos } from "./logos/logos.js"
 const { social, order } = defineProps({ social: Object, order: Array })
 
 const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
 
 const media = [
-	{ key: 'github', prefix: 'github.com/', logo: LogoGithub },
-	{ key: 'nuget', prefix: 'nuget.org/profiles/', logo: LogoNuget},
-	{ key: 'mastodon', prefix: null, logo: LogoMastodon},
-	{ key: 'pixelfed', prefix: null, logo: LogoPixelfed}
-]
+	{ key: 'github', prefix: 'github.com/' },
+	{ key: 'nuget', prefix: 'nuget.org/profiles/' },
+	{ key: 'mastodon', prefix: null },
+	{ key: 'pixelfed', prefix: null }
+];
+
+// Add logos
+media.forEach( m => {
+	const l = logos.find( logo => logo.name === m.key );
+	m.logo = l ? l.logo : null;
+});
 
 function getLogo(key)
 {
