@@ -47,8 +47,6 @@ function makeURL(state)
 
     let sort = "";
 
-    console.log (state.sort)
-
     if (state.sort?.order)
     {
         const dir = state.sort.order != "descend" ? "-" : "";
@@ -64,8 +62,6 @@ function makeURL(state)
     const paramsString = params.join("&");
 
     const url = `${Constants.GET_USERS}?${paramsString}`
-
-    console.log (url);
 
     return url;
 }
