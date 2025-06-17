@@ -96,7 +96,7 @@ const columns = [
     },
     {
         title: 'Location',
-        key: 'date_created',
+        key: 'location',
         sorter: true
     },
     {
