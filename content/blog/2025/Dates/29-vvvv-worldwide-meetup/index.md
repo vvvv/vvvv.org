@@ -17,7 +17,7 @@ thumb: "vvvvmeetup-thumbnail.png"
 ![](vvvvmeetup-29.jpg)
 *Artwork by Takuma Nakata*
 
-Here's to announce the 29th vvvv worldwide meetup on **July 17th, 7pm CET**, hosted by **The NODE Institute**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
+Here's to announce the 29th vvvv worldwide meetup on **July 17th, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
 Moderated by Randall Vasquez<br>
 Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)  
