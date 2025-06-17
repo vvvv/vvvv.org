@@ -132,7 +132,7 @@ const website = computed(()=>{
               </div>
 
               <p class="my-1">
-                <a :href="forumLink">Forum Profile</a>
+                <a :href="forumLink" target="_blank">Forum Profile</a>
               </p>
 
               <div v-if="company" class="border-top pt-2 mt-4">

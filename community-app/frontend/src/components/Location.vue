@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { NIcon } from 'naive-ui'
 import { LocationOutline } from '@vicons/ionicons5'
-import { getCountry } from '../utils.js'
+import { locationCityCountry } from '../utils.js'
 
 const { location } = defineProps(['location']);
 
 const text = computed(() => {
-    const t = [location.city, getCountry(location.country)].filter(Boolean).join(", ")
+    const t = locationCityCountry(location.city, location.country);
     return t ?? null
 })
 
