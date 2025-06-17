@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, h, computed } from 'vue'
+import { ref, reactive, watchEffect, watch, h, computed } from 'vue'
 import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
@@ -13,7 +13,7 @@ const pageSizes = [
     { label: '50 per page', value: 50 }
 ]
 
-const state = ref({
+const state = reactive({
     currentPage: 1,
     totalPages: 0,
     totalCount: 0,
@@ -35,31 +35,31 @@ const filterFieldForHire = ref(false);
 
 function applyFilter()
 {
-    state.value.currentPage = 1;
-    state.value.filter = filterField.value;
+    state.currentPage = 1;
+    state.filter = filterField.value;
 }
 
 function resetFilter()
 {
-    state.value.filter = filterField.value = '';
+    state.filter = filterField.value = '';
 }
 
 const isLess = ref(false)
 
 const handlePageChange = (curPage) => {
-      state.value.currentPage = curPage
+      state.currentPage = curPage
     };
 
 const handlePageSizeChange = (pageSize) => {
-    isLess.value = pageSize < state.value.pageSize;
+    isLess.value = pageSize < state.pageSize;
 
-    state.value.pageSize = pageSize;
-    state.value.currentPage = 1;
+    state.pageSize = pageSize;
+    state.currentPage = 1;
 };
 
 function clearFilter()
 {
-    state.value.filter = "";
+    state.filter = "";
 }
 
 const tableData = ref([])
@@ -132,32 +132,35 @@ watchEffect(() => {
         applyFilter();
 }); 
 
+watch (()=>state.sort, (sort, oldSort)=>{
+    if (sort !== oldSort) state.currentPage = 1;
+})
+
 watchEffect(async () => { 
   
     try{
         loading.value = true;
-        const result = await fetchUserData(state.value);
+        const result = await fetchUserData(state);
 
         tableData.value = result.data;
-        state.value.totalCount = result.totalCount;
-        state.value.totalPages = result.totalPages;
+        state.totalCount = result.totalCount;
+        state.totalPages = result.totalPages;
 
         if (result.totalPages > 0)
         {
             paginationRef.value = {
-                pageSize: state.value.pageSize,
+                pageSize: state.pageSize,
                 pageSizes: pageSizes,
-                page: 1,
+                page: state.currentPage,
                 showSizePicker: true,
                 pageCount: result.totalPages || 1
             }
         }
      
         if (isLess.value){
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        isLess.value = false;
-    }
-
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isLess.value = false;
+        }
     }
     catch (err){
         console.log (err)

@@ -12,7 +12,8 @@ export async function fetchUserData (state)
     const result = {
         data: null,
         totalPages: 0,
-        totalCount: 0
+        totalCount: 0,
+        currentPage: 0,
     }
 
     const response = await fetch(url);
@@ -28,18 +29,15 @@ export async function fetchUserData (state)
         }
     ))
 
-    if (data.meta)
-    {
-        result.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.totalCount ?? 0;
-    }
-
-    result.totalPages = Math.max(1, Math.ceil(state.totalCount / state.pageSize));
+    result.totalCount = data.meta?.total_count ?? data.meta?.filter_count ?? state.totalCount ?? 0;
+    result.totalPages = Math.max(1, Math.ceil(result.totalCount / state.pageSize));
 
     return result;
 }
 
 function makeURL(state)
 {
+
     const filter = state.filter ? `filter[username][_contains]=${state.filter}` : null
 
     const pages = state.pageSize ? `limit=${state.pageSize}&page=${state.currentPage}` : null;
