@@ -1,52 +1,71 @@
 import Constants from '../constants'
-import { createAssetUrl } from '../utils'
+import { createAssetUrl, locationCityCountry } from '../utils'
 
-const SORT = "sort=username"
-const FIELDS =`fields[]=username,userpic,related.hire.available,date_created`
+const DEFAULT_SORT = "sort=username"
+const FIELDS =`fields[]=username,userpic,related.hire.available,date_created,location_city,location_country`
 
 const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 
-export async function fetchUserData (tableData, state)
+export async function fetchUserData (state)
 {
+    const url = makeURL(state)
+    const result = {
+        data: null,
+        totalPages: 0,
+        totalCount: 0
+    }
 
-        const url = makeURL(state)
+    const response = await fetch(url);
+    const data = await response.json();
 
-        try{
-            const response = await fetch(url);
-            const data = await response.json();
-    
-            tableData.value = data.data.map((u) => (
-                {
-                    src: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
-                    username: u.username,
-                    available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
-                    date_created: new Date(u.date_created).toDateString()
-                }
-            ))
-    
-            if (data?.meta)
-            {
-                state.value.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.value.totalCount ?? 0;
-            }
-    
-            state.value.totalPages = Math.max(1, Math.ceil(state.value.totalCount / state.value.pageSize));
-        }
-        catch(error)
+    result.data = data.data?.map((u) => (
         {
-            console.error(error)
-            state.value.error = "Failed to fetch user data";
+            src: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
+            username: u.username,
+            available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
+            date_created: new Date(u.date_created).toDateString(),
+            location: locationCityCountry(u.location_city, u.location_country)
         }
+    ))
+
+    if (data.meta)
+    {
+        result.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.totalCount ?? 0;
+    }
+
+    result.totalPages = Math.max(1, Math.ceil(state.totalCount / state.pageSize));
+
+    return result;
 }
 
-function makeURL( state )
+function makeURL(state)
 {
-    const filter = state.value.filter ? `filter[username][_contains]=${state.value.filter}` : null
+    const filter = state.filter ? `filter[username][_contains]=${state.filter}` : null
 
-    const pages = state.value.pageSize ? `limit=${state.value.pageSize}&page=${state.value.currentPage}` : null;
-    const count = state.value.currentPage === 1 ? (filter ? "meta=filter_count" : "meta=total_count") : "";
+    const pages = state.pageSize ? `limit=${state.pageSize}&page=${state.currentPage}` : null;
+    const count = state.currentPage === 1 ? (filter ? "meta=filter_count" : "meta=total_count") : "";
 
-    const params = [FIELDS, SORT, filter, pages, count].filter(Boolean);
+    let sort = "";
+
+    console.log (state.sort)
+
+    if (state.sort?.order)
+    {
+        const dir = state.sort.order != "descend" ? "-" : "";
+        const key = state.sort.columnKey == "location" ? "location_country,location_city" : state.sort.columnKey;
+        sort = 'sort='+dir+key;
+    }
+    else
+    {
+        sort = DEFAULT_SORT;
+    }
+
+    const params = [FIELDS, sort, filter, pages, count].filter(Boolean);
     const paramsString = params.join("&");
 
-    return `${Constants.GET_USERS}?${paramsString}`;
+    const url = `${Constants.GET_USERS}?${paramsString}`
+
+    console.log (url);
+
+    return url;
 }

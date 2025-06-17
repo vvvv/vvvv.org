@@ -46,7 +46,7 @@ function showAll()
             </div>
         </div>
         <div class="overflow-auto">
-            <div class="row flex-nowrap d-flex no-gutters pt-2 pb-2 mb-2 align-items-center justify-content-between">
+            <div class="row flex-nowrap d-flex no-gutters pt-2 pb-2 mb-2 align-items-center">
                 <template v-if="loading">
                         <NSkeleton v-for="n in 8" :key="n" :width="50" :sharp="false" size="medium" class="m-3"/>
                 </template>

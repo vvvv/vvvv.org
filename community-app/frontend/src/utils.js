@@ -191,8 +191,15 @@ export const makeFields = (f, count) => {
 
 
 export function getCountry(value) {
+    if (!value) return null;
+
     const country = countries.find(country => country.value === value)
-    return country ? country.label : null
+    return country ? country.label : value
+}
+
+export function locationCityCountry(city, country)
+{
+  return [city, getCountry(country)].filter(Boolean).join(", ")
 }
 
 export const getProperties = (obj, keys) => {

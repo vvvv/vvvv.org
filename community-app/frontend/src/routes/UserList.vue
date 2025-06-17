@@ -4,6 +4,8 @@ import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch,
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
 import { showUserProfile } from "../utils.js"
+import AvatarColumn from '../components/AvatarColumn.vue'
+import ForHireColumn from '../components/ForHireColumn.vue'
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
@@ -16,7 +18,8 @@ const state = ref({
     totalPages: 0,
     totalCount: 0,
     pageSize: 10,
-    filter: ""
+    filter: "",
+    sort: null
 })
 
 const paginationRef = ref({
@@ -68,26 +71,18 @@ const columns = [
         key: 'avatar',
         render(row) {
             return h(
-                'div',
+                AvatarColumn,
                 {
-                    style: { cursor: 'pointer' },
+                    src: row.src,
                     onClick: (event)=> showUserProfile(row.username, event)
-                },
-                h(
-                    NAvatar,
-                    {
-                        objectFit: 'contain',
-                        round: true,
-                        size: 48,
-                        src: row.src
-                    }
-                )
+                }
             )
         }
     },
     {
         title: 'Username',
         key: 'username',
+        sorter: true,
         render(row) {
             return h(
                 'a',
@@ -100,14 +95,24 @@ const columns = [
         }
     },
     {
+        title: 'Location',
+        key: 'date_created',
+        sorter: true
+    },
+    {
         title: 'Registered since',
         key: 'date_created',
+        sorter: true
     },
     {
         title: 'Available for Hire',
-        key: 'available',
+        key: 'related.hire.available',
+        sorter: true,
         render(row) {
-            return row.available ? h(NIcon, {color: "#0e7a0d", size: "20"}, [h(Check)]) : null
+            return h(
+                ForHireColumn, 
+                { value: row.available}
+            )
         }
     }
 ]
@@ -128,27 +133,37 @@ watchEffect(() => {
 }); 
 
 watchEffect(async () => { 
+  
+    try{
+        loading.value = true;
+        const result = await fetchUserData(state.value);
 
-    loading.value = true;
-    
-    await fetchUserData( tableData, state );
+        tableData.value = result.data;
+        state.value.totalCount = result.totalCount;
+        state.value.totalPages = result.totalPages;
 
-    loading.value = false;
-
-    if (state.value.totalPages > 0)
-    {
-        paginationRef.value = {
-            pageSize: state.value.pageSize,
-            pageSizes: pageSizes,
-            page: state.value.currentPage,
-            showSizePicker: true,
-            pageCount: state.value.totalPages || 1
+        if (result.totalPages > 0)
+        {
+            paginationRef.value = {
+                pageSize: state.value.pageSize,
+                pageSizes: pageSizes,
+                page: 1,
+                showSizePicker: true,
+                pageCount: result.totalPages || 1
+            }
         }
-    }
-
-    if (isLess.value){
+     
+        if (isLess.value){
         window.scrollTo({ top: 0, behavior: 'smooth' });
         isLess.value = false;
+    }
+
+    }
+    catch (err){
+        console.log (err)
+    }
+    finally{
+        loading.value = false;
     }
 })
 
@@ -188,7 +203,8 @@ watchEffect(async () => {
             :loading="loading"
             :bordered="false"
             :columns="columns"
-            :data="tableData"/>
+            :data="tableData"
+            @update:sorter="s => state.sort = s"/>
     </n-space>
         <div class="row mt-3">
             <div class="ml-auto">

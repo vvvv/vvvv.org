@@ -46,8 +46,8 @@ async function sync(force)
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
             </template>
             <template v-else>
-                <ul v-if="store.topics.length > 0" class="list-group list-group-flush">
-                    <li v-for="topic in store.topics" :key="topic.id" class="list-group-item d-flex flex-nowrap mt-0 mb-0 py-2 forumLink">
+                <ul v-if="store.topics.length > 0" class="list-group list-group-flush forumList">
+                    <li v-for="(topic, index) in store.topics" :key="index" class="list-group-item d-flex flex-nowrap mt-0 mb-0 py-2 forumLink">
                         <NEllipsis :line-clamp="1" tooltip=false>
                             <a :href="topic.link" target="_blank">{{ topic.title }}</a>
                         </NEllipsis>
