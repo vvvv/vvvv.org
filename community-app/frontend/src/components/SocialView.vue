@@ -1,8 +1,7 @@
 <script setup>
 import { shallowRef, computed, onMounted } from 'vue'
-import { ensureHttps, getProperties, stripPrefix, ensurePrefix, stripBeforeLastAt, stripBeforeLastSlash, getURL } from '../utils'
+import { ensureHttps, stripHttp, getProperties, stripPrefix, ensurePrefix, stripBeforeLastAt, stripBeforeLastSlash, getURL } from '../utils'
 import { NIcon } from 'naive-ui'
-import { LogoGithub, LogoMastodon } from '@vicons/ionicons5'
 import { logos } from "./logos/logos.js"
 const { social, order } = defineProps({ social: Object, order: Array })
 
@@ -10,6 +9,7 @@ const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
 
 const media = [
+	{ key: 'website', prefix: null },
 	{ key: 'github', prefix: 'github.com/' },
 	{ key: 'nuget', prefix: 'nuget.org/profiles/' },
 	{ key: 'mastodon', prefix: null },
@@ -41,14 +41,29 @@ function openLink (name, link) {
 onMounted(()=>{
 	if  (social)
 	{
-		socialLinks.value = media.filter(({ key }) => social[key]).map(({ key, prefix, logo }) => {	
-				const stripped = stripBeforeLastSlash(social[key]);
-				const url = ensurePrefix(social[key], prefix)
+		socialLinks.value = media.filter(({ key }) => social[key]).map(({ key, prefix }) => {	
+				
+				let text;
+				let url;
+
+				if (key === 'website')
+				{
+					text = stripHttp(social.website)
+					url = ensureHttps(social.website)
+				}
+				else
+				{
+					text = stripBeforeLastSlash(social[key]);
+					url = ensurePrefix(social[key], prefix);
+				}
+
+				const logo = getLogo(key); 
+			
 				return {
 					name: key,
-					text: stripped,
+					text: text,
 					url: url,
-					icon: getLogo(key)
+					icon: logo
 				}
 			});
 
@@ -67,8 +82,8 @@ onMounted(()=>{
 
 <template>
 	<div>
-		<div class="row mt-4 mt-sm-0 pb-2 socialView border-bottom" v-if="socialLinks.length > 0">
-			<div class="col-sm-6 mb-1 pr-2" v-for="link in socialLinks" :key="link.name">
+		<div class="mt-4 mt-sm-0 pb-2 socialView" v-if="socialLinks.length > 0">
+			<div class="mb-1 pr-2" v-for="link in socialLinks" :key="link.name">
 				<div class="pb-2">
 					<NIcon v-if="link.icon" class="mr-2" size="20"><component :is="link.icon"/></NIcon>
 					<p v-else>{{  link.name }}</p>
@@ -77,13 +92,11 @@ onMounted(()=>{
 				</div>
 			</div>
 		</div>
-		<div class="row mt-4 mt-sm-0 socialView" v-if="socialFields.length > 0">
-			<div class="col-sm-12 mb-1 pr-2" v-for="field in socialFields" :key="field.name">
-				<div class="border-bottom pb-2">
+		<div class="mt-4 mt-sm-0 socialView border-top" v-if="socialFields.length > 0">
+			<div class="mb-1 pr-2 socialItem" v-for="field in socialFields" :key="field.name">
 					<div class="key">{{  field.name }}</div>
 					<template v-if="field.url"><a :href="field.url" target="_blank">{{ field.text }}</a></template>
 					<template v-else>{{ field.text }}</template>
-				</div>
 			</div>
 		</div>
 	</div>

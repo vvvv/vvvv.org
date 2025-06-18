@@ -56,6 +56,7 @@ watchEffect(()=>{
 })
 
 const handleTabChange = ( tabName ) => {
+
   const tab = tabs.value.find(t => t.name === tabName)
   if (tab) {
     activeTab.value = tabName;
