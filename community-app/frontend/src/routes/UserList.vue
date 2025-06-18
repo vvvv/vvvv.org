@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect, h, computed } from 'vue'
+import { ref, reactive, watchEffect, watch, h, computed, onMounted, onUnmounted } from 'vue'
 import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
@@ -7,13 +7,27 @@ import { showUserProfile } from "../utils.js"
 import AvatarColumn from '../components/AvatarColumn.vue'
 import ForHireColumn from '../components/ForHireColumn.vue'
 
+const windowWidth = ref(window.innerWidth);
+
+onMounted(() => {
+    window.addEventListener('resize', onWidthChange)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', onWidthChange)
+})
+
+function onWidthChange(){
+    windowWidth.value = window.innerWidth; 
+}
+
 const pageSizes = [
     { label: '10 per page', value: 10 },
     { label: '20 per page', value: 20 },
     { label: '50 per page', value: 50 }
 ]
 
-const state = ref({
+const state = reactive({
     currentPage: 1,
     totalPages: 0,
     totalCount: 0,
@@ -35,31 +49,31 @@ const filterFieldForHire = ref(false);
 
 function applyFilter()
 {
-    state.value.currentPage = 1;
-    state.value.filter = filterField.value;
+    state.currentPage = 1;
+    state.filter = filterField.value;
 }
 
 function resetFilter()
 {
-    state.value.filter = filterField.value = '';
+    state.filter = filterField.value = '';
 }
 
 const isLess = ref(false)
 
 const handlePageChange = (curPage) => {
-      state.value.currentPage = curPage
+      state.currentPage = curPage
     };
 
 const handlePageSizeChange = (pageSize) => {
-    isLess.value = pageSize < state.value.pageSize;
+    isLess.value = pageSize < state.pageSize;
 
-    state.value.pageSize = pageSize;
-    state.value.currentPage = 1;
+    state.pageSize = pageSize;
+    state.currentPage = 1;
 };
 
 function clearFilter()
 {
-    state.value.filter = "";
+    state.filter = "";
 }
 
 const tableData = ref([])
@@ -67,8 +81,8 @@ const loading = ref(true)
 
 const columns = [
     {
-        width: "60",
         key: 'avatar',
+        width: 60,
         render(row) {
             return h(
                 AvatarColumn,
@@ -82,7 +96,9 @@ const columns = [
     {
         title: 'Username',
         key: 'username',
+        width: 100,
         sorter: true,
+        ellipsis: true,
         render(row) {
             return h(
                 'a',
@@ -96,17 +112,16 @@ const columns = [
     },
     {
         title: 'Location',
-        key: 'date_created',
-        sorter: true
-    },
-    {
-        title: 'Registered since',
-        key: 'date_created',
+        key: 'location',
+        width: 70,
+        ellipsis: true,
         sorter: true
     },
     {
         title: 'Available for Hire',
         key: 'related.hire.available',
+        width: 60,
+        ellipsis: true,
         sorter: true,
         render(row) {
             return h(
@@ -114,8 +129,20 @@ const columns = [
                 { value: row.available}
             )
         }
-    }
+    },
+    {
+        title: 'Since',
+        key: 'date_created',
+        width: 70,
+        ellipsis: true,
+        sorter: true
+    }   
+
 ]
+
+const columnsRef = ref(columns);
+
+
 
 function jumpToPage()
 {
@@ -127,37 +154,47 @@ function jumpToPage()
     }        
 }
 
+watchEffect (()=>{
+    const w = windowWidth.value;
+
+    columnsRef.value = w < 600 ? columns.slice(0, 2) : w < 1024 ? columns.slice(0, 4) : columns;
+
+})
+
 watchEffect(() => {
     if (filterField.value === "")
         applyFilter();
 }); 
 
+watch (()=>state.sort, (sort, oldSort)=>{
+    if (sort !== oldSort) state.currentPage = 1;
+})
+
 watchEffect(async () => { 
   
     try{
         loading.value = true;
-        const result = await fetchUserData(state.value);
+        const result = await fetchUserData(state);
 
         tableData.value = result.data;
-        state.value.totalCount = result.totalCount;
-        state.value.totalPages = result.totalPages;
+        state.totalCount = result.totalCount;
+        state.totalPages = result.totalPages;
 
         if (result.totalPages > 0)
         {
             paginationRef.value = {
-                pageSize: state.value.pageSize,
+                pageSize: state.pageSize,
                 pageSizes: pageSizes,
-                page: 1,
+                page: state.currentPage,
                 showSizePicker: true,
                 pageCount: result.totalPages || 1
             }
         }
      
         if (isLess.value){
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        isLess.value = false;
-    }
-
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            isLess.value = false;
+        }
     }
     catch (err){
         console.log (err)
@@ -193,25 +230,29 @@ watchEffect(async () => {
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
+                :page-slot="5"
                 show-size-picker
                 :on-update:page="handlePageChange"
                 :on-update:page-size="handlePageSizeChange"/>
         </div>
     </div>
-    <n-space vertical :size="12">
-        <n-data-table
-            :loading="loading"
-            :bordered="false"
-            :columns="columns"
-            :data="tableData"
-            @update:sorter="s => state.sort = s"/>
-    </n-space>
+    <div class="overflow-auto">
+            <n-data-table
+                :loading="loading"
+                :bordered="false"
+                :columns="columnsRef"
+                :data="tableData"
+                @update:sorter="s => state.sort = s"
+                class="userTable"
+                style="white-space: pre;"/>
+    </div>
         <div class="row mt-3">
             <div class="ml-auto">
                 <n-pagination 
                     :page="state.currentPage" 
                     :page-count="state.totalPages"
                     :page-sizes="pageSizes"
+                    :page-slot="5"
                     show-size-picker
                     :on-update:page="handlePageChange"
                     :on-update:page-size="handlePageSizeChange"

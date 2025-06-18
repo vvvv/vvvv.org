@@ -12,42 +12,44 @@ export async function fetchUserData (state)
     const result = {
         data: null,
         totalPages: 0,
-        totalCount: 0
+        totalCount: 0,
+        currentPage: 0,
     }
 
     const response = await fetch(url);
     const data = await response.json();
+
+    const dateOptions = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    };
 
     result.data = data.data?.map((u) => (
         {
             src: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
             username: u.username,
             available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
-            date_created: new Date(u.date_created).toDateString(),
+            date_created: new Date(u.date_created).toLocaleString("en-US", dateOptions),
             location: locationCityCountry(u.location_city, u.location_country)
         }
     ))
 
-    if (data.meta)
-    {
-        result.totalCount = data.meta.total_count ?? data.meta.filter_count ?? state.totalCount ?? 0;
-    }
-
-    result.totalPages = Math.max(1, Math.ceil(state.totalCount / state.pageSize));
+    result.totalCount = data.meta?.total_count ?? data.meta?.filter_count ?? state.totalCount ?? 0;
+    result.totalPages = Math.max(1, Math.ceil(result.totalCount / state.pageSize));
 
     return result;
 }
 
 function makeURL(state)
 {
+
     const filter = state.filter ? `filter[username][_contains]=${state.filter}` : null
 
     const pages = state.pageSize ? `limit=${state.pageSize}&page=${state.currentPage}` : null;
     const count = state.currentPage === 1 ? (filter ? "meta=filter_count" : "meta=total_count") : "";
 
     let sort = "";
-
-    console.log (state.sort)
 
     if (state.sort?.order)
     {
@@ -64,8 +66,6 @@ function makeURL(state)
     const paramsString = params.join("&");
 
     const url = `${Constants.GET_USERS}?${paramsString}`
-
-    console.log (url);
 
     return url;
 }
