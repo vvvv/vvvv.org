@@ -1,12 +1,25 @@
 <script setup>
-import { ref, reactive, watchEffect, watch, h, computed } from 'vue'
+import { ref, reactive, watchEffect, watch, h, computed, onMounted, onUnmounted } from 'vue'
 import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
 import { showUserProfile } from "../utils.js"
 import AvatarColumn from '../components/AvatarColumn.vue'
 import ForHireColumn from '../components/ForHireColumn.vue'
-import { isLeftHandSideExpression } from 'typescript';
+
+const windowWidth = ref(window.innerWidth);
+
+onMounted(() => {
+    window.addEventListener('resize', onWidthChange)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('resize', onWidthChange)
+})
+
+function onWidthChange(){
+    windowWidth.value = window.innerWidth; 
+}
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
@@ -66,26 +79,10 @@ function clearFilter()
 const tableData = ref([])
 const loading = ref(true)
 
-const width = ref (600);
-
-const widths = {
-    "avatar": 60,
-    "username": 100,
-    "location": 100,
-    "date_created": 100,
-    "related.hire.available": 60
-}
-
-//const totalWidth = Object.values(widths).reduce((acc, val)=>acc+val, 0);
-
-//console.log (Object.values(width))
-//console.log (totalWidth);
-
 const columns = [
     {
         key: 'avatar',
-        width: widths['avatar'],
-        fixed: 'left',
+        width: 60,
         render(row) {
             return h(
                 AvatarColumn,
@@ -99,9 +96,9 @@ const columns = [
     {
         title: 'Username',
         key: 'username',
-        width: widths['username'],
+        width: 100,
         sorter: true,
-        fixed: 'left',
+        ellipsis: true,
         render(row) {
             return h(
                 'a',
@@ -116,19 +113,15 @@ const columns = [
     {
         title: 'Location',
         key: 'location',
-        width: widths['location'],
-        sorter: true
-    },
-    {
-        title: 'Registered since',
-        key: 'date_created',
-        width: widths['date_created'],
+        width: 70,
+        ellipsis: true,
         sorter: true
     },
     {
         title: 'Available for Hire',
         key: 'related.hire.available',
-        width: widths['related.hire.available'],
+        width: 60,
+        ellipsis: true,
         sorter: true,
         render(row) {
             return h(
@@ -136,8 +129,20 @@ const columns = [
                 { value: row.available}
             )
         }
-    }
+    },
+    {
+        title: 'Since',
+        key: 'date_created',
+        width: 70,
+        ellipsis: true,
+        sorter: true
+    }   
+
 ]
+
+const columnsRef = ref(columns);
+
+
 
 function jumpToPage()
 {
@@ -148,6 +153,13 @@ function jumpToPage()
         currentPage.value = pageToJump.value
     }        
 }
+
+watchEffect (()=>{
+    const w = windowWidth.value;
+
+    columnsRef.value = w < 600 ? columns.slice(0, 2) : w < 1024 ? columns.slice(0, 4) : columns;
+
+})
 
 watchEffect(() => {
     if (filterField.value === "")
@@ -218,29 +230,29 @@ watchEffect(async () => {
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
+                :page-slot="5"
                 show-size-picker
                 :on-update:page="handlePageChange"
                 :on-update:page-size="handlePageSizeChange"/>
         </div>
     </div>
-    <n-space vertical :size="12">
-        <n-data-table
-            virtual-scroll-header    
-            virtual-scroll
-            virtual-scroll-x
-            :scroll-x="width"
-            :loading="loading"
-            :bordered="false"
-            :columns="columns"
-            :data="tableData"
-            @update:sorter="s => state.sort = s"/>
-    </n-space>
+    <div class="overflow-auto">
+            <n-data-table
+                :loading="loading"
+                :bordered="false"
+                :columns="columnsRef"
+                :data="tableData"
+                @update:sorter="s => state.sort = s"
+                class="userTable"
+                style="white-space: pre;"/>
+    </div>
         <div class="row mt-3">
             <div class="ml-auto">
                 <n-pagination 
                     :page="state.currentPage" 
                     :page-count="state.totalPages"
                     :page-sizes="pageSizes"
+                    :page-slot="5"
                     show-size-picker
                     :on-update:page="handlePageChange"
                     :on-update:page-size="handlePageSizeChange"

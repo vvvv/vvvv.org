@@ -8,6 +8,7 @@ import fetchEduProfile from './fetchEduProfile.js'
 import { toHtml, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
 import SocialView from '../components/SocialView.vue'
 import LocationFull from '../components/LocationFull.vue'
+import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
 const name = route.params.name;
@@ -76,16 +77,10 @@ const url = computed(()=>{
                             <a v-if="url" :href="url.link" target="_blank">{{ url.name }}</a>
                         </div>
 
-                        <div class="maintained mt-4 pt-3 border-top" v-if="edu.owner">
-                            This page is maintained by:
-                            <div>
-                                <NIcon size="20" class="mr-2">
-                                    <PersonCircleOutline/>
-                                </NIcon>
-                                <a :href="'/user/'+edu.owner.username" @click="(event) => showUserProfile(edu.owner.username, event)">{{ edu.owner.username }}</a>
-                            </div>
-                        </div>
                         <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="edu.social" :social="edu.social" :order="socialKeys"/>
+
+                        <MaintainedBy class="text-left maintained mt-4 pt-3" :data="edu.owner"/>
+
                     </div>
                 </div>
                 <div v-if="edu.description" class="col-12 col-md-6 col-lg-8">

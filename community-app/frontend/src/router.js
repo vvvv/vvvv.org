@@ -90,9 +90,8 @@ const router = createRouter({
 });
 
 // Add global navigation guards for loading state
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from) => {
     isRouteLoading.value = true; // Start loading
-    next();
 });
 
 router.afterEach(() => {

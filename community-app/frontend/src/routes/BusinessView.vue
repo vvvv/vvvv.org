@@ -2,12 +2,13 @@
 
 import { ref, onMounted, computed } from 'vue'
 import { NSpin, NIcon } from 'naive-ui'
-import { LocationOutline, PersonCircleOutline } from '@vicons/ionicons5'
+import { LocationOutline } from '@vicons/ionicons5'
 import fetchCompanyProfile from './fetchCompanyProfile.js'
 import { toHtml, createAssetUrl, showUserProfile, getCountry, ensureHttps, stripHttp } from '../utils.js'
 import { useRoute } from "vue-router";
 import SocialView from '../components/SocialView.vue'
 import LocationFull from '../components/LocationFull.vue'
+import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
 const name = route.params.name;
@@ -70,7 +71,8 @@ const url = computed(()=>{
                                 <a :href="'/user/'+company.owner.username" @click="(event) => showUserProfile(company.owner.username, event)">{{ company.owner.username }}</a>
                             </div>
                         </div>
-                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="company.social" :social="company.social" :order="socialKeys"/>
+                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="company.social" :social="company.social" :order="socialKeys"/>                      
+                        <MaintainedBy class="text-left maintained mt-4 pt-3" :data="company.owner"/>
                     </div>
                 </div>
                 <div v-if="description" class="col-12 col-md-6 col-lg-8">

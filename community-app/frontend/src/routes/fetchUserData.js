@@ -19,12 +19,18 @@ export async function fetchUserData (state)
     const response = await fetch(url);
     const data = await response.json();
 
+    const dateOptions = {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+    };
+
     result.data = data.data?.map((u) => (
         {
             src: u.userpic ? createAssetUrl(u.userpic) + imageParams : null,
             username: u.username,
             available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
-            date_created: new Date(u.date_created).toDateString(),
+            date_created: new Date(u.date_created).toLocaleString("en-US", dateOptions),
             location: locationCityCountry(u.location_city, u.location_country)
         }
     ))
