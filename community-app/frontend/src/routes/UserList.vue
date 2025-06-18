@@ -11,13 +11,22 @@ import ForHireColumn from '../components/ForHireColumn.vue'
 const windowWidth = ref(window.innerWidth);
 const router = useRouter();
 const route = useRoute();
+const initialized = ref(false);
 
-onBeforeMount(()=>{
-    window.addEventListener('resize', onWidthChange);
-    state.currentPage = Number(route.query.page) || 1;
-    console.log (state.currentPage);
+const state = reactive({
+    currentPage: 1,
+    totalPages: 0,
+    totalCount: 0,
+    pageSize: 10,
+    filter: "",
+    sort: null
 })
 
+onMounted(async ()=>{
+    window.addEventListener('resize', onWidthChange);
+    state.currentPage = Number(route.query.page) || 1;
+    initialized.value = true;
+})
 
 onUnmounted(() => {
     window.removeEventListener('resize', onWidthChange)
@@ -33,19 +42,12 @@ const pageSizes = [
     { label: '50 per page', value: 50 }
 ]
 
-const state = reactive({
-    currentPage: Number(route.query.page) || 1,
-    totalPages: 0,
-    totalCount: 0,
-    pageSize: 10,
-    filter: "",
-    sort: null
-})
+
 
 const paginationRef = ref({
     pageSize: pageSizes[0].value,
     pageSizes: pageSizes,
-    page: 2,
+    page: 1,
     showSizePicker: true,
     pageCount: 10
 })
@@ -158,7 +160,6 @@ function jumpToPage()
     }        
 }
 
-
 watch (()=>state.sort, (sort, oldSort)=>{
     if (sort !== oldSort) state.currentPage = 1;
 })
@@ -175,13 +176,20 @@ watchEffect (()=>{
 watchEffect(() => {
     if (filterField.value === "")
         applyFilter();
-}); 
+});
 
+watchEffect(async ()=>{
+    if (initialized.value) {
+        await fetch();
+    }
+})
 
-watchEffect(async () => { 
-  
+async function fetch()
+{
     try{
+
         loading.value = true;
+    
         const result = await fetchUserData(state);
 
         tableData.value = result.data;
@@ -198,7 +206,7 @@ watchEffect(async () => {
                 pageCount: result.totalPages || 1
             }
         }
-     
+    
         if (isLess.value){
             window.scrollTo({ top: 0, behavior: 'smooth' });
             isLess.value = false;
@@ -210,7 +218,8 @@ watchEffect(async () => {
     finally{
         loading.value = false;
     }
-})
+}
+
 
 </script>
 

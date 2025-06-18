@@ -91,6 +91,7 @@ const router = createRouter({
 
 // Add global navigation guards for loading state
 router.beforeEach((to, from) => {
+    document.title = to.meta?.visible ? to.name : to.params?.name ? 'Profile: ' + to.params.name : to.params?.username ? 'Profile: ' + to.params.username : to.name;
     isRouteLoading.value = true; // Start loading
 });
 

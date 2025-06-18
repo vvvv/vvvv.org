@@ -18,11 +18,21 @@ let description;
 
 onMounted(async ()=>
 {
-    loading.value = true;
-    company.value = await fetchCompanyProfile (name);
-    loading.value = false;
+    try{
+        loading.value = true;
+        company.value = await fetchCompanyProfile (name);
+        document.title = 'Profile: '+ company.value.name;
+        description = toHtml(company.value.description);
+    }
+    catch(err)
+    {
+        console.log (err);
+    }
+    finally{
+        loading.value = false;
+    }
 
-    description = toHtml(company.value.description);
+
 })
 
 </script>

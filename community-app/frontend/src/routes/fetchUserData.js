@@ -13,7 +13,7 @@ export async function fetchUserData (state)
         data: null,
         totalPages: 0,
         totalCount: 0,
-        currentPage: 0,
+        currentPage: 1,
     }
 
     const response = await fetch(url);
@@ -47,7 +47,7 @@ function makeURL(state)
     const filter = state.filter ? `filter[username][_contains]=${state.filter}` : null
 
     const pages = state.pageSize ? `limit=${state.pageSize}&page=${state.currentPage}` : null;
-    const count = state.currentPage === 1 ? (filter ? "meta=filter_count" : "meta=total_count") : "";
+    const count = filter ? "meta=filter_count" : "meta=total_count";
 
     let sort = "";
 
