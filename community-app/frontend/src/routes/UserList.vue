@@ -22,9 +22,16 @@ const state = reactive({
     sort: null
 })
 
-onMounted(async ()=>{
+onMounted(()=>{
+    if (route.query.u)
+    {
+        showUserProfile (route.query.u);
+        return;
+    }
+
     window.addEventListener('resize', onWidthChange);
     state.currentPage = Number(route.query.page) || 1;
+
     initialized.value = true;
 })
 
