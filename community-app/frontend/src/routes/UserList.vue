@@ -94,7 +94,7 @@ const columns = [
                 AvatarColumn,
                 {
                     src: row.src,
-                    onClick: (event)=> showUserProfile(row.username, event)
+                    username: row.username
                 }
             )
         }

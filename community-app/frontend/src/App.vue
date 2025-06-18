@@ -111,9 +111,14 @@ const themeOverrides = {
             </div>
         </div>     
         <n-message-provider placement="bottom-right">
-            <NSpin :show="isRouteLoading" :delay="10">
+          <Suspense>
+            <template #default>
               <RouterView/>
-            </NSpin>
+            </template>
+            <template #fallback>
+              <NSpin :show="isRouteLoading"/>
+            </template>
+          </Suspense> 
         </n-message-provider>
       </div>
   </n-config-provider>

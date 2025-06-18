@@ -54,7 +54,7 @@ async function sync(force)
                         <NBadge :value="topic.count" color="DarkGray" class="ml-2"/>
                     </li>
                 </ul> 
-                <div v-else>No topics found.</div>
+                <div v-else class="m-3">Okay, Houston... we've had a problem here.<br/>Try again later.</div>
             </template>
         </div>
     </div>

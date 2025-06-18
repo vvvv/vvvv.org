@@ -163,15 +163,20 @@ const website = computed(()=>{
               </div>
 
               <div class="joined mb-2">
-                <NIcon size="1.2rem" class="mr-2">
-                  <CalendarOutline/>
-                </NIcon>
-                  {{ joined }}
+                <NTooltip trigger="hover">
+                    <template #trigger>
+                      <NIcon size="1.2rem" class="mr-2">
+                        <CalendarOutline/>
+                      </NIcon>
+                    </template>
+                    Joined
+                </NTooltip>
+                {{ joined }}
               </div>
 
               <Location v-if="location" :location="location"/>
 
-              <PartOf v-if="Object.keys(partOf)" :data="partOf" class="border-top pt-2 mt-4"/>
+              <PartOf v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
 
               <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" :order="socialKeys" v-if="social" />
 
