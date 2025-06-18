@@ -27,6 +27,7 @@ onMounted(async ()=>
 
         edu.value = await fetchEduProfile (name);
         
+        document.title = 'Profile: '+ edu.value.name;
         edu.value.description = toHtml(edu.value.description);
     }
     catch (err)

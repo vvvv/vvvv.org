@@ -53,6 +53,8 @@ onMounted(async ()=>
     }
     
     const data = json.data[0];
+
+    document.title = 'Profile: '+ data.username;
     user.value = data;
 
     userpic.value = user.value.userpic ? `${createAssetUrl(user.value.userpic)}${imageParams}` : null;
