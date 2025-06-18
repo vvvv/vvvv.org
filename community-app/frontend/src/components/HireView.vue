@@ -32,32 +32,32 @@ const hire = computed(()=>{
 
 <template>
     <div class="card-body">
+        <img v-if="hire.image" :src="hire.image" class="img-fluid pt-2 mb-4"/>
+        <p v-if="hire.description" class="card-text" v-html="hire.description"></p>
+        <hr class="d-lg-none mt-3 mt-lg-0"/>
         <div class="row">
-            <div class="col-12 col-lg-6" v-if="hire.image">
-                <img :src="hire.image" class="img-fluid pt-2 mb-4"/>
-                <ClippedText :text="hire.description" :maxLength="255" :clippedLength="100"/>
-            </div>
-            <hr class="d-lg-none mt-3 mt-lg-0"/>
-            <div class="col-12 col-lg-6">
-                <template v-if="hire.skills_vvvv">
+            <div class="col-12 col-lg-6" v-if="hire.skills_vvvv">
+                <div class="pr-lg-2">
                     <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>vvvv skills</b></p>
                     <p class="card-text" v-html="hire.skills_vvvv"></p>
-                </template>
-                <template v-if="hire.skills_other">
+                </div>
+            </div>
+           <div class="col-12 col-lg-6" v-if="hire.skills_vvvv">
+                <div class="pl-lg-2">
                     <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>other skills</b></p>
                     <p class="card-text" v-html="hire.skills_other"></p>
-                </template>
-                <template v-if="hire.contact">
-                    <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>contact</b></p>
-                    <p class="card-text">{{ hire.contact }}</p>
-                </template>
-                <template v-if="hire.availableFor.length > 0">
-                    <p class="py-0 mb-2 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>Available for</b></p>
-                    <NSpace>
-                        <NTag class="mr-2" v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
-                    </NSpace>
-                </template>
+                </div>
             </div>
         </div>
+        <template v-if="hire.contact">
+            <p class="py-0 mb-0 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>contact</b></p>
+            <p class="card-text">{{ hire.contact }}</p>
+        </template>
+        <template v-if="hire.availableFor.length > 0">
+            <p class="py-0 mb-2 text-muted font-weight-bold" style="font-variant-caps: all-small-caps;"><b>Available for</b></p>
+            <NSpace>
+                <NTag class="mr-2" v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
+            </NSpace>
+        </template>
     </div>
 </template>

@@ -221,7 +221,7 @@ $orange-hover: #ee4b28;
   }
 }
 
-.location{
+.location, .joined{
   color: #666;
   font-size: 0.9rem;
 }
@@ -232,6 +232,16 @@ $orange-hover: #ee4b28;
     color: #666;
     font-size: 0.8rem;
     margin: 0.3rem 0rem 0.2rem;
+  }
+
+  div:last-child{
+      border-bottom: none;
+    }
+
+  .socialItem
+  {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.7rem;
   }
 
 }

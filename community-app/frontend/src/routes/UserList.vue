@@ -1,5 +1,6 @@
 <script setup>
-import { ref, reactive, watchEffect, watch, h, computed, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, watchEffect, watch, h, computed, onMounted, onUnmounted, onBeforeMount } from 'vue'
+import { useRouter, useRoute } from 'vue-router';
 import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
@@ -8,10 +9,15 @@ import AvatarColumn from '../components/AvatarColumn.vue'
 import ForHireColumn from '../components/ForHireColumn.vue'
 
 const windowWidth = ref(window.innerWidth);
+const router = useRouter();
+const route = useRoute();
 
-onMounted(() => {
-    window.addEventListener('resize', onWidthChange)
+onBeforeMount(()=>{
+    window.addEventListener('resize', onWidthChange);
+    state.currentPage = Number(route.query.page) || 1;
+    console.log (state.currentPage);
 })
+
 
 onUnmounted(() => {
     window.removeEventListener('resize', onWidthChange)
@@ -28,7 +34,7 @@ const pageSizes = [
 ]
 
 const state = reactive({
-    currentPage: 1,
+    currentPage: Number(route.query.page) || 1,
     totalPages: 0,
     totalCount: 0,
     pageSize: 10,
@@ -62,7 +68,7 @@ const isLess = ref(false)
 
 const handlePageChange = (curPage) => {
       state.currentPage = curPage
-    };
+};
 
 const handlePageSizeChange = (pageSize) => {
     isLess.value = pageSize < state.pageSize;
@@ -142,23 +148,28 @@ const columns = [
 
 const columnsRef = ref(columns);
 
-
-
 function jumpToPage()
 {
     if (pageToJump.value < 1 || pageToJump.value > totalPages.value ){
-        pageToJump.value = currentPage.value
+        pageToJump.value = state.currentPage
     }
     else{
-        currentPage.value = pageToJump.value
+        state.currentPage = pageToJump.value
     }        
 }
 
+
+watch (()=>state.sort, (sort, oldSort)=>{
+    if (sort !== oldSort) state.currentPage = 1;
+})
+
+watchEffect(()=>{
+    router.push({ query: { ...route.query, page: state.currentPage } });
+})
+
 watchEffect (()=>{
     const w = windowWidth.value;
-
     columnsRef.value = w < 600 ? columns.slice(0, 2) : w < 1024 ? columns.slice(0, 4) : columns;
-
 })
 
 watchEffect(() => {
@@ -166,9 +177,6 @@ watchEffect(() => {
         applyFilter();
 }); 
 
-watch (()=>state.sort, (sort, oldSort)=>{
-    if (sort !== oldSort) state.currentPage = 1;
-})
 
 watchEffect(async () => { 
   
@@ -203,7 +211,6 @@ watchEffect(async () => {
         loading.value = false;
     }
 })
-
 
 </script>
 

@@ -153,7 +153,7 @@ const logoButtonText = computed(()=>{
       </n-form>
     </div>
     <div class="col text-right" v-if="eduExists && form[0].enabled">
-        <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">Open an Insitution Profile</a>
+        <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">Open Insitution Profile</a>
     </div> 
   </div>
 

@@ -65,17 +65,13 @@ const url = computed(()=>{
         </NAlert>
         <div v-if="edu">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-4 text-center mb-sm-4">
-                    <div class="text-center mb-3">
+                <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
+                    <div class="mb-3">
                         <img v-if="edu.logo" :src="edu.logo" alt="logo" class="img-fluid"/>
                         <div class="my-3">
                             <h5>{{ edu.name }}</h5>
                         </div>                     
                         <LocationFull :data="edu"/>
-
-                        <div class="my-3">                            
-                            <a v-if="url" :href="url.link" target="_blank">{{ url.name }}</a>
-                        </div>
 
                         <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="edu.social" :social="edu.social" :order="socialKeys"/>
 

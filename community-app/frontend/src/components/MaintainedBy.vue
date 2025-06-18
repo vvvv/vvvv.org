@@ -1,6 +1,7 @@
 <script setup>
 import { NIcon } from 'naive-ui'
 import { PersonCircleOutline } from '@vicons/ionicons5'
+import { showUserProfile } from '../utils.js'
 
 defineProps(['data']);
 
