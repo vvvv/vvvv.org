@@ -107,6 +107,11 @@ const submit = async () => {
     body.discourse = discourse;
   }
 
+  if (formValue.user?.newsletter != data.user?.newsletter)
+  {
+    body.newsletter = formValue.user.newsletter;
+  }
+
   try {
     const response = await post(Constants.EDIT_BASICS, body);
 
