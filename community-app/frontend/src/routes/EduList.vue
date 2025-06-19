@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRoute } from "vue-router";
 import { NSpin } from 'naive-ui'
 import { useEduListStore} from "./EduListStore.js";
 import defaultLogo from '../assets/defaultLogo.png'
@@ -7,11 +8,17 @@ import Location from "../components/Location.vue"
 import { showEduProfile } from "../utils.js"
 
 const loading = ref (true);
-
+const route = useRoute();
 const store = useEduListStore();
 
 onMounted( async ()=>
 {
+    if (route.query.e)
+    {
+        showEduProfile (route.query.e);
+        return;
+    }
+
     try{
         loading.value = true;
         await store.fetch();

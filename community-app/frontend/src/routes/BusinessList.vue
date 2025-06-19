@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRoute } from "vue-router";
 import { NSpin } from 'naive-ui'
 import { useCompanyListStore } from "./CompanyListStore.js";
 import defaultLogo from '../assets/defaultLogo.png'
@@ -8,10 +9,17 @@ import { showBusinessProfile } from "../utils.js"
 
 const loading = ref (true);
 
+const route = useRoute();
 const store = useCompanyListStore();
 
 onMounted( async ()=>
 {
+    if (route.query.b)
+    {
+        showBusinessProfile(route.query.b);
+        return;
+    }
+
     try{
         loading.value = true;
         await store.fetch();
