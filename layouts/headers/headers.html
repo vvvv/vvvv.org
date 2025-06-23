@@ -1,4 +1,4 @@
-{{ $content := site.GetPage "section" "community" }}
+{{ $content := site.GetPage "section" "social" }}
 {{ $links := sort ($content.Resources.ByType "page") ".Params.id" "asc" }}
 <!DOCTYPE html>
 <html class="scroll-padding">

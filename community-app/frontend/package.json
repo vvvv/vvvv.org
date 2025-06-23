@@ -1,0 +1,36 @@
+{
+  "name": "profile",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "serve": "vite",
+    "build": "vue-tsc -b && vite build --base=/js/vue --emptyOutDir",
+    "watch": "vite build --watch --base=/js/vue",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vicons/ionicons5": "^0.13.0",
+    "keycloak-js": "^26.1.2",
+    "leaflet": "^1.9.4",
+    "pinia": "^3.0.3",
+    "showdown": "^2.1.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "axios": "^1.7.9",
+    "naive-ui": "^2.41.0",
+    "rollup-plugin-visualizer": "^5.14.0",
+    "sass": "^1.87.0",
+    "sass-embedded": "^1.83.4",
+    "sass-loader": "^16.0.4",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5",
+    "vue-tsc": "^2.2.0"
+  }
+}

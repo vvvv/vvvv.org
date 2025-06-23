@@ -1,6 +1,6 @@
 ---
 title: Community
-type: community
-layout: community
+type: social
+layout: social
 description: Chat, Forum, Meetups, ...
 ---

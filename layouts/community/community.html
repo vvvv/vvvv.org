@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html class="scroll-padding">
     <head>
-        {{ partial "head" . }}     
+        {{ partial "head" . }}
+        <link rel="stylesheet" href="{{"/js/vue/index.css" | relURL}}">  
    </head>
 <body>
     <div class="main">
         {{ partial "nav" . }}
-        
-        {{ partial "community" .}}
+
+        <div id="community" class="{{ .Params.theme }}">    
+            <div id="app" class="container"></div>
+        </div>
 
         {{ partial "videoBlocker" . }}
 
-        {{ partial "contact" . }}
+        <!-- {{ partial "contact" . }}
         
-        {{ partial "footer" . }}
-
-        {{ partial "js" . }}
+        {{ partial "footer" . }} -->
     </div>
+    {{ partial "js" . }}
+    <script type="module" src="{{"/js/vue/app.js" | relURL}}" defer></script>
 </body>
 </html>
