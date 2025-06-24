@@ -7,6 +7,11 @@ import router from './router'
 
 const converter = new Showdown.Converter();
 
+export function isString( value )
+{
+    return typeof value == 'string'
+}
+
 export const showUserProfile = (username, event) => {
     router.push({name: 'User Profile', params: { username: username }});
     if (event) event.preventDefault();

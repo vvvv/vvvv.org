@@ -122,21 +122,13 @@ const imageButtonText = computed(()=>{
 
 <template>
   <template v-if="form !== null">
+
     <div class="row justify-content-between">
-      <div class="col">
-      <n-form
-          ref="formRef"
-          :model="form"
-          label-placement="left"
-          :label-width="160"
-          require-mark-placement="right-hanging"
-          >
-        <n-form-item label="Available for Hire" path="available">
+      <div class="col-12 col-sm-8">
+          <label class="text-nowrap mr-3">Available for Hire</label>
           <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
-        </n-form-item>
-      </n-form>
       </div>
-      <div class="col text-right" v-if="form.available && data.user.visible">
+      <div class="col-12 col-sm-4 text-sm-right" v-if="form.available && data.user.visible">
         <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
       </div>
     </div>

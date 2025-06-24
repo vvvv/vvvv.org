@@ -2,6 +2,7 @@
 import { ref, watch, onMounted } from 'vue'
 import { toHtml, toMd } from '../../utils.js'
 import { NInput } from 'naive-ui';
+import Helps from "./HelpTexts.js";
 
 const editorContainer = ref(null);
 
