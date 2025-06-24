@@ -1,9 +1,9 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-05-02"
+date: "2025-05-05"
 title: "Introducing: vvvv on Arm for Windows and Mac, Phase 1/2"
-description: "For your energy efficient CPU"
+description: "Native builds for Arm CPUs"
 thumb: thumb.png
 ---
 
@@ -13,7 +13,7 @@ You may have heard of those new Arm-based Windows laptops that have been popping
 
 [![](vvvv-on-arm.png)](https://vvvv.org/download/)
 
-Until now: The new Arm-builds of vvvv bring a massive performance boost to Arm-based Windows PCs. So just make sure to get the right download and you're good to go!
+Introducing: The new Arm-builds of vvvv bring a massive performance boost to Arm-based Windows PCs. So just make sure to get the right download and you're good to go!
 
 ## What about Macs?
 
@@ -22,7 +22,6 @@ Indeed. Recent Macs that run on Apple silicon are also Arm-based. So if using [P
 ![](vvvv-on-mac.png)
 
 For details on how to get going, see our article: [Running vvvv on a Mac](https://thegraybook.vvvv.org/reference/best-practice/vvvv-on-mac.html).
-
 
 ## The caveat
 We're rolling out Arm-builds of vvvv in two phases:

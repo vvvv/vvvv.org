@@ -5,3 +5,27 @@ RewriteRule ^sites/default/files/(.*)$ https://legacy.vvvv.org/sites/default/fil
 
 RewriteCond %{REQUEST_URI} ^/contribution/ [NC]
 RewriteRule ^contribution/.*$ https://beta.vvvv.org/contributions/ [R=301,L]
+
+# Redirect /user/name/ or /user/name to /user/?u=name
+RewriteCond %{REQUEST_URI} ^/user/([^/]+)/?$
+RewriteRule ^ /user/?u=%1 [R=301,L]
+
+# Redirect /users/name/ or /users/name to /user/?u=name
+RewriteCond %{REQUEST_URI} ^/users/([^/]+)/?$
+RewriteRule ^ /user/?u=%1 [R=301,L]
+
+# Redirect /business/name/ or /business/name to /business/?b=name
+RewriteCond %{REQUEST_URI} ^/business/([^/]+)/?$
+RewriteRule ^ /business/?b=%1 [R=301,L]
+
+# Redirect /businesses/name/ or /businesses/name to /business/?b=name
+RewriteCond %{REQUEST_URI} ^/businesses/([^/]+)/?$
+RewriteRule ^ /business/?b=%1 [R=301,L]
+
+# Redirect /edu/name/ or /edu/name to /edu/?e=name
+RewriteCond %{REQUEST_URI} ^/edu/([^/]+)/?$
+RewriteRule ^ /edu/?e=%1 [R=301,L]
+
+# Redirect /edus/name/ or /edus/name to /edu/?e=name
+RewriteCond %{REQUEST_URI} ^/edus/([^/]+)/?$
+RewriteRule ^ /edu/?e=%1 [R=301,L]
