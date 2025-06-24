@@ -1,23 +1,26 @@
 ---
 categories: "Dates"
 author: "chk"
-date: "2025-04-23"
-title: "28. vvvv worldwide meetup"
+date: "2025-06-14"
+title: "29. vvvv worldwide meetup"
 description: "IRL and real-time!"
 where: 
     location_name: "The NODE Institute"
     city: "Wipperstrasse 13, 12055 Berlin"
     country: "de"
     country_name: "Germany"
-    from_date: "1747328400"
-    to_date: "1747342800"
+    from_date: "1752771600"
+    to_date: "1752782400"
 thumb: "vvvvmeetup-thumbnail.png"
 ---
 
-![](vvvvmeetup-28.jpg)
-*Artwork by F3*
+![](vvvvmeetup-29.jpg)
+*Artwork by Takuma Nakata*
 
-Here's to announce the 28th vvvv worldwide meetup on **May 15th, 7pm CET**, hosted by **The NODE Institute**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
+Here's to announce the 29th vvvv worldwide meetup on **July 17th, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
+
+Moderated by Randall Vasquez<br>
+Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)  
 
 {{< box >}}
 ## IRL
@@ -26,14 +29,11 @@ The NODE Institute<br>
 Wipperstrasse 13, 12055 Berlin<br>
 Doors open: 18:30
 
-### Vienna
-Bildwerk / NBG31<br>
-Neubaugasse 31/11, 1070 Vienna<br>
-Doors open: 18:30
-
 ## Online
+Zoom and YouTube links will be shared shortly before the meetup.
+<!--
 [Watch via Youtube](https://youtube.com/live/rXaUijAvuWw)  
-[Join via Zoom](https://us02web.zoom.us/j/87338653360?pwd=QpxHpGBZLhtASLT5ro00rUsZLfIsZP.1)
+[Join via Zoom](https://us02web.zoom.us/j/87338653360?pwd=QpxHpGBZLhtASLT5ro00rUsZLfIsZP.1) -->
 {{< /box >}}
 
 ##  Want to share your work?
