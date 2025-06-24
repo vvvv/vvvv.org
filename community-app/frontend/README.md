@@ -1,4 +1,14 @@
-Add symbolic links to the parent's css and scss folders:
+## Help Texts for the Profile form:
+ - /community-app/frontend/src/components/profile/HelpTexts.js
+
+
+## How to Build
+
+### Setup
+
+`npm run i`
+
+### Add symbolic links to the parent's css and scss folders:
 
 external\scss <<===>> ***\assets\scss
 external\css <<===>> ***\assets\css
@@ -11,3 +21,9 @@ mklink /d external\scss SOURCE\scss
 2. cd external
 3. mklink /d scss SOURCE\scss
 4. mklink /d css SOURCE\css
+
+### Building
+
+`npm run build`
+
+This will build the app and copy its files into the `/static/js/vue/`, so that the Hugo will pick them up on the next Hugo build.
