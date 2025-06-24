@@ -8,6 +8,9 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
 import { post, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import FormItem from './FormItem.vue'
+import { getValue } from "./HelpTexts.js"
+import InputField from '../InputField.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -139,24 +142,16 @@ const logoButtonText = computed(()=>{
 </script>
 
 <template>
-  <div class="row justify-content-between" v-if="form !== null">
-    <div class="col">
-      <n-form
-          ref="formRef"
-          :model="form"
-          label-placement="left"
-          :label-width="160"
-          require-mark-placement="right-hanging"
-          >
-          <n-form-item label="I own a company" path="available">
-            <n-switch v-model:value="form[0].enabled" placeholder="I own a company"/>
-          </n-form-item>
-      </n-form>
+
+    <div class="row justify-content-between" v-if="form !== null">
+      <div class="col-12 col-sm-8">
+          <label class="text-nowrap mr-3">Company publicly visible</label>
+          <n-switch v-model:value="form[0].enabled" placeholder="Company publicly visible"/>
+      </div>
+      <div class="col-12 col-sm-4 text-sm-right" v-if="available">
+        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Company</a>
+      </div>
     </div>
-    <div class="col text-right" v-if="companyExists && form[0].enabled">
-        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">Open Company Profile</a>
-    </div> 
-  </div>
 
       <hr class="mt-1 mb-4"/>
 
@@ -183,7 +178,7 @@ const logoButtonText = computed(()=>{
           :model="form[0]"
           :rules="rules"
           label-placement="left"
-          :label-width="120"
+          :label-width="150"
           require-mark-placement="right-hanging"
           >
         <template v-if="companyExists">
@@ -192,14 +187,10 @@ const logoButtonText = computed(()=>{
             <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
           </n-form-item>
         </template>
-        <n-form-item label="Name" path="name" v-if="!companyExists">
-          <n-input v-model:value="form[0].name" placeholder="Name"/>
-        </n-form-item>
+        <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
         <div class="row">
           <div class="col">
-            <n-form-item label="Tagline" path="tagline">
-              <n-input v-model:value="form[0].tagline" placeholder="Tagline" />
-            </n-form-item>
+          <InputField path="tagline" type="company" v-model="form[0].tagline"/>
           </div>
         </div>
         <n-form-item label="Address" path="address">
@@ -220,11 +211,13 @@ const logoButtonText = computed(()=>{
           </div>
         </n-form-item>
 
-        <n-form-item label="Description" path="description">
-          <Editor class="fullWidth" v-model="form[0].description" label="Description" :limit="limit"/>
-        </n-form-item>
+        <FormItem path="description" type="company">
+          <template #content>
+            <Editor class="fullWidth" v-model="form[0].description" :limit="limit"/>
+          </template>
+        </FormItem>
 
-        <SocialFields v-model:value="form[0].social"/>
+        <SocialFields v-model:value="form[0].social" type="company"/>
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

@@ -8,6 +8,8 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
 import { post, createAssetUrl, makeFields, showEduProfile }  from '../../utils.js'
 import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import FormItem from './FormItem.vue'
+import InputField from '../InputField.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -138,24 +140,16 @@ const logoButtonText = computed(()=>{
 </script>
 
 <template>
-  <div class="row justify-content-between" v-if="form !== null">
-    <div class="col">
-      <n-form
-          ref="formRef"
-          :model="form"
-          label-placement="left"
-          :label-width="160"
-          require-mark-placement="right-hanging"
-          >
-          <n-form-item label="I'm in charge for an Educational Institution" path="available">
-            <n-switch v-model:value="form[0].enabled" placeholder="I'm in charge for an Educational Institution"/>
-          </n-form-item>
-      </n-form>
+
+    <div class="row justify-content-between" v-if="form !== null">
+      <div class="col-12 col-sm-8">
+          <label class="text-nowrap mr-3">Institution publicly visible</label>
+          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible"/>
+      </div>
+      <div class="col-12 col-sm-4 text-sm-right" v-if="eduExists && form[0].enabled">
+        <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">View Institution</a>
+      </div>
     </div>
-    <div class="col text-right" v-if="eduExists && form[0].enabled">
-        <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">Open Insitution Profile</a>
-    </div> 
-  </div>
 
       <hr class="mt-1 mb-4"/>
 
@@ -182,7 +176,7 @@ const logoButtonText = computed(()=>{
           :model="form[0]"
           :rules="rules"
           label-placement="left"
-          :label-width="120"
+          :label-width="150"
           require-mark-placement="right-hanging"
           >
         <template v-if="eduExists">
@@ -191,9 +185,16 @@ const logoButtonText = computed(()=>{
             <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
           </n-form-item>
         </template>
-        <n-form-item label="Name" path="name" v-if="!eduExists">
-          <n-input v-model:value="form[0].name" placeholder="Name"/>
-        </n-form-item>
+        <InputField path="name" v-if="!eduExists" type="edu"/>
+
+        <FormItem path="description" type="edu">
+          <template #content>
+            <Editor class="fullWidth" v-model="form[0].description" :limit="limit"/>
+          </template>
+        </FormItem>
+
+        <InputField path="course_language" type="edu"/>
+
         <n-form-item label="Address" path="address">
           <div class="row">
             <div class="col">
@@ -212,11 +213,8 @@ const logoButtonText = computed(()=>{
           </div>
         </n-form-item>
 
-        <n-form-item label="Description" path="description">
-          <Editor class="fullWidth" v-model="form[0].description" label="Description" :limit="limit"/>
-        </n-form-item>
 
-        <SocialFields v-model:value="form[0].social"/>
+        <SocialFields v-model:value="form[0].social" type="edu"/>
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

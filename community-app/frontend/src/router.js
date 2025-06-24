@@ -76,7 +76,7 @@ const routes = [
     },
     {
         path: '/user/edit/',
-        name: 'Edit',
+        name: 'Edit Profile',
         component: EditUser,
         beforeEnter: requireAuth,
         meta: { tabName: 'Profile', visible: true, isLeft: false }

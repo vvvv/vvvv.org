@@ -73,9 +73,9 @@ const handleTabChange = ( tabName ) => {
 
 const themeOverrides = {
   "common": {
-    "primaryColor": "#DE950BFF",
-    "colorFocusPrimary": "#FFA600FF",
-    "primaryColorHover": "#FFA600FF"
+    "primaryColor": "#444444FF",//"#DE950BFF",
+    "colorFocusPrimary": "#282828FF",
+    "primaryColorHover": "#000000FF"
   }
 }
 
@@ -104,7 +104,7 @@ const themeOverrides = {
                   </div>
                 </n-tab>
                 <template #suffix>
-                  <div v-if="authenticated" @click="logout" class="btn btn-outline-secondary">Logout</div>
+                  <a href="#" v-if="authenticated" @click="logout" class="">Logout</a>
                   <div v-else class="btn btn-primary" @click="login">Login</div>
                 </template>
               </n-tabs>
