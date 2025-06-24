@@ -1,8 +1,140 @@
-export default Object({   
-    website: 'Website',
-    github: 'Github',
-    nuget: 'Nuget',
-    pixelfed: 'Pixelfed',
-    mastodon: 'Mastodon',
-    customFields: 'Custom Fields'
+const data = Object({   
+    website: 
+    {
+        user:{
+            label: "Website",
+            help: 'Url of your personal website',
+            placeholder: 'vvvv.org'
+        },
+        company:{
+            label: "Website",
+            help: "Url of the company's website",
+            placeholder: "vvvv.org"
+        },
+        edu:{
+            label: "Website",
+            help: "Url of the institution's website",
+            placeholder: "vvvv.org"
+        }
+    },
+    github: {
+        label: "Github",
+        help: 'Your GitHub username',
+        placeholder: 'MyGitHubUser'
+    },
+    nuget: {
+        label: "NuGet",
+        help: 'Your NuGet user- or organization name',
+        placeholder: 'MyNuGetUser'
+    },
+    pixelfed: {
+        label: "Pixelfed",
+        help: 'Url to your Pixelfed profile',
+        placeholder: 'pixelfed.social/madewithvvvv'
+    },
+    mastodon: {
+        label: "Mastodon",
+        help: 'Url to your Mastodon profile',
+        placeholder: 'mastodon.xyz/@vvvv'
+    },
+    matrix: {
+        label: "Matrix",
+        help: 'Your handle on the chat',
+        placeholder: '@MyUsername:matrix.org'
+    },
+    linkedin: {
+        user:{
+            label: "LinkedIn",
+            help: 'Name of your personal profile on LinkedIn',
+            placeholder: 'MyLinkedInUser'
+        },
+        company:
+        {
+            label: "LinkedIn",
+            help: 'Public url of your company profile on LinkedIn',
+            placeholder: 'My-Company'
+        },
+        edu:
+        {
+            label: "LinkedIn",
+            help: 'Public url of the institution on LinkedIn',
+            placeholder: 'My-Institution'
+        }
+    },
+    customFields: {
+        label: "Custom Fields",
+        help: 'Anything you want share, like additional Urls or other info',
+        placeholder: {
+            key: 'Label',
+            value: 'Content'
+        },
+    },
+    statement: {
+        label: "Statement",
+        help: 'A short introduction about yourself'
+    },
+    newsletter: {
+        label: "Newsletter",
+        help: 'Subscribe to the vvvv newsletter. Frequency: ~1/month'
+    },
+    location: {
+        label: "Location"
+    },
+    name: {
+        user:{
+            label: "Name"
+        },
+        company:{
+            label: "Name",
+            help: "Your company's name",
+            placeholder: "My Company"
+        },
+        edu:{
+            label: "Name",
+            help: "Name of Institution",
+            placeholder: "My Institution"
+        }
+    },
+    tagline: {
+        company: {
+            label: "Tagline",
+            help: "Your company's slogan",
+            placeholder: "Everything you know is wrong"
+        }
+    },
+    description: {
+        company: {
+            label: "Description",
+            help: "A short introduction to your company and it's services"
+        },
+        edu:
+        {
+            label: "Description",
+            help: "A short introduction to your institution and the courses involving vvvv"
+        }
+    },
+    course_language:{
+        label: "Course Language",
+        placeholder: "German"
+    }
+
 })
+
+export function getValue(path, key, type)
+{
+    if (data[path] && (data[path][type] || data[path][key]))
+    {
+        if (data[path][type])
+        {
+            return type ? data[path][type][key] : data[path]["user"][key]
+        }
+        else
+        {
+            return data[path][key];
+        }
+    }
+
+    return undefined;
+}
+
+export default data;

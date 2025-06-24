@@ -4,11 +4,14 @@ import { countries } from '../../countries.js'
 import Constants from '../../constants.js'
 import SocialFields from './SocialFields.vue'
 import FileUploader from './FileUploader.vue'
-import FieldInput from './FieldInput.vue'
+import InputField from '../InputField.vue'
+import Helps from "./HelpTexts.js"
 import Editor from './Editor.vue'
+import InfoButton from '../InfoButton.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, createAssetUrl, makeFields, showUserProfile }  from '../../utils.js'
 import { NAvatar, NAlert, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import FormItem from './FormItem.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -46,8 +49,8 @@ const prepareData = ()=>{
 
 }
  
-onMounted(()=>{
-  prepareData()
+onMounted(()=>{  
+  prepareData();
 })
 
 const formChanged = (data)=> {
@@ -156,21 +159,12 @@ const avatarButtonText = computed(()=>{
   <template v-if="form !== null">
 
     <div class="row justify-content-between">
-      <div class="col">
-        <n-form
-            ref="formRef"
-            :model="form"
-            label-placement="left"
-            :label-width="160"
-            require-mark-placement="right-hanging"
-            >
-            <n-form-item label="Profile publicly visible" path="visible">
-              <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
-            </n-form-item>
-        </n-form>
+      <div class="col-12 col-sm-8">
+          <label class="text-nowrap mr-3">Profile publicly visible</label>
+          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
       </div>
-      <div class="col text-right" v-if="form.user.visible">
-        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
+      <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible">
+        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
       </div>
     </div>
 
@@ -197,7 +191,7 @@ const avatarButtonText = computed(()=>{
         ref="formRef"
         :model="form"
         label-placement="left"
-        :label-width="120"
+        :label-width="150"
         require-mark-placement="right-hanging"
         >
         <n-form-item label="Status" path="status" v-if="form.user && form.user.status !== undefined && form.user.status != '1'">
@@ -228,29 +222,38 @@ const avatarButtonText = computed(()=>{
             </n-form-item>
           </div>
         </div>
-        <n-form-item label="Contact" path="contact">
+
+        <!-- TODO: CONTACT FIELD -->
+        <!-- <n-form-item label="Contact" path="contact">
           <n-input v-model:value="form.social.contact" placeholder="Prefered way of contact in human readable forms" />
-        </n-form-item>
+        </n-form-item> -->
 
-        <n-form-item label="Statement" path="statement">
-          <Editor class="fullWidth" v-model="form.user.statement" label="Statement" :limit="limit"/>
-        </n-form-item>
+        <FormItem path="statement" type="user">
+          <template #content>
+            <Editor class="fullWidth" v-model="form.user.statement" label="Statement" :limit="limit"/>
+          </template>
+        </FormItem>
 
-        <n-form-item label="Location" path="location">
-          <div class="row">
-            <div class="col">
-              <n-input v-model:value="form.user.location_city" placeholder="City" clearable/>
+        <FormItem path="location">
+          <template #content>
+            <div class="row">
+              <div class="col">
+                <n-input v-model:value="form.user.location_city" placeholder="City" clearable/>
+              </div>
+              <div class="col">
+                <n-select :options="countries" filterable clearable v-model:value="form.user.location_country" placeholder="Country"/>
+              </div>
             </div>
-            <div class="col">
-              <n-select :options="countries" filterable clearable v-model:value="form.user.location_country" placeholder="Country"/>
-            </div>
-          </div>
-        </n-form-item>
-        <n-form-item label="Newsletter" path="newsletter">
-          <n-switch v-model:value="form.user.newsletter" placeholder="Newsletter"/>
-        </n-form-item>
+          </template>
+        </FormItem>
 
-        <SocialFields v-model:value="form.social"/>
+        <FormItem path="newsletter">
+          <template #content>
+            <n-switch v-model:value="form.user.newsletter"/>
+          </template>
+        </FormItem>
+
+        <SocialFields v-model:value="form.social" type="user"/>
 
         <SubmitRevertButtons @revert="revert" @submit="submit" :updating="updating"/>
     </n-form>

@@ -5,26 +5,28 @@ import InfoButton from "../InfoButton.vue";
 import InputField from "../InputField.vue";
 import Helps from "./HelpTexts.js";
 
-const model = defineModel('value')
+const model = defineModel('value');
+defineProps(['type']);
 
 </script>
 <template>
     <div class="row">
         <div class="col-12 col-lg-6">
-            <InputField path="website" label="Website" info="Website" v-model="model.website"/>
-            <InputField path="github" label="Github" info="Github" placeholder="Github" v-model="model.github"/>
-            <InputField path="nuget" label="NuGet" info="Nuget" placeholder="NuGet" v-model="model.nuget"/>
+            <InputField path="website" :type="type" v-model="model.website"/>
+            <InputField path="github" :type="type" v-model="model.github"/>
+            <InputField path="nuget" :type="type" v-model="model.nuget"/>
         </div>
         <div class="col-12 col-lg-6">
-            <InputField path="mastodon" label="Mastodon" info="Mastodon" placeholder="mastodon.xyz/@vvvv" v-model="model.mastodon"/>
-            <InputField path="pixelfed" label="Pixelfed" info="Pixelfed" placeholder="pixelfed.social/madewithvvvv" v-model="model.pixelfed"/>
+            <InputField path="mastodon" :type="type" v-model="model.mastodon"/>
+            <InputField path="pixelfed" :type="type" v-model="model.pixelfed"/>
+            <InputField path="linkedin" :type="type" v-model="model.linkedin"/>
         </div>
     </div>
 
     <n-form-item>
         <template #label>
             Custom Fields
-            <InfoButton :info="Helps['customFields']"/>
+            <InfoButton :info="Helps['customFields'].help"/>
         </template>
         <div class="d-flex flex-column">
             <template v-for="(field, index) in model.fields" :key="index">
@@ -32,13 +34,13 @@ const model = defineModel('value')
                     <div class="col-12 col-lg-6 mb-2 mb-lg-0">
                         <n-input 
                             v-model:value="field.key" 
-                            placeholder="Label"
+                            :placeholder="Helps['customFields'].placeholder?.key"
                         />
                     </div>
                     <div class="col-12 col-lg-6">
                         <n-input 
                             v-model:value="field.value" 
-                            placeholder="Content" 
+                            :placeholder="Helps['customFields'].placeholder?.value" 
                         />
                     </div>
                 </div>
