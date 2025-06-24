@@ -1,14 +1,17 @@
-## Help Texts for the Profile form:
- - /community-app/frontend/src/components/profile/HelpTexts.js
+# Community App for the vvvv.org
+
+## Help Texts for the Profile Form:
+
+ - `/community-app/frontend/src/components/profile/HelpTexts.js`
 
 
 ## How to Build
 
-### Setup
+### 1. Setup
 
 `npm run i`
 
-### Add symbolic links to the parent's css and scss folders:
+### 2. Add symbolic links to the parent's css and scss folders:
 
 external\scss <<===>> ***\assets\scss
 external\css <<===>> ***\assets\css
@@ -22,7 +25,7 @@ mklink /d external\scss SOURCE\scss
 3. mklink /d scss SOURCE\scss
 4. mklink /d css SOURCE\css
 
-### Building
+### 3. Build
 
 `npm run build`
 
