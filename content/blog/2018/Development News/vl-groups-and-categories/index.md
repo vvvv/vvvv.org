@@ -6,7 +6,7 @@ title: "VL: Groups and Categories"
 slug: "vl-groups-and-categories"
 description: ""
 imported: "true"
-thumb: "02_GroupInside.PNG"
+thumb: "02_GroupInside-1.png
 ---
 
 
@@ -36,10 +36,10 @@ What we had so far was a not so clear mix of all three. Let's see what we have i
 
 *Group* patches simply allow you to create more space in a patch by opening a new canvas. The groups name is merely used for human readability, vl doesn't care about it at all. Create a group by typing "group" in the nodebrowser. Groups is what you will be mostly using in your daily project-patching work.
 <!--{SPLIT()}-->
-![](02_GroupInside.PNG)
+![](02_GroupInside-1.png)
 *Inside a group patch*
 <!--~~~-->
-![](01_GroupOutside.PNG)
+![](01_GroupOutside-1.png)
 *Group patch from the outside*
 <!--{SPLIT}-->
 
@@ -47,25 +47,25 @@ What we had so far was a not so clear mix of all three. Let's see what we have i
 
 A *Category* patch looks quite similar to the group, only its name has a meaning: The name appends itself to the category of its parent patch. That way you can build up any category hierarchy, that you then see in the NodeBrowser. Multiple category levels are allowed with dot notation. e.g. *MyCat1.MyCat2*.
 <!--{SPLIT()}-->
-![](04_CategoryInsi_r.PNG)
+![](04_CategoryInsi_r-1.png)
 *Inside a category patch*
 <!--~~~-->
-![](03_CategoryOuts_r.PNG)
+![](03_CategoryOuts_r-1.png)
 *Category patch from the outside*
 <!--{SPLIT}-->
 ## Full Category
 
 A *Full Category* patch is similar to the Category patch, only that it doesn't add its category to the parent. By that you can place nodes in any category, regardless of the parent patch. It's considered bad practice to do that, but is useful to add nodes to an existing category like *Collections.Spread*, for example. Multiple category levels are allowed with dot notation. e.g. *MyParentCat.MySubCat*.
 <!--{SPLIT()}-->
-![](06_FullCategory_r.PNG)
+![](06_FullCategory_r-1.png)
 *Inside a full category patch*
 <!--~~~-->
-![](05_FullCategory_r.PNG)
+![](05_FullCategory_r-1.png)
 *Full category patch from the outside*
 <!--{SPLIT}-->
 Each vl document can directly start a category, which you can define in the angular brackets in the top left corner of the document patch. 
 
-![](DocPatch.png)
+![](DocPatch-1.png)
 *"Voo" specified as a documents category*
 
 ## Changing the Patch Type
