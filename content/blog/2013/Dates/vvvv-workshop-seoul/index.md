@@ -19,7 +19,7 @@ where:
     lat: "37.566535"
     long: "126.977969"
 imported: "true"
-thumb: "Capture.PNG"
+thumb: "workshop.png"
 ---
 
 
@@ -33,4 +33,4 @@ Registration is now open.
 
 Elliot
 
-![(c)  Stefan Kernjak / NODE Forum for Digital Arts](Capture.PNG) 
+![(c)  Stefan Kernjak / NODE Forum for Digital Arts](workshop.png) 

@@ -6,7 +6,7 @@ title: "Website updates"
 slug: "website-updates"
 description: ""
 imported: "true"
-thumb: "unsubscribe.PNG"
+thumb: "unsubscribe-1.png"
 ---
 
 
@@ -19,27 +19,27 @@ we've finally made a few minor updates to the website that were long overdue. He
 We've changed subscriptions from opt-in to opt-out because we had the feeling that sometimes forum-threads got answered but never acknowledged by the original poster. So now when you're starting a discussion or replying you're automatically subscribed, meaning you'll receive an email of any change to that content. 
 
 You can of course still unsubscribe from any content by either clicking "unsubscribe" in the topright corner of any page directly 
-![](unsubscribe.PNG) 
+![](unsubscribe-1.png) 
 
 or managing your subscriptions via:
-![](subscriptions.PNG)
+![](subscriptions-1.png)
 
 Also you can opt-out from auto-subscriptions via your personal settings:
-![](settings.png) 
+![](settings-1.png) 
 where you can individually choose to opt-out of auto-subscriptions for blog, forum, contributions and wikipages.
-![](auto.PNG)
+![](auto-1.png)
 
 Further we've improved the notification mails a bit in that they now show a direct link to the changed content at first glance. And no more annoying notifications regarding your own changes. cheeseus..
 
 ### Related nodes
 
 When you're on a nodereference page (which you can always reach directly by pressing ALT+F1 with any node selected) you see a section: "Related Discussions". You can now set such relations when creating or editing a forum thread by adding nodes to the "Related Nodes" section. For now this is still only possible for your own threads. 
-![](relations.png) 
+![](relations-1.png) 
 
 ### Alpha changes
 
 On the [alpha downloads page](https://legacy.vvvv.org/downloads/previews) you now see a listing of all changes per build when hovering its "See changes":
-![](changes.png)
+![](changes-1.png)
 https://legacy.vvvv.org/users/
 ### New Connectionshttps://legacy.vvvv.org/users/
 
