@@ -26,7 +26,7 @@ const hire = ref (null);
 const social = ref (null);
 const userpic = ref(null);
 const loading = ref(false);
-const statement = ref(null);
+const description = ref(null);
 const partOf = ref({});
 
 const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"];
@@ -62,7 +62,7 @@ onMounted(async ()=>
     hire.value = data.related[0]?.hire;
     social.value = data.related[0]?.social;
 
-    statement.value = user.value.statement;
+    description.value = user.value.description;
 
     const partOfRequests = [getPartOf(companyURL), getPartOf(eduURL)];
     const [companyResult, eduResult] = await Promise.allSettled(partOfRequests);
@@ -185,8 +185,8 @@ const website = computed(()=>{
         </div>
         <div class="col-12 col-md-6 col-lg-8">
 
-          <div v-if="statement" class="mb-4 statement">
-            <ClippedText :text="user.statement" :maxLength="255" :clippedLength="100"/>
+          <div v-if="description" class="mb-4 description">
+            <ClippedText :text="description" :maxLength="255" :clippedLength="100"/>
           </div>
 
           <div v-if="hire && hire.available">
