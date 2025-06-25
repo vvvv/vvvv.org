@@ -12,11 +12,6 @@ const help = ref(getValue(props.path, "help", props.type));
 const label = ref(getValue(props.path, "label", props.type));
 const placeholder = ref(getValue(props.path, "placeholder", props.type));
 
-console.log (props.path);
-console.log (props.type);
-
-console.log (`${help.value} ${label.value} ${placeholder.value}`)
-
 </script>
 
 <template>

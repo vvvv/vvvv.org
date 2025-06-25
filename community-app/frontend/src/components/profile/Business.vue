@@ -1,29 +1,30 @@
 <script setup>
-import { ref, watch, onMounted, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
-import { post, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
-import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
+import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
-import { getValue } from "./HelpTexts.js"
 import InputField from '../InputField.vue'
+import {  } from "../../routes/businessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
 
-const isChanged = ref(false);
+const store = useBusinessListStore();
+
 const formRef = ref(null);
-const formRef2 = ref(null);
 const form = ref(null);
 const logo = ref(null);
 const tempLogo = ref(null);
 const updating = ref(false);
 const companyExists = ref(false);
 const uploader = ref(null);
+const limit = 500;
 
 const emptyCompany = {
   enabled: false,
@@ -31,8 +32,11 @@ const emptyCompany = {
   name: "",
   tagline: "",
   description: "",
+  internships: false,
+  contact_url: "",
+  projects_url: "",
+  jobs_url: "",
   status: 0,
-  website: "",
   social: {}
 }
 
@@ -83,18 +87,28 @@ const updateTempLogo = (id) =>{
   tempLogo.value = id
 }
 
+async function validate(form)
+{
+    return new Promise (async (resolve, reject)=>{
+        form.value.validate((error)=>{
+          if (error) reject(error);
+          else resolve();
+        });
+    })
+}
+
 const submit = async () => {
 
-  const valid = await formRef2.value?.validate((errors) => {
-    if (errors) {
-      emit('message', "Please fill requiered fields")
-    }
-  })
+  try{
+    await formRef.value.validate();
+  }
+  catch (error)
+  {
+    emit('message', { type: 'error', string: 'Please fill requiered fields'});
+    return;        
+  }
 
-  if (!valid) return
-
-  updating.value = true;
-  const formValue = { ...form.value[0]};
+  const formValue = clone(form.value[0]);
 
   if (tempLogo.value == null)
   {
@@ -122,6 +136,8 @@ const submit = async () => {
       uploader.value.reset()
     }
   
+    store.fetch(true);
+    
     emit('updateData', data);
     emit('message', { type: 'success', string: 'Updated'});
   }
@@ -131,7 +147,8 @@ const submit = async () => {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
   }
   finally{
-    updating.value = false
+    formRef.value.restoreValidation();
+    updating.value = false;
   }
 }
 
@@ -145,11 +162,11 @@ const logoButtonText = computed(()=>{
 
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
-          <label class="text-nowrap mr-3">Company publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Company publicly visible"/>
+          <label class="text-nowrap mr-3">Business publicly visible</label>
+          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible"/>
       </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="available">
-        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Company</a>
+      <div class="col-12 col-sm-4 text-sm-right" v-if="companyExists && form[0].enabled">
+        <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Business</a>
       </div>
     </div>
 
@@ -174,7 +191,7 @@ const logoButtonText = computed(()=>{
 
       <NForm
           v-if="form !== null"
-          ref="formRef2"
+          ref="formRef"
           :model="form[0]"
           :rules="rules"
           label-placement="left"
@@ -216,8 +233,18 @@ const logoButtonText = computed(()=>{
             <Editor class="fullWidth" v-model="form[0].description" :limit="limit"/>
           </template>
         </FormItem>
-
+        
         <SocialFields v-model:value="form[0].social" type="company"/>
+
+        <FormItem path="internships">
+          <template #content>
+            <NSwitch v-model:value="form[0].internships"/>
+          </template>
+        </FormItem>
+        
+        <InputField path="contact_url" v-model="form[0].contact_url"/>
+        <InputField path="projects_url" v-model="form[0].projects_url"/>
+        <InputField path="jobs_url" v-model="form[0].jobs_url"/>
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

@@ -5,7 +5,7 @@ import Constants from '../constants.js'
 import Businesses from "../components/overview/Businesses.vue"
 import Edus from "../components/overview/Edus.vue"
 import ForHire from "../components/overview/ForHire.vue"
-import SocialHeader from '../components/SocialHeader.vue'
+import Connections from '../components/Connections.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 
@@ -72,7 +72,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
         </div>
         <div class="col-12">
             <h4>Connections</h4>
-            <SocialHeader class="mt-2 mb-4"/>
+            <Connections class="mt-2 mb-4"/>
         </div>
     </div>
 </template>

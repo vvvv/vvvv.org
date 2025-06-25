@@ -1,7 +1,7 @@
 import Constants from "../constants.js"
 import { defineStore } from 'pinia'
 
-export const useCompanyListStore = defineStore ('companyList',{
+export const useBusinessListStore = defineStore ('businessList',{
     state: ()=>{
         return {
             items: [],
@@ -15,7 +15,7 @@ export const useCompanyListStore = defineStore ('companyList',{
             if (this.fetched && !force) return;
 
             try{
-                const {items, total} = await fetchCompanyList();
+                const {items, total} = await fetchBusinessList();
                 this.items = items;
                 this.total = total;
                 this.fetched = true;
@@ -36,7 +36,7 @@ function logoSrc (src)
     return src ? `${Constants.ASSETS}${src}?${LOGO_SETTINGS}` : null;
 }
 
-async function fetchCompanyList()
+async function fetchBusinessList()
 {
 
     const response = await fetch (URL);

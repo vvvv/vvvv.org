@@ -2,8 +2,10 @@
 import MaintainedBy from './MaintainedBy.vue'
 import SocialView from './SocialView.vue'
 import LocationFull from './LocationFull.vue'
+import Links from './Links.vue'
+import Internships from './Internships.vue';
 
-defineProps(['data']);
+const props = defineProps(['data']);
 const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 </script>
@@ -16,8 +18,13 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
         </div>                     
         <LocationFull :data="data"/>
 
-        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="data.social" :social="data.social" :order="socialKeys"/>                      
+        <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social)>0" :social="data.social" :order="socialKeys"/>                      
+        
+        <Internships :data="data.internships"/>
 
-        <MaintainedBy class="text-left maintained mt-4 pt-3 border-top" :data="data.owner"/>
+        <Links class="links" :data="data"/>
+
+        <MaintainedBy class="maintained mt-4 pt-3 border-top" :data="data.owner"/>
+
     </div>
 </template>

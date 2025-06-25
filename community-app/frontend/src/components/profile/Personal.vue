@@ -1,16 +1,13 @@
 <script setup>
-import { ref, watch, onMounted, computed } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { countries } from '../../countries.js'
 import Constants from '../../constants.js'
 import SocialFields from './SocialFields.vue'
 import FileUploader from './FileUploader.vue'
-import InputField from '../InputField.vue'
-import Helps from "./HelpTexts.js"
 import Editor from './Editor.vue'
-import InfoButton from '../InfoButton.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
-import { post, createAssetUrl, makeFields, showUserProfile }  from '../../utils.js'
-import { NAvatar, NAlert, NSelect, NButton, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { post, clone, createAssetUrl, showUserProfile }  from '../../utils.js'
+import { NAvatar, NDatePicker, NAlert, NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -24,14 +21,9 @@ const userpic = ref(null);
 const tempUserpic = ref(null);
 const updating = ref(false);
 const uploader = ref(null);
-const limit = 256;
+const limit = 500;
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
-
-function clone(obj)
-{
-  return JSON.parse(JSON.stringify(obj))
-}
 
 const prepareData = ()=>{
 
@@ -41,6 +33,12 @@ const prepareData = ()=>{
   {
     userpic.value = createAssetUrl(temp.user.userpic.id) + imageParams;
   }
+
+  if (temp.user?.beta_since)
+    temp.user.beta_since = Date.parse(temp.user.beta_since);
+
+  if (temp.user?.gamma_since)
+    temp.user.gamma_since = Date.parse(temp.user.gamma_since);
 
   form.value = {
     user: temp.user,
@@ -73,7 +71,7 @@ const updateTempUserpic = (id) =>{
 const submit = async () => {
 
   updating.value = true;
-  const formValue  = { ...form.value };
+  const formValue  = clone (form.value);
   
   let discourse = {};
 
@@ -86,7 +84,7 @@ const submit = async () => {
     formValue.user.userpic = tempUserpic.value;
   }
 
-  const infoChanged = formValue.user?.statement != data.user?.statement ||
+  const infoForDiscourseChanged = formValue.user?.description != data.user?.description ||
       formValue.social?.website != data.social?.website ||
       formValue.user?.location_city != data.user?.location_city ||
       formValue.user?.location_country != data.user?.location_country ||
@@ -94,12 +92,17 @@ const submit = async () => {
       formValue.user?.surname != data.user?.surname ||
       formValue.user?.visible != data.user?.visible;
 
-  if (infoChanged) 
+  if (infoForDiscourseChanged) 
     discourse.info = true;
 
   if (formValue.user?.userpic && (formValue.user.userpic != data.user?.userpic))
     discourse.avatar = true;
- 
+
+  if (formValue.user?.gamma_since)
+    formValue.user.gamma_since = new Date(formValue.user.gamma_since).toISOString(); 
+  if (formValue.user?.beta_since)
+    formValue.user.beta_since = new Date(formValue.user.beta_since).toISOString();   
+
   const body = {
     user: formValue.user,
     social: formValue.social
@@ -228,9 +231,9 @@ const avatarButtonText = computed(()=>{
           <n-input v-model:value="form.social.contact" placeholder="Prefered way of contact in human readable forms" />
         </n-form-item> -->
 
-        <FormItem path="statement" type="user">
+        <FormItem path="description" type="user">
           <template #content>
-            <Editor class="fullWidth" v-model="form.user.statement" label="Statement" :limit="limit"/>
+            <Editor class="fullWidth" v-model="form.user.description" :limit="limit"/>
           </template>
         </FormItem>
 
@@ -255,6 +258,23 @@ const avatarButtonText = computed(()=>{
 
         <SocialFields v-model:value="form.social" type="user"/>
 
+        <div class="row">
+          <div class="col">
+            <FormItem path="beta_since">
+              <template #content>
+                <NDatePicker v-model:value="form.user.beta_since" type="year" clearable/>
+              </template>
+            </FormItem>
+          </div>
+          <div class="col">
+            <FormItem path="gamma_since">
+              <template #content>
+                <NDatePicker v-model:value="form.user.gamma_since" type="year" clearable/>
+              </template>
+            </FormItem>
+          </div>
+
+        </div>
         <SubmitRevertButtons @revert="revert" @submit="submit" :updating="updating"/>
     </n-form>
   </template>

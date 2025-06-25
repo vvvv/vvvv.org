@@ -5,7 +5,7 @@ import { useRoute } from "vue-router";
 import { NSpin, NIcon } from 'naive-ui'
 import { LocationOutline } from '@vicons/ionicons5'
 import { toHtml } from '../utils.js'
-import fetchCompanyProfile from './fetchCompanyProfile.js'
+import fetchBusinessProfile from './fetchBusinessProfile.js'
 import InstitutionBasics from '../components/InstitutionBasics.vue'
 
 const route = useRoute();
@@ -20,7 +20,7 @@ onMounted(async ()=>
 {
     try{
         loading.value = true;
-        company.value = await fetchCompanyProfile (name);
+        company.value = await fetchBusinessProfile (name);
         document.title = 'Profile: '+ company.value.name;
         description = toHtml(company.value.description);
     }
