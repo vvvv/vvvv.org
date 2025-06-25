@@ -14,10 +14,10 @@ import {
 import { useRouter, useRoute } from 'vue-router'
 import { fetchProfileData } from './fetchProfileData.js'
 
-import Basics from '../components/profile/Basics.vue'
-import Company from '../components/profile/Company.vue'
+import Personal from '../components/profile/Personal.vue'
+import Business from '../components/profile/Business.vue'
 import Edu from '../components/profile/Edu.vue'
-import Hire from '../components/profile/Hire.vue'
+import ForHire from '../components/profile/ForHire.vue'
 
 const emit = defineEmits(['logout']);
 
@@ -30,7 +30,7 @@ const data = ref(null);
 const loading = ref(true);
 const constants = ref(null);
 const failure = ref ("");
-const selected = shallowRef(Basics);
+const selected = shallowRef(Personal);
 
 const itemClass = ref ('item');
 const selectedClass = ref ('selected');
@@ -77,20 +77,20 @@ function renderIcon(icon) {
 
 const menuOptions = [
   {
-    label: "Basics",
-    component: Basics,
+    label: "Personal",
+    component: Personal,
     key: "basics",
     icon: renderIcon(PersonIcon)
   },
   {
-    label: 'Hire',
-    component: Hire,
+    label: 'For Hire',
+    component: ForHire,
     key: "hire",
     icon: renderIcon(WalletIcon)
   },
   {
-    label: 'Company',
-    component: Company,
+    label: 'Business',
+    component: Business,
     key: "company",
     icon: renderIcon(CompanyIcon)
   },

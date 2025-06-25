@@ -1,4 +1,10 @@
-const data = Object({   
+const data = Object({
+    beta_since:{
+        label: "Started using vvvv beta in",
+    },
+    gamma_since:{
+        label: "Started using vvvv gamma in",
+    },
     website: 
     {
         user:{
@@ -69,10 +75,6 @@ const data = Object({
             value: 'Content'
         },
     },
-    statement: {
-        label: "Statement",
-        help: 'A short introduction about yourself'
-    },
     newsletter: {
         label: "Newsletter",
         help: 'Subscribe to the vvvv newsletter. Frequency: ~1/month'
@@ -103,6 +105,10 @@ const data = Object({
         }
     },
     description: {
+        user:{
+            label: "Description",
+            help: 'A short introduction about yourself'
+        },
         company: {
             label: "Description",
             help: "A short introduction to your company and it's services"
@@ -116,6 +122,25 @@ const data = Object({
     course_language:{
         label: "Course Language",
         placeholder: "German"
+    },
+    internships:{
+        label: "Internships",
+        help: "Whether or not your business is accepting internship applications"
+    },
+    projects_url:{
+        label: "Projects",
+        help: 'In case your business website has an extra "Projects" url',
+        placeholder: 'https://mybusiness.com/projects'
+    },
+    contact_url:{
+        label: "Contact",
+        help: 'In case your business website has an extra "Contact" url',
+        placeholder: 'https://mybusiness.com/contact'
+    },
+    jobs_url:{
+        label: "Jobs",
+        help: 'In case your business website has an extra "Jobs" url',
+        placeholder: 'http://mybusiness.com/jobs'
     }
 
 })

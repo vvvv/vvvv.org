@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { connections } from '../connections.js'
 import { logos } from './logos/logos.js'
-import SocialHeaderItem from './SocialHeaderItem.vue';
+import ConnectionsItem from './ConnectionsItem.vue';
 
 const sortedConnections = computed(()=> {
     const c = [...connections].sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
@@ -25,6 +25,6 @@ const sortedConnections = computed(()=> {
 
 <template>
     <div class="row socialHeader">
-        <SocialHeaderItem v-for="connection in sortedConnections" :item="connection" :key="connection.name"/>
+        <ConnectionsItem v-for="connection in sortedConnections" :item="connection" :key="connection.name"/>
     </div>
 </template>

@@ -10,7 +10,7 @@ const buttonLabel = computed(()=>
   updating ? 'Updating...' : 'Submit'
 );
 
-const style="margin-left: 120px;"
+const style="margin-left: 150px;"
 
 </script>
 
