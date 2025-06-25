@@ -10,6 +10,7 @@ import HireView from '../components/HireView.vue'
 import SocialView from '../components/SocialView.vue'
 import Location from '../components/Location.vue'
 import ClippedText from '../components/ClippedText.vue'
+import BetaGammaUser from '../components/BetaGammaUser.vue'
 
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
 import PartOf from '../components/PartOf.vue'
@@ -123,6 +124,15 @@ const forumLink = computed(()=>
   `${Constants.FORUM}u/${user.value.username}/summary`
 )
 
+const betagammauser = computed(()=>
+{
+  const result = {};
+  if (user.value.beta_since) result.beta = new Date(user.value.beta_since).getFullYear();
+  if (user.value.gamma_since) result.gamma = new Date(user.value.gamma_since).getFullYear();
+
+  return result;
+})
+
 const website = computed(()=>{
 
     let url = null;
@@ -181,6 +191,8 @@ const website = computed(()=>{
               <PartOf v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
 
               <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" :order="socialKeys" v-if="social" />
+
+              <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
         <div class="col-12 col-md-6 col-lg-8">

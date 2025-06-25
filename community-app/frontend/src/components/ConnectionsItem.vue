@@ -1,11 +1,7 @@
 <script setup>
 import { NTooltip, NIcon } from 'naive-ui';
 
-const props = defineProps ({
-    item: Object
-})
-
-const connection = {...props.item};
+defineProps (['item']);
 
 const prefix = "https://vvvv.org";
 
@@ -14,9 +10,9 @@ const prefix = "https://vvvv.org";
     <div class="col-sm-6 col-lg-3 px-2">
         <div class="socialItem mb-1 px-3 pt-3 pb-0 mb-0">
             <div class="row border-bottom">
-                <h6 class="px-3 pb-1"> {{ connection.title }}</h6>
+                <h6 class="px-3 pb-1"> {{ item.title }}</h6>
             </div>
-            <div v-if="connection.children" v-for="c in connection.children" :key="c.name">
+            <div v-if="item.children" v-for="c in item.children" :key="c.name">
                 <div class="row mt-2 pb-2 border-bottom">
                     <div class="col-2">
                         <img v-if="c.logo" :src="prefix+c.logo" />

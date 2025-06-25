@@ -20,7 +20,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
         <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social)>0" :social="data.social" :order="socialKeys"/>                      
         
-        <Internships :data="data.internships"/>
+        <Internships :data="data.internships" text="Accepting internship applications"/>
 
         <Links class="links" :data="data"/>
 
