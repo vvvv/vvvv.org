@@ -6,7 +6,7 @@ title: "VL: Groups and Categories"
 slug: "vl-groups-and-categories"
 description: ""
 imported: "true"
-thumb: "02_GroupInside-1.png
+thumb: "02_GroupInside-1.png"
 ---
 
 
