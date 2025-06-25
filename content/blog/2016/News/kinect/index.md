@@ -7,9 +7,9 @@ slug: "kinect-0"
 description: ""
 imported: "true"
 originalType: "stuff"
-thumb: "IMG_1067.PNG"
+thumb: "kinect.png"
 ---
 
 
-![](IMG_1067.PNG) 
+![](kinect.png) 
 
