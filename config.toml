@@ -49,7 +49,7 @@ blog = '/blog/:sections[1]/:slug'
 
 [params]
 
-		title = "vvvv - visual live-progamming for .NET"
+		title = "vvvv - visual live-programming for .NET"
 		author = "vvvv group"
 		description = "vvvv is a visual live-programming environment for .NET"
 		
