@@ -6,11 +6,11 @@ title: "NODE17 Workshop Video Captures"
 slug: "node17-workshop-video-captures"
 description: ""
 imported: "true"
-thumb: "workshops.PNG"
+thumb: "workshop.png"
 ---
 
 
-![](workshops.PNG) 
+![](workshop.png) 
 
 Hey VVVVolks,
 
