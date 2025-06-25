@@ -1,8 +1,10 @@
 # Community App for the vvvv.org
 
 ## Help Texts for the Profile Form:
-
  - `/community-app/frontend/src/components/profile/HelpTexts.js`
+
+## Connections in the Community page footer
+ - `/community-app/frontend/src/connections.js`
 
 
 ## How to Build

@@ -55,7 +55,7 @@ export const connections = [
                 children: [
                     {   
                         description: 'NuGets tagged with "VL"',
-                        link: 'https://github.com/topics/vl',
+                        link: 'https://www.nuget.org/packages?q=Tags%3A%22VL%22&prerel=true&sortby=created-desc',
                         alt: 'NuGets tagged with "VL"'
                     },
                     {
@@ -107,18 +107,39 @@ export const connections = [
         children: [
             {
                 name: "YouTube",
-                description: 'Watch tutorials',
+                description: 'Official tutorials',
                 logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/@vvvvTv42',
                 alt: 'Watch tutorials on YouTube',
             },
            {
                 name: "VVVV TV",
-                description: 'Watch Episodes',
+                description: 'vvvvTv Season 2',
                 logo: "/img/icons/youtube-32x32.png",
-                link: 'https://www.youtube.com/@vvvvTv42',
-                alt: 'Watch Eposides',
-            }
+                link: 'https://www.youtube.com/watch?v=uvLNZsStve8&list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi&pp=gAQB',
+                alt: 'Watch vvvvTv Episodes',
+            },
+           {
+                name: "USER TUTORIALS",
+                description: 'Tutorials by chk',
+                logo: "/img/icons/youtube-32x32.png",
+                link: 'https://www.youtube.com/watch?v=7m1EzfxUtzo&list=PL2KeRstDQVRRVnzCHEambwAI4yWmpIF-p',
+                alt: 'Essential beginner video tutorials',
+            },
+           {
+                name: "USER TUTORIALS",
+                description: 'Tutorials by TobyK',
+                logo: "/img/icons/youtube-32x32.png",
+                link: 'https://www.youtube.com/watch?v=RXDRfqLbc74&list=PLEncasrnvr2bkPb0QKdU1DrDs4Hd_Jr0V',
+                alt: 'Intermediate Level Tutorials',
+            },
+           {
+                name: "USER TUTORIALS",
+                description: 'More Tutorials & Courses',
+                logo: "/img/icons/youtube-32x32.png",
+                link: 'https://thegraybook.vvvv.org/#getting-started',
+                alt: 'More Tutorials & Courses',
+            }            
         ],
         order: 7
     }
