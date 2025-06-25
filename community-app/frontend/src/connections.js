@@ -120,21 +120,18 @@ export const connections = [
                 alt: 'Watch vvvvTv Episodes',
             },
            {
-                name: "USER TUTORIALS",
                 description: 'Tutorials by chk',
                 logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/watch?v=7m1EzfxUtzo&list=PL2KeRstDQVRRVnzCHEambwAI4yWmpIF-p',
                 alt: 'Essential beginner video tutorials',
             },
            {
-                name: "USER TUTORIALS",
                 description: 'Tutorials by TobyK',
                 logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/watch?v=RXDRfqLbc74&list=PLEncasrnvr2bkPb0QKdU1DrDs4Hd_Jr0V',
                 alt: 'Intermediate Level Tutorials',
             },
            {
-                name: "USER TUTORIALS",
                 description: 'More Tutorials & Courses',
                 logo: "/img/icons/youtube-32x32.png",
                 link: 'https://thegraybook.vvvv.org/#getting-started',
