@@ -184,10 +184,10 @@ const avatarButtonText = computed(()=>{
         <n-form-item label="Avatar">
             <div class="container mx-0 px-0">
               <div class="row">
-                  <div class="col-3" v-if="userpic !== null">
+                  <div class="col-12 col-xl-3" v-if="userpic !== null">
                     <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
                   </div>
-                  <div class="col-9">
+                  <div class="col-12 col-xl-9">
                     <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
                     <NAlert v-if="tempUserpic" title="Uploaded" type="success">
                         Press 'Submit' below to update the Avatar.

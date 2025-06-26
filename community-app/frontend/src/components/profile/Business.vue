@@ -197,10 +197,10 @@ const logoButtonText = computed(()=>{
         <n-form-item label="Logo">
           <div class="container mx-0 px-0">
             <div class="row">
-              <div class="col-3" v-if="logo !== null">
+              <div class="col-12 col-xl-3" v-if="logo !== null">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-9">
+              <div class="col-12 col-xl-9">
                 <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
               </div>
             </div>
