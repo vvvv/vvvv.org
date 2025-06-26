@@ -89,7 +89,6 @@ export const connections = [
             {
                 name: "LinkedIn",
                 description: "Follow our posts", 
-                logo: "/img/icons/linkedin32x32.png",
                 link: 'https://www.linkedin.com/company/vvvv-group',
                 alt: 'Do big business on LinkedIn',
             },
@@ -108,32 +107,27 @@ export const connections = [
             {
                 name: "YouTube",
                 description: 'Official tutorials',
-                logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/@vvvvTv42',
                 alt: 'Watch tutorials on YouTube',
             },
            {
                 name: "VVVV TV",
                 description: 'vvvvTv Season 2',
-                logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/watch?v=uvLNZsStve8&list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi&pp=gAQB',
                 alt: 'Watch vvvvTv Episodes',
             },
            {
                 description: 'Tutorials by chk',
-                logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/watch?v=7m1EzfxUtzo&list=PL2KeRstDQVRRVnzCHEambwAI4yWmpIF-p',
                 alt: 'Essential beginner video tutorials',
             },
            {
                 description: 'Tutorials by TobyK',
-                logo: "/img/icons/youtube-32x32.png",
                 link: 'https://www.youtube.com/watch?v=RXDRfqLbc74&list=PLEncasrnvr2bkPb0QKdU1DrDs4Hd_Jr0V',
                 alt: 'Intermediate Level Tutorials',
             },
            {
                 description: 'More Tutorials & Courses',
-                logo: "/img/icons/youtube-32x32.png",
                 link: 'https://thegraybook.vvvv.org/#getting-started',
                 alt: 'More Tutorials & Courses',
             }            
