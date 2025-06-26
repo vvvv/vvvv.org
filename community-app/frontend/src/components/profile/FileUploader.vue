@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, defineExpose } from 'vue'
+import { ref, watch } from 'vue'
 import { removeFile, uploadFile, createAssetUrl } from '../../utils.js'
 import { NButton, NUpload } from 'naive-ui'
 
