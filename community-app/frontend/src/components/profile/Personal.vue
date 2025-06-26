@@ -173,23 +173,6 @@ const avatarButtonText = computed(()=>{
 
     <hr class="mt-1 mb-4"/>
 
-    <div class="form-group row mb-2">
-      <div class="col-sm-2"></div>
-      <div class="col-sm-10">
-        <div class="d-flex">
-          <div v-if="userpic !== null">
-            <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
-          </div>    
-          <div class="ml-3 align-self-center">
-            <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
-            <NAlert v-if="tempUserpic" title="Uploaded" type="success">
-                Submit the Form to update the Avatar.
-            </NAlert>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <n-form
         ref="formRef"
         :model="form"
@@ -197,6 +180,23 @@ const avatarButtonText = computed(()=>{
         :label-width="150"
         require-mark-placement="right-hanging"
         >
+
+        <n-form-item label="Avatar">
+            <div class="container mx-0 px-0">
+              <div class="row">
+                  <div class="col-3" v-if="userpic !== null">
+                    <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
+                  </div>
+                  <div class="col-9">
+                    <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
+                    <NAlert v-if="tempUserpic" title="Uploaded" type="success">
+                        Press 'Submit' below to update the Avatar.
+                    </NAlert>
+                  </div>
+                </div>
+            </div>  
+        </n-form-item>
+
         <n-form-item label="Status" path="status" v-if="form.user && form.user.status !== undefined && form.user.status != '1'">
           <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
           <n-tag :bordered="false" type="error" v-else-if="form.user.status == '2'">Disabled</n-tag>

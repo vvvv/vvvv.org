@@ -139,10 +139,11 @@ const imageButtonText = computed(()=>{
         ref="formImage"
         :model="form"
         label-placement="left"
-        :label-width="120"
+        :label-width="150"
         require-mark-placement="right-hanging"
         >
         <n-form-item label="Image">
+          <div class="container mx-0 px-0">
             <div class="row">
               <div class="col-6" v-if="image !== null">
                 <img :src="image" class="img-fluid"/>
@@ -152,6 +153,7 @@ const imageButtonText = computed(()=>{
                 <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
               </div>
             </div>
+          </div>
         </n-form-item>
     </n-form>
 
@@ -159,7 +161,7 @@ const imageButtonText = computed(()=>{
         ref="formRef2"
         :model="form"
         label-placement="left"
-        :label-width="120"
+        :label-width="150"
         require-mark-placement="right-hanging"
         >
       <n-form-item label="Description">

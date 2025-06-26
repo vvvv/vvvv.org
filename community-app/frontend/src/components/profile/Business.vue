@@ -183,20 +183,6 @@ const logoButtonText = computed(()=>{
       <hr class="mt-1 mb-4"/>
 
       <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
-      
-      <div class="form-group row mb-2">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-10">
-          <div class="row">
-            <div class="col-2" v-if="logo !== null">
-              <img :src="logo" class="img-fluid"/>
-            </div>    
-            <div class="col-10">
-              <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
-            </div>
-          </div>
-        </div>
-      </div>
 
 
       <NForm
@@ -208,6 +194,19 @@ const logoButtonText = computed(()=>{
           :label-width="150"
           require-mark-placement="right-hanging"
           >
+        <n-form-item label="Logo">
+          <div class="container mx-0 px-0">
+            <div class="row">
+              <div class="col-3" v-if="logo !== null">
+                <img :src="logo" class="img-fluid"/>
+              </div>
+              <div class="col-9">
+                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+              </div>
+            </div>
+          </div>
+        </n-form-item>
+
         <template v-if="companyExists">
           <n-form-item label="Status" path="status" v-if="form[0].status != '1'">
             <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
