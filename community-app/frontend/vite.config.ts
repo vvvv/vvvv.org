@@ -28,9 +28,6 @@ export default defineConfig({
   rollupOptions: {
     input: './src/main.js',
     output: {
-      manualChunks(id) {
-        if (id.includes('routes/EditUser')) return 'profile';
-      },
       entryFileNames: `app.js`,
       chunkFileNames: 'app-[name]-[hash].js',
       assetFileNames: '[name].[ext]'

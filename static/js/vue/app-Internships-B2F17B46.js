@@ -1,1 +1,0 @@
-import{h as s,K as r,o,j as t,n as c,f as n,b as a,L as i,p as l,t as m}from"./app-profile-DxpktdD5.js";const d={key:0,class:"location"},u={__name:"Internships",props:["data","text"],setup(e){return(_,p)=>e.data?(o(),s("div",d,[t(a(l),{size:"1.2rem",color:"green",class:"mr-2"},{default:n(()=>[t(a(i))]),_:1}),c(" "+m(e.text),1)])):r("",!0)}};export{u as _};
