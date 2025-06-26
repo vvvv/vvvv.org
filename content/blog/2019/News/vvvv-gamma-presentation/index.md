@@ -6,11 +6,11 @@ title: "vvvv Gamma Presentation"
 slug: "vvvv-gamma-presentation"
 description: ""
 imported: "true"
-thumb: "bildchen.JPG"
+thumb: "bildchen-1.jpg"
 ---
 
 
-![](bildchen.JPG) 
+![](bildchen-1.jpg) 
 
 We are very lucky to host the first vvvv gamma workshop at the Muthesius Kunsthochschule in Kiel. Joreg and Tebjan will give a 3 hour introduction into the vvvv future. Since we use vvvv a lot at the university, it makes totally sense to check out, what we can do with the next big thing.
 

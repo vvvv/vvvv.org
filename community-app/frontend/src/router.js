@@ -15,7 +15,7 @@ const EduView = () => import('./routes/EduView.vue');
 const ForHireList = () => import('./routes/ForHireList.vue');
 const EditUser = () => import('./routes/EditUser.vue');
 
-const requireAuth = (to, from, next) => {
+const requireAuth = (to, from, next) => {        
     if (isAuthenticated()){
         next();
     } 
@@ -75,7 +75,7 @@ const routes = [
         meta: { tabName: 'Educational Institutions' }
     },
     {
-        path: '/user/edit/',
+        path: '/community/edit/',
         name: 'Edit Profile',
         component: EditUser,
         beforeEnter: requireAuth,

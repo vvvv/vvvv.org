@@ -8,13 +8,16 @@ const { social, order } = defineProps({ social: Object, order: Array })
 const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
 
-const media = [
-	{ key: 'website', prefix: null },
-	{ key: 'github', prefix: 'github.com/' },
-	{ key: 'nuget', prefix: 'nuget.org/profiles/' },
-	{ key: 'mastodon', prefix: null },
-	{ key: 'pixelfed', prefix: null }
-];
+const socialOrder = ['website', 'github', 'nuget', 'linkedin', 'mastodon', 'pixelfed', 'peertube', 'youtube']
+
+const media = socialOrder.map( (m) => {
+	const l = logos.find( logo => logo.name === m );
+	return {
+		key: m,
+		prefix: l.prefix,
+		logo: l.logo
+	}
+})
 
 // Add logos
 media.forEach( m => {

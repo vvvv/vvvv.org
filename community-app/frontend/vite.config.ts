@@ -27,15 +27,15 @@ export default defineConfig({
     outDir: "../../static/js/vue/",
   rollupOptions: {
     output: {
-      // manualChunks: {
-      //   vue: ['vue', 'vue-router'],
-      //   showdown: ['showdown'],
-      //   keycloak: ['keycloak-js'],
-      //   leaflet: ['leaflet']
-      // },
+      manualChunks: {
+        vue: ['vue', 'vue-router'],
+        showdown: ['showdown'],
+        keycloak: ['keycloak-js'],
+        leaflet: ['leaflet']
+      },
       entryFileNames: `app.js`,
-      chunkFileNames: '[name].js',
-      assetFileNames: '[name].[ext]'
+      chunkFileNames: 'app-chunk-[hash].js',
+      assetFileNames: 'app-asset-[hash].[ext]'
     },
     treeshake: true
   },

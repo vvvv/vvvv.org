@@ -12,7 +12,7 @@ release:
     app_file: "sites/default/files/vvvv_50beta38_x86.zip"
     app_file_64: "sites/default/files/vvvv_50beta38_x64.zip"
 imported: "true"
-thumb: "spread.PNG"
+thumb: "spread-1.png"
 ---
 
 
@@ -35,9 +35,9 @@ Since there are hardly any other changes, we recommend you also switch as soon a
 ### So why the breaking change?
 
 It's about how values get stored in IO boxes and pins. They now use the same serialization technique we already [introduced](/blog/2018/vl-serialization) as a node set for beta37. This means that we can store any data inside patches for which a serializer is registered - be it a spread of values, a dictionary or even a custom record:
-![A spread of values in b37 and b38](spread.PNG)
+![A spread of values in b37 and b38](spread-1.png)
 And as a second example a dictionary from string to value
-![A dictionary of values in b37 and b37](dictionary.PNG)
+![A dictionary of values in b37 and b37](dictionary-1.png)
 
 It might not look as much yet but it is a first step to get proper IO boxes back.
 

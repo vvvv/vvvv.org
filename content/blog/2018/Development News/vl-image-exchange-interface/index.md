@@ -6,14 +6,14 @@ title: "VL: Image exchange interface"
 slug: "vl-image-exchange-interface"
 description: ""
 imported: "true"
-thumb: "gol_vl.PNG"
+thumb: "gol_vl-1.png"
 ---
 
 
 In the VVVV world you'll find four new nodes, **UploadImage** and **UploadImage (Async)** - both for DX9 and DX11 returning a texture. The former just takes an image and when requested uploads the image to the GPU, the latter takes an IObservable<IImage> and will upload whenever a new image gets pushed.
 In the VL world you'll find **ToImage** nodes which allow you to build images out of arbitrary data. Here is a little Game Of Life example:
 
-![Generating images in VL](gol_vl.PNG)![Rendering images in DX9 and DX11](gol_vvvv.PNG)
+![Generating images in VL](gol_vl-1.png)![Rendering images in DX9 and DX11](gol_vvvv-1.png)
 That one image is gray and the other red comes from the fact that we map a pixel format with one red channel to a format with one luminance channel in DX9 - not entirly correct, but better than seeing nothing at all.
 
 ##  The interface in detail
@@ -23,7 +23,7 @@ All of those libraries provide different sets of operations one can perform on t
 We therefore decided to add a new interface - simply called **IImage** - to our base types in VL with the intention to allow different node libraries to exchange their images. The idea is that the node libraries itself work with the image type they see fit and only provide ToImage and FromImage nodes which will act as the exit and entry points. Whether or not those entry and exit points have to copy the image is up to the library designer and probably also the library itself. For some it will be possible to write simple lightweight wrappers, for others a full copy will have to be done. If a certain pixel format is not supported by the library it is fine to throw an UnsupportedPixelFormatException which will inform the user to either change the whole image pipeline to a different pixel format or insert a conversion node so the sink can deal with it.
 
 Before diving any deeper here are two screenshots from a little example image pipeline, getting images pushed in the streaming thread from a GStreamer based video player, using OpenCV to apply a dilate operator on them and passing them down to vvvv for rendering:
-![](image_vl.PNG) ![](image_vvvv.PNG)
+![](image_vl-1.png) ![](image_vvvv-1.png)
 
 The image interface comes with a property Info returning a little struct of type **ImageInfo** containing size and pixel format information. With this struct it's easy to check whether the size or the pixel format of an image changed. The pixel format is an enumeration with just a few entries of what we thought are the most commonly used formats. Since there're many many others the image info comes also with a OriginalFormat property where an image source can simply put in the original format string - whatever that is. But it at least gives sinks a little chance to interpret the image data correctly.
 

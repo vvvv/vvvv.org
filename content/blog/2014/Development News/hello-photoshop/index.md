@@ -6,11 +6,11 @@ title: "Hello Photoshop"
 slug: "hello-photoshop-0"
 description: ""
 imported: "true"
-thumb: "PS-VVVV-Release.PNG"
+thumb: "PS-VVVV-Release-1.png"
 ---
 
 
-![](PS-VVVV-Release.PNG) 
+![](PS-VVVV-Release-1.png) 
 
 This one is for all pixelpeople out there.
 

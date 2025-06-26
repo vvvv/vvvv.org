@@ -10,7 +10,7 @@ import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '.
 import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
-import {  } from "../../routes/businessListStore.js";
+import { useBusinessListStore } from "../../routes/businessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -64,7 +64,17 @@ const prepareData = ()=>{
   form.value = temp.companies
 }
 
+const noSpaces = (rule, value) =>{
+   if (/\s/.test(value)) {
+          return new Error('No spaces allowed');
+  }
+  return true;
+}
 
+const noSpacesValidator = {
+    validator: noSpaces,
+    trigger: ['blur', 'input']
+  }
 
 const rules = {
   name: {

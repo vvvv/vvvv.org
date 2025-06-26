@@ -1,9 +1,11 @@
 const data = Object({
     beta_since:{
         label: "Started using vvvv beta in",
+        help: "The year you started using vvvv beta",
     },
     gamma_since:{
         label: "Started using vvvv gamma in",
+        help: "The year you started using VL in vvvv beta or vvvv gamma",
     },
     website: 
     {
@@ -43,6 +45,16 @@ const data = Object({
         help: 'Url to your Mastodon profile',
         placeholder: 'mastodon.xyz/@vvvv'
     },
+    peertube: {
+        label: "PeerTube",
+        help: "Url to your PeerTube profile",
+        placeholder: "https://mypeertube.tv/c/me"
+    },
+    youtube: {
+        label: "YouTube",
+        help: "Your YouTube handle",
+        placeholder: "@vvvvTv42"
+    },
     matrix: {
         label: "Matrix",
         help: 'Your handle on the chat',
@@ -52,19 +64,19 @@ const data = Object({
         user:{
             label: "LinkedIn",
             help: 'Name of your personal profile on LinkedIn',
-            placeholder: 'MyLinkedInUser'
+            placeholder: 'in/MyLinkedInUser'
         },
         company:
         {
             label: "LinkedIn",
             help: 'Public url of your company profile on LinkedIn',
-            placeholder: 'My-Company'
+            placeholder: 'company/My-Company'
         },
         edu:
         {
             label: "LinkedIn",
             help: 'Public url of the institution on LinkedIn',
-            placeholder: 'My-Institution'
+            placeholder: 'company/My-Institution'
         }
     },
     customFields: {

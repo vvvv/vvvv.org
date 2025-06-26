@@ -23,6 +23,8 @@ const exists = computed(()=>{
     return links.value.some( link => link.url != null || "");
 })
 
+console.log (links)
+
 </script>
 <template>
     <div class="my-3 pt-2 border-top" v-if="exists">

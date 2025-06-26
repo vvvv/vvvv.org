@@ -130,7 +130,7 @@ const betagammauser = computed(()=>
   if (user.value.beta_since) result.beta = new Date(user.value.beta_since).getFullYear();
   if (user.value.gamma_since) result.gamma = new Date(user.value.gamma_since).getFullYear();
 
-  return result;
+  return Object.keys(result).length > 0 ? result : null;
 })
 
 const website = computed(()=>{
