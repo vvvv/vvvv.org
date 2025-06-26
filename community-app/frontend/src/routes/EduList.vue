@@ -48,7 +48,7 @@ const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
                     <div class="companyCard p-3" @click="(event)=> showEduProfile(name, event)">
                         <div class="company">
                             <div class="logo">
-                                <img :src="logo || defaultLogo" v-if="logo !== null"/>
+                                <img :src="logo || defaultLogo"/>
                             </div>
                             <p class="name">{{ name }}</p>
                             

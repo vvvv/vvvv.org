@@ -1,4 +1,5 @@
 <script setup>
+import defaultLogo from '../assets/defaultLogo.png'
 import MaintainedBy from './MaintainedBy.vue'
 import SocialView from './SocialView.vue'
 import LocationFull from './LocationFull.vue'
@@ -12,13 +13,13 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 <template>
     <div>
-        <img v-if="data.logo" :src="data.logo" alt="logo" class="img-fluid"/>
+        <img :src="data.logo || defaultLogo" alt="logo" class="img-fluid"/>
         <div class="my-3">
             <h5>{{ data.name }}</h5>
         </div>                     
         <LocationFull :data="data"/>
 
-        <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social)>0" :social="data.social" :order="socialKeys"/>                      
+        <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social)>0" :social="data.social" />                      
         
         <Internships :data="data.internships" text="Accepting internship applications"/>
 

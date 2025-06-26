@@ -30,7 +30,6 @@ const loading = ref(false);
 const description = ref(null);
 const partOf = ref({});
 
-const socialKeys = ["contact", "website", "github", "nuget", "mastodon", "pixelfed"];
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userpicSize}&height=${userpicSize}`;
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
             &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`;
@@ -190,7 +189,7 @@ const website = computed(()=>{
 
               <PartOf v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
 
-              <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" :order="socialKeys" v-if="social" />
+              <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" v-if="social" />
 
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
