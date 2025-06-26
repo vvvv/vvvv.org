@@ -43,11 +43,11 @@ export const connections = [
                         link: 'https://github.com/topics/vl',
                         alt: 'Repos tagged with "VL"'
                     },
-                    {
-                        description: 'List of User repositories',
-                        link: '',
-                        alt: 'User repos'
-                    }
+                    // {
+                    //     description: 'List of User repositories',
+                    //     link: '',
+                    //     alt: 'User repos'
+                    // }
                 ],
             },
             {
@@ -58,11 +58,11 @@ export const connections = [
                         link: 'https://www.nuget.org/packages?q=Tags%3A%22VL%22&prerel=true&sortby=created-desc',
                         alt: 'NuGets tagged with "VL"'
                     },
-                    {
-                        description: 'List of User NuGets',
-                        link: '',
-                        alt: ''
-                    }
+                    // {
+                    //     description: 'List of User NuGets',
+                    //     link: '',
+                    //     alt: ''
+                    // }
                 ],
             }
         ],

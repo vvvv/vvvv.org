@@ -3,7 +3,8 @@ import { shallowRef, computed, onMounted } from 'vue'
 import { ensureHttps, stripHttp, getProperties, stripPrefix, ensurePrefix, stripBeforeLastAt, stripBeforeLastSlash, getURL } from '../utils'
 import { NIcon } from 'naive-ui'
 import { logos } from "./logos/logos.js"
-const { social, order } = defineProps({ social: Object, order: Array })
+
+defineProps({ social: Object })
 
 const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
