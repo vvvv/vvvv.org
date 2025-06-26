@@ -39,7 +39,7 @@ export default defineConfig({
     },
     treeshake: true
   },
-  cssCodeSplit: true, // Ensure CSS is split into a separate file
+  // cssCodeSplit: true, // Ensure CSS is split into a separate file
   target: 'esnext',
   minify: true,
   sourcemap: false
