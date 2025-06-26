@@ -21,7 +21,7 @@ For OSC, eg. simply place an OSCServer or OSCClient node to get a new binding co
 
 **screenshot**
 
-Once you have a binding column, you can establish individual bindings for public channels by simply clicking the according checkbox in the column. For all binding types (except Midi) this is already all you needed to do to get a default binding running. In case you want more finegrained control, you can tweak most bindings using the 🖊 button.
+Once you have a binding column, you can activate individual bindings for public channels by simply clicking the according checkbox in the column. For all binding types (except Midi) this is already all you needed to do to get a default binding running. In case you want more finegrained control, you can tweak most bindings using the 🖊 button.
 
 Alternatively you can establish bindings to channels (including non-public ones) using the BindTo... nodes coming with the respective IO packages. So for OSC, eg. use the BindToOSC node and you're done.
 

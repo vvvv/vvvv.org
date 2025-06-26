@@ -27,7 +27,7 @@ Either way you define a name and type to establish the Channel which is now glob
 
 ## Persistence of public channels
 
-Definitions of channels are saved in a separate file called "publicchannels.xml" that is referenced to your main document. This means that on opening a document you can rest assured that all your public channels are available in the first frame. Also this is great for version control where you'll see diffs of your changes to anything public channel related, in a central spot.
+Definitions of channels are saved in a separate file called "publicchannels.xml" that is referenced by your main document. This means that when opening a document you can rest assured that all your public channels are available in the first frame. Also this is great for version control where you'll see diffs of your changes to anything public channel related, in a central spot.
 
 ## Deleting a public channel
 

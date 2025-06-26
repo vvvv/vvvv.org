@@ -19,6 +19,8 @@ There are two ways of storing presets:
 
 **screenshot**
 
+Presets are stored in simple .xml files. One preset per file. Like this you can re-arrange/re-name presets right in the explorer also get a good view on changes when using version control.
+
 ## Recalling presets
 There are two ways of recalling presets: 
 - Via the Channel Browsers "Presets Panel"
