@@ -17,7 +17,7 @@ export default defineConfig({
       '@css': '/external/css',   // Alias for the symbolic link to the CSS folder
     },
   },
-  base: "http://localhost:5173/",
+  base: "./",
   server: {
     watch: {
       followSymlinks: true // Watch to symbolic links
@@ -26,6 +26,7 @@ export default defineConfig({
   build: {
     outDir: "../../static/js/vue/",
   rollupOptions: {
+    input: './src/main.js',
     output: {
       manualChunks: {
         vue: ['vue', 'vue-router'],
