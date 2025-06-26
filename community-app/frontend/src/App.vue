@@ -6,6 +6,7 @@ import { useRouter, useRoute } from 'vue-router'
 import { kclogin, kclogout, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
 import { NMessageProvider, NTab, NTabs, NConfigProvider, NIcon, NSpin } from 'naive-ui'
 import { PersonCircleOutline } from '@vicons/ionicons5'
+import './styles/style.scss'
 
 const router = useRouter();
 const route = useRoute();
@@ -17,6 +18,7 @@ const businessesCount = ref (0);
 const activeTab = ref(router.getRoutes()[0]);
 
 const login = ()=> {
+  //console.log (window.location.origin + window.location.pathname.split('#')[0]);
   kclogin(window.location.origin + window.location.pathname.split('#')[0])
 }
 
@@ -66,7 +68,14 @@ const handleTabChange = ( tabName ) => {
     }
     else
     {
-      router.push(tab.path); // Navigate to the selected tab's route
+      if (tab.name == 'Profile')
+      {
+          router.push({ name: 'Edit Profile', params: { username: getUsername() ?? "username"}}); // Navigate to the selected tab's route
+      }
+      else
+      {
+        router.push(tab.path);
+      }
     }
   }
 };

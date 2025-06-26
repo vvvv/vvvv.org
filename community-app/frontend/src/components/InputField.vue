@@ -20,6 +20,8 @@ const placeholder = ref(getValue(props.path, "placeholder", props.type));
             {{ label }}
             <InfoButton v-if="help" :info="help"/>
         </template>
+        <template #default>
             <n-input v-model:value="model" :placeholder="placeholder"/>
+        </template>
     </n-form-item>
 </template>

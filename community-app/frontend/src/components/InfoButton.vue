@@ -1,5 +1,5 @@
 <script setup>
-import { NTooltip, NButton, NIcon } from 'naive-ui'
+import { NTooltip, NIcon } from 'naive-ui'
 import { InformationCircle } from '@vicons/ionicons5'
 
 const { info } = defineProps(['info']) 
@@ -8,13 +8,9 @@ const { info } = defineProps(['info'])
 <template>
 <n-tooltip trigger="hover" placement="top">
     <template #trigger>
-        <n-button quaternary circle size="tiny" style="margin-left: 4px;">
-        <template #icon>
-            <n-icon>
-                <InformationCircle />
-            </n-icon>
-        </template>
-        </n-button>
+        <n-icon>
+            <InformationCircle />
+        </n-icon>
     </template>
     <span>{{ info }}</span>
 </n-tooltip>

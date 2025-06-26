@@ -19,7 +19,13 @@ defineProps(['type']);
         <div class="col-12 col-lg-6">
             <InputField path="mastodon" :type="type" v-model="model.mastodon"/>
             <InputField path="pixelfed" :type="type" v-model="model.pixelfed"/>
+            <InputField path="peertube" :type="type" v-model="model.peertube"/>
+        </div>
+        <div class="col-12 col-lg-6">
             <InputField path="linkedin" :type="type" v-model="model.linkedin"/>
+        </div>
+        <div class="col-12 col-lg-6">
+            <InputField path="youtube" :type="type" v-model="model.youtube"/>
         </div>
     </div>
 

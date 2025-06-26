@@ -11,8 +11,6 @@ if (import.meta.env.DEV)
     import("@scss/main.scss");
     import("@css/creative.css");
 }
-    
-import './styles/style.scss'
 
 await initKeycloak();
 
