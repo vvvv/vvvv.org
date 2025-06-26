@@ -29,23 +29,8 @@ export default defineConfig({
     input: './src/main.js',
     output: {
       manualChunks(id) {
-        if (id.includes('vue')) return 'vue';
-        if (id.includes('vue-router')) return 'vue-router';
-        if (id.includes('naive-ui')) return 'naive-ui';
-        if (id.includes('node_modules')) return 'vendor';
-        if (id.includes('pinia')) return 'pinia';
-        if (id.includes('Business')) return 'business';
-        if (id.includes('Edit')) return 'edit';
-        if (id.includes('Edu')) return 'edu';
-        if (id.includes('View')) return 'view';
-        if (id.includes('List')) return 'list';
+        if (id.includes('routes/EditUser')) return 'profile';
       },
-      // manualChunks: {
-      //   vue: ['vue', 'vue-router'],
-      //   showdown: ['showdown'],
-      //   keycloak: ['keycloak-js'],
-      //   leaflet: ['leaflet']
-      // },
       entryFileNames: `app.js`,
       chunkFileNames: 'app-[name]-[hash].js',
       assetFileNames: '[name].[ext]'
