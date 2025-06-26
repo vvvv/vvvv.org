@@ -8,12 +8,12 @@ description: "OSC, RCP, Midi, Redis,... your app parameters"
 
 Dear patchers! 
 
-Here's to introduce **Channel Bindings**. They offer a unified way to expose [public channels] from your app and make them accessible by the outside world. Think easy connections to Midi, OSC, OSCQuery, RCP, Redis,...
+Here's to introduce **Channel Bindings**. They offer a unified way to expose [Public Channels](../Introducing-PublicChannels/index.md) from your app and make them accessible by the outside world. Think easy connections to Midi, OSC, OSCQuery, RCP, Redis,...
 
 ## Adding Bindings
 There are two ways of adding bindings to a public channel:
-- Using a BindTo... node
 - Via the Channel Browsers "Binding" columns
+- Using a BindTo... node
 
 Either way you first need to establish the existence of a binding using already familiar nodes from packages like VL.IO.Midi, VL.IO.OSC,...
 

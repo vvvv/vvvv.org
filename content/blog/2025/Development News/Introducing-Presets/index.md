@@ -8,7 +8,7 @@ description: "A complete cueing solution for your apps parameters"
 
 Dear patchers!
 
-Here's to introduce **Presets and Transitions**. Using presets you can take snapshots of any combination of [public channels], store them in separate files and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
+Here's to introduce **Presets and Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../Introducing-PublicChannels/index.md), store them in separate files and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
 
 **screenshot**
 
@@ -29,4 +29,4 @@ Obviously, there is some more to transitions (curve, duration) you'll want to co
 
 ---
 
-Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you'll want to learn about [Bindings].
+Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you'll want to learn about [Bindings](../Introducing-Bindings/index.md).

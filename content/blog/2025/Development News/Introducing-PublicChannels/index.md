@@ -8,7 +8,7 @@ description: "An app wide parameter store"
 
 Dear patchers!
 
-Here's to introduce **Public Channels**. They allow you to define app-wide public named parameters. To get an overview of those, use the new Channel Browser: It lists and allows editing of all your public channels, allows you to store and re-call snapshots of their values using [Presets] and with just a few clicks allows you to expose them to the world via the idea of [Bindings].  
+Here's to introduce **Public Channels**. They allow you to define app-wide public named parameters. To get an overview of those, use the new Channel Browser: It lists and allows editing of all your public channels, allows you to store and re-call snapshots of their values using [Presets](../Introducing-Presets/index.md) and with just a few clicks allows you to expose them to the world via the idea of [Bindings](../Introducing-Bindings/index.md).  
 
 **screenshot**
 
@@ -35,4 +35,4 @@ There is only one way to delete a public channel: In the Channel Browser UI, fin
 
 **screeenshot**
 
-The next thing that comes to mind now is how it would be great if you could store snapshots of the current values of your public channels and later recall those. Enter: [Presets]. 
+The next thing that comes to mind now is how it would be great if you could store snapshots of the current values of your public channels and later recall those. Enter: [Presets](../Introducing-Presets/index.md). 
