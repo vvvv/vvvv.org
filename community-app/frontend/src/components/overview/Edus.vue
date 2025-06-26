@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { NTooltip, NSkeleton, NBadge } from "naive-ui"
 import { showEduProfile } from "../../utils.js"
 import { useEdusStore } from './EdusStore.js'
+import defaultLogo from '../../assets/defaultLogo.png'
 
 const loading = ref(false);
 const router = useRouter();
@@ -52,10 +53,10 @@ function showAll()
                 </template>
                 <template v-else-if="store">
                     <div v-if="store.items?.length > 0" v-for="item in store.items" class="text-center" :key="item.text">
-                        <a :href="item.url" @click="(event)=>showEduProfile(item.text, event)">
+                        <a :href="item.url" @click="(event)=>showEduProfile(item.text, event)" class="logo m-3">
                             <NTooltip trigger="hover" placement="top">
                                 <template #trigger>
-                                    <img :src="item.img" class="m-3" :alt="item.text"/>
+                                        <img :src="item.img || defaultLogo" :alt="item.text"/>
                                 </template>
                                 {{ item.text }}
                             </NTooltip>

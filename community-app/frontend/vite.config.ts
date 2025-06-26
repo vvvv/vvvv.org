@@ -35,7 +35,7 @@ export default defineConfig({
       },
       entryFileNames: `app.js`,
       chunkFileNames: 'app-chunk-[hash].js',
-      assetFileNames: 'app-asset-[hash].[ext]'
+      assetFileNames: '[name].[ext]'
     },
     treeshake: true
   },

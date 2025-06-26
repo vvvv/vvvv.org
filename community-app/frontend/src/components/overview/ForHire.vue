@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { NAvatar, NTooltip, NIcon, NSkeleton, NBadge } from "naive-ui"
 import { PersonOutline } from '@vicons/ionicons5'
 import { showUserProfile } from "../../utils.js"
-import { useForHireStore } from "./ForHireStore.js";
+import { useForHireStore } from "./ForHireStore.js"
 
 const router = useRouter();
 const loading = ref(false);
