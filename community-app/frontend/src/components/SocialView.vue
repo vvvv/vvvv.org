@@ -4,7 +4,7 @@ import { ensureHttps, stripHttp, getProperties, stripPrefix, ensurePrefix, strip
 import { NIcon } from 'naive-ui'
 import { logos } from "./logos/logos.js"
 
-defineProps({ social: Object })
+const props = defineProps(['social'])
 
 const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
@@ -43,22 +43,22 @@ function openLink (name, link) {
 }
 
 onMounted(()=>{
-	if  (social)
+	if  (props.social)
 	{
-		socialLinks.value = media.filter(({ key }) => social[key]).map(({ key, prefix }) => {	
+		socialLinks.value = media.filter(({ key }) => props.social[key]).map(({ key, prefix }) => {	
 				
 				let text;
 				let url;
 
 				if (key === 'website')
 				{
-					text = stripHttp(social.website)
-					url = ensureHttps(social.website)
+					text = stripHttp(props.social.website)
+					url = ensureHttps(props.social.website)
 				}
 				else
 				{
-					text = stripBeforeLastSlash(social[key]);
-					url = ensurePrefix(social[key], prefix);
+					text = stripBeforeLastSlash(props.social[key]);
+					url = ensurePrefix(props.social[key], prefix);
 				}
 
 				const logo = getLogo(key); 
@@ -71,7 +71,7 @@ onMounted(()=>{
 				}
 			});
 
-		socialFields.value = social.fields?.map(({ key, value }) => {	
+		socialFields.value = props.social.fields?.map(({ key, value }) => {	
 			const { text, url } = getURL(value);
 			return{
 				name: key,
