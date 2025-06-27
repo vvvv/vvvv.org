@@ -35,5 +35,5 @@ function toggleText()
         <span v-html="text"></span>
     </NPerformantEllipsis>
     <span v-else v-html="text"></span>
-    <div><a href="#" v-if="tooLong" @click.prevent="toggleText"> {{ buttonTexts[buttonState] }}</a></div>
+    <div class="mt-2"><a href="#" v-if="tooLong" @click.prevent="toggleText"> {{ buttonTexts[buttonState] }}</a></div>
 </template>

@@ -7,7 +7,7 @@ import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, clone, createAssetUrl, showUserProfile }  from '../../utils.js'
-import { NAvatar, NSelect, NDatePicker, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
+import { NAvatar, NSelect, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import StatusTag from '../StatusTag.vue'
 
@@ -37,19 +37,26 @@ const prepareData = ()=>{
     userpic.value = createAssetUrl(temp.user.userpic.id) + imageParams;
   }
 
-  if (temp.user?.beta_since)
-    temp.user.beta_since = Date.parse(temp.user.beta_since);
-
-  if (temp.user?.gamma_since)
-    temp.user.gamma_since = Date.parse(temp.user.gamma_since);
-
   form.value = {
     user: temp.user,
     social: temp.social
   }
 
-  betaYears.value = [];
+  const currentYear = new Date().getFullYear();
 
+  betaYears.value = range(2001, currentYear);
+  gammaYears.value = range (2015, currentYear);
+
+}
+
+function range(start, end) {
+  return Array.from({ length: end - start + 1 }, (_, i) => {
+    const year = start + i;
+    return {
+      label: year,
+      value: year
+    }
+  });
 }
  
 onMounted(()=>{  
@@ -267,14 +274,14 @@ const avatarButtonText = computed(()=>{
           <div class="col">
             <FormItem path="beta_since">
               <template #content>
-                <NDatePicker v-model:value="form.user.beta_since" type="year" clearable/>
+                <NSelect :options="betaYears" v-model:value="form.user.beta_since" clearable/>
               </template>
             </FormItem>
           </div>
           <div class="col">
             <FormItem path="gamma_since">
               <template #content>
-                <NDatePicker v-model:value="form.user.gamma_since" type="year" clearable/>
+                <NSelect :options="gammaYears" v-model:value="form.user.gamma_since" clearable/>
               </template>
             </FormItem>
           </div>

@@ -123,6 +123,10 @@ $orange-hover: #ee4b28;
 
   .profileContent
   {
+    p{
+      line-height: 1.7rem;
+    }
+
     a {
       text-decoration: underline;
       text-underline-offset: 0.2rem;

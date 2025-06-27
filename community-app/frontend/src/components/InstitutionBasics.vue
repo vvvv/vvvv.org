@@ -25,7 +25,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
         <Links class="links" :data="data"/>
 
-        <MaintainedBy class="maintained mt-4 pt-3 border-top" :data="data.owner"/>
+        <MaintainedBy class="maintained mt-4 pt-3 border-top d-none d-md-block" :data="data.owner"/>
 
     </div>
 </template>

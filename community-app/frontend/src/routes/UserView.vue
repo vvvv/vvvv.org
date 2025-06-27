@@ -131,10 +131,11 @@ const forumLink = computed(()=>
 
 const betagammauser = computed(()=>
 {
-  const result = {};
-  if (user.value.beta_since) result.beta = new Date(user.value.beta_since).getFullYear();
-  if (user.value.gamma_since) result.gamma = new Date(user.value.gamma_since).getFullYear();
-
+  const result = {
+    beta: user.value.beta_since,
+    gamma: user.value.gamma_since
+  };
+  
   return Object.keys(result).length > 0 ? result : null;
 })
 
@@ -154,12 +155,12 @@ const website = computed(()=>{
 })
 
 const hireCardVisible = computed(()=>{
-  return  hire.skills_other || 
-          hire.skills_vvvv || 
-          hire.contact || 
-          (hire.availableFor && hire.availableFor.length > 0) || 
-          hire.description || 
-          hire.image;
+  return  hire.value.skills_other || 
+          hire.value.skills_vvvv || 
+          hire.value.contact || 
+          (hire.value.availableFor && hire.value.availableFor.length > 0) || 
+          hire.value.description || 
+          hire.value.image;
  })
 
 
@@ -209,7 +210,7 @@ const hireCardVisible = computed(()=>{
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
-        <div class="col-12 col-md-6 col-lg-8 profileContent">
+        <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
 
           <div v-if="description" class="mb-4 description">
             <ClippedText :text="description" :maxLength="255" :clippedLength="100"/>

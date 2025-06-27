@@ -7,6 +7,7 @@ import { LocationOutline } from '@vicons/ionicons5'
 import { toHtml } from '../utils.js'
 import fetchBusinessProfile from './fetchBusinessProfile.js'
 import InstitutionBasics from '../components/InstitutionBasics.vue'
+import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
 const name = route.params.name;
@@ -51,8 +52,9 @@ onMounted(async ()=>
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
                     <InstitutionBasics class="mb-3" :data="company"/>
                 </div>
-                <div v-if="description" class="col-12 col-md-6 col-lg-8 profileContent">
+                <div v-if="description" class="col-12 col-md-6 col-lg-8 mt-3 mt-md-0 profileContent">
                     <p v-html="description"></p>
+                    <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="company.owner"/>
                 </div>
             </div>
         </div>
