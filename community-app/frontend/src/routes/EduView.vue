@@ -87,7 +87,7 @@ const url = computed(()=>{
 
                     </div>
                 </div>
-                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8">
+                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8 profileContent">
                     <p v-html="edu.description"></p>
                 </div>
             </div>

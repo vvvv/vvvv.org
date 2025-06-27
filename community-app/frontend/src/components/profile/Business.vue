@@ -107,6 +107,33 @@ async function validate(form)
     })
 }
 
+const submitVisible = async ()=>{
+  const body = 
+  {
+    name: form.value[0].name,
+    enabled: form.value[0].enabled
+  }
+
+  try {
+    updating.value = true;
+    const response = await post(Constants.EDIT_COMPANY, body);
+
+    if (response.code === 'SUCCESS')
+    {
+      data.companies[0] = form.value[0];
+
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
+  }
+  catch (error) {
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+  }
+  finally {
+    updating.value = false;
+  }
+}
+
 const submit = async () => {
 
   try{
@@ -119,6 +146,7 @@ const submit = async () => {
   }
 
   const formValue = clone(form.value[0]);
+  delete formValue.status;
 
   if (tempLogo.value == null)
   {
@@ -173,7 +201,7 @@ const logoButtonText = computed(()=>{
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Business publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible"/>
+          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible" @update:value="submitVisible" :disabled="!(companyExists || form[0].name)"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="companyExists && form[0].enabled">
         <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Business</a>
@@ -200,8 +228,8 @@ const logoButtonText = computed(()=>{
               <div class="col-12 col-xl-3" v-if="logo !== null">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-12 col-xl-9">
-                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+              <div class="col-12 col-xl-auto">
+                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader" type="company"/>
                 <NAlert v-if="tempLogo" title="Uploaded" type="success">
                         Press 'Submit' below to update the Logo.
                 </NAlert>

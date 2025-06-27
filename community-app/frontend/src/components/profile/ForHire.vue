@@ -43,6 +43,32 @@ const updateTempImage = (id) =>{
   tempImage.value = id
 }
 
+const submitVisible = async ()=>{
+  const body = 
+  {
+    available: form.value.available
+  }
+
+  try {
+    updating.value = true;
+    const response = await post(Constants.EDIT_HIRE, body);
+
+    if (response.result == 'Updated')
+    {
+      data.hire.available = form.value.available;
+
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
+  }
+  catch (error) {
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+  }
+  finally {
+    updating.value = false;
+  }
+}
+
 const submit = async () => {
 
   updating.value = true
@@ -126,7 +152,7 @@ const imageButtonText = computed(()=>{
     <div class="row justify-content-between">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Available for Hire</label>
-          <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
+          <n-switch v-model:value="form.available" placeholder="Available for Hire" @update:value="submitVisible"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.available && data.user.visible">
         <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
@@ -148,8 +174,8 @@ const imageButtonText = computed(()=>{
               <div class="col-6" v-if="image !== null">
                 <img :src="image" class="img-fluid"/>
               </div>
-              <div class="col-6">
-                <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
+              <div class="col-auto">
+                <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader" type="hire"/>
                 <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
                 <NAlert v-if="tempImage" title="Uploaded" type="success">
                     Press 'Submit' below to update the Image.

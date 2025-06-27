@@ -36,12 +36,9 @@ function showAll()
 <template>
         <div class="section">
             <div class="row pb-2 mb-2 border-bottom">
-                <div class="col-auto mr-auto">
-                    <h2>Professionals for Hire</h2>
-                </div>
-                <div class="col-auto">
-                    <a href="/forhire/" class="all" @click.prevent="showAll">For Hire</a>
-                    <NBadge v-if="!loading && store.total" :value="store.total" color="grey" class="ml-2"/>
+                <div class="col-auto d-flex">
+                    <a href="/forhire/" @click.prevent="showAll" class="pr-3"><h2>Professionals for Hire</h2></a>
+                    <NBadge v-if="!loading && store.total" :value="store.total" color="grey"/>
                 </div>
             </div>
             <div class="row pt-2 pb-2 mb-2 align-items-center">

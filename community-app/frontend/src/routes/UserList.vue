@@ -19,7 +19,10 @@ const state = reactive({
     totalCount: 0,
     pageSize: 10,
     filter: "",
-    sort: null
+    sort: {
+        order: "ascend",
+        columnKey: "date_created"
+    }
 })
 
 onMounted(()=>{
@@ -97,7 +100,7 @@ const loading = ref(true)
 const columns = [
     {
         key: 'avatar',
-        width: 60,
+        width: 30,
         render(row) {
             return h(
                 AvatarColumn,
@@ -247,7 +250,6 @@ async function fetch()
                 secondary 
                 @click="applyFilter" 
                 class="ml-xs-0 ml-2 mr-3 mb-md-2">Search</n-button>
-            <span class="text-muted" v-if="state.totalCount>0">Total: {{ state.totalCount }}</span>
         </div>
         <div class="ml-3 mr-3 ml-md-auto">
             <n-pagination 
@@ -267,6 +269,7 @@ async function fetch()
                 :bordered="false"
                 :columns="columnsRef"
                 :data="tableData"
+                :sorter="state.sort"
                 @update:sorter="s => state.sort = s"
                 class="userTable"
                 style="white-space: pre;"/>

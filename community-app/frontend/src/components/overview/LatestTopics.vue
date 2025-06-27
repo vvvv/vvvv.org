@@ -32,13 +32,12 @@ async function sync(force)
 <template>
     <div class="section">
         <div class="row pb-2 mb-2 border-bottom">
-            <div class="d-flex col-auto mr-auto">
-                <h2>Latest Forum Topics</h2>
-                <SyncButton v-if="!loading" @click="sync(true)" class="ml-3"/>
-                <span v-else class="ml-3">...</span>
+            <div class="d-flex col-auto">
+                <a :href="Constants.FORUM" @click.prevent="showAll" class="pr-3"><h2>Latest Forum Topics</h2></a>
             </div>
-            <div class="col-auto">
-                <a :href="Constants.FORUM" class="all">Forum</a>
+            <div class="col-1 ml-auto mr-2">
+                <SyncButton v-if="!loading" @click="sync(true)"/>
+                <span v-else>...</span>
             </div>
         </div>
         <div class="row pt-2">

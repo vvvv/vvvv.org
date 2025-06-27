@@ -33,5 +33,23 @@ export default Object({
         url: 'https://login.vvvv.org/',
         realm: 'vvvv', 
         clientId: 'weblogin'
-    }
+    },
+    FILE_TYPES: [
+        {
+            label: "gif",
+            mime: "image/gif"
+        },
+        {
+            label: "jpg",
+            mime: "image/jpeg"
+        },
+        {
+            label: "webp",
+            mime: "image/webp"
+        },
+        {
+            label: "png",
+            mime: "image/png"
+        }
+    ]
 })

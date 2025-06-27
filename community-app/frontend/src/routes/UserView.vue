@@ -11,9 +11,9 @@ import SocialView from '../components/SocialView.vue'
 import Location from '../components/Location.vue'
 import ClippedText from '../components/ClippedText.vue'
 import BetaGammaUser from '../components/BetaGammaUser.vue'
+import Maintains from '../components/Maintains.vue'
 
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
-import PartOf from '../components/PartOf.vue'
 
 
 const route = useRoute();
@@ -153,6 +153,15 @@ const website = computed(()=>{
     return url;
 })
 
+const hireCardVisible = computed(()=>{
+  return  hire.skills_other || 
+          hire.skills_vvvv || 
+          hire.contact || 
+          hire.availableFor.length > 0 || 
+          hire.description || 
+          hire.image;
+ })
+
 
 </script>
 
@@ -193,14 +202,14 @@ const website = computed(()=>{
 
               <Location v-if="location" :location="location"/>
 
-              <PartOf v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
+              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
 
               <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" v-if="social" />
 
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
-        <div class="col-12 col-md-6 col-lg-8">
+        <div class="col-12 col-md-6 col-lg-8 profileContent">
 
           <div v-if="description" class="mb-4 description">
             <ClippedText :text="description" :maxLength="255" :clippedLength="100"/>
@@ -208,7 +217,7 @@ const website = computed(()=>{
 
           <div v-if="hire && hire.available">
             <h4 class="h4">Available for hire</h4>
-            <div class="card">
+            <div class="card" v-if="hireCardVisible">
               <HireView :data="hire"/>
             </div>
           </div>

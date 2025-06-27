@@ -58,7 +58,7 @@ onMounted(()=>{
 				else
 				{
 					text = stripBeforeLastSlash(props.social[key]);
-					url = ensurePrefix(props.social[key], prefix);
+					url = ensureHttps(ensurePrefix(props.social[key], prefix));
 				}
 
 				const logo = getLogo(key); 

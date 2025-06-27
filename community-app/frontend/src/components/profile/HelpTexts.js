@@ -1,4 +1,18 @@
 const data = Object({
+    image:{
+        user:{
+            help:"webp, png, jpg; square; max 512x512"
+        },
+        company:{
+            help:"webp, png, jpg; any aspect ratio; max 512x512"
+        },
+        edu:{
+            help:"webp, png, jpg; any aspect ratio; max 512x512"
+        },
+        hire:{
+            help:"webp, png, jpg, gif; any aspect ratio; max 1024x1024"
+        }
+    },
     beta_since:{
         label: "Started using vvvv beta in",
         help: "The year you started using vvvv beta",
@@ -48,7 +62,7 @@ const data = Object({
     peertube: {
         label: "PeerTube",
         help: "Url to your PeerTube profile",
-        placeholder: "https://mypeertube.tv/c/me"
+        placeholder: "mypeertube.tv/c/me"
     },
     youtube: {
         label: "YouTube",
@@ -172,6 +186,11 @@ export function getValue(path, key, type)
     }
 
     return undefined;
+}
+
+export function getImageHelps(type)
+{
+    return data.image[type];
 }
 
 export default data;

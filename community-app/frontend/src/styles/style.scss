@@ -120,6 +120,15 @@ $orange-hover: #ee4b28;
   h3{
     margin-bottom: 0px;
   }
+
+  .profileContent
+  {
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+      text-decoration-color: #999;
+    }
+  }
 }
 
 .userView{
@@ -138,6 +147,10 @@ $orange-hover: #ee4b28;
 
 #profile{
   text-align: left;
+
+  .imageHelp{
+    font-size: 0.8rem;
+  }
 
   hr{
     max-width: 100%;

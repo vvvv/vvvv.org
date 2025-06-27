@@ -6,7 +6,7 @@ import SocialFields from './SocialFields.vue'
 import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
-import { post, createAssetUrl, makeFields, showEduProfile }  from '../../utils.js'
+import { post, createAssetUrl, makeFields, showEduProfile, clone }  from '../../utils.js'
 import { NAvatar, NAlert, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
@@ -16,7 +16,6 @@ const { data, constants } = defineProps(['data', 'constants']);
 
 const isChanged = ref(false);
 const formRef = ref(null);
-const formRef2 = ref(null);
 const form = ref(null);
 const logo = ref(null);
 const tempLogo = ref(null);
@@ -30,7 +29,6 @@ const emptyData = {
   name: "",
   description: "",
   status: 0,
-  website: "",
   social: {}
 }
 
@@ -58,8 +56,6 @@ const prepareData = ()=>{
   form.value = temp.edus
 }
 
-
-
 const rules = {
   name: {
     required: true,
@@ -81,9 +77,36 @@ const updateTempLogo = (id) =>{
   tempLogo.value = id
 }
 
+const submitVisible = async ()=>{
+  const body = 
+  {
+    name: form.value[0].name,
+    enabled: form.value[0].enabled
+  }
+
+  try {
+    updating.value = true;
+    const response = await post(Constants.EDIT_EDU, body);
+
+    if (response.code == 'SUCCESS')
+    {
+      data.edus[0] = form.value[0];
+
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
+  }
+  catch (error) {
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+  }
+  finally {
+    updating.value = false;
+  }
+}
+
 const submit = async () => {
 
-  const valid = await formRef2.value?.validate((errors) => {
+  const valid = await formRef.value?.validate((errors) => {
     if (errors) {
       emit('message', "Please fill requiered fields")
     }
@@ -92,7 +115,8 @@ const submit = async () => {
   if (!valid) return
 
   updating.value = true;
-  const formValue = { ...form.value[0]};
+  const formValue = clone(form.value[0]);
+  delete formValue.status;
 
   if (tempLogo.value == null)
   {
@@ -144,7 +168,7 @@ const logoButtonText = computed(()=>{
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Institution publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible"/>
+          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible" @update:value="submitVisible" :disabled="!(eduExists || form[0].name)"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="eduExists && form[0].enabled">
         <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">View Institution</a>
@@ -157,7 +181,7 @@ const logoButtonText = computed(()=>{
 
       <NForm
           v-if="form !== null"
-          ref="formRef2"
+          ref="formRef"
           :model="form[0]"
           :rules="rules"
           label-placement="left"
@@ -171,8 +195,8 @@ const logoButtonText = computed(()=>{
               <div class="col-12 col-xl-3" v-if="logo !== null">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-12 col-xl-9">
-                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+              <div class="col-12 col-xl-auto">
+                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader" type="edu"/>
                 <NAlert v-if="tempLogo" title="Uploaded" type="success">
                     Press 'Submit' below to update the Logo.
                 </NAlert>
@@ -187,7 +211,7 @@ const logoButtonText = computed(()=>{
             <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
           </n-form-item>
         </template>
-        <InputField path="name" v-if="!eduExists" type="edu"/>
+        <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
 
         <FormItem path="description" type="edu">
           <template #content>

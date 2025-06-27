@@ -68,10 +68,40 @@ const updateTempUserpic = (id) =>{
   tempUserpic.value = id
 }
 
+const submitVisible = async ()=>{
+  const body = 
+  {
+    user: {
+      email: form.value.user.email,
+      visible: form.value.user.visible
+    }
+  }
+
+  try {
+    updating.value = true;
+    const response = await post(Constants.EDIT_PERSONAL, body);
+
+    if (response.result == 'Updated')
+    {
+      data.user.visible = form.value.user.visible;
+
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
+  }
+  catch (error) {
+    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+  }
+  finally {
+    updating.value = false;
+  }
+}
+
 const submit = async () => {
 
   updating.value = true;
-  const formValue  = clone (form.value);
+  const formValue  = clone(form.value);
+  delete formValue.status;
   
   let discourse = {};
 
@@ -163,7 +193,7 @@ const avatarButtonText = computed(()=>{
     <div class="row justify-content-between">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Profile publicly visible</label>
-          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
+          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submitVisible"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible">
         <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
@@ -186,8 +216,8 @@ const avatarButtonText = computed(()=>{
                   <div class="col-12 col-xl-3" v-if="userpic !== null">
                     <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
                   </div>
-                  <div class="col-12 col-xl-9">
-                    <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
+                  <div class="col-12 col-xl-auto">
+                    <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader" type="user"/>
                     <NAlert v-if="tempUserpic" title="Uploaded" type="success">
                         Press 'Submit' below to update the Avatar.
                     </NAlert>
