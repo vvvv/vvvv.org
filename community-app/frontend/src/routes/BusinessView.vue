@@ -18,6 +18,13 @@ let description;
 
 onMounted(async ()=>
 {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
+
+
     try{
         loading.value = true;
         company.value = await fetchBusinessProfile (name);

@@ -232,7 +232,7 @@ async function fetch()
 
 <template>
     <div class="row mb-3">
-        <div class="col-12 mb-3 mb-md-0 col-md">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
             <n-input 
                 v-model:value="filterField" 
                 type="text" 
@@ -246,13 +246,15 @@ async function fetch()
                 strong 
                 secondary 
                 @click="applyFilter" 
-                class="ml-xs-0 ml-2">Search</n-button>
+                class="ml-xs-0 ml-2 mr-3 mb-md-2">Search</n-button>
+            <span class="text-muted" v-if="state.totalCount>0">Total: {{ state.totalCount }}</span>
         </div>
-        <div class="ml-3 ml-md-auto mr-3">
+        <div class="ml-3 mr-3 ml-md-auto">
             <n-pagination 
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
+                :page-size="state.pageSize"
                 :page-slot="5"
                 show-size-picker
                 :on-update:page="handlePageChange"
@@ -275,6 +277,7 @@ async function fetch()
                     :page="state.currentPage" 
                     :page-count="state.totalPages"
                     :page-sizes="pageSizes"
+                    :page-size="state.pageSize"
                     :page-slot="5"
                     show-size-picker
                     :on-update:page="handlePageChange"

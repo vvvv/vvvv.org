@@ -41,6 +41,12 @@ onMounted(async ()=>
 {
   loading.value = true;
 
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+
   try
   {
     // Fetch User Info

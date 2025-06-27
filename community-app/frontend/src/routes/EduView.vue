@@ -21,6 +21,13 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 onMounted(async ()=>
 {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
+
+
     try{
         loading.value = true;
         error.value = null;
