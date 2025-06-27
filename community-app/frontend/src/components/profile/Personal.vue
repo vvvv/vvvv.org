@@ -134,6 +134,8 @@ const submit = async () => {
       formValue.user.userpic = { id: formValue.user.userpic } // data has userpic as an object with id
       data.user = clone (formValue.user);
       data.social = clone (formValue.social);
+      
+      if (response.code === 'NEW') data.user.status = 0;
 
       if (uploader.value)
       {
@@ -197,7 +199,7 @@ const avatarButtonText = computed(()=>{
             </div>  
         </n-form-item>
 
-        <n-form-item label="Status" path="status" v-if="form.user && form.user.status !== undefined && form.user.status != '1'">
+        <n-form-item label="Status" path="status" v-if="form.user && form.user.status && form.user.status != '1'">
           <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
           <n-tag :bordered="false" type="error" v-else-if="form.user.status == '2'">Disabled</n-tag>
         </n-form-item>

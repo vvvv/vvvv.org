@@ -157,7 +157,7 @@ const hireCardVisible = computed(()=>{
   return  hire.skills_other || 
           hire.skills_vvvv || 
           hire.contact || 
-          hire.availableFor.length > 0 || 
+          (hire.availableFor && hire.availableFor.length > 0) || 
           hire.description || 
           hire.image;
  })

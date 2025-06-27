@@ -143,6 +143,8 @@ const submit = async () => {
     
       //Update fields in data
       data.companies[0] = formValue;
+      
+      if (response.code === 'NEW') data.companies[0].status = 0;
 
       if (uploader.value) 
       {
@@ -201,7 +203,7 @@ const logoButtonText = computed(()=>{
         <n-form-item label="Logo">
           <div class="container mx-0 px-0">
             <div class="row">
-              <div class="col-12 col-xl-3" v-if="logo !== null">
+              <div class="col-12 col-xl-3" v-if="logo">
                 <img :src="logo" class="img-fluid"/>
               </div>
               <div class="col-12 col-xl-auto">
@@ -215,7 +217,7 @@ const logoButtonText = computed(()=>{
         </n-form-item>
 
         <template v-if="companyExists">
-          <n-form-item label="Status" path="status" v-if="form[0].status != '1'">
+          <n-form-item label="Status" path="status" v-if="form[0].status && form[0].status != '1'">
             <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
             <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
           </n-form-item>

@@ -149,12 +149,12 @@ const imageButtonText = computed(()=>{
         <n-form-item label="Image">
           <div class="container mx-0 px-0">
             <div class="row">
-              <div class="col-6" v-if="image !== null">
+              <div class="col-6" v-if="image">
                 <img :src="image" class="img-fluid"/>
               </div>
               <div class="col-auto">
                 <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader" type="hire"/>
-                <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
+                <NButton @click="removeImage" v-if="image">Remove Image</NButton>
                 <NAlert v-if="tempImage" title="Uploaded" type="success">
                     Press 'Submit' below to update the Image.
                 </NAlert>
