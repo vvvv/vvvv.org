@@ -119,7 +119,7 @@ const submit = async () => {
   }
 
   try {
-    const response = await post(Constants.EDIT_BASICS, body);
+    const response = await post(Constants.EDIT_PERSONAL, body);
 
     if (response.result == 'Updated')
     {
@@ -145,7 +145,6 @@ const submit = async () => {
   }
   catch (error) {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-    console.log (error);
   }
   finally {
     updating.value = false;

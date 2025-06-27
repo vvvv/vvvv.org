@@ -98,29 +98,31 @@ export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop
 export const createAssetUrl = id => id && Constants.ASSETS + id
 
 export const post = async (url, payload) =>{
-  try{
-    const token = await getAccessToken()
-    const response = await fetch(url, {
-      headers: { 
-        "Content-Type": "application/json",
-        'Authorization': token
-      },
-      method: "POST",
-      body: JSON.stringify(payload)
-    })
-  
-    const json = await response.json()
-  
-    if (json.error)
-    {
-        throw new Error (data.response.error)
-    }
-    
-    return json
+
+  const token = await getAccessToken()
+  const response = await fetch(url, {
+    headers: { 
+      "Content-Type": "application/json",
+      'Authorization': token
+    },
+    method: "POST",
+    body: JSON.stringify(payload)
+  })
+
+  if (!response.ok)
+  {
+    const error = await response.json()
+    throw new Error (error)  
   }
-  catch(error) {
-    throw new Error (error)
+
+  const json = await response.json()
+
+  if (json.error)
+  {
+      throw new Error (data.response.error)
   }
+  
+  return json;
 }
 
 export const removeFile = async (id) =>{
