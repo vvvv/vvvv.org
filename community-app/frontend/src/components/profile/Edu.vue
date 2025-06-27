@@ -10,6 +10,7 @@ import { post, createAssetUrl, makeFields, showEduProfile, clone }  from '../../
 import { NAvatar, NAlert, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
+import StatusTag from '../StatusTag.vue'
 import { useEduListStore } from "../../routes/EduListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -36,7 +37,7 @@ const emptyData = {
 }
 
 const prepareData = ()=>{
-  const temp = { ...data };
+  const temp = clone(data);
 
   if (temp.edus?.length > 0)
   {
@@ -116,8 +117,11 @@ const submit = async () => {
     
       //Update fields in data
       data.edus[0] = formValue;
-      if (response.code === 'NEW') data.edus[0].status = 0;
-      
+      if (response.code === 'NEW') 
+      {
+        data.edus[0].status = form.value[0].status = '0';
+      }
+
       if (uploader.value) 
       {
         uploader.value.reset()
@@ -159,7 +163,7 @@ const logoButtonText = computed(()=>{
 
       <hr class="mt-1 mb-4"/>
 
-      <div class="h2" v-if="eduExists">{{ form[0].name }}</div>
+      <div class="h2 mb-3" v-if="eduExists">{{ form[0].name }}</div>
 
       <NForm
           v-if="form !== null"
@@ -187,12 +191,8 @@ const logoButtonText = computed(()=>{
           </div>
         </n-form-item>
 
-        <template v-if="eduExists">
-          <n-form-item label="Status" path="status" v-if="form[0].status && form[0].status != '1'">
-            <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
-            <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
-          </n-form-item>
-        </template>
+        <StatusTag :value="form[0].status"/>
+
         <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
 
         <FormItem path="description" type="edu">

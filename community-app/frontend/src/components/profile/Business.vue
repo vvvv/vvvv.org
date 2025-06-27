@@ -10,6 +10,7 @@ import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '.
 import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
+import StatusTag from '../StatusTag.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -41,7 +42,8 @@ const emptyCompany = {
 }
 
 const prepareData = ()=>{
-  const temp = { ...data };
+
+  const temp = clone(data);
 
   if (temp.companies?.length > 0)
   {
@@ -61,7 +63,7 @@ const prepareData = ()=>{
     companyExists.value = false;
   }
 
-  form.value = temp.companies
+  form.value = temp.companies;
 }
 
 const noSpaces = (rule, value) =>{
@@ -144,7 +146,10 @@ const submit = async () => {
       //Update fields in data
       data.companies[0] = formValue;
       
-      if (response.code === 'NEW') data.companies[0].status = 0;
+      if (response.code === 'NEW') 
+      {
+        data.companies[0].status = form.value[0].status = '0';
+      }
 
       if (uploader.value) 
       {
@@ -188,7 +193,7 @@ const logoButtonText = computed(()=>{
 
       <hr class="mt-1 mb-4"/>
 
-      <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
+      <div class="h2 mb-3" v-if="companyExists">{{ form[0].name }}</div>
 
 
       <NForm
@@ -216,13 +221,9 @@ const logoButtonText = computed(()=>{
           </div>
         </n-form-item>
 
-        <template v-if="companyExists">
-          <n-form-item label="Status" path="status" v-if="form[0].status && form[0].status != '1'">
-            <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
-            <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
-          </n-form-item>
-        </template>
-        <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+        <StatusTag :value="form[0].status"/>
+
+          <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
         <div class="row">
           <div class="col">
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>

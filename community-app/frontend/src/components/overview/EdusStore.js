@@ -31,7 +31,7 @@ export const useEdusStore = defineStore ('edus',{
 
 async function fetchEdus(){
         
-    const imageParamsLogos = "?withoutEnlargement=true&quality=90&fit=cover&height=40";
+    const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=45";
     const url = Constants.GET_EDUS+"?fields[]=name,logo&meta=filter_count";
 
     const limit = 8;

@@ -181,12 +181,10 @@ const imageButtonText = computed(()=>{
         <Editor v-model="form.skills_other" class="fullWidth" :limit="limit"/>
       </n-form-item>
 
-      <div class="form-group row mb-2">
-        <label class="col-sm-2 col-form-label">Available for</label>
-        <div class="col-sm-10">
-          <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
-        </div>
-      </div>
+      <n-form-item label="Available for">
+        <n-select v-model:value="form.availableFor" multiple :options="hireOptions" />
+      </n-form-item>
+
     </n-form>
     <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
   </template>

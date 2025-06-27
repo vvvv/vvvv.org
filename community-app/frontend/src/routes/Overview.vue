@@ -72,7 +72,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
         </div>
         <div class="col-12">
             <h4>Connections</h4>
-            <Connections class="mt-2 mb-4"/>
+            <Connections class="mt-3 mb-4"/>
         </div>
     </div>
 </template>

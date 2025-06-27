@@ -7,8 +7,9 @@ import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, clone, createAssetUrl, showUserProfile }  from '../../utils.js'
-import { NAvatar, NDatePicker, NAlert, NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
+import { NAvatar, NSelect, NDatePicker, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
+import StatusTag from '../StatusTag.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -22,6 +23,8 @@ const tempUserpic = ref(null);
 const updating = ref(false);
 const uploader = ref(null);
 const limit = 500;
+const betaYears = ref([]);
+const gammaYears = ref([]);
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
 
@@ -44,6 +47,8 @@ const prepareData = ()=>{
     user: temp.user,
     social: temp.social
   }
+
+  betaYears.value = [];
 
 }
  
@@ -134,8 +139,8 @@ const submit = async () => {
       formValue.user.userpic = { id: formValue.user.userpic } // data has userpic as an object with id
       data.user = clone (formValue.user);
       data.social = clone (formValue.social);
-      
-      if (response.code === 'NEW') data.user.status = 0;
+
+      if (response.code === 'NEW') data.user.status = form.value.user.status = '0';
 
       if (uploader.value)
       {
@@ -199,10 +204,8 @@ const avatarButtonText = computed(()=>{
             </div>  
         </n-form-item>
 
-        <n-form-item label="Status" path="status" v-if="form.user && form.user.status && form.user.status != '1'">
-          <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
-          <n-tag :bordered="false" type="error" v-else-if="form.user.status == '2'">Disabled</n-tag>
-        </n-form-item>
+        <StatusTag :value="form.user?.status"/>
+
         <div class="row">
           <div class="col-12 col-lg-6">
             <n-form-item label="Username" path="username">
