@@ -6,7 +6,7 @@ import FieldEditor from './FieldEditor.vue'
 import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
-import { NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { NButton, NAlert, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 
@@ -151,6 +151,9 @@ const imageButtonText = computed(()=>{
               <div class="col-6">
                 <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader"/>
                 <NButton @click="removeImage" v-if="image !== null">Remove Image</NButton>
+                <NAlert v-if="tempImage" title="Uploaded" type="success">
+                    Press 'Submit' below to update the Image.
+                </NAlert>
               </div>
             </div>
           </div>

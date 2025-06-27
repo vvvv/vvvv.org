@@ -7,7 +7,7 @@ import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
 import { post, createAssetUrl, makeFields, showEduProfile }  from '../../utils.js'
-import { NAvatar, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { NAvatar, NAlert, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 
@@ -173,6 +173,9 @@ const logoButtonText = computed(()=>{
               </div>
               <div class="col-12 col-xl-9">
                 <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+                <NAlert v-if="tempLogo" title="Uploaded" type="success">
+                    Press 'Submit' below to update the Logo.
+                </NAlert>
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
 import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
-import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
+import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import { useBusinessListStore } from "../../routes/businessListStore.js";
@@ -202,6 +202,9 @@ const logoButtonText = computed(()=>{
               </div>
               <div class="col-12 col-xl-9">
                 <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+                <NAlert v-if="tempLogo" title="Uploaded" type="success">
+                        Press 'Submit' below to update the Logo.
+                </NAlert>
               </div>
             </div>
           </div>
