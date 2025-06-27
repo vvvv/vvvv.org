@@ -68,41 +68,12 @@ const updateTempUserpic = (id) =>{
   tempUserpic.value = id
 }
 
-const submitVisible = async ()=>{
-  const body = 
-  {
-    user: {
-      email: form.value.user.email,
-      visible: form.value.user.visible
-    }
-  }
-
-  try {
-    updating.value = true;
-    const response = await post(Constants.EDIT_PERSONAL, body);
-
-    if (response.result == 'Updated')
-    {
-      data.user.visible = form.value.user.visible;
-
-      emit('updateData', data);
-      emit('message', { type: 'success', string: response.result});
-    }
-  }
-  catch (error) {
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-  }
-  finally {
-    updating.value = false;
-  }
-}
-
 const submit = async () => {
 
   updating.value = true;
   const formValue  = clone(form.value);
   delete formValue.status;
-  
+
   let discourse = {};
 
   if (tempUserpic.value == null)
@@ -151,7 +122,7 @@ const submit = async () => {
   try {
     const response = await post(Constants.EDIT_PERSONAL, body);
 
-    if (response.result == 'Updated')
+    if (response.code == 'SUCCESS' || 'NEW')
     {
       if (tempUserpic.value !== null)
       {
@@ -193,7 +164,7 @@ const avatarButtonText = computed(()=>{
     <div class="row justify-content-between">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Profile publicly visible</label>
-          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submitVisible"/>
+          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submit"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible">
         <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>

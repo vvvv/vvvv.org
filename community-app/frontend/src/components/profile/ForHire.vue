@@ -7,8 +7,11 @@ import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
 import { NButton, NAlert, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
+import { useForHireListStore } from "../../routes/ForHireListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
+
+const store = useForHireListStore();
 
 const { data, constants } = defineProps(['data', 'constants']);
 const hireOptions = ref([]);
@@ -43,32 +46,6 @@ const updateTempImage = (id) =>{
   tempImage.value = id
 }
 
-const submitVisible = async ()=>{
-  const body = 
-  {
-    available: form.value.available
-  }
-
-  try {
-    updating.value = true;
-    const response = await post(Constants.EDIT_HIRE, body);
-
-    if (response.result == 'Updated')
-    {
-      data.hire.available = form.value.available;
-
-      emit('updateData', data);
-      emit('message', { type: 'success', string: response.result});
-    }
-  }
-  catch (error) {
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-  }
-  finally {
-    updating.value = false;
-  }
-}
-
 const submit = async () => {
 
   updating.value = true
@@ -84,28 +61,29 @@ const submit = async () => {
   }
 
   try{
-    const response = await post(Constants.EDIT_HIRE, formValue)
+      const response = await post(Constants.EDIT_HIRE, formValue)
 
-    if (response.result == 'Updated')
-    {
-      // Update Data
-      data.hire = formValue
-
-      if (tempImage.value !== null)
+      if (response.code === 'SUCCESS')
       {
-        image.value = createAssetUrl(tempImage.value)
-        form.value.image = tempImage.value
-        tempImage.value = null
-      }
+        // Update Data
+        data.hire = formValue
 
-      if (uploader.value)
-      {
-        uploader.value.reset() 
-      }
+        if (tempImage.value !== null)
+        {
+          image.value = createAssetUrl(tempImage.value)
+          form.value.image = tempImage.value
+          tempImage.value = null
+        }
 
-      emit('updateData', data)
-      emit('message', { type: 'success', string: 'Updated'})
-    }
+        if (uploader.value)
+        {
+          uploader.value.reset() 
+        }
+
+        emit('updateData', data)
+        emit('message', { type: 'success', string: response.result})
+        store.fetch(true);
+      }
   }
   catch (error) {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'})
@@ -152,7 +130,7 @@ const imageButtonText = computed(()=>{
     <div class="row justify-content-between">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Available for Hire</label>
-          <n-switch v-model:value="form.available" placeholder="Available for Hire" @update:value="submitVisible"/>
+          <n-switch v-model:value="form.available" placeholder="Available for Hire" @update:value="submit"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.available && data.user.visible">
         <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>

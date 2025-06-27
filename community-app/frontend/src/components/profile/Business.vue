@@ -10,7 +10,7 @@ import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '.
 import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
-import { useBusinessListStore } from "../../routes/businessListStore.js";
+import { useBusinessListStore } from "../../routes/BusinessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -107,33 +107,6 @@ async function validate(form)
     })
 }
 
-const submitVisible = async ()=>{
-  const body = 
-  {
-    name: form.value[0].name,
-    enabled: form.value[0].enabled
-  }
-
-  try {
-    updating.value = true;
-    const response = await post(Constants.EDIT_COMPANY, body);
-
-    if (response.code === 'SUCCESS')
-    {
-      data.companies[0] = form.value[0];
-
-      emit('updateData', data);
-      emit('message', { type: 'success', string: response.result});
-    }
-  }
-  catch (error) {
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-  }
-  finally {
-    updating.value = false;
-  }
-}
-
 const submit = async () => {
 
   try{
@@ -159,25 +132,28 @@ const submit = async () => {
 
   try{
     const response = await post(Constants.EDIT_COMPANY, formValue)
-  
-    if (tempLogo.value)
-    {
-      logo.value = createAssetUrl(tempLogo.value);
-      tempLogo.value = null;
-    }
-  
-    //Update fields in data
-    data.companies[0] = formValue;
-
-    if (uploader.value) 
-    {
-      uploader.value.reset()
-    }
-  
-    store.fetch(true);
     
-    emit('updateData', data);
-    emit('message', { type: 'success', string: 'Updated'});
+    if (response.code === 'SUCCESS' || 'NEW')
+    {
+      if (tempLogo.value)
+      {
+        logo.value = createAssetUrl(tempLogo.value);
+        tempLogo.value = null;
+      }
+    
+      //Update fields in data
+      data.companies[0] = formValue;
+
+      if (uploader.value) 
+      {
+        uploader.value.reset()
+      }
+    
+      store.fetch(true);
+      
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
   }
   catch (error)
   {
@@ -201,7 +177,7 @@ const logoButtonText = computed(()=>{
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Business publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible" @update:value="submitVisible" :disabled="!(companyExists || form[0].name)"/>
+          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible" @update:value="submit" :disabled="!(companyExists || form[0].name)"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="companyExists && form[0].enabled">
         <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Business</a>

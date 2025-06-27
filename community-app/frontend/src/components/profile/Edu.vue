@@ -10,9 +10,12 @@ import { post, createAssetUrl, makeFields, showEduProfile, clone }  from '../../
 import { NAvatar, NAlert, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
+import { useEduListStore } from "../../routes/EduListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
+
+const store = useEduListStore();
 
 const isChanged = ref(false);
 const formRef = ref(null);
@@ -77,33 +80,6 @@ const updateTempLogo = (id) =>{
   tempLogo.value = id
 }
 
-const submitVisible = async ()=>{
-  const body = 
-  {
-    name: form.value[0].name,
-    enabled: form.value[0].enabled
-  }
-
-  try {
-    updating.value = true;
-    const response = await post(Constants.EDIT_EDU, body);
-
-    if (response.code == 'SUCCESS')
-    {
-      data.edus[0] = form.value[0];
-
-      emit('updateData', data);
-      emit('message', { type: 'success', string: response.result});
-    }
-  }
-  catch (error) {
-    emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-  }
-  finally {
-    updating.value = false;
-  }
-}
-
 const submit = async () => {
 
   const valid = await formRef.value?.validate((errors) => {
@@ -130,22 +106,27 @@ const submit = async () => {
   try{
     const response = await post(Constants.EDIT_EDU, formValue)
   
-    if (tempLogo.value)
+    if (response.code == 'SUCCESS' || 'NEW')
     {
-      logo.value = createAssetUrl(tempLogo.value);
-      tempLogo.value = null;
-    }
-  
-    //Update fields in data
-    data.edus[0] = formValue;
+      if (tempLogo.value)
+      {
+        logo.value = createAssetUrl(tempLogo.value);
+        tempLogo.value = null;
+      }
+    
+      //Update fields in data
+      data.edus[0] = formValue;
 
-    if (uploader.value) 
-    {
-      uploader.value.reset()
+      if (uploader.value) 
+      {
+        uploader.value.reset()
+      }
+    
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+      store.fetch(true);
     }
-  
-    emit('updateData', data);
-    emit('message', { type: 'success', string: 'Updated'});
+
   }
   catch (error)
   {
@@ -168,7 +149,7 @@ const logoButtonText = computed(()=>{
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Institution publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible" @update:value="submitVisible" :disabled="!(eduExists || form[0].name)"/>
+          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible" @update:value="submit" :disabled="!(eduExists || form[0].name)"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="eduExists && form[0].enabled">
         <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">View Institution</a>
