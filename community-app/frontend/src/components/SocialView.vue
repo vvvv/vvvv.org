@@ -61,6 +61,12 @@ onMounted(()=>{
 					url = ensureHttps(ensurePrefix(props.social[key], prefix));
 				}
 
+				// if (prefix)
+				// {
+				// 	text = stripBeforeLastSlash(props.social[key]);
+				// 	url = ensureHttps(ensurePrefix(text, prefix));
+				// }
+
 				const logo = getLogo(key); 
 			
 				return {
