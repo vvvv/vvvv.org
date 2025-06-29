@@ -1,16 +1,16 @@
 const data = Object({
     image:{
         user:{
-            help:"webp, png, jpg; square; max 512x512"
+            help:"webp, png, jpg; square; max 512x512; max 1MB"
         },
         company:{
-            help:"webp, png, jpg; any aspect ratio; max 512x512"
+            help:"webp, png, jpg; any aspect ratio; max 512x512; max 1MB"
         },
         edu:{
-            help:"webp, png, jpg; any aspect ratio; max 512x512"
+            help:"webp, png, jpg; any aspect ratio; max 512x512; max 1MB"
         },
         hire:{
-            help:"webp, png, jpg, gif; any aspect ratio; max 1024x1024"
+            help:"webp, png, jpg, gif; any aspect ratio; max 1024x1024; max 1MB"
         }
     },
     beta_since:{

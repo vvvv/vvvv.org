@@ -174,7 +174,7 @@ const imageButtonText = computed(()=>{
       <n-form-item label="Description">
         <Editor v-model="form.description" class="fullWidth" :limit="limit"/>
       </n-form-item>
-      <n-form-item label="VVVV skills">
+      <n-form-item label="vvvv skills">
         <Editor v-model="form.skills_vvvv" class="fullWidth" :limit="limit"/>
       </n-form-item>
       <n-form-item label="Other skills">

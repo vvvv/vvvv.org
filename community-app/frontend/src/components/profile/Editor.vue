@@ -40,11 +40,14 @@ watch (model, (newValue)=>{
 </script>
 
 <template>
+  <div class="container">
     <div class="row">
-      <div class="col px-0">
-        <n-input type="textarea" :maxlength="limit" v-model:value="model" show-count clearable class="field-input"/>
+      <div class="col px-0 d-flex">
+        <n-input type="textarea" :maxlength="limit" v-model:value="model" rows=3 show-count clearable />
       </div>
-        <div class="col overflow-auto rounded field-preview py-1 text-muted bg-light" v-html="html">
-      </div>
+        <div class="col d-flex overflow-auto rounded field-preview py-1 text-muted bg-light">
+          <div v-html="html"></div>
+        </div>
     </div>
+  </div>
 </template>

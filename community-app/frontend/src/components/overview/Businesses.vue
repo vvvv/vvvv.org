@@ -39,7 +39,7 @@ function showAll()
     <div class="section">
         <div class="row pb-2 mb-2 border-bottom">
             <div class="col-auto mr-auto d-flex">
-                <a href="/businesses/" @click.prevent="showAll" class="pr-3"><h2>Businesses using VVVV</h2></a>
+                <a href="/businesses/" @click.prevent="showAll" class="pr-3"><h2>Businesses using vvvv</h2></a>
                 <NBadge v-if="!loading && store.total" :value="store.total" color="grey"/>
             </div>
         </div>

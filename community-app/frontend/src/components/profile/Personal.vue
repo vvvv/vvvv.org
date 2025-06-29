@@ -111,11 +111,6 @@ const submit = async () => {
   if (formValue.user?.userpic && (formValue.user.userpic != data.user?.userpic))
     discourse.avatar = true;
 
-  if (formValue.user?.gamma_since)
-    formValue.user.gamma_since = new Date(formValue.user.gamma_since).toISOString(); 
-  if (formValue.user?.beta_since)
-    formValue.user.beta_since = new Date(formValue.user.beta_since).toISOString();   
-
   const body = {
     user: formValue.user,
     social: formValue.social

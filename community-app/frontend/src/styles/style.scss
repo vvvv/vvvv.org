@@ -12,15 +12,6 @@ $orange-hover: #ee4b28;
     text-decoration-color: #bbb;
   }
 
-  // .logo {
-  //   filter: grayscale(100%) opacity(70%);
-
-  //   &:hover{
-  //     filter: grayscale(0%) opacity(100%);
-  //     transition: filter 0.5s;
-  //   }
-  // }
-
   .logo {
     height: 45px;
     img{
@@ -177,10 +168,6 @@ $orange-hover: #ee4b28;
     font-size: 0.9rem;
   }
 
-  .field-input{
-    height: 8rem;
-  }
-
   .fullWidth{
     width: 100%;
     margin-left: inherit;
@@ -189,7 +176,6 @@ $orange-hover: #ee4b28;
 
   .field-preview{
     font-size: 0.9rem;
-    max-height: 8rem;
 
     p {
       font-size: inherit;
