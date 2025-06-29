@@ -13,6 +13,6 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: ./vvvv.org/build.sh
-          host: 'forum.vvvv.org'
+          host: 'vvvv.org'
           username: vvvv
           privateKey: ${{ secrets.SSH_PRIVATE_KEY}}
