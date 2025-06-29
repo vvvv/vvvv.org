@@ -23,17 +23,17 @@ Moderated by Randall Vasquez<br>
 Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)  
 
 {{< box >}}
-## IRL
-### Berlin
+## Berlin
 The NODE Institute<br>
 Wipperstrasse 13, 12055 Berlin<br>
 Doors open: 18:30
+**[RSVP here](https://thenodeinstitute.org/event/29-vvvv-worldwide-meetup/)**
 
 ## Online
-Zoom and YouTube links will be shared shortly before the meetup.
-<!--
-[Watch via Youtube](https://youtube.com/live/rXaUijAvuWw)  
-[Join via Zoom](https://us02web.zoom.us/j/87338653360?pwd=QpxHpGBZLhtASLT5ro00rUsZLfIsZP.1) -->
+[Watch via Youtube](https://www.youtube.com/live/Npr0K63bKZc)
+The Zoom link will be shared shortly before the meetup
+<!--[Join via Zoom](https://us02web.zoom.us/j/87338653360?pwd=QpxHpGBZLhtASLT5ro00rUsZLfIsZP.1) -->
+<!-- Zoom and YouTube links will be shared shortly before the meetup. -->
 {{< /box >}}
 
 ##  Want to share your work?
