@@ -136,7 +136,7 @@ const betagammauser = computed(()=>
     gamma: user.value.gamma_since
   };
   
-  return Object.keys(result).length > 0 ? result : null;
+  return result.beta || result.gamma ? result : null;
 })
 
 const website = computed(()=>{
