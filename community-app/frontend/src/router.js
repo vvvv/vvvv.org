@@ -75,7 +75,7 @@ const routes = [
         meta: { tabName: 'Educational Institutions' }
     },
     {
-        path: '/community/edit/',
+        path: '/edit-profile/',
         name: 'Edit Profile',
         component: EditUser,
         beforeEnter: requireAuth,

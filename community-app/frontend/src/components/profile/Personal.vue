@@ -266,14 +266,14 @@ const avatarButtonText = computed(()=>{
         <SocialFields v-model:value="form.social" type="user"/>
 
         <div class="row">
-          <div class="col">
+          <div class="col-12 col-md-6">
             <FormItem path="beta_since">
               <template #content>
                 <NSelect :options="betaYears" v-model:value="form.user.beta_since" clearable/>
               </template>
             </FormItem>
           </div>
-          <div class="col">
+          <div class="col-12 col-md-6">
             <FormItem path="gamma_since">
               <template #content>
                 <NSelect :options="gammaYears" v-model:value="form.user.gamma_since" clearable/>
