@@ -47,7 +47,7 @@ function showAll()
                         <NSkeleton v-for="n in 4" :key="n" :width="50" circle size="medium" class="m-2"/>
                     </template>
                     <template v-else-if="store">
-                        <div v-for="user in store.items" :key="user.text" class="m-2">
+                        <div v-if="store.items?.length > 0" v-for="user in store.items" :key="user.text" class="mx-3">
                             <a :href="'/user/'+user.text" @click="(event)=>showUserProfile(user.text, event)">
                                 <NTooltip trigger="hover" placement="top">
                                     <template #trigger>
@@ -67,6 +67,9 @@ function showAll()
                             </a>
                         </div>
                     </template>
+                    <div v-else>
+                        Something went wrong.
+                    </div>
                 </div>
             </div>
         </div>

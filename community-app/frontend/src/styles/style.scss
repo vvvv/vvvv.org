@@ -69,17 +69,18 @@ $orange-hover: #ee4b28;
 
 #UsersForHire{
   .card{
-
+    
+    color: inherit;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    
+    border: 0px;
+    
     .imageContainer
     {
       overflow: hidden;
     }
-
-    color: inherit;
-    cursor: pointer;
-
-    border: 0px;
-
 
     &:hover{
       background-color: #eee;
@@ -88,9 +89,6 @@ $orange-hover: #ee4b28;
       }
     }
    
-    border-radius: 3px;
-    background-color: #f6f6f6;
-
     img{
       transition: transform 0.1s ease;
 
@@ -104,6 +102,11 @@ $orange-hover: #ee4b28;
 
 #community
 {
+  .profile-logo{
+    width: 120px;
+    height: 120px;
+  }
+
   .userTable{
     white-space: pre;
   }
@@ -259,6 +262,7 @@ $orange-hover: #ee4b28;
 .logoListView{
 
   .name{
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
   }
 

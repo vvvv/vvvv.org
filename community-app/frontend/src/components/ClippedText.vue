@@ -31,7 +31,7 @@ function toggleText()
 </script>
 
 <template>
-    <NPerformantEllipsis line-clamp="3" tooltip=false v-if="tooLong && buttonState == 0">
+    <NPerformantEllipsis line-clamp="3" :tooltip=false v-if="tooLong && buttonState == 0">
         <span v-html="text"></span>
     </NPerformantEllipsis>
     <span v-else v-html="text"></span>

@@ -1,9 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60">
-    <path style="opacity:0;fill:#fea72b;fill-opacity:1;stroke:none;stroke-opacity:0" d="M-5.801-6.164h72.69v72.871h-72.69z" />
-    <g data-name="Calque 2">
-        <g data-name="header">
-            <path d="M26.58 27.06q0 8-4.26 12.3a12.21 12.21 0 0 1-9 3.42 12.21 12.21 0 0 1-9-3.42Q0 35.1 0 27.06q0-8.04 4.26-12.3a12.21 12.21 0 0 1 9-3.42 12.21 12.21 0 0 1 9 3.42q4.32 4.24 4.32 12.3zM13.29 17q-5.67 0-5.67 10.06t5.67 10.08q5.71 0 5.71-10.08T13.29 17z" style="fill:#3a384c;fill-opacity:1" transform="translate(14.627 5.256) scale(1.15671)" />
-            <path d="M9 6.78a7.37 7.37 0 0 1-.6-3 7.37 7.37 0 0 1 .6-3A8.09 8.09 0 0 1 12.83 0a7.05 7.05 0 0 1 3.69.84 7.37 7.37 0 0 1 .6 3 7.37 7.37 0 0 1-.6 3 7.46 7.46 0 0 1-3.87.84A6.49 6.49 0 0 1 9 6.78z" style="fill:#fff" transform="translate(14.627 5.256) scale(1.15671)" />
-        </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="60"
+   height="60"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="Mobilizon-logo.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="12.7"
+     inkscape:cx="29.96063"
+     inkscape:cy="30"
+     inkscape:current-layer="g3" />
+  <path
+     style="opacity:0;fill:#fea72b;fill-opacity:1;stroke:none;stroke-opacity:0"
+     d="M-5.801-6.164h72.69v72.871h-72.69z"
+     id="path1" />
+  <g
+     data-name="Calque 2"
+     id="g4">
+    <g
+       data-name="header"
+       id="g3">
+      <path
+         id="path2"
+         style="fill:#3a384c;fill-opacity:1"
+         d="M 12.829315 -0.00012157326 A 8.09 8.09 0 0 0 8.9997574 0.77997348 A 7.37 7.37 0 0 0 8.4003337 3.780469 A 7.37 7.37 0 0 0 8.9997574 6.7792759 A 6.49 6.49 0 0 0 12.650332 7.6792557 A 7.46 7.46 0 0 0 16.520414 6.8400625 A 7.37 7.37 0 0 0 17.119838 3.8395671 A 7.37 7.37 0 0 0 16.520414 0.84076011 A 7.05 7.05 0 0 0 12.829315 -0.00012157326 z M 13.259887 11.339962 A 12.21 12.21 0 0 0 4.260089 14.759209 C 1.4200918 17.599206 -4.0524418e-05 21.700064 -4.0524418e-05 27.060059 C -4.0524418e-05 32.420053 1.4391899 36.519223 4.3191871 39.35922 A 12.21 12.21 0 0 0 13.320674 42.780156 A 12.21 12.21 0 0 0 22.320471 39.35922 C 25.160469 36.492556 26.580601 32.393387 26.580601 27.060059 C 26.580601 21.686731 25.139682 17.585873 22.259685 14.759209 A 12.21 12.21 0 0 0 13.259887 11.339962 z M 13.29028 16.999872 C 17.096943 16.986539 18.999158 20.340066 18.999158 27.060059 C 18.999158 33.780052 17.096943 37.140508 13.29028 37.140508 C 9.510284 37.127175 7.6202387 33.766719 7.6202387 27.060059 C 7.6202387 20.353399 9.510284 16.999872 13.29028 16.999872 z "
+         transform="translate(14.627 5.256) scale(1.15671)" />
     </g>
+  </g>
 </svg>

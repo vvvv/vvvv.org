@@ -17,11 +17,14 @@ onMounted(()=>{
     if (data.hire) 
     {
         hire.value = {
+            username: data.username,
+            name: data.name,
             description: toHtml(data.hire.description),
             contact: data.hire.contact,
             skills_vvvv: toHtml(data.hire.skills_vvvv),
             skills_other: toHtml(data.hire.skills_other),
             image: data.hire.image ? createAssetUrl(data.hire.image) : null,
+            location: data.location,
             availableFor: data.hire.availableFor
                 ? data.hire.availableFor.map(item => item.AvailableFor_Options_id ? item.AvailableFor_Options_id.value : "")
                 : []
@@ -33,23 +36,23 @@ onMounted(()=>{
 
 <template>
     <template v-if="hire">
-        <div class="card mb-5" @click="(event)=>showUserProfile(data.username, event)">
+        <div class="card h-100" @click="(event)=>showUserProfile(hire.username, event)">
             <div class="imageContainer">
-                <img v-if="hire.image" :src="hire.image" class="card-img-top" :alt="data.username" />
+                <img v-if="hire.image" :src="hire.image" class="card-img-top" :alt="hire.username" />
             </div>
             <div class="card-body">
-                <h4 class="card-title">{{ data.username }}</h4>
-                <p class="card-text"> {{ data.title }}</p>
-                <NPerformantEllipsis line-clamp="3" tooltip=false>
+                <h4 class="card-title">{{ hire.name ?? hire.username }}</h4>
+                <p class="card-text text-muted" v-if="hire.name">{{ hire.username }}</p>
+                <NPerformantEllipsis v-if="hire.skills_vvvv" line-clamp="3" :tooltip=false class="card-text">
                     <span v-html="hire.skills_vvvv"></span>
                 </NPerformantEllipsis>
-                <div v-if="hire.availableFor.length > 0" class="mt-2">
+                <div v-if="hire.availableFor.length > 0" class="mt-2 card-text">
                     <NSpace>
                         <NTag v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
                     </NSpace>
                 </div>
-                <Location :location="data.location" class="border-top pt-2 mt-3"/>
             </div>
+            <Location :location="hire.location" class="card-footer"/>
         </div>
     </template>
 </template>

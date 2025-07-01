@@ -27,8 +27,8 @@ onMounted( async ()=> {
     <NSpin :show="loading">
         <div v-if="!loading && store">
             <p v-if="store.total > 0">{{ store.total }} professional vvvv users available for hire:</p>
-            <div class="row">
-                <div id="UsersForHire" class="col-md-6 col-lg-4 col-12" v-for="user in store.items" :key="user.username">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div id="UsersForHire" class="col mb-4" v-for="user in store.items" :key="user.username">
                     <ForHireCard :data="user"/>
                 </div>
             </div>

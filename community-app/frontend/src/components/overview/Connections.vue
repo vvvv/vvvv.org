@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue';
-import { connections } from '../connections.js'
-import { logos } from './logos/logos.js'
-import ConnectionsItem from './ConnectionsItem.vue';
+import { connections } from '../../connections.js'
+import { logos } from '../logos/logos.js'
+import ConnectionsItem from '../ConnectionsItem.vue';
 
 const sortedConnections = computed(()=> {
     const c = [...connections].sort((a, b) => (a.order ?? 100) - (b.order ?? 100));
@@ -10,10 +10,10 @@ const sortedConnections = computed(()=> {
         c.children?.forEach (connection =>{
             if (!connection.logo && connection.name)
             {
-                const element = logos.find (l=> l.name === connection.name.toLowerCase());
+                const element = logos[connection.name.toLowerCase()];
                 if (element)
                 {
-                    connection.icon = element.logo;
+                    connection.icon = element;
                 }
             }
         })
@@ -24,7 +24,5 @@ const sortedConnections = computed(()=> {
 </script>
 
 <template>
-    <div class="row socialHeader">
-        <ConnectionsItem v-for="connection in sortedConnections" :item="connection" :key="connection.name"/>
-    </div>
+    <ConnectionsItem v-for="connection in sortedConnections" :item="connection" :key="connection.name" class="col mb-2"/>
 </template>
