@@ -213,7 +213,7 @@ const hireCardVisible = computed(()=>{
         <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
 
           <div v-if="description" class="mb-4 description">
-            <ClippedText :text="description" :maxLength="255" :clippedLength="100"/>
+            <p v-html="description"></p>
           </div>
 
           <div v-if="hire && hire.available">

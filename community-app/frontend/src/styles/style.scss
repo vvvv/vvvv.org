@@ -103,8 +103,8 @@ $orange-hover: #ee4b28;
 #community
 {
   .profile-logo{
-    width: 120px;
-    height: 120px;
+    max-width: 150px;
+    min-height: 150px;
   }
 
   .userTable{

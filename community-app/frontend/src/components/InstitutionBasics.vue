@@ -13,7 +13,9 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 <template>
     <div>
-        <img :src="data.logo || defaultLogo" alt="logo" class="profile-logo img-fluid"/>
+        <div class="d-flex profile-logo align-items-center">
+            <img :src="data.logo || defaultLogo" alt="logo" class="img-fluid"/>
+        </div>
         <div class="my-3">
             <h5>{{ data.name }}</h5>
         </div>                     

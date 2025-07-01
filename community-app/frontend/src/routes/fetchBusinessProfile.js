@@ -1,7 +1,7 @@
 import Constants from '../constants'
 import { createAssetUrl } from '../utils'
 
-const IMAGE_PARAMS = '?withoutEnlargement=true&quality=90&fit=cover&width=120';
+const IMAGE_PARAMS = '?withoutEnlargement=true&quality=90&fit=cover&width=150';
 const URL = Constants.BASEURL+`items/Company?fields=*,social.*,owner.username&filter[name][_eq]=`;
 
 export default async function fetchBusinessProfile ( name )
