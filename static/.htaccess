@@ -8,12 +8,12 @@ RewriteRule ^contribution/.*$ https://beta.vvvv.org/contributions/ [R=301,L]
 
 # Redirect /users/name/ or /user/name/ with or without trailing slash to /user/?u=name
 RewriteCond %{REQUEST_URI} ^/users?/([^/]+)/?$
-RewriteRule ^ /user/?u=%1 [R=301,L]
+RewriteRule ^ /user/?u=%1 [R=301,NC,B,L]
 
 # Redirect /businesses/name/ or /business/name/ with or without trailing slash to /business/?b=name
 RewriteCond %{REQUEST_URI} ^/business(es)?/([^/]+)/?$
-RewriteRule ^ /business/?b=%2 [R=301,L]
+RewriteRule ^ /business/?b=%2 [R=301,NC,B,L]
 
 # Redirect /edu/name/ or /edus/name/ with or without trailing slash to /edu/?e=name
 RewriteCond %{REQUEST_URI} ^/edus?/([^/]+)/?$
-RewriteRule ^ /edu/?e=%1 [R=301,L]
+RewriteRule ^ /edu/?e=%1 [R=301,NC,B,L]
