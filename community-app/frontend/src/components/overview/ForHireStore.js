@@ -36,7 +36,7 @@ async function fetchForHire(){
     const imageParamsAvatars = "?withoutEnlargement=true&quality=90&fit=cover&height=60&width=60";
     const limit = 10;
 
-    const url = Constants.GET_HIRE+"?fields[]=user_id.username,user_id.userpic&meta=filter_count";
+    const url = Constants.GET_HIRE+"?fields[]=user_id.name,user_id.surname,user_id.username,user_id.userpic&meta=filter_count";
         
     const response = await fetch(url);
     
@@ -46,7 +46,8 @@ async function fetchForHire(){
         const items = json.data?.map((h) => (
             {
                 img: h.user_id.userpic ? createAssetUrl(h.user_id.userpic) + imageParamsAvatars : null,
-                text: h.user_id.username,
+                name: [h.user_id.name, h.user_id.surname].filter(Boolean).join(" ") ?? null,
+                username: h.user_id.username,
             }
         ));
 

@@ -11,7 +11,6 @@ const loading = ref(false);
 const store = useForHireStore();
 
 onMounted(async ()=>{
-
     try{
         loading.value = true;
         await store.fetch();
@@ -23,7 +22,6 @@ onMounted(async ()=>{
     finally{
         loading.value = false;
     }
-
 })
 
 function showAll()
@@ -48,7 +46,7 @@ function showAll()
                     </template>
                     <template v-else-if="store">
                         <div v-if="store.items?.length > 0" v-for="user in store.items" :key="user.text" class="mx-3">
-                            <a :href="'/user/'+user.text" @click="(event)=>showUserProfile(user.text, event)">
+                            <a :href="'/user/'+user.username" @click="(event)=>showUserProfile(user.username, event)">
                                 <NTooltip trigger="hover" placement="top">
                                     <template #trigger>
                                         <div>
@@ -62,7 +60,7 @@ function showAll()
                                             </NAvatar>
                                         </div>
                                     </template>
-                                    {{ user.text }}
+                                    {{ user.name ? `${user.name} (${user.username})` : user.username }}
                                 </NTooltip>
                             </a>
                         </div>
