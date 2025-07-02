@@ -1,17 +1,19 @@
 ---
 categories: "News"
 author: "joreg"
-date: "2025-06-24"
+date: "2025-07-02"
 title: "Re-Introducing: User, Business and Edu Profiles"
 description: "Inter-Community visibility improvements"
 ---
 
 Dear Patchers, Businesses and Educators!
 
-If you've been with vvvv for long enough, you might remember our earlier websites' feature of user and business profiles that hadn't made it over to this new website yet. Today, we're bringing these back!
+If you've been with vvvv for long enough, you might remember our earlier websites' feature of user and business profiles that hadn't made it over to this new website yet. Today, we're bringing them back!
 
 ## Community visibility
 The main idea of these profiles is that we get a bit of a better inter-community visibility. The **[Community](/community)** page aggregates infos from the profiles and renders an overview of who is where, who offers what skills/services, job announcements, latest contributions, tutorials and more. So this page is meant to become the number one entry-point regarding anything community.
+
+![alt text](image.png)
 
 ## Edit your Profile
 To make yourself visible, please head over to **[editing your profile](/edit-profile)**. When prompted to log in, use the same credentials that you use for the forum. 
