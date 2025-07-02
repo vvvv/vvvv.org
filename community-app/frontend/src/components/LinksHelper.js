@@ -9,7 +9,8 @@ const linkInfo = {
     github: 'https://github.com/',
     youtube: 'https://youtube.com/',
     linkedin: 'https://linkedin.com/',
-    nuget: 'https://nuget.org/profiles/'
+    nuget: 'https://nuget.org/profiles/',
+    vimeo: 'https://vimeo.com/'
 }
 
 export const linkData = (key, url)=>{
@@ -27,7 +28,8 @@ export const linkData = (key, url)=>{
 
     if (key == 'github' || 
         key == 'nuget' ||
-        key == 'youtube')
+        key == 'youtube' ||
+        key == 'vimeo')
     {
 
         const handle = url.match(matchLastSegment, '')[1];

@@ -241,6 +241,21 @@ $orange-hover: #ee4b28;
   font-size: 0.9rem;
 }
 
+.internship{
+  color: #666;
+  font-size: 0.9rem;
+  a{
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+    text-decoration-color: #bbb;
+
+    &:hover{
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+    }
+  }
+}
+
 .socialView{
   .key{
     text-transform: uppercase;

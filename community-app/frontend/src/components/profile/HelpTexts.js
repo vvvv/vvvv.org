@@ -69,6 +69,11 @@ const data = Object({
         help: "Your YouTube handle",
         placeholder: "@vvvvTv42"
     },
+    vimeo: {
+        label: "Vimeo",
+        help: "Your Vimeo handle",
+        placeholder: "vvvvleaks"
+    },
     matrix: {
         label: "Matrix",
         help: 'Your handle on the chat',

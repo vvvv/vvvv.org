@@ -10,7 +10,7 @@ import InstitutionBasics from '../components/InstitutionBasics.vue'
 import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
-const name = route.params.name;
+const name = route.params?.name ?? "vvvv";
 
 const company = ref(null);
 const loading = ref(false);
