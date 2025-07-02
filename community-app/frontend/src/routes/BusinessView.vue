@@ -35,6 +35,7 @@ onMounted(async ()=>
     catch(err)
     {
         console.log (err);
+        error.value = "Something went wrong or maybe a business you are looking for is simply not yet confirmed.";
     }
     finally{
         loading.value = false;

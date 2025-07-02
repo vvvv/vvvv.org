@@ -34,8 +34,8 @@ const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userp
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
             &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`;
 
-const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,logo`;
-const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,logo`;
+const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name`;
+const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name`;
 
 onMounted(async ()=>
 {

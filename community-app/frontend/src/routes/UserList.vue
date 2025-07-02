@@ -27,9 +27,9 @@ const state = reactive({
 })
 
 onMounted(()=>{
-    if (route.query.u)
+    if (route.query.p)
     {
-        showUserProfile (route.query.u);
+        showUserProfile (route.query.p);
         return;
     }
 

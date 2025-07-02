@@ -41,7 +41,7 @@ onMounted(async ()=>
     catch (err)
     {
         console.log (err);
-        error.value = "Something went wrong. Maybe an Institutional Institution is simply not yet confirmed.";
+        error.value = "Something went wrong or maybe an Institutional Institution is simply not yet confirmed.";
     }
     finally
     {
