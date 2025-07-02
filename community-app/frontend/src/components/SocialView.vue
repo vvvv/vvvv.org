@@ -10,7 +10,7 @@ const props = defineProps(['social'])
 const socialLinks = shallowRef([]);
 const socialFields = shallowRef([]);
 
-const socialOrder = ['website', 'github', 'nuget', 'linkedin', 'mastodon', 'pixelfed', 'peertube', 'youtube']
+const socialOrder = ['website', 'linkedin', 'github', 'nuget', 'mastodon', 'pixelfed', 'peertube', 'vimeo', 'youtube' ]
 
 onMounted(()=>{
 	if  (props.social)

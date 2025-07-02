@@ -13,9 +13,11 @@ $orange-hover: #ee4b28;
   }
 
   .logo {
-    height: 45px;
+    height: 55px;
+    margin: 1rem 4rem 1rem 0;
+
     img{
-      max-height: 45px;
+      max-height: 55px;
     }
   }
 
@@ -82,6 +84,13 @@ $orange-hover: #ee4b28;
       overflow: hidden;
     }
 
+    .n-tag{
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 0.5rem 0.7rem;
+    }
+
     &:hover{
       background-color: #eee;
       img{
@@ -100,8 +109,12 @@ $orange-hover: #ee4b28;
   }
 }
 
-#community
+#Community-app
 {
+
+  min-height: 30rem;
+  padding-bottom: 5rem;
+
   .profile-logo{
     max-width: 150px;
     min-height: 150px;
@@ -237,6 +250,21 @@ $orange-hover: #ee4b28;
 .location, .joined{
   color: #666;
   font-size: 0.9rem;
+}
+
+.internship{
+  color: #666;
+  font-size: 0.9rem;
+  a{
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+    text-decoration-color: #bbb;
+
+    &:hover{
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+    }
+  }
 }
 
 .socialView{

@@ -86,7 +86,14 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    strict: false
+    strict: false,
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({ left: 0, top: 0 })
+        }, 100)
+        })
+    },
 });
 
 // Add global navigation guards for loading state

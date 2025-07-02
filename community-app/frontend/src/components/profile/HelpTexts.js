@@ -69,6 +69,11 @@ const data = Object({
         help: "Your YouTube handle",
         placeholder: "@vvvvTv42"
     },
+    vimeo: {
+        label: "Vimeo",
+        help: "Your Vimeo handle",
+        placeholder: "vvvvleaks"
+    },
     matrix: {
         label: "Matrix",
         help: 'Your handle on the chat',
@@ -133,16 +138,19 @@ const data = Object({
     description: {
         user:{
             label: "Description",
-            help: 'A short introduction about yourself'
+            help: 'A short introduction about yourself',
+            info: 'The above field allow [Markdown]'
         },
         company: {
             label: "Description",
-            help: "A short introduction to your company and it's services"
+            help: "A short introduction to your company and it's services",
+            info: 'The above field allow [Markdown]'
         },
         edu:
         {
             label: "Description",
-            help: "A short introduction to your institution and the courses involving vvvv"
+            help: "A short introduction to your institution and the courses involving vvvv",
+            info: 'The above field allow [Markdown]'
         }
     },
     course_language:{
@@ -167,8 +175,10 @@ const data = Object({
         label: "Jobs",
         help: 'In case your business website has an extra "Jobs" url',
         placeholder: 'http://mybusiness.com/jobs'
+    },
+    hire:{
+        info: 'The above fields allow [Markdown]'
     }
-
 })
 
 export function getValue(path, key, type)

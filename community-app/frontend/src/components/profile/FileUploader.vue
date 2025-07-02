@@ -77,7 +77,7 @@ const createThumbnailUrl = (file)=>{
         :create-thumbnail-url="createThumbnailUrl"
     >
         <NButton type="primary">{{ buttonText }}</NButton>
-            <p class="text-muted imageHelp mt-1"> ({{ getImageHelps(type).help }})</p>
+            <p class="text-muted imageHelp mt-1 mb-0"> ({{ getImageHelps(type).help }})</p>
     </NUpload>
     <NAlert v-if="message" title="Careful" type="error">
         {{ message }}

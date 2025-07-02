@@ -33,6 +33,7 @@ const emptyData = {
   name: "",
   description: "",
   status: 0,
+  website: "",
   social: {}
 }
 
@@ -53,7 +54,11 @@ const prepareData = ()=>{
   else
   {
     temp.edus = [{ ...emptyData}];
-    temp.edus[0].social.fields = makeFields([], 4);
+    const defaultSocial = {
+      fields: makeFields([], 4),
+      website: ""
+    };
+    temp.edus[0].social = defaultSocial;
     eduExists.value = false;
   }
 
@@ -64,7 +69,23 @@ const rules = {
   name: {
     required: true,
     message: "Name is required",
-    trigger: ['blur', 'input']
+    trigger: ['input', 'blur'],
+  },
+  website: {
+    required: true,
+    message: "Website is required",
+    trigger: ['input', 'blur'],
+    validator: (rule, value)=>{
+      return form.value[0].social.website.length > 0;
+    }
+  },
+  logo: {
+    required: true,
+    message: "Logo is required",
+    trigger: ['input', 'blur'],
+    validator: (rule, value)=>{
+      return logo.value != null || tempLogo.value != null ;
+    }
   }
 }
 
@@ -83,17 +104,19 @@ const updateTempLogo = (id) =>{
 
 const submit = async () => {
 
-  const valid = await formRef.value?.validate((errors) => {
-    if (errors) {
-      emit('message', "Please fill requiered fields")
-    }
-  })
-
-  if (!valid) return
+  try{
+    await formRef.value.validate();
+  }
+  catch (error)
+  {
+    emit('message', { type: 'error', string: 'Please fill requiered fields'});
+    return;        
+  }
 
   updating.value = true;
   const formValue = clone(form.value[0]);
   delete formValue.status;
+  delete formValue.website;
 
   if (tempLogo.value == null)
   {
@@ -127,18 +150,19 @@ const submit = async () => {
         uploader.value.reset()
       }
     
+      store.fetch(true);
+
       emit('updateData', data);
       emit('message', { type: 'success', string: response.result});
-      store.fetch(true);
     }
 
   }
   catch (error)
   {
-    console.log (error);
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
   }
   finally{
+    formRef.value.restoreValidation();
     updating.value = false
   }
 }
@@ -175,7 +199,7 @@ const logoButtonText = computed(()=>{
           require-mark-placement="right-hanging"
           >
 
-        <n-form-item label="Logo">
+        <n-form-item label="Logo" path="logo">
           <div class="container mx-0 px-0">
             <div class="row">
               <div class="col-12 col-xl-3" v-if="logo">

@@ -1,10 +1,16 @@
 $label: #888;
 
 
-#community{
-    
-    min-height: 30rem;
-    padding-bottom: 5rem;
+#Community{
+
+    .card{
+        background-color: inherit;
+
+        .card-footer{
+            background-color: inherit;
+            border: none;
+        }
+    }
     
     .nav-item {
         color: #444;

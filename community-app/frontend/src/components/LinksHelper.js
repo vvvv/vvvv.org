@@ -1,14 +1,16 @@
 import { logos } from '../components/logos/logos.js'
 import { stripHttp, ensureHttps } from '../utils.js'
 
-const beforeLastSlash = /^.*\//;
-const beforeInOrCompany = /^.*(?=\/(company|in))/;
+const matchLastSegment = /([^\/]+)\/?$/;
+const matchInOrCompanyName = /(?:\/?(company|in)\/([^\/]+))\/?$/i;
+const matchName = /^[a-zA-Z0-9\-_.]+$/;
 
 const linkInfo = {
     github: 'https://github.com/',
     youtube: 'https://youtube.com/',
     linkedin: 'https://linkedin.com/',
-    nuget: 'https://nuget.org/profiles/'
+    nuget: 'https://nuget.org/profiles/',
+    vimeo: 'https://vimeo.com/'
 }
 
 export const linkData = (key, url)=>{
@@ -26,10 +28,11 @@ export const linkData = (key, url)=>{
 
     if (key == 'github' || 
         key == 'nuget' ||
-        key == 'youtube')
+        key == 'youtube' ||
+        key == 'vimeo')
     {
 
-        const handle = url.replace(beforeLastSlash, '');
+        const handle = url.match(matchLastSegment, '')[1];
 
         return {
             key: key,
@@ -41,13 +44,23 @@ export const linkData = (key, url)=>{
 
     if (key == 'linkedin')
     {
-        const handle = url.replace(beforeInOrCompany, '');
-        const text = url.replace(beforeLastSlash, '');
+        const match = url.match(matchInOrCompanyName, '');
+
+        let handle;
+
+        if (match)
+        {
+            handle = `${match[1]}/${match[2]}`;
+        }
+        else if (matchName.test(url))
+        {
+            handle = `in/${url}`;
+        }
 
         return {
             key: key,
             url: linkInfo[key]+handle,
-            text: text,
+            text: url.match(matchLastSegment, '')[1],
             icon: logos[key]
         }
     }
@@ -59,7 +72,7 @@ export const linkData = (key, url)=>{
         return{
             key: key,
             url: ensureHttps(url),
-            text: url.replace (beforeLastSlash, ''),
+            text: url.match(matchLastSegment, '')[1],
             icon: logos[key]
         }
     }
