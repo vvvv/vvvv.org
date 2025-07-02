@@ -84,6 +84,13 @@ $orange-hover: #ee4b28;
       overflow: hidden;
     }
 
+    .n-tag{
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 0.5rem 0.7rem;
+    }
+
     &:hover{
       background-color: #eee;
       img{

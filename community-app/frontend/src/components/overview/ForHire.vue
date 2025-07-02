@@ -42,10 +42,10 @@ function showAll()
             <div class="overflow-auto">
                 <div class="row flex-nowrap d-flex no-gutters pt-2 pb-2 mb-2 align-items-center">
                     <template v-if="loading">
-                        <NSkeleton v-for="n in 4" :key="n" :width="50" circle size="medium" class="m-2"/>
+                        <NSkeleton v-for="n in 4" :key="n" :width="50" circle size="medium" class="mx-2"/>
                     </template>
                     <template v-else-if="store">
-                        <div v-if="store.items?.length > 0" v-for="user in store.items" :key="user.text" class="mx-3">
+                        <div v-if="store.items?.length > 0" v-for="user in store.items" :key="user.text" class="mx-3 my-3">
                             <a :href="'/user/'+user.username" @click="(event)=>showUserProfile(user.username, event)">
                                 <NTooltip trigger="hover" placement="top">
                                     <template #trigger>
