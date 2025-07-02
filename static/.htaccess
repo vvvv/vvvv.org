@@ -6,9 +6,13 @@ RewriteRule ^sites/default/files/(.*)$ https://legacy.vvvv.org/sites/default/fil
 RewriteCond %{REQUEST_URI} ^/contribution/ [NC]
 RewriteRule ^contribution/.*$ https://beta.vvvv.org/contributions/ [R=301,L]
 
-# Redirect /users/name/ or /user/name/ with or without trailing slash to /user/?u=name
+# Redirect /users/name/ or /user/name/ with or without trailing slash to /people/?p=name
 RewriteCond %{REQUEST_URI} ^/users?/([^/]+)/?$
-RewriteRule ^ /user/?u=%1 [R=301,NC,B,L]
+RewriteRule ^ /people/?p=%1 [R=301,NC,B,L]
+
+# Redirect /peoples/name/ or /people/name/ with or without trailing slash to /people/?p=name
+RewriteCond %{REQUEST_URI} ^/peoples?/([^/]+)/?$
+RewriteRule ^ /people/?p=%1 [R=301,NC,B,L]
 
 # Redirect /businesses/name/ or /business/name/ with or without trailing slash to /business/?b=name
 RewriteCond %{REQUEST_URI} ^/business(es)?/([^/]+)/?$

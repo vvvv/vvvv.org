@@ -13,7 +13,7 @@ export function isString( value )
 }
 
 export const showUserProfile = (username, event) => {
-    router.push({name: 'User Profile', params: { username: username }});
+    router.push({name: 'Personal Profile', params: { username: username }});
     if (event) event.preventDefault();
 }
 

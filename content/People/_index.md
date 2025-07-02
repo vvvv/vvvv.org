@@ -1,6 +1,6 @@
 ---
-title: User
+title: People
 type: community
 layout: community
-theme: 
+theme:
 ---

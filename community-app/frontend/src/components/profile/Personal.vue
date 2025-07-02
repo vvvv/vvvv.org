@@ -176,7 +176,7 @@ const avatarButtonText = computed(()=>{
           <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submit"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible && form.user?.status == '1'">
-        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
+        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
       </div>
     </div>
 

@@ -46,7 +46,7 @@ function showAll()
                     </template>
                     <template v-else-if="store">
                         <div v-if="store.items?.length > 0" v-for="user in store.items" :key="user.text" class="mx-3 my-3">
-                            <a :href="'/user/'+user.username" @click="(event)=>showUserProfile(user.username, event)">
+                            <a :href="'/people/'+user.username" @click="(event)=>showUserProfile(user.username, event)">
                                 <NTooltip trigger="hover" placement="top">
                                     <template #trigger>
                                         <div>

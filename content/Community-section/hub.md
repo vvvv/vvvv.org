@@ -1,7 +1,7 @@
 ---
 id: 0
 title: Community Hub
-description: 'Our community hub'
+description: Explore vvvv's ecosystem of people, businesses and educational institutions
 icon: /img/PeopleCircleOutline.svg
 link: /community/
 buttonText: Open Community

@@ -7,6 +7,7 @@ import { fetchUserData } from "./fetchUserData.js";
 import { showUserProfile } from "../utils.js"
 import AvatarColumn from '../components/AvatarColumn.vue'
 import ForHireColumn from '../components/ForHireColumn.vue'
+import debounce from 'lodash/debounce'
 
 const windowWidth = ref(window.innerWidth);
 const router = useRouter();
@@ -151,7 +152,7 @@ const columns = [
     {
         title: 'Since',
         key: 'date_created',
-        width: 70,
+        width: 60,
         ellipsis: true,
         sorter: true
     }   
@@ -230,6 +231,14 @@ async function fetch()
     }
 }
 
+const setDebouncedFilter = debounce((value)=>{
+        state.filter = value;
+        console.log (value);
+}, 400);
+
+const onInput = (value) => {
+    setDebouncedFilter(value);
+};
 
 </script>
 
@@ -244,6 +253,8 @@ async function fetch()
                 @clear="clearFilter" 
                 @keyup.enter="applyFilter"
                 @keyup.esc="clearFilter"
+                @update:value="onInput"
+                :loading="loading ? loading : undefined"
                 clearable/>
             <n-button 
                 strong 

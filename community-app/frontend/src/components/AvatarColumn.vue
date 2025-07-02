@@ -7,7 +7,7 @@ defineProps(['src', 'username']);
 </script>
 
 <template>
-    <a :href="'/user/'+username" @click="(event)=> showUserProfile(username, event)">
+    <a :href="'/people/'+username" @click="(event)=> showUserProfile(username, event)">
         <NIcon style="cursor: 'pointer';">
             <NAvatar round :size="48" :src="src" objectFit="contain"/>
         </NIcon>

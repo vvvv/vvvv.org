@@ -1,6 +1,6 @@
 ---
-title: User
+title: Profile
 type: community
 layout: community
-theme:
+theme: 
 ---

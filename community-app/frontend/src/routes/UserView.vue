@@ -113,7 +113,7 @@ const joined = computed(()=> new Date(user.value.date_created).toLocaleString("e
 
 function edit()
 {
-  router.push ({name: 'User Profile'});
+  router.push ({name: 'Personal Profile'});
 }
 
 const location = computed(()=>{

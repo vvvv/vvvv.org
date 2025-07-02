@@ -33,16 +33,16 @@ const routes = [
         meta: { tabName: 'Overview', visible: true, isLeft: true, order: 0 }
     },
     {
-        path: '/user/',
-        name: 'Users',
+        path: '/people/',
+        name: 'People',
         component: UserList,
-        meta: { tabName: 'Users', visible: true, isLeft: true, order: 1 }
+        meta: { tabName: 'People', visible: true, isLeft: true, order: 1 }
     },
     {
-        path: '/user/:username',
-        name: 'User Profile',
+        path: '/people/:username',
+        name: 'Personal Profile',
         component: UserView,
-        meta: { tabName: 'Users' }
+        meta: { tabName: 'People' }
     },
     {
         path: '/forhire/',
@@ -91,7 +91,7 @@ const router = createRouter({
         return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve({ left: 0, top: 0 })
-        }, 100)
+        }, 200)
         })
     },
 });

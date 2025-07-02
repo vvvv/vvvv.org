@@ -137,7 +137,7 @@ const imageButtonText = computed(()=>{
           <n-switch v-model:value="form.available" placeholder="Available for Hire" @update:value="submit"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="form.available && data.user.visible">
-        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
+        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
       </div>
     </div>
 
