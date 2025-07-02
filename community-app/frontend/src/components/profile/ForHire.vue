@@ -5,13 +5,17 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import FieldEditor from './FieldEditor.vue'
 import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
+import { getValue } from "./HelpTexts.js"
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
 import { NButton, NAlert, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import { useForHireListStore } from "../../routes/ForHireListStore.js";
+import FormItem from './FormItem.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 
 const store = useForHireListStore();
+
+const info = ref(getValue('hire', "info", 'user'));
 
 const { data, constants } = defineProps(['data', 'constants']);
 const hireOptions = ref([]);
@@ -177,8 +181,11 @@ const imageButtonText = computed(()=>{
       <n-form-item label="vvvv skills">
         <Editor v-model="form.skills_vvvv" class="fullWidth" :limit="limit"/>
       </n-form-item>
-      <n-form-item label="Other skills">
+      <n-form-item label="Other skills" class="mb-4">
         <Editor v-model="form.skills_other" class="fullWidth" :limit="limit"/>
+        <template #feedback>
+          {{ info }}
+        </template>
       </n-form-item>
 
       <n-form-item label="Available for">

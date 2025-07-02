@@ -31,7 +31,7 @@ export const useBusinessesStore = defineStore ('businesses',{
 
 async function fetchBusinesses(){
         
-    const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=45";
+    const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=55";
     const url = Constants.GET_COMPANIES+"?fields[]=name,logo&meta=filter_count";
 
     const limit = 8;

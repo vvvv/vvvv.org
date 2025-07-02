@@ -43,7 +43,7 @@ watch (model, (newValue)=>{
   <div class="container">
     <div class="row">
       <div class="col px-0 d-flex">
-        <n-input type="textarea" :maxlength="limit" v-model:value="model" rows=3 show-count clearable />
+        <n-input type="textarea" :maxlength="limit" v-model:value="model" rows=3 show-count clearable placeholder="Markdown allowed!" />
       </div>
         <div class="col d-flex overflow-auto rounded field-preview py-1 text-muted bg-light">
           <div v-html="html"></div>
