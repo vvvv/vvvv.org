@@ -2,7 +2,7 @@
 categories: "News"
 author: "joreg"
 date: "2025-07-02"
-title: "Re-Introducing: User, Business and Edu Profiles"
+title: "Re-Introducing: Personal, Business and Edu Profiles"
 description: "Inter-Community visibility improvements"
 ---
 
