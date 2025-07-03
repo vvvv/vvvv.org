@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="{{ .Site.Params.author }}">
+<meta name="description" content="{{if isset .Params "description"}}{{.Params.description}}{{else}}{{.Site.Params.description}}{{end}}">
+<link rel="image_src" href="{{ partial "partial.ogimage" . }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
+<link rel="shortlink" href="{{ .Permalink }}" />
+{{ partial "partial.ogdata" . }}
+<meta itemprop="name" content="{{ .Site.Params.title }}" />
+
+<title>{{ .Title }}</title>
+
+{{ partial "structuredData/structuredData" . }}
+
+{{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+{{ end -}}
+
+{{ "<!-- Favicon -->" | safeHTML }}
+<link rel="shortcut icon" href="{{ .Site.Params.favicon | relURL }}">
+
+<link rel="stylesheet" href="{{ "css/bootstrap.min.css" | relURL }}" type="text/css">
+<link rel="stylesheet" href="{{ "css/swiper-bundle.min.css" | relURL }}" type="text/css">
+
+{{ "<!-- Newsletter CSS -->" | safeHTML }}
+<link rel="stylesheet" href="https://assets.sendinblue.com/component/form/2ef8d8058c0694a305b0.css">
+<link rel="stylesheet" href="https://assets.sendinblue.com/component/clickable/b056d6397f4ba3108595.css">
+<link rel="stylesheet" href="https://assets.sendinblue.com/component/progress-indicator/f86d65a4a9331c5e2851.css">
+<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+
+{{ "<!-- DocSearch CSS -->" | safeHTML }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"/>
+{{ $style := resources.Get "css/customDocSearch.css" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink | relURL }}" type="text/css">
+
+{{ "<!-- Plausible -->" | safeHTML }}
+<script async defer data-domain="vvvv.org" src="https://plausible.io/js/script.js"></script>
+<script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+
+{{ "<!-- Custom CSS -->" | safeHTML }}
+{{ $style := resources.Get "css/creative.css" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink | relURL }}" type="text/css">
+{{ "<!-- Custom SASS -->" | safeHTML }}
+{{ $style := resources.Get "scss/main.scss" | toCSS | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $style.Permalink | relURL }}" type="text/css">
+
+
+{{ "<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->" | safeHTML }}
+{{ "<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->" | safeHTML }}
+{{ "<!--[if lt IE 9]>" | safeHTML }}
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+{{ "<![endif]-->" | safeHTML }}

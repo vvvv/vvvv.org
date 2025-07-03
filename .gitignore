@@ -7,7 +7,7 @@
 /themes/hugo-creative-theme-master/static/img/portfolio/4.jpg
 /themes/hugo-creative-theme-master/static/img/portfolio/5.jpg
 /themes/hugo-creative-theme-master/static/img/portfolio/6.jpg
-/community/frontend/*
+/vue/node_modules/*
 /community/layout/*
-/community/test/*
-/static/js/vue/*
+**/package-lock.json
+**/extensions.json

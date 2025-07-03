@@ -15,6 +15,9 @@
 {{- with index $ctx "url" -}}
     {{- $url = . -}}
 {{- end -}}
+{{- with index $ctx "localurl" -}}
+    {{- $url = . | absLangURL -}}
+{{- end -}}
 
 <li {{ if $style -}}class="{{- $style -}}"{{- end }}>
     <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }}>{{- $name -}}</a>
