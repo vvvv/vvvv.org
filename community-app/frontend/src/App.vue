@@ -17,10 +17,10 @@ const businessesCount = ref (0);
 
 const activeTab = ref(router.getRoutes()[0]);
 
-const register = ()=> {
-  const editRoute = router.getRoutes().find( r => r.name === 'Edit Profile');
-  kcregister(window.location.origin + editRoute.path);
-}
+const profileLink = computed(()=>{
+  const route = router.getRoutes().find( r => r.name === 'Edit Profile').path;
+  return window.location.origin + route;
+})
 
 const login = ()=> {
   kclogin(window.location.origin + window.location.pathname.split('#')[0])
@@ -120,7 +120,7 @@ const themeOverrides = {
                   <a href="#" v-if="authenticated" @click="logout" class="">Logout</a>
                   <template v-else>
                     <div class="btn btn-primary mr-4" @click="login">Login</div>
-                    <a href="#" @click="register">Sign up</a>
+                    <a href="#" @click="kcregister(profileLink)">Sign up</a>
                   </template>
                 </template>
               </n-tabs>
