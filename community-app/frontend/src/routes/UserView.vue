@@ -12,7 +12,6 @@ import Location from '../components/Location.vue'
 import ClippedText from '../components/ClippedText.vue'
 import BetaGammaUser from '../components/BetaGammaUser.vue'
 import Maintains from '../components/Maintains.vue'
-
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
 
 
@@ -68,7 +67,7 @@ onMounted(async ()=>
     hire.value = data.related[0]?.hire;
     social.value = data.related[0]?.social;
 
-    description.value = user.value.description;
+    description.value = toHtml(user.value.description);
 
     const partOfRequests = [getPartOf(companyURL), getPartOf(eduURL)];
     const [companyResult, eduResult] = await Promise.allSettled(partOfRequests);

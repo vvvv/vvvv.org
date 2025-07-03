@@ -7,7 +7,7 @@ const props = defineProps(['value']);
 </script>
 
 <template>
-    <NIcon v-if="props.value" color="#0e7a0d" size="20">
+    <NIcon v-if="props.value" color="black" size="20">
         <CheckmarkCircle/>
     </NIcon>
 </template>
