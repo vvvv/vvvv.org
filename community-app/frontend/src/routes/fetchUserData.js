@@ -55,8 +55,24 @@ function makeURL(state)
     if (state.sort?.order)
     {
         const dir = state.sort.order != "descend" ? "-" : "";
-        const key = state.sort.columnKey == "location" ? "location_country,location_city" : state.sort.columnKey;
-        sort = 'sort='+dir+key;
+
+        let key;
+
+        if (state.sort.columnKey == "location")
+        {
+            key = `${dir}location_country,${dir}location_city`;
+        }
+        else
+        {
+            key = dir + state.sort.columnKey;
+        }
+
+        if (state.sort.columnKey == "last_modified")
+        {
+            key = `${dir}last_modified,${dir}date_created`;
+        }
+        
+        sort = 'sort='+key;
     }
     else
     {
