@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref, computed, onMounted } from 'vue'
-import { NTag, NSpace, NPerformantEllipsis } from 'naive-ui'
+import { NTag, NSpace, NPerformantEllipsis, NTooltip } from 'naive-ui'
 import { toHtml, createAssetUrl, showUserProfile } from '../utils'
 import Location from './Location.vue';
 import ClippedText from './ClippedText.vue';
@@ -41,15 +41,20 @@ onMounted(()=>{
                 <img v-if="hire.image" :src="hire.image" class="card-img-top" :alt="hire.username" />
             </div>
             <div class="card-body">
-                <h4 class="card-title">{{ hire.name ?? hire.username }}</h4>
+                <h4 class="card-title">{{ hire.name || hire.username }}</h4>
                 <p class="card-text text-muted" v-if="hire.name">{{ hire.username }}</p>
                 <NPerformantEllipsis v-if="hire.skills_vvvv" line-clamp="3" :tooltip=false class="card-text">
                     <span v-html="hire.skills_vvvv"></span>
                 </NPerformantEllipsis>
-                <div v-if="hire.availableFor.length > 0" class="mt-2 card-text">
-                    <NSpace>
-                        <NTag v-for="t in hire.availableFor" :bordered="false">{{ t }}</NTag>
-                    </NSpace>
+                <div v-if="hire.availableFor.length > 0" class="mt-3 card-text">
+                    <NTooltip trigger="hover" placement="top-start">
+                        <template #trigger>
+                            <div>
+                                <NTag v-for="t in hire.availableFor" :bordered="false" class="mr-2">{{ t }}</NTag>
+                            </div>
+                        </template>
+                        Available for
+                    </NTooltip>
                 </div>
             </div>
             <Location :location="hire.location" class="card-footer"/>
