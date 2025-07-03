@@ -2,7 +2,7 @@ import Constants from '../constants'
 import { createAssetUrl, locationCityCountry } from '../utils'
 
 const DEFAULT_SORT = "sort=username"
-const FIELDS =`fields[]=username,userpic,related.hire.available,date_created,location_city,location_country`
+const FIELDS =`fields[]=username,userpic,related.hire.available,date_created,last_modified,location_city,location_country`
 
 const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 
@@ -31,7 +31,8 @@ export async function fetchUserData (state)
             username: u.username,
             available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
             date_created: new Date(u.date_created).toLocaleString("en-US", dateOptions),
-            location: locationCityCountry(u.location_city, u.location_country)
+            location: locationCityCountry(u.location_city, u.location_country),
+            last_modified: u.last_modified ? new Date(u.last_modified).toLocaleString("en-US", dateOptions) : "",
         }
     ))
 

@@ -22,7 +22,7 @@ const state = reactive({
     filter: "",
     sort: {
         order: "ascend",
-        columnKey: "date_created"
+        columnKey: "last_modified"
     }
 })
 
@@ -152,10 +152,17 @@ const columns = [
     {
         title: 'Since',
         key: 'date_created',
-        width: 60,
+        width: 50,
         ellipsis: true,
         sorter: true
-    }   
+    },
+    {
+        title: 'Updated',
+        key: 'last_modified',
+        width: 50,
+        ellipsis: true,
+        sorter: true
+    }    
 
 ]
 
