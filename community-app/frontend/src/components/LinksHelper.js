@@ -2,7 +2,7 @@ import { logos } from '../components/logos/logos.js'
 import { stripHttp, ensureHttps } from '../utils.js'
 
 const matchLastSegment = /([^\/]+)\/?$/;
-const matchInOrCompanyName = /(?:\/?(company|in)\/([^\/]+))\/?$/i;
+const matchForLinkedIn = /(?:\/?(company|in|school)\/([^\/]+))\/?$/i;
 const matchName = /^[a-zA-Z0-9\-_.]+$/;
 
 const linkInfo = {
@@ -44,7 +44,7 @@ export const linkData = (key, url)=>{
 
     if (key == 'linkedin')
     {
-        const match = url.match(matchInOrCompanyName, '');
+        const match = url.match(matchForLinkedIn, '');
 
         let handle;
 
