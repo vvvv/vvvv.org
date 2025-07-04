@@ -39,7 +39,7 @@ async function fetchLatestTopics(){
                     id: t.id,
                     title: t.title,
                     link: Constants.FORUM+'t/'+t.slug,
-                    count: t.count
+                    count: t.count-1
                 }
             })
 
