@@ -50,7 +50,7 @@ async function sync(force)
                         <NEllipsis :line-clamp="1" :tooltip=false>
                             <a :href="topic.link" target="_blank">{{ topic.title }}</a>
                         </NEllipsis>
-                        <NBadge :value="topic.count > 0" color="DarkGray" class="ml-2"/>
+                        <NBadge v-if="topic.count>0" :value="topic.count" color="DarkGray" class="ml-2"/>
                     </li>
                 </ul> 
                 <div v-else class="m-3">Okay, Houston... we've had a problem here.<br/>Try again later.</div>
