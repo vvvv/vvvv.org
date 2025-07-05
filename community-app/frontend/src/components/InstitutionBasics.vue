@@ -20,10 +20,11 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
             <h5>{{ data.name }}</h5>
         </div>                     
         <LocationFull :data="data"/>
+        
+        <Internships :data="data" text="Accepting internship applications"/>
 
         <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social).length>0" :social="data.social" />                      
         
-        <Internships :data="data" text="Accepting internship applications"/>
 
         <Links class="links" :data="data"/>
 

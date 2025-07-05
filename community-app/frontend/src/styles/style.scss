@@ -136,8 +136,8 @@ $orange-hover: #ee4b28;
 
     a {
       text-decoration: underline;
-      text-underline-offset: 0.2rem;
-      text-decoration-color: #999;
+      text-underline-offset: 0.3rem;
+      text-decoration-color: #bbb;
     }
   }
 }
@@ -270,7 +270,7 @@ $orange-hover: #ee4b28;
 .socialView{
   .key{
     text-transform: uppercase;
-    color: #666;
+    color: #888;
     font-size: 0.8rem;
     margin: 0.3rem 0rem 0.2rem;
   }
@@ -281,7 +281,6 @@ $orange-hover: #ee4b28;
 
   .socialItem
   {
-    border-bottom: 1px solid #ddd;
     padding-bottom: 0.7rem;
   }
 

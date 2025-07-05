@@ -35,7 +35,7 @@ onMounted(()=>{
 
 <template>
 	<div>
-		<div class="mt-4 mt-sm-0 pb-2 socialView" v-if="socialLinks.length > 0">
+		<div class="mt-md-2 mt-0 socialView" v-if="socialLinks.length > 0">
 			<div class="mb-1 pr-2" v-for="link in socialLinks" :key="link.key">
 				<div class="pb-2">
 					<NIcon v-if="link.icon" class="mr-2" size="20"><component :is="link.icon"/></NIcon>
@@ -45,7 +45,7 @@ onMounted(()=>{
 				</div>
 			</div>
 		</div>
-		<div class="mt-4 mt-sm-0 socialView border-top" v-if="socialFields.length > 0">
+		<div class="mt-md-2 pt-2 socialView border-top" v-if="socialFields.length > 0">
 			<div class="mb-1 pr-2 socialItem" v-for="field in socialFields" :key="field.key">
 					<div class="key">{{  field.key }}</div>
 					<template v-if="field.url"><a :href="field.url" target="_blank">{{ field.text }}</a></template>

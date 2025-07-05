@@ -200,16 +200,18 @@ const hireCardVisible = computed(()=>{
                 {{ joined }}
               </div>
 
-              <Location v-if="location" :location="location"/>
+              <Location v-if="location" :location="location" class="pb-2"/>
 
-              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
+              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top py-3 mt-4"/>
 
-              <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" v-if="social" />
+              <SocialView class="my-1 py-2 border-top" :social="social" v-if="social" />
 
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
         <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
+
+          <hr class="d-block d-md-none"/>
 
           <div v-if="description" class="mb-4 description">
             <p v-html="description"></p>

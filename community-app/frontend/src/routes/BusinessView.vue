@@ -53,7 +53,10 @@ onMounted(async ()=>
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
                     <InstitutionBasics class="mb-3" :data="company"/>
                 </div>
-                <div v-if="description" class="col-12 col-md-6 col-lg-8 mt-3 mt-md-0 profileContent">
+                <div v-if="description" class="col-12 col-md-6 col-lg-8 mt-0 mt-md-3 mt-md-0 profileContent">
+
+                    <hr class="d-block d-md-none"/>
+
                     <p v-html="description"></p>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="company.owner"/>
                 </div>

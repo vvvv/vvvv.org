@@ -137,9 +137,9 @@ const columns = [
         sorter: true
     },
     {
-        title: 'Available for Hire',
+        title: 'For Hire',
         key: 'related.hire.available',
-        width: 60,
+        width: 40,
         ellipsis: true,
         sorter: true,
         render(row) {
@@ -152,14 +152,14 @@ const columns = [
     {
         title: 'Since',
         key: 'date_created',
-        width: 50,
+        width: 40,
         ellipsis: true,
         sorter: true
     },
     {
         title: 'Updated',
         key: 'last_modified',
-        width: 50,
+        width: 40,
         ellipsis: true,
         sorter: true
     }    

@@ -1,7 +1,7 @@
 import Constants from '../constants'
 import { createAssetUrl } from '../utils'
 
-const IMAGE_PARAMS = '?withoutEnlargement=true&quality=90&fit=cover&width=150';
+const IMAGE_PARAMS = '?withoutEnlargement=true&quality=98&fit=cover&width=300&format=png';
 const URL = Constants.BASEURL+`items/Edu?fields=*,social.*,owner.username&filter[name][_eq]=`;
 
 export default async function fetchEduProfile ( name )
