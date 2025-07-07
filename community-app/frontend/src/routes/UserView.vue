@@ -211,11 +211,12 @@ const hireCardVisible = computed(()=>{
         </div>
         <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
 
-          <hr class="d-block d-md-none"/>
-
-          <div v-if="description" class="mb-4 description">
-            <p v-html="description"></p>
-          </div>
+          <template v-if="description">
+            <hr class="d-block d-md-none"/>
+            <div class="mb-4 description">
+              <p v-html="description"></p>
+            </div>
+          </template>
 
           <div v-if="hire && hire.available">
             <h4 class="h4">Available for hire</h4>

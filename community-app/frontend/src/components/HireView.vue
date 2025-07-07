@@ -6,9 +6,7 @@ import ClippedText from '../components/ClippedText.vue'
 
 const { data, contact } = defineProps({ data: Object, contact: String })
 
-// Use image as is or set the params to control how to transform it before download
-// "?withoutEnlargement=true&quality=90&fit=cover&width=512"
-const imageParams = "";
+const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=720";
 
 const hire = computed(()=>{
 

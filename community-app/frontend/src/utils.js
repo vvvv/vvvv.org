@@ -12,23 +12,24 @@ export function isString( value )
     return typeof value == 'string'
 }
 
-export const showUserProfile = (username, event) => {
-    router.push({name: 'Personal Profile', params: { username: username }});
-    if (event) event.preventDefault();
-}
 
 export function shuffle(array)
 {
     return array.sort(() => 0.5 - Math.random());
 }
 
+export const showUserProfile = (username, event) => {
+    router.push({name: 'Personal Profile', params: { username: encodeURIComponent(username) }});
+    if (event) event.preventDefault();
+}
+
 export const showBusinessProfile = (name, event) => {
-    router.push({name: 'Business Profile', params: { name: name }});
+    router.push({name: 'Business Profile', params: { name: encodeURIComponent(name) }});
     if (event) event.preventDefault();
 }
 
 export const showEduProfile = (name, event) => {
-    router.push({name: 'Educational Institution Profile', params: { name: name }});
+    router.push({name: 'Educational Institution Profile', params: { name: encodeURIComponent(name) }});
     if (event) event.preventDefault();
 }
 
