@@ -12,6 +12,8 @@ const { data } = defineProps({
 
 const hire = ref(null);
 
+const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=512";
+
 onMounted(()=>{
 
     if (data.hire) 
@@ -23,7 +25,7 @@ onMounted(()=>{
             contact: data.hire.contact,
             skills_vvvv: toHtml(data.hire.skills_vvvv),
             skills_other: toHtml(data.hire.skills_other),
-            image: data.hire.image ? createAssetUrl(data.hire.image) : null,
+            image: data.hire.image ? createAssetUrl(data.hire.image)+imageParams : null,
             location: data.location,
             availableFor: data.hire.availableFor
                 ? data.hire.availableFor.map(item => item.AvailableFor_Options_id ? item.AvailableFor_Options_id.value : "")
