@@ -29,7 +29,7 @@ export const useForHireListStore = defineStore ('forHireList',{
 })
 
 const url = Constants.GET_USERS+`?fields=*,related.social.contact,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value
-&filter[related][hire][available][_eq]=true&sort=username&meta=filter_count`;
+&filter[related][hire][available][_eq]=true&sort=name,surname,username&meta=filter_count`;
 
 async function fetchHireData () 
 {
