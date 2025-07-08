@@ -172,8 +172,8 @@ const data = Object({
         placeholder: 'https://mybusiness.com/contact'
     },
     jobs_url:{
-        label: "Jobs",
-        help: 'In case your business website has an extra "Jobs" url',
+        label: "We're Hiring",
+        help: 'In case your business website has an extra url for vacancies',
         placeholder: 'http://mybusiness.com/jobs'
     },
     hire:{

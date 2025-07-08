@@ -261,15 +261,17 @@ const logoButtonText = computed(()=>{
         
         <SocialFields v-model:value="form[0].social" type="company"/>
 
+        
+        <InputField path="contact_url" v-model="form[0].contact_url"/>
+        <InputField path="projects_url" v-model="form[0].projects_url"/>
+        <InputField path="jobs_url" v-model="form[0].jobs_url"/>
+
         <FormItem path="internships">
           <template #content>
             <NSwitch v-model:value="form[0].internships"/>
           </template>
         </FormItem>
-        
-        <InputField path="contact_url" v-model="form[0].contact_url"/>
-        <InputField path="projects_url" v-model="form[0].projects_url"/>
-        <InputField path="jobs_url" v-model="form[0].jobs_url"/>
+
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>
