@@ -22,6 +22,7 @@ export default Object({
     
     //BACKEND
     FORUM_TOPICS: BACKENDURL + 'discourseTopics',
+    FORUM_JOBS: BACKENDURL + 'discourseJobs',
     BACKEND_GET_USER: BACKENDURL + "userinfo",
     BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
     EDIT_PERSONAL: BACKENDURL + "edit/personal",
