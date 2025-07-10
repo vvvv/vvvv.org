@@ -8,7 +8,7 @@ import ForHire from "../components/overview/ForHire.vue"
 import Connections from '../components/overview/Connections.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
-import Oportunities from '../components/overview/Oportunities.vue'
+import Opportunities from '../components/overview/Opportunities.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -62,7 +62,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
             <Businesses class="mt-4"/>
         </div>
         <div class="col mb-4 mb-md-0 order-1 order-md-2">
-            <Oportunities/>
+            <Opportunities/>
         </div>
     </div>
     <div class="row mt-4 overview">

@@ -3,12 +3,12 @@
 import { ref, onMounted } from 'vue';
 import { NTag, NEllipsis, NSkeleton, NBadge, NTooltip } from 'naive-ui'
 import { SyncSharp } from '@vicons/ionicons5'
-import { useOportunitiesStore } from './OportunitiesStore.js'
+import { useOpportunitiesStore } from './OpportunitiesStore.js'
 import { showBusinessProfile } from "../../utils.js"
 import Constants from '../../constants.js'
 import SyncButton from "../SyncButton.vue"
 
-const store = useOportunitiesStore();
+const store = useOpportunitiesStore();
 const loading = ref(false);
 
 onMounted(()=>{   
@@ -34,7 +34,7 @@ async function sync(force)
     <div class="section">
         <div class="row pb-2 mb-2 border-bottom">
             <div class="d-flex col-auto">
-                <h2>Oportunities</h2>
+                <h2>Opportunities</h2>
             </div>
             <div class="col-1 ml-auto mr-2">
                 <SyncButton v-if="!loading" @click="sync(true)"/>

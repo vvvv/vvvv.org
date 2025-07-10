@@ -1,7 +1,7 @@
 import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 
-export const useOportunitiesStore = defineStore ('oportunities',{
+export const useOpportunitiesStore = defineStore ('oportunities',{
     state: ()=>{
         return {
             jobs: [],
@@ -17,7 +17,6 @@ export const useOportunitiesStore = defineStore ('oportunities',{
 
             try{
                 this.internships = await fetchInternships();
-                // this.count = this.jobs.length + this.internships.length;
             }
             catch (error){
                 this.fetched = false;
