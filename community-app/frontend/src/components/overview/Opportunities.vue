@@ -1,11 +1,9 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NTag, NEllipsis, NSkeleton, NBadge, NTooltip } from 'naive-ui'
-import { SyncSharp } from '@vicons/ionicons5'
+import { NTag, NEllipsis, NSkeleton } from 'naive-ui'
 import { useOpportunitiesStore } from './OpportunitiesStore.js'
 import { showBusinessProfile } from "../../utils.js"
-import Constants from '../../constants.js'
 import SyncButton from "../SyncButton.vue"
 
 const store = useOpportunitiesStore();
