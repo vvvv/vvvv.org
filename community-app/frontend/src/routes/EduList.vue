@@ -15,7 +15,7 @@ onMounted( async ()=>
 {
     if (route.query.e)
     {
-        showEduProfile (route.query.e);
+        showEduProfile (decodeURI(route.query.e));
         return;
     }
 

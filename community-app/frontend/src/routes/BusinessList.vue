@@ -17,7 +17,7 @@ onMounted( async ()=>
 {
     if (route.query.b)
     {
-        showBusinessProfile(route.query.b);
+        showBusinessProfile(decodeURI(route.query.b));
         return;
     }
 
