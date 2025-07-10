@@ -8,27 +8,37 @@ description: "A complete cueing solution for your apps parameters"
 
 Dear patchers!
 
-Here's to introduce **Presets and Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../Introducing-PublicChannels/index.md), store them in separate files and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
+Here's to introduce **Presets** and **Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../Introducing-PublicChannels/index.md), store and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
 
-**screenshot**
+![](presets.png)s
+<center><small>A preset column to store, and the Presets Panel to trigger snapshots</small></center>
 
 ## Storing presets
-There are two ways of storing presets: 
+There are two ways to store presets: 
 - Via the Channel Browsers "Preset Columns"
 - Via a set of nodes
 
-**screenshot**
+![](preset-columns.png)
 
-Presets are stored in simple .xml files. One preset per file. Like this you can re-arrange/re-name presets right in the explorer also get a good view on changes when using version control.
+Multiple preset columns can be used in parallel, allowing you to capture and manipulate presets.
+
+Every preset is stored in small .xml file in a folder called "Presets" next to the main active .vl document. This allows you to re-arrange/re-name presets right in the explorer. Also this is good for version control where you get a good view on changes.
+
+To learn about storing presets programmatically from within a patch check out the help patch of the "StorePreset" node.
 
 ## Recalling presets
-There are two ways of recalling presets: 
+There are two ways to recall presets: 
 - Via the Channel Browsers "Presets Panel"
 - Via a set of nodes
 
+![](presets-panel.png)
 
-Obviously, there is some more to transitions (curve, duration) you'll want to control (and you can!) but for simple scenarios the default transition should already allow for quick prototyping. One thing you can change easily, is global transition time:
+The presets panel shows a list of all available presets. Here you can quickly transition to or jump to any of the them, but also rename them, add descriptions or delete them.
+
+Obviously, there is some more to transitions (curve, duration) you'll want to control (and you can!) but for simple scenarios the default transition should already allow for quick prototyping. 
+
+To learn about recalling presets programmatically from within a patch, check out the help patches of the "RecallPreset" and "TriggerPreset" nodes.
 
 ---
 
-Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you'll want to learn about [Bindings](../Introducing-Bindings/index.md).
+Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you need to learn about [Bindings](../Introducing-Bindings/index.md).
