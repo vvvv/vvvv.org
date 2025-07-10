@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { NAvatar, NTooltip, NIcon, NSkeleton, NBadge } from "naive-ui"
+import { NAvatar, NTooltip, NIcon, NSkeleton, NBadge, NButton } from "naive-ui"
 import { PersonOutline } from '@vicons/ionicons5'
 import { showUserProfile } from "../../utils.js"
 import { useForHireStore } from "./ForHireStore.js"
@@ -50,7 +50,7 @@ function showAll()
                                 <NTooltip trigger="hover" placement="top">
                                     <template #trigger>
                                         <div>
-                                            <NAvatar v-if="user.img" objectFit="contain" round :src="user.img" :size="50">
+                                            <NAvatar v-if="user.img" objectFit="contain" round :src="user.img" :size="50" :class="{ 'noImageBack': user.img !== null }">
                                                 <template #fallback>
                                                     <NIcon><PersonOutline/></NIcon>
                                                 </template>
@@ -64,6 +64,7 @@ function showAll()
                                 </NTooltip>
                             </a>
                         </div>
+                        <NButton v-if="store.total > store.items?.length" strong @click="showAll" class="mx-3">See all</NButton>
                     </template>
                     <div v-else>
                         Something went wrong.

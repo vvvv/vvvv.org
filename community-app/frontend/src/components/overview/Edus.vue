@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { NTooltip, NSkeleton, NBadge } from "naive-ui"
+import { NTooltip, NSkeleton, NBadge, NButton } from "naive-ui"
 import { showEduProfile } from "../../utils.js"
 import { useEdusStore } from './EdusStore.js'
 import defaultLogo from '../../assets/defaultLogo.png'
@@ -59,6 +59,7 @@ function showAll()
                             </NTooltip>
                         </a>
                     </div>
+                    <NButton v-if="store.total > store.items?.length" strong @click="showAll" class="ml-3">See all</NButton>
                 </template>
                 <div v-else>
                     Something went wrong.

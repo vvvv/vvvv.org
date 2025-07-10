@@ -59,8 +59,6 @@ async function fetchJobs(){
 async function fetchInternships(){
 
     const url = Constants.GET_COMPANIES+"?fields[]=name&filter[internships][_eq]=true&sort[]=-date_updated";
-    
-    console.log ("fetching: "+url)
 
     const response = await fetch(url);
     

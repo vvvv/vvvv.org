@@ -34,7 +34,7 @@ async function fetchEdus(){
     const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=200&format=png";
     const url = Constants.GET_EDUS+"?fields[]=name,logo&meta=filter_count";
 
-    const limit = 8;
+    const limit = 10;
     
     const response = await fetch(url);
     
