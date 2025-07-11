@@ -63,7 +63,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
             <Businesses class="mt-4"/>
         </div>
         <div class="col mb-4 mb-md-0 order-1 order-md-2">
-            <LatestNugets/>
+            <LatestNugets class="mb-2"/>
             <Opportunities/>
         </div>
     </div>

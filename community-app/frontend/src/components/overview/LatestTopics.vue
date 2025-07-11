@@ -35,7 +35,7 @@ async function sync(force)
 <template>
     <div class="section pl-4">
         <SectionTitle :showRefresh="true" :loading="loading" title="Latest Forum Topics" @sync="sync(true)" :link="Constants.FORUM" :isExternal="true"/>
-        <div class="row pt-2">
+        <div class="row">
             <template v-if="loading">
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
             </template>

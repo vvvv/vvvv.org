@@ -1,6 +1,8 @@
 import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 
+const twoWeeks = 14 * 24 * 60 * 60 * 1000;
+
 export const useLatestNugetsStore = defineStore ('latestNugets',{
     state: ()=>{
         return {
@@ -23,11 +25,11 @@ export const useLatestNugetsStore = defineStore ('latestNugets',{
 
         }
     }
-})
+})  
 
 async function fetchLatestNugets(){
 
-    const count = 5;
+    const count = 7;
     const response = await fetch(Constants.NUGETS_LATEST+`?count=${count}`);
 
     if (response.ok)
@@ -35,9 +37,15 @@ async function fetchLatestNugets(){
         const json = await response.json();
 
         const nugets = json.map((n)=>{
+
+            // const by=[... new Set([ ...n.owners, ...n.authors])];
+
             return {
-                title: n,
-                link: `${Constants.NUGET_PACK_LINK}${n}#readme-body-tab`
+                id: n.id,
+                icon: n.icon || "",
+                by: n.owners.join(', '),
+                link: `${Constants.NUGET_PACK_LINK}${n.id}#readme-body-tab`,
+                status: n.status
             }
         })
         

@@ -9,6 +9,19 @@ $orange-hover: #ee4b28;
 .overview
 {
 
+  .nugets{
+    .by{
+      font-size: 0.8rem;
+      color: #888;
+      padding: 0.1rem 1rem;
+    }
+
+    .new{
+      background-color: #aaa;
+      color: #fff !important;
+    }
+  }
+
   a.all {
     text-transform: uppercase;
     text-decoration: underline;
