@@ -40,7 +40,7 @@ const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
     <n-spin :show="loading">
         <div class="logoListView" v-if="!loading && store">
             <!-- <Map v-model:state="state"/> -->
-            <p v-if="store.total > 0">{{ store.total }} educational institutions teaching vvvv:</p>
+            <p v-if="store.total > 0">{{ store.total }} Institutions where vvvv serves in parts of the education program:</p>
             <div class="row">
                 <div v-for="{ name, description, logo, location_city, location_country } in store.items" 
                     track-by="name"
