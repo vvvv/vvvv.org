@@ -11,6 +11,8 @@ export default Object({
 
     //LINKS
     FORUM:"https://forum.vvvv.org/",
+    NUGET_ORG:"https://www.nuget.org/packages?q=tag%3Avl&includeComputedFrameworks=true&prerel=true&sortby=created-desc",
+    NUGET_PACK_LINK:"https://www.nuget.org/packages/",
     
     //DATA
     BASEURL: DATAURL, 
@@ -21,6 +23,7 @@ export default Object({
     GET_HIRE: DATAURL + 'items/Hire',
     
     //BACKEND
+    NUGETS_LATEST: BACKENDURL + 'latestNugets',
     FORUM_TOPICS: BACKENDURL + 'discourseTopics',
     FORUM_JOBS: BACKENDURL + 'discourseJobs',
     BACKEND_GET_USER: BACKENDURL + "userinfo",

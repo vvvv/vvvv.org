@@ -9,6 +9,7 @@ import Connections from '../components/overview/Connections.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 import Opportunities from '../components/overview/Opportunities.vue'
+import LatestNugets from '../components/overview/LatestNugets.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -62,6 +63,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
             <Businesses class="mt-4"/>
         </div>
         <div class="col mb-4 mb-md-0 order-1 order-md-2">
+            <LatestNugets/>
             <Opportunities/>
         </div>
     </div>

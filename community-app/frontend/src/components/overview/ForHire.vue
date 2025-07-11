@@ -34,7 +34,7 @@ function showAll()
 
 <template>
         <div class="section pr-4">
-            <SectionTitle :loading="loading" title="Professionals for Hire" @showAll="showAll" showAllLink="/forhire/">
+            <SectionTitle :loading="loading" title="Professionals for Hire" @showAll="showAll" link="/forhire/">
                 <NBadge v-if="!loading && store.total" :value="store.total" color="grey"/>
             </SectionTitle>
             <div class="row overflow-auto">

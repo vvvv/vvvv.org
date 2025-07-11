@@ -2,13 +2,12 @@
 
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { NIcon, NEllipsis, NSkeleton, NBadge, NTooltip } from 'naive-ui'
-import { SyncSharp } from '@vicons/ionicons5'
-import { useLatestTopicsStore } from './LatestTopicsStore.js'
+import { NEllipsis, NSkeleton } from 'naive-ui'
+import { useLatestNugetsStore } from './LatestNugetsStore.js'
 import Constants from '../../constants.js'
 import SectionTitle from './SectionTitle.vue'
 
-const store = useLatestTopicsStore();
+const store = useLatestNugetsStore();
 const loading = ref(false);
 const router = useRouter();
 
@@ -30,22 +29,25 @@ async function sync(force)
     }
 }
 
+function showAll()
+{
+    window.location.replace(Constants.NUGET_ORG);
+}
 </script>
 
 <template>
     <div class="section pl-4">
-        <SectionTitle :showRefresh="true" :loading="loading" title="Latest Forum Topics" @sync="sync(true)" :link="Constants.FORUM" :isExternal="true"/>
+        <SectionTitle :showRefresh="true" :loading="loading" title="Latest NuGets tagged with VL" @sync="sync(true)" :link="Constants.NUGET_ORG" :isExternal="true"/>
         <div class="row pt-2">
             <template v-if="loading">
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
             </template>
             <template v-else>
-                <ul v-if="store.topics.length > 0" class="list-group list-group-flush list">
-                    <li v-for="(topic, index) in store.topics" :key="index" class="list-group-item d-flex flex-nowrap link">
+                <ul v-if="store.nugets.length > 0" class="list-group list-group-flush list">
+                    <li v-for="(nuget, index) in store.nugets" :key="index" class="list-group-item d-flex flex-nowrap link">
                         <NEllipsis :line-clamp="1" :tooltip=false>
-                            <a :href="topic.link" target="_blank">{{ topic.title }}</a>
+                            <a :href="nuget.link" target="_blank">{{ nuget.title }}</a>
                         </NEllipsis>
-                        <NBadge v-if="topic.count>0" :value="topic.count" color="DarkGray" class="ml-2"/>
                     </li>
                 </ul> 
                 <div v-else class="m-3">Okay, Houston... we've had a problem here.<br/>Try again later.</div>
