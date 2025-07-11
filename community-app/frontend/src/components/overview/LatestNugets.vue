@@ -21,8 +21,6 @@ async function sync(force)
     try {
         loading.value = true;
         await store.fetch(force);
-        
-        console.log (store.nugets);
     }
     catch(error) {
         console.log (error);
