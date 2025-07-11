@@ -5,6 +5,7 @@ import { NTooltip, NSkeleton, NBadge, NButton } from "naive-ui"
 import { showBusinessProfile } from "../../utils.js"
 import { useBusinessesStore } from './businessesStore.js'
 import defaultLogo from '../../assets/defaultLogo.png'
+import SectionTitle from './SectionTitle.vue'
 
 const loading = ref(false);
 const router = useRouter();
@@ -36,15 +37,12 @@ function showAll()
 </script>
 
 <template>
-    <div class="section">
-        <div class="row pb-2 mb-2 border-bottom">
-            <div class="col-auto mr-auto d-flex">
-                <a href="/businesses/" @click.prevent="showAll" class="pr-3"><h2>Businesses using vvvv</h2></a>
-                <NBadge v-if="!loading && store.total" :value="store.total" color="grey"/>
-            </div>
-        </div>
-        <div class="overflow-auto">
-            <div class="row flex-nowrap d-flex no-gutters pt-2 pb-2 mb-2 align-items-center pl-3">
+    <div class="section pr-4">
+        <SectionTitle :loading="loading" title="Businesses using vvvv" @showAll="showAll" showAllLink="/businesses/">
+            <NBadge v-if="!loading && store.total" :value="store.total" color="grey"/>
+        </SectionTitle>
+        <div class="row overflow-auto">
+            <div class="flex-nowrap d-flex no-gutters pt-2 pb-2 mb-2 align-items-center">
                 <template v-if="loading">
                         <NSkeleton v-for="n in 8" :key="n" :width="50" :sharp="false" size="medium" class="m-3"/>
                 </template>

@@ -26,51 +26,55 @@ $orange-hover: #ee4b28;
   }
 
   .section{
-    border-radius: 5px;
-    background-color: #fafafa;
     padding: 1rem;
 
     h2{
       font-size: 1.1rem;
       font-weight: 600;
+      margin-bottom: 0.2rem;
     }
 
-    .forumList{
-      width: 100%;
+    .sectionBorder{
+      border-bottom: 1px solid #000;
     }
-    
-    .forumLink{
-      background-color: inherit;
-      font-size: 0.9rem;
-      border-color: #eee;
+
+    .list{
+      width: 100%;
+      
+      li{
+        padding: 0.5rem 0rem;
+        margin: 0px;
+      }
+      
+      a{
+        background-color: inherit;
+        font-size: 0.9rem;
+        border-color: #eee;
+      }
     }
   }
 
-  .socialHeader{
-    .socialItem{
-      border-radius: 5px;
-      background-color: #fafafa;
-  
+  .socialItem{
+          
+    a{
       font-size: 0.9rem;
-  
-      img{
-        width: 24px;
-        height: 24px;
-      }
-  
-      .link{
-        background-color: inherit;
-      }
+      color: #666;
 
-      a:hover{
+      &:hover{
         color: $orange;
       }
-  
-      h6{
-        font-weight: 600;
-      }
+    }
+
+    img{
+      width: 24px;
+      height: 24px;
+    }
+
+    h6{
+      font-weight: 600;
     }
   }
+
 }
 
 #UsersForHire{

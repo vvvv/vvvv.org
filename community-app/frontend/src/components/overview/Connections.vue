@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { connections } from '../../connections.js'
 import { logos } from '../logos/logos.js'
-import ConnectionsItem from '../ConnectionsItem.vue';
+import ConnectionsItem from './ConnectionsItem.vue';
 
 const sortedConnections = computed(()=> {
     const c = [...connections].sort((a, b) => (a.order ?? 100) - (b.order ?? 100));

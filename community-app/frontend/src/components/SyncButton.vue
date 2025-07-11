@@ -3,7 +3,7 @@ import { NIcon, NTooltip } from 'naive-ui'
 import { SyncSharp } from '@vicons/ionicons5'
 </script>
 <template>
-    <div>
+    <div class="text-right">
         <NTooltip trigger="hover" placement="top">
             <template #trigger>
                 <NIcon :size="20" alt="Sync" color="DarkGray" style="cursor: pointer;">

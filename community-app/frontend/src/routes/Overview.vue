@@ -65,9 +65,8 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
             <Opportunities/>
         </div>
     </div>
-    <div class="row mt-4 overview">
+    <div class="row mt-4 overview pt-4">
         <div class="col">
-            <h4 class="border-bottom pb-2">Connections</h4>
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 <Connections/>
             </div>
