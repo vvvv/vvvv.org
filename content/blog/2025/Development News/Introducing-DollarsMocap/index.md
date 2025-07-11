@@ -1,33 +1,38 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-04-01"
+date: "2025-07-11"
 title: "Introducing: DollarsMoCap"
-description: "A new way to track a skeleton"
+description: "Probably the simplest way to achieve full body tracking"
+thumb: "logo.png"
 ---
 
-Dear trackers of skeletons!
+Dear body trackers!
 
-There are many options for skeleton trackings you can use with vvvv:
-- Kinect (the original one)
-- Kinect 2
-- Azure Kinect
-- Orbbec
-- ...
+There are many options for skeleton tracking you can use with vvvv:
+- [Kinect](https://www.nuget.org/packages/VL.Devices.Kinect) (the original one)
+- [Kinect 2](https://www.nuget.org/packages/VL.Devices.Kinect2)
+- [Azure Kinect](https://www.nuget.org/packages/VL.Devices.AzureKinect)
+- [Orbbec Femto](https://www.nuget.org/packages/VL.Devices.AzureKinect.Femto)
+- [ZED](https://www.nuget.org/packages/VL.Devices.ZED)
 
-Those options all require the according specific depth camera. Now here is a new option that doesn't require additional hardware and tracks a single 3d skeleton (including fingers and face!) even from a simple webcam: 
+But those options all require the according specific depth camera, which you might not always have around. Now here is a new option that doesn't require additional hardware and tracks a single 3d skeleton (including fingers and face!) even from a simple webcam: 
 
-[Dollars Mono](https://www.dollarsmocap.com/mono) by [Dollars MoCap](https://www.dollarsmocap.com/)
+Introducing: **[Dollars Mono](https://www.dollarsmocap.com/mono)** by [Dollars MoCap](https://www.dollarsmocap.com/)
+
+Watch this demo of their technology to get an idea of the quality of tracking you can expect:
 
 {{< youtube gBbKCGwMFeY >}}
 
-The above demo of their technology shows quite well the quality of tracking you can expect.
+To use the tracking data in vvvv to control an avatar, all you need to do is load a rigged model and provide a joint mapping, ie. a spread of joint names the model comes with, that aligns with the joint names as returned by DollarsMoCap.
 
-Many thanks to the creator of Dollars MoCap for the great support and helping us along the way of implementing this for vvvv. 
+![](applyskeleton.png)
+
+Many thanks go out to Kan Feng, the creator of Dollars MoCap, for the great support and helping us along the way of implementing this for vvvv!
 
 ## How do i get it?
 
-As of this writing, requires latest vvvv gamma 7.0 preview builds. Then install as usual:
+As of this writing, requires latest [vvvv gamma 7.0 preview](https://vvvv.org/download/) builds. Then install as usual:
 
     nuget install VL.DollarsMoCap -pre
 
