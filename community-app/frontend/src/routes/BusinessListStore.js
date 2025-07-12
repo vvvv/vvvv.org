@@ -29,7 +29,7 @@ export const useBusinessListStore = defineStore ('businessList',{
 })
 
 const URL = Constants.BASEURL+`items/Company?fields=*&sort=name&meta=filter_count`;
-const LOGO_SETTINGS = 'withoutEnlargement=true&fit=inside&height=50&quality=90&format=auto';
+const LOGO_SETTINGS = 'withoutEnlargement=true&fit=inside&height=120&quality=90&format=png';
 
 function logoSrc (src)
 {

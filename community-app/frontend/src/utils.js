@@ -12,23 +12,24 @@ export function isString( value )
     return typeof value == 'string'
 }
 
-export const showUserProfile = (username, event) => {
-    router.push({name: 'User Profile', params: { username: username }});
-    if (event) event.preventDefault();
-}
 
 export function shuffle(array)
 {
     return array.sort(() => 0.5 - Math.random());
 }
 
-export const showBusinessProfile = (name, event) => {
-    router.push({name: 'Business Profile', params: { name: name }});
+export const showUserProfile = (username, event) => {
+    router.push({name: 'Personal Profile', params: { username: encodeURI(username) }});
     if (event) event.preventDefault();
 }
 
-export const showEduProfile = (name, event) => {
-    router.push({name: 'Educational Institution Profile', params: { name: name }});
+export const showBusinessProfile = (slug, event) => {
+    router.push({name: 'Business Profile', params: { slug: slug }});
+    if (event) event.preventDefault();
+}
+
+export const showEduProfile = (slug, event) => {
+    router.push({name: 'Educational Institution Profile', params: { slug: slug }});
     if (event) event.preventDefault();
 }
 
@@ -98,29 +99,31 @@ export const removeProps = (obj, props) => props.forEach(prop => delete obj[prop
 export const createAssetUrl = id => id && Constants.ASSETS + id
 
 export const post = async (url, payload) =>{
-  try{
-    const token = await getAccessToken()
-    const response = await fetch(url, {
-      headers: { 
-        "Content-Type": "application/json",
-        'Authorization': token
-      },
-      method: "POST",
-      body: JSON.stringify(payload)
-    })
-  
-    const json = await response.json()
-  
-    if (json.error)
-    {
-        throw new Error (data.response.error)
-    }
-    
-    return json
+
+  const token = await getAccessToken()
+  const response = await fetch(url, {
+    headers: { 
+      "Content-Type": "application/json",
+      'Authorization': token
+    },
+    method: "POST",
+    body: JSON.stringify(payload)
+  })
+
+  if (!response.ok)
+  {
+    const error = await response.json()
+    throw new Error (error)  
   }
-  catch(error) {
-    throw new Error (error)
+
+  const json = await response.json()
+
+  if (json.error)
+  {
+      throw new Error (data.response.error)
   }
+  
+  return json;
 }
 
 export const removeFile = async (id) =>{

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
@@ -7,10 +8,11 @@ import { countries } from '../../countries.js'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import Editor from './Editor.vue'
 import { post, clone, createAssetUrl, makeFields, showBusinessProfile }  from '../../utils.js'
-import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
+import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
-import { useBusinessListStore } from "../../routes/businessListStore.js";
+import StatusTag from '../StatusTag.vue'
+import { useBusinessListStore } from "../../routes/BusinessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -30,6 +32,7 @@ const emptyCompany = {
   enabled: false,
   logo: null,
   name: "",
+  slug: "",
   tagline: "",
   description: "",
   internships: false,
@@ -37,11 +40,13 @@ const emptyCompany = {
   projects_url: "",
   jobs_url: "",
   status: 0,
+  website: "",
   social: {}
 }
 
 const prepareData = ()=>{
-  const temp = { ...data };
+
+  const temp = clone(data);
 
   if (temp.companies?.length > 0)
   {
@@ -57,11 +62,15 @@ const prepareData = ()=>{
   else
   {
     temp.companies = [{ ...emptyCompany}];
-    temp.companies[0].social.fields = makeFields([], 4);
+    const defaultSocial = {
+      fields: makeFields([], 4),
+      website: ""
+    };
+    temp.companies[0].social = defaultSocial;
     companyExists.value = false;
   }
 
-  form.value = temp.companies
+  form.value = temp.companies;
 }
 
 const noSpaces = (rule, value) =>{
@@ -71,16 +80,27 @@ const noSpaces = (rule, value) =>{
   return true;
 }
 
-const noSpacesValidator = {
-    validator: noSpaces,
-    trigger: ['blur', 'input']
-  }
-
 const rules = {
   name: {
     required: true,
     message: "Name is required",
-    trigger: ['blur', 'input']
+    trigger: ['input', 'blur'],
+  },
+  website: {
+    required: true,
+    message: "Website is required",
+    trigger: ['input', 'blur'],
+    validator: (rule, value)=>{
+      return form.value[0]?.social?.website?.length > 0;
+    }
+  },
+  logo: {
+    required: true,
+    message: "Logo is required",
+    trigger: ['input', 'blur'],
+    validator: (rule, value)=>{
+      return logo.value != null || tempLogo.value != null ;
+    }
   }
 }
 
@@ -97,16 +117,6 @@ const updateTempLogo = (id) =>{
   tempLogo.value = id
 }
 
-async function validate(form)
-{
-    return new Promise (async (resolve, reject)=>{
-        form.value.validate((error)=>{
-          if (error) reject(error);
-          else resolve();
-        });
-    })
-}
-
 const submit = async () => {
 
   try{
@@ -119,6 +129,17 @@ const submit = async () => {
   }
 
   const formValue = clone(form.value[0]);
+  delete formValue.status;
+  delete formValue.website;
+
+  if (!form.value[0].slug)
+  {
+    formValue.slug = slug.value;
+  }
+  else
+  {
+    delete formValue.slug;
+  }
 
   if (tempLogo.value == null)
   {
@@ -131,29 +152,36 @@ const submit = async () => {
 
   try{
     const response = await post(Constants.EDIT_COMPANY, formValue)
-  
-    if (tempLogo.value)
-    {
-      logo.value = createAssetUrl(tempLogo.value);
-      tempLogo.value = null;
-    }
-  
-    //Update fields in data
-    data.companies[0] = formValue;
-
-    if (uploader.value) 
-    {
-      uploader.value.reset()
-    }
-  
-    store.fetch(true);
     
-    emit('updateData', data);
-    emit('message', { type: 'success', string: 'Updated'});
+    if (response.code === 'SUCCESS' || 'NEW')
+    {
+      if (tempLogo.value)
+      {
+        logo.value = createAssetUrl(tempLogo.value);
+        tempLogo.value = null;
+      }
+    
+      //Update fields in data
+      data.companies[0] = formValue;
+      
+      if (response.code === 'NEW') 
+      {
+        data.companies[0].status = form.value[0].status = '0';
+      }
+
+      if (uploader.value) 
+      {
+        uploader.value.reset()
+      }
+    
+      store.fetch(true);
+      
+      emit('updateData', data);
+      emit('message', { type: 'success', string: response.result});
+    }
   }
   catch (error)
   {
-    console.log (error);
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
   }
   finally{
@@ -166,6 +194,10 @@ const logoButtonText = computed(()=>{
   return logo.value !== null ? "Upload new" : "Upload Logo" 
 })
 
+const slug = computed(()=>{
+  return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
+})
+
 </script>
 
 <template>
@@ -173,7 +205,7 @@ const logoButtonText = computed(()=>{
     <div class="row justify-content-between" v-if="form !== null">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Business publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible"/>
+          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible" @update:value="submit" :disabled="!(companyExists || form[0].name)"/>
       </div>
       <div class="col-12 col-sm-4 text-sm-right" v-if="companyExists && form[0].enabled">
         <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Business</a>
@@ -182,7 +214,7 @@ const logoButtonText = computed(()=>{
 
       <hr class="mt-1 mb-4"/>
 
-      <div class="h2" v-if="companyExists">{{ form[0].name }}</div>
+      <div class="h2 mb-3" v-if="companyExists">{{ form[0].name }}</div>
 
 
       <NForm
@@ -194,26 +226,26 @@ const logoButtonText = computed(()=>{
           :label-width="150"
           require-mark-placement="right-hanging"
           >
-        <n-form-item label="Logo">
+        <n-form-item label="Logo" path="logo">
           <div class="container mx-0 px-0">
             <div class="row">
-              <div class="col-12 col-xl-3" v-if="logo !== null">
+              <div class="col-12 col-xl-3" v-if="logo">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-12 col-xl-9">
-                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader"/>
+              <div class="col-12 col-xl-auto">
+                <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader" type="company"/>
+                <NAlert v-if="tempLogo" title="Uploaded" type="success">
+                        Press 'Submit' below to update the Logo.
+                </NAlert>
               </div>
             </div>
           </div>
         </n-form-item>
 
-        <template v-if="companyExists">
-          <n-form-item label="Status" path="status" v-if="form[0].status != '1'">
-            <n-tag :bordered="false" type="warning" v-if="form[0].status == '0'">Not yet confirmed</n-tag>
-            <n-tag :bordered="false" type="error" v-if="form[0].status == '2'">Disabled</n-tag>
-          </n-form-item>
-        </template>
-        <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+        <StatusTag :value="form[0].status"/>
+
+          <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+          <InputField path="slug" type="company" v-model="slug" :disabled="true"/>
         <div class="row">
           <div class="col">
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>
@@ -245,15 +277,17 @@ const logoButtonText = computed(()=>{
         
         <SocialFields v-model:value="form[0].social" type="company"/>
 
+        
+        <InputField path="contact_url" v-model="form[0].contact_url"/>
+        <InputField path="projects_url" v-model="form[0].projects_url"/>
+        <InputField path="jobs_url" v-model="form[0].jobs_url"/>
+
         <FormItem path="internships">
           <template #content>
             <NSwitch v-model:value="form[0].internships"/>
           </template>
         </FormItem>
-        
-        <InputField path="contact_url" v-model="form[0].contact_url"/>
-        <InputField path="projects_url" v-model="form[0].projects_url"/>
-        <InputField path="jobs_url" v-model="form[0].jobs_url"/>
+
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

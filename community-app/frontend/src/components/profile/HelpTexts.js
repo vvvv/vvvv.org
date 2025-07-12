@@ -1,4 +1,18 @@
 const data = Object({
+    image:{
+        user:{
+            help:"webp, png, jpg; square; max 512x512; max 1MB"
+        },
+        company:{
+            help:"webp, png, jpg; any aspect ratio; max 512x512; max 1MB"
+        },
+        edu:{
+            help:"webp, png, jpg; any aspect ratio; max 512x512; max 1MB"
+        },
+        hire:{
+            help:"webp, png, jpg, gif; any aspect ratio; max 1024x1024; max 1MB"
+        }
+    },
     beta_since:{
         label: "Started using vvvv beta in",
         help: "The year you started using vvvv beta",
@@ -48,12 +62,17 @@ const data = Object({
     peertube: {
         label: "PeerTube",
         help: "Url to your PeerTube profile",
-        placeholder: "https://mypeertube.tv/c/me"
+        placeholder: "mypeertube.tv/c/me"
     },
     youtube: {
         label: "YouTube",
         help: "Your YouTube handle",
         placeholder: "@vvvvTv42"
+    },
+    vimeo: {
+        label: "Vimeo",
+        help: "Your Vimeo handle",
+        placeholder: "vvvvleaks"
     },
     matrix: {
         label: "Matrix",
@@ -109,6 +128,11 @@ const data = Object({
             placeholder: "My Institution"
         }
     },
+    slug:{
+        label: "Slug",
+        help: "URL-safe version of a name or title, used in links.",
+        placeholder: "Auto-generated"
+    },
     tagline: {
         company: {
             label: "Tagline",
@@ -119,16 +143,19 @@ const data = Object({
     description: {
         user:{
             label: "Description",
-            help: 'A short introduction about yourself'
+            help: 'A short introduction about yourself',
+            info: 'The above field allow [Markdown]'
         },
         company: {
             label: "Description",
-            help: "A short introduction to your company and it's services"
+            help: "A short introduction to your company and it's services",
+            info: 'The above field allow [Markdown]'
         },
         edu:
         {
             label: "Description",
-            help: "A short introduction to your institution and the courses involving vvvv"
+            help: "A short introduction to your institution and the courses involving vvvv",
+            info: 'The above field allow [Markdown]'
         }
     },
     course_language:{
@@ -150,11 +177,13 @@ const data = Object({
         placeholder: 'https://mybusiness.com/contact'
     },
     jobs_url:{
-        label: "Jobs",
-        help: 'In case your business website has an extra "Jobs" url',
+        label: "We're Hiring",
+        help: 'In case your business website has an extra url for vacancies',
         placeholder: 'http://mybusiness.com/jobs'
+    },
+    hire:{
+        info: 'The above fields allow [Markdown]'
     }
-
 })
 
 export function getValue(path, key, type)
@@ -172,6 +201,11 @@ export function getValue(path, key, type)
     }
 
     return undefined;
+}
+
+export function getImageHelps(type)
+{
+    return data.image[type];
 }
 
 export default data;

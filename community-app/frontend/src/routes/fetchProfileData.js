@@ -95,12 +95,13 @@ async function loadProfile() {
     delete user.edus
 
     social.fields = makeFields(social.fields ?? [], 4);
+    
     companies.forEach((c)=>{
-        c.social.fields = makeFields(c.social.fields ?? [], 4);
+        (c.social ??= {}).fields = makeFields(c.social.fields ?? [], 4);
     })
 
     edus.forEach((c)=>{
-        c.social.fields = makeFields(c.social.fields ?? [], 4);
+        (c.social ??= {}).fields = makeFields(c.social.fields ?? [], 4);
     })
 
     return {

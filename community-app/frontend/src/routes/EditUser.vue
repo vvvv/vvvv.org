@@ -126,10 +126,10 @@ const handleUpdateValue = (key, item) => {
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-md-3 mb-md-0 mb-5 profile-menu">  
+            <div class="col-12 col-lg-3 mb-lg-0 mb-5 profile-menu">  
               <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
             </div>
-            <div class="col-12 col-md-8 ml-md-1">
+            <div class="col-12 col-lg-8 ml-lg-1">
                 <component :is="selected" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
               </div>
             </div>

@@ -7,6 +7,7 @@ import { fetchUserData } from "./fetchUserData.js";
 import { showUserProfile } from "../utils.js"
 import AvatarColumn from '../components/AvatarColumn.vue'
 import ForHireColumn from '../components/ForHireColumn.vue'
+import debounce from 'lodash/debounce'
 
 const windowWidth = ref(window.innerWidth);
 const router = useRouter();
@@ -19,13 +20,16 @@ const state = reactive({
     totalCount: 0,
     pageSize: 10,
     filter: "",
-    sort: null
+    sort: {
+        order: "ascend",
+        columnKey: "last_modified"
+    }
 })
 
 onMounted(()=>{
-    if (route.query.u)
+    if (route.query.p)
     {
-        showUserProfile (route.query.u);
+        showUserProfile (decodeURIComponent(route.query.p));
         return;
     }
 
@@ -45,8 +49,8 @@ function onWidthChange(){
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
-    { label: '20 per page', value: 20 },
-    { label: '50 per page', value: 50 }
+    { label: '50 per page', value: 50 },
+    { label: '100 per page', value: 100 }
 ]
 
 
@@ -97,7 +101,7 @@ const loading = ref(true)
 const columns = [
     {
         key: 'avatar',
-        width: 60,
+        width: 30,
         render(row) {
             return h(
                 AvatarColumn,
@@ -133,9 +137,9 @@ const columns = [
         sorter: true
     },
     {
-        title: 'Available for Hire',
+        title: 'For Hire',
         key: 'related.hire.available',
-        width: 60,
+        width: 40,
         ellipsis: true,
         sorter: true,
         render(row) {
@@ -148,10 +152,17 @@ const columns = [
     {
         title: 'Since',
         key: 'date_created',
-        width: 70,
+        width: 40,
         ellipsis: true,
         sorter: true
-    }   
+    },
+    {
+        title: 'Updated',
+        key: 'last_modified',
+        width: 40,
+        ellipsis: true,
+        sorter: true
+    }    
 
 ]
 
@@ -227,12 +238,19 @@ async function fetch()
     }
 }
 
+const setDebouncedFilter = debounce((value)=>{
+        state.filter = value;
+}, 400);
+
+const onInput = (value) => {
+    setDebouncedFilter(value);
+};
 
 </script>
 
 <template>
     <div class="row mb-3">
-        <div class="col-12 mb-3 mb-md-0 col-md">
+        <div class="col-12 col-md-5 mb-3 mb-md-0">
             <n-input 
                 v-model:value="filterField" 
                 type="text" 
@@ -241,18 +259,21 @@ async function fetch()
                 @clear="clearFilter" 
                 @keyup.enter="applyFilter"
                 @keyup.esc="clearFilter"
+                @update:value="onInput"
+                :loading="loading ? loading : undefined"
                 clearable/>
             <n-button 
                 strong 
                 secondary 
                 @click="applyFilter" 
-                class="ml-xs-0 ml-2">Search</n-button>
+                class="ml-xs-0 ml-2 mr-3 mb-md-2">Search</n-button>
         </div>
-        <div class="ml-3 ml-md-auto mr-3">
+        <div class="ml-3 mr-3 ml-md-auto">
             <n-pagination 
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
+                :page-size="state.pageSize"
                 :page-slot="5"
                 show-size-picker
                 :on-update:page="handlePageChange"
@@ -265,6 +286,7 @@ async function fetch()
                 :bordered="false"
                 :columns="columnsRef"
                 :data="tableData"
+                :sorter="state.sort"
                 @update:sorter="s => state.sort = s"
                 class="userTable"
                 style="white-space: pre;"/>
@@ -275,6 +297,7 @@ async function fetch()
                     :page="state.currentPage" 
                     :page-count="state.totalPages"
                     :page-sizes="pageSizes"
+                    :page-size="state.pageSize"
                     :page-slot="5"
                     show-size-picker
                     :on-update:page="handlePageChange"

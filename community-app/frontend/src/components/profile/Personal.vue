@@ -7,8 +7,9 @@ import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
 import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import { post, clone, createAssetUrl, showUserProfile }  from '../../utils.js'
-import { NAvatar, NDatePicker, NAlert, NSelect, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
+import { NAvatar, NSelect, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
+import StatusTag from '../StatusTag.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -22,6 +23,8 @@ const tempUserpic = ref(null);
 const updating = ref(false);
 const uploader = ref(null);
 const limit = 500;
+const betaYears = ref([]);
+const gammaYears = ref([]);
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
 
@@ -34,17 +37,26 @@ const prepareData = ()=>{
     userpic.value = createAssetUrl(temp.user.userpic.id) + imageParams;
   }
 
-  if (temp.user?.beta_since)
-    temp.user.beta_since = Date.parse(temp.user.beta_since);
-
-  if (temp.user?.gamma_since)
-    temp.user.gamma_since = Date.parse(temp.user.gamma_since);
-
   form.value = {
     user: temp.user,
     social: temp.social
   }
 
+  const currentYear = new Date().getFullYear();
+
+  betaYears.value = range(2001, currentYear);
+  gammaYears.value = range (2015, currentYear);
+
+}
+
+function range(start, end) {
+  return Array.from({ length: end - start + 1 }, (_, i) => {
+    const year = start + i;
+    return {
+      label: year,
+      value: year
+    }
+  });
 }
  
 onMounted(()=>{  
@@ -71,8 +83,9 @@ const updateTempUserpic = (id) =>{
 const submit = async () => {
 
   updating.value = true;
-  const formValue  = clone (form.value);
-  
+  const formValue  = clone(form.value);
+  delete formValue.status;
+
   let discourse = {};
 
   if (tempUserpic.value == null)
@@ -98,11 +111,6 @@ const submit = async () => {
   if (formValue.user?.userpic && (formValue.user.userpic != data.user?.userpic))
     discourse.avatar = true;
 
-  if (formValue.user?.gamma_since)
-    formValue.user.gamma_since = new Date(formValue.user.gamma_since).toISOString(); 
-  if (formValue.user?.beta_since)
-    formValue.user.beta_since = new Date(formValue.user.beta_since).toISOString();   
-
   const body = {
     user: formValue.user,
     social: formValue.social
@@ -119,9 +127,9 @@ const submit = async () => {
   }
 
   try {
-    const response = await post(Constants.EDIT_BASICS, body);
+    const response = await post(Constants.EDIT_PERSONAL, body);
 
-    if (response.result == 'Updated')
+    if (response.code == 'SUCCESS' || 'NEW')
     {
       if (tempUserpic.value !== null)
       {
@@ -134,6 +142,8 @@ const submit = async () => {
       data.user = clone (formValue.user);
       data.social = clone (formValue.social);
 
+      if (response.code === 'NEW') data.user.status = form.value.user.status = '0';
+
       if (uploader.value)
       {
         uploader.value.reset() 
@@ -145,7 +155,6 @@ const submit = async () => {
   }
   catch (error) {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
-    console.log (error);
   }
   finally {
     updating.value = false;
@@ -164,10 +173,10 @@ const avatarButtonText = computed(()=>{
     <div class="row justify-content-between">
       <div class="col-12 col-sm-8">
           <label class="text-nowrap mr-3">Profile publicly visible</label>
-          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
+          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submit"/>
       </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible">
-        <a :href="'/user/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
+      <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible && form.user?.status == '1'">
+        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
       </div>
     </div>
 
@@ -187,8 +196,8 @@ const avatarButtonText = computed(()=>{
                   <div class="col-12 col-xl-3" v-if="userpic !== null">
                     <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
                   </div>
-                  <div class="col-12 col-xl-9">
-                    <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader"/>
+                  <div class="col-12 col-xl-auto">
+                    <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader" type="user"/>
                     <NAlert v-if="tempUserpic" title="Uploaded" type="success">
                         Press 'Submit' below to update the Avatar.
                     </NAlert>
@@ -197,10 +206,8 @@ const avatarButtonText = computed(()=>{
             </div>  
         </n-form-item>
 
-        <n-form-item label="Status" path="status" v-if="form.user && form.user.status !== undefined && form.user.status != '1'">
-          <n-tag :bordered="false" type="warning" v-if="form.user.status == '0'">Not yet confirmed</n-tag>
-          <n-tag :bordered="false" type="error" v-else-if="form.user.status == '2'">Disabled</n-tag>
-        </n-form-item>
+        <StatusTag :value="form.user?.status"/>
+
         <div class="row">
           <div class="col-12 col-lg-6">
             <n-form-item label="Username" path="username">
@@ -259,17 +266,17 @@ const avatarButtonText = computed(()=>{
         <SocialFields v-model:value="form.social" type="user"/>
 
         <div class="row">
-          <div class="col">
+          <div class="col-12 col-md-6">
             <FormItem path="beta_since">
               <template #content>
-                <NDatePicker v-model:value="form.user.beta_since" type="year" clearable/>
+                <NSelect :options="betaYears" v-model:value="form.user.beta_since" clearable/>
               </template>
             </FormItem>
           </div>
-          <div class="col">
+          <div class="col-12 col-md-6">
             <FormItem path="gamma_since">
               <template #content>
-                <NDatePicker v-model:value="form.user.gamma_since" type="year" clearable/>
+                <NSelect :options="gammaYears" v-model:value="form.user.gamma_since" clearable/>
               </template>
             </FormItem>
           </div>

@@ -44,19 +44,16 @@ const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
             <!-- <Map v-model:state="state"/> -->
             <p v-if="store.total > 0">{{ store.total }} Businesses that use vvvv:</p>
             <div class="row">
-                <div v-for="{ name, description, logo, location_city, location_country, internships } in store.items" 
-                    track-by="name"
-                    :class="elementClass">
-                    <div class="companyCard p-3" @click="(event)=> showBusinessProfile(name, event)">
+                <div v-for="item in store.items" track-by="item.name" :class="elementClass">
+                    <div class="companyCard p-3" @click="(event)=> showBusinessProfile(item.slug, event)">
                         <div class="company">
                             <div class="logo">
-                                <img :src="logo || defaultLogo"/>
+                                <img :src="item.logo || defaultLogo"/>
                             </div>
-                            <p class="name">{{ name }}</p>
+                            <p class="name">{{ item.name }}</p>
                             
-                            <Internships :data="internships" text="Accepting internship" class="mb-1"/>
-                            <Location :location="{city: location_city, country: location_country}"/>
-
+                            <Internships :data="item" text="Accepting internship" class="mb-1"/>
+                            <Location :location="{city: item.location_city, country: item.location_country}"/>
                         </div>
                     </div>
                 </div>

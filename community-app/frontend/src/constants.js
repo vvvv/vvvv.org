@@ -11,6 +11,8 @@ export default Object({
 
     //LINKS
     FORUM:"https://forum.vvvv.org/",
+    NUGET_ORG:"https://www.nuget.org/packages?q=tag%3Avl&includeComputedFrameworks=true&prerel=true&sortby=created-desc",
+    NUGET_PACK_LINK:"https://www.nuget.org/packages/",
     
     //DATA
     BASEURL: DATAURL, 
@@ -21,10 +23,12 @@ export default Object({
     GET_HIRE: DATAURL + 'items/Hire',
     
     //BACKEND
+    NUGETS_LATEST: BACKENDURL + 'latestNugets',
     FORUM_TOPICS: BACKENDURL + 'discourseTopics',
+    FORUM_JOBS: BACKENDURL + 'discourseJobs',
     BACKEND_GET_USER: BACKENDURL + "userinfo",
     BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
-    EDIT_BASICS: BACKENDURL + "edit/personal",
+    EDIT_PERSONAL: BACKENDURL + "edit/personal",
     EDIT_HIRE: BACKENDURL + "edit/hire",
     EDIT_COMPANY: BACKENDURL + "edit/company",
     EDIT_EDU: BACKENDURL + "edit/edu",
@@ -33,5 +37,23 @@ export default Object({
         url: 'https://login.vvvv.org/',
         realm: 'vvvv', 
         clientId: 'weblogin'
-    }
+    },
+    FILE_TYPES: [
+        {
+            label: "gif",
+            mime: "image/gif"
+        },
+        {
+            label: "jpg",
+            mime: "image/jpeg"
+        },
+        {
+            label: "webp",
+            mime: "image/webp"
+        },
+        {
+            label: "png",
+            mime: "image/png"
+        }
+    ]
 })

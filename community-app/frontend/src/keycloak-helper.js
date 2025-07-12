@@ -3,6 +3,7 @@ import { keycloak } from "./keycloak";
 export const isAuthenticated = () => keycloak.authenticated
 export const kclogout = (url) => keycloak.logout({ redirectUri: url })
 export const kclogin = (url) => keycloak.login({ redirectUri: url })
+export const kcregister = (url) => keycloak.login ({ action: "register", redirectUri: url})
 
 export const getUsername = () => {
     if (keycloak.authenticated) {

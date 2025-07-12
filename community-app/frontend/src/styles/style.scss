@@ -2,8 +2,24 @@ $orange: #ffa800;
 $orange-link-hover: #ff8800;
 $orange-hover: #ee4b28;
 
+.noImageBack{
+  background-color: inherit;
+}
+
 .overview
 {
+
+  .nugets{
+    .by{
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .new{
+      background-color: #aaa;
+      color: #fff !important;
+    }
+  }
 
   a.all {
     text-transform: uppercase;
@@ -13,75 +29,87 @@ $orange-hover: #ee4b28;
   }
 
   .logo {
-    filter: grayscale(100%) opacity(70%);
+    height: 55px;
+    margin: 1rem 3rem 1rem 0;
 
-    &:hover{
-      filter: grayscale(0%) opacity(100%);
-      transition: filter 0.5s;
+    img{
+      max-height: 55px;
     }
   }
 
   .section{
-    border-radius: 5px;
-    background-color: #fafafa;
     padding: 1rem;
 
     h2{
       font-size: 1.1rem;
       font-weight: 600;
+      margin-bottom: 0.2rem;
     }
 
-    .forumList{
-      width: 100%;
+    .sectionBorder{
+      border-bottom: 1px solid #000;
     }
-    
-    .forumLink{
-      background-color: inherit;
-      font-size: 0.9rem;
-      border-color: #eee;
+
+    .list{
+      width: 100%;
+      
+      li{
+        padding: 0.5rem 0rem;
+        margin: 0px;
+      }
+      
+      a{
+        background-color: inherit;
+        font-size: 0.9rem;
+        border-color: #eee;
+      }
     }
   }
 
-  .socialHeader{
-    .socialItem{
-      border-radius: 5px;
-      background-color: #fafafa;
-  
+  .socialItem{
+          
+    a{
       font-size: 0.9rem;
-  
-      img{
-        width: 24px;
-        height: 24px;
-      }
-  
-      .link{
-        background-color: inherit;
-      }
+      color: #666;
 
-      a:hover{
+      &:hover{
         color: $orange;
       }
-  
-      h6{
-        font-weight: 600;
-      }
+    }
+
+    img{
+      width: 24px;
+      height: 24px;
+    }
+
+    h6{
+      font-weight: 600;
     }
   }
+
 }
 
 #UsersForHire{
   .card{
-
+    
+    color: inherit;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #f6f6f6;
+    
+    border: 0px;
+    
     .imageContainer
     {
       overflow: hidden;
     }
 
-    color: inherit;
-    cursor: pointer;
-
-    border: 0px;
-
+    .n-tag{
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      padding: 0.5rem 0.7rem;
+    }
 
     &:hover{
       background-color: #eee;
@@ -90,9 +118,6 @@ $orange-hover: #ee4b28;
       }
     }
    
-    border-radius: 3px;
-    background-color: #f6f6f6;
-
     img{
       transition: transform 0.1s ease;
 
@@ -104,14 +129,36 @@ $orange-hover: #ee4b28;
   }
 }
 
-#community
+#Community-app
 {
+
+  min-height: 30rem;
+  padding-bottom: 5rem;
+
+  .profile-logo{
+    max-width: 150px;
+    min-height: 150px;
+  }
+
   .userTable{
     white-space: pre;
   }
   
   h3{
     margin-bottom: 0px;
+  }
+
+  .profileContent
+  {
+    p{
+      line-height: 1.7rem;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 0.3rem;
+      text-decoration-color: #bbb;
+    }
   }
 }
 
@@ -131,6 +178,10 @@ $orange-hover: #ee4b28;
 
 #profile{
   text-align: left;
+
+  .imageHelp{
+    font-size: 0.8rem;
+  }
 
   hr{
     max-width: 100%;
@@ -153,10 +204,6 @@ $orange-hover: #ee4b28;
     font-size: 0.9rem;
   }
 
-  .field-input{
-    height: 8rem;
-  }
-
   .fullWidth{
     width: 100%;
     margin-left: inherit;
@@ -165,7 +212,6 @@ $orange-hover: #ee4b28;
 
   .field-preview{
     font-size: 0.9rem;
-    max-height: 8rem;
 
     p {
       font-size: inherit;
@@ -226,10 +272,25 @@ $orange-hover: #ee4b28;
   font-size: 0.9rem;
 }
 
+.internship{
+  color: #666;
+  font-size: 0.9rem;
+  a{
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+    text-decoration-color: #bbb;
+
+    &:hover{
+      text-decoration: underline;
+      text-decoration-color: #bbb;
+    }
+  }
+}
+
 .socialView{
   .key{
     text-transform: uppercase;
-    color: #666;
+    color: #888;
     font-size: 0.8rem;
     margin: 0.3rem 0rem 0.2rem;
   }
@@ -240,7 +301,6 @@ $orange-hover: #ee4b28;
 
   .socialItem
   {
-    border-bottom: 1px solid #ddd;
     padding-bottom: 0.7rem;
   }
 
@@ -249,6 +309,7 @@ $orange-hover: #ee4b28;
 .logoListView{
 
   .name{
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
   }
 
@@ -269,7 +330,7 @@ $orange-hover: #ee4b28;
   .company{
     cursor: pointer;
   }
-
+  
   .logo {
     height: 60px;
     img{

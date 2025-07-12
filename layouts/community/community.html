@@ -2,23 +2,21 @@
 <html class="scroll-padding">
     <head>
         {{ partial "head" . }}
-        <link rel="stylesheet" href="{{"/js/vue/index.css" | relURL}}">  
+        <link rel="stylesheet" crossorigin href="{{"/js/vue/main.css" | relURL}}">  
    </head>
 <body>
     <div class="main">
         {{ partial "nav" . }}
 
-        <div id="community" class="{{ .Params.theme }}">    
-            <div id="app" class="container"></div>
-        </div>
+        <div id="Community-app" class="container {{ .Params.theme }}"></div>
 
         {{ partial "videoBlocker" . }}
 
-        <!-- {{ partial "contact" . }}
+        {{ partial "contact" . }}
         
-        {{ partial "footer" . }} -->
+        {{ partial "footer" . }}
     </div>
     {{ partial "js" . }}
-    <script type="module" src="{{"/js/vue/app.js" | relURL}}" defer></script>
+    <script type="module" crossorigin src="{{"/js/vue/app.js" | relURL}}" defer></script>
 </body>
 </html>

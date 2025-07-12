@@ -11,9 +11,8 @@ import SocialView from '../components/SocialView.vue'
 import Location from '../components/Location.vue'
 import ClippedText from '../components/ClippedText.vue'
 import BetaGammaUser from '../components/BetaGammaUser.vue'
-
+import Maintains from '../components/Maintains.vue'
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
-import PartOf from '../components/PartOf.vue'
 
 
 const route = useRoute();
@@ -34,12 +33,18 @@ const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userp
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
             &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`;
 
-const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,logo`;
-const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,logo`;
+const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,slug`;
+const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,slug`;
 
 onMounted(async ()=>
 {
   loading.value = true;
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
 
   try
   {
@@ -62,7 +67,7 @@ onMounted(async ()=>
     hire.value = data.related[0]?.hire;
     social.value = data.related[0]?.social;
 
-    description.value = user.value.description;
+    description.value = toHtml(user.value.description);
 
     const partOfRequests = [getPartOf(companyURL), getPartOf(eduURL)];
     const [companyResult, eduResult] = await Promise.allSettled(partOfRequests);
@@ -91,7 +96,8 @@ async function getPartOf(url)
     {
       return {
         name: json.data[0].name,
-        logo: json.data[0].logo ? `${createAssetUrl(json.data[0].logo)}${imageParams}` : null
+        logo: json.data[0].logo ? `${createAssetUrl(json.data[0].logo)}${imageParams}` : null,
+        slug: json.data[0].slug
       }
     }
     return null;
@@ -107,7 +113,7 @@ const joined = computed(()=> new Date(user.value.date_created).toLocaleString("e
 
 function edit()
 {
-  router.push ({name: 'User Profile'});
+  router.push ({name: 'Personal Profile'});
 }
 
 const location = computed(()=>{
@@ -125,11 +131,12 @@ const forumLink = computed(()=>
 
 const betagammauser = computed(()=>
 {
-  const result = {};
-  if (user.value.beta_since) result.beta = new Date(user.value.beta_since).getFullYear();
-  if (user.value.gamma_since) result.gamma = new Date(user.value.gamma_since).getFullYear();
-
-  return Object.keys(result).length > 0 ? result : null;
+  const result = {
+    beta: user.value.beta_since,
+    gamma: user.value.gamma_since
+  };
+  
+  return result.beta || result.gamma ? result : null;
 })
 
 const website = computed(()=>{
@@ -147,6 +154,15 @@ const website = computed(()=>{
     return url;
 })
 
+const hireCardVisible = computed(()=>{
+  return  hire.value.skills_other || 
+          hire.value.skills_vvvv || 
+          hire.value.contact || 
+          (hire.value.availableFor && hire.value.availableFor.length > 0) || 
+          hire.value.description || 
+          hire.value.image;
+ })
+
 
 </script>
 
@@ -155,7 +171,7 @@ const website = computed(()=>{
     <div v-if="user" class="userView">
       <div class="row">
         <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
-              <NAvatar objectFit="contain" round :size="userpicSize" :src="userpic"/>
+              <NAvatar objectFit="contain" round :size="userpicSize" :src="userpic" :class="{ 'noImageBack': userpic !== null }"/>
 
               <div class="my-3">
                 <h5>{{ user.username }}
@@ -185,24 +201,27 @@ const website = computed(()=>{
                 {{ joined }}
               </div>
 
-              <Location v-if="location" :location="location"/>
+              <Location v-if="location" :location="location" class="pb-2"/>
 
-              <PartOf v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top pt-2 mt-4"/>
+              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top py-3 mt-4"/>
 
-              <SocialView class="mt-4 mb-4 pt-3 border-top" :social="social" v-if="social" />
+              <SocialView class="my-1 py-2 border-top" :social="social" v-if="social" />
 
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
-        <div class="col-12 col-md-6 col-lg-8">
+        <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
 
-          <div v-if="description" class="mb-4 description">
-            <ClippedText :text="description" :maxLength="255" :clippedLength="100"/>
-          </div>
+          <template v-if="description">
+            <hr class="d-block d-md-none"/>
+            <div class="mb-4 description">
+              <p v-html="description"></p>
+            </div>
+          </template>
 
           <div v-if="hire && hire.available">
             <h4 class="h4">Available for hire</h4>
-            <div class="card">
+            <div class="card" v-if="hireCardVisible">
               <HireView :data="hire"/>
             </div>
           </div>

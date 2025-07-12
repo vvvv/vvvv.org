@@ -9,9 +9,10 @@ import { toHtml, showUserProfile, getCountry, ensureHttps, stripHttp } from '../
 import SocialView from '../components/SocialView.vue'
 import LocationFull from '../components/LocationFull.vue'
 import MaintainedBy from '../components/MaintainedBy.vue'
+import InstitutionBasics from '../components/InstitutionBasics.vue'
 
 const route = useRoute();
-const name = route.params.name;
+const slug = route.params?.slug;
 
 const edu = ref(null);
 const loading = ref(false);
@@ -21,11 +22,18 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 onMounted(async ()=>
 {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+    });
+
+
     try{
         loading.value = true;
         error.value = null;
 
-        edu.value = await fetchEduProfile (name);
+        edu.value = await fetchEduProfile (slug);
         
         document.title = 'Profile: '+ edu.value.name;
         edu.value.description = toHtml(edu.value.description);
@@ -33,7 +41,7 @@ onMounted(async ()=>
     catch (err)
     {
         console.log (err);
-        error.value = "Something went wrong. Maybe an Institutional Institution is simply not yet confirmed.";
+        error.value = "Something went wrong or maybe an Institutional Institution is simply not yet confirmed.";
     }
     finally
     {
@@ -67,21 +75,14 @@ const url = computed(()=>{
         <div v-if="edu">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
-                    <div class="mb-3">
-                        <img v-if="edu.logo" :src="edu.logo" alt="logo" class="img-fluid"/>
-                        <div class="my-3">
-                            <h5>{{ edu.name }}</h5>
-                        </div>                     
-                        <LocationFull :data="edu"/>
-
-                        <SocialView class="text-left mt-4 mb-4 pt-3 border-top" v-if="edu.social" :social="edu.social" :order="socialKeys"/>
-
-                        <MaintainedBy class="text-left maintained mt-4 pt-3" :data="edu.owner"/>
-
-                    </div>
+                    <InstitutionBasics class="mb-3" :data="edu"/>
                 </div>
-                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8">
+                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8 mt-0 mt-md-3 mt-md-0 profileContent">
+                    
+                    <hr class="d-block d-md-none"/>
+                    
                     <p v-html="edu.description"></p>
+                    <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="edu.owner"/>
                 </div>
             </div>
         </div>

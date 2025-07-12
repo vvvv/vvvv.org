@@ -33,16 +33,16 @@ const routes = [
         meta: { tabName: 'Overview', visible: true, isLeft: true, order: 0 }
     },
     {
-        path: '/user/',
-        name: 'Users',
+        path: '/people/',
+        name: 'People',
         component: UserList,
-        meta: { tabName: 'Users', visible: true, isLeft: true, order: 1 }
+        meta: { tabName: 'People', visible: true, isLeft: true, order: 1 }
     },
     {
-        path: '/user/:username',
-        name: 'User Profile',
+        path: '/people/:username',
+        name: 'Personal Profile',
         component: UserView,
-        meta: { tabName: 'Users' }
+        meta: { tabName: 'People' }
     },
     {
         path: '/forhire/',
@@ -57,7 +57,7 @@ const routes = [
         meta: { tabName: 'Businesses', visible: true, isLeft: true, order: 3 }
     },
     {
-        path: '/business/:name',
+        path: '/business/:slug',
         name: 'Business Profile',
         component: BusinessView,
         meta: { tabName: 'Businesses' }
@@ -69,13 +69,13 @@ const routes = [
         meta: { tabName: 'Educational Institutions', visible: true, isLeft: true, order: 4 }
     },
     {
-        path: '/edu/:name',
+        path: '/edu/:slug',
         name: 'Educational Institution Profile',
         component: EduView,
         meta: { tabName: 'Educational Institutions' }
     },
     {
-        path: '/community/edit/',
+        path: '/edit-profile/',
         name: 'Edit Profile',
         component: EditUser,
         beforeEnter: requireAuth,
@@ -86,7 +86,14 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
-    strict: false
+    strict: false,
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve({ left: 0, top: 0 })
+        }, 200)
+        })
+    },
 });
 
 // Add global navigation guards for loading state

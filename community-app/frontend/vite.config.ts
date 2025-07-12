@@ -17,7 +17,7 @@ export default defineConfig({
       '@css': '/external/css',   // Alias for the symbolic link to the CSS folder
     },
   },
-  base: "http://localhost:5173/",
+  base: "./",
   server: {
     watch: {
       followSymlinks: true // Watch to symbolic links
@@ -26,20 +26,20 @@ export default defineConfig({
   build: {
     outDir: "../../static/js/vue/",
   rollupOptions: {
+    input: './src/main.js',
     output: {
       manualChunks: {
-        vue: ['vue', 'vue-router'],
-        showdown: ['showdown'],
-        keycloak: ['keycloak-js'],
-        leaflet: ['leaflet']
+        vue: ['vue'],
+        icons: ['@vicons/ionicons5'],
+        lodash: ['lodash']
       },
       entryFileNames: `app.js`,
-      chunkFileNames: 'app-chunk-[hash].js',
-      assetFileNames: 'app-asset-[hash].[ext]'
+      chunkFileNames: 'app-[name]-[hash].js',
+      assetFileNames: '[name].[ext]'
     },
     treeshake: true
   },
-  cssCodeSplit: true, // Ensure CSS is split into a separate file
+  // cssCodeSplit: true, // Ensure CSS is split into a separate file
   target: 'esnext',
   minify: true,
   sourcemap: false

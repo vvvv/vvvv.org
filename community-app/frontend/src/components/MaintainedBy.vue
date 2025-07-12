@@ -14,7 +14,7 @@ defineProps(['data']);
             <NIcon size="20" class="mr-2">
                 <PersonCircleOutline/>
             </NIcon>
-            <a :href="'/user/'+data.username" @click="(event) => showUserProfile(data.username, event)">{{ data.username }}</a>
+            <a :href="'/people/'+data.username" @click="(event) => showUserProfile(data.username, event)">{{ data.username }}</a>
         </div>
     </div>
 </template>

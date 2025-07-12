@@ -2,7 +2,7 @@ import Constants from '../constants'
 import { createAssetUrl, locationCityCountry } from '../utils'
 
 const DEFAULT_SORT = "sort=username"
-const FIELDS =`fields[]=username,userpic,related.hire.available,date_created,location_city,location_country`
+const FIELDS =`fields[]=username,userpic,related.hire.available,date_created,last_modified,location_city,location_country`
 
 const imageParams = "?withoutEnlargement=true&quality=90&fit=cover&width=120&height=120"
 
@@ -31,7 +31,8 @@ export async function fetchUserData (state)
             username: u.username,
             available: Array.isArray(u.related) ? u.related[0]?.hire?.available ?? false : false,
             date_created: new Date(u.date_created).toLocaleString("en-US", dateOptions),
-            location: locationCityCountry(u.location_city, u.location_country)
+            location: locationCityCountry(u.location_city, u.location_country),
+            last_modified: u.last_modified ? new Date(u.last_modified).toLocaleString("en-US", dateOptions) : "",
         }
     ))
 
@@ -54,8 +55,24 @@ function makeURL(state)
     if (state.sort?.order)
     {
         const dir = state.sort.order != "descend" ? "-" : "";
-        const key = state.sort.columnKey == "location" ? "location_country,location_city" : state.sort.columnKey;
-        sort = 'sort='+dir+key;
+
+        let key;
+
+        if (state.sort.columnKey == "location")
+        {
+            key = `${dir}location_country,${dir}location_city`;
+        }
+        else
+        {
+            key = dir + state.sort.columnKey;
+        }
+
+        if (state.sort.columnKey == "last_modified")
+        {
+            key = `${dir}last_modified,${dir}date_created`;
+        }
+        
+        sort = 'sort='+key;
     }
     else
     {
