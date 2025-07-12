@@ -38,14 +38,26 @@ async function fetchLatestNugets(){
 
         const nugets = json.map((n)=>{
 
-            // const by=[... new Set([ ...n.owners, ...n.authors])];
+            let status="";
+
+            try{
+                if (new Date(n.firstPublished).getTime() + twoWeeks > Date.now()) {
+                    status = "new";
+                }
+                else if (n.firstPublished != n.lastPublished) {
+                    status = "updated";
+                }
+            }
+            catch{
+                // server still using an old API. Status will stay ""
+            }
 
             return {
                 id: n.id,
                 icon: n.icon || "",
                 by: n.owners.join(', '),
                 link: `${Constants.NUGET_PACK_LINK}${n.id}#readme-body-tab`,
-                status: n.status
+                status: status
             }
         })
         

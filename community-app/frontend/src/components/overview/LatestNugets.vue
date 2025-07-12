@@ -2,7 +2,7 @@
 
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { NEllipsis, NSkeleton, NAvatar, NTag } from 'naive-ui'
+import { NEllipsis, NSkeleton, NImage, NTag } from 'naive-ui'
 import { useLatestNugetsStore } from './LatestNugetsStore.js'
 import Constants from '../../constants.js'
 import SectionTitle from './SectionTitle.vue'
@@ -45,12 +45,12 @@ function showAll()
             </template>
             <template v-else>
                 <ul v-if="store.nugets.length > 0" class="list-group list-group-flush list">
-                    <li v-for="(nuget, index) in store.nugets" :key="index" class="list-group-item d-flex flex-nowrap link">
-                        <NAvatar v-if="nuget.icon" objectFit="contain" :src="nuget.icon" :size="25" class="mr-3" :class="{ 'noImageBack': nuget.icon !== null }"/>
-                        <NEllipsis :line-clamp="1" :tooltip=false>
+                    <li v-for="(nuget, index) in store.nugets" :key="index" class="list-group-item d-flex flex-nowrap link align-items-baseline">
+                        <NImage v-if="nuget.icon" objectFit="contain" :src="nuget.icon" :height="25" class="align-self-center" :class="{ 'noImageBack': nuget.icon !== null }"/>
+                        <NEllipsis :line-clamp="1" :tooltip=false class="ml-3">
                             <a :href="nuget.link" target="_blank">{{ nuget.id }}</a>
                         </NEllipsis>
-                        <span class="by">{{ nuget.by }}</span>
+                        <div class="by d-none d-sm-inline ml-3">{{ nuget.by }}</div>
                         <NTag v-if="nuget.status" size="small" round :bordered="false" class="px-2 ml-3 text-muted text-right" :class="{'new': nuget.status == 'new'}">{{ nuget.status }}</NTag>
                     </li>
                 </ul> 
