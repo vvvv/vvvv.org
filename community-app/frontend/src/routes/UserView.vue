@@ -28,6 +28,7 @@ const userpic = ref(null);
 const loading = ref(false);
 const description = ref(null);
 const partOf = ref({});
+const worksFor = ref([]);
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userpicSize}&height=${userpicSize}`;
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
@@ -35,6 +36,8 @@ const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
 
 const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,slug`;
 const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,slug`;
+
+const worksForURL = `${Constants.GET_COMPANIES}?fields[]=name,slug,people.User_Role_id.role&filter[people][_some][User_Role_id][user_id][_eq]=`;
 
 onMounted(async ()=>
 {
@@ -69,13 +72,16 @@ onMounted(async ()=>
 
     description.value = toHtml(user.value.description);
 
-    const partOfRequests = [getPartOf(companyURL), getPartOf(eduURL)];
+    const partOfRequests = [getPartOf(companyURL), getPartOf(eduURL), getPartOf(worksForURL)];
     const [companyResult, eduResult] = await Promise.allSettled(partOfRequests);
 
     if (companyResult.status === 'fulfilled' && companyResult.value) 
       partOf.value.company = companyResult.value;
     if (eduResult.status === 'fulfilled' && eduResult.value) 
       partOf.value.edu = eduResult.value;
+
+    await getWorksFor(worksForURL);
+
   }
   catch (error)
   {
@@ -86,6 +92,21 @@ onMounted(async ()=>
     loading.value = false;
   }
 })
+
+async function getWorksFor(url)
+{
+  const response = await fetch(url);
+  const json = await response.json();
+
+  if (response.ok && json.data?.length > 0)
+    {
+      worksFor.value = json.data.map(i=>({
+        name: i.name,
+        slug: i.slug,
+        role: i.people[0].User_Role_id.role
+      }));
+    }
+}
 
 async function getPartOf(url)
 {

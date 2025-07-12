@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
@@ -12,6 +12,7 @@ import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
+import PersonPicker from './PersonPicker.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -41,6 +42,7 @@ const emptyCompany = {
   jobs_url: "",
   status: 0,
   website: "",
+  personnel: [],
   social: {}
 }
 
@@ -105,7 +107,7 @@ const rules = {
 }
 
 onMounted(()=>{
-  prepareData()
+  prepareData();
 })
 
 const updateTempLogo = (id) =>{
@@ -148,6 +150,13 @@ const submit = async () => {
   else
   {
     formValue.logo = tempLogo.value
+  }
+
+  if (formValue.personnel.length > 0)
+  {
+    formValue.personnel = formValue.personnel.map(p => (
+      { User_id: {id:p} }
+    ));
   }
 
   try{
@@ -287,6 +296,13 @@ const slug = computed(()=>{
             <NSwitch v-model:value="form[0].internships"/>
           </template>
         </FormItem>
+        
+        <FormItem path="people" type="company">
+          <template #content>
+            <PersonPicker v-model="form[0].people" path="people" type="company"/>
+          </template>
+        </FormItem>
+        
 
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>

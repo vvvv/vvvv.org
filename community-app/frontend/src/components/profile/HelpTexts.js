@@ -128,6 +128,14 @@ const data = Object({
             placeholder: "My Institution"
         }
     },
+    people:{
+        company:{
+            label: "People",
+            help: "Persons working for the company",
+            placeholderPerson: "Start typing to search for usernames",
+            placeholderRole: "Role in the company"
+        }
+    },
     slug:{
         label: "Slug",
         help: "URL-safe version of a name or title, used in links.",
