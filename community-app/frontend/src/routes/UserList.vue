@@ -29,7 +29,7 @@ const state = reactive({
 onMounted(()=>{
     if (route.query.p)
     {
-        showUserProfile (decodeURI(route.query.p));
+        showUserProfile (decodeURIComponent(route.query.p));
         return;
     }
 
@@ -240,7 +240,6 @@ async function fetch()
 
 const setDebouncedFilter = debounce((value)=>{
         state.filter = value;
-        console.log (value);
 }, 400);
 
 const onInput = (value) => {

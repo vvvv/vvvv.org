@@ -23,13 +23,13 @@ export const showUserProfile = (username, event) => {
     if (event) event.preventDefault();
 }
 
-export const showBusinessProfile = (name, event) => {
-    router.push({name: 'Business Profile', params: { name: encodeURI(name) }});
+export const showBusinessProfile = (slug, event) => {
+    router.push({name: 'Business Profile', params: { slug: slug }});
     if (event) event.preventDefault();
 }
 
-export const showEduProfile = (name, event) => {
-    router.push({name: 'Educational Institution Profile', params: { name: encodeURI(name) }});
+export const showEduProfile = (slug, event) => {
+    router.push({name: 'Educational Institution Profile', params: { slug: slug }});
     if (event) event.preventDefault();
 }
 

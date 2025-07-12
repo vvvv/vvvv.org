@@ -10,7 +10,7 @@ import InstitutionBasics from '../components/InstitutionBasics.vue'
 import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
-const name = route.params?.name ?? "vvvv";
+const slug = route.params?.slug ?? "vvvv";
 
 const company = ref(null);
 const loading = ref(false);
@@ -19,6 +19,7 @@ let description;
 
 onMounted(async ()=>
 {
+
     window.scrollTo({
         top: 0,
         left: 0,
@@ -28,14 +29,14 @@ onMounted(async ()=>
 
     try{
         loading.value = true;
-        company.value = await fetchBusinessProfile (name);
+        company.value = await fetchBusinessProfile (slug);
         document.title = 'Profile: '+ company.value.name;
         description = toHtml(company.value.description);
     }
     catch(err)
     {
         console.log (err);
-        error.value = "Something went wrong or maybe a business you are looking for is simply not yet confirmed.";
+        err.value = "Something went wrong or maybe a business you are looking for is simply not yet confirmed.";
     }
     finally{
         loading.value = false;

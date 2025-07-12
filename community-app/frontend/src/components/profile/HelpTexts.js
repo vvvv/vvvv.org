@@ -128,6 +128,11 @@ const data = Object({
             placeholder: "My Institution"
         }
     },
+    slug:{
+        label: "Slug",
+        help: "URL-safe version of a name or title, used in links.",
+        placeholder: "Auto-generated"
+    },
     tagline: {
         company: {
             label: "Tagline",

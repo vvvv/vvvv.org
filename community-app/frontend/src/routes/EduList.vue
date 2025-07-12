@@ -15,7 +15,7 @@ onMounted( async ()=>
 {
     if (route.query.e)
     {
-        showEduProfile (decodeURI(route.query.e));
+        showEduProfile (route.query.e);
         return;
     }
 
@@ -42,10 +42,10 @@ const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
             <!-- <Map v-model:state="state"/> -->
             <p v-if="store.total > 0">{{ store.total }} Institutions where vvvv serves in parts of the education program:</p>
             <div class="row">
-                <div v-for="{ name, description, logo, location_city, location_country } in store.items" 
+                <div v-for="{ name, slug, description, logo, location_city, location_country } in store.items" 
                     track-by="name"
                     :class="elementClass">
-                    <div class="companyCard p-3" @click="(event)=> showEduProfile(name, event)">
+                    <div class="companyCard p-3" @click="(event)=> showEduProfile(slug, event)">
                         <div class="company">
                             <div class="logo">
                                 <img :src="logo || defaultLogo"/>

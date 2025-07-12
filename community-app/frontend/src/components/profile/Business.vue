@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
@@ -31,6 +32,7 @@ const emptyCompany = {
   enabled: false,
   logo: null,
   name: "",
+  slug: "",
   tagline: "",
   description: "",
   internships: false,
@@ -89,7 +91,7 @@ const rules = {
     message: "Website is required",
     trigger: ['input', 'blur'],
     validator: (rule, value)=>{
-      return form.value[0].social.website.length > 0;
+      return form.value[0]?.social?.website?.length > 0;
     }
   },
   logo: {
@@ -129,6 +131,15 @@ const submit = async () => {
   const formValue = clone(form.value[0]);
   delete formValue.status;
   delete formValue.website;
+
+  if (!form.value[0].slug)
+  {
+    formValue.slug = slug.value;
+  }
+  else
+  {
+    delete formValue.slug;
+  }
 
   if (tempLogo.value == null)
   {
@@ -183,6 +194,10 @@ const logoButtonText = computed(()=>{
   return logo.value !== null ? "Upload new" : "Upload Logo" 
 })
 
+const slug = computed(()=>{
+  return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
+})
+
 </script>
 
 <template>
@@ -230,6 +245,7 @@ const logoButtonText = computed(()=>{
         <StatusTag :value="form[0].status"/>
 
           <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+          <InputField path="slug" type="company" v-model="slug" :disabled="true"/>
         <div class="row">
           <div class="col">
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>

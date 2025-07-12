@@ -12,7 +12,7 @@ import MaintainedBy from '../components/MaintainedBy.vue'
 import InstitutionBasics from '../components/InstitutionBasics.vue'
 
 const route = useRoute();
-const name = route.params.name;
+const slug = route.params?.slug;
 
 const edu = ref(null);
 const loading = ref(false);
@@ -33,7 +33,7 @@ onMounted(async ()=>
         loading.value = true;
         error.value = null;
 
-        edu.value = await fetchEduProfile (name);
+        edu.value = await fetchEduProfile (slug);
         
         document.title = 'Profile: '+ edu.value.name;
         edu.value.description = toHtml(edu.value.description);

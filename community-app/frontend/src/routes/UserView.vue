@@ -33,8 +33,8 @@ const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userp
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
             &fields=*,related.hire.*,related.hire.availableFor.AvailableFor_Options_id.value,related.social.*`;
 
-const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name`;
-const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name`;
+const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,slug`;
+const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,slug`;
 
 onMounted(async ()=>
 {
@@ -96,7 +96,8 @@ async function getPartOf(url)
     {
       return {
         name: json.data[0].name,
-        logo: json.data[0].logo ? `${createAssetUrl(json.data[0].logo)}${imageParams}` : null
+        logo: json.data[0].logo ? `${createAssetUrl(json.data[0].logo)}${imageParams}` : null,
+        slug: json.data[0].slug
       }
     }
     return null;

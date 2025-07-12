@@ -32,7 +32,7 @@ export const useEdusStore = defineStore ('edus',{
 async function fetchEdus(){
         
     const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=200&format=png";
-    const url = Constants.GET_EDUS+"?fields[]=name,logo&meta=filter_count";
+    const url = Constants.GET_EDUS+"?fields[]=name,logo,slug&meta=filter_count";
 
     const limit = 10;
     
@@ -44,8 +44,9 @@ async function fetchEdus(){
         const items = json.data?.map((b) => (
             {
                 img: b.logo ? createAssetUrl(b.logo) + imageParamsLogos : null,
-                url: '/edu/'+b.name,
+                url: '/edu/'+b.slug,
                 text: b.name,
+                slug: b.slug
             }
         ));
     

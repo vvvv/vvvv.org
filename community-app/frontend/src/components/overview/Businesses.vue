@@ -48,7 +48,7 @@ function showAll()
                 </template>
                 <template v-else-if="store">
                     <div v-if="store.items?.length > 0" v-for="item in store.items" class="logo" :key="item.text">
-                        <a :href="item.url" @click="(event)=>showBusinessProfile(item.text, event)">
+                        <a :href="item.url" @click="(event)=>showBusinessProfile(item.slug, event)">
                             <NTooltip trigger="hover" placement="top">
                                 <template #trigger>
                                     <img :src="item.img || defaultLogo" :alt="item.text"/>

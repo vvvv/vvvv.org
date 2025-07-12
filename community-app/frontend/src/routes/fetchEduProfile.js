@@ -2,11 +2,11 @@ import Constants from '../constants'
 import { createAssetUrl } from '../utils'
 
 const IMAGE_PARAMS = '?withoutEnlargement=true&quality=98&fit=cover&width=300&format=png';
-const URL = Constants.BASEURL+`items/Edu?fields=*,social.*,owner.username&filter[name][_eq]=`;
+const URL = Constants.BASEURL+`items/Edu?fields=*,social.*,owner.username&filter[slug][_eq]=`;
 
-export default async function fetchEduProfile ( name )
+export default async function fetchEduProfile (slug)
 {
-    const url = URL + name
+    const url = URL + slug;
     
     const response = await fetch(url);
     const json = await response.json();

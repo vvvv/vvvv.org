@@ -57,7 +57,7 @@ const routes = [
         meta: { tabName: 'Businesses', visible: true, isLeft: true, order: 3 }
     },
     {
-        path: '/business/:name',
+        path: '/business/:slug',
         name: 'Business Profile',
         component: BusinessView,
         meta: { tabName: 'Businesses' }
@@ -69,7 +69,7 @@ const routes = [
         meta: { tabName: 'Educational Institutions', visible: true, isLeft: true, order: 4 }
     },
     {
-        path: '/edu/:name',
+        path: '/edu/:slug',
         name: 'Educational Institution Profile',
         component: EduView,
         meta: { tabName: 'Educational Institutions' }
