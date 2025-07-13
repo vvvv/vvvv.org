@@ -109,7 +109,8 @@ async function getWorksFor(url)
             name: i.Company[0].Company_id.name,
             slug: i.Company[0].Company_id.slug,
             role: i.role,
-            link: '/business/'+i.Company[0].Company_id.slug
+            link: '/business/'+i.Company[0].Company_id.slug,
+            isEdu: false,
           }
         }
         
@@ -119,7 +120,8 @@ async function getWorksFor(url)
             name: i.Edu[0].Edu_id.name,
             slug: i.Edu[0].Edu_id.slug,
             role: i.role,
-            link: '/edu/'+i.Edu[0].Edu_id.slug
+            link: '/edu/'+i.Edu[0].Edu_id.slug,
+            isEdu: true
           }
         }
       });

@@ -134,6 +134,12 @@ const data = Object({
             help: "Persons working for the company",
             placeholderPerson: "Start typing to search for usernames",
             placeholderRole: "Role in the company"
+        },
+        edu:{
+            label: "People",
+            help: "Persons working for the institution",
+            placeholderPerson: "Start typing to search for usernames",
+            placeholderRole: "Role in the insitution"
         }
     },
     slug:{

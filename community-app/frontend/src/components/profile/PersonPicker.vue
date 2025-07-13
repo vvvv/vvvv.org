@@ -73,10 +73,7 @@ function addNew()
 {
     persons.value.push({
         role: "",
-        person: {
-            label:"",
-            value:""
-        },
+        person: {},
         options: [],
         id: null
     })

@@ -1,9 +1,13 @@
 <script setup>
 import { NIcon, NTooltip } from 'naive-ui';
 import { PersonCircleOutline } from '@vicons/ionicons5'
-import { toHtml, showBusinessProfile } from '../utils.js'
+import { toHtml, showBusinessProfile, showEduProfile } from '../utils.js'
 
 defineProps(['data']);
+
+function click(item){
+    item.isEdu ? showEduProfile(item.slug) : showBusinessProfile(item.slug)
+}
 
 </script>
 <template>
@@ -12,7 +16,7 @@ defineProps(['data']);
         <div v-for="item in data" class="mb-2">
             <NTooltip trigger="hover" :disabled="!item.role">
                 <template #trigger>
-                    <a :href="item.link" @click.prevent="showBusinessProfile(item.slug)">{{ item.name }}</a>
+                    <a :href="item.link" @click.prevent="click(item)">{{ item.name }}</a>
                 </template>
                 {{ item.role }}
             </NTooltip>

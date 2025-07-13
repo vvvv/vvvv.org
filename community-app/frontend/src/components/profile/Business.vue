@@ -13,8 +13,8 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
-import { useBusinessListStore } from "../../routes/BusinessListStore.js";
-import isEqual from 'lodash/isEqual';
+import { useBusinessListStore } from "../../routes/BusinessListStore.js"
+import { transformer } from './FormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -47,32 +47,7 @@ const emptyCompany = {
   social: {}
 }
 
-const transformer = {
-  people:{
-    toForm: (persons)=>{
-      return persons.map(person=>({
-          ...person,
-          options:[person.person]
-        }
-      ))
-    },
-    toPayload: (persons)=>{
-      const filtered = persons.filter(p => p.person.value && p.person.value !== "");
-      const result = filtered.map(person=>{
-        const result = { 
-          User_Role_id: {
-            user_id: person.person.value,
-            role: person.role,
-          } 
-        }
-        if (person.id) 
-          result.User_Role_id.id = person.id;
-        return result;
-      })
-      return result;
-    }
-  }
-}
+
 
 const prepareData = ()=>{
 
