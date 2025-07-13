@@ -47,6 +47,33 @@ const emptyCompany = {
   social: {}
 }
 
+const transformer = {
+  people:{
+    toForm: (persons)=>{
+      return persons.map(person=>({
+          ...person,
+          options:[person.person]
+        }
+      ))
+    },
+    toPayload: (persons)=>{
+      const filtered = persons.filter(p => p.person.value && p.person.value !== "");
+      const result = filtered.map(person=>{
+        const result = { 
+          User_Role_id: {
+            user_id: person.person.value,
+            role: person.role,
+          } 
+        }
+        if (person.id) 
+          result.User_Role_id.id = person.id;
+        return result;
+      })
+      return result;
+    }
+  }
+}
+
 const prepareData = ()=>{
 
   const temp = clone(data);
@@ -61,6 +88,11 @@ const prepareData = ()=>{
     }
 
     companyExists.value = true;
+
+    if (temp.companies[0].people)
+    {
+      temp.companies[0].people = transformer.people.toForm(temp.companies[0].people);
+    }
   }
   else
   {
@@ -155,14 +187,7 @@ const submit = async () => {
 
   if (formValue.people.length > 0)
   {
-    formValue.people = formValue.people.map((p, index) => (
-      { 
-        User_Role_id: {
-          user_id: p.person.value,
-          role: p.role
-        } 
-      }
-    ));
+    formValue.people = transformer.people.toPayload(formValue.people);
   }
 
   try{

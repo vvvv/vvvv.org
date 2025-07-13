@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, watchEffect } from 'vue'
-import { NInput, NSelect, NIcon } from 'naive-ui';
+import { NInput, NSelect, NIcon, NButton } from 'naive-ui';
 import { getValue } from "./HelpTexts.js"
 import Constants from '../../constants.js'
 import debounce from 'lodash/debounce'
@@ -18,14 +18,10 @@ const placeholderRole = getValue(props.path, "placeholderRole", props.type);
 
 onMounted(()=>{
 
-    if (persons && persons.value.length == 0)
+    if (persons.value && persons.value.length == 0)
     {
         addNew();  
     }
-
-    persons.value.forEach(p=>{
-        p.options = [p.person];
-    })
 })
 
 watchEffect(()=>{
@@ -34,6 +30,7 @@ watchEffect(()=>{
 const url = `${Constants.GET_USERS}?limit=5&fields[]=username,id&filter[username][_contains]=`
 
 const debounceQuery = debounce(async (query, index)=>{
+        persons.value[index].options = [];
         persons.value[index].options = await queryUsers(query);
 }, 400)
 
@@ -80,7 +77,8 @@ function addNew()
             label:"",
             value:""
         },
-        options: null
+        options: [],
+        id: null
     })
 }
 
@@ -92,7 +90,7 @@ function remove(index)
 </script>
 <template>
     <div class="d-block">
-        <div v-for="(p, index) in persons" :key="p.person.value" class="row">
+        <div v-for="(p, index) in persons" :key="p.person.value" class="row mb-2 align-items-center">
             <div class="col-12 col-md-6">
                 <NSelect v-model:value="p.person.value"
                 filterable
@@ -101,23 +99,15 @@ function remove(index)
                 :loading="loading"
                 clearable
                 remote
-                :clear-filter-after-select="true"
+                @focus="()=>{p.options = []}"
                 @search="q => debounceQuery (q, index)"
                 />
             </div>
-            <div class="col-12 col-md-6 d-flex">
-                <NInput v-model:value="p.role" :placeholder="placeholderRole"/>
-                <template v-if="index == persons.length-1">
-                    <NIcon @click="addNew" color="#000000" class="ml-2" size="1.2rem">
-                        <AddCircle/>
-                    </NIcon>
-                </template>
-                <template v-else>
-                    <NIcon @click="remove(index)" color="#ff0000" class="ml-2" size="1.2rem">
-                        <RemoveCircle />
-                    </NIcon>
-                </template>
+            <div class="col-12 col-md-6 d-flex align-items-center">
+                <NInput v-model:value="p.role" :placeholder="placeholderRole" clearable/>
+                <NButton @click="remove(index)" secondary size="small" class="ml-2">-</NButton>
             </div>
         </div>
+        <NButton @click="addNew" secondary size="small">+</NButton>
     </div>
 </template>
