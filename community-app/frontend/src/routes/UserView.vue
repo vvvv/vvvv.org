@@ -242,12 +242,11 @@ const hireCardVisible = computed(()=>{
 
               <Location v-if="location" :location="location" class="pb-2"/>
 
+              <AffiliatedWith v-if="worksFor.length > 0" :data="worksFor" class="mb-3"/>
               
               <SocialView class="my-1 py-2 border-top" :social="social" v-if="social" />
               
               <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="mb-3"/>
-              
-              <AffiliatedWith v-if="worksFor.length > 0" :data="worksFor" class="mb-3"/>
                 
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
