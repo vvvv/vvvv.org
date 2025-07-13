@@ -57,7 +57,8 @@ async function fetchLatestNugets(){
                 icon: n.icon || "",
                 by: n.owners.join(', '),
                 link: `${Constants.NUGET_PACK_LINK}${n.id}#readme-body-tab`,
-                status: status
+                status: status,
+                desc: n.desc
             }
         })
         
