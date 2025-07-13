@@ -47,7 +47,7 @@ function showAll()
                 <ul v-if="store.nugets.length > 0" class="list-group list-group-flush list">
                     <template v-for="(nuget, index) in store.nugets" :key="index">
                         <li class="list-group-item d-flex flex-nowrap link align-items-baseline">
-                            <NImage v-if="nuget.icon" objectFit="contain" :src="nuget.icon" :height="25" class="align-self-center" :class="{ 'noImageBack': nuget.icon !== null }"/>
+                            <NImage v-if="nuget.icon" preview-disabled objectFit="contain" :src="nuget.icon" :height="25" class="align-self-center" :class="{ 'noImageBack': nuget.icon !== null }"/>
                             <NEllipsis :line-clamp="1" :tooltip=false class="ml-3">
                                 <template v-if="nuget.desc">
                                     <NTooltip trigger="hover" placement="top-start">
