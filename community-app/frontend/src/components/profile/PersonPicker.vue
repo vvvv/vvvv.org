@@ -17,13 +17,18 @@ const placeholderPerson = getValue(props.path, "placeholderPerson", props.type);
 const placeholderRole = getValue(props.path, "placeholderRole", props.type);
 
 onMounted(()=>{
+
+    if (persons && persons.value.length == 0)
+    {
+        addNew();  
+    }
+
     persons.value.forEach(p=>{
         p.options = [p.person];
     })
 })
 
 watchEffect(()=>{
-    console.log (persons.value);
 })
 
 const url = `${Constants.GET_USERS}?limit=5&fields[]=username,id&filter[username][_contains]=`
@@ -75,7 +80,7 @@ function addNew()
             label:"",
             value:""
         },
-        options: []
+        options: null
     })
 }
 

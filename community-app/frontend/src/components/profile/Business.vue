@@ -14,6 +14,7 @@ import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js";
+import isEqual from 'lodash/isEqual';
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -42,7 +43,7 @@ const emptyCompany = {
   jobs_url: "",
   status: 0,
   website: "",
-  personnel: [],
+  people: [],
   social: {}
 }
 
@@ -152,14 +153,20 @@ const submit = async () => {
     formValue.logo = tempLogo.value
   }
 
-  if (formValue.personnel.length > 0)
+  if (formValue.people.length > 0)
   {
-    formValue.personnel = formValue.personnel.map(p => (
-      { User_id: {id:p} }
+    formValue.people = formValue.people.map((p, index) => (
+      { 
+        User_Role_id: {
+          user_id: p.person.value,
+          role: p.role
+        } 
+      }
     ));
   }
 
   try{
+    
     const response = await post(Constants.EDIT_COMPANY, formValue)
     
     if (response.code === 'SUCCESS' || 'NEW')
