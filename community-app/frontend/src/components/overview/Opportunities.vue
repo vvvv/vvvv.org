@@ -48,7 +48,7 @@ async function sync(force)
                     <li v-for="(job, index) in store.internships" :key="index" class="list-group-item d-flex flex-nowrap mt-0 mb-0 py-2 link">
                         <NTag size="small" round :bordered="false" class="px-2 mr-3 text-muted">internship</NTag>
                         <NEllipsis :line-clamp="1" :tooltip=false>
-                            <a :href="job.link" target="_blank" @click="(event)=>showBusinessProfile(job.title, event)">
+                            <a :href="job.link" target="_blank" @click.prevent="showBusinessProfile(job.slug)">
                                 {{ job.title }}
                             </a>
                         </NEllipsis>

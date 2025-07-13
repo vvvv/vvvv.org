@@ -58,17 +58,18 @@ async function fetchJobs(){
 
 async function fetchInternships(){
 
-    const url = Constants.GET_COMPANIES+"?fields[]=name&filter[internships][_eq]=true&sort[]=-date_updated";
+    const url = Constants.GET_COMPANIES+"?fields[]=name,slug&filter[internships][_eq]=true&sort[]=-date_updated";
 
     const response = await fetch(url);
     
     if (response.ok)
     {
         const json = await response.json();
-        const companies = json.data?.map((h) => (
+        const companies = json.data?.map((c) => (
             {
-                title: h.name,
-                link: '/business/'+h.name
+                title: c.name,
+                link: '/business/'+c.slug,
+                slug: c.slug
             }
         ));
 
