@@ -1,0 +1,21 @@
+<script setup>
+import { NIcon, NTooltip } from 'naive-ui';
+import { PersonCircleOutline } from '@vicons/ionicons5'
+import { toHtml, showBusinessProfile } from '../utils.js'
+
+defineProps(['data']);
+
+</script>
+<template>
+    <div>
+        <p class="text-muted mb-1 border-top pt-3">Affiliated with</p>
+        <div v-for="item in data" class="mb-2">
+            <NTooltip trigger="hover" :disabled="!item.role">
+                <template #trigger>
+                    <a :href="item.link" @click.prevent="showBusinessProfile(item.slug)">{{ item.name }}</a>
+                </template>
+                {{ item.role }}
+            </NTooltip>
+        </div>
+    </div>
+</template>

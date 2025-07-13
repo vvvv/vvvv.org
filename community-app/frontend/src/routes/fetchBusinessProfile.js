@@ -2,7 +2,7 @@ import Constants from '../constants'
 import { createAssetUrl } from '../utils'
 
 const IMAGE_PARAMS = '?withoutEnlargement=true&quality=98&fit=cover&width=300&format=png';
-const URL = Constants.BASEURL+`items/Company?fields=*,social.*,owner.username&filter[slug][_eq]=`;
+const URL = Constants.BASEURL+`items/Company?fields=*,social.*,owner.username,people.User_Role_id.role,people.User_Role_id.user_id.username&filter[slug][_eq]=`;
 
 export default async function fetchBusinessProfile(slug)
 {
@@ -20,6 +20,18 @@ export default async function fetchBusinessProfile(slug)
         }
     
         const data = {...json.data[0]};
+
+        console.log (data.people);
+
+        data.people = data.people.filter(p => p.User_Role_id.user_id !== null);
+
+        data.people = data.people.map (p=>(
+            {
+                role: p.User_Role_id.role,
+                username: p.User_Role_id.user_id.username,
+                link: '/people/'+p.User_Role_id.user_id.username
+            }
+        ))
         
         data.logo = data?.logo ? createAssetUrl(data.logo) + IMAGE_PARAMS : null;
     

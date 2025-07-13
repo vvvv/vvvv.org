@@ -13,6 +13,7 @@ import ClippedText from '../components/ClippedText.vue'
 import BetaGammaUser from '../components/BetaGammaUser.vue'
 import Maintains from '../components/Maintains.vue'
 import { isEmpty, toHtml, clone, createAssetUrl, getCountry, showBusinessProfile, ensureHttps, stripHttp } from '../utils.js'
+import AffiliatedWith from '../components/AffiliatedWith.vue'
 
 
 const route = useRoute();
@@ -28,6 +29,7 @@ const userpic = ref(null);
 const loading = ref(false);
 const description = ref(null);
 const partOf = ref({});
+const worksFor = ref([]);
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${userpicSize}&height=${userpicSize}`;
 const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
@@ -35,6 +37,8 @@ const url = `${Constants.GET_USERS}?filter[username][_eq]=${username}
 
 const companyURL = `${Constants.GET_COMPANIES}?filter[owner][username][_eq]=${username}&fields=name,slug`;
 const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&fields=name,slug`;
+
+const worksForURL = `${Constants.GET_USER_ROLES}?fields=Company.Company_id.name,Company.Company_id.slug,Edu.Edu_id.name,Edu.Edu_id.slug,role&filter[user_id][id][_eq]=`;
 
 onMounted(async ()=>
 {
@@ -76,6 +80,9 @@ onMounted(async ()=>
       partOf.value.company = companyResult.value;
     if (eduResult.status === 'fulfilled' && eduResult.value) 
       partOf.value.edu = eduResult.value;
+
+    await getWorksFor(worksForURL+user.value.id);
+
   }
   catch (error)
   {
@@ -86,6 +93,38 @@ onMounted(async ()=>
     loading.value = false;
   }
 })
+
+async function getWorksFor(url)
+{
+  const response = await fetch(url);
+  const json = await response.json();
+
+  if (response.ok && json.data?.length > 0)
+    {
+      worksFor.value = json.data.map(i=>{
+
+        if (i.Company[0])
+        {
+          return {
+            name: i.Company[0].Company_id.name,
+            slug: i.Company[0].Company_id.slug,
+            role: i.role,
+            link: '/business/'+i.Company[0].Company_id.slug
+          }
+        }
+        
+        if (i.Edu[0])
+        {
+          return {
+            name: i.Edu[0].Edu_id.name,
+            slug: i.Edu[0].Edu_id.slug,
+            role: i.role,
+            link: '/edu/'+i.Edu[0].Edu_id.slug
+          }
+        }
+      });
+    }
+}
 
 async function getPartOf(url)
 {
@@ -203,17 +242,19 @@ const hireCardVisible = computed(()=>{
 
               <Location v-if="location" :location="location" class="pb-2"/>
 
-              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="border-top py-3 mt-4"/>
-
+              
               <SocialView class="my-1 py-2 border-top" :social="social" v-if="social" />
-
+              
+              <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="mb-3"/>
+              
+              <AffiliatedWith v-if="worksFor.length > 0" :data="worksFor" class="mb-3"/>
+                
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
         <div class="col-12 mt-3 mt-md-0 pt-md-0 col-md-6 col-lg-8 profileContent">
 
           <template v-if="description">
-            <hr class="d-block d-md-none"/>
             <div class="mb-4 description">
               <p v-html="description"></p>
             </div>

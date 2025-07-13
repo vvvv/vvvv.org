@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
@@ -12,7 +12,9 @@ import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
+import PersonPicker from './PersonPicker.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js";
+import isEqual from 'lodash/isEqual';
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -41,7 +43,35 @@ const emptyCompany = {
   jobs_url: "",
   status: 0,
   website: "",
+  people: [],
   social: {}
+}
+
+const transformer = {
+  people:{
+    toForm: (persons)=>{
+      return persons.map(person=>({
+          ...person,
+          options:[person.person]
+        }
+      ))
+    },
+    toPayload: (persons)=>{
+      const filtered = persons.filter(p => p.person.value && p.person.value !== "");
+      const result = filtered.map(person=>{
+        const result = { 
+          User_Role_id: {
+            user_id: person.person.value,
+            role: person.role,
+          } 
+        }
+        if (person.id) 
+          result.User_Role_id.id = person.id;
+        return result;
+      })
+      return result;
+    }
+  }
 }
 
 const prepareData = ()=>{
@@ -58,6 +88,11 @@ const prepareData = ()=>{
     }
 
     companyExists.value = true;
+
+    if (temp.companies[0].people)
+    {
+      temp.companies[0].people = transformer.people.toForm(temp.companies[0].people);
+    }
   }
   else
   {
@@ -105,7 +140,7 @@ const rules = {
 }
 
 onMounted(()=>{
-  prepareData()
+  prepareData();
 })
 
 const updateTempLogo = (id) =>{
@@ -150,7 +185,13 @@ const submit = async () => {
     formValue.logo = tempLogo.value
   }
 
+  if (formValue.people.length > 0)
+  {
+    formValue.people = transformer.people.toPayload(formValue.people);
+  }
+
   try{
+    
     const response = await post(Constants.EDIT_COMPANY, formValue)
     
     if (response.code === 'SUCCESS' || 'NEW')
@@ -287,6 +328,13 @@ const slug = computed(()=>{
             <NSwitch v-model:value="form[0].internships"/>
           </template>
         </FormItem>
+        
+        <FormItem path="people" type="company">
+          <template #content>
+            <PersonPicker v-model="form[0].people" path="people" type="company"/>
+          </template>
+        </FormItem>
+        
 
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>

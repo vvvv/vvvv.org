@@ -7,7 +7,7 @@ defineProps(['data']);
 
 <template>
 <div>
-    <div class="mb-2">Maintains:</div>
+    <p class="text-muted mb-1 border-top pt-3">Maintains</p>
     <a v-if="data.company" :href="'/business/'+data.company.slug" @click="(event) => showBusinessProfile(data.company.slug, event)">
         <div class="mb-1 d-flex text-align-center">
             {{ data.company.name }}
