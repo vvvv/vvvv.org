@@ -8,7 +8,7 @@ defineProps(['data']);
 </script>
 <template>
     <p class="text-muted mb-2 border-top pt-3">People</p>
-    <div v-for="person in data.people" class="mb-2">
+    <div v-for="person in data" class="mb-2">
         <NIcon size="20" class="mr-2">
             <PersonCircleOutline/>
         </NIcon>

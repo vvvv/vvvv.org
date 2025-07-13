@@ -28,7 +28,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
         
         <Links class="links" :data="data"/>
 
-        <InstitutionPeople :data="data"/>
+        <InstitutionPeople v-if="data.people?.length > 0" :data="data.people"/>
 
         <MaintainedBy class="maintained mt-4 pt-3 border-top d-none d-md-block" :data="data.owner"/>
 
