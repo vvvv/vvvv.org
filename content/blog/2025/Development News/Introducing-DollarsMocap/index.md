@@ -20,7 +20,7 @@ There are many options for skeleton tracking you can use with vvvv:
 
 But those options all require the according specific depth camera, which you might not always at hand. Now here is a new option that doesn't require additional hardware and tracks a single 3d skeleton (including fingers and face!) even from a simple webcam: 
 
-Introducing: **[Dollars Mono](https://www.dollarsmocap.com/mono)** by [Dollars MoCap](https://www.dollarsmocap.com/)
+Introducing: **[Dollars MONO](https://www.dollarsmocap.com/mono)** by [Dollars MoCap](https://www.dollarsmocap.com/)
 
 Watch this demo of their technology to get an idea of the quality of tracking you can expect:
 
@@ -38,5 +38,9 @@ As of this writing, requires latest [vvvv gamma 7.0 preview](https://vvvv.org/do
 
     nuget install VL.DollarsMoCap -pre
 
----
+{{< box >}}
+If you want to use Dollars MONO beyond it's free trial limitations, Dollars MoCap offers a **25% discount on the [Dollars MONO Lifetime License](https://store.dollarsmocap.com/products/mono)** by using the coupon code "vvvv" on checkout!
+{{< /box >}}
+
+
 If you have a request for custom development, please [get in touch](mailto:devvvvs@vvvv.org)!
