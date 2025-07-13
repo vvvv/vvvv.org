@@ -77,10 +77,7 @@ const url = computed(()=>{
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
                     <InstitutionBasics class="mb-3" :data="edu"/>
                 </div>
-                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8 mt-0 mt-md-3 mt-md-0 profileContent">
-                    
-                    <hr class="d-block d-md-none"/>
-                    
+                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8 mt-4 mt-md-0 profileContent">
                     <p v-html="edu.description"></p>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="edu.owner"/>
                 </div>

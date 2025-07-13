@@ -9,7 +9,7 @@ defineProps(['data']);
 
 <template>
     <div v-if="data">
-        <p class="text-muted mb-2">This page is maintained by</p>
+        <p class="text-muted mb-2 smallTitle">This page is maintained by</p>
         <div>
             <NIcon size="20" class="mr-2">
                 <PersonCircleOutline/>
