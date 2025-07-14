@@ -17,15 +17,13 @@ const link = computed(()=>{
             <a :href="link" taret="_blank">
                 <NIcon size="1.2rem" color="black" class="mr-2">
                     <CheckmarkCircle/>
-                </NIcon>
-                {{ text }}
+                </NIcon>{{ text }}
             </a>
         </template>
         <template v-else>
                 <NIcon size="1.2rem" color="black" class="mr-2">
                     <CheckmarkCircle/>
-                </NIcon>
-                {{ text }}
+                </NIcon>{{ text }}
         </template>
     </div>
 </template>

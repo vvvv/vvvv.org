@@ -1,5 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue'
+import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
@@ -11,7 +12,9 @@ import { NAvatar, NAlert, NButton, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NF
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
-import { useEduListStore } from "../../routes/EduListStore.js";
+import PersonPicker from './PersonPicker.vue'
+import { useEduListStore } from "../../routes/EduListStore.js"
+import { transformer } from './FormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -31,10 +34,12 @@ const emptyData = {
   enabled: false,
   logo: null,
   name: "",
+  slug: "",
   description: "",
   status: 0,
   website: "",
-  social: {}
+  social: {},
+  people: []
 }
 
 const prepareData = ()=>{
@@ -50,6 +55,11 @@ const prepareData = ()=>{
     }
 
     eduExists.value = true;
+
+    if (temp.edus[0].people)
+    {
+      temp.edus[0].people = transformer.people.toForm(temp.edus[0].people);
+    }
   }
   else
   {
@@ -76,7 +86,7 @@ const rules = {
     message: "Website is required",
     trigger: ['input', 'blur'],
     validator: (rule, value)=>{
-      return form.value[0].social.website.length > 0;
+      return form.value[0]?.social?.website?.length > 0;
     }
   },
   logo: {
@@ -118,6 +128,15 @@ const submit = async () => {
   delete formValue.status;
   delete formValue.website;
 
+  if (!form.value[0].slug)
+  {
+    formValue.slug = slug.value;
+  }
+  else
+  {
+    delete formValue.slug;
+  }
+
   if (tempLogo.value == null)
   {
     delete formValue.logo
@@ -125,6 +144,11 @@ const submit = async () => {
   else
   {
     formValue.logo = tempLogo.value
+  }
+
+  if (formValue.people.length > 0)
+  {
+    formValue.people = transformer.people.toPayload(formValue.people);
   }
 
   try{
@@ -169,6 +193,10 @@ const submit = async () => {
 
 const logoButtonText = computed(()=>{
   return logo.value !== null ? "Upload new" : "Upload Logo" 
+})
+
+const slug = computed(()=>{
+  return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
 })
 
 </script>
@@ -218,6 +246,7 @@ const logoButtonText = computed(()=>{
         <StatusTag :value="form[0].status"/>
 
         <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
+        <InputField path="slug" type="edu" v-model="slug" :disabled="true"/>
 
         <FormItem path="description" type="edu">
           <template #content>
@@ -245,8 +274,14 @@ const logoButtonText = computed(()=>{
           </div>
         </n-form-item>
 
-
         <SocialFields v-model:value="form[0].social" type="edu"/>
+
+        <FormItem path="people" type="edu">
+          <template #content>
+            <PersonPicker v-model="form[0].people" path="people" type="edu"/>
+          </template>
+        </FormItem>
+
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
 </template>

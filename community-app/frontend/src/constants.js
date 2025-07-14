@@ -11,17 +11,22 @@ export default Object({
 
     //LINKS
     FORUM:"https://forum.vvvv.org/",
+    NUGET_ORG:"https://www.nuget.org/packages?q=tag%3Avl&includeComputedFrameworks=true&prerel=true&sortby=created-desc",
+    NUGET_PACK_LINK:"https://www.nuget.org/packages/",
     
     //DATA
     BASEURL: DATAURL, 
     ASSETS: DATAURL + "assets/",
     GET_COMPANIES: DATAURL + 'items/Company',
+    GET_USER_ROLES: DATAURL + 'items/User_Role',
     GET_EDUS: DATAURL + 'items/Edu',
     GET_USERS: DATAURL + 'items/User',
     GET_HIRE: DATAURL + 'items/Hire',
     
     //BACKEND
+    NUGETS_LATEST: BACKENDURL + 'latestNugets',
     FORUM_TOPICS: BACKENDURL + 'discourseTopics',
+    FORUM_JOBS: BACKENDURL + 'discourseJobs',
     BACKEND_GET_USER: BACKENDURL + "userinfo",
     BACKEND_GET_CONSTANTS: BACKENDURL + "constants",
     EDIT_PERSONAL: BACKENDURL + "edit/personal",

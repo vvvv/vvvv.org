@@ -45,7 +45,7 @@ const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
             <p v-if="store.total > 0">{{ store.total }} Businesses that use vvvv:</p>
             <div class="row">
                 <div v-for="item in store.items" track-by="item.name" :class="elementClass">
-                    <div class="companyCard p-3" @click="(event)=> showBusinessProfile(item.name, event)">
+                    <div class="companyCard p-3" @click="(event)=> showBusinessProfile(item.slug, event)">
                         <div class="company">
                             <div class="logo">
                                 <img :src="item.logo || defaultLogo"/>

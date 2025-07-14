@@ -5,6 +5,7 @@ import SocialView from './SocialView.vue'
 import LocationFull from './LocationFull.vue'
 import Links from './Links.vue'
 import Internships from './Internships.vue';
+import InstitutionPeople from './InstitutionPeople.vue'
 
 const props = defineProps(['data']);
 const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
@@ -21,12 +22,13 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
         </div>                     
         <LocationFull :data="data"/>
         
-        <Internships :data="data" text="Accepting internship applications"/>
+        <Internships :data="data" text="Accepting internship applications" :isLink="true"/>
 
         <SocialView class="mt-4 mb-4 pt-3 border-top" v-if="Object.keys(data.social).length>0" :social="data.social" />                      
         
-
         <Links class="links" :data="data"/>
+
+        <InstitutionPeople v-if="data.people?.length > 0" :data="data.people"/>
 
         <MaintainedBy class="maintained mt-4 pt-3 border-top d-none d-md-block" :data="data.owner"/>
 

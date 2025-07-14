@@ -2,7 +2,7 @@
 
 import { ref, onMounted, computed } from 'vue'
 import { useRoute } from "vue-router";
-import { NSpin, NIcon } from 'naive-ui'
+import { NSpin, NIcon, NTooltip } from 'naive-ui'
 import { LocationOutline } from '@vicons/ionicons5'
 import { toHtml } from '../utils.js'
 import fetchBusinessProfile from './fetchBusinessProfile.js'
@@ -10,7 +10,7 @@ import InstitutionBasics from '../components/InstitutionBasics.vue'
 import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
-const name = route.params?.name ?? "vvvv";
+const slug = route.params?.slug ?? "vvvv";
 
 const company = ref(null);
 const loading = ref(false);
@@ -19,6 +19,7 @@ let description;
 
 onMounted(async ()=>
 {
+
     window.scrollTo({
         top: 0,
         left: 0,
@@ -28,14 +29,14 @@ onMounted(async ()=>
 
     try{
         loading.value = true;
-        company.value = await fetchBusinessProfile (name);
+        company.value = await fetchBusinessProfile(slug);
         document.title = 'Profile: '+ company.value.name;
         description = toHtml(company.value.description);
     }
     catch(err)
     {
         console.log (err);
-        error.value = "Something went wrong or maybe a business you are looking for is simply not yet confirmed.";
+        err.value = "Something went wrong or maybe a business you are looking for is simply not yet confirmed.";
     }
     finally{
         loading.value = false;
@@ -54,9 +55,6 @@ onMounted(async ()=>
                     <InstitutionBasics class="mb-3" :data="company"/>
                 </div>
                 <div v-if="description" class="col-12 col-md-6 col-lg-8 mt-0 mt-md-3 mt-md-0 profileContent">
-
-                    <hr class="d-block d-md-none"/>
-
                     <p v-html="description"></p>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="company.owner"/>
                 </div>

@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
+import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
 import SocialFields from './SocialFields.vue'
@@ -11,7 +12,9 @@ import { NSelect, NTag, NSwitch, NForm, NFormItem, NInput, NAlert } from 'naive-
 import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
-import { useBusinessListStore } from "../../routes/BusinessListStore.js";
+import PersonPicker from './PersonPicker.vue'
+import { useBusinessListStore } from "../../routes/BusinessListStore.js"
+import { transformer } from './FormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -31,6 +34,7 @@ const emptyCompany = {
   enabled: false,
   logo: null,
   name: "",
+  slug: "",
   tagline: "",
   description: "",
   internships: false,
@@ -39,8 +43,11 @@ const emptyCompany = {
   jobs_url: "",
   status: 0,
   website: "",
+  people: [],
   social: {}
 }
+
+
 
 const prepareData = ()=>{
 
@@ -56,6 +63,11 @@ const prepareData = ()=>{
     }
 
     companyExists.value = true;
+
+    if (temp.companies[0].people)
+    {
+      temp.companies[0].people = transformer.people.toForm(temp.companies[0].people);
+    }
   }
   else
   {
@@ -89,7 +101,7 @@ const rules = {
     message: "Website is required",
     trigger: ['input', 'blur'],
     validator: (rule, value)=>{
-      return form.value[0].social.website.length > 0;
+      return form.value[0]?.social?.website?.length > 0;
     }
   },
   logo: {
@@ -103,7 +115,7 @@ const rules = {
 }
 
 onMounted(()=>{
-  prepareData()
+  prepareData();
 })
 
 const updateTempLogo = (id) =>{
@@ -130,6 +142,15 @@ const submit = async () => {
   delete formValue.status;
   delete formValue.website;
 
+  if (!form.value[0].slug)
+  {
+    formValue.slug = slug.value;
+  }
+  else
+  {
+    delete formValue.slug;
+  }
+
   if (tempLogo.value == null)
   {
     delete formValue.logo
@@ -139,7 +160,13 @@ const submit = async () => {
     formValue.logo = tempLogo.value
   }
 
+  if (formValue.people.length > 0)
+  {
+    formValue.people = transformer.people.toPayload(formValue.people);
+  }
+
   try{
+    
     const response = await post(Constants.EDIT_COMPANY, formValue)
     
     if (response.code === 'SUCCESS' || 'NEW')
@@ -181,6 +208,10 @@ const submit = async () => {
 
 const logoButtonText = computed(()=>{
   return logo.value !== null ? "Upload new" : "Upload Logo" 
+})
+
+const slug = computed(()=>{
+  return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
 })
 
 </script>
@@ -230,6 +261,7 @@ const logoButtonText = computed(()=>{
         <StatusTag :value="form[0].status"/>
 
           <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+          <InputField path="slug" type="company" v-model="slug" :disabled="true"/>
         <div class="row">
           <div class="col">
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>
@@ -271,6 +303,13 @@ const logoButtonText = computed(()=>{
             <NSwitch v-model:value="form[0].internships"/>
           </template>
         </FormItem>
+        
+        <FormItem path="people" type="company">
+          <template #content>
+            <PersonPicker v-model="form[0].people" path="people" type="company"/>
+          </template>
+        </FormItem>
+        
 
       </NForm>
       <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>

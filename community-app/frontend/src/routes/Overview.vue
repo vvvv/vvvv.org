@@ -8,6 +8,8 @@ import ForHire from "../components/overview/ForHire.vue"
 import Connections from '../components/overview/Connections.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
+import Opportunities from '../components/overview/Opportunities.vue'
+import LatestNugets from '../components/overview/LatestNugets.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -43,32 +45,33 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
 </script>
 
 <template>
-    <div class="row row-cols-1 row-cols-md-2 overview">
-        <div class="col mb-4">
+    <div class="row row-cols-1 row-cols-md-2 mb-4 overview">
+        <div class="col">
             <template v-if="content?.video">
                 <h4 class="border-bottom pb-2">Staff picks</h4>
                 <YouTubePlayer :id="content.video"/>
             </template>
         </div>
-        <div class="col mb-4">
+        <div class="col">
             <LatestTopics/>
         </div>
-        <div class="col mb-4">
-            <Edus class="h-100"/>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 mb-4 overview">
+        <div class="col mb-4 mb-md-0 order-2 order-md-1">
+            <Edus/>
+            <ForHire class="mt-4"/>
+            <Businesses class="mt-4"/>
         </div>
-        <div class="col mb-4">
-            <ForHire/>
+        <div class="col mb-4 mb-md-0 order-1 order-md-2">
+            <LatestNugets class="mb-2"/>
+            <Opportunities/>
         </div>
     </div>
-    <div class="row overview mb-4">
-        <div class="col-12 mb-4">
-            <Businesses/>
-        </div>
-    </div>
-    <div class="overview">
-        <h4 class="border-bottom pb-2">Connections</h4>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-            <Connections/>
+    <div class="row mt-4 overview pt-4">
+        <div class="col">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+                <Connections/>
+            </div>
         </div>
     </div>
 </template>

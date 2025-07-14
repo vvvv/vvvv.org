@@ -19,17 +19,17 @@ export function shuffle(array)
 }
 
 export const showUserProfile = (username, event) => {
-    router.push({name: 'Personal Profile', params: { username: encodeURIComponent(username) }});
+    router.push({name: 'Personal Profile', params: { username: encodeURI(username) }});
     if (event) event.preventDefault();
 }
 
-export const showBusinessProfile = (name, event) => {
-    router.push({name: 'Business Profile', params: { name: encodeURIComponent(name) }});
+export const showBusinessProfile = (slug, event) => {
+    router.push({name: 'Business Profile', params: { slug: slug }});
     if (event) event.preventDefault();
 }
 
-export const showEduProfile = (name, event) => {
-    router.push({name: 'Educational Institution Profile', params: { name: encodeURIComponent(name) }});
+export const showEduProfile = (slug, event) => {
+    router.push({name: 'Educational Institution Profile', params: { slug: slug }});
     if (event) event.preventDefault();
 }
 

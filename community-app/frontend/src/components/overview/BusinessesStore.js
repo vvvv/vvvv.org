@@ -32,9 +32,9 @@ export const useBusinessesStore = defineStore ('businesses',{
 async function fetchBusinesses(){
         
     const imageParamsLogos = "?withoutEnlargement=true&quality=98&fit=cover&height=200&format=png";
-    const url = Constants.GET_COMPANIES+"?fields[]=name,logo&meta=filter_count";
+    const url = Constants.GET_COMPANIES+"?fields[]=name,logo,slug&meta=filter_count";
 
-    const limit = 8;
+    const limit = 10;
     
     const response = await fetch(url);
     
@@ -44,8 +44,9 @@ async function fetchBusinesses(){
         const items = json.data?.map((b) => (
             {
                 img: b.logo ? createAssetUrl(b.logo) + imageParamsLogos : null,
-                url: '/business/'+b.name,
+                url: '/business/'+b.slug,
                 text: b.name,
+                slug: b.slug
             }
         ));
     

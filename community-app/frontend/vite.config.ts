@@ -28,6 +28,11 @@ export default defineConfig({
   rollupOptions: {
     input: './src/main.js',
     output: {
+      manualChunks: {
+        vue: ['vue'],
+        icons: ['@vicons/ionicons5'],
+        lodash: ['lodash']
+      },
       entryFileNames: `app.js`,
       chunkFileNames: 'app-[name]-[hash].js',
       assetFileNames: '[name].[ext]'
