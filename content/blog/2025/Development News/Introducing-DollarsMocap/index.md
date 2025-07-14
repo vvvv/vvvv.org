@@ -26,7 +26,12 @@ Watch this demo of their technology to get an idea of the quality of tracking yo
 
 {{< youtube gBbKCGwMFeY >}}
 
-To use the tracking data in vvvv to control an avatar, all you need to do is load a rigged model and provide a joint mapping, ie. a spread of joint names the model comes with, that aligns with the joint names as returned by DollarsMoCap. This takes about 5 minutes to set up and then works for all models that use the same skeleton.
+When running Dollars MONO on the same PC as vvvv, all you have to do is activate the "vvvv Streaming" option you can find under `Settings > Stream & Export`:
+
+![](streaming.png) 
+
+The data is received in vvvv by the node DollarsMoCap. 
+To control an avatar with that data, all you need to do is load a rigged model and provide a joint mapping, ie. a spread of joint names the model comes with, that aligns with the joint names as returned by DollarsMoCap. This takes about 5 minutes to set up and then works for all models that use the same skeleton.
 
 ![](applyskeleton.png)
 
