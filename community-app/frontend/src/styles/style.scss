@@ -52,6 +52,10 @@ $orange-hover: #ee4b28;
         color: #444;
         text-decoration: underline;
         text-decoration-color: #aaa;
+
+        &:hover{
+          color: #000;
+        }
       }
 
       .btn{
