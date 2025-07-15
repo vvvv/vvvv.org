@@ -40,6 +40,35 @@ $orange-hover: #ee4b28;
   .section{
     padding: 1rem;
 
+    .footer{
+      font-size: 0.9rem;
+      color: #666;
+      border-top: 1px solid #888;
+      padding: 0.5rem 1rem;
+      background-color: #f0f0f0;
+      vertical-align: baseline;
+
+      a{
+        color: #444;
+        text-decoration: underline;
+        text-decoration-color: #aaa;
+      }
+
+      .btn{
+        color: #fff;
+        border-radius: 15px;
+        border: none;
+        padding: 0rem 0.7rem;
+        font-size: 0.9rem;
+        background-color: #aaa;
+        text-transform: inherit;
+
+        &:hover{
+          background-color: #888;
+        }
+      }
+    }
+
     h2{
       font-size: 1.1rem;
       font-weight: 600;
@@ -52,7 +81,18 @@ $orange-hover: #ee4b28;
 
     .list{
       width: 100%;
+      font-size: 0.9rem;
       
+      td{
+        border-bottom: 1px solid #dee2e6;
+        border-top: inherit;
+        padding: 0.4rem 0rem;
+      }
+
+      .count{
+        color: #888;
+      }
+
       li{
         padding: 0.5rem 0rem;
         margin: 0px;
@@ -60,7 +100,6 @@ $orange-hover: #ee4b28;
       
       a{
         background-color: inherit;
-        font-size: 0.9rem;
         border-color: #eee;
       }
     }
@@ -99,6 +138,12 @@ $orange-hover: #ee4b28;
     
     border: 0px;
     
+    .card-body{
+      a{
+        pointer-events: none;
+      }
+    }
+
     .imageContainer
     {
       overflow: hidden;

@@ -40,14 +40,18 @@ async function sync(force)
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
             </template>
             <template v-else>
-                <ul v-if="store.topics.length > 0" class="list-group list-group-flush list">
-                    <li v-for="(topic, index) in store.topics" :key="index" class="list-group-item d-flex flex-nowrap link">
-                        <NEllipsis :line-clamp="1" :tooltip=false>
-                            <a :href="topic.link" target="_blank">{{ topic.title }}</a>
-                        </NEllipsis>
-                        <NBadge v-if="topic.count>0" :value="topic.count" color="DarkGray" class="ml-2"/>
-                    </li>
-                </ul> 
+                <table v-if="store.topics.length > 0" class="table table-sm list">
+                    <tr v-for="(topic, index) in store.topics" :key="index" class="link">
+                        <td>
+                            <NEllipsis :line-clamp="1" :tooltip=false>
+                                <a :href="topic.link" target="_blank">{{ topic.title }}</a>
+                            </NEllipsis>
+                        </td>
+                        <td class="pl-3">
+                            <span v-if="topic.count" class="count">{{ topic.count }}</span>
+                        </td>
+                    </tr>
+                </table>
                 <div v-else class="m-3">Okay, Houston... we've had a problem here.<br/>Try again later.</div>
             </template>
         </div>

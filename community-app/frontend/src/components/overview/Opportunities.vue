@@ -1,10 +1,11 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NTag, NEllipsis, NSkeleton } from 'naive-ui'
+import { NTag, NEllipsis, NSkeleton, NTooltip } from 'naive-ui'
 import { useOpportunitiesStore } from './OpportunitiesStore.js'
 import { showBusinessProfile } from "../../utils.js"
 import SectionTitle from './SectionTitle.vue'
+import Constants from '../../Constants.js'
 
 const store = useOpportunitiesStore();
 const loading = ref(false);
@@ -29,7 +30,7 @@ async function sync(force)
 </script>
 
 <template>
-    <div class="section pl-4">
+    <div class="section pl-4 opportunities">
         <SectionTitle showRefresh="true" :loading="loading" title="Opportunities" @sync="sync(true)"/>
         <div class="row pt-1">
             <template v-if="loading">
@@ -53,9 +54,24 @@ async function sync(force)
                             </a>
                         </NEllipsis>
                     </li>
-                </ul> 
+                </ul>
                 <!-- <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div> -->
             </template>
+        </div>
+        <div class="row justify-content-end footer">
+            <span class="mr-3">Add:</span>
+            <a class="link mr-3" :href="Constants.FORUM_JOBS_TOPIC" role="button">job</a>
+            <a class="link" :href="Constants.PROFILE_BUSINESS" role="button">internship</a>
+            <!-- <NTooltip trigger="hover">
+                <template #trigger>
+                </template>
+                Add job via Job Forum
+            </NTooltip>
+            <NTooltip trigger="hover">
+                <template #trigger>
+                </template>
+                Add internship via business profile
+            </NTooltip> -->
         </div>
     </div>
 </template>
