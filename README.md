@@ -8,6 +8,7 @@ Source of [vvvv.org](http://vvvv.org)
 - The only file that is mandatory in your folder is the `index.md` file. Best copy one over from another blogpost and modify it
 - For posts of type `date` you need to enter from- and to- dates in unix time, which can be converted to from date using e.g. this [date -> timestamp converter](https://dqydj.com/unix-time-to-date-converter/)
 - To preview your post locally, see the section "Local Build" below
+- Finally make a pull-request from your fork to this repo
 
 ### Shortcodes
 For embedding external media use these short codes:
