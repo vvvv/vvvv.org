@@ -9,6 +9,16 @@ $orange-hover: #ee4b28;
 .overview
 {
 
+  .lastMonth{
+    img{
+      width: 3rem;
+    }
+
+    .second{
+      font-size: 0.9rem;
+    }
+  }
+
   .nugets{
     .by{
       font-size: 0.8rem;

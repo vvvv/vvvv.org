@@ -10,6 +10,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 import Opportunities from '../components/overview/Opportunities.vue'
 import LatestNugets from '../components/overview/LatestNugets.vue'
+import LastMonth from '../components/overview/LastMonth.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -53,6 +54,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
             </template>
         </div>
         <div class="col">
+            <LastMonth/>
             <LatestTopics/>
         </div>
     </div>
