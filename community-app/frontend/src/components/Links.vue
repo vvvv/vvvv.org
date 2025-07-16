@@ -25,8 +25,8 @@ const exists = computed(()=>{
 
 </script>
 <template>
-    <div class="my-3 pt-2 border-top" v-if="exists">
-        <p class="text-muted mb-2 smallTitle">Direct links:</p>
+    <div class="mb-3 pt-2 border-top" v-if="exists">
+        <p class="text-muted mb-2 smallTitle">Direct links</p>
         <template v-for="link in links" :key="link.name">
             <p v-if="link.url" class="mb-1">
                 <a :href="link.url" target="_blank">{{ link.name }}</a>

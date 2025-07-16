@@ -33,13 +33,13 @@ onMounted(async ()=>{
 
 <template>
     <div v-if="store.link" class="section pr-4 lastMonth">
-        <div class="row border-bottom py-3 align-items-center">
-            <div class="col-2 pr-0 py-0">
-                <img :src="store.thumb"/>
+        <div class="row border-bottom pb-3 align-items-start">
+            <div class="col-1 px-0 py-0">
+                <img :src="store.thumb" class="img-fluid"/>
             </div>
-            <div class="col-10">
+            <div class="col-11 py-0 pl-4 no-gutter">
                 <strong><a :href="store.link">{{ store.title }}</a></strong>
-                <div class="text-muted second">Read blogpost</div>
+                <div class="text-muted second">Blog</div>
             </div>
         </div>
     </div>

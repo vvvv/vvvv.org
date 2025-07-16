@@ -1,14 +1,17 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NTag, NEllipsis, NSkeleton, NTooltip } from 'naive-ui'
+import { NTag, NEllipsis, NSkeleton, NTooltip, NDropdown, NButton } from 'naive-ui'
 import { useOpportunitiesStore } from './OpportunitiesStore.js'
 import { showBusinessProfile } from "../../utils.js"
 import SectionTitle from './SectionTitle.vue'
 import Constants from '../../Constants.js'
+import { useRouter } from 'vue-router';
 
 const store = useOpportunitiesStore();
 const loading = ref(false);
+
+const router = useRouter();
 
 onMounted(()=>{   
     sync();
@@ -27,11 +30,41 @@ async function sync(force)
         loading.value = false;
     }
 }
+
+const addOptions = ref(
+    [
+        {
+            label: 'Add job via Job Forum',
+            key: 'job',
+            link: Constants.FORUM_JOBS_TOPIC
+        },
+        {
+            label: 'Add internship via business profile',
+            key: 'internship',
+            link: Constants.PROFILE_BUSINESS
+        }
+    ]
+)
+
+function handleAdd (value)
+{
+    const link = addOptions.value.find(o=>o.key == value).link;
+    document.location.href = link;
+}
+
 </script>
 
 <template>
     <div class="section pl-4 opportunities">
-        <SectionTitle showRefresh="true" :loading="loading" title="Opportunities" @sync="sync(true)"/>
+        <SectionTitle showRefresh="true" :loading="loading" title="Opportunities" @sync="sync(true)">
+            <template #beforeSync>
+                <NDropdown placement="bottom-start" trigger="click" size="small" :options="addOptions" @select="handleAdd">
+                    <div class="mr-3">
+                        <NButton size="small">+ Add</NButton>
+                    </div>
+                </NDropdown>
+            </template>
+        </SectionTitle>
         <div class="row pt-1">
             <template v-if="loading">
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
@@ -58,10 +91,8 @@ async function sync(force)
                 <!-- <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div> -->
             </template>
         </div>
-        <div class="row justify-content-end footer">
-            <span class="mr-3">Add:</span>
-            <a class="link mr-3" :href="Constants.FORUM_JOBS_TOPIC" role="button">job</a>
-            <a class="link" :href="Constants.PROFILE_BUSINESS" role="button">internship</a>
+        <div class="row justify-content-end">
+
             <!-- <NTooltip trigger="hover">
                 <template #trigger>
                 </template>
