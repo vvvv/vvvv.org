@@ -39,7 +39,7 @@ onMounted(async ()=>{
             </div>
             <div class="col-11 py-0 pl-4 no-gutter">
                 <strong><a :href="store.link">{{ store.title }}</a></strong>
-                <div class="text-muted second">Blog</div>
+                <div class="text-muted second">Last month in review</div>
             </div>
         </div>
     </div>
