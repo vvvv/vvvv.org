@@ -49,6 +49,7 @@ function changeConnection(key)
                 :list="store.list.connections" 
                 :options="store.socialOptions"
                 :connection="store.selectedConnection"
+                type="Business"
                  class="mt-3" @change="changeConnection"/>
             
             <LogoListView v-if="store.selectedSection.key == 'list'" 

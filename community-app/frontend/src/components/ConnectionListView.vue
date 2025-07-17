@@ -4,7 +4,7 @@ import { NIcon, NButton, NDropdown } from 'naive-ui';
 import { ChevronDown } from '@vicons/ionicons5';
 import { showBusinessProfile, showEduProfile } from "../utils.js"
 
-const props = defineProps(['list', 'options', 'connection'])
+const props = defineProps(['list', 'options', 'connection', 'type'])
 const emit = defineEmits(['change'])
 
 function handleClick(item)
@@ -26,7 +26,7 @@ function handleClick(item)
         <table class="table table-borderless">
             <thead class="border-bottom">
                 <tr>
-                    <th scope="col" class="col-4">{{ type }}</th>
+                    <th scope="col" class="col-4">{{ type}}</th>
                     <th scope="col" class="col">
                        <NDropdown trigger="click" :options="options" @select="(key) => emit('change', key)">
                          <NButton secondary>{{ connection.label }}<NIcon class="ml-4"><ChevronDown/></NIcon></NButton>
