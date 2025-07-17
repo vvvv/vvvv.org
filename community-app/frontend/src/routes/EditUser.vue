@@ -3,14 +3,6 @@
 import { ref, shallowRef, onMounted, h } from 'vue'
 import { useMessage, NIcon, NMenu, NSpin, NButton } from 'naive-ui'
 
-import {
-  PersonCircleOutline as PersonIcon,
-  HomeOutline as HomeIcon,
-  WalletOutline as WalletIcon,
-  StorefrontOutline as CompanyIcon,
-  SchoolOutline as EduIcon,
-} from '@vicons/ionicons5'
-
 import { useRouter, useRoute } from 'vue-router'
 import { fetchProfileData } from './fetchProfileData.js'
 
@@ -18,6 +10,14 @@ import Personal from '../components/profile/Personal.vue'
 import Business from '../components/profile/Business.vue'
 import Edu from '../components/profile/Edu.vue'
 import ForHire from '../components/profile/ForHire.vue'
+
+import {
+  PersonCircleOutline as PersonIcon,
+  HomeOutline as HomeIcon,
+  WalletOutline as WalletIcon,
+  StorefrontOutline as CompanyIcon,
+  SchoolOutline as EduIcon,
+} from '@vicons/ionicons5'
 
 const emit = defineEmits(['logout']);
 
@@ -30,7 +30,11 @@ const data = ref(null);
 const loading = ref(true);
 const constants = ref(null);
 const failure = ref ("");
-const selected = shallowRef(Personal);
+
+const selected = ref({
+  key: "basics",
+  component: Personal
+})
 
 const itemClass = ref ('item');
 const selectedClass = ref ('selected');
@@ -50,10 +54,17 @@ const showMessage = (m) => {
 }
 
 onMounted(async() => {
+
+  const route_key = route.query.p ?? "personal";
+
+  selected.value = {
+    key: route_key,
+    component: menuOptions.find(m => m.key == route_key).component
+  }
+
   try{
     loading.value = true;
-
-    [ data.value, constants.value ] = await fetchProfileData();  
+    [ data.value, constants.value ] = await fetchProfileData();
   }
   catch (error) {
     failure.value = error.message;
@@ -79,19 +90,19 @@ const menuOptions = [
   {
     label: "Personal",
     component: Personal,
-    key: "basics",
+    key: "personal",
     icon: renderIcon(PersonIcon)
   },
   {
     label: 'For Hire',
     component: ForHire,
-    key: "hire",
+    key: "forhire",
     icon: renderIcon(WalletIcon)
   },
   {
     label: 'Business',
     component: Business,
-    key: "company",
+    key: "business",
     icon: renderIcon(CompanyIcon)
   },
   {
@@ -103,7 +114,10 @@ const menuOptions = [
 ];
 
 const handleUpdateValue = (key, item) => {
-  selected.value = item.component
+  selected.value = {
+    key: key,
+    component: item.component,
+  }
 }
 
 </script>
@@ -127,10 +141,10 @@ const handleUpdateValue = (key, item) => {
           </div>
           <div class="row">
             <div class="col-12 col-lg-3 mb-lg-0 mb-5 profile-menu">  
-              <n-menu responsive :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
+              <n-menu responsive :value="selected.key" :options="menuOptions" @update:value="handleUpdateValue" :default-value="menuOptions[0].key"/>
             </div>
             <div class="col-12 col-lg-8 ml-lg-1">
-                <component :is="selected" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
+                <component :is="selected.component" :data="data" :constants="constants" @message="showMessage" @updateData="updateData"/>
               </div>
             </div>
         </template>

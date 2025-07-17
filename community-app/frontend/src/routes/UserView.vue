@@ -253,7 +253,8 @@ const hireCardVisible = computed(()=>{
               <BetaGammaUser v-if="betagammauser" :data="betagammauser"/>
 
         </div>
-        <div class="col-12 col-md-6 col-lg-8 mt-4 mt-md-0 pt-md-0 profileContent">
+        <div class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
+        <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
 
           <template v-if="description">
             <div class="mb-4 description">

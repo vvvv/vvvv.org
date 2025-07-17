@@ -10,6 +10,7 @@ import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 import Opportunities from '../components/overview/Opportunities.vue'
 import LatestNugets from '../components/overview/LatestNugets.vue'
+import LastMonth from '../components/overview/LastMonth.vue'
 
 const content = ref (null);
 const loading = ref (false);
@@ -45,10 +46,11 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
 </script>
 
 <template>
-    <div class="row row-cols-1 row-cols-md-2 mb-4 overview">
+    <div class="row row-cols-1 row-cols-md-2 m3-4 overview">
         <div class="col">
+            <LastMonth/>
             <template v-if="content?.video">
-                <h4 class="border-bottom pb-2">Staff picks</h4>
+                <h5 class="pb-0">Staff picks</h5>
                 <YouTubePlayer :id="content.video"/>
             </template>
         </div>
