@@ -10,25 +10,33 @@ export const useBusinessListStore = defineStore ('businessList',{
         return {
             list: {},
             selectedSection: sections[0],
-            selectedConnection: socials[0],
+            selectedConnection: connections[0],
             sections: sections,
-            socialOptions: socials,
+            socialOptions: connections,
             loading: false
         }
     },
     actions: {
 
-        async setSection(key)
+        async setSection(section, type)
         {
-            this.selectedSection = sections.find(s=> s.key == key);
-            if (key == 'list') this.getList(true);
-            if (key == 'connections') this.setConnection(socials[0].key)
+            this.selectedSection = sections.find(s=> s.key == section) ?? sections[0];
+            if (type)
+            {
+                this.selectedConnection = connections.find(c=> c.key == type) || connections[0];
+            }
         },
 
-        async setConnection(key)
+        async getData()
         {
-            this.selectedConnection = socials.find(s=> s.key == key);
-            this.getConnection(true);
+            if (this.selectedSection.key == 'list')
+            {
+                await this.getList(true);
+            }
+            else if (this.selectedSection.key == 'connections')
+            {
+                await this.getConnections(true);
+            }
         },
 
         async getList(force = false){
@@ -48,7 +56,7 @@ export const useBusinessListStore = defineStore ('businessList',{
 
         },
 
-        async getConnection(force = false){
+        async getConnections(force = false){
 
             if (this.list.connections && !force) return;
             this.loading = true;
@@ -80,7 +88,7 @@ const sections = [
     { label: "Connections", key: 'connections', content: 'Social'},
 ];
 
-const socials=[
+const connections = [
     { label: "GitHub", key: "github" },
     { label: "NuGet", key: "nuget" },
     { label: "Mastodon", key: "mastodon" },
