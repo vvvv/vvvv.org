@@ -9,6 +9,8 @@ export const useLastMonthStore = defineStore ('lastMonth',{
             title: "",
             link:"",
             thumb:"",
+            date: null,
+            description:"",
             fetched: false
         }
     },
@@ -23,6 +25,8 @@ export const useLastMonthStore = defineStore ('lastMonth',{
                 this.link = rss.link;
                 this.thumb = rss.thumb;
                 this.fetched = true;
+                this.description = rss.description;
+                this.date = new Date(rss.pubDate).getTime()
             }
             catch (error){
                 this.fetched = false;
@@ -33,9 +37,6 @@ export const useLastMonthStore = defineStore ('lastMonth',{
 })
 
 async function fetchRSS(){
-    
-    // const imageParamsAvatars = "?withoutEnlargement=true&quality=90&fit=cover&height=60&width=60";
-    // const limit = 10;
 
     const url = Constants.OVERVIEW_RSS;
         
@@ -59,8 +60,9 @@ async function fetchRSS(){
                         title: getItem(item, 'title'),
                         link: getItem(item, 'link'),
                         category: getItem(item, 'category'),
+                        thumb: getItem(item, 'thumb'),
                         description: getItem(item, 'description'),
-                        thumb: getItem(item, 'thumb')
+                        pubDate: getItem(item, 'pubDate')
                     }
                 )
             ));
@@ -75,7 +77,9 @@ async function fetchRSS(){
         return {
             title: lastMonth.title,
             link: lastMonth.link,
-            thumb: latestMonthThumb
+            thumb: latestMonthThumb,
+            description: lastMonth.description,
+            pubDate: lastMonth.pubDate
         }
     }
     else {
