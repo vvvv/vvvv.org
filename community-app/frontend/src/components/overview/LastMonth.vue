@@ -34,7 +34,7 @@ onMounted(async ()=>{
 <template>
     <div v-if="store.link" class="section pr-4 lastMonth">
         <div class="row border-bottom pb-3 align-items-start">
-            <div class="col-1 px-0 py-0">
+            <div class="col-1 px-0 py-1">
                 <img :src="store.thumb" class="img-fluid"/>
             </div>
             <div class="col-11 py-0 pl-4 no-gutter">
