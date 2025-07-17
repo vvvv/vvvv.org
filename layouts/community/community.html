@@ -8,7 +8,11 @@
     <div class="main">
         {{ partial "nav" . }}
 
-        <div id="Community-app" class="container {{ .Params.theme }}"></div>
+        <div id="Community-app" class="container {{ .Params.theme }}">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 
         {{ partial "videoBlocker" . }}
 
