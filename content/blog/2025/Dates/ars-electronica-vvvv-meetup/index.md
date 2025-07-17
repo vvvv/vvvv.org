@@ -18,7 +18,7 @@ thumb: "vvvvmeetup-panic-thumbnail.png"
 
 We are happy to announce a special edition of the vvvv worldwide meetup on **September 6th, 7pm CET** during the **[Ars Electronica Festival 2025](https://ars.electronica.art/festival)**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL, with a focus on works that are exhibited during the festival in Linz. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
-Moderation by Simon Weckert<br>
+Moderated and curated by Simon Weckert and Amir Bastan<br>
 Support by [3e8](https://www.3e8.studio/) & [Studio Brüll](https://studiobruell.de/) 
 
 {{< box >}}
