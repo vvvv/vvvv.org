@@ -8,7 +8,11 @@
     <div class="main">
         {{ partial "nav" . }}
 
-        <div id="Community-app" class="container {{ .Params.theme }}"></div>
+        <div id="Community-app" class="container {{ .Params.theme }}">
+            <div class="spinner-border m-4" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
 
         {{ partial "videoBlocker" . }}
 
@@ -16,7 +20,7 @@
         
         {{ partial "footer" . }}
     </div>
-    {{ partial "js" . }}
     <script type="module" crossorigin src="{{"/js/vue/app.js" | relURL}}" defer></script>
+    {{ partial "js" . }}
 </body>
 </html>

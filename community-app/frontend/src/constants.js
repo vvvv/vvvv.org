@@ -7,12 +7,18 @@ const BACKEND_REMOTE="https://io.vvvv.org/v1/"
 const DATAURL = DATA_REMOTE
 const BACKENDURL = import.meta.env.DEV ? BACKEND_LOCAL: BACKEND_REMOTE
 
+const PROFILE = "/edit-profile"
+
 export default Object({   
 
     //LINKS
     FORUM:"https://forum.vvvv.org/",
+    FORUM_JOBS_TOPIC: "https://forum.vvvv.org/c/jobs/26",
     NUGET_ORG:"https://www.nuget.org/packages?q=tag%3Avl&includeComputedFrameworks=true&prerel=true&sortby=created-desc",
     NUGET_PACK_LINK:"https://www.nuget.org/packages/",
+
+    //RSS
+    OVERVIEW_RSS: "https://vvvv.org/community/index.xml",
     
     //DATA
     BASEURL: DATAURL, 
@@ -22,6 +28,13 @@ export default Object({
     GET_EDUS: DATAURL + 'items/Edu',
     GET_USERS: DATAURL + 'items/User',
     GET_HIRE: DATAURL + 'items/Hire',
+
+    //PROFILE
+    PROFILE: PROFILE,
+    PROFILE_BUSINESS: PROFILE + "?p=business",
+    PROFILE_EDU: PROFILE + "?p=edu",
+    PROFILE_PERSONAL: PROFILE + "?p=personal",
+    PROFILE_FORHIRE: PROFILE + "?p=forhire",
     
     //BACKEND
     NUGETS_LATEST: BACKENDURL + 'latestNugets',

@@ -27,7 +27,7 @@ export const useLatestTopicsStore = defineStore ('latestTopics',{
 
 async function fetchLatestTopics(){
 
-    const count = 7;
+    const count = 9;
     const response = await fetch(Constants.FORUM_TOPICS+`?count=${count}`);
 
     if (response.ok)
