@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-07-13"
+date: "2025-07-18"
 title: "Introducing: DollarsMoCap"
 description: "Probably the simplest way to achieve full body tracking"
 thumb: "logo.png"
@@ -26,14 +26,17 @@ Watch this demo of their technology to get an idea of the quality of tracking yo
 
 {{< youtube gBbKCGwMFeY >}}
 
-When running Dollars MONO on the same PC as vvvv, all you have to do is activate the "vvvv Streaming" option you can find under `Settings > Stream & Export`:
+When running Dollars MONO on the same PC as vvvv, all you have to do is activate the "vvvv Streaming" option you can find under `Settings > Stream`:
 
 ![](streaming.png) 
 
 The data is received in vvvv by the node DollarsMoCap. 
 To control an avatar with that data, all you need to do is load a rigged model and provide a joint mapping, ie. a spread of joint names the model comes with, that aligns with the joint names as returned by DollarsMoCap. This takes about 5 minutes to set up and then works for all models that use the same skeleton.
 
-![](applyskeleton.png)
+<video width=100% controls autoplay>
+    <source src="lankydude.mp4" type="video/mp4">
+    Your browser does not support the video tag.  
+</video>
 
 Many thanks go out to Kan Feng, the creator of Dollars MoCap, for the great support and helping us along the way of implementing this for vvvv!
 
