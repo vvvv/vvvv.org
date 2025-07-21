@@ -3,8 +3,9 @@ import { logos } from './logos/logos.js'
 import { NIcon, NButton, NDropdown } from 'naive-ui';
 import { ChevronDown } from '@vicons/ionicons5';
 import { showBusinessProfile, showEduProfile } from "../utils.js"
+import { computed } from 'vue';
 
-const props = defineProps(['list', 'options', 'connection', 'type'])
+const props = defineProps(['list', 'options', 'connection', 'type', 'title'])
 const emit = defineEmits(['change'])
 
 function handleClick(item)
@@ -19,10 +20,13 @@ function handleClick(item)
     }
 }
 
+const profileLink = computed(()=>`/edit-profile/?p=${props.list.items[0].key}`)
+
 </script>
 
 <template>
-    <div>
+    <div class="connectionsView">
+        <p>{{ title }}</p>
         <table class="table table-borderless">
             <thead class="border-bottom">
                 <tr>
@@ -46,6 +50,7 @@ function handleClick(item)
                 </tr>
             </tbody>
         </table>
+        <p class="profileLink">Add this platform to <a :href="profileLink">your profile.</a></p>
     </div>
 </template>
 
