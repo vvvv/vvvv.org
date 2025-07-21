@@ -89,8 +89,7 @@ const titleList = computed(()=>{
                 :list="store.list.connections" 
                 :options="store.socialOptions"
                 :connection="store.selectedConnection"
-                title = "Businesses on other platforms:"
-                type="Business"
+                connectionKey="business"
                 @change="changeConnection"/>
             
         </template>
