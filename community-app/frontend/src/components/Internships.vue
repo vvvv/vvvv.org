@@ -12,7 +12,7 @@ const link = computed(()=>{
 
 </script>
 <template>
-    <div v-if="data.internships" class="internship">
+    <div class="internship">
         <template v-if="isLink">
             <a :href="link" taret="_blank">
                 <NIcon size="1.2rem" color="black" class="mr-2">

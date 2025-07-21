@@ -1,62 +1,98 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from "vue-router";
-import { NSpin } from 'naive-ui'
-import { useEduListStore} from "./EduListStore.js";
-import defaultLogo from '../assets/defaultLogo.png'
-import Location from "../components/Location.vue"
+import { ref, onMounted, watch, computed } from 'vue'
+import { useRoute, useRouter } from "vue-router";
+import { useEduListStore} from "./EduListStore.js"
 import { showEduProfile } from "../utils.js"
+import ListNavigation from './ListNavigation.vue';
+import LogoListView from '../components/LogoListView.vue';
+import ConnectionListView from '../components/ConnectionListView.vue';
 
-const loading = ref (true);
+const router = useRouter();
 const route = useRoute();
 const store = useEduListStore();
 
 onMounted( async ()=>
 {
-    if (route.query.e)
+    store.setSection('list');
+    await checkRoute(route.query);
+})
+
+watch(() => route.query, async (newQ, oldQ)=>{
+    if (newQ != oldQ) await checkRoute(route.query);
+}, { deep: true })
+
+async function checkRoute(query)
+{
+    if (query.b)
     {
-        showEduProfile (route.query.e);
+        showEduProfile(query.b);
         return;
+    }
+    else if (query.section)
+    {   
+        store.setSection(query.section, query.type);
     }
 
     try{
-        loading.value = true;
-        await store.fetch();
+        await store.getData();
     }
     catch (error)
     {
         console.log (error);
     }
-    finally{
-        loading.value = false;
+}
+
+function changeSection(key)
+{
+    if (key == 'connections')
+    {
+        router.push({name: 'Educational Institutions', query:{ section: key, type: store.selectedConnection.key ?? 'github' }})
+    }
+    else if (key == 'list')
+    {
+        router.push({name: 'Educational Institutions', query:{ section: key}});
+    }
+}
+
+function changeConnection(key)
+{
+    router.push({name: 'Educational Institutions', query:{ section: store.selectedSection.key, type: key }})
+}
+
+const title = computed(()=>{
+    
+    if (store.list?.list)
+    {
+         return `${store.list.list.total} Institutions where vvvv serves in parts of the education program:`
     }
 })
-
-const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
 
 </script>
 
 <template>
-    <n-spin :show="loading">
-        <div class="logoListView" v-if="!loading && store">
-            <!-- <Map v-model:state="state"/> -->
-            <p v-if="store.total > 0">{{ store.total }} Institutions where vvvv serves in parts of the education program:</p>
-            <div class="row">
-                <div v-for="{ name, slug, description, logo, location_city, location_country } in store.items" 
-                    track-by="name"
-                    :class="elementClass">
-                    <div class="companyCard p-3" @click="(event)=> showEduProfile(slug, event)">
-                        <div class="company">
-                            <div class="logo">
-                                <img :src="logo || defaultLogo"/>
-                            </div>
-                            <p class="name">{{ name }}</p>
-                            
-                        <Location :location="{city: location_city, country: location_country}"/>
-                        </div>
-                    </div>
-                </div>
+    <n-spin :show="store.loading">
+
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
             </div>
+        </div>
+
+        <div class="logoListView" v-if="!loading && store">
+            <template v-if="!store.loading && store.list">
+                
+                <LogoListView v-if="store.selectedSection.key == 'list'" 
+                    :title = "title"
+                    :list ="store.list.list"
+                    @click="showEduProfile"/>
+
+                <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
+                    :list="store.list.connections" 
+                    :options="store.socialOptions"
+                    :connection="store.selectedConnection"
+                    type="Institution"
+                    class="mt-3" @change="changeConnection"/>
+            </template>
         </div>
     </n-spin>
 </template>
