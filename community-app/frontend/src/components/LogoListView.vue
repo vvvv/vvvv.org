@@ -1,0 +1,30 @@
+<script setup>
+import defaultLogo from '../assets/defaultLogo.png'
+import Location from "../components/Location.vue"
+import Internships from '../components/Internships.vue';
+
+const props = defineProps(['list', 'title'])
+const emit = defineEmits(['click']);
+
+</script>
+
+<template>
+    <div class="logoListView" v-if="list && list.total > 0">
+        <p>{{ title }}</p>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+            <div v-for="item in list.items" track-by="item.name" class="col mb-4">
+                <div class="companyCard p-3 h-100" @click.prevent="emit('click', item.slug)">
+                    <div class="company">
+                        <div class="logo">
+                            <img :src="item.logo || defaultLogo"/>
+                        </div>
+                        <p class="name">{{ item.name }}</p>
+                        
+                        <Internships v-if="item.internships"  :data="item" text="Accepting internship" class="mb-1"/>
+                        <Location :location="{city: item.location_city, country: item.location_country}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
