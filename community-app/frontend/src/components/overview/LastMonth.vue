@@ -30,9 +30,6 @@ onMounted(async ()=>{
         loading.value = false;
     }
 
-    console.log (Date.now());
-    console.log (store.date + oneWeek);
-
     isNew.value = store.date ? Date.now() < store.date + oneWeek : false;
     
 })

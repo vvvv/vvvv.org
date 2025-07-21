@@ -1,7 +1,6 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, computed } from 'vue'
 import { useRoute, useRouter } from "vue-router";
-import { NButton, NDropdown, NSpin, NIcon } from 'naive-ui'
 import { useBusinessListStore } from "./BusinessListStore.js";
 import { showBusinessProfile } from "../utils.js"
 import ListNavigation from './ListNavigation.vue';
@@ -14,6 +13,7 @@ const store = useBusinessListStore();
 
 onMounted( async ()=>
 {
+    store.setSection('list');
     await checkRoute(route.query);
 })
 
@@ -59,6 +59,14 @@ function changeConnection(key)
     router.push({name: 'Businesses', query:{ section: store.selectedSection.key, type: key }})
 }
 
+const title = computed(()=>{
+    
+    if (store.list?.list)
+    {
+        return `${store.list.list.total} Businesses that use vvvv:`   
+    }
+})
+
 </script>
 
 <template>
@@ -72,16 +80,18 @@ function changeConnection(key)
 
         <template v-if="!store.loading && store.list">
             
+            <LogoListView v-if="store.selectedSection.key == 'list'" 
+                :list ="store.list.list"
+                :title="title"
+                @click="showBusinessProfile"/>
+            
             <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
                 :list="store.list.connections" 
                 :options="store.socialOptions"
                 :connection="store.selectedConnection"
                 type="Business"
-                 class="mt-3" @change="changeConnection"/>
+                class="mt-3" @change="changeConnection"/>
             
-            <LogoListView v-if="store.selectedSection.key == 'list'" 
-                :list ="store.list.list"/>
-
         </template>
 
     </n-spin>
