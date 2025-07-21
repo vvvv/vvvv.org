@@ -59,7 +59,7 @@ function changeConnection(key)
     router.push({name: 'Businesses', query:{ section: store.selectedSection.key, type: key }})
 }
 
-const title = computed(()=>{
+const titleList = computed(()=>{
     
     if (store.list?.list)
     {
@@ -72,7 +72,7 @@ const title = computed(()=>{
 <template>
     <n-spin :show="store.loading">
 
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-12 col-lg-4">
                 <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
             </div>
@@ -82,15 +82,15 @@ const title = computed(()=>{
             
             <LogoListView v-if="store.selectedSection.key == 'list'" 
                 :list ="store.list.list"
-                :title="title"
+                :title="titleList"
                 @click="showBusinessProfile"/>
             
             <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
                 :list="store.list.connections" 
                 :options="store.socialOptions"
                 :connection="store.selectedConnection"
-                type="Business"
-                class="mt-3" @change="changeConnection"/>
+                connectionKey="business"
+                @change="changeConnection"/>
             
         </template>
 

@@ -72,13 +72,13 @@ const title = computed(()=>{
 <template>
     <n-spin :show="store.loading">
 
-        <div class="row">
+        <div class="row mb-2">
             <div class="col-12 col-lg-4">
                 <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
             </div>
         </div>
 
-        <div class="logoListView" v-if="!loading && store">
+        <div v-if="!loading && store">
             <template v-if="!store.loading && store.list">
                 
                 <LogoListView v-if="store.selectedSection.key == 'list'" 
@@ -90,8 +90,8 @@ const title = computed(()=>{
                     :list="store.list.connections" 
                     :options="store.socialOptions"
                     :connection="store.selectedConnection"
-                    type="Institution"
-                    class="mt-3" @change="changeConnection"/>
+                    connectionKey="edu"
+                    @change="changeConnection"/>
             </template>
         </div>
     </n-spin>

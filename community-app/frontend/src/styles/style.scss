@@ -395,3 +395,21 @@ $orange-hover: #ee4b28;
     }
   }
 }
+
+.connectionsView{
+  .profileLink{
+
+    color: #777;
+
+    a{
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+      text-decoration-color: #bbb;
+  
+      &:hover{
+        text-decoration: underline;
+        text-decoration-color: #bbb;
+      }
+    }
+  }
+}
