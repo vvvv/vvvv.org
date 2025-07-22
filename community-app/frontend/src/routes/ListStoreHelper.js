@@ -10,7 +10,8 @@ export const storeObject = (key) => (
             selectedConnection: connections[0],
             sections: sections,
             socialOptions: connections,
-            loading: false
+            loading: false,
+            pager: { page: 0, size: 10}
         }
     },
     actions: {
@@ -18,21 +19,23 @@ export const storeObject = (key) => (
         async setSection(section, key)
         {
             this.selectedSection = sections.find(s=> s.key == section) ?? sections[0];
-            if (key)
-            {
-                this.selectedConnection = connections.find(c=> c.key == key) || connections[0];
-            }
+            this.selectedConnection = key ? connections.find(c=> c.key == key) ?? connections[0] : connections[0];
         },
 
-        async getData()
+        async getData(pager)
         {
-            if (this.selectedSection.key == 'list')
+            if (pager)
             {
-                await this.getList(true);
-            }
-            else if (this.selectedSection.key == 'connections')
-            {
-                await this.getConnections(true);
+                this.pager = pager;
+    
+                if (this.selectedSection.key == 'list')
+                {
+                    await this.getList(true);
+                }
+                else if (this.selectedSection.key == 'connections')
+                {
+                    await this.getConnections(true);
+                }
             }
         },
 
@@ -42,7 +45,7 @@ export const storeObject = (key) => (
             this.loading = true;
 
             try{
-                this.list.list = await fetchList(listFetchURLs[key]);
+                this.list.list = await fetchList(listFetchURLs[key], this.pager);
             }
             catch (error){
                 this.fetched = false;
@@ -59,7 +62,7 @@ export const storeObject = (key) => (
             this.loading = true;
 
             try{
-                const result = await fetchSocial(key, this.selectedConnection.key);
+                const result = await fetchSocial(key, this.selectedConnection.key, this.pager);
 
                 result.items.forEach(i=>{
                     i.profileLink = `/${key}/${i.slug}`
@@ -83,21 +86,22 @@ const LOGO_SETTINGS = 'withoutEnlargement=true&fit=inside&height=120&quality=90&
 
 const listFetchURLs = {
     business: Constants.GET_COMPANIES + '?fields=*&sort=name&meta=filter_count',
-    edu: Constants.GET_EDUS + '?fields=*&sort=name&meta=filter_count'
+    edu: Constants.GET_EDUS + '?fields=*&sort=name&meta=filter_count',
+    people: Constants.GET_USERS + '?fields=*&sort=username&meta=filter_count'
 }
 
 const socialFetchURLs ={
-    user: {
-        url: `${Constants.GET_USERS}?fields=username,related.social.{SOCIAL}&filter[related][social][{SOCIAL}][_nempty]=true&sort=username`,
-        itemPath: 'related.social'
+    people: {
+        url: `${Constants.GET_USERS}?fields=username,related.social.{SOCIAL}&filter[related][social][{SOCIAL}][_nempty]=true&sort=username&meta=filter_count`,
+        itemPath: ['related', 'social']
     },
     business: {
-        url: `${Constants.GET_COMPANIES}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name`,
+        url: `${Constants.GET_COMPANIES}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
         itemPath: 'social'
     },
     edu: 
     {
-        url: `${Constants.GET_EDUS}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name`,
+        url: `${Constants.GET_EDUS}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
         itemPath: 'social'
     }
 };
@@ -119,10 +123,15 @@ const connections = [
 ];
 
 
-async function fetchList(url)
+function pagerParam(pager)
+{
+    return `&limit=${pager.size}&page=${pager.page}`;
+}
+
+async function fetchList(url, pager)
 {
 
-    const response = await fetch (url);
+    const response = await fetch (url + pagerParam(pager));
 
     if (response.ok)
     {
@@ -150,14 +159,23 @@ function logoSrc (src)
     return src ? `${Constants.ASSETS}${src}?${LOGO_SETTINGS}` : null;
 }
 
-async function fetchSocial(key, social)
+function getSocials(object, path)
+{
+    return path.split('.').reduce((acc, key)=>{
+        console.log (acc);
+        console.log (key);
+        return acc && acc[key] !== undefined ? acc[key] : acc;
+    }, object);
+}
+
+async function fetchSocial(key, social, pager)
 {
 
     const query = socialFetchURLs[key]; 
     const url = query?.url.replaceAll('{SOCIAL}', social)
     if (!url) throw new Error ("Can't fetch Social");
 
-    const response = await fetch (url);
+    const response = await fetch (url + pagerParam(pager));
 
     if (response.ok)
     {
@@ -165,7 +183,9 @@ async function fetchSocial(key, social)
     
         const items = json.data.map(item=>{
      
-            const data = linkData (social, item[query.itemPath][social]);
+            const handle = (Array.isArray(query.itemPath) ? item[query.itemPath[0]][0][query.itemPath[1]] : item[query.itemPath])[social];
+
+            const data = linkData (social, handle);
          
             return {
                 name: item.username || item.name,
