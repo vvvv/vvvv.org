@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { logos } from './logos/logos.js'
 import { NIcon, NButton, NDropdown, NPagination, NSpin } from 'naive-ui';
 import { ChevronDown } from '@vicons/ionicons5';
@@ -72,6 +72,8 @@ function setSize(s)
 const isSimple = computed(() => (windowWidth.value < 480 ? true : false));
 const showSizePicker = computed(() => windowWidth.value > 600);
 
+watch(()=>props.list, ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+
 </script>
 
 <template>
@@ -122,10 +124,10 @@ const showSizePicker = computed(() => windowWidth.value > 600);
             </table>
             
             <div class="row mt-4">
-                <div class="col">
+                <div class="col-12 col-md">
                     <p class="profileLink">Add this platform to <a :href="profileLink">your profile.</a></p>
                 </div>
-                <div class="col-auto ml-auto" v-if="list.total > pageSizes[0].value">
+                <div class="col-12 col-md-auto ml-auto" v-if="list.total > pageSizes[0].value">
                     <NPagination
                         v-model:page="page"
                         v-model:page-size="pageSize"
