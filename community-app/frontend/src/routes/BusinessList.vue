@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, watch, computed } from 'vue'
+import { NSpin } from 'naive-ui'
 import { useRoute, useRouter } from "vue-router";
 import { useBusinessListStore } from "./BusinessListStore.js";
 import { showBusinessProfile } from "../utils.js"
@@ -10,6 +11,11 @@ import ConnectionListView from '../components/ConnectionListView.vue';
 const router = useRouter();
 const route = useRoute();
 const store = useBusinessListStore();
+const pageSizes = [
+    { label: '10 per page', value: 10 },
+    { label: '50 per page', value: 50 },
+    { label: '100 per page', value: 100 }
+]
 
 onMounted( async ()=>
 {
@@ -34,7 +40,7 @@ async function checkRoute(query)
     }
 
     try{
-        await store.getData();
+        await store.getData( {page: 0, size: pageSizes[0].value} );
     }
     catch (error)
     {
@@ -59,7 +65,7 @@ function changeConnection(key)
     router.push({name: 'Businesses', query:{ section: store.selectedSection.key, type: key }})
 }
 
-const title = computed(()=>{
+const titleList = computed(()=>{
     
     if (store.list?.list)
     {
@@ -70,29 +76,26 @@ const title = computed(()=>{
 </script>
 
 <template>
-    <n-spin :show="store.loading">
-
-        <div class="row">
-            <div class="col-12 col-lg-4">
-                <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
-            </div>
+    <div class="row mb-2">
+        <div class="col-12 col-lg-4">
+            <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
         </div>
+    </div>
 
-        <template v-if="!store.loading && store.list">
-            
-            <LogoListView v-if="store.selectedSection.key == 'list'" 
-                :list ="store.list.list"
-                :title="title"
-                @click="showBusinessProfile"/>
-            
-            <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
-                :list="store.list.connections" 
-                :options="store.socialOptions"
-                :connection="store.selectedConnection"
-                type="Business"
-                class="mt-3" @change="changeConnection"/>
-            
-        </template>
-
-    </n-spin>
+    <LogoListView v-if="store.selectedSection.key == 'list'" 
+        :loading = "store.loading"
+        :list ="store.list?.list"
+        :title="titleList"
+        @click="showBusinessProfile"/>
+    
+    <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
+        :list="store.list?.connections" 
+        :options="store.socialOptions"
+        :connection="store.selectedConnection"
+        :pageSizes="pageSizes"
+        :loading="store.loading"
+        connectionKey="business"
+        @change="changeConnection"
+        @page="store.getData"
+    />
 </template>
