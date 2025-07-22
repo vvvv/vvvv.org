@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:static/js/vue/app-Location-BjG01-we.js
-import{a8 as n,ac as s}from"./app.js";import{h as r}from"./app-icons-DRCsUfN5.js";import{f as i,c as l,a1 as u,o as m,Q as a,x as p,P as _,u as e,R as d}from"./app-vue-Chj5ZsMy.js";const f={key:0,class:"location"},N={__name:"Location",props:["location"],setup(t){const o=i(()=>n(t.location.city,t.location.country)??null);return(c,x)=>o.value?(m(),l("div",f,[a(e(s),{size:"1.2rem",class:"mr-2"},{default:_(()=>[a(e(r))]),_:1}),p(" "+d(o.value),1)])):u("",!0)}};export{N as _};
-========
-import{a4 as n,a8 as s}from"./app.js";import{h as r}from"./app-icons-DRCsUfN5.js";import{f as i,c as l,a1 as u,o as m,Q as a,x as p,P as _,u as e,R as d}from"./app-vue-Chj5ZsMy.js";const f={key:0,class:"location"},N={__name:"Location",props:["location"],setup(t){const o=i(()=>n(t.location.city,t.location.country)??null);return(c,x)=>o.value?(m(),l("div",f,[a(e(s),{size:"1.2rem",class:"mr-2"},{default:_(()=>[a(e(r))]),_:1}),p(" "+d(o.value),1)])):u("",!0)}};export{N as _};
->>>>>>>> community-connections:static/js/vue/app-Location-CJMxaFW1.js
