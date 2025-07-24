@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-07-25"
+date: "2025-07-24"
 title: "Introducing: Channel Bindings"
 description: "Connect your app parameters to RCP, OSCQuery, OSC, Midi, Redis,..."
 ---
