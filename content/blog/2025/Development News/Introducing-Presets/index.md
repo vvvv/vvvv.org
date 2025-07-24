@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-07-01"
+date: "2025-07-25"
 title: "Introducing: Presets and Transitions"
 description: "A complete cueing solution for your apps parameters"
 ---
@@ -10,7 +10,7 @@ Dear patchers!
 
 Here's to introduce **Presets** and **Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../Introducing-PublicChannels/index.md), store and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
 
-![](presets.png)s
+![](presets.png)
 <center><small>A preset column to store, and the Presets Panel to trigger snapshots</small></center>
 
 ## Storing presets
@@ -20,7 +20,7 @@ There are two ways to store presets:
 
 ![](preset-columns.png)
 
-Multiple preset columns can be used in parallel, allowing you to capture and manipulate presets.
+<center><small>Multiple preset columns can be used in parallel, allowing you to capture and manipulate presets.</small></center>
 
 Every preset is stored in small .xml file in a folder called "Presets" next to the main active .vl document. This allows you to re-arrange/re-name presets right in the explorer. Also this is good for version control where you get a good view on changes.
 
@@ -33,7 +33,7 @@ There are two ways to recall presets:
 
 ![](presets-panel.png)
 
-The presets panel shows a list of all available presets. Here you can quickly transition to or jump to any of the them, but also rename them, add descriptions or delete them.
+The Presets Panel shows a list of all available presets. Here you can quickly transition to or jump to any of the them, but also rename them, add descriptions or delete them.
 
 Obviously, there is some more to transitions (curve, duration) you'll want to control (and you can!) but for simple scenarios the default transition should already allow for quick prototyping. 
 

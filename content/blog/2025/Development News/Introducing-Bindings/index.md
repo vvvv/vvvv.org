@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2025-07-01"
+date: "2025-07-25"
 title: "Introducing: Channel Bindings"
 description: "Connect your app parameters to RCP, OSCQuery, OSC, Midi, Redis,..."
 ---
@@ -11,7 +11,7 @@ Dear patchers!
 Here's to introduce **Channel Bindings**. They offer a unified way to expose [Public Channels](../Introducing-PublicChannels/index.md) from your app and allow them to interact with the outside world. Think easy connections to RCP, OSCQuery, OSC, Midi, Redis,...
 
 ![](binding-columns.png)
-<center><small>Binding columns for OSC, OSCQuery and Redis established by the respective nodes</small></center>
+<center><small>Binding columns for MIDI, OSC, OSCQuery and Redis established by the respective nodes</small></center>
 
 ## Adding Binding Columns
 
@@ -27,7 +27,7 @@ For each channel you see the following:
 - +/🖊: Buttons to add or modify a binding
 
 ## Adding Bindings
-There are two ways of adding bindings to a public channel:
+There are two ways to add bindings to a public channel:
 - Via the Channel Browsers "Binding" columns
 - Using a BindTo... node
 
@@ -37,7 +37,7 @@ Alternatively you can establish bindings to channels (including non-public ones)
 
 ![](bindto-node.png)
 
-Note that also multiple bindings are possible to a single channel. Like this you can e.g. define that a value that comes in via midi, should go out via OSC or the other way round...
+Note that also multiple bindings are possible to a single channel. Like this you can e.g. define that a value that comes in via MIDI, should go out via OSC or the other way round...
 
 ## Removing Bindings
 Unchecking a checkbox in a binding column or removing a BindTo... node removes the binding. 
