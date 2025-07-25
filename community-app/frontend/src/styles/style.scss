@@ -326,7 +326,7 @@ $orange-hover: #ee4b28;
 
 .location, .joined, .smallTitle{
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.90rem;
 }
 
 .internship{
@@ -379,21 +379,21 @@ $orange-hover: #ee4b28;
     &:hover{
       background-color: #f0f0f0;
     }
-   
-    border-radius: 5px;
-    background-color: #fbfbfb;
-  }
 
-  .company{
-    cursor: pointer;
-  }
-  
-  .logo {
-    height: 60px;
-    img{
-      max-height: 60px;
+    border-bottom: 1px solid #eee;
+
+    .company{
+      cursor: pointer;
+    }
+    
+    .logo {
+      height: 60px;
+      img{
+        max-height: 60px;
+      }
     }
   }
+
 }
 
 .connectionsView{

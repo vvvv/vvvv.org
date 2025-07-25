@@ -14,17 +14,18 @@ const emit = defineEmits(['click']);
         <div class="logoListView" v-if="list && list.total > 0">
             <p>{{ title }}</p>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-                <div v-for="item in list.items" track-by="item.name" class="col mb-4">
-                    <div class="companyCard p-3 h-100" @click.prevent="emit('click', item.slug)">
+                <div v-for="item in list.items" track-by="item.name" class="col mx-0 px-0">
+                    <div class="companyCard p-3 h-100 p-4" @click.prevent="emit('click', item.slug)">
                         <div class="company">
                             <div class="logo">
                                 <img :src="item.logo || defaultLogo"/>
                             </div>
                             <p class="name">{{ item.name }}</p>
-                            
-                            <Internships v-if="item.internships"  :data="item" text="Accepting internship" class="mb-1"/>
-                            <Location :location="{city: item.location_city, country: item.location_country}"/>
                         </div>
+                            
+                        <Internships v-if="item.internships"  :data="item" text="Accepting internship" class="mb-1"/>
+                        <Location :location="{city: item.location_city, country: item.location_country}"/>
+
                     </div>
                 </div>
             </div>
