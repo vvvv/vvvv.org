@@ -368,6 +368,7 @@ $orange-hover: #ee4b28;
   .name{
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
 
@@ -376,16 +377,14 @@ $orange-hover: #ee4b28;
   }
 
   .companyCard{
+    cursor: pointer;
+
     &:hover{
       background-color: #f0f0f0;
     }
 
     border-bottom: 1px solid #eee;
 
-    .company{
-      cursor: pointer;
-    }
-    
     .logo {
       height: 60px;
       img{

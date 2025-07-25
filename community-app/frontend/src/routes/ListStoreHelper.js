@@ -96,7 +96,7 @@ const socialFetchURLs ={
         itemPath: ['related', 'social']
     },
     business: {
-        url: `${Constants.GET_COMPANIES}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
+        url: `${Constants.GET_COMPANIES}?fields=name,slug,tagline,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
         itemPath: 'social'
     },
     edu: 
