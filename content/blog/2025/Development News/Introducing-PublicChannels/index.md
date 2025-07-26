@@ -8,7 +8,7 @@ description: "An app wide parameter store"
 
 Dear patchers!
 
-Here's to introduce **Public Channels**. They allow you to define app-wide public, named parameters. To get an overview of those, use the new **Channel Browser**: It lists and allows editing of all your public channels, allows you to store and re-call snapshots of their values using **[Presets](../introducing-presets-and-transitions/index.md)** and with just a few clicks allows you to expose them to the world via the idea of **[Bindings](../introducing-channel-bindings/index.md)**.
+Here's to introduce **Public Channels**. They allow you to define app-wide public, named parameters. To get an overview of those, use the new **Channel Browser**: It lists and allows editing of all your public channels, allows you to store and re-call snapshots of their values using **[Presets](../introducing-presets-and-transitions/)** and with just a few clicks allows you to expose them to the world via the idea of **[Bindings](../introducing-channel-bindings/)**.
 
 Yes, this is what we've been talking about for a while now under the code name "Global Channels". And yes, you can test-drive all of this now in the latest [vvvv gamma 7.0 previews](https://vvvv.org/download/).
 
@@ -44,4 +44,4 @@ To remove all public channels that are no longer referenced by a PublicChannel n
 
 ---
 
-The next thing that comes to mind now is how it would be great if you could store snapshots of the current values of your public channels and later recall those. Enter: [Presets](../introducing-presets-and-transitions/index.md). 
+The next thing that comes to mind now is how it would be great if you could store snapshots of the current values of your public channels and later recall those. Enter: [Presets](../introducing-presets-and-transitions/). 

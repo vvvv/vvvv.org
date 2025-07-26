@@ -8,7 +8,7 @@ description: "Connect your app parameters to RCP, OSCQuery, OSC, Midi, Redis,...
 
 Dear patchers! 
 
-Here's to introduce **Channel Bindings**. They offer a unified way to expose [Public Channels](../introducing-public-channels/index.md) from your app and allow them to interact with the outside world. Think easy connections to RCP, OSCQuery, OSC, Midi, Redis,...
+Here's to introduce **Channel Bindings**. They offer a unified way to expose [Public Channels](../introducing-public-channels/) from your app and allow them to interact with the outside world. Think easy connections to RCP, OSCQuery, OSC, Midi, Redis,...
 
 ![](binding-columns.png)
 <center><small>Binding columns for MIDI, OSC, OSCQuery and Redis established by the respective nodes</small></center>
@@ -44,4 +44,4 @@ Unchecking a checkbox in a binding column or removing a BindTo... node removes t
 
 ---
 
-And this concludes the trinity of [Public Channels](../introducing-public-channels/index.md), [Presets](../introducing-presets-and-transitions/index.md) and Bindings. These three blog posts merely touch the surface of all the possibilities emerging from the presented new features and concepts. Take your time to explore additional material that can be found in the help browser when looking for the terms "public channel", "preset", "transition" and "bindings". 
+And this concludes the trinity of [Public Channels](../introducing-public-channels/), [Presets](../introducing-presets-and-transitions/) and Bindings. These three blog posts merely touch the surface of all the possibilities emerging from the presented new features and concepts. Take your time to explore additional material that can be found in the help browser when looking for the terms "public channel", "preset", "transition" and "bindings". 
