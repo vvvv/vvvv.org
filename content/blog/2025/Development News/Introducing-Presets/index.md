@@ -8,7 +8,7 @@ description: "A complete cueing solution for your apps parameters"
 
 Dear patchers!
 
-Here's to introduce **Presets** and **Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../Introducing-PublicChannels/index.md), store and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
+Here's to introduce **Presets** and **Transitions**. Using presets you can take snapshots of any combination of [Public Channels](../introducing-public-channels/index.md), store and recall them again anytime. A simple recall will jump to the stored value. Using a transition, values will be smoothly converged to. 
 
 ![](presets.png)
 <center><small>A preset column to store, and the Presets Panel to trigger snapshots</small></center>
@@ -41,4 +41,4 @@ To learn about recalling presets programmatically from within a patch, check out
 
 ---
 
-Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you need to learn about [Bindings](../Introducing-Bindings/index.md).
+Now that you have your public channels cued using presets, you'll want to send out the actual values of your parameters to the world. This is when you need to learn about [Bindings](../introducing-channel-bindings/index.md).
