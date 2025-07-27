@@ -215,7 +215,7 @@ const hireCardVisible = computed(()=>{
   <n-spin :show="loading">
     <div v-if="user" class="userView">
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
               <NAvatar objectFit="contain" round :size="userpicSize" :src="userpic" :class="{ 'noImageBack': userpic !== null }"/>
 
               <div class="my-3">

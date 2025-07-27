@@ -25,7 +25,7 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
         </div>
         <LocationFull :data="data"/>
         
-        <Internships :data="data" text="Accepting internship applications" :isLink="true"/>
+        <Internships v-if="data.internships" :data="data" text="Accepting internship applications" :isLink="true"/>
 
         <SocialView class="mt-4 py-2 border-top" v-if="Object.keys(data.social).length>0" :social="data.social" />                      
         
