@@ -17,7 +17,7 @@ const emit = defineEmits(['click']);
                 <div v-for="item in list.items" track-by="item.name" class="col mx-0 px-0">
                     <NTooltip :disabled="!item.tagline" trigger="hover" placement="top" delay="50" duration="0">
                         <template #trigger>
-                            <div class="companyCard p-3 h-100 p-4" @click.prevent="emit('click', item.slug)">
+                            <div class="companyCard p-3 h-100 px-3 py-4" @click.prevent="emit('click', item.slug)">
                                 <div class="company">
                                     <div class="logo">
                                         <img :src="item.logo || defaultLogo"/>
