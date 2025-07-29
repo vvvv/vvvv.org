@@ -47,6 +47,8 @@ export default Object({
     EDIT_COMPANY: BACKENDURL + "edit/company",
     EDIT_EDU: BACKENDURL + "edit/edu",
     FILE: BACKENDURL + "file",
+    MAP_CLUSTERS: BACKENDURL + "map/clusters",
+    MAP_CHILDREN: BACKENDURL + "map/children",
     LOGIN_OPTIONS: {
         url: 'https://login.vvvv.org/',
         realm: 'vvvv', 

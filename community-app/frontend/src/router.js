@@ -6,6 +6,8 @@ import Overview from "./routes/Overview.vue"
 const People = () => import('./routes/People.vue');
 const UserView = () => import('./routes/UserView.vue');
 
+const Map = () => import('./routes/Map.vue');
+
 const BusinessList = () => import('./routes/BusinessList.vue');
 const BusinessView = () => import('./routes/BusinessView.vue');
 
@@ -80,6 +82,12 @@ const routes = [
         component: EditUser,
         beforeEnter: requireAuth,
         meta: { tabName: 'Profile', visible: true, isLeft: false }
+    },
+    {
+        path: '/map/',
+        name: 'Map Dev',
+        component: Map,
+        meta: { tabName: 'Map', visible: false, isLeft: false }
     },
 ]
 
