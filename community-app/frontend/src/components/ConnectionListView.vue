@@ -1,7 +1,7 @@
 <script setup>
-import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import { logos } from './logos/logos.js'
-import { NIcon, NButton, NDropdown, NPagination, NSpin } from 'naive-ui';
+import { NIcon, NButton, NDropdown, NPagination, NSpin, NPerformantEllipsis } from 'naive-ui';
 import { ChevronDown } from '@vicons/ionicons5';
 import { showBusinessProfile, showEduProfile } from "../utils.js"
 
@@ -72,24 +72,26 @@ function setSize(s)
 const isSimple = computed(() => (windowWidth.value < 480 ? true : false));
 const showSizePicker = computed(() => windowWidth.value > 600);
 
+watch(()=>props.list, ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+
 </script>
 
 <template>
     <p>{{ constants[props.connectionKey].title }}</p>
     <NSpin :show="loading">
         <div class="connectionsView" v-if="list">
-            <table class="table table-borderless">
+            <table class="table table-borderless w-100" style="table-layout: fixed;">
                 <thead class="border-bottom">
                     <tr>
-                        <th scope="col" class="col-4">{{ constants[props.connectionKey].type }}</th>
-                        <th scope="col" class="col pr-0">
+                        <th scope="col" class="w-20">{{ constants[props.connectionKey].type }}</th>
+                        <th scope="col" class="w-80 pr-0">
                             <div class="row align-items-center">
-                                <div class="col mb-3 mb-md-0">
+                                <div class="col">
                                     <NDropdown trigger="click" :options="options" @select="(key) => emit('change', key)">
                                         <NButton secondary>{{ connection.label }}<NIcon class="ml-4"><ChevronDown/></NIcon></NButton>
                                     </NDropdown>
                                 </div>
-                                <div class="col-auto" v-if="list.total > pageSizes[0].value">
+                                <div class="col-auto mt-3 mt-md-0" v-if="list.total > pageSizes[0].value">
                                     <NPagination
                                         v-model:page="page"
                                         v-model:page-size="pageSize"
@@ -110,11 +112,16 @@ const showSizePicker = computed(() => windowWidth.value > 600);
                 <tbody v-if="list">
                     <tr v-for="item in list.items" class="border-bottom">
                         <td>
-                            <a :href="item.profileLink" @click.prevent="handleClick(item)">{{ item.name }}</a>
+                            <NPerformantEllipsis line-clamp="1" :tooltip="false">
+                                <a :href="item.profileLink" @click.prevent="handleClick(item)">{{ item.name }}</a>
+                            </NPerformantEllipsis>
                         </td>
                         <td>
                             <a :href="item.connectionLink" target="_blank">
-                                <NIcon class="mr-3"><component :is="logos[connection.key]"/></NIcon>{{ item.label }}
+                                <NPerformantEllipsis line-clamp="1" :tooltip="false">
+                                    <NIcon class="mr-1"><component :is="logos[connection.key]"/></NIcon>
+                                        {{ item.label }}
+                                </NPerformantEllipsis>
                             </a>
                         </td>
                     </tr>
@@ -122,10 +129,10 @@ const showSizePicker = computed(() => windowWidth.value > 600);
             </table>
             
             <div class="row mt-4">
-                <div class="col">
+                <div class="col-12 col-md order-2 order-md-1">
                     <p class="profileLink">Add this platform to <a :href="profileLink">your profile.</a></p>
                 </div>
-                <div class="col-auto ml-auto" v-if="list.total > pageSizes[0].value">
+                <div class="col-12 col-md-auto ml-auto order-1 order-md-2 mb-3 mb-md-0" v-if="list.total > pageSizes[0].value">
                     <NPagination
                         v-model:page="page"
                         v-model:page-size="pageSize"

@@ -284,7 +284,8 @@ const showSizePicker = computed(() => windowWidth.value > 600)
                 style="white-space: pre;"/>
     </div>
         <div class="row mt-3">
-            <div class="ml-auto">
+            <div class="col"></div>
+            <div class="col-12 col-md-auto ml-auto mr-3">
                 <NPagination 
                     :page="state.currentPage" 
                     :page-count="state.totalPages"

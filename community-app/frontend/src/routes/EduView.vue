@@ -75,11 +75,13 @@ const url = computed(()=>{
         <div v-if="edu">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-2">
-                    <InstitutionBasics class="mb-3" :data="edu"/>
+                    <InstitutionBasics :data="edu"/>
                 </div>
-                <div v-if="edu.description" class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
-                    <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
-                    <p v-html="edu.description"></p>
+                <div class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
+                    <template v-if="edu.description">
+                        <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
+                        <p v-html="edu.description"></p>
+                    </template>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="edu.owner"/>
                 </div>
             </div>

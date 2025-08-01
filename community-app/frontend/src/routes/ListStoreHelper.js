@@ -45,7 +45,7 @@ export const storeObject = (key) => (
             this.loading = true;
 
             try{
-                this.list.list = await fetchList(listFetchURLs[key], this.pager);
+                this.list.list = await fetchList(listFetchURLs[key]);
             }
             catch (error){
                 this.fetched = false;
@@ -96,7 +96,7 @@ const socialFetchURLs ={
         itemPath: ['related', 'social']
     },
     business: {
-        url: `${Constants.GET_COMPANIES}?fields=name,slug,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
+        url: `${Constants.GET_COMPANIES}?fields=name,slug,tagline,social.{SOCIAL}&filter[social][{SOCIAL}][_nempty]=true&sort=name&meta=filter_count`,
         itemPath: 'social'
     },
     edu: 
@@ -128,10 +128,10 @@ function pagerParam(pager)
     return `&limit=${pager.size}&page=${pager.page}`;
 }
 
-async function fetchList(url, pager)
+async function fetchList(url)
 {
 
-    const response = await fetch (url + pagerParam(pager));
+    const response = await fetch (url);
 
     if (response.ok)
     {

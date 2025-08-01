@@ -31,7 +31,7 @@ onMounted(async ()=>
         loading.value = true;
         company.value = await fetchBusinessProfile(slug);
         document.title = 'Profile: '+ company.value.name;
-        description = toHtml(company.value.description);
+        description = toHtml(company.value.description ?? company.value.tagline);
     }
     catch(err)
     {
@@ -52,11 +52,11 @@ onMounted(async ()=>
         <div v-if="company">
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
-                    <InstitutionBasics class="mb-3" :data="company"/>
+                    <InstitutionBasics :data="company"/>
                 </div>
-                <div v-if="description" class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
+                <div class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
                     <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
-                    <p v-html="description"></p>
+                    <p v-if="description" v-html="description"></p>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="company.owner"/>
                 </div>
             </div>
