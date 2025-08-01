@@ -1,7 +1,16 @@
 {{ "<!-- HEADER -->" | safeHTML }}
 <header class="d-flex align-items-center">
+  <img  id="hero-image" 
+        src="/img/header_70_5_3072.jpg" 
+        srcset="/img/header_70_5_3072.jpg 3072w"
+        sizes="(max-width: 1024px) 1024px,
+               (max-width: 1500px) 1800px,
+               3000px"/>
   <div id="hero-text" class="ml-3 ml-md-5">
-      <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
-      <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
+    <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
+    <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
+  </div>
+  <div id="hero-attribution">
+    Artwork: Arístides García
   </div>
 </header>
