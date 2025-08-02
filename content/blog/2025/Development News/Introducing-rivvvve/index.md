@@ -4,6 +4,7 @@ author: "joreg"
 date: "2025-07-14"
 title: "Introducing: Rive"
 description: "A new way to design and integrate User Interfaces"
+draft: true
 ---
 
 Dear patchers!
