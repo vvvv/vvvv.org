@@ -1,85 +1,73 @@
-document.addEventListener("DOMContentLoaded", (event) => { 
+document.addEventListener("DOMContentLoaded", async () => { 
 
-    const images = [
-        [
-            ['header_70_1_3072.jpg', '3072w'],
-        ],
-        [
-            ['header_70_2_3072.jpg','3072w']
-        ],
-        [
-            ['header_70_3_3072.jpg', '3072w']
-        ],
-        [
-            ['header_70_4_3072.jpg','3072w']
-        ],
-        [
-            ['header_70_5_3072.jpg','3072w']
-        ],
-        [
-            ['header_70_6_3072.jpg', '3072w']
-        ],
-    ]
+    const imageURL = (id) => `https://data.vvvv.org/assets/${id}`;
  
-    const image = document.getElementById('hero-image');
+    const heroContent = document.getElementById('hero-content');
+    const imageTag = document.getElementById('hero-image');
+    const title = heroContent.getElementsByClassName('title')[0];
+    const author = heroContent.getElementsByClassName('author')[0];
+    const photographer = heroContent.getElementsByClassName('photographer')[0];
+
+    let images = [];
 
     function setHeroImage(index)
     {
-        image.setAttribute('src', `/img/${images[index][0][0]}`);
-        image.setAttribute('srcset', `/img/${images[index].map(e=>e.join(" ")).join(',')}`);
-    }
-    
-    let currentIndex = Math.floor(Math.random()*(images.length-1));
-    setHeroImage(currentIndex);
-  
-    image.addEventListener('load', () => {
-        console.log('Image loaded:', image.currentSrc);
-        image.style.visibility = 'visible';
-        image.style.opacity = '100';
-    });
+        const image = images[index];
 
-    image.addEventListener('click', ()=>{
+        imageTag.setAttribute('src', imageURL(image.image_id));
+        imageTag.setAttribute('srcset', `${imageURL(image.image_id)}, 3072w`);
+
+        title.textContent = image.title;
+        author.textContent = image.author;
+        photographer.textContent = image.photographer;
+    }
+
+    function makeTagVisible()
+    {
+        heroContent.style.visibility = 'visible';
+        heroContent.style.opacity = '100';
+        imageTag.style.visibility = 'visible';
+        imageTag.style.opacity = '100';
+    }
+  
+    imageTag.addEventListener('load', makeTagVisible);
+
+    imageTag.addEventListener('click', ()=>{
         currentIndex = (currentIndex + images.length + 1) % images.length;
         setHeroImage(currentIndex);
     });
-  
-  // const handle = document.getElementsByTagName('header')[0];
-  // handle.addEventListener('click', ()=>{
-  //   currentIndex = (currentIndex + images.length + 1) % images.length;
-  //   handle.style.backgroundImage = `url(/img/${images[currentIndex]})`;
-  // });
+
+    let currentIndex = 0;
+
+    try{
+        images = await fetchHero();
+        currentIndex=Math.floor(Math.random()*(images.length));
+        setHeroImage(currentIndex);
+    }
+    catch (error) {
+        makeTagVisible();
+        console.log ("Can't fetch project images");
+    }
+
+    async function fetchHero()
+    {
+        const response = await fetch('https://data.vvvv.org/items/Hero');
+
+        if (!response.ok)
+        {
+            const json = await response.json();
+            throw new Error (json);
+        }
+
+        const json = await response.json();
+
+        return json.data.map (d=>{
+            return {
+                image_id: d.image,
+                title: d.title,
+                author: d.author,
+                photographer: d.photographer,
+            }
+        })
+    }
 })
-
-//   const images = [
-//     [
-//       'header_70_AAAA_004210_3072.jpg 3072w',
-//     ],
-//     ['header_70_aaaa_009149_3072.jpg 3072w'],
-//     ['header_70_BBBB_000966-bw_3072.jpg 3072w'],
-//     ['header_70_jjjj_000646_3072.jpg 3072w'],
-//     ['header_70_jjjj_000646-bw_3072.jpg 3072w'],
-//     [
-//       'refik-anadol-frank-gehry-blueprints-ai-generated-landscapes-guggenheim-bilbao-designboom-large02-1024.jpg w1024',
-//       'refik-anadol-frank-gehry-blueprints-ai-generated-landscapes-guggenheim-bilbao-designboom-large02.jpg w1800'
-//     ]
-//   ]
- 
-//   const handle = document.getElementById('hero-image');
-
-//   function setHeroImage(index)
-//   {
-//       handle.setAttribute('srcset', `/img/${images[index].join(',')}`);
-//   }
- 
-//   let currentIndex = Math.floor(Math.random()*(images.length-1));
-//   setHeroImage(currentIndex);
-//   handle.addEventListener('click', ()=>{
-//     currentIndex = (currentIndex + images.length + 1) % images.length;
-//     setHeroImage(currentIndex);
-//   });
-  
-//   // const handle = document.getElementsByTagName('header')[0];
-//   // handle.addEventListener('click', ()=>{
-//   //   currentIndex = (currentIndex + images.length + 1) % images.length;
-//   //   handle.style.backgroundImage = `url(/img/${images[currentIndex]})`;
-//   // });
