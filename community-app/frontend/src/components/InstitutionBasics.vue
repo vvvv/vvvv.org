@@ -18,11 +18,14 @@ const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
             <img :src="data.logo || defaultLogo" alt="logo" class="img-fluid"/>
         </div>
         <div class="my-3">
-            <h5>{{ data.name }}</h5>
-        </div>                     
+            <h5 class="h5 bold">{{ data.name }}</h5>
+        </div>
+        <div class="mb-4 text-muted pr-4" v-if="data.tagline">
+            {{ data.tagline }}
+        </div>
         <LocationFull :data="data"/>
         
-        <Internships :data="data" text="Accepting internship applications" :isLink="true"/>
+        <Internships v-if="data.internships" :data="data" text="Accepting internship applications" :isLink="true"/>
 
         <SocialView class="mt-4 py-2 border-top" v-if="Object.keys(data.social).length>0" :social="data.social" />                      
         

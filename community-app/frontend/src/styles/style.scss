@@ -38,7 +38,7 @@ $orange-hover: #ee4b28;
 
   .logo {
     height: 55px;
-    margin: 1rem 3rem 1rem 0;
+    margin: 1rem 1.5rem 1rem 1.5rem;
 
     img{
       max-height: 55px;
@@ -326,7 +326,7 @@ $orange-hover: #ee4b28;
 
 .location, .joined, .smallTitle{
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.90rem;
 }
 
 .internship{
@@ -368,6 +368,7 @@ $orange-hover: #ee4b28;
   .name{
     margin-top: 1rem;
     margin-bottom: 0.5rem;
+    font-weight: 600;
   }
 
 
@@ -376,22 +377,43 @@ $orange-hover: #ee4b28;
   }
 
   .companyCard{
+    cursor: pointer;
+
     &:hover{
       background-color: #f0f0f0;
     }
-   
-    border-radius: 5px;
-    background-color: #fbfbfb;
+
+    border-bottom: 1px solid #eee;
+
+    .logo {
+      height: 60px;
+      img{
+        max-height: 60px;
+      }
+    }
   }
 
-  .company{
-    cursor: pointer;
+}
+
+.connectionsView{
+
+  .pagination{
+    font-weight: normal;
   }
+
+  .profileLink{
+
+    color: #777;
+
+    a{
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
+      text-decoration-color: #bbb;
   
-  .logo {
-    height: 60px;
-    img{
-      max-height: 60px;
+      &:hover{
+        text-decoration: underline;
+        text-decoration-color: #bbb;
+      }
     }
   }
 }

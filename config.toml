@@ -91,7 +91,7 @@ blog = '/blog/:sections[1]/:slug'
 		# Hero section
 		[params.Hero]
 		vvvv     = "vvvv"
-		subtitle   = "A visual live-programming environment that takes you from <b>rapid prototyping</b> to <b>final production.</b>"
+		subtitle   = "<span class='backBox'>A visual live-programming environment that takes you from <b>rapid prototyping</b> to <b>final production.</b></span>"
 		tryitButton = "Download"
 		tryitButtonLink = "Download"
 		requestADemoButton = "Request a tour"

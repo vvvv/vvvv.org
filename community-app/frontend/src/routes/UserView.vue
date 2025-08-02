@@ -204,6 +204,10 @@ const hireCardVisible = computed(()=>{
           hire.value.image;
  })
 
+ const socialVisible = computed(()=>{
+  return Object.values(social.value).some(v=> v !== null && v != "");
+ })
+
 
 </script>
 
@@ -211,7 +215,7 @@ const hireCardVisible = computed(()=>{
   <n-spin :show="loading">
     <div v-if="user" class="userView">
       <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-sm-4">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
               <NAvatar objectFit="contain" round :size="userpicSize" :src="userpic" :class="{ 'noImageBack': userpic !== null }"/>
 
               <div class="my-3">
@@ -246,7 +250,7 @@ const hireCardVisible = computed(()=>{
 
               <AffiliatedWith v-if="worksFor.length > 0" :data="worksFor" class="mb-3"/>
               
-              <SocialView class="my-1 py-2 border-top" :social="social" v-if="social" />
+              <SocialView class="my-1 py-2 border-top" :social="social" v-if="socialVisible" />
               
               <Maintains v-if="Object.keys(partOf).length > 0" :data="partOf" class="mb-3"/>
                 
@@ -254,7 +258,7 @@ const hireCardVisible = computed(()=>{
 
         </div>
         <div class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
-        <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
+        <div v-if="description && hire && hire.available" class="border-top d-flex d-md-none mt-2 mb-4"></div>
 
           <template v-if="description">
             <div class="mb-4 description">
@@ -263,7 +267,7 @@ const hireCardVisible = computed(()=>{
           </template>
 
           <div v-if="hire && hire.available">
-            <h4 class="h4">Available for hire</h4>
+            <h4 class="h4 mt-4 mt-sm-0">Available for hire</h4>
             <div class="card" v-if="hireCardVisible">
               <HireView :data="hire"/>
             </div>

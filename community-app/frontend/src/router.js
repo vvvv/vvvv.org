@@ -3,7 +3,7 @@ import { isAuthenticated, kclogin } from './keycloak-helper.js'
 import { isRouteLoading } from "./globalState.js"
 import Overview from "./routes/Overview.vue"
 
-const UserList = () => import('./routes/UserList.vue');
+const People = () => import('./routes/People.vue');
 const UserView = () => import('./routes/UserView.vue');
 
 const BusinessList = () => import('./routes/BusinessList.vue');
@@ -35,7 +35,7 @@ const routes = [
     {
         path: '/people/',
         name: 'People',
-        component: UserList,
+        component: People,
         meta: { tabName: 'People', visible: true, isLeft: true, order: 1 }
     },
     {

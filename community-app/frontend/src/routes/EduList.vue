@@ -1,62 +1,102 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute } from "vue-router";
+import { ref, onMounted, watch, computed } from 'vue'
 import { NSpin } from 'naive-ui'
-import { useEduListStore} from "./EduListStore.js";
-import defaultLogo from '../assets/defaultLogo.png'
-import Location from "../components/Location.vue"
+import { useRoute, useRouter } from "vue-router";
+import { useEduListStore} from "./EduListStore.js"
 import { showEduProfile } from "../utils.js"
+import ListNavigation from './ListNavigation.vue';
+import LogoListView from '../components/LogoListView.vue';
+import ConnectionListView from '../components/ConnectionListView.vue';
 
-const loading = ref (true);
+const router = useRouter();
 const route = useRoute();
 const store = useEduListStore();
+const pageSizes = [
+    { label: '10 per page', value: 10 },
+    { label: '50 per page', value: 50 },
+    { label: '100 per page', value: 100 }
+]
 
 onMounted( async ()=>
 {
-    if (route.query.e)
+    store.setSection('list');
+    await checkRoute(route.query);
+})
+
+watch(() => route.query, async (newQ, oldQ)=>{
+    if (newQ != oldQ) await checkRoute(route.query);
+}, { deep: true })
+
+async function checkRoute(query)
+{
+    if (query.b)
     {
-        showEduProfile (route.query.e);
+        showEduProfile(query.b);
         return;
+    }
+    else if (query.section)
+    {   
+        store.setSection(query.section, query.type);
     }
 
     try{
-        loading.value = true;
-        await store.fetch();
+        await store.getData({page: 0, size: pageSizes[0].value});
     }
     catch (error)
     {
         console.log (error);
     }
-    finally{
-        loading.value = false;
+}
+
+function changeSection(key)
+{
+    if (key == 'connections')
+    {
+        router.push({name: 'Educational Institutions', query:{ section: key, type: store.selectedConnection.key ?? 'github' }})
+    }
+    else if (key == 'list')
+    {
+        router.push({name: 'Educational Institutions', query:{ section: key}});
+    }
+}
+
+function changeConnection(key)
+{
+    router.push({name: 'Educational Institutions', query:{ section: store.selectedSection.key, type: key }})
+}
+
+const titleList = computed(()=>{
+    
+    if (store.list?.list)
+    {
+         return `${store.list.list.total} Institutions where vvvv serves in parts of the education program:`
     }
 })
-
-const elementClass = "col-12 col-sm-6 col-md-4 col-lg-3 my-2";
 
 </script>
 
 <template>
-    <n-spin :show="loading">
-        <div class="logoListView" v-if="!loading && store">
-            <!-- <Map v-model:state="state"/> -->
-            <p v-if="store.total > 0">{{ store.total }} Institutions where vvvv serves in parts of the education program:</p>
-            <div class="row">
-                <div v-for="{ name, slug, description, logo, location_city, location_country } in store.items" 
-                    track-by="name"
-                    :class="elementClass">
-                    <div class="companyCard p-3" @click="(event)=> showEduProfile(slug, event)">
-                        <div class="company">
-                            <div class="logo">
-                                <img :src="logo || defaultLogo"/>
-                            </div>
-                            <p class="name">{{ name }}</p>
-                            
-                        <Location :location="{city: location_city, country: location_country}"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row mb-2">
+        <div class="col-12 col-lg-4">
+            <ListNavigation :sections="store.sections" :selected="store.selectedSection.key" @select="changeSection"/>
         </div>
-    </n-spin>
+    </div>
+
+    <LogoListView v-if="store.selectedSection.key == 'list'" 
+        :loading = "store.loading"
+        :title = "titleList"
+        :list ="store.list?.list"
+        @click="showEduProfile"
+    />
+
+    <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
+        :list="store.list?.connections" 
+        :loading="store.loading"
+        :options="store.socialOptions"
+        :connection="store.selectedConnection"
+        :pageSizes="pageSizes"
+        connectionKey="edu"
+        @change="changeConnection"
+        @page="store.getData"
+    />
 </template>

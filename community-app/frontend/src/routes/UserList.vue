@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive, watchEffect, watch, h, computed, onMounted, onUnmounted, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
-import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon, loadingBarProviderProps } from "naive-ui"
+import { NDataTable, NButton, NInput, NPagination, NSpace, NA, NAvatar, NSwitch, NTag, NIcon } from "naive-ui"
 import { CheckmarkCircle as Check } from '@vicons/ionicons5'
 import { fetchUserData } from "./fetchUserData.js";
 import { showUserProfile } from "../utils.js"
@@ -13,6 +13,8 @@ const windowWidth = ref(window.innerWidth);
 const router = useRouter();
 const route = useRoute();
 const initialized = ref(false);
+
+const props = defineProps(['title', 'pageSizes']);
 
 const state = reactive({
     currentPage: 1,
@@ -27,12 +29,6 @@ const state = reactive({
 })
 
 onMounted(()=>{
-    if (route.query.p)
-    {
-        showUserProfile (decodeURIComponent(route.query.p));
-        return;
-    }
-
     window.addEventListener('resize', onWidthChange);
     state.currentPage = Number(route.query.page) || 1;
 
@@ -47,17 +43,9 @@ function onWidthChange(){
     windowWidth.value = window.innerWidth; 
 }
 
-const pageSizes = [
-    { label: '10 per page', value: 10 },
-    { label: '50 per page', value: 50 },
-    { label: '100 per page', value: 100 }
-]
-
-
-
 const paginationRef = ref({
-    pageSize: pageSizes[0].value,
-    pageSizes: pageSizes,
+    pageSize: props.pageSizes[0].value,
+    pageSizes: props.pageSizes,
     page: 1,
     showSizePicker: true,
     pageCount: 10
@@ -218,7 +206,7 @@ async function fetch()
         {
             paginationRef.value = {
                 pageSize: state.pageSize,
-                pageSizes: pageSizes,
+                pageSizes: props.pageSizes,
                 page: state.currentPage,
                 showSizePicker: true,
                 pageCount: result.totalPages || 1
@@ -246,12 +234,15 @@ const onInput = (value) => {
     setDebouncedFilter(value);
 };
 
+const isSimple = computed(() => (windowWidth.value < 480 ? true : false))
+const showSizePicker = computed(() => windowWidth.value > 600)
+
 </script>
 
 <template>
     <div class="row mb-3">
         <div class="col-12 col-md-5 mb-3 mb-md-0">
-            <n-input 
+            <NInput 
                 v-model:value="filterField" 
                 type="text" 
                 placeholder="Username" 
@@ -262,26 +253,27 @@ const onInput = (value) => {
                 @update:value="onInput"
                 :loading="loading ? loading : undefined"
                 clearable/>
-            <n-button 
+            <NButton 
                 strong 
                 secondary 
                 @click="applyFilter" 
-                class="ml-xs-0 ml-2 mr-3 mb-md-2">Search</n-button>
+                class="ml-xs-0 ml-2 mr-3 mb-md-2">Search</NButton>
         </div>
         <div class="ml-3 mr-3 ml-md-auto">
-            <n-pagination 
+            <NPagination
                 :page="state.currentPage" 
                 :page-count="state.totalPages"
                 :page-sizes="pageSizes"
                 :page-size="state.pageSize"
                 :page-slot="5"
-                show-size-picker
+                :simple="isSimple"
+                :show-size-picker="showSizePicker"
                 :on-update:page="handlePageChange"
                 :on-update:page-size="handlePageSizeChange"/>
         </div>
     </div>
     <div class="overflow-auto">
-            <n-data-table
+            <NDataTable
                 :loading="loading"
                 :bordered="false"
                 :columns="columnsRef"
@@ -292,13 +284,15 @@ const onInput = (value) => {
                 style="white-space: pre;"/>
     </div>
         <div class="row mt-3">
-            <div class="ml-auto">
-                <n-pagination 
+            <div class="col"></div>
+            <div class="col-12 col-md-auto ml-auto mr-3">
+                <NPagination 
                     :page="state.currentPage" 
                     :page-count="state.totalPages"
                     :page-sizes="pageSizes"
                     :page-size="state.pageSize"
                     :page-slot="5"
+                    :simple="isSimple"
                     show-size-picker
                     :on-update:page="handlePageChange"
                     :on-update:page-size="handlePageSizeChange"
