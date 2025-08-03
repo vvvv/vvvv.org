@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const photographer = heroContent.getElementsByClassName('photographer')[0];
 
     let images = [];
+    let currentIndex = 0;
 
     function setHeroImage(index)
     {
@@ -26,8 +27,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     {
         heroContent.style.visibility = 'visible';
         heroContent.style.opacity = '100';
-        imageTag.style.visibility = 'visible';
-        imageTag.style.opacity = '100';
     }
   
     imageTag.addEventListener('load', makeTagVisible);
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         setHeroImage(currentIndex);
     });
 
-    let currentIndex = 0;
 
     try{
         images = await fetchHero();
