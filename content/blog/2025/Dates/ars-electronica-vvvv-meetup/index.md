@@ -9,8 +9,8 @@ where:
     city: "Ars-Electronica-Straße 1, 4040 Linz"
     country: "at"
     country_name: "Austria"
-    from_date: "1757174400"
-    to_date: "1757188800"
+    from_date: "1757181600"
+    to_date: "1757196000"
 thumb: "vvvvmeetup-panic-thumbnail.png"
 ---
 
