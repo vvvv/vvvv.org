@@ -1,7 +1,7 @@
 ---
 categories: "Dates"
 author: "chk"
-date: "2025-07-17"
+date: "2025-08-03"
 title: "vvvv worldwide meetup @ Ars Electronica Festival"
 description: "IRL and real-time!"
 where: 
@@ -16,7 +16,7 @@ thumb: "vvvvmeetup-panic-thumbnail.png"
 
 ![](vvvvmeetup-panic.jpg)
 
-We are happy to announce a special edition of the vvvv worldwide meetup on **September 6th, 7pm CET** during the **[Ars Electronica Festival 2025](https://ars.electronica.art/festival)**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL, with a focus on works that are exhibited during the festival in Linz. Join us IRL or online with artist presentations and announcements in the vvvv community.
+We are happy to announce a special edition of the vvvv worldwide meetup on **September 6th, 6pm CET** during the **[Ars Electronica Festival 2025](https://ars.electronica.art/festival)**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL, with a focus on works that are exhibited during the festival in Linz. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
 Moderated and curated by [Simon Weckert](https://www.simonweckert.com/) and [Amir Bastan](https://amirbastan.com/)<br>
 Support by [3e8](https://www.3e8.studio/) & [Studio Brüll](https://studiobruell.de/) 
