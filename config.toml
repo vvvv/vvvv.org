@@ -46,6 +46,9 @@ blog = '/blog/:sections[1]/:slug'
   [outputFormats.RSS]
     mediatype = "application/rss+xml"
     baseName = "index"
+  [outputFormats.json]
+    mediatype = "application/json"
+    baseName = "index"
 
 [params]
 

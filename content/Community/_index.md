@@ -5,5 +5,6 @@ layout: community
 outputs:
 - html
 - RSS
+- json
 theme:
 ---

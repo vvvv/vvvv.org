@@ -1,0 +1,18 @@
+{{- $thumbResource := resources.Get "img/grey-thumb.png" -}}
+        {{- $pageRes := .Resources -}}
+        {{- with .Thumb -}}
+            {{- with $pageRes.GetMatch . -}}
+                {{- $thumb = . -}}
+            {{- end -}}
+        {{- end -}}
+{{- $thumb := $thumbResource.Fill "80x80 jpg" -}}
+
+{
+  "title": {{ .Title | jsonify }},
+  "link": {{ .Permalink | jsonify }},
+  "thumb": {{ $thumb.Permalink | jsonify }},
+  "description": {{ .Description | jsonify }},
+  {{- with .From -}}"from": {{ . }},{{- end -}}
+  {{- with .To -}}"to": {{ . }},{{- end -}}
+  "pubDate": {{ .PubDate }}
+}

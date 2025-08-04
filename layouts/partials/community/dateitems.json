@@ -1,0 +1,14 @@
+{{- $len := len . -}}
+{{- range $i, $item := . -}}
+  {{- $data := dict
+    "Thumb" $item.Params.thumb
+    "Title" $item.Title
+    "Permalink" $item.Permalink
+    "Description" $item.Params.description
+    "From" $item.Params.where.from_date
+    "To" $item.Params.where.to_date
+    "PubDate" $item.Date.Unix
+  -}}
+  {{ partial "community/dateitem.json" $data }}
+  {{- if lt (add $i 1) $len -}},{{- end -}}
+{{- end -}}

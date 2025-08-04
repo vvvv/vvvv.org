@@ -1,0 +1,59 @@
+{{- /* Last Month in Review */ -}}
+
+{{- $pages := slice -}}
+{{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
+{{- $lastMonthInReview := index $pages 0 -}}
+
+{{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
+
+{{- /* Future Dates */ -}}
+
+{{- $futureDates := slice -}}
+{{- range $blogDates -}}
+  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
+  {{- if ge $toDate (time.Now.Unix) -}}
+    {{- $futureDates = $futureDates | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $futureDates = first 3 $futureDates.ByDate.Reverse -}}  
+
+{{- /* Past Dates */ -}}
+
+{{- $pastDates := slice -}}
+{{- range $blogDates -}}
+  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
+  {{- if lt $toDate (time.Now.Unix) -}}
+    {{- $pastDates = $pastDates | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $pastDates = first 3 $pastDates.ByDate.Reverse -}}  
+
+{{- $siteRes := .Resources -}}
+
+{
+  {{- with $lastMonthInReview -}}
+    {{- $thumb := resources.Get "img/grey-thumb.png" -}}
+          {{- $pageRes := .Resources -}}
+            {{- with .Params.thumb -}}
+              {{- with $pageRes.GetMatch . -}}
+                  {{- $thumb = . -}}
+              {{- end -}}
+          {{- end -}}
+    {{- $thumbSite := $thumb.Fill "80x80 jpg" -}}
+    "lastMonthInReview": {
+      "title": {{- .Title | jsonify -}},
+      "link": "{{- .Permalink -}}",
+      "thumb": "{{- $thumbSite.Permalink -}}",
+      "description": {{- .Params.description | jsonify -}},
+      "pubDate": {{- .Date.Unix -}}
+    },
+  {{- end -}}
+
+  "futureDates":[
+    {{ partial "community/dateitems.json" $futureDates }}
+  ],
+
+  "pastDates":[
+    {{ partial "community/dateitems.json" $pastDates }}
+  ]
+}

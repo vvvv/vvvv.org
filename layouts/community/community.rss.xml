@@ -35,7 +35,6 @@ xmlns:vvvv="https://vvvv.org/rss"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
 xmlns:dc="http://purl.org/dc/elements/1.1/" 
 xmlns:atom="http://www.w3.org/2005/Atom"
-xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" 
 xmlns:media="http://search.yahoo.com/mrss/">
 
   <channel>
@@ -49,11 +48,7 @@ xmlns:media="http://search.yahoo.com/mrss/">
 			<link>{{.Site.BaseURL}}</link>
 			<url>{{ "img/ogVVVV.jpg" | absURL }}</url>
 		</image>
-    <itunes:image href="{{ "img/ogVVVV.jpg" | absURL }}" />
     <description>A RSS news feed for vvvv community section</description>
-    <itunes:summary>{{.Site.Params.title}}</itunes:summary>
-		<itunes:category text="News"> </itunes:category>
-		<itunes:explicit>no</itunes:explicit>
     <generator>Hugo -- gohugo.io</generator>
     {{ with $.Site.LanguageCode }}
     <language>{{.}}</language>
