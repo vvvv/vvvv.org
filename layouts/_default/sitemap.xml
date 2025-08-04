@@ -29,6 +29,22 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>{{- .Site.BaseURL -}}people</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>{{- .Site.BaseURL -}}forhire</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>{{- .Site.BaseURL -}}business</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>{{- .Site.BaseURL -}}edu</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>{{- .Site.BaseURL -}}licensing</loc>
     <changefreq>weekly</changefreq>
   </url>
