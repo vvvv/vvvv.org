@@ -10,7 +10,7 @@ And just like that,
 
 half of 2025 is already a goner again. But uh has July been active:
 
-First the [29th vvvv meetup](https://www.youtube.com/watch?v=Npr0K63bKZc&list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt&ab_channel=TheNODEInstitute) happend, once again giving a great insight what's currently cooking in the community.
+First the [29th vvvv meetup](https://www.youtube.com/watch?v=Npr0K63bKZc&list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt&ab_channel=TheNODEInstitute) happend, once again giving a great insight what's currently cooking in the community. And coming up: There'll be a **[special edition meetup on September 6](https://vvvv.org/blog/2025/vvvv-worldwide-meetup-@-ars-electronica-festival/)** during this years [Ars Electronica](https://ars.electronica.art/festival) in Linz!
 
 We made a [first demonstration of our work on effortless avateering](https://youtu.be/Npr0K63bKZc?list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt&t=5666) and you can already test this yourself using the newly released [VL.DollarsMoCap](https://vvvv.org/blog/2025/introducing-dollarsmocap/) NuGet. Support for depthcameras like AzureKinect, Orbbec Femto, Stereolabs ZED is in the works. 
 
