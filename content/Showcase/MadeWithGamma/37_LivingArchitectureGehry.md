@@ -1,7 +1,7 @@
 ---
 id: 37
 author: Refik Anadol Studio
-title: Living Architecture: Gehry
+title: Living Architecture:Gehry
 subtitle: 
 link: https://www.designboom.com/art/refik-anadol-frank-gehry-forms-ai-generated-landscapes-guggenheim-bilbao-03-11-2025/
 img: img/MadeWithGamma/LivingArchitecture_Gehry.png
