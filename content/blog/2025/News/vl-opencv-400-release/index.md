@@ -2,7 +2,7 @@
 date: "2025-05-20"
 title: "VL.OpenCV 4.0.0 is out now!"
 description: "A new version of the VL.OpenCV library has been released"
-categories: Dates
+categories: News
 author: ravazquez
 thumb: thumb.png
 ---

@@ -1,15 +1,40 @@
+{{- /* Last Month in Review */ -}}
+
 {{- $pages := slice -}}
 {{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
 {{- $lastMonthInReview := index $pages 0 -}}
 
-{{- $siteRes := .Resources}}
+{{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
 
-{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<rss version="2.0" 
+{{- /* Future Dates */ -}}
+
+{{- $futureDates := slice -}}
+{{- range $blogDates -}}
+  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
+  {{- if ge $toDate (time.Now.Unix) -}}
+    {{- $futureDates = $futureDates | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $futureDates = first 3 $futureDates.ByDate.Reverse -}}  
+
+{{- /* Past Dates */ -}}
+
+{{- $pastDates := slice -}}
+{{- range $blogDates -}}
+  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
+  {{- if lt $toDate (time.Now.Unix) -}}
+    {{- $pastDates = $pastDates | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- $pastDates = first 3 $pastDates.ByDate.Reverse -}}  
+
+{{- $siteRes := .Resources -}}
+
+<rss version="2.0"
+xmlns:vvvv="https://vvvv.org/rss"
 xmlns:content="http://purl.org/rss/1.0/modules/content/"
 xmlns:dc="http://purl.org/dc/elements/1.1/" 
 xmlns:atom="http://www.w3.org/2005/Atom"
-xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" 
 xmlns:media="http://search.yahoo.com/mrss/">
 
   <channel>
@@ -23,18 +48,12 @@ xmlns:media="http://search.yahoo.com/mrss/">
 			<link>{{.Site.BaseURL}}</link>
 			<url>{{ "img/ogVVVV.jpg" | absURL }}</url>
 		</image>
-    <itunes:image href="{{ "img/ogVVVV.jpg" | absURL }}" />
     <description>A RSS news feed for vvvv community section</description>
-    <itunes:summary>{{.Site.Params.title}}</itunes:summary>
-		<itunes:category text="News"> </itunes:category>
-		<itunes:explicit>no</itunes:explicit>
     <generator>Hugo -- gohugo.io</generator>
     {{ with $.Site.LanguageCode }}
     <language>{{.}}</language>
     {{end}}
     <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
-
-    {{ $lastMonthInReview.Title }}
 
     {{ with $lastMonthInReview}}
       <item>
@@ -42,7 +61,6 @@ xmlns:media="http://search.yahoo.com/mrss/">
         <link>{{ .Permalink }}</link>
         {{ with .Params.author }}
           <dc:creator>{{.}}</dc:creator>
-          <author>{{.}}</author>
         {{end}}
         <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
         <category>{{ .Params.categories }}</category>
@@ -53,15 +71,31 @@ xmlns:media="http://search.yahoo.com/mrss/">
                   {{ $thumb = . }}
               {{ end }}
           {{ end }}
-        {{ $thumbSite := $thumb.Fill "80x80 jpeg"}}
+        {{ $thumbSite := $thumb.Fill "80x80 jpg"}}
         <thumb>{{ $thumbSite.Permalink }}</thumb>
         <guid isPermaLink="false">{{ printf "%s#%s" .Permalink (.Date.Format "02-01-06") }}</guid>
         <description>{{- .Params.description | html -}}</description>
         {{ $thumbRSS := $thumb.Resize "600x jpeg"}}
         {{ $sizeInBytes := len $thumbRSS.Content }}
-        <enclosure url="{{ $thumbRSS.Permalink }} " length="{{ $sizeInBytes }}" type="image/jpeg" />
+        <enclosure url="{{ $thumbRSS.Permalink }}" length="{{ $sizeInBytes }}" type="image/jpeg" />
         <updated>{{ .Date | safeHTML }}</updated>
       </item>
     {{ end }}
+
+    {{- range $futureDates -}}
+      {{- $data := dict
+        "Item" .
+        "Category" ""
+      -}}
+      {{- partial "community/dateitem.xml" $data -}}
+    {{- end -}}
+
+    {{- range $pastDates -}}
+      {{- $data := dict
+        "Item" .
+        "Category" "/Past"
+      -}}
+      {{ partial "community/dateitem.xml" $data -}}
+    {{- end -}}
   </channel>
 </rss>

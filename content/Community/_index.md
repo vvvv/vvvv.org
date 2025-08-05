@@ -4,6 +4,7 @@ type: community
 layout: community
 outputs:
 - html
-- rss
+- RSS
+- json
 theme:
 ---
