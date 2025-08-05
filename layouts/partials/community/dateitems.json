@@ -7,6 +7,8 @@
     "Description" $item.Params.description
     "From" $item.Params.where.from_date
     "To" $item.Params.where.to_date
+    "City" $item.Params.where.city
+    "Country" $item.Params.where.country_name
     "PubDate" $item.Date.Unix
   -}}
   {{ partial "community/dateitem.json" $data }}

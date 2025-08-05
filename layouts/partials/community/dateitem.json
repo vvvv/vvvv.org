@@ -14,5 +14,7 @@
   "description": {{ .Description | jsonify }},
   {{- with .From -}}"from": {{ . }},{{- end -}}
   {{- with .To -}}"to": {{ . }},{{- end -}}
+  {{- with .City -}}"city": {{ .  | jsonify }},{{- end -}}
+  {{- with .Country -}}"country": {{ .  | jsonify }},{{- end -}} 
   "pubDate": {{ .PubDate }}
 }
