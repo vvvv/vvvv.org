@@ -6,41 +6,13 @@ import Businesses from "../components/overview/Businesses.vue"
 import Edus from "../components/overview/Edus.vue"
 import ForHire from "../components/overview/ForHire.vue"
 import Connections from '../components/overview/Connections.vue'
-import YouTubePlayer from '../components/YouTubePlayer.vue'
+import Video from '../components/Video.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 import Opportunities from '../components/overview/Opportunities.vue'
 import Dates from '../components/overview/Dates.vue'
+import Staffpicks from '../components/overview/Staffpicks.vue'
 import LatestNugets from '../components/overview/LatestNugets.vue'
 import LastMonth from '../components/overview/LastMonth.vue'
-
-const content = ref (null);
-const loading = ref (false);
-
-onMounted(async ()=>{
-
-    const url = Constants.BASEURL+"items/Community";
-
-    try{
-        loading.value = true;
-
-        const response = await fetch (url);
-
-        if (response.ok)
-        {
-            const json = await response.json();
-            content.value = json.data;
-        }
-
-    }
-    catch (error)
-    {
-        console.log (error);
-    }
-    finally{
-        loading.value = false;
-    }
-})
-
 
 const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
 
@@ -50,10 +22,7 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
     <div class="row row-cols-1 row-cols-md-2 m3-4 overview">
         <div class="col">
             <LastMonth/>
-            <template v-if="content?.video">
-                <h5 class="pb-0">Staff picks</h5>
-                <YouTubePlayer :id="content.video"/>
-            </template>
+            <Staffpicks/>
             <div class="d-none d-md-block">
                 <Edus/>
                 <ForHire class="mt-4"/>
