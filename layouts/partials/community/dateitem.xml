@@ -1,0 +1,27 @@
+{{- $category := .Category -}}
+{{- with .Item -}}
+<item>
+    <title>{{- .Title -}}</title>
+    <link>{{- .Permalink -}}</link>
+    {{- with .Params.author -}}
+        <dc:creator>{{- . -}}</dc:creator>
+    {{- end -}}
+    <pubDate>{{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML -}}</pubDate>
+    <category>{{- .Params.categories -}}{{- $category -}}</category>
+    {{- $thumb := resources.Get "img/grey-thumb.png" -}}
+    {{- $pageRes := .Resources -}}
+    {{- with .Params.thumb -}}
+        {{- with $pageRes.GetMatch . -}}
+        {{- $thumb = . -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $thumbSite := $thumb.Fill "80x80 png" -}}
+    {{- $sizeInBytes := len $thumbSite.Content -}}
+    <enclosure url="{{- $thumbSite.Permalink -}}" length="{{- $sizeInBytes -}}" type="image/png" />
+    <vvvv:fromDate> {{- .Params.where.from_date -}}</vvvv:fromDate>
+    <vvvv:toDate>{{- .Params.where.to_date -}}</vvvv:toDate>
+    <vvvv:updated>{{- .Date | safeHTML -}}</vvvv:updated>
+    <guid isPermaLink="false">{{- printf "%s#%s" .Permalink (.Date.Format "02-01-06") -}}</guid>
+    <description>{{- .Params.description | html -}}</description>
+</item>
+{{- end -}}

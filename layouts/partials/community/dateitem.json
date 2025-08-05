@@ -1,0 +1,20 @@
+{{- $thumb := resources.Get "img/grey-thumb.png" -}}
+        {{- $pageRes := .Resources -}}
+        {{- with .Thumb -}}
+            {{- with $pageRes.GetMatch . -}}
+                {{- $thumb = . -}}
+            {{- end -}}
+        {{- end -}}
+{{- $thumb = $thumb.Fill "50x50 png" -}}
+
+{
+  "title": {{ .Title | jsonify }},
+  "link": {{ .Permalink | jsonify }},
+  "thumb": {{ $thumb.Permalink | jsonify }},
+  "description": {{ .Description | jsonify }},
+  {{- with .From -}}"from": {{ . }},{{- end -}}
+  {{- with .To -}}"to": {{ . }},{{- end -}}
+  {{- with .City -}}"city": {{ .  | jsonify }},{{- end -}}
+  {{- with .Country -}}"country": {{ .  | jsonify }},{{- end -}} 
+  "pubDate": {{ .PubDate }}
+}
