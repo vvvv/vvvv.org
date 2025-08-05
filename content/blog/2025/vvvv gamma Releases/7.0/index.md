@@ -20,17 +20,17 @@ __[Download vvvv gamma 7.0](http://vvvv.org/#Download)__
 
 {{< /box >}}
 
-Since the full change log is not easy to digist, we'll provide you with quick rundown of our personal release highlights:
+Since the full change log is not easy to digest, we'll provide you with quick rundown of our personal release highlights:
 
 ## Patch Editor
 
 ### Workspace customization
-The most obvious change with this release is the dockable user interface: Tabs of patches or tool windows like the Inspector, Debug Views, ... can now be freely arranged and docked to allow for a side-by-side view of tabs or multiple windows. However you arrange your workspace, it will survive a restart and you can always continue working exactly were you left. As a cherry on top, the Quad menu now also has a Recent... entry that will give you quick access to your latest .vl documents.
+The most obvious change with this release is the dockable user interface: Tabs of patches or tool windows like the Inspector, Debug Views, ... can now be freely arranged and docked to allow for a side-by-side view of tabs or multiple windows. However you arrange your workspace, it will survive a restart and you can always continue working exactly were you left. As a cherry on top, the Quad menu now also has a "Recent..." entry that will give you quick access to your latest .vl documents.
 
 *image*
 
 ### Snapping 
-We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
+We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around, they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
 
 *mp4*
 
@@ -46,29 +46,38 @@ And while at it we came up with two related shortcuts that'll save you another b
 *mp4*
 
 ### Public Channels
-https://vvvv.org/blog/2025/introducing-public-channels/
+An addition to Channels, VL's dead-simple solution for bi-directional data-binding: Allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
+
+For more details, please see our [Introduction to Public Channels](https://vvvv.org/blog/2025/introducing-public-channels/).
 
 ### Presets and Transitions
-https://vvvv.org/blog/2025/introducing-presets-and-transitions/
+As soon as you start working with Public Channels, you'll find it convenient to use the new Preset system, that conveniently allows you to save the state of your public channels under a preset name and recall them anytime. Either by jumping to the values or smoothly transitioning to them. Via UI or programmatically (allowing you to build your own UIs on top). Sky is the limit. 
+
+For more details, please see our [Introduction to Presets and Transitions](https://vvvv.org/blog/2025/introducing-presets-and-transitions/).
 
 ### Channel Bindings
-https://vvvv.org/blog/2025/introducing-channel-bindings/
+And the other thing you'll find valuable as soon as you start working with Public Channels is the fact that you can easily bind any of them to external data sources. Think one-click exporuse via OSCQuery, OSC, MIDI, Redis (and more protocols still to come). Again via UI or programmatically via a set of nodes. 
 
-### Property Metadata
-A for now rather advanced topic that shall become more relevant later: You can now add metadata to properties via the Inspektor. Read all we have to say about this so far, here: [Metadata]()
+For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
 
 ### Comments
-Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to let you quickly change their size:
+Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to lmuch quicker let you change their size:
 - Alt 1, 2, 3, 4, 5
  
 *mp4*
 
+### Type Editor
+Specifying nested type annotations was a bit of a drag up until now. Here you see the new type editor in action that has auto-completion for even nested types:
+
+*mp4*
+
 ### IOBoxes
-Float precision shortcut
+IOBoxes default to a precision of 2 by default. Changing the precision involved a couple of annoying clicks. Now there are shortcuts to add/remove digits:
 
 *mp4*
 
 ### Helpbrowser 
+
 links: readme, sponsor, chat
 
 *image*
@@ -76,16 +85,25 @@ links: readme, sponsor, chat
 ## New Settings
 
 ## Exporter updates
+Adds options to ignore compile and runtime errors to exporter
 
-## vvvvc
-https://vvvv.org/blog/2025/introducing-vvvvc.exe/
+    New option to ignore errors at compile time. Defaults to false (was true when exported via UI). Set to true to allow export of patches containing errors.
+    New option to ignore unhandled exeptions at runtime. Defaults to false. Set to true if exceptions should only get logged.
+    Makes Platform setting advanced -> it was a bit confusing and is only needed in rare cases.
+
+Replaces Target OS with Runtime Identifier in exporter. Maps directly to RuntimeIdentifier of generated C# project. Defaults to current OS and CPU architecture.
+
+## Commandline compiler
+
+For more details, please see our [Introduction to vvvvc.exe](https://vvvv.org/blog/2025/introducing-vvvvc.exe/).
 
 ## arm builds
 https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/
 
 ## New libraries
 ### Support for VST audio plugins
-https://vvvv.org/blog/2024/introducing-support-for-vst3-audio-plugins/
+
+For more details, please see our [Introduction to the support of VST3 audio plugins](https://vvvv.org/blog/2024/introducing-support-for-vst3-audio-plugins/).
 
 ### Effortless avateering
 https://vvvv.org/blog/2025/introducing-dollarsmocap/
@@ -122,7 +140,6 @@ So the above was all the new stuff. Now here is an overview of the changes to ex
 The big focus on [extendability](https://thegraybook.vvvv.org/reference/extending/overview.html) we have with vvvv, makes it possible for everyone to contribute to its ecosystem of libraries. And many of you do! Following is a list of profile pages on nuget.org by all individuals and groups that have published libraries for use with vvvv since the last vvvv gamma stable release. In no particular order:
 
 [AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia), [anamirbast](https://www.nuget.org/profiles/anamirbast), [tebjan](https://www.nuget.org/profiles/tebjan), [bj-rn](https://www.nuget.org/profiles/bj-rn), [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl), [antokhio](https://www.nuget.org/profiles/antokhio), [D21s](https://www.nuget.org/profiles/D21s), [3e8.studio](https://www.nuget.org/profiles/3e8.studio), [cnisidis](https://www.nuget.org/profiles/cnisidis), [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt), [sebescudie](https://www.nuget.org/profiles/sebescudie), [mhusinsky](https://www.nuget.org/profiles/mhusinsky), [chkworks](https://www.nuget.org/profiles/chkworks) 
-
 
 **check re standardlibs and other PRs**
 
