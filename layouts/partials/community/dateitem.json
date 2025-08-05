@@ -1,11 +1,11 @@
-{{- $thumbResource := resources.Get "img/grey-thumb.png" -}}
+{{- $thumb := resources.Get "img/grey-thumb.png" -}}
         {{- $pageRes := .Resources -}}
         {{- with .Thumb -}}
             {{- with $pageRes.GetMatch . -}}
                 {{- $thumb = . -}}
             {{- end -}}
         {{- end -}}
-{{- $thumb := $thumbResource.Fill "80x80 jpg" -}}
+{{- $thumb = $thumb.Fill "50x50 png" -}}
 
 {
   "title": {{ .Title | jsonify }},

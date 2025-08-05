@@ -1,6 +1,7 @@
 {{- $len := len . -}}
 {{- range $i, $item := . -}}
   {{- $data := dict
+    "Resources" $item.Resources
     "Thumb" $item.Params.thumb
     "Title" $item.Title
     "Permalink" $item.Permalink
