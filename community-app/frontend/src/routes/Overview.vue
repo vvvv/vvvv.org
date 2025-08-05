@@ -9,6 +9,7 @@ import Connections from '../components/overview/Connections.vue'
 import YouTubePlayer from '../components/YouTubePlayer.vue'
 import LatestTopics from '../components/overview/LatestTopics.vue'
 import Opportunities from '../components/overview/Opportunities.vue'
+import Dates from '../components/overview/Dates.vue'
 import LatestNugets from '../components/overview/LatestNugets.vue'
 import LastMonth from '../components/overview/LastMonth.vue'
 
@@ -53,20 +54,22 @@ const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
                 <h5 class="pb-0">Staff picks</h5>
                 <YouTubePlayer :id="content.video"/>
             </template>
+            <div class="d-none d-md-block">
+                <Edus/>
+                <ForHire class="mt-4"/>
+                <Businesses class="mt-4"/>
+            </div>
         </div>
         <div class="col">
+            <Dates/>
             <LatestTopics/>
-        </div>
-    </div>
-    <div class="row row-cols-1 row-cols-md-2 mb-4 overview">
-        <div class="col mb-4 mb-md-0 order-2 order-md-1">
-            <Edus/>
-            <ForHire class="mt-4"/>
-            <Businesses class="mt-4"/>
-        </div>
-        <div class="col mb-4 mb-md-0 order-1 order-md-2">
             <LatestNugets class="mb-2"/>
             <Opportunities/>
+            <div class="d-block d-md-none">
+                <Edus/>
+                <ForHire class="mt-4"/>
+                <Businesses class="mt-4"/>
+            </div>
         </div>
     </div>
     <div class="row mt-4 overview pt-4">

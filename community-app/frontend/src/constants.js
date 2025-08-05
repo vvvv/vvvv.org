@@ -16,9 +16,13 @@ export default Object({
     FORUM_JOBS_TOPIC: "https://forum.vvvv.org/c/jobs/26",
     NUGET_ORG:"https://www.nuget.org/packages?q=tag%3Avl&includeComputedFrameworks=true&prerel=true&sortby=created-desc",
     NUGET_PACK_LINK:"https://www.nuget.org/packages/",
+    BLOG_DATES:"https://vvvv.org/categories/dates/",
 
     //RSS
     OVERVIEW_RSS: "https://vvvv.org/community/index.xml",
+
+    //HUGO JSON
+    OVERVIEW_JSON: "https://vvvv.org/community/index.json",
     
     //DATA
     BASEURL: DATAURL, 

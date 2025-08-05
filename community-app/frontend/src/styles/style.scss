@@ -1,6 +1,7 @@
 $orange: #ffa800;
 $orange-link-hover: #ff8800;
 $orange-hover: #ee4b28;
+$tag-dark:  #666;
 
 .noImageBack{
   background-color: inherit;
@@ -89,6 +90,30 @@ $orange-hover: #ee4b28;
 
     .sectionBorder{
       border-bottom: 1px solid #000;
+    }
+
+    .darkTag{
+        background-color: $tag-dark;
+        color: #fff;
+    }
+
+    .dates{
+      .row{
+        border-bottom: 1px solid #eee;
+      }
+      .upcoming{
+        background-color: $tag-dark;
+      }
+      .info{
+        margin-top: 0rem;
+
+        .title{
+          font-size: 1rem;
+        }
+        .date{
+          font-size: 0.9rem;
+      }
+      }
     }
 
     .list{

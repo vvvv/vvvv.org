@@ -72,7 +72,7 @@ function handleAdd (value)
             <template v-else>
                 <ul v-if="store.jobs.length > 0" class="list-group list-group-flush list">
                     <li v-for="(job, index) in store.jobs" :key="index" class="list-group-item d-flex flex-nowrap mt-0 mb-0 py-2 link">
-                        <NTag size="small" round :bordered="false" class="px-3 mr-3" :color="{color: '#666', textColor: '#fff'}">job</NTag>
+                        <NTag size="small" round :bordered="false" class="px-3 mr-3 darkTag">job</NTag>
                         <NEllipsis :line-clamp="1" :tooltip=false>
                             <a :href="job.link" target="_blank">{{ job.title }}</a>
                         </NEllipsis>
@@ -90,19 +90,6 @@ function handleAdd (value)
                 </ul>
                 <!-- <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div> -->
             </template>
-        </div>
-        <div class="row justify-content-end">
-
-            <!-- <NTooltip trigger="hover">
-                <template #trigger>
-                </template>
-                Add job via Job Forum
-            </NTooltip>
-            <NTooltip trigger="hover">
-                <template #trigger>
-                </template>
-                Add internship via business profile
-            </NTooltip> -->
         </div>
     </div>
 </template>
