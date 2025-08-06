@@ -13,6 +13,7 @@ $tag-dark:  #666;
   .video-placeholder{
     cursor: pointer;
     width: 100%;
+    min-width: 10rem;
     aspect-ratio: 16 / 9;
     position: relative;
     background-color: #fff;
@@ -23,13 +24,16 @@ $tag-dark:  #666;
         height: 4rem;
         transform: translate(-50%, -50%);
         left: 50%; top: 50%;
-        font-size: 2rem;
-        background: rgba(0,0,0,0.6);
         color: #fff;
-        border: none;
-        border-radius: 50%;
+        fill: #fff;
         text-align: center;
-        padding-left: 0.5rem;
+        background-color: #00000088;
+        padding: 0.7rem 0.6rem 0.7rem 0.8rem;
+        border-radius: 4rem;
+
+        &:hover{
+          transform: translate(-50%, -50%) scale(1.1);
+        }
     }
   }
 
@@ -170,7 +174,6 @@ $tag-dark:  #666;
         }
         .date{
           font-size: 0.9rem;
-          line-height: 1.5rem;
       }
       }
     }

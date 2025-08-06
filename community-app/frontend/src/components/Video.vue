@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed, watch } from "vue";
+import { Play } from "@vicons/ionicons5";
+import { NIcon } from "naive-ui";
 
 const props = defineProps(['id', 'platform', 'thumb']);
 const showVideo = ref(false);
@@ -19,7 +21,7 @@ const link = computed(()=>{
     <div class="video">
         <div v-if="!showVideo" class="video-placeholder" @click="showVideo = true">
             <img v-if="thumb" :src="thumb" alt="Video thumbnail" class="img-fluid"/>
-            <button class="play-btn">▶</button>
+            <Play class="play-btn"/>
         </div>
         <div v-else-if="platform == 'youtube'" class="video-iframe">
             <iframe 
