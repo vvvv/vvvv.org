@@ -73,6 +73,10 @@ const isSimple = computed(() => (windowWidth.value < 480 ? true : false));
 const showSizePicker = computed(() => windowWidth.value > 600);
 
 watch(()=>props.list, ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+watch(()=>props.connection, (oldValue, newValue)=> { 
+    if (oldValue!=newValue)
+        page.value = 1;
+});
 
 </script>
 
