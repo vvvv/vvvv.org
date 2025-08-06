@@ -159,15 +159,6 @@ function logoSrc (src)
     return src ? `${Constants.ASSETS}${src}?${LOGO_SETTINGS}` : null;
 }
 
-function getSocials(object, path)
-{
-    return path.split('.').reduce((acc, key)=>{
-        console.log (acc);
-        console.log (key);
-        return acc && acc[key] !== undefined ? acc[key] : acc;
-    }, object);
-}
-
 async function fetchSocial(key, social, pager)
 {
 
@@ -188,10 +179,10 @@ async function fetchSocial(key, social, pager)
             const data = linkData (social, handle);
          
             return {
-                name: item.username || item.name,
+                name: item.username ?? item.name,
                 label: data.text,
                 connectionLink: data.url,
-                slug: item.slug,
+                slug: item.slug ?? item.username,
             }
             
         });
