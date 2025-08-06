@@ -2,8 +2,8 @@ import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 import { createAssetUrl, shuffle } from "../../utils.js"
 
-const smallThumbParams = '?quality=80&fit=cover&height=50&format=png';
-const bigThumbParams = '?quality=90&fit=cover&width=550&format=jpeg';
+const smallThumbParams = '?fit=cover&height=50&quality=90&format=png';
+const bigThumbParams = '?fit=cover&width=525&height=294&quality=95&format=jpeg';
 
 export const useStaffpicksStore = defineStore ('staffpicksStore',{
     state: ()=>{
@@ -14,6 +14,9 @@ export const useStaffpicksStore = defineStore ('staffpicksStore',{
         }
     },
     actions: {
+        shuffle(){
+            shuffle(this.videos);
+        },
         async fetch(force = false){
 
             if (this.fetched && !force && this.fetching) return;
@@ -36,7 +39,7 @@ export const useStaffpicksStore = defineStore ('staffpicksStore',{
                             id: item.video_id
                         }
                     });
-                    this.videos = shuffle(videos);
+                    this.videos = videos;
                     this.fetched = true;
                 }
                 else {

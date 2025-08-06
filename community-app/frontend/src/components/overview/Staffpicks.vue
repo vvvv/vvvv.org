@@ -11,6 +11,7 @@ onMounted(async ()=>{
     try {
         loading.value = true;
         await store.fetch();
+        store.shuffle();
     }
     catch(error) {
         console.log (error);
@@ -25,16 +26,16 @@ const selectedVideo = computed(()=>store.videos[selected.value]);
 </script>
 
 <template>
-    <div v-if="!loading && store.videos.length > 0" class="staffpicks">
+    <div v-if="!loading && store.videos.length > 0" class="staffpicks mr-2">
         <h5 class="pb-0">Staff picks</h5>
-        <Video :platform="selectedVideo.platform" :id="selectedVideo.id" :thumb="selectedVideo.bigThumb"></Video>
+            <Video :platform="selectedVideo.platform" :id="selectedVideo.id" :thumb="selectedVideo.bigThumb" class=" mt-3 mb-2"></Video>
         <div>
             <template v-for="(item, index) of store.videos" :index="index">
-                <div class="row mb-0 mx-1 py-2 pr-1 mb-2" @click="selected = index" :class="{ selected: selected == index }">
-                    <div class="col-3">
-                        <img :src="item.smallThumb" :alt="item.title"/>
+                <div class="row my-0 px-3 py-2 mb-1 d-flex align-items-center" @click="selected = index" :class="{ selected: selected == index }">
+                    <div class="col-2 px-0">
+                        <img :src="item.smallThumb" :alt="item.title" class="img-fluid"/>
                     </div>
-                    <div class="col-9">
+                    <div class="col-10 pl-4">
                         <p>{{ item.title }}</p>
                     </div>
                 </div>

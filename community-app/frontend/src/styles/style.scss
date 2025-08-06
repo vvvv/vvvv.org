@@ -7,6 +7,43 @@ $tag-dark:  #666;
   background-color: inherit;
 }
 
+.video { 
+  background-color: #fff;
+
+  .video-placeholder{
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    background-color: #fff;
+    
+    .play-btn {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        transform: translate(-50%, -50%);
+        left: 50%; top: 50%;
+        font-size: 2rem;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        text-align: center;
+        padding-left: 0.5rem;
+    }
+  }
+
+  .video-iframe iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+  }
+}
+
+
 .overview
 {
 
@@ -16,55 +53,20 @@ $tag-dark:  #666;
         background-color: #eee;
       }
 
+      p{
+        padding: 0px;
+        margin: 0px;
+        line-height: 1.5rem;
+      }
+
       cursor: pointer;
       border-radius: 3px;
 
       &:hover{
-        background-color: #ddd;
+        background-color: #f0f0f0;
       }
     }
   }
-
-  .youtube-wrapper { 
-    background-color: #fff;
-    width: 100%;
-    height: 330px;
-
-    .youtube-placeholder{
-      height: 330px;
-      cursor: pointer; 
-      position: relative;
-      background-color: #fff;
-      
-      img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center;
-          background-color: #fff;
-      }
-  
-      .play-btn {
-          position: absolute;
-          width: 4rem;
-          height: 4rem;
-          transform: translate(-50%, -50%);
-          left: 50%; top: 50%;
-          font-size: 2rem;
-          background: rgba(0,0,0,0.6);
-          color: #fff;
-          border: none;
-          border-radius: 50%;
-          text-align: center;
-          padding-left: 0.5rem;
-      }
-    } 
-    .youtube-iframe iframe {
-      height: 330px; 
-      width: 100%;
-    }
-  }
-
 
   .lastMonth{
     vertical-align: top;
@@ -168,6 +170,7 @@ $tag-dark:  #666;
         }
         .date{
           font-size: 0.9rem;
+          line-height: 1.5rem;
       }
       }
     }
