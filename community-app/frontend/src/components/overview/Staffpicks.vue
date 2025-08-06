@@ -26,7 +26,7 @@ const selectedVideo = computed(()=>store.videos[selected.value]);
 </script>
 
 <template>
-    <div v-if="!loading && store.videos.length > 0" class="staffpicks mr-2">
+    <div v-if="!loading && store.videos.length > 0" class="staffpicks mr-2 mb-2 mb-md-4">
         <h5 class="pb-0">Staff picks</h5>
             <Video :platform="selectedVideo.platform" :id="selectedVideo.id" :thumb="selectedVideo.bigThumb" class=" mt-3 mb-2"></Video>
         <div>
