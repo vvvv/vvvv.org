@@ -72,13 +72,11 @@ xmlns:media="http://search.yahoo.com/mrss/">
               {{ end }}
           {{ end }}
         {{ $thumbSite := $thumb.Fill "80x80 jpg"}}
-        <thumb>{{ $thumbSite.Permalink }}</thumb>
         <guid isPermaLink="false">{{ printf "%s#%s" .Permalink (.Date.Format "02-01-06") }}</guid>
         <description>{{- .Params.description | html -}}</description>
         {{ $thumbRSS := $thumb.Resize "600x jpeg"}}
         {{ $sizeInBytes := len $thumbRSS.Content }}
         <enclosure url="{{ $thumbRSS.Permalink }}" length="{{ $sizeInBytes }}" type="image/jpeg" />
-        <updated>{{ .Date | safeHTML }}</updated>
       </item>
     {{ end }}
 

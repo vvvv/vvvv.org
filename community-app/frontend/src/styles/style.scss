@@ -7,8 +7,66 @@ $tag-dark:  #666;
   background-color: inherit;
 }
 
+.video { 
+  background-color: #fff;
+
+  .video-placeholder{
+    cursor: pointer;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    background-color: #fff;
+    
+    .play-btn {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        transform: translate(-50%, -50%);
+        left: 50%; top: 50%;
+        font-size: 2rem;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        text-align: center;
+        padding-left: 0.5rem;
+    }
+  }
+
+  .video-iframe iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+  }
+}
+
+
 .overview
 {
+
+  .staffpicks{
+    .row {
+      &.selected{
+        background-color: #eee;
+      }
+
+      p{
+        padding: 0px;
+        margin: 0px;
+        line-height: 1.5rem;
+      }
+
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover{
+        background-color: #f0f0f0;
+      }
+    }
+  }
 
   .lastMonth{
     vertical-align: top;
@@ -112,6 +170,7 @@ $tag-dark:  #666;
         }
         .date{
           font-size: 0.9rem;
+          line-height: 1.5rem;
       }
       }
     }

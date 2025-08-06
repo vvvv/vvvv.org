@@ -25,7 +25,7 @@ onMounted(async ()=>{
 
 <template>
     <div class="section pl-4">
-        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES"/>
+        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true"/>
             <template v-if="loading">
                 <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
             </template>
