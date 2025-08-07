@@ -78,26 +78,38 @@ IOBoxes default to a precision of 2 by default. Changing the precision involved 
 
 ### Helpbrowser 
 
-links: readme, sponsor, chat
+![](helpbrowser.png)
 
-*image*
+In the help browsers Learn tab where you find help to all the packs you have installed, the packs didn't have links back to their online readme. This is now shown for all packs. Plus, packs can also have 4 more optional buttons:
+- Website: Link to a website covering the pack
+- Source: Link to the packs source repository
+- Sponsor!: Link to a page where this pack can be supported
+- Chat: Link to a dedicated chat room
+
+To learn how to provide those links for your packs, please refer to [Providing Help](https://thegraybook.vvvv.org/reference/extending/providing-help.html).
 
 ## New Settings
 
-## Exporter updates
-Adds options to ignore compile and runtime errors to exporter
+## Application Exporter
 
-    New option to ignore errors at compile time. Defaults to false (was true when exported via UI). Set to true to allow export of patches containing errors.
-    New option to ignore unhandled exeptions at runtime. Defaults to false. Set to true if exceptions should only get logged.
-    Makes Platform setting advanced -> it was a bit confusing and is only needed in rare cases.
+![](exporter.png)
 
-Replaces Target OS with Runtime Identifier in exporter. Maps directly to RuntimeIdentifier of generated C# project. Defaults to current OS and CPU architecture.
+3 little improvements for the Exporter:
+- Can now export console apps also for MacOS in addition to Windows and Linux
+- Has a new option to ignore unhandled exeptions at runtime: So far by default unhandled exceptions would result in a popup and halt the application. This can now be disabled, which would only write those exceptions to the log.
+- Has a new option to ignore errors at compile time: There are cases where you are aware of errors in your patch that you simply want to ignore for the time being and still be able to export
 
-## Commandline compiler
+## Commandline Compiler
+
+![](vvvvc.png)
+
+While so far exporting your patches was only possible via the Application Exporter UI, you can now also export apps via the commandline, ie. without the need to open vvvv itself.
 
 For more details, please see our [Introduction to vvvvc.exe](https://vvvv.org/blog/2025/introducing-vvvvc.exe/).
 
 ## arm builds
+
+For those of you who want to run vvvv 
 https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/
 
 ## New libraries
