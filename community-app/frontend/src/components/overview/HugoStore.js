@@ -18,13 +18,16 @@ export const useHugoStore = defineStore ('hugoStore',{
         return {
             lastMonth: {},
             dates: [],
-            fetched: false
+            fetched: false,
+            fetching: false
         }
     },
     actions: {
         async fetch(force = false){
 
-            if (this.fetched && !force) return;
+            if (this.fetched && !force && this.fetching) return;
+
+            this.fetching = true;
 
             try{
                 const url = Constants.OVERVIEW_JSON;        
@@ -61,6 +64,9 @@ export const useHugoStore = defineStore ('hugoStore',{
             }
             catch (error){
                 this.fetched = false;
+            }
+            finally{
+                this.fetching = false;
             }
 
         }

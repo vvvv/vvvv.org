@@ -25,7 +25,7 @@ onMounted(async ()=>{
 
 <template>
     <div class="section pl-4">
-        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES"/>
+        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true"/>
             <template v-if="loading">
                 <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
             </template>
@@ -40,9 +40,10 @@ onMounted(async ()=>{
                             </div>
                             <div class="col-10 col-md-9 col-lg-10 info pl-0">
                                 <a :href="item.link" class="title">{{ item.title }}</a>
-                                <p class="date mt-1 mb-0">
+                                <p class="date mt-1 mb-0 d-flex">
+                                    <NTag v-if="!item.past" size="small" round :bordered="false" class="mr-2 darkTag">upcoming</NTag>
                                     <NEllipsis :line-clamp="1" :tooltip=false>
-                                        <NTag v-if="!item.past"size="small" round :bordered="false" class="mr-2 darkTag">upcoming</NTag> {{ item.dates }}<span v-if="item.country">. {{ item.country }}</span>
+                                    {{ item.dates }}<span v-if="item.country">. {{ item.country }}</span>
                                     </NEllipsis>
                                 </p>
                             </div>

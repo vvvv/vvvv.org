@@ -7,8 +7,70 @@ $tag-dark:  #666;
   background-color: inherit;
 }
 
+.video { 
+  background-color: #fff;
+
+  .video-placeholder{
+    cursor: pointer;
+    width: 100%;
+    min-width: 10rem;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    background-color: #fff;
+    
+    .play-btn {
+        position: absolute;
+        width: 4rem;
+        height: 4rem;
+        transform: translate(-50%, -50%);
+        left: 50%; top: 50%;
+        color: #fff;
+        fill: #fff;
+        text-align: center;
+        background-color: #00000088;
+        padding: 0.7rem 0.6rem 0.7rem 0.8rem;
+        border-radius: 4rem;
+
+        &:hover{
+          transform: translate(-50%, -50%) scale(1.1);
+        }
+    }
+  }
+
+  .video-iframe iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+  }
+}
+
+
 .overview
 {
+
+  .staffpicks{
+    .row {
+      &.selected{
+        background-color: #eee;
+      }
+
+      p{
+        padding: 0px;
+        margin: 0px;
+        line-height: 1.5rem;
+      }
+
+      cursor: pointer;
+      border-radius: 3px;
+
+      &:hover{
+        background-color: #f0f0f0;
+      }
+    }
+  }
 
   .lastMonth{
     vertical-align: top;

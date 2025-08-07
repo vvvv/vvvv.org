@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { logos } from './logos/logos.js'
 import { NIcon, NButton, NDropdown, NPagination, NSpin, NPerformantEllipsis } from 'naive-ui';
 import { ChevronDown } from '@vicons/ionicons5';
-import { showBusinessProfile, showEduProfile } from "../utils.js"
+import { showBusinessProfile, showEduProfile, showUserProfile } from "../utils.js"
 
 const props = defineProps(['list', 'loading', 'options', 'connection', 'connectionKey', 'pageSizes'])
 const emit = defineEmits(['change', 'page'])
@@ -26,29 +26,20 @@ const constants = {
     business: {
         title: 'Businesses on other platforms:',
         type: 'Business',
-        profileLink: 'business'
+        profileLink: 'business',
+        handleClick: (item)=>showBusinessProfile(item.slug)
     },
     edu: {
         title: 'Institutions on other platforms:',
         type: 'Institution',
-        profileLink: 'edu'
+        profileLink: 'edu',
+        handleClick: (item)=>showEduProfile(item.slug)
     },
     people: {
         title: 'People on other platforms:',
         type: 'Username',
-        profileLink: 'personal'
-    }
-}
-
-function handleClick(item)
-{
-    if (item.key == 'business')
-    {
-        showBusinessProfile(item.slug);
-    }
-    else if (item.key == 'edu')
-    {
-        showEduProfile(item.slug);
+        profileLink: 'personal',
+        handleClick: (item)=>showUserProfile(item.name)
     }
 }
 
@@ -73,6 +64,10 @@ const isSimple = computed(() => (windowWidth.value < 480 ? true : false));
 const showSizePicker = computed(() => windowWidth.value > 600);
 
 watch(()=>props.list, ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
+watch(()=>props.connection, (oldValue, newValue)=> { 
+    if (oldValue!=newValue)
+        page.value = 1;
+});
 
 </script>
 
@@ -113,7 +108,7 @@ watch(()=>props.list, ()=> window.scrollTo({ top: 0, behavior: 'smooth' }));
                     <tr v-for="item in list.items" class="border-bottom">
                         <td>
                             <NPerformantEllipsis line-clamp="1" :tooltip="false">
-                                <a :href="item.profileLink" @click.prevent="handleClick(item)">{{ item.name }}</a>
+                                <a :href="item.profileLink" @click.prevent="constants[item.key].handleClick(item)">{{ item.name }}</a>
                             </NPerformantEllipsis>
                         </td>
                         <td>

@@ -32,7 +32,8 @@ export default Object({
     GET_EDUS: DATAURL + 'items/Edu',
     GET_USERS: DATAURL + 'items/User',
     GET_HIRE: DATAURL + 'items/Hire',
-
+    GET_STAFFPICKS: DATAURL + 'items/Staffpicks',
+    
     //PROFILE
     PROFILE: PROFILE,
     PROFILE_BUSINESS: PROFILE + "?p=business",
