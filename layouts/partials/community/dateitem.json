@@ -5,7 +5,7 @@
                 {{- $thumb = . -}}
             {{- end -}}
         {{- end -}}
-{{- $thumb = $thumb.Fill "50x50 png" -}}
+{{- $thumb = $thumb.Fill "100x100 png" -}}
 
 {
   "title": {{ .Title | jsonify }},
