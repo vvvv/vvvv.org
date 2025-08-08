@@ -2,8 +2,8 @@ import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 import { createAssetUrl, shuffle } from "../../utils.js"
 
-const smallThumbParams = '?fit=cover&height=50&quality=90&format=png';
-const bigThumbParams = '?fit=cover&width=525&height=294&quality=95&format=jpeg';
+const smallThumbParams = '?fit=cover&height=80&quality=90&format=png';
+const bigThumbParams = '?fit=cover&width=1024&height=576&quality=95&format=jpeg';
 
 export const useStaffpicksStore = defineStore ('staffpicksStore',{
     state: ()=>{
@@ -24,7 +24,7 @@ export const useStaffpicksStore = defineStore ('staffpicksStore',{
             this.fetching = true;
 
             try{
-                const url = Constants.GET_STAFFPICKS;       
+                const url = `${Constants.GET_STAFFPICKS}?limit=4`;       
                 const response = await fetch(url);
                 
                 if (response.ok)
