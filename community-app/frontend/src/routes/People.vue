@@ -88,7 +88,7 @@ function changeConnection(key)
     />
 
     <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
-        :list="store.list.connections"
+        :list="store.list?.connections"
         :loading="store.loading" 
         :options="store.socialOptions"
         :connection="store.selectedConnection"
