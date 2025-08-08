@@ -2,7 +2,7 @@ import Constants from "../../constants.js"
 import { defineStore } from 'pinia'
 import { createAssetUrl, shuffle } from "../../utils.js"
 
-const smallThumbParams = '?fit=cover&height=80&quality=90&format=png';
+const smallThumbParams = '?fit=cover&height=80&quality=90&format=jpeg';
 const bigThumbParams = '?fit=cover&width=1024&height=576&quality=95&format=jpeg';
 
 export const useStaffpicksStore = defineStore ('staffpicksStore',{
