@@ -129,7 +129,7 @@ const themeOverrides = {
         <n-message-provider placement="bottom-right">
           <Suspense>
             <template #default>
-              <RouterView/>
+              <RouterView @logout="logout"/>
             </template>
             <template #fallback>
               <NSpin :show="isRouteLoading"/>

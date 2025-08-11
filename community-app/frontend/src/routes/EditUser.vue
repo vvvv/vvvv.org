@@ -129,7 +129,7 @@ const handleUpdateValue = (key, item) => {
         <!-- On Failure -->
         <div v-if="!loading && failure" class="mt-4">
           {{ failure }}
-          <div class="mt-2"><n-button @click="auth.logout()">Logout</n-button></div>
+          <div class="mt-2"><n-button @click="emit('logout')">Logout</n-button></div>
         </div>
 
         <!--  On Data -->
