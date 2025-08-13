@@ -29,10 +29,16 @@ The most obvious change with this release is the dockable user interface: Tabs o
 
 *image*
 
+Open previous windows
+Open previous documents
+
 ### Snapping 
 We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around, they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
 
 *mp4*
+
+Snapping
+Show snapping guides
 
 ### Refactoring
 One of the most requested features: Make it less clicks to refactor a bunch of nodes into one new custom node. Here goes:
@@ -60,18 +66,17 @@ And the other thing you'll find valuable as soon as you start working with Publi
 
 For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
 
-### Comments
-Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to lmuch quicker let you change their size:
-- Alt 1, 2, 3, 4, 5
- 
-*mp4*
-
 ### Type Editor
 Specifying nested type annotations was a bit of a drag up until now. Here you see the new type editor in action that has auto-completion for even nested types:
 
 *mp4*
 
-### IOBoxes
+### Comments and IOBoxes
+Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to lmuch quicker let you change their size:
+- Alt 1, 2, 3, 4, 5
+ 
+*mp4*
+
 IOBoxes default to a precision of 2 by default. Changing the precision involved a couple of annoying clicks. Now there are shortcuts to add/remove digits:
 
 *mp4*
@@ -87,8 +92,6 @@ In the help browsers Learn tab where you find help to all the packs you have ins
 - Chat: Link to a dedicated chat room
 
 To learn how to provide those links for your packs, please refer to [Providing Help](https://thegraybook.vvvv.org/reference/extending/providing-help.html).
-
-## New Settings
 
 ## Application Exporter
 
@@ -109,44 +112,80 @@ For more details, please see our [Introduction to vvvvc.exe](https://vvvv.org/bl
 
 ## arm builds
 
-For those of you who want to run vvvv 
-https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/
+![](arm.png)
+
+With the advent of Arm-based Windows Laptops we now also offer dedicated builds for this architecture in order to run at full speed also on such devices. As a side effect, vvvv now also runs at close to native speeds when run on Apple Silicon hardware. 
+
+For more details, please see our [Introduction to running vvvv on arm](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/).
+
+## New VL features
+- custom regions
 
 ## New libraries
+
+As ya'll know, vvvv is not a monolithic tool, with features, but a development environment with libraries that you can install and update independently as needed. Following is a list of new libraries since vvvv's last major release.
+
 ### Support for VST audio plugins
+
+Audio in vvvv got a big bump with the seamless integration of support for VST3 audio plugins. Any VST3 plugin can now be used as just another node, with audio in/out and parameter and MIDI input pins. 
+
+*image*
+
+Needless to say this also works when exporting your patches allowing you to build complex standalone audio tools!
 
 For more details, please see our [Introduction to the support of VST3 audio plugins](https://vvvv.org/blog/2024/introducing-support-for-vst3-audio-plugins/).
 
 ### Effortless avateering
-https://vvvv.org/blog/2025/introducing-dollarsmocap/
 
-- https://vvvv.org/blog/2024/introducing-blueiot-real-time-location-system/
-- https://vvvv.org/blog/2024/introducing-support-for-rplidar-devices-by-slamtec/
-- https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/
-- https://vvvv.org/blog/2025/introducing-support-for-network-cameras-by-axis/
-- https://vvvv.org/blog/2025/introducing-support-for-orbbec-femto-devices-via-k4a/
-- https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/
+Controlling virtual characters with vvvv has been a tough nut, but this nut is cracked and we're committed to adding simple introductions on how to do so for all skeleton tracking options available with vvvv. 
+
+*image*
+
+As of this writing, your first option is using [DollarsMoCap](https://vvvv.org/blog/2025/introducing-dollarsmocap/) but you can expect support for Kinects, Orbbec's Femtos and StereLab's ZED devices soon.
+
+### Orbbec Femto depth cameras
+
+You can now use Femto Bolt and Mega cameras by Orbbec with the node-set known from AzureKinect devices. For details, please see [Introducing Support for Orbbec Femto devices via K4A](https://vvvv.org/blog/2025/introducing-support-for-orbbec-femto-devices-via-k4a).
+
+### Axis network cameras
+
+Need to access and control a network camera by Axis? We have you covered! For details, please see [Introducing support for Networks cameras by Axis](https://vvvv.org/blog/2025/introducing-support-for-network-cameras-by-axis/).
+
+### Lidars by Slamtec
+
+Want to work with the data sensed by one of the Lidars of Slamtec? Easy! For details, please see [Introducing support for RPLidar devices](https://vvvv.org/blog/2024/introducing-support-for-rplidar-devices-by-slamtec).
+
+### Position tracking by Blueiot
+
+Need a stable ID tracking people in a large space? Try this: [Introducing Blueiot realtime location system](https://vvvv.org/blog/2024/introducing-blueiot-real-time-location-system/).
 
 ## Updated Libraries
   
 So the above was all the new stuff. Now here is an overview of the changes to existing libraries for this release:
 
-- VL.Stride
-- VL.Skia
-- VL.ImGUI
-- VL.Audio improvements
-- VL.OpenCV: https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/
-- https://vvvv.org/blog/2024/introducing-support-for-the-imaging-sources-industrial-cameras/
-- https://vvvv.org/blog/2024/introducing-support-for-industrial-cameras-by-ids-imaging/
-- https://vvvv.org/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/
+### VL.Stride
+### VL.Skia
+### VL.ImGUI
+### VL.Audio 
+### VL.OpenCV
+https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/
 
-- VL.CEF update
-- mqtt, websocket, webserver, now stable
-- openexr
+### VL.CEF
+### VL.OpenEXR
+
+### VL.Augmenta
 - augmenta now with pointcloud and zones
 
-## New VL features
-- custom regions
+### Devices
+The following device libraries got new stable releases:
+- [Industrial cameras by The Imaging Source](https://vvvv.org/blog/2024/introducing-support-for-the-imaging-sources-industrial-cameras/)
+- [Industrial cameras by IDS](https://vvvv.org/blog/2024/introducing-support-for-industrial-cameras-by-ids-imaging/)
+- [ZED Stereo cameras by Stereolabs](https://vvvv.org/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/)
+- [ by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/)
+
+### Networking IO
+- mqtt, websocket, webserver, now stable
+links to vvvvtv episodes
 
 ## Community efforts
 The big focus on [extendability](https://thegraybook.vvvv.org/reference/extending/overview.html) we have with vvvv, makes it possible for everyone to contribute to its ecosystem of libraries. And many of you do! Following is a list of profile pages on nuget.org by all individuals and groups that have published libraries for use with vvvv since the last vvvv gamma stable release. In no particular order:
