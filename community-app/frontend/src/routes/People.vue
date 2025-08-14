@@ -12,6 +12,8 @@ const router = useRouter();
 const route = useRoute();
 const store = usePeopleStore();
 
+const emit = defineEmits(['logout']);
+
 onMounted( async ()=>
 {
     store.setSection('list');

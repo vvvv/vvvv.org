@@ -19,8 +19,6 @@ import { transformer } from './FormHelper.js'
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
 
-const store = useBusinessListStore();
-
 const formRef = ref(null);
 const form = ref(null);
 const logo = ref(null);
@@ -189,9 +187,7 @@ const submit = async () => {
       {
         uploader.value.reset()
       }
-    
-      store.fetch(true);
-      
+          
       emit('updateData', data);
       emit('message', { type: 'success', string: response.result});
     }
@@ -199,6 +195,7 @@ const submit = async () => {
   catch (error)
   {
     emit('message', { type: 'error', string: 'Ooops. Something has happened on update'});
+    console.log(error);
   }
   finally{
     formRef.value.restoreValidation();

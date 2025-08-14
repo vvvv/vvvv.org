@@ -3,7 +3,7 @@ import { ref, onMounted, computed, watch, watchEffect } from 'vue'
 import Constants from './constants'
 import { isRouteLoading } from "./globalState.js";
 import { useRouter, useRoute } from 'vue-router'
-import { kclogin, kclogout, kcregister, isAuthenticated, getAccessToken, getMail, getUsername } from './keycloak-helper'
+import { kclogin, kclogout, kcregister, isAuthenticated, getUsername } from './keycloak-helper'
 import { NMessageProvider, NTab, NTabs, NConfigProvider, NIcon, NSpin } from 'naive-ui'
 import { PersonCircleOutline } from '@vicons/ionicons5'
 import './styles/style.scss'
@@ -30,7 +30,6 @@ const logout = ()=> {
   kclogout(window.location.origin + `/community`)
 }
 
-const authenticated = computed(()=>isAuthenticated())
 
 const leftTabs = computed(() => {
 
@@ -117,7 +116,7 @@ const themeOverrides = {
                   </div>
                 </n-tab>
                 <template #suffix>
-                  <a href="#" v-if="authenticated" @click="logout" class="">Logout</a>
+                  <a href="#" v-if="isAuthenticated()" @click="logout" class="">Logout</a>
                   <template v-else>
                     <div class="btn btn-primary mr-4" @click="login">Login</div>
                     <a href="#" @click="kcregister(profileLink)">Sign up</a>
@@ -126,10 +125,10 @@ const themeOverrides = {
               </n-tabs>
             </div>
         </div>     
-        <n-message-provider placement="bottom-right">
+        <n-message-provider placement="bottom">
           <Suspense>
             <template #default>
-              <RouterView/>
+              <RouterView @logout="logout"/>
             </template>
             <template #fallback>
               <NSpin :show="isRouteLoading"/>

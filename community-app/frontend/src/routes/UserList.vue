@@ -16,6 +16,8 @@ const initialized = ref(false);
 
 const props = defineProps(['title', 'pageSizes']);
 
+const emit = defineEmits(['logout']);
+
 const state = reactive({
     currentPage: 1,
     totalPages: 0,

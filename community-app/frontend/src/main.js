@@ -12,7 +12,12 @@ if (import.meta.env.DEV)
     import("@css/creative.css");
 }
 
-await initKeycloak();
+try{
+    await initKeycloak();
+}
+catch{
+    console.log("Failed to initialize Oath");
+}
 
 const pinia = createPinia();
 const app = createApp(App);

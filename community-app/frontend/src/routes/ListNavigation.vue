@@ -4,7 +4,7 @@ import { ChevronDown } from '@vicons/ionicons5'
 import { NButton, NButtonGroup, NDropdown, NIcon, NTab, NTabPane, NTabs } from 'naive-ui'
 
 const props = defineProps(['selected', 'sections']);
-const emit = defineEmits (['select']);
+const emit = defineEmits (['select', 'logout']);
 
 </script>
 

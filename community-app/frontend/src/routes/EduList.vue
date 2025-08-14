@@ -17,6 +17,8 @@ const pageSizes = [
     { label: '100 per page', value: 100 }
 ]
 
+const emit = defineEmits(['logout']);
+
 onMounted( async ()=>
 {
     store.setSection('list');
