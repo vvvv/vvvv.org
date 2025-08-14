@@ -25,7 +25,7 @@ const router = useRouter();
 const route = useRoute();
 const message = useMessage();
 
-const messageDuration = 2000;
+const messageDuration = 3000;
 const data = ref(null);
 const loading = ref(true);
 const constants = ref(null);

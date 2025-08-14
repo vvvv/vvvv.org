@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { isAuthenticated, kclogin } from './keycloak-helper.js'
 import { isRouteLoading } from "./globalState.js"
-import Overview from "./routes/Overview.vue"
+
+const Overview = () => import('./routes/Overview.vue');
 
 const People = () => import('./routes/People.vue');
 const UserView = () => import('./routes/UserView.vue');
@@ -80,7 +81,7 @@ const routes = [
         component: EditUser,
         beforeEnter: requireAuth,
         meta: { tabName: 'Profile', visible: true, isLeft: false }
-    },
+    }
 ]
 
 const router = createRouter({
@@ -98,8 +99,16 @@ const router = createRouter({
 
 // Add global navigation guards for loading state
 router.beforeEach((to, from) => {
-    document.title = to.meta?.visible ? to.name : to.params?.name ? 'Profile: ' + to.params.name : to.params?.username ? 'Profile: ' + to.params.username : to.name;
-    isRouteLoading.value = true; // Start loading
+
+    if (to.path === '/silent-check-sso.html')
+    {
+        return { name: 'Overview' };
+    }
+    else
+    {
+        isRouteLoading.value = true; // Start loading
+        document.title = to.meta?.visible ? to.name : to.params?.name ? 'Profile: ' + to.params.name : to.params?.username ? 'Profile: ' + to.params.username : to.name;
+    }
 });
 
 router.afterEach(() => {

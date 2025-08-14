@@ -13,13 +13,10 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
-import { useEduListStore } from "../../routes/EduListStore.js"
 import { transformer } from './FormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
-
-const store = useEduListStore();
 
 const isChanged = ref(false);
 const formRef = ref(null);
@@ -173,8 +170,6 @@ const submit = async () => {
       {
         uploader.value.reset()
       }
-    
-      store.fetch(true);
 
       emit('updateData', data);
       emit('message', { type: 'success', string: response.result});

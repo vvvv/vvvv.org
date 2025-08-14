@@ -40,6 +40,8 @@ const eduURL = `${Constants.GET_EDUS}?filter[owner][username][_eq]=${username}&f
 
 const worksForURL = `${Constants.GET_USER_ROLES}?fields=Company.Company_id.name,Company.Company_id.slug,Edu.Edu_id.name,Edu.Edu_id.slug,role&filter[user_id][id][_eq]=`;
 
+const emit = defineEmits(['logout']);
+
 onMounted(async ()=>
 {
   loading.value = true;

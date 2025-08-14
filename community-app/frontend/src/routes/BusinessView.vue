@@ -10,6 +10,7 @@ import InstitutionBasics from '../components/InstitutionBasics.vue'
 import MaintainedBy from '../components/MaintainedBy.vue'
 
 const route = useRoute();
+
 const slug = route.params?.slug ?? "vvvv";
 
 const company = ref(null);

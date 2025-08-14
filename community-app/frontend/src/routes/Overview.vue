@@ -16,6 +16,8 @@ import LastMonth from '../components/overview/LastMonth.vue'
 
 const columnClass='col-12 col-md-6 mb-3 mb-lg-0';
 
+const emit = defineEmits(['logout']);
+
 </script>
 
 <template>
