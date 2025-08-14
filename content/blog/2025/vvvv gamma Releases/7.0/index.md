@@ -161,49 +161,68 @@ Need a stable ID tracking people in a large space? Try this: [Introducing Blueio
 
 ## Updated Libraries
   
-So the above was all the new stuff. Now here is an overview of the changes to existing libraries for this release:
+So the above was all new stuff. Now here is are some highlights of changes to existing libraries for this release:
 
 ### VL.Stride
+Adds Location aka Gizmo for manipulating entities and controlling values, to be used in Edit Mode (F4).
+
+https://github.com/vvvv/VL.StandardLibs/pull/673
+https://github.com/vvvv/VL.StandardLibs/pull/691
+https://github.com/vvvv/VL.StandardLibs/pull/686
+
+[All changes](https://thegraybook.vvvv.org/changelog/7.x.html#stride)
+
 ### VL.Skia
+Adds FromSharedHandle for Skia which in turn is getting used by texture/mesh viewers. [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia)
+
 ### VL.ImGUI
+
+Adds dockable windows to Stride backend (thanks [kopffarben](https://vvvv.org/people/kopffarben)). [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#imgui)
+
 ### VL.Audio 
+AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [All changes](https://github.com/vvvv/VL.Audio/commits/main/)
+
 ### VL.OpenCV
-https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/
+A new maintainance release is out, see: [VL.OpenCV 4.0 is out](https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/)
+
+And it has been featured in the following vvvvTv episodes:
+- [Introduction to OpenCV](https://www.youtube.com/live/fjw2m8w6RNU)
+- [AR using OpenCV with ArUco Markers](https://www.youtube.com/live/j7DWMET-qM8)
 
 ### VL.CEF
+- We've updated the underlying Chrome engine to version 132
+- There are now convenient WebLayer (for Skia) and WebRenderer (for Stride)nodes that let you render content with arbitrary 2d transformations and still have mouse input working
+- We've added an example of how you can inject your own mouse/keyboard/touch notifications for the WebLayer nodes
+  
 ### VL.OpenEXR
-
-### VL.Augmenta
-- augmenta now with pointcloud and zones
+- Supports all compression formats
+- Supports scanline based and tiled images
+- Supports sequential and randomized line order (user randomized to allow for parallel writing)
 
 ### Devices
-The following device libraries got new stable releases:
-- [Industrial cameras by The Imaging Source](https://vvvv.org/blog/2024/introducing-support-for-the-imaging-sources-industrial-cameras/)
-- [Industrial cameras by IDS](https://vvvv.org/blog/2024/introducing-support-for-industrial-cameras-by-ids-imaging/)
-- [ZED Stereo cameras by Stereolabs](https://vvvv.org/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/)
-- [ by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/)
+The following device libraries got new releases:
+- [Industrial cameras by The Imaging Source](https://vvvv.org/blog/2024/introducing-support-for-the-imaging-sources-industrial-cameras/) got a stable release
+- [Industrial cameras by IDS](https://vvvv.org/blog/2024/introducing-support-for-industrial-cameras-by-ids-imaging/) got a stable release
+- [ZED Stereo cameras by Stereolabs](https://vvvv.org/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/) got a stable release
+- [Leap Motion Controllers by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/) now support latest devices
+- [VL.Augmenta](http://nuget.org/packages/vl.augmenta) Now supports their new WebSocket based protocol including pointcloud streaming and zones
 
 ### Networking IO
-- mqtt, websocket, webserver, now stable
-links to vvvvtv episodes
+The following finally got a stable release and have been discussed in a [vvvvTv seson 2](https://www.youtube.com/playlist?list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi) episode:
+
+- [VL.IO.MQTT](https://www.nuget.org/packages/VL.IO.MQTT) as featured in [Networking with MQTT](https://www.youtube.com/live/h_TQFUN8EQ0)
+- [VL.IO.WebSocket](https://www.nuget.org/packages/VL.IO.WebSocket) as featured in [Talking to an API](https://www.youtube.com/live/TTvkQgGZfZw) and [Multiplayer Installation](https://www.youtube.com/live/GtKx2v5Egxw) and [Controlling an app via a WebUI](https://www.youtube.com/live/DR1ay0WR418)
+- [VL.IO.WebServer](https://www.nuget.org/packages/VL.IO.WebServer) as featured in [Serving a WebUI for mobile access](https://www.youtube.com/live/mhczdsRKmaE)
 
 ## Community efforts
 The big focus on [extendability](https://thegraybook.vvvv.org/reference/extending/overview.html) we have with vvvv, makes it possible for everyone to contribute to its ecosystem of libraries. And many of you do! Following is a list of profile pages on nuget.org by all individuals and groups that have published libraries for use with vvvv since the last vvvv gamma stable release. In no particular order:
 
 [AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia), [anamirbast](https://www.nuget.org/profiles/anamirbast), [tebjan](https://www.nuget.org/profiles/tebjan), [bj-rn](https://www.nuget.org/profiles/bj-rn), [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl), [antokhio](https://www.nuget.org/profiles/antokhio), [D21s](https://www.nuget.org/profiles/D21s), [3e8.studio](https://www.nuget.org/profiles/3e8.studio), [cnisidis](https://www.nuget.org/profiles/cnisidis), [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt), [sebescudie](https://www.nuget.org/profiles/sebescudie), [mhusinsky](https://www.nuget.org/profiles/mhusinsky), [chkworks](https://www.nuget.org/profiles/chkworks) 
 
-**check re standardlibs and other PRs**
-
-Further we'd like to highlight the following users who continuously provide materials to learn from:
-
-- [Christoph Ignaz Kirmaier](https://www.3e8.studio/) aka "chk" maintains his [VL.TheBigBang](https://www.nuget.org/packages/VL.TheBigBang) pack which he describes as: "A tutorial series of 42 chapters, covering all nodes and techniques to get you started with the visual programming environment vvvv"
-- [Toby Knyvett]() aka "tobyk" maintains his [VL.ExtendedTutorials](https://www.nuget.org/packages/VL.ExtendedTutorials) pack with a series of [video tutorials](https://www.youtube.com/@TobyKLight) covering various topics, like Mutability (Record vs Class), Solving Cyclic problems and a vector matrix maths tutorial series 
-- levoxtrip
-  
-All of the above (and those we might have missed) are immensely valuable and we as the developers of vvvv bow before every single one of you!
+These contributions are extremely valuable and we bow before every single one of you! Often those contributions are also demonstrated at a [vvvv meetup](https://www.youtube.com/watch?v=Npr0K63bKZc&list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt) that are expertly run by [The NODE Institute](https://thenodeinstitute.org/) in collaboration with [chk](https://vvvv.org/people/chk) and [ravazquez](https://vvvv.org/people/ravazquez).
 
 ## Licensing
-The release of a new version is always a good moment to make sure you still have a valid license for commercial use. To check, log into your account on vvvv.org and then view [your vvvv gamma licenses](https://store.vvvv.org/licenses).
+The release of a new version is always a good moment to make sure you still have a valid license for commercial use. To check, [view your vvvv gamma licenses](https://store.vvvv.org/licenses). Requires login!
 
 In case, you simply [buy a license](https://store.vvvv.org/) the moment you start working on a commercial project. Don't forget that we also have monthly options!
 
