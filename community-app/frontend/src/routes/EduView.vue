@@ -18,6 +18,8 @@ const edu = ref(null);
 const loading = ref(false);
 const error = ref(null);
 
+const emit = defineEmits(['logout']);
+
 const socialKeys = ["website", "github", "nuget", "mastodon", "pixelfed"];
 
 onMounted(async ()=>

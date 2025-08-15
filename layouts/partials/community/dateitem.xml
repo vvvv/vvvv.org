@@ -15,7 +15,7 @@
         {{- $thumb = . -}}
         {{- end -}}
     {{- end -}}
-    {{- $thumbSite := $thumb.Fill "80x80 png" -}}
+    {{- $thumbSite := $thumb.Fill "100x100 png" -}}
     {{- $sizeInBytes := len $thumbSite.Content -}}
     <enclosure url="{{- $thumbSite.Permalink -}}" length="{{- $sizeInBytes -}}" type="image/png" />
     <vvvv:fromDate> {{- .Params.where.from_date -}}</vvvv:fromDate>

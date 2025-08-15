@@ -8,6 +8,8 @@ import ForHireCard from '../components/ForHireCard.vue'
 const loading = ref (true);
 const store = useForHireListStore();
 
+const emit = defineEmits(['logout']);
+
 onMounted( async ()=> {
     try{
         loading.value = true;

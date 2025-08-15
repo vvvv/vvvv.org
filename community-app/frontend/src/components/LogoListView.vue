@@ -15,7 +15,7 @@ const emit = defineEmits(['click']);
             <p>{{ title }}</p>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
                 <div v-for="item in list.items" track-by="item.name" class="col mx-0 px-0">
-                    <NTooltip :disabled="!item.tagline" trigger="hover" placement="top" delay="50" duration="0">
+                    <NTooltip trigger="hover" placement="top" :delay="50" :duration="0">
                         <template #trigger>
                             <div class="companyCard p-3 h-100 px-3 py-4" @click.prevent="emit('click', item.slug)">
                                 <div class="company">
@@ -30,7 +30,7 @@ const emit = defineEmits(['click']);
         
                             </div>
                         </template>
-                        {{ item.tagline }}
+                        {{ item.tagline || item.name }}
                     </NTooltip>
                 </div>
             </div>

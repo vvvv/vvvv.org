@@ -11,6 +11,8 @@ import ConnectionListView from '../components/ConnectionListView.vue';
 const router = useRouter();
 const route = useRoute();
 const store = useBusinessListStore();
+const emit = defineEmits(['logout']);
+
 const pageSizes = [
     { label: '10 per page', value: 10 },
     { label: '50 per page', value: 50 },
