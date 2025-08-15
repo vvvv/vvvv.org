@@ -1,15 +1,16 @@
 ---
-date: "2025-08-02"
+date: "2025-08-14"
 title: "vvvv gamma 7.0 release"
 description: Release notes
 categories: "vvvv gamma Releases"
 author: joreg
-thumb: vvvv60-thumb.jpg
+thumb: vvvv70-thumb.jpg
 ---
 
-![vvvv gamma 7.0 release](vvvv60-400px.jpg)
+![vvvv gamma 7.0 release](header_70_6_3072.jpg)
+<small>Artwork by Arístides García aka [lasal](https://vvvv.org/people/lasal)</small>
  
-Here is to introduce **vvvv gamma 7.0**, 
+Here is to introduce **vvvv gamma 7.0**. Make no mistake, this is not your parents vvvv!
 
 {{< box >}}
 __[Download vvvv gamma 7.0](http://vvvv.org/#Download)__  
@@ -25,12 +26,13 @@ Since the full change log is not easy to digest, we'll provide you with quick ru
 ## Patch Editor
 
 ### Workspace customization
-The most obvious change with this release is the dockable user interface: Tabs of patches or tool windows like the Inspector, Debug Views, ... can now be freely arranged and docked to allow for a side-by-side view of tabs or multiple windows. However you arrange your workspace, it will survive a restart and you can always continue working exactly were you left. As a cherry on top, the Quad menu now also has a "Recent..." entry that will give you quick access to your latest .vl documents.
+The most obvious change with this release is the dockable user interface: Tabs of patches or tool windows like the Inspector, Debug Views, ... can now be freely arranged and docked to allow for a side-by-side view of tabs or multiple windows. However you arrange your workspace, it will survive a restart and you can always continue working exactly were you left. 
 
-*image*
+![](workspace.gif)
 
-Open previous windows
-Open previous documents
+New [settings](https://thegraybook.vvvv.org/reference/hde/settings.html) supporting this feature: "Open previous windows" and "Open previous documents"
+
+And as a cherry on top, the Quad menu now also has a "Recent..." entry that will give you quick access to your latest .vl documents.
 
 ### Snapping 
 We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around, they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
@@ -54,6 +56,8 @@ And while at it we came up with two related shortcuts that'll save you another b
 ### Public Channels
 An addition to Channels, VL's dead-simple solution for bi-directional data-binding: Allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
 
+![](channel-browser.png)
+
 For more details, please see our [Introduction to Public Channels](https://vvvv.org/blog/2025/introducing-public-channels/).
 
 ### Presets and Transitions
@@ -67,9 +71,9 @@ And the other thing you'll find valuable as soon as you start working with Publi
 For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
 
 ### Type Editor
-Specifying nested type annotations was a bit of a drag up until now. Here you see the new type editor in action that has auto-completion for even nested types:
+Specifying nested type annotations was a bit of a drag up until now. Here you see how the new type editor auto-completes types when pressing the TAB key and has support even for nested types:
 
-*mp4*
+<video controls src="typeeditor.mp4" title=""></video>
 
 ### Comments and IOBoxes
 Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to lmuch quicker let you change their size:
@@ -127,9 +131,9 @@ As ya'll know, vvvv is not a monolithic tool, with features, but a development e
 
 ### Support for VST audio plugins
 
-Audio in vvvv got a big bump with the seamless integration of support for VST3 audio plugins. Any VST3 plugin can now be used as just another node, with audio in/out and parameter and MIDI input pins. 
+![](vst.png)
 
-*image*
+Audio in vvvv got a big bump with the seamless integration of support for VST3 audio plugins. Any VST3 plugin can now be used as just another node, with audio in/out and parameter and MIDI input pins. 
 
 Needless to say this also works when exporting your patches allowing you to build complex standalone audio tools!
 
@@ -137,25 +141,30 @@ For more details, please see our [Introduction to the support of VST3 audio plug
 
 ### Effortless avateering
 
+<video controls src="lankydude.mp4" title="" width="100%"></video>
+
 Controlling virtual characters with vvvv has been a tough nut, but this nut is cracked and we're committed to adding simple introductions on how to do so for all skeleton tracking options available with vvvv. 
 
-*image*
 
 As of this writing, your first option is using [DollarsMoCap](https://vvvv.org/blog/2025/introducing-dollarsmocap/) but you can expect support for Kinects, Orbbec's Femtos and StereLab's ZED devices soon.
 
 ### Orbbec Femto depth cameras
+![](orbbec-logo.svg)
 
 You can now use Femto Bolt and Mega cameras by Orbbec with the node-set known from AzureKinect devices. For details, please see [Introducing Support for Orbbec Femto devices via K4A](https://vvvv.org/blog/2025/introducing-support-for-orbbec-femto-devices-via-k4a).
 
 ### Axis network cameras
+![](axis-logo.png)
 
 Need to access and control a network camera by Axis? We have you covered! For details, please see [Introducing support for Networks cameras by Axis](https://vvvv.org/blog/2025/introducing-support-for-network-cameras-by-axis/).
 
-### Lidars by Slamtec
+### Slamtec Lidars
+![](slamtec-logo.png)
 
 Want to work with the data sensed by one of the Lidars of Slamtec? Easy! For details, please see [Introducing support for RPLidar devices](https://vvvv.org/blog/2024/introducing-support-for-rplidar-devices-by-slamtec).
 
-### Position tracking by Blueiot
+### Blueiot realtime location system
+![](blueiot-logo.svg)
 
 Need a stable ID tracking people in a large space? Try this: [Introducing Blueiot realtime location system](https://vvvv.org/blog/2024/introducing-blueiot-real-time-location-system/).
 
@@ -166,21 +175,21 @@ So the above was all new stuff. Now here is are some highlights of changes to ex
 ### VL.Stride
 Adds Location aka Gizmo for manipulating entities and controlling values, to be used in Edit Mode (F4).
 
-https://github.com/vvvv/VL.StandardLibs/pull/673
-https://github.com/vvvv/VL.StandardLibs/pull/691
-https://github.com/vvvv/VL.StandardLibs/pull/686
+*mp4*
 
-[All changes](https://thegraybook.vvvv.org/changelog/7.x.html#stride)
+With much gratitude we've acceppted the following pull requests:
+
+- [VL.ImGui.Stride.Viewports](https://github.com/vvvv/VL.StandardLibs/pull/673) by [kopffarben](https://vvvv.org/people/kopffarben)
+- [Custom present call](https://github.com/vvvv/VL.StandardLibs/pull/691) by [tonfilm](https://vvvv.org/people/tonfilm)
+- [Asset Url optional output on asset loading nodes](https://github.com/vvvv/VL.StandardLibs/pull/686) by [sebescudie](https://vvvv.org/people/sebescudie)
+
+[All changes](https://thegraybook.vvvv.org/changelog/7.x.html#stride).
 
 ### VL.Skia
-Adds FromSharedHandle for Skia which in turn is getting used by texture/mesh viewers. [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia)
-
-### VL.ImGUI
-
-Adds dockable windows to Stride backend (thanks [kopffarben](https://vvvv.org/people/kopffarben)). [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#imgui)
+Adds FromSharedHandle for Skia which in turn is getting used by texture/mesh viewers. [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia).
 
 ### VL.Audio 
-AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [All changes](https://github.com/vvvv/VL.Audio/commits/main/)
+AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [All changes](https://github.com/vvvv/VL.Audio/commits/main/).
 
 ### VL.OpenCV
 A new maintainance release is out, see: [VL.OpenCV 4.0 is out](https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/)
@@ -191,24 +200,24 @@ And it has been featured in the following vvvvTv episodes:
 
 ### VL.CEF
 - We've updated the underlying Chrome engine to version 132
-- There are now convenient WebLayer (for Skia) and WebRenderer (for Stride)nodes that let you render content with arbitrary 2d transformations and still have mouse input working
+- There are now convenient WebLayer (for Skia) and WebRenderer (for Stride) nodes that let you render content with arbitrary 2d transformations and still have mouse input working
 - We've added an example of how you can inject your own mouse/keyboard/touch notifications for the WebLayer nodes
   
 ### VL.OpenEXR
-- Supports all compression formats
-- Supports scanline based and tiled images
-- Supports sequential and randomized line order (user randomized to allow for parallel writing)
+- Now supports more compression formats (including DWAA and DWAB)
+- Now supports scanline based and tiled images
+- Now supports sequential and randomized line order (use randomized to allow for parallel, ie. much faster writing)
 
 ### Devices
 The following device libraries got new releases:
 - [Industrial cameras by The Imaging Source](https://vvvv.org/blog/2024/introducing-support-for-the-imaging-sources-industrial-cameras/) got a stable release
 - [Industrial cameras by IDS](https://vvvv.org/blog/2024/introducing-support-for-industrial-cameras-by-ids-imaging/) got a stable release
 - [ZED Stereo cameras by Stereolabs](https://vvvv.org/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/) got a stable release
-- [Leap Motion Controllers by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/) now support latest devices
-- [VL.Augmenta](http://nuget.org/packages/vl.augmenta) Now supports their new WebSocket based protocol including pointcloud streaming and zones
+- [Leap Motion Controllers by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/) now supports latest devices
+- [VL.Augmenta](http://nuget.org/packages/vl.augmenta) now supports their new WebSocket based protocol including pointcloud streaming and zones
 
 ### Networking IO
-The following finally got a stable release and have been discussed in a [vvvvTv seson 2](https://www.youtube.com/playlist?list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi) episode:
+The following libraries finally got a stable release and have been discussed in a [vvvvTv season 2](https://www.youtube.com/playlist?list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi) episode:
 
 - [VL.IO.MQTT](https://www.nuget.org/packages/VL.IO.MQTT) as featured in [Networking with MQTT](https://www.youtube.com/live/h_TQFUN8EQ0)
 - [VL.IO.WebSocket](https://www.nuget.org/packages/VL.IO.WebSocket) as featured in [Talking to an API](https://www.youtube.com/live/TTvkQgGZfZw) and [Multiplayer Installation](https://www.youtube.com/live/GtKx2v5Egxw) and [Controlling an app via a WebUI](https://www.youtube.com/live/DR1ay0WR418)
