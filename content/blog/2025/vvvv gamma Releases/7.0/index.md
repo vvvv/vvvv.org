@@ -26,37 +26,39 @@ Since the full change log is not easy to digest, we'll provide you with quick ru
 ## Patch Editor
 
 ### Workspace customization
+
+<video controls src="workspace.mp4" title="" width="100%"></video>
+
 The most obvious change with this release is the dockable user interface: Tabs of patches or tool windows like the Inspector, Debug Views, ... can now be freely arranged and docked to allow for a side-by-side view of tabs or multiple windows. However you arrange your workspace, it will survive a restart and you can always continue working exactly were you left. 
 
-![](workspace.gif)
-
-New [settings](https://thegraybook.vvvv.org/reference/hde/settings.html) supporting this feature: "Open previous windows" and "Open previous documents"
+New [settings](https://thegraybook.vvvv.org/reference/hde/settings.html) supporting this feature: "Open previous windows" and "Open previous documents".
 
 And as a cherry on top, the Quad menu now also has a "Recent..." entry that will give you quick access to your latest .vl documents.
 
 ### Snapping 
+
+<video controls src="snapping-1.mp4" title="" width="100%"></video>
+
 We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around, they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
 
-*mp4*
-
-Snapping
-Show snapping guides
+New [settings](https://thegraybook.vvvv.org/reference/hde/settings.html) supporting this feature: "Snapping" and "Show snapping guides".
 
 ### Refactoring
+
+<video controls src="grouping.mp4" title="" width="100%"></video>
+
 One of the most requested features: Make it less clicks to refactor a bunch of nodes into one new custom node. Here goes:
-- `CTRL + G` to group nodes to a process node
-- `CTRL + SHIFT + G` to group nodes to an operation node
+- `CTRL` + `G` to group nodes to a process node
+- `CTRL` + `SHIFT` + `G` to group nodes to an operation node
   
 And while at it we came up with two related shortcuts that'll save you another bunch of clicks:
 - `F2` on a node to rename it's definition: Like this you no longer have to open a nodes definition to rename it
-- `CTRL + SHIFT + X` to cut a nodes definition: Like this you no longer have to navigate to a nodes definition in case you want to move it around <- pro-alert!
-
-*mp4*
+- `CTRL` + `SHIFT` + `X` to cut a nodes definition: Like this you no longer have to navigate to a nodes definition in case you want to move it around <- pro-alert!
 
 ### Public Channels
-An addition to Channels, VL's dead-simple solution for bi-directional data-binding: Allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
-
 ![](channel-browser.png)
+
+An addition to Channels, VL's dead-simple solution for bi-directional data-binding: Allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
 
 For more details, please see our [Introduction to Public Channels](https://vvvv.org/blog/2025/introducing-public-channels/).
 
@@ -71,19 +73,22 @@ And the other thing you'll find valuable as soon as you start working with Publi
 For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
 
 ### Type Editor
-Specifying nested type annotations was a bit of a drag up until now. Here you see how the new type editor auto-completes types when pressing the TAB key and has support even for nested types:
 
-<video controls src="typeeditor.mp4" title=""></video>
+<video controls src="typeeditor.mp4" title="" width="100%"></video>
+
+Specifying nested type annotations was a bit of a drag up until now. Here you see how the new type editor auto-completes types when pressing the `TAB` key and has support even for nested types:
 
 ### Comments and IOBoxes
-Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to lmuch quicker let you change their size:
-- Alt 1, 2, 3, 4, 5
- 
+
 *mp4*
 
+Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to much quicker let you change their size. Try these from big to small:
+
+`ALT` + `1`, `2`, `3`, `4`, `5`, `6`
+ 
 IOBoxes default to a precision of 2 by default. Changing the precision involved a couple of annoying clicks. Now there are shortcuts to add/remove digits:
 
-*mp4*
+`CTRL` + `+`, `-`
 
 ### Helpbrowser 
 
@@ -173,9 +178,9 @@ Need a stable ID tracking people in a large space? Try this: [Introducing Blueio
 So the above was all new stuff. Now here is are some highlights of changes to existing libraries for this release:
 
 ### VL.Stride
-Adds Location aka Gizmo for manipulating entities and controlling values, to be used in Edit Mode (F4).
-
 *mp4*
+
+Adds Location aka Gizmo for manipulating entities and controlling values, to be used in Edit Mode (F4). EditMode comes with Undo for those Gizmo changes and nice Size management of Gizmos. Those are always rendered on top and can get resized via Shift-Scroll
 
 With much gratitude we've acceppted the following pull requests:
 
