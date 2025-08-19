@@ -37,7 +37,7 @@ And as a cherry on top, the Quad menu now also has a "Recent..." entry that will
 
 ### Snapping 
 
-<video controls src="snapping-1.mp4" title="" width="100%"></video>
+<video controls src="snapping.mp4" title="" width="100%"></video>
 
 We heard you want to keep your patches tidy, so we give you snapping: While dragging elements in a patch around, they will now automagically align themselves to their neighbouring pins and nodes. This gives you cleaner patches by default and saves you a lot of time re-arranging things. 
 
@@ -128,7 +128,9 @@ With the advent of Arm-based Windows Laptops we now also offer dedicated builds 
 For more details, please see our [Introduction to running vvvv on arm](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/).
 
 ## New VL features
-- custom regions
+Regions are a powerful language concept in VL. And the fact that you can even come up with your own, is probably not well known. If you're curious, now is a good time to learn all about them, as we've improved and simplified the API for creating [custom regions](https://thegraybook.vvvv.org/reference/extending/custom-regions.html). 
+
+And unrelated but also new: When using process nodes that stem from classes or records: you now can make their State Output visible even when not enabled by the creator of the node!
 
 ## New libraries
 
@@ -178,9 +180,10 @@ Need a stable ID tracking people in a large space? Try this: [Introducing Blueio
 So the above was all new stuff. Now here is are some highlights of changes to existing libraries for this release:
 
 ### VL.Stride
-*mp4*
 
-Adds Location aka Gizmo for manipulating entities and controlling values, to be used in Edit Mode (F4). EditMode comes with Undo for those Gizmo changes and nice Size management of Gizmos. Those are always rendered on top and can get resized via Shift-Scroll
+<video controls src="gizmo.mp4" title="" width="100%"></video>
+
+A new node "Location" allows for manipulating entities (including Undo) in Edit Mode (F4). Gizmos are always rendered on top and can get resized via Shift-Scroll.
 
 With much gratitude we've acceppted the following pull requests:
 
@@ -188,13 +191,18 @@ With much gratitude we've acceppted the following pull requests:
 - [Custom present call](https://github.com/vvvv/VL.StandardLibs/pull/691) by [tonfilm](https://vvvv.org/people/tonfilm)
 - [Asset Url optional output on asset loading nodes](https://github.com/vvvv/VL.StandardLibs/pull/686) by [sebescudie](https://vvvv.org/people/sebescudie)
 
-[All changes](https://thegraybook.vvvv.org/changelog/7.x.html#stride).
+[More changes](https://thegraybook.vvvv.org/changelog/7.x.html#stride).
 
 ### VL.Skia
-Adds FromSharedHandle for Skia which in turn is getting used by texture/mesh viewers. [All changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia).
+
+<video controls src="skia.mp4" title="" width="100%"></video>
+
+Skia rendering can now be extended into the titlebar and the renderer can be set to be always on top.
+
+[More changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia).
 
 ### VL.Audio 
-AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [All changes](https://github.com/vvvv/VL.Audio/commits/main/).
+AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [More changes](https://github.com/vvvv/VL.Audio/commits/main/).
 
 ### VL.OpenCV
 A new maintainance release is out, see: [VL.OpenCV 4.0 is out](https://vvvv.org/blog/2025/vl.opencv-4.0.0-is-out-now/)
@@ -221,7 +229,7 @@ The following device libraries got new releases:
 - [Leap Motion Controllers by UltraLeap](https://vvvv.org/blog/2024/introducing-support-for-new-ultraleap-devices/) now supports latest devices
 - [VL.Augmenta](http://nuget.org/packages/vl.augmenta) now supports their new WebSocket based protocol including pointcloud streaming and zones
 
-### Networking IO
+### Networking
 The following libraries finally got a stable release and have been discussed in a [vvvvTv season 2](https://www.youtube.com/playlist?list=PLBTgwgsWWcT8eDfjAg299o7paRqkd2Zdi) episode:
 
 - [VL.IO.MQTT](https://www.nuget.org/packages/VL.IO.MQTT) as featured in [Networking with MQTT](https://www.youtube.com/live/h_TQFUN8EQ0)
