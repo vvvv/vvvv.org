@@ -1,5 +1,5 @@
 ---
-date: "2025-08-14"
+date: "2025-08-21"
 title: "vvvv gamma 7.0 release"
 description: Release notes
 categories: "vvvv gamma Releases"
@@ -7,7 +7,7 @@ author: joreg
 thumb: vvvv70-thumb.jpg
 ---
 
-![vvvv gamma 7.0 release](header_70_6_3072.jpg)
+![vvvv gamma 7.0 release](header-7.png)
 <small>Artwork by Arístides García aka [lasal](https://vvvv.org/people/lasal)</small>
  
 Here is to introduce **vvvv gamma 7.0** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
