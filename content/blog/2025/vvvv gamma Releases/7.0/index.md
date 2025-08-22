@@ -10,7 +10,7 @@ thumb: vvvv70-thumb.jpg
 ![vvvv gamma 7.0 release](header_70_6_3072.jpg)
 <small>Artwork by Arístides García aka [lasal](https://vvvv.org/people/lasal)</small>
  
-Here is to introduce **vvvv gamma 7.0**. Make no mistake, this is not your parents vvvv!
+Here is to introduce **vvvv gamma 7.0** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
 
 {{< box >}}
 __[Download vvvv gamma 7.0](http://vvvv.org/#Download)__  
@@ -49,7 +49,7 @@ New [settings](https://thegraybook.vvvv.org/reference/hde/settings.html) support
 
 One of the most requested features: Make it less clicks to refactor a bunch of nodes into one new custom node. Here goes:
 - `CTRL` + `G` to group nodes to a process node
-- `CTRL` + `SHIFT` + `G` to group nodes to an operation node
+- `CTRL` + `ALT` + `G` to group nodes to an operation node
   
 And while at it we came up with two related shortcuts that'll save you another bunch of clicks:
 - `F2` on a node to rename it's definition: Like this you no longer have to open a nodes definition to rename it
@@ -58,17 +58,17 @@ And while at it we came up with two related shortcuts that'll save you another b
 ### Public Channels
 ![](channel-browser.png)
 
-An addition to Channels, VL's dead-simple solution for bi-directional data-binding: Allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
+As an addition to "Channels", VL's dead-simple solution for bi-directional data-binding, "Public Channels" allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
 
 For more details, please see our [Introduction to Public Channels](https://vvvv.org/blog/2025/introducing-public-channels/).
 
 ### Presets and Transitions
-As soon as you start working with Public Channels, you'll find it convenient to use the new Preset system, that conveniently allows you to save the state of your public channels under a preset name and recall them anytime. Either by jumping to the values or smoothly transitioning to them. Via UI or programmatically (allowing you to build your own UIs on top). Sky is the limit. 
+As soon as you start working with Public Channels, you'll find it convenient to use the new Preset system, that allows you to save the state of your public channels under a preset name and recall them anytime. Either by jumping to the values or smoothly transitioning to them. Via UI or programmatically (allowing you to build your own UIs on top). Sky is the limit. 
 
 For more details, please see our [Introduction to Presets and Transitions](https://vvvv.org/blog/2025/introducing-presets-and-transitions/).
 
 ### Channel Bindings
-And the other thing you'll find valuable as soon as you start working with Public Channels is the fact that you can easily bind any of them to external data sources. Think one-click exporuse via OSCQuery, OSC, MIDI, Redis (and more protocols still to come). Again via UI or programmatically via a set of nodes. 
+And the other thing you'll find valuable as soon as you start working with Public Channels is the fact that you can easily bind any of them to external data sources. Think one-click exposure via OSCQuery, OSC, MIDI, Redis (and more protocols still to come). Again via UI or programmatically via a set of nodes. 
 
 For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
 
@@ -76,17 +76,19 @@ For more details, please see our [Introduction to Channel Bindings](https://vvvv
 
 <video controls src="typeeditor.mp4" title="" width="100%"></video>
 
-Specifying nested type annotations was a bit of a drag up until now. Here you see how the new type editor auto-completes types when pressing the `TAB` key and has support even for nested types:
+Specifying nested type annotations was a bit of a drag up until now. Here you see how the new type editor auto-completes types when pressing the `TAB` key and has support even for nested types.
 
 ### Comments and IOBoxes
 
-*mp4*
+<video controls src="emoji.mp4" title="" width="100%"></video>
 
-Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis but we've also added new shortcuts to much quicker let you change their size. Try these from big to small:
+Adding comments to your patches makes them more understandable to others and your future self. You can now not only prettify your comments using emojis 👀 (by typing 🪟 + `.`), but we've also added new shortcuts to much quicker let you change their size. Try these from big to small:
 
 `ALT` + `1`, `2`, `3`, `4`, `5`, `6`
- 
-IOBoxes default to a precision of 2 by default. Changing the precision involved a couple of annoying clicks. Now there are shortcuts to add/remove digits:
+
+Path IOBoxes are now automatically created when drag-dropping in a file or folder from the Explorer.
+
+Float IOBoxes default to a precision of 2. Changing the precision involved a couple of annoying clicks. Now there are shortcuts to quickly add/remove digits:
 
 `CTRL` + `+`, `-`
 
@@ -108,7 +110,7 @@ To learn how to provide those links for your packs, please refer to [Providing H
 
 3 little improvements for the Exporter:
 - Can now export console apps also for MacOS in addition to Windows and Linux
-- Has a new option to ignore unhandled exeptions at runtime: So far by default unhandled exceptions would result in a popup and halt the application. This can now be disabled, which would only write those exceptions to the log.
+- Has a new option to ignore unhandled exceptions at runtime: So far by default unhandled exceptions would result in a popup and halt the application. This can now be disabled, which would only write those exceptions to the log.
 - Has a new option to ignore errors at compile time: There are cases where you are aware of errors in your patch that you simply want to ignore for the time being and still be able to export
 
 ## Commandline Compiler
@@ -119,7 +121,7 @@ While so far exporting your patches was only possible via the Application Export
 
 For more details, please see our [Introduction to vvvvc.exe](https://vvvv.org/blog/2025/introducing-vvvvc.exe/).
 
-## arm builds
+## Arm builds
 
 ![](arm.png)
 
@@ -128,9 +130,9 @@ With the advent of Arm-based Windows Laptops we now also offer dedicated builds 
 For more details, please see our [Introduction to running vvvv on arm](https://vvvv.org/blog/2025/introducing-vvvv-on-arm-for-windows-and-mac-phase-1/2/).
 
 ## New VL features
-Regions are a powerful language concept in VL. And the fact that you can even come up with your own, is probably not well known. If you're curious, now is a good time to learn all about them, as we've improved and simplified the API for creating [custom regions](https://thegraybook.vvvv.org/reference/extending/custom-regions.html). 
+Regions are a powerful language concept in VL. And the fact that you can even come up with your own, is actually quite crazy. If you're curious, now is a good time to learn all about them, as we've improved and simplified the API for creating [custom regions](https://thegraybook.vvvv.org/reference/extending/custom-regions.html). 
 
-And unrelated but also new: When using process nodes that stem from classes or records: you now can make their State Output visible even when not enabled by the creator of the node!
+And unrelated but also new: When using process nodes that stem from classes or records: You can now make their State Output visible even when not enabled by the creator of the node!
 
 ## New libraries
 
@@ -177,13 +179,13 @@ Need a stable ID tracking people in a large space? Try this: [Introducing Blueio
 
 ## Updated Libraries
   
-So the above was all new stuff. Now here is are some highlights of changes to existing libraries for this release:
+So the above was all new stuff. Now here are some highlights of changes to existing libraries for this release:
 
 ### VL.Stride
 
 <video controls src="gizmo.mp4" title="" width="100%"></video>
 
-A new node "Location" allows for manipulating entities (including Undo) in Edit Mode (F4). Gizmos are always rendered on top and can get resized via Shift-Scroll.
+A new node "Location" allows for manipulating entities (including Undo) in Edit Mode (`F4`). Gizmos are always rendered on top and can get resized via `Shift` + mousewheel.
 
 With much gratitude we've acceppted the following pull requests:
 
@@ -197,9 +199,7 @@ With much gratitude we've acceppted the following pull requests:
 
 <video controls src="skia.mp4" title="" width="100%"></video>
 
-Skia rendering can now be extended into the titlebar and the renderer can be set to be always on top.
-
-[More changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia).
+Skia rendering can now be extended into the titlebar and the renderer can be set to be always on top. [More changes](https://thegraybook.vvvv.org/changelog/7.x.html#skia).
 
 ### VL.Audio 
 AudioPlayer now applies automatic resampling if the files sample rate doesn't match the engines samplerate. [More changes](https://github.com/vvvv/VL.Audio/commits/main/).
@@ -239,18 +239,18 @@ The following libraries finally got a stable release and have been discussed in 
 ## Community efforts
 The big focus on [extendability](https://thegraybook.vvvv.org/reference/extending/overview.html) we have with vvvv, makes it possible for everyone to contribute to its ecosystem of libraries. And many of you do! Following is a list of profile pages on nuget.org by all individuals and groups that have published libraries for use with vvvv since the last vvvv gamma stable release. In no particular order:
 
-[AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia), [anamirbast](https://www.nuget.org/profiles/anamirbast), [tebjan](https://www.nuget.org/profiles/tebjan), [bj-rn](https://www.nuget.org/profiles/bj-rn), [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl), [antokhio](https://www.nuget.org/profiles/antokhio), [D21s](https://www.nuget.org/profiles/D21s), [3e8.studio](https://www.nuget.org/profiles/3e8.studio), [cnisidis](https://www.nuget.org/profiles/cnisidis), [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt), [sebescudie](https://www.nuget.org/profiles/sebescudie), [mhusinsky](https://www.nuget.org/profiles/mhusinsky), [chkworks](https://www.nuget.org/profiles/chkworks) 
+[AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia) - [anamirbast](https://www.nuget.org/profiles/anamirbast) - [tebjan](https://www.nuget.org/profiles/tebjan) - [bj-rn](https://www.nuget.org/profiles/bj-rn) - [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl) - [antokhio](https://www.nuget.org/profiles/antokhio) - [D21s](https://www.nuget.org/profiles/D21s) - [3e8.studio](https://www.nuget.org/profiles/3e8.studio) - [cnisidis](https://www.nuget.org/profiles/cnisidis) - [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt) - [sebescudie](https://www.nuget.org/profiles/sebescudie) - [mhusinsky](https://www.nuget.org/profiles/mhusinsky) - [chkworks](https://www.nuget.org/profiles/chkworks) 
 
 These contributions are extremely valuable and we bow before every single one of you! Often those contributions are also demonstrated at a [vvvv meetup](https://www.youtube.com/watch?v=Npr0K63bKZc&list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt) that are expertly run by [The NODE Institute](https://thenodeinstitute.org/) in collaboration with [chk](https://vvvv.org/people/chk) and [ravazquez](https://vvvv.org/people/ravazquez).
 
 ## Licensing
-The release of a new version is always a good moment to make sure you still have a valid license for commercial use. To check, [view your vvvv gamma licenses](https://store.vvvv.org/licenses). Requires login!
+The release of a new vvvversion is always a good moment to make sure you still have a valid license for commercial use. To check, [view your vvvv gamma licenses](https://store.vvvv.org/licenses). Requires to be logged in!
 
-In case, you simply [buy a license](https://store.vvvv.org/) the moment you start working on a commercial project. Don't forget that we also have monthly options!
+In case, you simply [buy a license](https://store.vvvv.org/) the moment you start working on a commercial project. And don't forget: We also have monthly options!
 
 ---
 
-We hope this release suits you well and would love to hear your thoughts on it in the comments. 
+We wish you a very productivvvve time ahead. And should you have thoughts on this release, we`d would love to read them in the comments. 
 
 Good patch,  
 your devvvvs!
