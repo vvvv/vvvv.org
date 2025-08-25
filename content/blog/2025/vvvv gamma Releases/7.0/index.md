@@ -1,5 +1,5 @@
 ---
-date: "2025-08-21"
+date: "2025-08-25"
 title: "vvvv gamma 7.0 release"
 description: Release notes
 categories: "vvvv gamma Releases"
@@ -60,17 +60,17 @@ And while at it we came up with two related shortcuts that'll save you another b
 
 As an addition to "Channels", VL's dead-simple solution for bi-directional data-binding, "Public Channels" allow you to define channels that are "public" in the sense that you can access them by name from anywhere in your app. Like this they become app-wide parameters that allow you to define a control-surface for your patches. And you get an excellent overview of all your public channels in the new Public Channel Browser. 
 
-For more details, please see our [Introduction to Public Channels](https://vvvv.org/blog/2025/introducing-public-channels/).
+For more details, please see [The Channel Browser](https://thegraybook.vvvv.org/reference/hde/the_channelbrowser.html).
 
 ### Presets and Transitions
 As soon as you start working with Public Channels, you'll find it convenient to use the new Preset system, that allows you to save the state of your public channels under a preset name and recall them anytime. Either by jumping to the values or smoothly transitioning to them. Via UI or programmatically (allowing you to build your own UIs on top). Sky is the limit. 
 
-For more details, please see our [Introduction to Presets and Transitions](https://vvvv.org/blog/2025/introducing-presets-and-transitions/).
+For more details, please see [Presets and Transitions](https://thegraybook.vvvv.org/reference/hde/presets.html).
 
 ### Channel Bindings
 And the other thing you'll find valuable as soon as you start working with Public Channels is the fact that you can easily bind any of them to external data sources. Think one-click exposure via OSCQuery, OSC, MIDI, Redis (and more protocols still to come). Again via UI or programmatically via a set of nodes. 
 
-For more details, please see our [Introduction to Channel Bindings](https://vvvv.org/blog/2025/introducing-channel-bindings/).
+For more details, please see [Bindings](https://thegraybook.vvvv.org/reference/hde/bindings.html).
 
 ### Type Editor
 
@@ -212,14 +212,10 @@ And it has been featured in the following vvvvTv episodes:
 - [AR using OpenCV with ArUco Markers](https://www.youtube.com/live/j7DWMET-qM8)
 
 ### VL.CEF
-- We've updated the underlying Chrome engine to version 132
-- There are now convenient WebLayer (for Skia) and WebRenderer (for Stride) nodes that let you render content with arbitrary 2d transformations and still have mouse input working
-- We've added an example of how you can inject your own mouse/keyboard/touch notifications for the WebLayer nodes
+For rendering websites in vvvv we've updated the underlying Chrome engine to version 132. Plus some more changes, see: [Update: VL.CEF improvements](https://vvvv.org/blog/2025/update-vl.cef-improvements/).
   
 ### VL.OpenEXR
-- Now supports more compression formats (including DWAA and DWAB)
-- Now supports scanline based and tiled images
-- Now supports sequential and randomized line order (use randomized to allow for parallel, ie. much faster writing)
+Reading and writing OpenEXR textures in vvvv got greatly improved, see [Update: VL.OpenEXR improvements](https://vvvv.org/blog/2025/update-vl.openexr-improvements/).
 
 ### Devices
 The following device libraries got new releases:
