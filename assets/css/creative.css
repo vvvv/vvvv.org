@@ -310,28 +310,7 @@ aside {
     }
 }
 
-header {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    overflow: hidden;
-    padding: 2em 0 4em;
 
-    /* For smaller mobile image */
-    /* background-image: url(../img/header_6.0_1500.jpg);
-    background-position: 71% 0%;
-    height: 400px; */
-
-    background-image: url(../img/header_6.0.jpg);
-    background-position: 71% 0%;
-    height: 600px;
-
-}
 
 /* For smaller mobile image */
 /* 
@@ -340,28 +319,28 @@ header {
       background-image: url(../img/header_6.0.jpg);
       min-height: 600px;
   }
-} */
+}
 
 @media (min-width: 768px)
 {
   header{
-    background-position: 65% 0%;
+    background-position: center bottom;
   }
 }
 
 @media (min-width: 1500px)
 {
   header{
-    background-position: center top;
+    background-position: center bottom;
   }
 }
 
 @media (min-width: 2250px){
   header {
-      background-image: url(../img/header_6.0_3072.jpg);
+      background-image: url(../img/refik-anadol-frank-gehry-blueprints-ai-generated-landscapes-guggenheim-bilbao-designboom-large02.jpg);
       min-height: 819px;
   }
-}
+} */
 
 .section-heading {
     margin-top: 0;
