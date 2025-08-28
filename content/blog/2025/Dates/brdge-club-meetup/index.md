@@ -3,7 +3,7 @@ categories: "Dates"
 author: "ravazquez"
 date: "2025-08-28"
 title: "BRDGE Club Meetup"
-description: "IRL and real-time!"
+description: "Let's bridge code, design, and scalable experiences together"
 where:
   location_name: "Google Meet"
   country_name: "See information below"
