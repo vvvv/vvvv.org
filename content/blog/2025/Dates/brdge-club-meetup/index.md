@@ -7,8 +7,8 @@ description: "Let's bridge code, design, and scalable experiences together"
 where:
   location_name: "Google Meet"
   country_name: "See information below"
-  from_date: "1757523600"
-  to_date: "1757530800"
+  from_date: "1757530800"
+  to_date: "1757538000"
 thumb: "BRDGE-meetup-thumbnail.png"
 ---
 
