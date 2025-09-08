@@ -3,10 +3,6 @@ title: Learn
 firstColumn:
   - item: 
       text: > 
-            <a href="https://thenodeinstitute.org/event/nocode-2-new-media-art-with-vvvv/" target="_blank">Free intro in Berlin on September 7</a>
-      image: /img/icons/mortarboard-fill.svg
-  - item: 
-      text: > 
             <a href="https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/" target="_blank">Beginner class starting Octorber 27</a>
       image: /img/icons/mortarboard-fill.svg
   - item: 
