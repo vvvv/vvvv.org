@@ -48,12 +48,8 @@ export const useHugoStore = defineStore ('hugoStore',{
 
                     this.dates = [];
 
-                    data.futureDates.forEach(d=>{
-                        this.dates.push(dateItem(d, false))    
-                    });
-
-                    data.pastDates.forEach(d=>{
-                        this.dates.push(dateItem(d, true))    
+                    data.dates.forEach(d=>{
+                        this.dates.push(dateItem(d))    
                     });
 
                     this.fetched = true;
@@ -73,7 +69,7 @@ export const useHugoStore = defineStore ('hugoStore',{
     }
 })
 
-function dateItem(item, isPast)
+function dateItem(item)
 {
     let dates = "";
 
@@ -96,6 +92,8 @@ function dateItem(item, isPast)
                      ${to.day} ${to.month} ${to.year}, ${to.hour}:${to.minute}`
         }
     }
+
+    const isPast = new Date(item.from * 1000) < new Date();
 
     return{
         title: item.title,
