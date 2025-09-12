@@ -6,6 +6,10 @@
 
 {{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
 
+{{- /* Dates */ -}}
+
+{{- $dates := first 3 (sort $blogDates "Date" "desc") -}}
+
 {{- /* Future Dates */ -}}
 
 {{- $futureDates := slice -}}
@@ -15,7 +19,7 @@
     {{- $futureDates = $futureDates | append . -}}
   {{- end -}}
 {{- end -}}
-{{- $futureDates = first 3 $futureDates.ByDate.Reverse -}}  
+{{- $futureDates = first 3 (sort $futureDates "Date" "desc") -}}  
 
 {{- /* Past Dates */ -}}
 
@@ -26,7 +30,7 @@
     {{- $pastDates = $pastDates | append . -}}
   {{- end -}}
 {{- end -}}
-{{- $pastDates = first 3 $pastDates.ByDate.Reverse -}}  
+{{- $pastDates = first 3 (sort $pastDates "Date" "desc") -}}
 
 {{- $siteRes := .Resources -}}
 
@@ -95,5 +99,14 @@ xmlns:media="http://search.yahoo.com/mrss/">
       -}}
       {{ partial "community/dateitem.xml" $data -}}
     {{- end -}}
+
+    {{- range $dates -}}
+      {{- $data := dict
+        "Item" .
+        "Category" ""
+      -}}
+      {{ partial "community/dateitem.xml" $data -}}
+    {{- end -}}
+
   </channel>
 </rss>
