@@ -6,26 +6,25 @@ categories: Monthly Reviews
 author: joreg 
 ---
 
+Sorry for the late delivery of the revvvview this month. You know...circumstances...
 
-/////////
+So here goes, the main thing:
 
-- [The 7.0 release](https://vvvv.org/blog/2025/vvvv-gamma-7.0-release/)
+![](header-7.png)
 
-- [VL.OpenEXR improvements](https://vvvv.org/blog/2025/update-vl.openexr-improvements/)
-- [VL.CEF improvements](https://vvvv.org/blog/2025/update-vl.cef-improvements/)
+**[vvvv gamma 7.0 is out](https://vvvv.org/blog/2025/vvvv-gamma-7.0-release/)**. And it is big. Please take a moment to go through the release post if you haven't yet and give it a spin. Any reason not to lovvvve it? Please let us know!
 
-- Upcoming meetup: [30th vvvv worldwide meetup](https://vvvv.org/blog/2025/30.-vvvv-worldwide-meetup/)
+Then save the date for the upcoming [30th vvvv worldwide meetup](https://vvvv.org/blog/2025/30.-vvvv-worldwide-meetup/) on September 18th!
 
-////////
-
-
+And in case you missed it, you can rewatch the [special edition meetup at Ars Electronica](https://www.youtube.com/live/gTfWE8Jsh9Q?si=rW6TDZNaVrzgVJSA). 
 
 ## Learning vvvv
 
-The next **[vvvv beginner class starting October 27](https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/)**. Still chances to signup if you haven't yet!
+If you're rather new to vvvv and want a thorough introduction, consider joining the next **[vvvv beginner class starting starting October 27](https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/)**. 
 
-[levoxtrip](https://vvvv.org/people/levoxtrip) has been adding new videos to the [10XCC vvvv](https://www.youtube.com/watch?v=6Hrv2dLZtgk&list=PLRXS5GZAC6Y97lHwbsQQThB6DAodtBnOG&ab_channel=LEVOXTRIP) on youtube!
-
+[levoxtrip](https://vvvv.org/people/levoxtrip) continues to fill his two tutorial playlists:
+- [vvvv TextureFX Streams](https://www.youtube.com/playlist?list=PLRXS5GZAC6Y9-Wr0urNzpBW_I1_bDoNoA)
+- [Processing to vvvv Tutorials](https://www.youtube.com/playlist?list=PLRXS5GZAC6Y-Ww1bX_ApYRdSw8NGOxNZn)
 
 ## Contributions
 
@@ -39,22 +38,10 @@ We got updates to the following:
 
 - [VL.TheBigBang](https://www.nuget.org/packages/VL.TheBigBang)
 - [VL.OpenEXR](https://www.nuget.org/packages/VL.OpenEXR)
-- [VL.Video](https://www.nuget.org/packages/VL.Video)
-- [VL.Stride.TextureFX](https://www.nuget.org/packages/VL.Stride.TextureFX)
-- [VL.Stride](https://www.nuget.org/packages/VL.Stride)
-- [VL.Skia](https://www.nuget.org/packages/VL.Skia)
-- [VL.Serialization.Raw](https://www.nuget.org/packages/VL.Serialization.Raw)
-- [VL.Serialization.MessagePack](https://www.nuget.org/packages/VL.Serialization.MessagePack)
-- [VL.Serialization.FSPickler](https://www.nuget.org/packages/VL.Serialization.FSPickler)
-- [VL.IO.Redis](https://www.nuget.org/packages/VL.IO.Redis)
-- [VL.IO.OSCQuery](https://www.nuget.org/packages/VL.IO.OSCQuery)
-- [VL.ImGui.Skia](https://www.nuget.org/packages/VL.ImGui.Skia)
-- [VL.FuzzySearch](https://www.nuget.org/packages/VL.FuzzySearch)
 - [VL.Augmenta](https://www.nuget.org/packages/VL.Augmenta)
 - [VL.MediaPipe](https://www.nuget.org/packages/VL.MediaPipe)
 - [VL.CEF.Stride](https://www.nuget.org/packages/VL.CEF.Stride)
 - [VL.CEF.Skia](https://www.nuget.org/packages/VL.CEF.Skia)
-- [VL.IO.OSC](https://www.nuget.org/packages/VL.IO.OSC)
 - [VL.OpenCV](https://www.nuget.org/packages/VL.OpenCV)
 - [VL.Devices.AzureKinect](https://www.nuget.org/packages/VL.Devices.AzureKinect)
 - [VL.BadMapper](https://www.nuget.org/packages/VL.BadMapper)
@@ -74,11 +61,10 @@ Plus several new entries in the forum’s work-in-progress section:
 {{< vimeo 925341209 >}}
 
 [SMART DATA + DU 2024](https://www.re-spaces.com/en/project/smart-data-du) by [Responsive Spaces](https://www.re-spaces.com/en)
-This project's mani target is to get a better understanding of the diverse and complex landscape of data-driven processes and applications.
 
 ## Jobs
 - Always keep an eye on the [vvvv job board](https://forum.vvvv.org/c/jobs)
 - If you need a vvvv specialist or are one yourself, check out this listing of [vvvv specialists available for hire](https://vvvv.org/forhire)
 - There maybe some more on [The Interactive & Immersive Job Board](https://jobs.interactiveimmersive.io/jobs/) and [dasauge.de](https://dasauge.de/sta/Vvvv/)
 
-That was it for July. Anything to add? Please do so in the comments!
+That was it for August. Anything to add? Please do so in the comments!
