@@ -3,35 +3,8 @@
 {{- $pages := slice -}}
 {{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
 {{- $lastMonthInReview := index $pages 0 -}}
-
 {{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
-
-{{- /* Dates */ -}}
-
 {{- $dates := first 3 (sort $blogDates "Date" "desc") -}}
-
-{{- /* Future Dates */ -}}
-
-{{- $futureDates := slice -}}
-{{- range $blogDates -}}
-  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
-  {{- if ge $toDate (time.Now.Unix) -}}
-    {{- $futureDates = $futureDates | append . -}}
-  {{- end -}}
-{{- end -}}
-{{- $futureDates = first 3 (sort $futureDates "Date" "desc") -}}  
-
-{{- /* Past Dates */ -}}
-
-{{- $pastDates := slice -}}
-{{- range $blogDates -}}
-  {{- $toDate := int (trim (default "0" .Params.where.to_date) " ") -}}
-  {{- if lt $toDate (time.Now.Unix) -}}
-    {{- $pastDates = $pastDates | append . -}}
-  {{- end -}}
-{{- end -}}
-{{- $pastDates = first 3 (sort $pastDates "Date" "desc") -}}
-
 {{- $siteRes := .Resources -}}
 
 <rss version="2.0"
@@ -83,22 +56,6 @@ xmlns:media="http://search.yahoo.com/mrss/">
         <enclosure url="{{ $thumbRSS.Permalink }}" length="{{ $sizeInBytes }}" type="image/jpeg" />
       </item>
     {{ end }}
-
-    {{- range $futureDates -}}
-      {{- $data := dict
-        "Item" .
-        "Category" ""
-      -}}
-      {{- partial "community/dateitem.xml" $data -}}
-    {{- end -}}
-
-    {{- range $pastDates -}}
-      {{- $data := dict
-        "Item" .
-        "Category" "/Past"
-      -}}
-      {{ partial "community/dateitem.xml" $data -}}
-    {{- end -}}
 
     {{- range $dates -}}
       {{- $data := dict
