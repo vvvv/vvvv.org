@@ -49,6 +49,7 @@ We got updates to the following:
 - [VL.IO.RCP](https://www.nuget.org/packages/VL.IO.RCP)
 - [VL.Audio.VST](https://www.nuget.org/packages/VL.Audio.VST)
 - [VL.Interpolator.Addons](https://www.nuget.org/packages/VL.Interpolator.Addons)
+- [VL.Avalonia](https://www.nuget.org/packages/VL.Avalonia)
 
 Plus several new entries in the forum’s work-in-progress section:
 
