@@ -1,13 +1,17 @@
 <script setup>
 
 import { ref, onMounted } from 'vue';
-import { NTag, NEllipsis, NSkeleton } from 'naive-ui'
+import { NTag, NEllipsis, NSkeleton, NButton, NButtonGroup } from 'naive-ui'
 import { useHugoStore } from './Hugostore.js'
 import Constants from '../../constants.js';
 import SectionTitle from './SectionTitle.vue'
+import DateList from "./DateList.vue";
 
 const store = useHugoStore();
 const loading = ref(false);
+const tab = ref('upcoming');
+
+const tabs = ['upcoming', 'past'];
 
 onMounted(async ()=>{   
     try {
@@ -20,37 +24,39 @@ onMounted(async ()=>{
     finally {
         loading.value = false;
     }
+
+    console.log (store.dates[tab.value]);
 })
+
 </script>
 
 <template>
     <div class="section pl-4">
-        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true"/>
-            <template v-if="loading">
-                <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
-            </template>
-            <template v-else>
-                <div v-if="store.dates.length > 0" class="dates">
-                    <template v-for="(item, index) in store.dates.slice(0, 3)">
-                        <div class="mt-0 mb-0 row border-bottom mb-2 pb-3 d-flex align-items-center" :class="{ 'text-muted': item.past }">
-                            <div class="col-2 col-lg-1 pl-0 mr-lg-0 pr-lg-0">
-                                <a :href="item.link">
-                                    <img :src="item.thumb" class="img-fluid" alt="{{ item.title }}"/>
-                                </a>
-                            </div>
-                            <div class="col-10 col-lg-11 info">
-                                <a :href="item.link" class="title">{{ item.title }}</a>
-                                <p class="date mt-1 mb-0 d-flex">
-                                    <NTag v-if="!item.past" size="small" round :bordered="false" class="mr-2 darkTag">upcoming</NTag>
-                                    <NEllipsis :line-clamp="1" :tooltip=false>
-                                    {{ item.dates }}<span v-if="item.country">. {{ item.country }}</span>
-                                    </NEllipsis>
-                                </p>
-                            </div>
-                        </div>
-                    </template>
+        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true">
+            <template #buttons>
+                <div style="margin-top: -0.2rem;">
+                    <NButtonGroup>
+                        <NButton 
+                            v-for="tabName in tabs"
+                            size="small" 
+                            @click="tab = tabName"
+                            class="mr-2"
+                            :ghost="tab !== tabName"
+                            :strong="tab !== tabname"
+                            :color="tab === tabName ? '#aaaaaa' : '#bbbbbb'"
+                            >
+                            {{ tabName }}
+                        </NButton>
+                    </NButtonGroup>
                 </div>
-                <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div>
             </template>
+        </SectionTitle>
+        <template v-if="loading">
+            <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
+        </template>
+        <template v-else>
+            <DateList v-if="store.dates[tab]" :isPast="tab == 'past'" :data="store.dates[tab]"/>
+            <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div>
+        </template>
     </div>
 </template>

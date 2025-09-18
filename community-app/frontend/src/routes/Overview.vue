@@ -26,9 +26,9 @@ const emit = defineEmits(['logout']);
             <LastMonth/>
             <Staffpicks/>
             <div class="d-none d-md-block">
-                <Edus/>
-                <ForHire class="mt-4"/>
+                <ForHire/>
                 <Businesses class="mt-4"/>
+                <Edus class="mt-4"/>
             </div>
         </div>
         <div class="col">
@@ -37,9 +37,9 @@ const emit = defineEmits(['logout']);
             <LatestNugets class="mb-2"/>
             <Opportunities/>
             <div class="d-block d-md-none">
-                <Edus/>
-                <ForHire class="mt-4"/>
+                <ForHire/>
                 <Businesses class="mt-4"/>
+                <Edus class="mt-4"/>
             </div>
         </div>
     </div>

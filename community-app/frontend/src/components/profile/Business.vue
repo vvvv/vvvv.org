@@ -15,6 +15,7 @@ import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js"
 import { transformer } from './FormHelper.js'
+import { businessMessages } from "./HelpTexts.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -44,8 +45,6 @@ const emptyCompany = {
   people: [],
   social: {}
 }
-
-
 
 const prepareData = ()=>{
 
@@ -211,24 +210,43 @@ const slug = computed(()=>{
   return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
 })
 
+
+const errors = computed(()=>{
+
+  if (companyExists.value)
+  {
+    const list = [];
+  
+    if (!data.user.visible) list.push(businessMessages.ownerNotVisible);
+    if (form.value[0].status !== "1") list.push(businessMessages.notConfirmed);
+    if (!form.value[0].enabled) list.push(businessMessages.visibilitySwitch);
+  
+    if (list.length)
+    {
+      return {
+        header: businessMessages.header,
+        list: list
+      }
+    }
+  }
+
+  return null;
+})
+
 </script>
 
 <template>
 
     <div class="row justify-content-between" v-if="form !== null">
-      <div class="col-12 col-sm-8">
-          <label class="text-nowrap mr-3">Business publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Business publicly visible" @update:value="submit" :disabled="!(companyExists || form[0].name)"/>
+      <div class="col-12 col-sm-9">
+          <div class="h2 mb-3" v-if="companyExists">{{ form[0].name }}</div>
       </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="companyExists && form[0].enabled">
+      <div class="col-12 col-sm-3 text-sm-right mt-2" v-if="companyExists && data.companies[0]?.enabled && !errors">
         <a :href="'/company/'+form[0].name" @click="(event) => showBusinessProfile(form[0].name, event)">View Business</a>
       </div>
     </div>
 
       <hr class="mt-1 mb-4"/>
-
-      <div class="h2 mb-3" v-if="companyExists">{{ form[0].name }}</div>
-
 
       <NForm
           v-if="form !== null"
@@ -245,7 +263,7 @@ const slug = computed(()=>{
               <div class="col-12 col-xl-3" v-if="logo">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-12 col-xl-auto">
+              <div class="col-12 col-xl-auto mt-2 mt-xl-0">
                 <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader" type="company"/>
                 <NAlert v-if="tempLogo" title="Uploaded" type="success">
                         Press 'Submit' below to update the Logo.
@@ -257,8 +275,25 @@ const slug = computed(()=>{
 
         <StatusTag :value="form[0].status"/>
 
-          <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
-          <InputField path="slug" type="company" v-model="slug" :disabled="true"/>
+        <FormItem path="enabled" type="company">
+          <template #content>
+            <div class="w-100">
+              <n-switch v-model:value="form[0].enabled" placeholder="Publicly visible" :disabled="!companyExists || !form[0].name"/>
+              <div class="mt-2" v-if="errors">
+                <n-alert :title="errors.header" type="warning">
+                  <span v-for="(error, index) in errors.list" :key="index">
+                    - {{  error }}
+                    <br/>
+                  </span> 
+                </n-alert>
+              </div>
+            </div>
+          </template>
+        </FormItem>
+        
+        <InputField v-if="!companyExists" path="name" type="company" v-model="form[0].name"/>
+          
+        <InputField path="slug" type="company" v-model="slug" :disabled="true"/>
         <div class="row">
           <div class="col">
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>

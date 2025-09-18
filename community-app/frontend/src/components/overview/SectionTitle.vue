@@ -8,7 +8,7 @@ const emit = defineEmits(['showAll', 'sync']);
 
 <template>
     <div class="row pb-1 mb-2 sectionBorder no-gutter align-items-center justify-content-between">
-        <div class="d-flex col pl-0">
+        <div class="d-flex align-items-center pl-0">
             <template v-if="link">
                 <a v-if="!isExternal" :href="link" @click.prevent="emit('showAll')" class="pr-3"><h2>{{title}}</h2></a>
                 <a v-else :href="link" class="pr-3" target="_blank"><h2>{{title}}</h2></a>
@@ -16,6 +16,7 @@ const emit = defineEmits(['showAll', 'sync']);
             <h2 v-else>{{ title }}</h2>
             <slot></slot>
         </div>
+        <slot name="buttons" class="col-auto"></slot>
         <div v-if="showRefresh" class="col-auto">
             <div class="d-flex align-items-center">
                 <slot name="beforeSync"></slot>

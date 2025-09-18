@@ -154,6 +154,14 @@ const data = Object({
             placeholder: "Everything you know is wrong"
         }
     },
+    enabled:{
+        company:{
+            label: "Publicly visible"
+        },
+        edu:{
+            label: "Publicly visible"
+        }
+    },
     description: {
         user:{
             label: "Description",
@@ -199,6 +207,34 @@ const data = Object({
         info: 'The above fields allow [Markdown]'
     }
 })
+
+export const personalMessages = {
+    header: "Profile is not visible",
+    wontVisibleHeader: "Making profile hidden, hides following sections:",
+    notConfirmed: "Still in review state",
+    visibilitySwitch: "'Publicly Visible' switch should be on",
+}
+
+export const businessMessages = {
+    header: "Business currently not visible!",
+    notConfirmed: "Still in review state",
+    visibilitySwitch: "'Publicly Visible' switch should be on",
+    ownerNotVisible: "Your user's personal profile must be set to 'Visible'",
+}
+
+export const eduMessages = {
+    header: "Institution currently not visible!",
+    notConfirmed: "Still in review state",
+    visibilitySwitch: "'Publicly Visible' switch should be on",
+    ownerNotVisible: "Your user's personal profile must be set to 'Visible'",
+}
+
+export const forHireMessages = {
+    header: "Profile is not visible in the 'For Hire' section",
+    notConfirmed: "Still in review state",
+    availableSwitch: "'Available for Hire' switch should be on",
+    profileNotVisible: "Your user's personal profile must be set to 'Visible'",
+}
 
 export function getValue(path, key, type)
 {

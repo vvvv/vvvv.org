@@ -14,6 +14,7 @@ import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
 import { transformer } from './FormHelper.js'
+import { eduMessages } from "./HelpTexts.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -194,23 +195,42 @@ const slug = computed(()=>{
   return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
 })
 
+const errors = computed(()=>{
+
+  if (eduExists.value)
+  {
+    const list = [];
+  
+    if (!data.user.visible) list.push(eduMessages.ownerNotVisible);
+    if (form.value[0].status !== "1") list.push(eduMessages.notConfirmed);
+    if (!form.value[0].enabled) list.push(eduMessages.visibilitySwitch);
+  
+    if (list.length)
+    {
+      return {
+        header: eduMessages.header,
+        list: list
+      }
+    }    
+  }
+
+  return null;
+})
+
 </script>
 
 <template>
 
     <div class="row justify-content-between" v-if="form !== null">
-      <div class="col-12 col-sm-8">
-          <label class="text-nowrap mr-3">Institution publicly visible</label>
-          <n-switch v-model:value="form[0].enabled" placeholder="Institution publicly visible" @update:value="submit" :disabled="!(eduExists || form[0].name)"/>
-      </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="eduExists && form[0].enabled">
+      <div class="col-12 col-sm-9">
+        <div class="h2 mb-3" v-if="eduExists">{{ form[0].name }}</div>
+     </div>
+      <div class="col-12 col-sm-3 text-sm-right mt-2" v-if="eduExists && data.edus[0]?.enabled && !errors">
         <a :href="'/edu/'+form[0].name" @click="(event) => showEduProfile(form[0].name, event)">View Institution</a>
       </div>
     </div>
 
       <hr class="mt-1 mb-4"/>
-
-      <div class="h2 mb-3" v-if="eduExists">{{ form[0].name }}</div>
 
       <NForm
           v-if="form !== null"
@@ -228,7 +248,7 @@ const slug = computed(()=>{
               <div class="col-12 col-xl-3" v-if="logo">
                 <img :src="logo" class="img-fluid"/>
               </div>
-              <div class="col-12 col-xl-auto">
+              <div class="col-12 col-xl-auto mt-2 mt-xl-0">
                 <FileUploader :buttonText="logoButtonText" @change="updateTempLogo" folder="logo" ref="uploader" type="edu"/>
                 <NAlert v-if="tempLogo" title="Uploaded" type="success">
                     Press 'Submit' below to update the Logo.
@@ -240,16 +260,24 @@ const slug = computed(()=>{
 
         <StatusTag :value="form[0].status"/>
 
-        <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
-        <InputField path="slug" type="edu" v-model="slug" :disabled="true"/>
-
-        <FormItem path="description" type="edu">
+        <FormItem path="enabled" type="edu">
           <template #content>
-            <Editor class="fullWidth" v-model="form[0].description" :limit="limit"/>
+            <div class="w-100">
+              <n-switch v-model:value="form[0].enabled" placeholder="Publicly visible" :disabled="!eduExists || !form[0].name"/>
+              <div class="mt-2" v-if="errors">
+                <n-alert :title="errors.header" type="warning">
+                  <span v-for="(error, index) in errors.list" :key="index">
+                    - {{  error }}
+                  <br/>
+                  </span> 
+                </n-alert>
+              </div>
+            </div>
           </template>
         </FormItem>
 
-        <InputField path="course_language" type="edu"/>
+        <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
+        <InputField path="slug" type="edu" v-model="slug" :disabled="true"/>
 
         <n-form-item label="Address" path="address">
           <div class="row">
@@ -268,6 +296,14 @@ const slug = computed(()=>{
             </div>
           </div>
         </n-form-item>
+
+        <FormItem path="description" type="edu">
+          <template #content>
+            <Editor class="fullWidth" v-model="form[0].description" :limit="limit"/>
+          </template>
+        </FormItem>
+
+        <InputField path="course_language" type="edu"/>
 
         <SocialFields v-model:value="form[0].social" type="edu"/>
 

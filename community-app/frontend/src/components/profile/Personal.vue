@@ -10,6 +10,7 @@ import { post, clone, createAssetUrl, showUserProfile }  from '../../utils.js'
 import { NAvatar, NSelect, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } from 'naive-ui'
 import FormItem from './FormItem.vue'
 import StatusTag from '../StatusTag.vue'
+import { personalMessages } from "./HelpTexts.js";
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -165,18 +166,44 @@ const avatarButtonText = computed(()=>{
   return userpic.value !== null ? "Upload new" : "Upload avatar" 
 })
 
+const errors = computed(()=>{
+
+  const list = [];
+  const wontVisibleList = [];
+
+  if (!form.value.user.visible) 
+  {
+    if (data.companies?.length) wontVisibleList.push('Company');
+    if (data.edus?.length) wontVisibleList.push('Educational Institution');
+    if (data.hire?.available) wontVisibleList.push('For Hire');
+  }
+
+  if (form.value.user.status !== "1") list.push(personalMessages.notConfirmed);
+
+  if (list.length || wontVisibleList.list)
+  {
+    return {
+      header: personalMessages.header,
+      wontVisibleHeader: personalMessages.wontVisibleHeader,
+      list: list,
+      wontVisibleList: wontVisibleList
+    }
+  }
+
+  return null;
+})
+
 </script>
 
 <template>
   <template v-if="form !== null">
 
     <div class="row justify-content-between">
-      <div class="col-12 col-sm-8">
-          <label class="text-nowrap mr-3">Profile publicly visible</label>
-          <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible" @update:value="submit"/>
+      <div class="col-12 col-sm-9">
+        <div class="h2 mb-3">{{ data.user.username }}</div>
       </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="form.user.visible && form.user?.status == '1'">
-        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Profile</a>
+      <div class="col-12 col-sm-3 text-sm-right mt-2" v-if="data.user.visible && !errors">
+        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Public Profile</a>
       </div>
     </div>
 
@@ -196,7 +223,7 @@ const avatarButtonText = computed(()=>{
                   <div class="col-12 col-xl-3" v-if="userpic !== null">
                     <NAvatar :round="true" :size="avatarSize" :src="userpic" object-fit="cover"/>
                   </div>
-                  <div class="col-12 col-xl-auto">
+                  <div class="col-12 col-xl-auto mt-2 mt-xl-0">
                     <FileUploader class="mt-3" :buttonText="avatarButtonText" @change="updateTempUserpic" folder="avatar" ref="uploader" type="user"/>
                     <NAlert v-if="tempUserpic" title="Uploaded" type="success">
                         Press 'Submit' below to update the Avatar.
@@ -205,8 +232,31 @@ const avatarButtonText = computed(()=>{
                 </div>
             </div>  
         </n-form-item>
-
+        
         <StatusTag :value="form.user?.status"/>
+
+        <n-form-item label="Publicly visible">
+          <div class="w-100">
+            <n-switch v-model:value="form.user.visible" placeholder="Profile publicly visible"/>
+            <div class="mt-2 errors" v-if="errors">
+              <n-alert :title="errors.header" type="warning">
+                <ul>
+                  <li v-for="(msg, index) in errors.list" :key="index">
+                    {{  msg }}
+                  </li>
+                </ul>
+                <template v-if="errors.wontVisibleList.length">
+                  <div class="mb-1">{{ errors.wontVisibleHeader }}</div>
+                  <ul>
+                    <li v-for="(msg, index) in errors.wontVisibleList" :key="index">
+                      {{  msg }}
+                    </li>
+                  </ul>
+                </template>
+              </n-alert>
+            </div>
+          </div>
+        </n-form-item>
 
         <div class="row">
           <div class="col-12 col-lg-6">
