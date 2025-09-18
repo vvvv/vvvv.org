@@ -115,8 +115,8 @@ blog = '/blog/:sections[1]/:slug'
 
 		[params.Download.gamma]
 
-		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38747/artifacts/content/vvvv_gamma_6.7_setup.exe"
-		StableLinkARM = ""
+		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39385/artifacts/content/vvvv_gamma_7.0-win-x64_setup.exe"
+		StableLinkARM = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39386/artifacts/content/vvvv_gamma_7.0-win-arm64_setup.exe"
 		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
 		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
 
@@ -128,7 +128,7 @@ blog = '/blog/:sections[1]/:slug'
 		TabMac = "Mac / Parallels"
 
 		StableText  = "Download: Stable"
-		StableVersion = "Version: 6.7"
+		StableVersion = "Version: 7.0"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"

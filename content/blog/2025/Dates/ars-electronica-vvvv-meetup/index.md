@@ -36,11 +36,10 @@ Doors open: 17:30
 -->
 
 ## Online
-The YouTube streaming link will be shared shortly before the meetup.
-<!--
-[Watch via Youtube](https://www.youtube.com/live/Npr0K63bKZc)<br>
-[Join via Zoom](https://us02web.zoom.us/j/88581589594?pwd=qZrSFFidBl9u6IMmPiGwdnUuBXV3TX.1)
--->
+
+[Watch via Youtube](https://youtube.com/live/gTfWE8Jsh9Q?feature=share)<br>
+[Join via Zoom](https://us02web.zoom.us/j/84221013146?pwd=vglPvqt7C6bWa1tO8SPGpU9TNzUzuO.1)
+
 {{< /box >}}
 
 ## Do I need to know vvvv or VL to join this meetup?

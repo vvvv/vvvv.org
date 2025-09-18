@@ -30,7 +30,8 @@ When running Dollars MONO on the same PC as vvvv, all you have to do is activate
 
 ![](streaming.png) 
 
-The data is received in vvvv by the node DollarsMoCap. 
+In vvvv you need the [VL.DollarsMoCap](https://www.nuget.org/packages/VL.DollarsMoCap) NuGet that comes with a node called `DollarsMoCap` that receives the data.
+
 To control an avatar with that data, all you need to do is load a rigged model and provide a joint mapping, ie. a spread of joint names the model comes with, that aligns with the joint names as returned by DollarsMoCap. This takes about 5 minutes to set up and then works for all models that use the same skeleton.
 
 <video width=100% controls autoplay>
@@ -44,7 +45,7 @@ Many thanks go out to Kan Feng, the creator of Dollars MoCap, for the great supp
 
 As of this writing, requires latest [vvvv gamma 7.0 preview](https://vvvv.org/download/) builds. Then install as usual:
 
-    nuget install VL.DollarsMoCap -pre
+    nuget install VL.DollarsMoCap
 
 {{< box >}}
 If you want to use Dollars MONO beyond it's free trial limitations, Dollars MoCap offers a **25% discount on the [Dollars MONO Lifetime License](https://store.dollarsmocap.com/products/mono)** by using the coupon code "vvvv" on checkout!
