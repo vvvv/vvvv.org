@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", async () => { 
 
-    const imageURL = (id) => `https://data.vvvv.org/assets/${id}`;
- 
+    const baseUrl = 'https://data.vvvv.org';
+    const imageURL = (id) => `${baseUrl}/assets/${id}`;
+    const collectionUrl = `${baseUrl}/items/Hero_stage`;
+
     const heroContent = document.getElementById('hero-content');
     const imageTag = document.getElementById('hero-image');
     const title = heroContent.getElementsByClassName('title')[0];
@@ -49,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function fetchHero()
     {
-        const response = await fetch('https://data.vvvv.org/items/Hero');
+        const response = await fetch(collectionUrl);
 
         if (!response.ok)
         {
@@ -61,10 +63,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         return json.data.map (d=>{
             return {
-                image_id: d.image,
-                title: d.title,
-                author: d.author,
-                photographer: d.photographer,
+                image_id: d.Image,
+                title: d.Title,
+                author: d.Author,
+                photographer: d.Photographer,
             }
         })
     }
