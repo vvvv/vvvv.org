@@ -12,7 +12,7 @@ const loading = ref(false);
 onMounted(async ()=>{   
     try {
         loading.value = true;
-        await store.fetch();
+        await store.fetch(true);
     }
     catch(error) {
         console.log (error);
