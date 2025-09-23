@@ -209,30 +209,29 @@ const data = Object({
 })
 
 export const personalMessages = {
-    header: "Profile is not visible",
-    wontVisibleHeader: "Making profile hidden, hides following sections:",
+    header: "Profile is currently not visible",
     notConfirmed: "Still in review state",
-    visibilitySwitch: "'Publicly Visible' switch should be on",
+    wontVisibleHeader: "A hidden personal profile also hides the following:",
+    businessProfile: "Business Profile",
+    eduProfile: "Educational Institution Profile",
+    forHireProfile: 'Your listing in the "For Hire" section'
 }
 
 export const businessMessages = {
-    header: "Business currently not visible!",
+    header: "Business is currently not visible",
     notConfirmed: "Still in review state",
-    visibilitySwitch: "'Publicly Visible' switch should be on",
     ownerNotVisible: "Your user's personal profile must be set to 'Visible'",
 }
 
 export const eduMessages = {
-    header: "Institution currently not visible!",
+    header: "Institution is currently not visible",
     notConfirmed: "Still in review state",
-    visibilitySwitch: "'Publicly Visible' switch should be on",
     ownerNotVisible: "Your user's personal profile must be set to 'Visible'",
 }
 
 export const forHireMessages = {
-    header: "Profile is not visible in the 'For Hire' section",
+    header: "Profile is currently not visible",
     notConfirmed: "Still in review state",
-    availableSwitch: "'Available for Hire' switch should be on",
     profileNotVisible: "Your user's personal profile must be set to 'Visible'",
 }
 

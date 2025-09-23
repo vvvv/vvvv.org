@@ -203,7 +203,6 @@ const errors = computed(()=>{
   
     if (!data.user.visible) list.push(eduMessages.ownerNotVisible);
     if (form.value[0].status !== "1") list.push(eduMessages.notConfirmed);
-    if (!form.value[0].enabled) list.push(eduMessages.visibilitySwitch);
   
     if (list.length)
     {

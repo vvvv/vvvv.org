@@ -219,7 +219,6 @@ const errors = computed(()=>{
   
     if (!data.user.visible) list.push(businessMessages.ownerNotVisible);
     if (form.value[0].status !== "1") list.push(businessMessages.notConfirmed);
-    if (!form.value[0].enabled) list.push(businessMessages.visibilitySwitch);
   
     if (list.length)
     {

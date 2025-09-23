@@ -24,7 +24,7 @@ const { data, isPast = false } = defineProps(['data', 'isPast']);
             </div>
         </template>
     </div>
-    <div v-else>
+    <div v-else class="row">
         No upcoming dates.
     </div>
 </template>

@@ -131,7 +131,6 @@ const errors = computed(()=>{
 
   if (!data.user.visible) list.push(forHireMessages.profileNotVisible);
   if (data.user.status !== "1") list.push(forHireMessages.notConfirmed);
-  if (!form.value.available) list.push(forHireMessages.availableSwitch);
 
   if (list.length)
   {

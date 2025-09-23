@@ -173,9 +173,9 @@ const errors = computed(()=>{
 
   if (!form.value.user.visible) 
   {
-    if (data.companies?.length) wontVisibleList.push('Company');
-    if (data.edus?.length) wontVisibleList.push('Educational Institution');
-    if (data.hire?.available) wontVisibleList.push('For Hire');
+    if (data.companies?.length) wontVisibleList.push(personalMessages.businessProfile);
+    if (data.edus?.length) wontVisibleList.push(personalMessages.eduProfile);
+    if (data.hire?.available) wontVisibleList.push(personalMessages.forHireProfile);
   }
 
   if (form.value.user.status !== "1") list.push(personalMessages.notConfirmed);
