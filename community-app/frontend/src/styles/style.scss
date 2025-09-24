@@ -323,6 +323,24 @@ $tag-dark:  #666;
 #profile{
   text-align: left;
 
+  .errors{
+    .n-alert-body__title
+    {
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    ul{
+      margin-bottom: 0rem;
+      list-style-type: "-";
+      padding-left: 1rem;
+    }
+    li{
+      padding-left: 0.5rem;
+    }
+
+  }
+
   .imageHelp{
     font-size: 0.8rem;
   }

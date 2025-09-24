@@ -17,7 +17,7 @@ export const useHugoStore = defineStore ('hugoStore',{
     state: ()=>{
         return {
             lastMonth: {},
-            dates: [],
+            dates: {},
             fetched: false,
             fetching: false
         }
@@ -46,10 +46,22 @@ export const useHugoStore = defineStore ('hugoStore',{
                         isNew: lm.pubDate ? Date.now() < lm.pubDate * 1000 + oneWeek : false
                     }
 
-                    this.dates = [];
+                    this.dates = {
+                        past: [],
+                        upcoming: [],
+                    };
 
                     data.dates.forEach(d=>{
-                        this.dates.push(dateItem(d))    
+                        const item = dateItem(d);
+                        
+                        if (item.past) 
+                        {
+                            this.dates.past.push(item);
+                        }
+                        else
+                        {
+                            this.dates.upcoming.push(item);
+                        }    
                     });
 
                     this.fetched = true;

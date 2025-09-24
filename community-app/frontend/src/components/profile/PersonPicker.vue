@@ -87,7 +87,7 @@ function remove(index)
 </script>
 <template>
     <div class="d-block">
-        <div v-for="(p, index) in persons" :key="p.person.value" class="row mb-2 align-items-center">
+        <div v-if="persons.length" v-for="(p, index) in persons" :key="p.person.value" class="row mb-2 align-items-center">
             <div class="col-12 col-md-6">
                 <NSelect v-model:value="p.person.value"
                 filterable

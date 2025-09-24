@@ -125,7 +125,7 @@ const themeOverrides = {
               </n-tabs>
             </div>
         </div>     
-        <n-message-provider placement="bottom">
+        <n-message-provider placement="top">
           <Suspense>
             <template #default>
               <RouterView @logout="logout"/>

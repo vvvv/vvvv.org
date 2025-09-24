@@ -5,7 +5,7 @@ import SubmitRevertButtons from './SubmitRevertButtons.vue'
 import FieldEditor from './FieldEditor.vue'
 import FileUploader from './FileUploader.vue'
 import Editor from './Editor.vue'
-import { getValue } from "./HelpTexts.js"
+import { getValue, forHireMessages } from "./HelpTexts.js"
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
 import { NButton, NAlert, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import { useForHireListStore } from "../../routes/ForHireListStore.js";
@@ -23,7 +23,6 @@ const isChanged = ref(false);
 const form = ref(null);
 const formRef = ref(null);
 const formRef2 = ref(null);
-const formImage = ref(null);
 const updating = ref(false);
 const limit = 500;
 const uploader = ref(null);
@@ -126,47 +125,39 @@ const imageButtonText = computed(()=>{
   return image.value !== null ? "Upload new" : "Upload" 
 })
 
+const errors = computed(()=>{
+
+  const list = [];
+
+  if (!data.user.visible) list.push(forHireMessages.profileNotVisible);
+  if (data.user.status !== "1") list.push(forHireMessages.notConfirmed);
+
+  if (list.length)
+  {
+    return {
+      header: forHireMessages.header,
+      list: list
+    }
+  }
+
+  return null;
+})
+
 </script>
 
 <template>
   <template v-if="form !== null">
 
     <div class="row justify-content-between">
-      <div class="col-12 col-sm-8">
-          <label class="text-nowrap mr-3">Available for Hire</label>
-          <n-switch v-model:value="form.available" placeholder="Available for Hire" @update:value="submit"/>
+      <div class="col-12 col-sm-9">
+        <div class="h2 mb-3">For Hire</div>
       </div>
-      <div class="col-12 col-sm-4 text-sm-right" v-if="form.available && data.user.visible">
-        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">Open Public Profile</a>
+      <div class="col-12 col-sm-3 text-sm-right mt-2" v-if="data.hire.available && !errors">
+        <a :href="'/people/'+data.user.username" @click="(event) => showUserProfile(data.user.username, event)">View Public Profile</a>
       </div>
     </div>
 
     <hr class="mt-1 mb-4"/>
-
-    <n-form
-        ref="formImage"
-        :model="form"
-        label-placement="left"
-        :label-width="150"
-        require-mark-placement="right-hanging"
-        >
-        <n-form-item label="Image">
-          <div class="container mx-0 px-0">
-            <div class="row">
-              <div class="col-6" v-if="image">
-                <img :src="image" class="img-fluid"/>
-              </div>
-              <div class="col-auto">
-                <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader" type="hire"/>
-                <NButton @click="removeImage" v-if="image">Remove Image</NButton>
-                <NAlert v-if="tempImage" title="Uploaded" type="success">
-                    Press 'Submit' below to update the Image.
-                </NAlert>
-              </div>
-            </div>
-          </div>
-        </n-form-item>
-    </n-form>
 
     <n-form
         ref="formRef2"
@@ -175,6 +166,38 @@ const imageButtonText = computed(()=>{
         :label-width="150"
         require-mark-placement="right-hanging"
         >
+
+      <n-form-item label="Image">
+        <div class="container mx-0 px-0">
+          <div class="row">
+            <div class="col-6" v-if="image">
+              <img :src="image" class="img-fluid"/>
+            </div>
+            <div class="col-auto mt-2 mt-xl-0">
+              <FileUploader :buttonText="imageButtonText" @change="updateTempImage" folder="hire" ref="uploader" type="hire"/>
+              <NButton @click="removeImage" v-if="image">Remove Image</NButton>
+              <NAlert v-if="tempImage" title="Uploaded" type="success">
+                  Press 'Submit' below to update the Image.
+              </NAlert>
+            </div>
+          </div>
+        </div>
+      </n-form-item>
+
+      <n-form-item label="Available for Hire">
+        <div class="w-100">
+          <n-switch v-model:value="form.available" placeholder="Available for Hire"/>
+          <div class="mt-2 errors" v-if="errors">
+            <n-alert :title="errors.header" type="warning">
+              <span v-for="(error, index) in errors.list" :key="index">
+                - {{  error }}
+              <br/>
+              </span> 
+            </n-alert>
+          </div>
+        </div>
+      </n-form-item>
+
       <n-form-item label="Description">
         <Editor v-model="form.description" class="fullWidth" :limit="limit"/>
       </n-form-item>
