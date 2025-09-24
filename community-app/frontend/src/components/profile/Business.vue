@@ -278,7 +278,7 @@ const errors = computed(()=>{
           <template #content>
             <div class="w-100">
               <n-switch v-model:value="form[0].enabled" placeholder="Publicly visible" :disabled="!companyExists || !form[0].name"/>
-              <div class="mt-2" v-if="errors">
+              <div class="mt-2 errors" v-if="errors">
                 <n-alert :title="errors.header" type="warning">
                   <span v-for="(error, index) in errors.list" :key="index">
                     - {{  error }}
