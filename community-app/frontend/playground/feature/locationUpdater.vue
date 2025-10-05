@@ -8,8 +8,6 @@ import Constants from '../../src/constants'
 
 const key = import.meta.env.VITE_LOCATION_UPDATER;
 
-console.log (key);
-
 const types = [
     {
         label: 'Company',
@@ -51,16 +49,23 @@ async function onChangeType(_type)
     try{
         loading.value = true;
 
-        const url = `${Constants.BASEURL}items/${_type}?fields[]=name,location,location_city,location_street,location_postalcode,location_country`;
-        const response = await fetch(url);
+        const headers = new Headers();
+        headers.append('type', _type)
+        headers.append('key', key);
 
+        const url = `http://localhost:4050/v1/admin/read`;
+        const response = await fetch(url,{
+            headers
+        });
+
+        
         if (!response.ok)
         {
             throw new Error ('Server Error');        
         }
-
+                
         const json = await response.json();
-
+        
         entities.value = json.data.map(e => {
             return {
                 label: e.name,
@@ -107,19 +112,23 @@ async function update()
         }
 
         try{
-            console.log (payload);
-            // loading.value = true;
+            loading.value = true;
+            
+            const headers = new Headers();
+            headers.append('key', key);
+            headers.append('Content-Type', 'application/json');
 
-            // const url = `http://localhost:4050/v1/admin/updateLocation/`;
-            // const response = await fetch(url, {
-            //     method: "POST",
-            //     body: JSON.stringify(payload)
-            // });
+            const url = `http://localhost:4050/v1/admin/updateLocation/`;
+            const response = await fetch(url, {
+                method: "POST",
+                headers,
+                body: JSON.stringify(payload)
+            });
 
-            // if (!response.ok)
-            // {
-            //     throw new Error ("Can't update");
-            // }
+            if (!response.ok)
+            {
+                throw new Error ("Can't update");
+            }
         }
         catch (error) {
             console.log(error);
