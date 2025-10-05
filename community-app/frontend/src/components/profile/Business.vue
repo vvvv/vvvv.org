@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watchEffect } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
@@ -13,9 +13,11 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
+import LocationBox from '../../features/nominatim/components/LocationBox.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js"
 import { transformer } from './FormHelper.js'
 import { businessMessages } from "./HelpTexts.js";
+import { useLocationHelper } from './composables/useLocationHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -28,6 +30,8 @@ const updating = ref(false);
 const companyExists = ref(false);
 const uploader = ref(null);
 const limit = 500;
+
+const { location, address, handleLocation} = useLocationHelper(form);
 
 const emptyCompany = {
   enabled: false,
@@ -115,6 +119,10 @@ onMounted(()=>{
   prepareData();
 })
 
+watch (()=>data, (newValue)=>{
+  prepareData();
+})
+
 const updateTempLogo = (id) =>{
   if (id !== null)
   {
@@ -162,6 +170,15 @@ const submit = async () => {
     formValue.people = transformer.people.toPayload(formValue.people);
   }
 
+  if (location.value)
+  {
+    formValue.location = location.value;
+  }
+  else
+  {
+    delete formValue.location;
+  }
+
   try{
     
     const response = await post(Constants.EDIT_COMPANY, formValue)
@@ -173,21 +190,19 @@ const submit = async () => {
         logo.value = createAssetUrl(tempLogo.value);
         tempLogo.value = null;
       }
-    
-      //Update fields in data
-      data.companies[0] = formValue;
-      
+          
       if (response.code === 'NEW') 
       {
-        data.companies[0].status = form.value[0].status = '0';
+        formValue.status = form.value[0].status = '0';
       }
 
       if (uploader.value) 
       {
         uploader.value.reset()
       }
-          
-      emit('updateData', data);
+
+      emit('reload');
+
       emit('message', { type: 'success', string: response.result});
     }
   }
@@ -312,6 +327,9 @@ const errors = computed(()=>{
                 </div>
               </div>
               <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+            </div>
+            <div class="col-12">
+              <LocationBox @location="handleLocation" :location="form[0].location" :address="address"/>
             </div>
           </div>
         </n-form-item>

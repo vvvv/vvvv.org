@@ -324,6 +324,27 @@ $tag-dark:  #666;
 #profile{
   text-align: left;
 
+  .nominatim{
+
+    .info {
+      font-size: 0.9rem;
+      color: #333;
+      margin-top: 0.5rem;
+
+      p{
+        font-size: inherit;
+        margin-bottom: 0.3rem;
+        color: inherit;
+      }
+    }
+
+    .attribution{
+      margin: 0.5rem 0rem;
+      font-size: 0.8rem;
+      color: #999;
+    }
+  }
+
   .errors{
     .n-alert-body__title
     {

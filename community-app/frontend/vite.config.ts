@@ -26,7 +26,9 @@ export default defineConfig({
   build: {
     outDir: "../../static/js/vue/",
   rollupOptions: {
-    input: './src/main.js',
+    input: {
+      main: './src/main.js'
+    },
     output: {
       manualChunks: {
         vue: ['vue'],
