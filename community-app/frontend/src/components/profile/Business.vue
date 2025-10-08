@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watchEffect } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
@@ -13,9 +13,11 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
+import LocationBox from '../../features/nominatim/components/LocationBox.vue'
 import { useBusinessListStore } from "../../routes/BusinessListStore.js"
 import { transformer } from './FormHelper.js'
 import { businessMessages } from "./HelpTexts.js";
+import { useLocationHelper } from './composables/useLocationHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -28,6 +30,8 @@ const updating = ref(false);
 const companyExists = ref(false);
 const uploader = ref(null);
 const limit = 500;
+
+const { location, address, handleLocation, updateAddress } = useLocationHelper(form);
 
 const emptyCompany = {
   enabled: false,
@@ -93,6 +97,16 @@ const rules = {
     message: "Name is required",
     trigger: ['input', 'blur'],
   },
+  location_country: {
+      required: true,
+      message: "Country is required",
+      trigger: ['input', 'blur', 'change'],
+    },
+  location_city: {
+    required: true,
+    message: "City is required",
+    trigger: ['input', 'blur'],
+  },
   website: {
     required: true,
     message: "Website is required",
@@ -112,6 +126,10 @@ const rules = {
 }
 
 onMounted(()=>{
+  prepareData();
+})
+
+watch (()=>data, (newValue)=>{
   prepareData();
 })
 
@@ -162,6 +180,15 @@ const submit = async () => {
     formValue.people = transformer.people.toPayload(formValue.people);
   }
 
+  if (location.value)
+  {
+    formValue.location = location.value;
+  }
+  else
+  {
+    delete formValue.location;
+  }
+
   try{
     
     const response = await post(Constants.EDIT_COMPANY, formValue)
@@ -173,21 +200,19 @@ const submit = async () => {
         logo.value = createAssetUrl(tempLogo.value);
         tempLogo.value = null;
       }
-    
-      //Update fields in data
-      data.companies[0] = formValue;
-      
+          
       if (response.code === 'NEW') 
       {
-        data.companies[0].status = form.value[0].status = '0';
+        formValue.status = form.value[0].status = '0';
       }
 
       if (uploader.value) 
       {
         uploader.value.reset()
       }
-          
-      emit('updateData', data);
+
+      emit('reload');
+
       emit('message', { type: 'success', string: response.result});
     }
   }
@@ -298,20 +323,31 @@ const errors = computed(()=>{
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>
           </div>
         </div>
-        <n-form-item label="Address" path="address">
+        <n-form-item label="Address">
           <div class="row">
-            <div class="col">
-              <n-input v-model:value="form[0].location_street" placeholder="Street and house number" class="mb-1" />
-              <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info" class="mb-1"/>
-              <div class="row mb-1">
+            <div class="col-12">
+              <n-form-item path="location_country">
+                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+              </n-form-item>
+              <div class="row">
+                <div class="col-8">
+                  <n-form-item path="location_city">
+                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                  </n-form-item>
+                </div>
                 <div class="col-4">
                   <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
                 </div>
-                <div class="col-8">
-                  <n-input v-model:value="form[0].location_city" placeholder="City" />
-                </div>
               </div>
-              <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+              </n-form-item>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+              </n-form-item>
+            </div>
+            <div class="col-12">
+              <LocationBox @location="handleLocation" @address="updateAddress" :location="form[0].location" :address="address"/>
             </div>
           </div>
         </n-form-item>

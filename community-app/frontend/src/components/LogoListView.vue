@@ -1,10 +1,10 @@
 <script setup>
+import { NSpin, NTooltip } from 'naive-ui';
 import defaultLogo from '../assets/defaultLogo.png'
 import Location from "../components/Location.vue"
 import Internships from '../components/Internships.vue';
-import { NSpin, NTooltip } from 'naive-ui';
 
-const props = defineProps(['list', 'title', 'loading'])
+const props = defineProps(['list', 'loading'])
 const emit = defineEmits(['click']);
 
 </script>
@@ -12,7 +12,6 @@ const emit = defineEmits(['click']);
 <template>
     <NSpin :show="loading">
         <div class="logoListView" v-if="list && list.total > 0">
-            <p>{{ title }}</p>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
                 <div v-for="item in list.items" track-by="item.name" class="col mx-0 px-0">
                     <NTooltip trigger="hover" placement="top" :delay="50" :duration="0">
@@ -37,3 +36,15 @@ const emit = defineEmits(['click']);
         </div>
     </NSpin>
 </template>
+
+<style scoped>
+    .map-container {
+        width: 100%;
+        height: 400px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .leaflet-marker-icon{
+        filter: saturate(0%);
+    }
+</style>

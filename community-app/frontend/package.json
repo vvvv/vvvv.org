@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:playground": "vite --config vite.playground.config.ts",
     "serve": "vite",
     "build": "vue-tsc -b && vite build --base=/js/vue --emptyOutDir",
     "watch": "vite build --watch --base=/js/vue",

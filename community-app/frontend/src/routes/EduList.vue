@@ -31,9 +31,9 @@ watch(() => route.query, async (newQ, oldQ)=>{
 
 async function checkRoute(query)
 {
-    if (query.b)
+    if (query.e)
     {
-        showEduProfile(query.b);
+        showEduProfile(query.e);
         return;
     }
     else if (query.section)
