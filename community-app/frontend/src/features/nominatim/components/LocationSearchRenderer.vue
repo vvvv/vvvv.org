@@ -34,11 +34,14 @@ watch (()=>props.state, (newValue)=>{
             <NTag size="small" type="warning" :bordered="false" class="mr-2">Too bad</NTag> We can't find you on a map. Adjust your address.
         </div>
 
-        <div v-else-if="state.type === 'many'" class="many">
-            <p class="info"><NTag size="small" type="warning" :bordered="false" class="mr-2">Pick one</NTag>We'll show on a map on one of these locations. Pick one:</p>
-            <NList hoverable clickable show-divider bordered>
-                <NListItem v-for="place in state.results" :key="place.place_id" @click="select(place)">
+        <div v-else-if="!selected && state.type === 'found'" class="many">
+            <p class="info">Pick the location, then we'll pin you there on the map:</p>
+            <NList clickable show-divider bordered>
+                <NListItem v-for="place in state.results" :key="place.place_id">
                     {{ place.text }}<br/>
+                    <template #suffix>
+                        <NButton @click="select(place)" secondary>Pick</NButton>
+                    </template>
                 </NListItem>
             </NList>
         </div>

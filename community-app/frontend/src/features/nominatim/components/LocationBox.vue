@@ -44,14 +44,6 @@ watch(queryString, (newQuery) => {
     }   
 })
 
-watch(state, (newState)=>{
-    if(newState.type === 'single')
-    {
-        emit('location', newState.results[0]);
-        selected.value = newState.results[0];  
-    }
-})
-
 function select(place)
 {
     emit('location', place);
@@ -72,7 +64,6 @@ const verb = computed(()=>{
 
         <div v-if="locationExists || selected" class="info">
             <p>{{ verb }} you on the map. To change your location, tweak the address.</p>
-            <p v-if="selected">{{ selected.text }}</p>
         </div>
         
         <div class="attribution">

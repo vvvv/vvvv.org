@@ -1,11 +1,11 @@
-export function useMapView(store, mapRef, handler)
+export function useMapView(mapRef, handler)
 {
 
     const center = [51.505, -0.09];
     const zoom = 4;
 
-    function fillMap(){
-        const locations = store.list.list.items.filter((e)=> e.location !== null)
+    function fillMap(items){
+        const locations = items.filter((e)=> e.location !== null)
             .map((e)=>{
                 return {
                     coords: e.location.coordinates,

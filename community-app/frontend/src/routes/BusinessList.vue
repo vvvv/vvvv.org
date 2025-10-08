@@ -17,7 +17,7 @@ const store = useBusinessListStore();
 const emit = defineEmits(['logout']);
 const mapRef = ref(null);
 
-const { fillMap, center, zoom } = useMapView(store, mapRef, showBusinessProfile);
+const { fillMap, center, zoom } = useMapView(mapRef, showBusinessProfile);
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
@@ -49,7 +49,7 @@ async function checkRoute(query)
 
     try{
         await store.getData( {page: 0, size: pageSizes[0].value} );
-        fillMap();
+        fillMap(store.list.list.items);
     }
     catch (error)
     {

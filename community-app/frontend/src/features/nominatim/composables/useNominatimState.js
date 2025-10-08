@@ -43,15 +43,10 @@ export function useNominatimState( { result, loading, error }){
             return { type: 'empty'}
         }
 
-        if (result.value.features && result.value.features.length > 1)
+        if (result.value.features && result.value.features.length > 0)
         {
             const places = result.value.features.map(toPlace);
-            return { type: 'many', results: places};
-        }
-
-        return {
-            type: 'single',
-            results: [toPlace(result.value.features[0])]
+            return { type: 'found', results: places};
         }
     })
 }
