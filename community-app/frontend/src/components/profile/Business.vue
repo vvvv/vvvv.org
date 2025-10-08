@@ -31,7 +31,7 @@ const companyExists = ref(false);
 const uploader = ref(null);
 const limit = 500;
 
-const { location, address, handleLocation} = useLocationHelper(form);
+const { location, address, handleLocation, updateAddress } = useLocationHelper(form);
 
 const emptyCompany = {
   enabled: false,
@@ -95,6 +95,16 @@ const rules = {
   name: {
     required: true,
     message: "Name is required",
+    trigger: ['input', 'blur'],
+  },
+  location_country: {
+      required: true,
+      message: "Country is required",
+      trigger: ['input', 'blur', 'change'],
+    },
+  location_city: {
+    required: true,
+    message: "City is required",
     trigger: ['input', 'blur'],
   },
   website: {
@@ -313,23 +323,31 @@ const errors = computed(()=>{
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>
           </div>
         </div>
-        <n-form-item label="Address" path="address">
+        <n-form-item label="Address">
           <div class="row">
-            <div class="col">
-              <n-input v-model:value="form[0].location_street" placeholder="Street and house number" class="mb-1" />
-              <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info" class="mb-1"/>
-              <div class="row mb-1">
+            <div class="col-12">
+              <n-form-item path="location_country">
+                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+              </n-form-item>
+              <div class="row">
+                <div class="col-8">
+                  <n-form-item path="location_city">
+                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                  </n-form-item>
+                </div>
                 <div class="col-4">
                   <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
                 </div>
-                <div class="col-8">
-                  <n-input v-model:value="form[0].location_city" placeholder="City" />
-                </div>
               </div>
-              <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+              </n-form-item>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+              </n-form-item>
             </div>
             <div class="col-12">
-              <LocationBox @location="handleLocation" :location="form[0].location" :address="address"/>
+              <LocationBox @location="handleLocation" @address="updateAddress" :location="form[0].location" :address="address"/>
             </div>
           </div>
         </n-form-item>

@@ -1,10 +1,22 @@
 import { computed } from 'vue';
 
 function toPlace(value){
+
+    const address = value.properties.address;
+
+    let street = address.road ? address.road : "";
+    street += address.house_number ? ` ${address.house_number}` : "";
+
     return {
         place_id: value.properties.place_id,
         text: value.properties.display_name,
-        geometry: value.geometry
+        geometry: value.geometry,
+        address: {
+            country: address.country,
+            city: address.city,
+            postalcode: address.postcode,
+            street: street
+        }
     }
 }
 

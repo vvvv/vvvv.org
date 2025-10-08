@@ -7,11 +7,17 @@ import { showBusinessProfile } from "../utils.js"
 import ListNavigation from './ListNavigation.vue';
 import LogoListView from '../components/LogoListView.vue';
 import ConnectionListView from '../components/ConnectionListView.vue';
+import MapView from '../features/leaflet/components/MapView.vue';
+import { useMapView } from './composables/useMapView';
+import '../styles/style.scss'
 
 const router = useRouter();
 const route = useRoute();
 const store = useBusinessListStore();
 const emit = defineEmits(['logout']);
+const mapRef = ref(null);
+
+const { fillMap, center, zoom } = useMapView(store, mapRef, showBusinessProfile);
 
 const pageSizes = [
     { label: '10 per page', value: 10 },
@@ -43,6 +49,7 @@ async function checkRoute(query)
 
     try{
         await store.getData( {page: 0, size: pageSizes[0].value} );
+        fillMap();
     }
     catch (error)
     {
@@ -84,11 +91,15 @@ const titleList = computed(()=>{
         </div>
     </div>
 
-    <LogoListView v-if="store.selectedSection.key == 'list'" 
-        :loading = "store.loading"
-        :list ="store.list?.list"
-        :title="titleList"
-        @click="showBusinessProfile"/>
+    <template v-if="store.selectedSection.key == 'list'">
+        <p>{{ titleList }}</p>
+        <MapView ref="mapRef" :center="center" :zoom="zoom"/>
+        <LogoListView  
+            :loading = "store.loading"
+            :list ="store.list?.list"
+            @click="showBusinessProfile"
+            class="mt-4"/>
+    </template>
     
     <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
         :list="store.list?.connections" 

@@ -8,6 +8,7 @@ export default defineConfig({
       '@': '/src',
       '@scss': '/external/scss', // Alias for the symbolic link to the SCSS folder
       '@css': '/external/css',   // Alias for the symbolic link to the CSS folder
+      '@static': '/external/static',
     },
   },
   root: ".", // project root (where playground.html is)

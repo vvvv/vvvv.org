@@ -6,7 +6,7 @@ import { useNominatimQuery } from '../composables/useNominatimQuery.js'
 import { useNominatimState } from '../composables/useNominatimState.js'
 import LocationSearchRenderer from './LocationSearchRenderer.vue'
 
-const emit = defineEmits(['location']);
+const emit = defineEmits(['location', 'address']);
 
 const props = defineProps({
     location: { type: Object, required: false},
@@ -54,7 +54,8 @@ watch(state, (newState)=>{
 
 function select(place)
 {
-    emit('location', place)
+    emit('location', place);
+    emit('address', place)
     selected.value = place;
 }
 
