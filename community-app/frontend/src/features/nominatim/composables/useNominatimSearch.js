@@ -11,8 +11,6 @@ export function useNominatimSearch (delay = 400)
 
     const searchAsync = async (query) => {
 
-        console.log (query)
-
         if (controller.value) controller.value.abort();
         controller.value = new AbortController();
 

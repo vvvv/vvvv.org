@@ -37,10 +37,10 @@ watch (()=>props.state, (newValue)=>{
         <div v-else-if="!selected && state.type === 'found'" class="many">
             <p class="info">Pick the location, then we'll pin you there on the map:</p>
             <NList clickable show-divider bordered>
-                <NListItem v-for="place in state.results" :key="place.place_id">
+                <NListItem v-for="place in state.results" :key="place.place_id" @click="select(place)">
                     {{ place.text }}<br/>
                     <template #suffix>
-                        <NButton @click="select(place)" secondary>Pick</NButton>
+                        <NButton @click="select(place)" type="primary">Pick</NButton>
                     </template>
                 </NListItem>
             </NList>

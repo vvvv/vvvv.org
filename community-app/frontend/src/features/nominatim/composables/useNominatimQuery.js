@@ -1,17 +1,17 @@
 import { computed } from "vue";
 
-export function useNominatimQuery( props ){
+export function useNominatimQuery( address ){
 
     return computed(()=>{
 
-        if (!props.address.country || props.address.country === '')
+        if (!address.value.country || address.value.country === '')
         {
             return null;
         }
 
         const params = new URLSearchParams();
 
-        Object.entries(props.address).forEach(([key, value])=>{
+        Object.entries(address.value).forEach(([key, value])=>{
             if (value && value !== "")
             {
                 params.append(key, value)      

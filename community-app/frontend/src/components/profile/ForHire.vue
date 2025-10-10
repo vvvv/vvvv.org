@@ -9,11 +9,10 @@ import { getValue, forHireMessages } from "./HelpTexts.js"
 import { clone, post, toHtml, toMd, removeFile, createAssetUrl, showUserProfile }  from '../../utils'
 import { NButton, NAlert, NSelect, NTag, NFlex, NRow, NCol, NSwitch, NForm, NFormItemGi, NRadioButton, NRadioGroup, NFormItem, NInput } from 'naive-ui'
 import { useForHireListStore } from "../../routes/ForHireListStore.js";
+import { useFormHelper } from './composables/useFormHelper.js'
 import FormItem from './FormItem.vue'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
-
-const store = useForHireListStore();
 
 const info = ref(getValue('hire', "info", 'user'));
 
@@ -29,6 +28,9 @@ const uploader = ref(null);
 const tempImage = ref(null);
 const image = ref (null);
 
+const store = useForHireListStore();
+const formHelper = useFormHelper(form);
+
 const prepareData = () =>{
   const temp = clone(data);
   form.value = temp.hire;
@@ -38,6 +40,8 @@ const prepareData = () =>{
   {
     image.value = createAssetUrl(temp.hire.image)
   }
+
+  formHelper.setNewData(form.value);
 }
 
 const updateTempImage = (id) =>{
@@ -86,6 +90,8 @@ const submit = async () => {
         emit('updateData', data)
         emit('message', { type: 'success', string: response.result})
         store.fetch(true);
+
+        formHelper.setNewData(form.value);
       }
   }
   catch (error) {
@@ -216,6 +222,10 @@ const errors = computed(()=>{
       </n-form-item>
 
     </n-form>
-    <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
+
+      <div class="stickyFormButtons" v-if="formHelper.changed.value">
+        <SubmitRevertButtons @revert="formHelper.revert" @submit="submit" :updating="updating"/>
+      </div>
+
   </template>
 </template>

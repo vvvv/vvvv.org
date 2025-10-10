@@ -53,8 +53,8 @@ const showMessage = (m) => {
 
 }
 
-onMounted(async() => {
-
+async function reload()
+{
   const route_key = route.query.p ?? "personal";
 
   selected.value = {
@@ -73,6 +73,12 @@ onMounted(async() => {
   {
     loading.value = false;
   }
+}
+
+onMounted(async() => {
+
+  await reload();
+  
 })
 
 const updateData = (d)=>{

@@ -8,20 +8,16 @@ import LocationSearchRenderer from './LocationSearchRenderer.vue'
 
 const emit = defineEmits(['location', 'address']);
 
-const props = defineProps({
+const { location, address} = defineProps({
     location: { type: Object, required: false},
     address: { type: Object, required: true}
 })
 
 const { result, loading, error, searchDebounced } = useNominatimSearch(500);
 const state = useNominatimState({ result, loading, error });
-const queryString = useNominatimQuery( props );
+const queryString = useNominatimQuery( address );
 const locationExists = ref(false);
 const selected = ref(null);
-
-onMounted(()=>{
-    locationExists.value = props.location !== null;
-})
 
 function retry(){
     searchDebounced(queryString.value);
@@ -36,12 +32,18 @@ watch(queryString, (newQuery)=>{
 
 watch(queryString, (newQuery) => {
 
+    locationExists.value = false;
+
     if (newQuery)
     {
-        if (props.location) emit('location', null);
+        if (location) emit('location', null);
         selected.value = null;
         searchDebounced(newQuery);
     }   
+})
+
+watch (()=>location, (newValue)=>{
+    if (newValue) locationExists.value = true;
 })
 
 function select(place)

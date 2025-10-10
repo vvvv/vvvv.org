@@ -1,24 +1,23 @@
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export function useLocationHelper(_form){
 
-    const form = ref(_form);
+    const form = _form;
+    const address = ref({});
 
     const location = ref(null);
 
-    const address = computed(()=>{
-
-        if (!form && !form.value) return {};
-
-        return{
+    function addressChangeHandler()
+    {
+        address.value = {
             street: form.value[0].location_street,
             city: form.value[0].location_city,
             postalcode: form.value[0].location_postalcode,
-            country: form.value[0].location_country,
+            country: form.value[0].location_country
         }
-    })
+    }
     
-    const handleLocation = (loc)=>{ 
+    function locationHandler (loc) { 
         if (loc)
         {
             location.value = {
@@ -28,7 +27,7 @@ export function useLocationHelper(_form){
         }
     }
 
-    const updateAddress = (loc)=>{
+    function addressHandler (loc) {  
         if (loc)
         {
             if (loc.address.country) form.value[0].location_country = loc.address.country;
@@ -38,5 +37,5 @@ export function useLocationHelper(_form){
         }
     }
 
-    return { location, address, handleLocation, updateAddress }
+    return { location, address, addressChangeHandler, locationHandler, addressHandler }
 }
