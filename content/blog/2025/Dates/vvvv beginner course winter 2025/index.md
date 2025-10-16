@@ -12,10 +12,9 @@ thumb: "WS25_VVVV_Beginner-thumb.jpg"
 
 ![](WS25_VVVV_Beginner.jpg) 
 
-Last call for the vvvv beginner course! This live class is designed as a weekly add-on to your studies or work, fully remote and scheduled every Monday evening starting on October 27th. If all you ever wanted is to learn vvvv from scratch, connect with other patching enthusiasts and benefit from some project support to kickstart your ideas, then this course is for you.
+Last call for the vvvv beginner course! This live class is designed as a weekly add-on to your studies or work, fully remote and scheduled **every Monday evening starting on October 27th**. If all you ever wanted is to learn vvvv from scratch, connect with other patching enthusiasts and benefit from some project support to kickstart your ideas, then this course is for you.
 
-Sign up here:
-https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/
+**[Sign up here](https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/)!**
 
 ## What will I learn?
 
