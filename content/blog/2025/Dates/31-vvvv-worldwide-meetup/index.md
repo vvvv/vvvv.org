@@ -9,7 +9,7 @@ where:
     city: "Wipperstrasse 13, 12055 Berlin"
     country: "de"
     country_name: "Germany"
-    from_date: "1763665200"
+    from_date: "1763661600"
     to_date: "1763672400"
 thumb: "vvvvmeetup-thumbnail.png"
 ---
@@ -19,7 +19,7 @@ thumb: "vvvvmeetup-thumbnail.png"
 
 Here's to announce the 31th vvvv worldwide meetup on **November 20th, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
-Moderated by Randall Vasquez<br>
+Moderated by [Randall Vasquez](https://vvvv.org/people/ravazquez)<br>
 Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)  
 
 {{< box >}}
