@@ -1,9 +1,10 @@
-import { ref, computed, watch } from 'vue'
+import { ref } from 'vue'
 
 export function useLocationHelper(_form){
 
     const form = _form;
     const address = ref({});
+    const zoom = ref(15);
 
     const location = ref(null);
 
@@ -21,8 +22,8 @@ export function useLocationHelper(_form){
         if (loc)
         {
             location.value = {
-                lat: loc.geometry.coordinates[0],
-                long: loc.geometry.coordinates[1]
+                lat: loc.geometry.coordinates[1],
+                long: loc.geometry.coordinates[0]
             }
         }
     }
@@ -37,5 +38,21 @@ export function useLocationHelper(_form){
         }
     }
 
-    return { location, address, addressChangeHandler, locationHandler, addressHandler }
+    function updateLocation (newValue)
+    {
+        if (newValue)
+        {
+            location.value = newValue;
+        }
+    }
+
+    function updateZoom(newZoom)
+    {
+        if (newZoom)
+        {
+            zoom.value = newZoom
+        }
+    }
+
+    return { location, address, addressChangeHandler, locationHandler, addressHandler, zoom, updateZoom, updateLocation }
 }

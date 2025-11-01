@@ -30,17 +30,13 @@ watch (()=>props.state, (newValue)=>{
 
         <LocationErrorRenderer v-if="state.type === 'error'" :error="state.error" @retry="emit('retry')"/>
 
-        <div v-else-if="state.type === 'empty'" class="info">
-            <NTag size="small" type="warning" :bordered="false" class="mr-2">Too bad</NTag> We can't find you on a map. Adjust your address.
-        </div>
-
         <div v-else-if="!selected && state.type === 'found'" class="many">
-            <p class="info">Pick the location, then we'll pin you there on the map:</p>
+            <p class="info">Pick a location below and adjust the pin if needed:</p>
             <NList clickable show-divider bordered>
                 <NListItem v-for="place in state.results" :key="place.place_id" @click="select(place)">
                     {{ place.text }}<br/>
                     <template #suffix>
-                        <NButton @click="select(place)" type="primary">Pick</NButton>
+                        <NButton @click="select(place)" type="primary">Pin on map</NButton>
                     </template>
                 </NListItem>
             </NList>

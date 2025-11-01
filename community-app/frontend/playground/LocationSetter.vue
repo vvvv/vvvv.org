@@ -1,10 +1,11 @@
 <script setup>
 
 import { reactive, ref, watch } from 'vue';
-import { NInput, NDropdown, NButton } from 'naive-ui';
-import LocationBox from "../../src/features/nominatim/components/LocationBox.vue";
-import { useLocationHelper } from '../../src/components/profile/composables/useLocationHelper';
-import Constants from '../../src/constants'
+import { NInput, NDropdown, NButton, NForm } from 'naive-ui';
+import LocationBox from "../src/features/nominatim/components/LocationBox.vue";
+import MapPicker from '../src/components/profile/MapPicker.vue'
+import { useLocationHelper } from '../src/components/profile/composables/useLocationHelper';
+import Constants from '../src/constants'
 
 const key = import.meta.env.VITE_LOCATION_UPDATER;
 
@@ -32,7 +33,11 @@ const loading = ref(false);
 const entities = ref([]);
 const selected = ref(null);
 
-const { location, handleLocation } = useLocationHelper();
+const addressObject = {
+    address
+}
+
+const { location, locationHandler, zoom, zoomHandler } = useLocationHelper();
 
 watch (location, (newValue)=>{
     console.log (newValue);
@@ -108,7 +113,13 @@ async function update()
         {
             type: selected.value.type,
             name: selected.value.name,
-            location: location.value
+            location: location.value,
+            address: {
+                location_country: address.value.country,
+                location_city: address.value.city,
+                location_postalcode: address.value.postalcode,
+                location_street: address.value.street,
+            }
         }
 
         try{
@@ -140,6 +151,21 @@ async function update()
     }
 }
 
+function updateCoords(loc)
+{
+    console.log (loc);
+}
+
+// function addressChangeHandler()
+// {
+//     const add = {
+//         street: address.value.location_street,
+//         city: address.value.location_city,
+//         postalcode: address.value.location_postalcode,
+//         country: address.value.location_country
+//     }
+// }
+
 </script>
 <template>
     <div>
@@ -156,16 +182,21 @@ async function update()
 
     <div>
         {{  selected?.name || '' }}
-        <NInput v-model:value="address.street" placeholder="Street"></NInput>
-        <NInput v-model:value="address.city" placeholder="City"></NInput>
-        <NInput v-model:value="address.postalcode" placeholder="Postalcode"></NInput>
-        <NInput v-model:value="address.country" placeholder="Country"></NInput>
-    
-        <LocationBox :location=location @location="handleLocation" :address="address"/>
-    
+        <NForm @input="addressChangeHandler">
+            <NInput v-model:value="address.street" placeholder="Street"></NInput>
+            <NInput v-model:value="address.city" placeholder="City"></NInput>
+            <NInput v-model:value="address.postalcode" placeholder="Postalcode"></NInput>
+            <NInput v-model:value="address.country" placeholder="Country"></NInput>
+        </NForm>
+           
         <div v-if="loading">Loading...</div>
+        
+        <MapPicker :coords="location" @coords="updateCoords" :zoom="zoom"/>
     
+        <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="zoomHandler"/>
+
         <NButton @click="update">Update</NButton>
+
     </div>
 
 </template>

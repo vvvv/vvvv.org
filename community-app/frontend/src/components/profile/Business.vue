@@ -14,6 +14,7 @@ import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
 import LocationBox from '../../features/nominatim/components/LocationBox.vue'
+import MapPicker from './MapPicker.vue'
 import { businessMessages } from "./HelpTexts.js";
 import { useBusinessListStore } from "../../routes/BusinessListStore.js"
 import { useFormHelper } from './composables/useFormHelper.js'
@@ -32,7 +33,8 @@ const uploader = ref(null);
 
 const limit = 500;
 
-const locationHelper = useLocationHelper(form);
+const { location, zoom, address, updateZoom, updateLocation, locationHandler, addressChangeHandler } = useLocationHelper(form);
+
 const formHelper = useFormHelper(form);
 
 const emptyCompany = {
@@ -73,6 +75,12 @@ const prepareData = ()=>{
     if (temp.companies[0].people)
     {
       temp.companies[0].people = formHelper.transformer.people.toForm(temp.companies[0].people);
+    }
+
+    if (temp.companies[0].location)
+    {
+      temp.companies[0].location = formHelper.transformer.map.toLocation(temp.companies[0].location);
+      location.value = temp.companies[0].location;
     }
   }
   else
@@ -139,6 +147,10 @@ watch (()=>data, (newValue)=>{
   prepareData();
 })
 
+watch (location, (newValue)=>{
+  formHelper.changed.value = true;
+})
+
 const updateTempLogo = (id) =>{
   if (id !== null)
   {
@@ -186,9 +198,9 @@ const submit = async () => {
     formValue.people = formHelper.transformer.people.toPayload(formValue.people);
   }
 
-  if (locationHelper.location.value)
+  if (location.value)
   {
-    formValue.location = locationHelper.location.value;
+    formValue.location = location.value;
   }
   else
   {
@@ -332,34 +344,46 @@ const errors = computed(()=>{
           </div>
         </div>
         
-        <n-form-item label="Address" @input="locationHelper.addressChangeHandler">
-          <div class="row">
-            <div class="col-12">
-              <n-form-item path="location_country">
-                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="locationHelper.addressChangeHandler"/>
-              </n-form-item>
-              <div class="row">
-                <div class="col-8">
-                  <n-form-item path="location_city">
-                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
-                  </n-form-item>
+        <n-form-item label="Address" @input="addressChangeHandler" :show-feedback="false">
+          <div class="d-flex flex-column w-100">
+            <div class="row">
+              <div class="col-12">
+                <n-form-item path="location_country">
+                  <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="addressChangeHandler"/>
+                </n-form-item>
+                <div class="row">
+                  <div class="col-8">
+                    <n-form-item path="location_city">
+                      <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                    </n-form-item>
+                  </div>
+                  <div class="col-4">
+                    <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
+                  </div>
                 </div>
-                <div class="col-4">
-                  <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
-                </div>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+                </n-form-item>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+                </n-form-item>
               </div>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
-              </n-form-item>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
-              </n-form-item>
-            </div>
-            <div class="col-12">
-              <LocationBox @location="locationHelper.locationHandler" @address="locationHelper.addressHandler" :location="form[0].location" :address="locationHelper.address"/>
             </div>
           </div>
         </n-form-item>
+
+        <FormItem path="map" type="company">
+            <template #content>
+            <div class="d-flex flex-column w-100">
+              <div class="row">
+                <div class="col-12">
+                  <MapPicker :coords="location" @coords="updateLocation" :zoom="zoom" @zoom="updateZoom"/>
+                  <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="updateZoom"/>
+                </div>
+              </div>
+            </div>
+            </template>
+        </FormItem>
 
         <FormItem path="description" type="company">
           <template #content>

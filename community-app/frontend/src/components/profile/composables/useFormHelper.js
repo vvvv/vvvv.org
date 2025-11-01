@@ -44,6 +44,14 @@ export function useFormHelper(_form)
     }
 
     const transformer = {
+        map:{
+            toLocation: (geojson)=>{
+                return {
+                    lat: geojson.coordinates[1],
+                    long: geojson.coordinates[0]
+                }
+            }
+        },
         people:{
             toForm: (persons)=>{
             return persons.map(person=>({

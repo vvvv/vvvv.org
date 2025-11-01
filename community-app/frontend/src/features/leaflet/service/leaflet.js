@@ -3,7 +3,7 @@ import L from 'leaflet';
 const osmURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-export function createMap(element, options = {})
+export function createMap(element, onZoom, options = {})
 {
     if (!element) throw new Error('Element is required');
 
@@ -12,6 +12,13 @@ export function createMap(element, options = {})
         zoom: options.zoom || 2,
         zoomControl: true,
         attributionControl: true
+    })
+
+    map.on('zoom', ()=>{
+        const zoom = map.getZoom();
+        if (onZoom){
+            onZoom(zoom);
+        }
     })
 
     const tileLayer = L.tileLayer(
@@ -66,3 +73,40 @@ export function addMarker(map, lat, long, { popup, onClick, icon } = {})
     marker.addTo(map);
     return marker;
 }
+
+export function addDraggableMarker(map, position, onMove, options = {})
+{
+
+    const markerOptions = {
+        draggable: true
+    };
+
+    if (options.icon) markerOptions.icon = options.icon;
+    
+    const marker = L.marker([position.lat, position.long], markerOptions);
+    
+    marker.on('dragend', ()=>{
+        const { lat, lng } = marker.getLatLng();
+        if (onMove){
+            onMove({lat, long: lng});
+        }
+    })
+    
+    marker.addTo(map);
+    
+    return marker;
+}
+
+export function updateMarkerPosition(marker, map, position, zoom = 5){
+    const { lat, long } = position;
+    const pos = [lat, long];
+    const currentPosition = marker.getLatLng();
+    
+    marker.setLatLng(pos);
+
+    map.flyTo(pos, zoom, {
+        animate: true,
+        duration: 0.5
+    });
+}
+

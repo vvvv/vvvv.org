@@ -1,4 +1,4 @@
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 
 function toPlace(value){
 
@@ -12,7 +12,7 @@ function toPlace(value){
         text: value.properties.display_name,
         geometry: value.geometry,
         address: {
-            country: address.country,
+            country: address.country_code.toUpperCase(),
             city: address.city,
             postalcode: address.postcode,
             street: street
@@ -21,6 +21,9 @@ function toPlace(value){
 }
 
 export function useNominatimState( { result, loading, error }){
+
+    let stage = 'idle';
+
     return computed(()=>{
 
         if (loading.value)
@@ -30,23 +33,38 @@ export function useNominatimState( { result, loading, error }){
 
         if (error.value)
         {
-            return { type: 'error', error: error.value};
+            stage = 'idle';
+            return { type: 'error', error: error.value, stage};
         }
 
         if (!result.value)
         {
-            return { type: ''};
+            stage = 'idle';
+            return { type: '', stage};
         }
 
         if (!result.value.features || result.value.features.length === 0)
         {
-            return { type: 'empty'}
+            console.log(stage);
+
+            let type = 'empty';
+
+            if (stage === 'idle') stage === 'city';
+            else if (stage === 'city') stage === 'country';
+            else if (stage === 'country') 
+                {
+                    stage == 'idle';
+                    type ='';
+                }
+
+            return { type, stage}
         }
 
         if (result.value.features && result.value.features.length > 0)
         {
+            stage = 'idle';
             const places = result.value.features.map(toPlace);
-            return { type: 'found', results: places};
+            return { type: 'found', results: places, stage};
         }
     })
 }
