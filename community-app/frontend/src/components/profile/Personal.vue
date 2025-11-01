@@ -11,6 +11,7 @@ import { NAvatar, NSelect, NAlert, NTag, NSwitch, NForm, NFormItem, NInput } fro
 import FormItem from './FormItem.vue'
 import StatusTag from '../StatusTag.vue'
 import { personalMessages } from "./HelpTexts.js";
+import { useFormHelper } from './composables/useFormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const avatarSize = 120;
@@ -28,6 +29,8 @@ const betaYears = ref([]);
 const gammaYears = ref([]);
 
 const imageParams = `?withoutEnlargement=true&quality=90&fit=cover&width=${avatarSize}&height=${avatarSize}`;
+
+const formHelper = useFormHelper(form);
 
 const prepareData = ()=>{
 
@@ -47,6 +50,8 @@ const prepareData = ()=>{
 
   betaYears.value = range(2001, currentYear);
   gammaYears.value = range (2015, currentYear);
+
+  formHelper.setNewData(form.value);
 
 }
 
@@ -152,6 +157,8 @@ const submit = async () => {
 
       emit('updateData', data);
       emit('message', { type: 'success', string: response.result});
+
+      formHelper.setNewData(form.value);
     }
   }
   catch (error) {
@@ -332,7 +339,11 @@ const errors = computed(()=>{
           </div>
 
         </div>
-        <SubmitRevertButtons @revert="revert" @submit="submit" :updating="updating"/>
     </n-form>
+
+    <div class="stickyFormButtons" v-if="formHelper.changed.value">
+      <SubmitRevertButtons @revert="formHelper.revert" @submit="submit" :updating="updating"/>
+    </div>
+
   </template>
 </template>

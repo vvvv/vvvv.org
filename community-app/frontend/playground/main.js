@@ -1,6 +1,5 @@
 import { createApp } from "vue";
-import locationUpdater from "./feature/locationUpdater.vue";
-import MapTester from "./MapTester.vue";
+import LocationSetter from "./LocationSetter.vue";
 
 if (import.meta.env.DEV)
 {
@@ -11,4 +10,4 @@ if (import.meta.env.DEV)
 
 import '../src/styles/style.scss'
 
-createApp(MapTester).mount("#app");
+createApp(LocationSetter).mount("#app");

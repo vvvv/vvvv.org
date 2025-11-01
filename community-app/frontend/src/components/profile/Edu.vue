@@ -13,13 +13,14 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
-import { transformer } from './FormHelper.js'
+import LocationBox from '../../features/nominatim/components/LocationBox.vue'
 import { eduMessages } from "./HelpTexts.js";
+import { useLocationHelper } from './composables/useLocationHelper.js'
+import { useFormHelper } from './composables/useFormHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
 
-const isChanged = ref(false);
 const formRef = ref(null);
 const form = ref(null);
 const logo = ref(null);
@@ -27,6 +28,9 @@ const tempLogo = ref(null);
 const updating = ref(false);
 const eduExists = ref(false);
 const uploader = ref(null);
+
+const locationHelper = useLocationHelper(form);
+const formHelper = useFormHelper(form);
 
 const emptyData = {
   enabled: false,
@@ -56,7 +60,7 @@ const prepareData = ()=>{
 
     if (temp.edus[0].people)
     {
-      temp.edus[0].people = transformer.people.toForm(temp.edus[0].people);
+      temp.edus[0].people = formHelper.transformer.people.toForm(temp.edus[0].people);
     }
   }
   else
@@ -70,13 +74,24 @@ const prepareData = ()=>{
     eduExists.value = false;
   }
 
-  form.value = temp.edus
+  form.value = temp.edus;
+  formHelper.setNewData(form.value);
 }
 
 const rules = {
   name: {
     required: true,
     message: "Name is required",
+    trigger: ['input', 'blur'],
+  },
+  location_country: {
+    required: true,
+    message: "Country is required",
+    trigger: ['input', 'blur', 'change'],
+  },
+  location_city: {
+    required: true,
+    message: "City is required",
     trigger: ['input', 'blur'],
   },
   website: {
@@ -99,6 +114,10 @@ const rules = {
 
 onMounted(()=>{
   prepareData()
+})
+
+watch (()=>data, (newValue)=>{
+  prepareData();
 })
 
 const updateTempLogo = (id) =>{
@@ -146,10 +165,22 @@ const submit = async () => {
 
   if (formValue.people.length > 0)
   {
-    formValue.people = transformer.people.toPayload(formValue.people);
+    formValue.people = formHelper.transformer.people.toPayload(formValue.people);
   }
 
+  if (location.value)
+  {
+    formValue.location = location.value;
+  }
+  else
+  {
+    delete formValue.location;
+  }
+
+
   try{
+    updating.value = true;
+
     const response = await post(Constants.EDIT_EDU, formValue)
   
     if (response.code == 'SUCCESS' || 'NEW')
@@ -174,6 +205,8 @@ const submit = async () => {
 
       emit('updateData', data);
       emit('message', { type: 'success', string: response.result});
+
+      formHelper.setNewData(form.value);
     }
 
   }
@@ -278,20 +311,31 @@ const errors = computed(()=>{
         <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
         <InputField path="slug" type="edu" v-model="slug" :disabled="true"/>
 
-        <n-form-item label="Address" path="address">
+        <n-form-item label="Address" @input="locationHelper.addressChangeHandler">
           <div class="row">
-            <div class="col">
-              <n-input v-model:value="form[0].location_street" placeholder="Street and house number" class="mb-1" />
-              <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info" class="mb-1"/>
-              <div class="row mb-1">
+            <div class="col-12">
+              <n-form-item path="location_country">
+                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="locationHelper.addressChangeHandler"/>
+              </n-form-item>
+              <div class="row">
+                <div class="col-8">
+                  <n-form-item path="location_city">
+                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                  </n-form-item>
+                </div>
                 <div class="col-4">
                   <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
                 </div>
-                <div class="col-8">
-                  <n-input v-model:value="form[0].location_city" placeholder="City" />
-                </div>
               </div>
-              <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+              </n-form-item>
+              <n-form-item>
+                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+              </n-form-item>
+            </div>
+            <div class="col-12">
+              <LocationBox @location="locationHelper.locationHandler" @address="locationHelper.addressHandler" :location="form[0].location" :address="locationHelper.address"/>
             </div>
           </div>
         </n-form-item>
@@ -313,5 +357,8 @@ const errors = computed(()=>{
         </FormItem>
 
       </NForm>
-      <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
+
+      <div class="stickyFormButtons" v-if="formHelper.changed.value">
+        <SubmitRevertButtons @revert="formHelper.revert" @submit="submit" :updating="updating"/>
+      </div>
 </template>

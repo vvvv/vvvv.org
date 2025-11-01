@@ -7,6 +7,8 @@ import { showEduProfile } from "../utils.js"
 import ListNavigation from './ListNavigation.vue';
 import LogoListView from '../components/LogoListView.vue';
 import ConnectionListView from '../components/ConnectionListView.vue';
+import MapView from '../features/leaflet/components/MapView.vue';
+import { useMapView } from './composables/useMapView';
 
 const router = useRouter();
 const route = useRoute();
@@ -16,6 +18,10 @@ const pageSizes = [
     { label: '50 per page', value: 50 },
     { label: '100 per page', value: 100 }
 ]
+
+const mapRef = ref(null);
+
+const { fillMap, center, zoom } = useMapView(mapRef, showEduProfile);
 
 const emit = defineEmits(['logout']);
 
@@ -84,12 +90,17 @@ const titleList = computed(()=>{
         </div>
     </div>
 
-    <LogoListView v-if="store.selectedSection.key == 'list'" 
-        :loading = "store.loading"
-        :title = "titleList"
-        :list ="store.list?.list"
-        @click="showEduProfile"
-    />
+    <template v-if="store.selectedSection.key == 'list'">
+        <p>{{ titleList }}</p>
+        <MapView ref="mapRef" :center="center" :zoom="zoom"/>
+        <LogoListView v-if="store.selectedSection.key == 'list'" 
+            :loading = "store.loading"
+            :title = "titleList"
+            :list ="store.list?.list"
+            @click="showEduProfile"
+            class="mt-4"
+        />
+    </template>
 
     <ConnectionListView v-if="store.selectedSection.key == 'connections'" 
         :list="store.list?.connections" 

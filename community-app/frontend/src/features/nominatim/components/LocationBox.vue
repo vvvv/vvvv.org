@@ -6,21 +6,40 @@ import { useNominatimQuery } from '../composables/useNominatimQuery.js'
 import { useNominatimState } from '../composables/useNominatimState.js'
 import LocationSearchRenderer from './LocationSearchRenderer.vue'
 
-const emit = defineEmits(['location', 'address']);
+const emit = defineEmits(['location', 'address', 'zoom']);
 
-const props = defineProps({
+const { location, address } = defineProps({
     location: { type: Object, required: false},
     address: { type: Object, required: true}
 })
 
-const { result, loading, error, searchDebounced } = useNominatimSearch(500);
-const state = useNominatimState({ result, loading, error });
-const queryString = useNominatimQuery( props );
+const addressToQuery = ref(address);
 const locationExists = ref(false);
 const selected = ref(null);
 
-onMounted(()=>{
-    locationExists.value = props.location !== null;
+const { result, loading, error, searchDebounced, searchAsync } = useNominatimSearch(500);
+
+const state = useNominatimState({ result, loading, error });
+const queryString = useNominatimQuery( addressToQuery );
+
+watch (()=>address, (newValue)=>
+{
+    addressToQuery.value = newValue;
+})
+
+watch (state, (newValue)=>{
+    if (newValue.type === 'empty')
+    {
+        switch (newValue.stage)
+        {
+            case 'idle':
+                addressToQuery.value = { city: address.city, country: address.country };
+                break;
+            case 'city':
+                addressToQuery.value = { country: address.country };
+                break;
+        }
+    }
 })
 
 function retry(){
@@ -36,18 +55,38 @@ watch(queryString, (newQuery)=>{
 
 watch(queryString, (newQuery) => {
 
+    locationExists.value = false;
+
     if (newQuery)
     {
-        if (props.location) emit('location', null);
+        if (location) emit('location', null);
         selected.value = null;
         searchDebounced(newQuery);
     }   
 })
 
+watch (()=>location, (newValue)=>{
+    if (newValue) locationExists.value = true;
+})
+
 function select(place)
 {
+
+    if (place.address.street && place.address.street !== '')
+    {
+        emit('zoom', 17);   
+    }
+    else if (place.address.city && place.address.city !== '')
+    {
+        emit('zoom', 10);
+    }
+    else if (place.address.country && place.address.country !== '')
+    {
+        emit('zoom', 5);
+    }
+
     emit('location', place);
-    emit('address', place)
+    emit('address', place);
     selected.value = place;
 }
 
@@ -62,9 +101,9 @@ const verb = computed(()=>{
 
         <LocationSearchRenderer :state="state" @select="(value)=>select(value)" @retry="retry" v-if="!locationExists && !selected"/>
 
-        <div v-if="locationExists || selected" class="info">
+        <!-- <div v-if="locationExists || selected" class="info">
             <p>{{ verb }} you on the map. To change your location, tweak the address.</p>
-        </div>
+        </div> -->
         
         <div class="attribution">
             We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.

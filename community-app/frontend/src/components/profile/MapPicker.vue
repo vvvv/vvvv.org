@@ -1,55 +1,81 @@
 <script setup>
 
-import { ref, onMounted, watchEffect } from 'vue'
-import L from 'leaflet'
+import { ref, onMounted, watch, onUnmounted, watchEffect  } from 'vue'
+import { createMap, addDraggableMarker, updateMarkerPosition, clearMarkers } from '../../features/leaflet/service/leaflet.js'
+import iconUrl from "@static/img/icons/leaflet-marker-icon-black.png"
+import "leaflet/dist/leaflet.css";
 
-const props = defineProps['coords'];
-const emit = defineEmits(['newcoords']);
+const props = defineProps(['coords', 'zoom']);
+const emit = defineEmits(['coords', 'zoom']);
 
-const defaultCoords = { lat: 51.505, lon: -0.09 };
+const defaultCoords = { lat: 51.505, long: -0.09 };
+const defaultZoom = 5;
 
-const mapContainer = ref(null)
+const mapContainer = ref(null);
+
+const icon = L.icon({
+    iconUrl: iconUrl,
+    iconSize: [25, 41],
+    iconAnchor: [14, 41],
+    popupAnchor: [-1, -41],
+});
 
 let map = null;
 let marker = null;
 
+const initialCoords = {
+    lat: props.coords?.lat ?? defaultCoords.lat,
+    lng: props.coords?.long ?? defaultCoords.long
+}
+
 onMounted(()=>{
-    initMap(props.coords.value || defaultCoords);
-})
 
-watchEffect(()=>{
-    setCenter(props.coords.value || defaultCoords);
-})
-
-function initMap(coords)
-{
-    map = L.map(mapContainer.value).setView([coords.lat, coords.lon], 13);
-
-    L.titleLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/">OSM</a> contributors',
-    }).addTo(map);
-
-    marker = L.marker([coords.lat, coords.lon], { draggable: true }).addTo(map);
-
-    marker.on('dragged', ()=>{
-        const { lat, lng } = marker.getLanLng();
-        emit('coords', { lat: lat, lon: lng });
-    })
-}
-
-function setCenter(coords)
-{
-    if (map && marker)
+    if (!mapContainer.value || map) 
     {
-        const center = [coords.lat, coords.lon];
-        map.setView(center, 13);
-        marker.setLanLng(center);
+        return;
     }
-}
+    
+    const { map: leafletMap } = createMap (mapContainer.value, (zoom)=>{
+        emit('zoom', zoom);
+    },
+    { center: initialCoords, zoom: props.zoom || defaultZoom }
+    );
+    
+    map = leafletMap;
+
+    const position = props.coords ?? defaultCoords;
+
+    marker = addDraggableMarker (map, position, (coords)=>{
+            emit('coords', coords);
+        },
+        { icon }
+    );
+})
+
+onUnmounted(()=>{
+    if (map)
+    {
+        clearMarkers(map);
+        map.remove();
+        map = null;
+    }
+})
+
+watch(()=>props.coords, (newValue)=>{
+    if (map && marker) updateMarkerPosition (marker, map, newValue, props.zoom);
+})
+
 </script>
 
 <template>
-  <div class="map-picker">
-    <div ref="mapContainer" style="height: 400px;"></div>
-  </div>
+    <div ref="mapContainer" class="map-container"></div>
 </template>
+
+<style scoped>
+    .map-container {
+        width: 100%;
+        height: 350px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>

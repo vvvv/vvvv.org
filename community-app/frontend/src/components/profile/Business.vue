@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, computed, watch, watchEffect } from 'vue'
 import slugify from 'slugify'
 import Constants from '../../constants.js'
 import FileUploader from './FileUploader.vue'
@@ -14,9 +14,10 @@ import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
 import LocationBox from '../../features/nominatim/components/LocationBox.vue'
-import { useBusinessListStore } from "../../routes/BusinessListStore.js"
-import { transformer } from './FormHelper.js'
+import MapPicker from './MapPicker.vue'
 import { businessMessages } from "./HelpTexts.js";
+import { useBusinessListStore } from "../../routes/BusinessListStore.js"
+import { useFormHelper } from './composables/useFormHelper.js'
 import { useLocationHelper } from './composables/useLocationHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
@@ -29,9 +30,12 @@ const tempLogo = ref(null);
 const updating = ref(false);
 const companyExists = ref(false);
 const uploader = ref(null);
+
 const limit = 500;
 
-const { location, address, handleLocation, updateAddress } = useLocationHelper(form);
+const { location, zoom, address, updateZoom, updateLocation, locationHandler, addressChangeHandler } = useLocationHelper(form);
+
+const formHelper = useFormHelper(form);
 
 const emptyCompany = {
   enabled: false,
@@ -50,7 +54,10 @@ const emptyCompany = {
   social: {}
 }
 
+
 const prepareData = ()=>{
+
+  formHelper.changed.value = false;
 
   const temp = clone(data);
 
@@ -67,7 +74,13 @@ const prepareData = ()=>{
 
     if (temp.companies[0].people)
     {
-      temp.companies[0].people = transformer.people.toForm(temp.companies[0].people);
+      temp.companies[0].people = formHelper.transformer.people.toForm(temp.companies[0].people);
+    }
+
+    if (temp.companies[0].location)
+    {
+      temp.companies[0].location = formHelper.transformer.map.toLocation(temp.companies[0].location);
+      location.value = temp.companies[0].location;
     }
   }
   else
@@ -78,10 +91,11 @@ const prepareData = ()=>{
       website: ""
     };
     temp.companies[0].social = defaultSocial;
-    companyExists.value = false;
+    companyExists.value = false;  
   }
 
   form.value = temp.companies;
+  formHelper.setNewData(form.value);
 }
 
 const noSpaces = (rule, value) =>{
@@ -133,6 +147,10 @@ watch (()=>data, (newValue)=>{
   prepareData();
 })
 
+watch (location, (newValue)=>{
+  formHelper.changed.value = true;
+})
+
 const updateTempLogo = (id) =>{
   if (id !== null)
   {
@@ -177,7 +195,7 @@ const submit = async () => {
 
   if (formValue.people.length > 0)
   {
-    formValue.people = transformer.people.toPayload(formValue.people);
+    formValue.people = formHelper.transformer.people.toPayload(formValue.people);
   }
 
   if (location.value)
@@ -191,7 +209,9 @@ const submit = async () => {
 
   try{
     
-    const response = await post(Constants.EDIT_COMPANY, formValue)
+    updating.value = true;
+
+    const response = await post(Constants.EDIT_COMPANY, formValue);
     
     if (response.code === 'SUCCESS' || 'NEW')
     {
@@ -212,8 +232,9 @@ const submit = async () => {
       }
 
       emit('reload');
-
       emit('message', { type: 'success', string: response.result});
+
+      formHelper.setNewData(form.value);
     }
   }
   catch (error)
@@ -234,7 +255,6 @@ const logoButtonText = computed(()=>{
 const slug = computed(()=>{
   return form.value[0].slug ? form.value[0].slug : slugify (form.value[0].name ?? "", { lower: true, strict: true});
 })
-
 
 const errors = computed(()=>{
 
@@ -323,34 +343,47 @@ const errors = computed(()=>{
           <InputField path="tagline" type="company" v-model="form[0].tagline"/>
           </div>
         </div>
-        <n-form-item label="Address">
-          <div class="row">
-            <div class="col-12">
-              <n-form-item path="location_country">
-                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country"/>
-              </n-form-item>
-              <div class="row">
-                <div class="col-8">
-                  <n-form-item path="location_city">
-                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
-                  </n-form-item>
+        
+        <n-form-item label="Address" @input="addressChangeHandler" :show-feedback="false">
+          <div class="d-flex flex-column w-100">
+            <div class="row">
+              <div class="col-12">
+                <n-form-item path="location_country">
+                  <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="addressChangeHandler"/>
+                </n-form-item>
+                <div class="row">
+                  <div class="col-8">
+                    <n-form-item path="location_city">
+                      <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                    </n-form-item>
+                  </div>
+                  <div class="col-4">
+                    <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
+                  </div>
                 </div>
-                <div class="col-4">
-                  <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
-                </div>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+                </n-form-item>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+                </n-form-item>
               </div>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
-              </n-form-item>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
-              </n-form-item>
-            </div>
-            <div class="col-12">
-              <LocationBox @location="handleLocation" @address="updateAddress" :location="form[0].location" :address="address"/>
             </div>
           </div>
         </n-form-item>
+
+        <FormItem path="map" type="company">
+            <template #content>
+            <div class="d-flex flex-column w-100">
+              <div class="row">
+                <div class="col-12">
+                  <MapPicker :coords="location" @coords="updateLocation" :zoom="zoom" @zoom="updateZoom"/>
+                  <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="updateZoom"/>
+                </div>
+              </div>
+            </div>
+            </template>
+        </FormItem>
 
         <FormItem path="description" type="company">
           <template #content>
@@ -359,7 +392,6 @@ const errors = computed(()=>{
         </FormItem>
         
         <SocialFields v-model:value="form[0].social" type="company"/>
-
         
         <InputField path="contact_url" v-model="form[0].contact_url"/>
         <InputField path="projects_url" v-model="form[0].projects_url"/>
@@ -377,7 +409,9 @@ const errors = computed(()=>{
           </template>
         </FormItem>
         
-
       </NForm>
-      <SubmitRevertButtons @revert="prepareData" @submit="submit" :updating="updating"/>
+
+      <div class="stickyFormButtons" v-if="formHelper.changed.value">
+        <SubmitRevertButtons @revert="formHelper.revert" @submit="submit" :updating="updating"/>
+      </div>
 </template>

@@ -39,6 +39,18 @@ const data = Object({
             placeholder: "vvvv.org"
         }
     },
+    map: {
+        company:
+        {
+            label: "Map",
+            help: "Pin your company on the map"
+        },
+        edu:
+        {
+            label: "Map",
+            help: "Pin your institution on the map"
+        }
+    },
     github: {
         label: "Github",
         help: 'Your GitHub username',

@@ -1,34 +1,34 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 export function useLocationHelper(_form){
 
-    const form = ref(_form);
+    const form = _form;
+    const address = ref({});
+    const zoom = ref(15);
 
     const location = ref(null);
 
-    const address = computed(()=>{
-
-        if (!form && !form.value) return {};
-
-        return{
+    function addressChangeHandler()
+    {
+        address.value = {
             street: form.value[0].location_street,
             city: form.value[0].location_city,
             postalcode: form.value[0].location_postalcode,
-            country: form.value[0].location_country,
+            country: form.value[0].location_country
         }
-    })
+    }
     
-    const handleLocation = (loc)=>{ 
+    function locationHandler (loc) { 
         if (loc)
         {
             location.value = {
-                lat: loc.geometry.coordinates[0],
-                long: loc.geometry.coordinates[1]
+                lat: loc.geometry.coordinates[1],
+                long: loc.geometry.coordinates[0]
             }
         }
     }
 
-    const updateAddress = (loc)=>{
+    function addressHandler (loc) {  
         if (loc)
         {
             if (loc.address.country) form.value[0].location_country = loc.address.country;
@@ -38,5 +38,21 @@ export function useLocationHelper(_form){
         }
     }
 
-    return { location, address, handleLocation, updateAddress }
+    function updateLocation (newValue)
+    {
+        if (newValue)
+        {
+            location.value = newValue;
+        }
+    }
+
+    function updateZoom(newZoom)
+    {
+        if (newZoom)
+        {
+            zoom.value = newZoom
+        }
+    }
+
+    return { location, address, addressChangeHandler, locationHandler, addressHandler, zoom, updateZoom, updateLocation }
 }
