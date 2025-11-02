@@ -94,8 +94,14 @@ const prepareData = ()=>{
     companyExists.value = false;  
   }
 
+  
   form.value = temp.companies;
   formHelper.setNewData(form.value);
+
+  if (!form.companies?.[0]?.location)
+  {
+    addressChangeHandler();
+  }
 }
 
 const noSpaces = (rule, value) =>{

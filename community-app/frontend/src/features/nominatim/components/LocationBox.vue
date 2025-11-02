@@ -25,6 +25,9 @@ const queryString = useNominatimQuery( addressToQuery );
 watch (()=>address, (newValue)=>
 {
     addressToQuery.value = newValue;
+},
+{
+    immediate: true
 })
 
 watch (state, (newValue)=>{
@@ -32,7 +35,7 @@ watch (state, (newValue)=>{
     {
         switch (newValue.stage)
         {
-            case 'idle':
+            case 'idle':    
                 addressToQuery.value = { city: address.city, country: address.country };
                 break;
             case 'city':
@@ -46,13 +49,6 @@ function retry(){
     searchDebounced(queryString.value);
 }
 
-watch(queryString, (newQuery)=>{
-    locationExists.value = false;
-},
-{
-    once: true
-})
-
 watch(queryString, (newQuery) => {
 
     locationExists.value = false;
@@ -63,6 +59,9 @@ watch(queryString, (newQuery) => {
         selected.value = null;
         searchDebounced(newQuery);
     }   
+},
+{
+    immediate: true
 })
 
 watch (()=>location, (newValue)=>{
@@ -90,20 +89,11 @@ function select(place)
     selected.value = place;
 }
 
-const verb = computed(()=>{
-    if (locationExists) return "We have";
-    else if (selected) return "We've found";
-})
-
 </script>
 <template>
     <div class="nominatim">
 
         <LocationSearchRenderer :state="state" @select="(value)=>select(value)" @retry="retry" v-if="!locationExists && !selected"/>
-
-        <!-- <div v-if="locationExists || selected" class="info">
-            <p>{{ verb }} you on the map. To change your location, tweak the address.</p>
-        </div> -->
         
         <div class="attribution">
             We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.
