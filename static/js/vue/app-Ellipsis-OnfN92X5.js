@@ -1,4 +1,4 @@
-import{G as L,f as j,b as D,m as N,d as T,Y as E,h as y}from"./app.js";import{v as $,N as B}from"./app-utils-Dp1jWI29.js";import{d as M,h as p,r as u,f as x,a5 as P,D as I}from"./app-vue-BvXrwsFo.js";const _=L({name:"Ellipsis",common:j,peers:{Tooltip:$}}),H=D("ellipsis",{overflow:"hidden"},[N("line-clamp",`
+import{G as L,f as j,b as D,m as N,d as T,Y as E,h as y}from"./app.js";import{v as $,N as B}from"./app-utils-BxZ-CQXf.js";import{d as M,h as p,r as u,f as x,a5 as P,D as I}from"./app-vue-BvXrwsFo.js";const _=L({name:"Ellipsis",common:j,peers:{Tooltip:$}}),H=D("ellipsis",{overflow:"hidden"},[N("line-clamp",`
  white-space: nowrap;
  display: inline-block;
  vertical-align: bottom;
