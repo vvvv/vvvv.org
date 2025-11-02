@@ -8,7 +8,7 @@ import "leaflet/dist/leaflet.css";
 const props = defineProps(['coords', 'zoom']);
 const emit = defineEmits(['coords', 'zoom']);
 
-const defaultCoords = { lat: 51.505, long: -0.09 };
+const defaultCoords = { lat: 52.52, long: 13.404954 };
 const defaultZoom = 5;
 
 const mapContainer = ref(null);
