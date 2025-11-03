@@ -93,7 +93,7 @@ function select(place)
 <template>
     <div class="nominatim">
 
-        <LocationSearchRenderer :state="state" @select="(value)=>select(value)" @retry="retry" v-if="!locationExists && !selected"/>
+        <LocationSearchRenderer :state="state" @select="(value)=>select(value)" @retry="retry"/>
         
         <div class="attribution">
             We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.

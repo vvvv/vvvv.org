@@ -383,8 +383,9 @@ const errors = computed(()=>{
             <div class="d-flex flex-column w-100">
               <div class="row">
                 <div class="col-12">
-                  <MapPicker :coords="location" @coords="updateLocation" :zoom="zoom" @zoom="updateZoom"/>
                   <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="updateZoom"/>
+                  <p class="info">Drag and drop the pin to set your location:</p>
+                  <MapPicker :coords="location" @coords="updateLocation" :zoom="zoom" @zoom="updateZoom"/>
                 </div>
               </div>
             </div>
