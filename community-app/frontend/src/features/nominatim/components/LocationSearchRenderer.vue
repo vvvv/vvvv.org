@@ -1,23 +1,49 @@
 <script setup>
-import { watch, ref } from 'vue'
-import { NList, NListItem, NTag, NSpin, NButton } from 'naive-ui'
+import { watch, ref, computed } from 'vue'
+import { NList, NListItem, NTag, NSpin, NButton, NSelect } from 'naive-ui'
 import LocationErrorRenderer from './LocationErrorRenderer.vue'
 
 const props = defineProps({
     state: { type: Object, required: true}
 })
-const selected = ref(false);
 
 const emit = defineEmits(['select', 'retry']);
 
 function select(place)
 {
+    selectedOption.value = place.text;
     emit('select', place);
-    selected.value = true;
 }
 
+const options = ref([]);
+const defaultValue = ref("");
+const selectedOption = ref(null);
+
 watch (()=>props.state, (newValue)=>{
-    selected.value = false;
+
+    if (newValue)
+    {
+        selectedOption.value = null;
+
+        if (newValue.type === 'found' && newValue.results.length >0)
+        {
+            options.value = newValue.results.map((r)=>{
+                return {
+                    label: r.text,
+                    value: r
+                }
+            })
+
+            defaultValue.value = "Navigate map to:";
+        }
+        else if (newValue.type === 'loading')
+        {
+            defaultValue.value = "Searching..."
+        }   
+        else {
+            defaultValue.value = "Location can't be found";
+        }
+    }
 })
 
 </script>
@@ -30,16 +56,15 @@ watch (()=>props.state, (newValue)=>{
 
         <LocationErrorRenderer v-if="state.type === 'error'" :error="state.error" @retry="emit('retry')"/>
 
-        <div v-else-if="!selected && state.type === 'found'" class="many">
-            <p class="info">Pick a location below and adjust the pin if needed:</p>
-            <NList clickable show-divider bordered>
-                <NListItem v-for="place in state.results" :key="place.place_id" @click="select(place)">
-                    {{ place.text }}<br/>
-                    <template #suffix>
-                        <NButton @click="select(place)" type="primary">Pin on map</NButton>
-                    </template>
-                </NListItem>
-            </NList>
-        </div>
+        <NSelect
+                v-model:value ="selectedOption"
+                :on-update:value="select" 
+                :options="options" 
+                :disabled="options.length == 0" 
+                :placeholder="defaultValue"
+                :reset-menu-on-options-change="true"
+                >
+        </NSelect>      
+
     </div>
 </template>
