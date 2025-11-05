@@ -42,6 +42,18 @@ export function createMap(element, onZoom, options = {})
       const pos = this._map._latLngToNewLayerPoint(this._latlng, opt.zoom, opt.center).round();
       this._setPos(pos);
     }
+    
+    // Fixing the same for Popups:
+    // https://github.com/Leaflet/Leaflet/issues/4453
+    //
+    L.Popup.prototype._animateZoom = function (e) {
+        if (!this._map) {
+            return
+        }
+        var pos = this._map._latLngToNewLayerPoint(this._latlng, e.zoom, e.center),
+            anchor = this._getAnchor()
+        L.DomUtil.setPosition(this._container, pos.add(anchor))
+    }
 
     return { map, tileLayer };
 }
@@ -50,7 +62,7 @@ export function clearMarkers(map)
 {
     if (!map) return;
     map.eachLayer((layer)=>{
-        if (layer instanceof L.marker){
+        if (layer instanceof L.marker || layer instanceof L.popup){
             map.removeLayer(layer);
         }
     });
@@ -82,7 +94,7 @@ export function addGroup(map, group, markers)
 
 export function makeMarker(map, lat, long, { popup, onClick, icon } = {})
 {
-    if (!map) throw new Error ('Map is required');
+    if (!map) return;
 
     const markerOptions = {};
     if (icon) markerOptions.icon = icon;
