@@ -44,14 +44,13 @@ export function useLeaflet(options = {})
     function addLocations(places = [], callbacks = {}){
         if (!map.value) return;
 
-        clearMarkers(map.value);
+        // clearMarkers(map.value);
 
         const markers = places.map((place) => {
 
             const marker = makeMarker(map.value, place.coords[1], place.coords[0], { popup: place.html, icon });
 
             marker.on('popupopen', ()=>{
-
                 for (const [id, handler] of Object.entries(callbacks)){
 
                     const el  = marker.getPopup().getElement().querySelector(`#${id}`);
