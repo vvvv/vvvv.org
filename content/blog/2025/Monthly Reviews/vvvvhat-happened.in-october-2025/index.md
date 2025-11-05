@@ -5,20 +5,29 @@ description: "Last month in review"
 categories: Monthly Reviews
 author: joreg 
 ---
-////
 
-- [vvvv on Arm for Windows and Mac, second phase](https://vvvv.org/blog/2025/update-vvvv-on-arm-for-windows-and-mac-phase-2/2/)
+So!
 
-- [The upcoing vvvv worldwide meetup markes the 31st edition](https://vvvv.org/blog/2025/31.-vvvv-worldwide-meetup/)
+The big news: Tell all your Apple friends they can finally run vvvv including VL.Stride for 3d rendering on their Silicon! It's not native, you have to run a virtual Windows (bummer, yes), but once you're over that... performance is great and sky is the limit, see: [vvvv on Arm for Windows and Mac, second phase](https://vvvv.org/blog/2025/update-vvvv-on-arm-for-windows-and-mac-phase-2/2/).
 
-- [Call for Support: Stride Shader System Rewrite](https://vvvv.org/blog/2025/call-for-support-stride-shader-system-rewrite/)
+Less big but still sweet: [VL.Devices.ZED now supports avateering](https://vvvv.org/blog/2025/update-avateering-support-for-stereolabs-zed-cameras/).
 
-////
+What's cooking? 
+- We're about to launch maps for [Businesses](https://vvvv.org/business/) and [Educational Institutions](https://vvvv.org/edu/)
+- We're working on more options for Avateering (Kinect, Femto, ...)
+- We're working on a way to create plugins for your apps...
+- We're fixing bugs as they come in
+- And actually many more little and huge things...
 
+Oh and if you haven't already, please consider supporting the [Stride Shader System Rewrite](https://vvvv.org/blog/2025/call-for-support-stride-shader-system-rewrite/)!
+
+And here two dates to save: 
+- November 20: [vvvv worldwide meetup 31st edition](https://vvvv.org/blog/2025/31.-vvvv-worldwide-meetup/)
+- November 26: [openDome Meetup II at b-dome](https://thenodeinstitute.org/event/opendome-meetup-ii-at-b-dome/)
 
 ## Learning vvvv
 
-The [vvvv beginners class](https://thenodeinstitute.org/winter-season-2025-26-out-now/#beginner) lead by [chk](https://vvvv.org/people/chk) has strated on October 27. Stay tuned for more courses in the upcoming seassion.
+The [vvvv beginners class](https://thenodeinstitute.org/winter-season-2025-26-out-now/#beginner) lead by [chk](https://vvvv.org/people/chk) has just started. You haven't missed too much yet, if you still want to join!
 
 ## Contributions
 
@@ -78,4 +87,4 @@ DATA SOIL | City in the Cloud, Data on the Ground by [3e8.studio](https://3e8.st
 - If you need a vvvv specialist or are one yourself, check out this listing of [vvvv specialists available for hire](https://vvvv.org/forhire)
 - There maybe some more relevant on the [CreativeApplications Job Board](https://www.creativeapplications.net/jobs/), the [Interactive & Immersive Job Board](https://jobs.interactiveimmersive.io/jobs/) and [dasauge.de](https://dasauge.de/sta/Vvvv/)
 
-That was it for September. Anything to add? Please do so in the comments!
+That was it for Oktober. Anything to add? Please do so in the comments!
