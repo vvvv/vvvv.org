@@ -29,11 +29,15 @@ Wipperstrasse 13, 12055 Berlin<br>
 Doors open: 18:30
 **[RSVP here](https://thenodeinstitute.org/event/31st-vvvv-worldwide-meetup/)**
 
+## Cologne
+Motion Experience Lab<br>
+Köln International School of Design<br>
+Ubierring 40, 50678 Cologne<br>
+Doors open: 18:30
+
 ## Online
-<!--
-[Watch via Youtube](https://www.youtube.com/live/Npr0K63bKZc)<br>
-[Join via Zoom](https://us02web.zoom.us/j/88581589594?pwd=qZrSFFidBl9u6IMmPiGwdnUuBXV3TX.1) -->
-Zoom and YouTube links will be shared shortly before the meetup. 
+[Watch via Youtube](https://www.youtube.com/live/96h-UvwgSvA)<br>
+[Join via Zoom](https://us02web.zoom.us/j/84842322872?pwd=tn8wgdZWaMpcbUJ4kMPuZyZ8lmTZof.1) 
 {{< /box >}}
 
 ##  Want to share your work?
