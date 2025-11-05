@@ -1,11 +1,13 @@
-import { ref, onMounted, onUnmounted, } from 'vue'
-import { createMap, setView, addMarker, clearMarkers } from '../service/leaflet'
+import { ref, onMounted, onUnmounted, toRaw } from 'vue'
+import { createMap, setView, makeMarker, addGroup, clearMarkers } from '../service/leaflet'
 import iconUrl from "@static/img/icons/leaflet-marker-icon-black.png"
 
 export function useLeaflet(options = {})
 {
     const mapContainer = ref(null);
     const map = ref(null);
+
+    let group = null;
 
     const icon = L.icon({
         iconUrl: iconUrl,
@@ -17,7 +19,7 @@ export function useLeaflet(options = {})
     onMounted(()=>{
         if (!mapContainer || map.value) return;
 
-        const { map: leafletMap } = createMap(mapContainer.value, options);
+        const { map: leafletMap } = createMap(mapContainer.value, null, options);
         
         map.value = leafletMap;
     });
@@ -44,9 +46,9 @@ export function useLeaflet(options = {})
 
         clearMarkers(map.value);
 
-        places.forEach((place) => {
+        const markers = places.map((place) => {
 
-            const marker = addMarker(map.value, place.coords[1], place.coords[0], { popup: place.html, icon });
+            const marker = makeMarker(map.value, place.coords[1], place.coords[0], { popup: place.html, icon });
 
             marker.on('popupopen', ()=>{
 
@@ -63,7 +65,12 @@ export function useLeaflet(options = {})
                     if (el) el.removeEventListener("click", handler)
                 }
             });
+
+            return marker;
         })
+
+        group = addGroup(map.value, group, markers);
+        map.value.fitBounds(group.getBounds());
     }
 
     return { mapContainer, map, showLocation, addLocations }
