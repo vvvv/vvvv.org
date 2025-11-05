@@ -13,12 +13,12 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
-import LocationBox from '../../features/nominatim/components/LocationBox.vue'
 import MapPicker from './MapPicker.vue'
 import { businessMessages } from "./HelpTexts.js";
 import { useBusinessListStore } from "../../routes/BusinessListStore.js"
 import { useFormHelper } from './composables/useFormHelper.js'
-import { useLocationHelper } from './composables/useLocationHelper.js'
+import { useMapHelper } from './composables/useMapHelper.js'
+
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -33,9 +33,8 @@ const uploader = ref(null);
 
 const limit = 500;
 
-const { location, zoom, address, updateZoom, updateLocation, locationHandler, addressChangeHandler } = useLocationHelper(form);
-
 const formHelper = useFormHelper(form);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler } = useMapHelper(form, formHelper);
 
 const emptyCompany = {
   enabled: false,
@@ -94,14 +93,14 @@ const prepareData = ()=>{
     companyExists.value = false;  
   }
 
-  
   form.value = temp.companies;
   formHelper.setNewData(form.value);
 
-  if (!form.companies?.[0]?.location)
+  if (!form.value[0]?.location)
   {
     addressChangeHandler();
   }
+
 }
 
 const noSpaces = (rule, value) =>{
@@ -151,10 +150,6 @@ onMounted(()=>{
 
 watch (()=>data, (newValue)=>{
   prepareData();
-})
-
-watch (location, (newValue)=>{
-  formHelper.changed.value = true;
 })
 
 const updateTempLogo = (id) =>{
@@ -382,10 +377,12 @@ const errors = computed(()=>{
             <template #content>
             <div class="d-flex flex-column w-100">
               <div class="row">
-                <div class="col-12">
-                  <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="updateZoom"/>
+                <div class="col-12 map">
                   <p class="info">Drag and drop the pin to set your location:</p>
-                  <MapPicker :coords="location" @coords="updateLocation" :zoom="zoom" @zoom="updateZoom"/>
+                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom"/>
+                  <div class="attribution">
+                      We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.
+                  </div>
                 </div>
               </div>
             </div>

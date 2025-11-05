@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export function useLocationHelper(_form){
 
@@ -28,15 +28,15 @@ export function useLocationHelper(_form){
         }
     }
 
-    function addressHandler (loc) {  
-        if (loc)
-        {
-            if (loc.address.country) form.value[0].location_country = loc.address.country;
-            if (loc.address.city) form.value[0].location_city = loc.address.city;
-            if (loc.address.postalcode) form.value[0].location_postalcode = loc.address.postalcode;
-            if (loc.address.street) form.value[0].location_street = loc.address.street;
-        }
-    }
+    // function addressHandler (loc) {  
+    //     if (loc)
+    //     {
+    //         if (loc.address.country) form.value[0].location_country = loc.address.country;
+    //         if (loc.address.city) form.value[0].location_city = loc.address.city;
+    //         if (loc.address.postalcode) form.value[0].location_postalcode = loc.address.postalcode;
+    //         if (loc.address.street) form.value[0].location_street = loc.address.street;
+    //     }
+    // }
 
     function updateLocation (newValue)
     {
@@ -54,5 +54,5 @@ export function useLocationHelper(_form){
         }
     }
 
-    return { location, address, addressChangeHandler, locationHandler, addressHandler, zoom, updateZoom, updateLocation }
+    return { location, address, addressChangeHandler, locationHandler, zoom, updateZoom, updateLocation }
 }

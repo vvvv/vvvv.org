@@ -335,23 +335,36 @@ $tag-dark:  #666;
     z-index: 1000;
   }
 
-  .nominatim{
+  .map{
 
     .info {
       font-size: 0.9rem;
+      margin-top: 0.4rem;
       color: #333;
+    }
 
-      p{
-        font-size: inherit;
-        margin-bottom: 0.3rem;
-        color: inherit;
-      }
+    p{
+      font-size: inherit;
+      margin-bottom: 0.5rem;
+      color: inherit;
     }
 
     .attribution{
       margin: 0.5rem 0rem;
       font-size: 0.8rem;
       color: #999;
+    }
+
+    .map-container
+    {
+      width: 100%;
+      height: 350px;
+      border-radius: 8px;
+      overflow: hidden;
+
+      a{
+        text-decoration: none;
+      }
     }
   }
 
