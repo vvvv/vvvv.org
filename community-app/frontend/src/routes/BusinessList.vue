@@ -92,13 +92,15 @@ const titleList = computed(()=>{
     </div>
 
     <template v-if="store.selectedSection.key == 'list'">
-        <p>{{ titleList }}</p>
-        <MapView ref="mapRef" :center="center" :zoom="zoom"/>
-        <LogoListView  
-            :loading = "store.loading"
-            :list ="store.list?.list"
-            @click="showBusinessProfile"
-            class="mt-4"/>
+        <div class="communityList">
+            <p>{{ titleList }}</p>
+            <MapView ref="mapRef" :center="center" :zoom="zoom"/>
+            <LogoListView  
+                :loading = "store.loading"
+                :list ="store.list?.list"
+                @click="showBusinessProfile"
+                class="mt-4"/>
+        </div>
     </template>
     
     <ConnectionListView v-if="store.selectedSection.key == 'connections'" 

@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import 'leaflet.markercluster'
 
 const osmURL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -31,11 +32,23 @@ export function createMap(element, onZoom, options = {})
 
     tileLayer.addTo(map);
 
+    // Fixing exception when zooming with markers:
+    // https://stackoverflow.com/questions/73542576/leaflet-error-when-zooming-after-closing-popup
+    //
+    L.Marker.prototype._animateZoom = function (opt) {
+      if (!this._map) {
+          return;
+      }
+      const pos = this._map._latLngToNewLayerPoint(this._latlng, opt.zoom, opt.center).round();
+      this._setPos(pos);
+    }
+
     return { map, tileLayer };
 }
 
 export function clearMarkers(map)
 {
+    if (!map) return;
     map.eachLayer((layer)=>{
         if (layer instanceof L.marker){
             map.removeLayer(layer);
@@ -48,7 +61,26 @@ export function setView (map, lat, long, zoom = 14)
     map.setView([lat, long], zoom);
 }
 
-export function addMarker(map, lat, long, { popup, onClick, icon } = {})
+export function addGroup(map, group, markers)
+{
+    if (!map) return;
+
+    const g = group ? group.clearLayers() : L.markerClusterGroup({
+        showCoverageOnHover: false, // disables the blue polygon/halo
+        spiderfyOnMaxZoom: true,    // keeps spiderfying at max zoom if needed
+        zoomToBoundsOnClick: true
+    });
+
+    markers.forEach ((m)=>{
+        g.addLayer(m)}
+    );       
+
+    map.addLayer(g);
+    
+    return g;
+}
+
+export function makeMarker(map, lat, long, { popup, onClick, icon } = {})
 {
     if (!map) throw new Error ('Map is required');
 
@@ -70,7 +102,6 @@ export function addMarker(map, lat, long, { popup, onClick, icon } = {})
         marker.on('click', onClick);
     }
 
-    marker.addTo(map);
     return marker;
 }
 
