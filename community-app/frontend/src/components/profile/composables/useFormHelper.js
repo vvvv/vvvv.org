@@ -10,21 +10,18 @@ export function useFormHelper(_form)
 
     const changed = ref(false);
 
-    watch( form, (newVal) => {
-
+    watch(form, (newVal, oldVal) => {
             if (prevFormValue !== null)
-            {
-    
-                if (!isEqual(newVal, prevFormValue)) 
                 {
-                    changed.value = true;
-                    prevFormValue = cloneDeep(newVal);
+                    if (!isEqual(newVal, prevFormValue)) 
+                    {
+                        changed.value = true;
+                        prevFormValue = cloneDeep(newVal);
+                    }
                 }
-            }
-            else {
+            else{
                 changed.value = false;
             }
-
         },
         { deep: true, immediate: false }
     )

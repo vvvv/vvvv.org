@@ -45,8 +45,6 @@ export function useNominatimState( { result, loading, error }){
 
         if (!result.value.features || result.value.features.length === 0)
         {
-            console.log(stage);
-
             let type = 'empty';
 
             if (stage === 'idle') stage === 'city';

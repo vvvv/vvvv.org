@@ -13,10 +13,10 @@ import FormItem from './FormItem.vue'
 import InputField from '../InputField.vue'
 import StatusTag from '../StatusTag.vue'
 import PersonPicker from './PersonPicker.vue'
-import LocationBox from '../../features/nominatim/components/LocationBox.vue'
-import { eduMessages } from "./HelpTexts.js";
-import { useLocationHelper } from './composables/useLocationHelper.js'
+import MapPicker from './MapPicker.vue'
+import { eduMessages } from "./HelpTexts.js"
 import { useFormHelper } from './composables/useFormHelper.js'
+import { useMapHelper } from './composables/useMapHelper.js'
 
 const emit = defineEmits(['reload', 'message', 'updateData']);
 const { data, constants } = defineProps(['data', 'constants']);
@@ -29,8 +29,8 @@ const updating = ref(false);
 const eduExists = ref(false);
 const uploader = ref(null);
 
-const locationHelper = useLocationHelper(form);
 const formHelper = useFormHelper(form);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler } = useMapHelper(form, formHelper);
 
 const emptyData = {
   enabled: false,
@@ -62,6 +62,12 @@ const prepareData = ()=>{
     {
       temp.edus[0].people = formHelper.transformer.people.toForm(temp.edus[0].people);
     }
+
+    if (temp.edus[0].location)
+    {
+      temp.edus[0].location = formHelper.transformer.map.toLocation(temp.edus[0].location);
+      location.value = temp.edus[0].location;
+    }
   }
   else
   {
@@ -76,6 +82,11 @@ const prepareData = ()=>{
 
   form.value = temp.edus;
   formHelper.setNewData(form.value);
+
+  if (!form.value[0]?.location)
+  {
+    addressChangeHandler();
+  }
 }
 
 const rules = {
@@ -311,34 +322,49 @@ const errors = computed(()=>{
         <InputField path="name" v-if="!eduExists" type="edu" v-model="form[0].name"/>
         <InputField path="slug" type="edu" v-model="slug" :disabled="true"/>
 
-        <n-form-item label="Address" @input="locationHelper.addressChangeHandler">
-          <div class="row">
-            <div class="col-12">
-              <n-form-item path="location_country">
-                <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="locationHelper.addressChangeHandler"/>
-              </n-form-item>
-              <div class="row">
-                <div class="col-8">
-                  <n-form-item path="location_city">
-                    <n-input v-model:value="form[0].location_city" placeholder="City"/>
-                  </n-form-item>
+        <n-form-item label="Address" @input="addressChangeHandler">
+          <div class="d-flex flex-column w-100">
+            <div class="row">
+              <div class="col-12">
+                <n-form-item path="location_country">
+                  <n-select :options="countries" filterable clearable v-model:value="form[0].location_country" placeholder="Country" @update:value="addressChangeHandler"/>
+                </n-form-item>
+                <div class="row">
+                  <div class="col-8">
+                    <n-form-item path="location_city">
+                      <n-input v-model:value="form[0].location_city" placeholder="City"/>
+                    </n-form-item>
+                  </div>
+                  <div class="col-4">
+                    <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
+                  </div>
                 </div>
-                <div class="col-4">
-                  <n-input v-model:value="form[0].location_postalcode" placeholder="Postal code"/>
-                </div>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
+                </n-form-item>
+                <n-form-item>
+                  <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
+                </n-form-item>
               </div>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_street" placeholder="Street and house number"/>
-              </n-form-item>
-              <n-form-item>
-                <n-input v-model:value="form[0].location_additionalInfo" placeholder="Additional Info"/>
-              </n-form-item>
-            </div>
-            <div class="col-12">
-              <LocationBox @location="locationHelper.locationHandler" @address="locationHelper.addressHandler" :location="form[0].location" :address="locationHelper.address"/>
             </div>
           </div>
         </n-form-item>
+
+        <FormItem path="map" type="edu">
+            <template #content>
+            <div class="d-flex flex-column w-100">
+              <div class="row">
+                <div class="col-12 map">
+                  <p class="info">Drag and drop the pin to set your location:</p>
+                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom"/>
+                  <div class="attribution">
+                      We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.
+                  </div>
+                </div>
+              </div>
+            </div>
+            </template>
+        </FormItem>
 
         <FormItem path="description" type="edu">
           <template #content>

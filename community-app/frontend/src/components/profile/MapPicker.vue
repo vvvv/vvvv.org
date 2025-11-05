@@ -62,7 +62,10 @@ onUnmounted(()=>{
 })
 
 watch(()=>props.coords, (newValue)=>{
-    if (map && marker) updateMarkerPosition (marker, map, newValue, props.zoom);
+    if ( newValue && map && marker)
+    {
+        updateMarkerPosition (marker, map, newValue, props.zoom);
+    }
 })
 
 </script>
@@ -70,12 +73,3 @@ watch(()=>props.coords, (newValue)=>{
 <template>
     <div ref="mapContainer" class="map-container"></div>
 </template>
-
-<style scoped>
-    .map-container {
-        width: 100%;
-        height: 350px;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-</style>
