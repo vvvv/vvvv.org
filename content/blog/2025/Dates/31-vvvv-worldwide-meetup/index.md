@@ -32,6 +32,7 @@ Doors open: 18:30
 ## Cologne
 Motion Experience Lab<br>
 Köln International School of Design<br>
+Room 404 (4th Floor)<br>
 Ubierring 40, 50678 Cologne<br>
 Doors open: 18:30
 
