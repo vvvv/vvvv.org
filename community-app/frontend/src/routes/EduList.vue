@@ -49,6 +49,7 @@ async function checkRoute(query)
 
     try{
         await store.getData({page: 0, size: pageSizes[0].value});
+        fillMap(store.list.list.items);
     }
     catch (error)
     {
@@ -91,15 +92,17 @@ const titleList = computed(()=>{
     </div>
 
     <template v-if="store.selectedSection.key == 'list'">
-        <p>{{ titleList }}</p>
-        <MapView ref="mapRef" :center="center" :zoom="zoom"/>
-        <LogoListView v-if="store.selectedSection.key == 'list'" 
-            :loading = "store.loading"
-            :title = "titleList"
-            :list ="store.list?.list"
-            @click="showEduProfile"
-            class="mt-4"
-        />
+        <div class="communityList">
+            <p>{{ titleList }}</p>
+            <MapView ref="mapRef" :center="center" :zoom="zoom"/>
+            <LogoListView v-if="store.selectedSection.key == 'list'" 
+                :loading = "store.loading"
+                :title = "titleList"
+                :list ="store.list?.list"
+                @click="showEduProfile"
+                class="mt-4"
+            />
+        </div>
     </template>
 
     <ConnectionListView v-if="store.selectedSection.key == 'connections'" 

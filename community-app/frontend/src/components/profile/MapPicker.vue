@@ -54,8 +54,6 @@ onMounted(()=>{
 
     mapStyles = mapContainer.value.classList;
 
-    console.log (mapStyles);
-
     watch(()=>props.disabled, (newValue)=>{
         enabled(map, marker, !newValue);
         newValue ? mapStyles.add ('disabled') : mapStyles.remove('disabled');

@@ -22,7 +22,8 @@ export function useMapHelper(_form, _formHelper)
             addressToQuery.value = newValue;
         },
         {
-            immediate: true
+            immediate: true,
+            deep: true
         })
     }
 
@@ -77,6 +78,7 @@ export function useMapHelper(_form, _formHelper)
         })
 
         watch (form, (newValue, oldValue)=>{
+            
             if (oldValue !== null)
             {
                 if (oldValue[0].location !== newValue[0].location)
@@ -89,6 +91,9 @@ export function useMapHelper(_form, _formHelper)
                     setAddressWatcher();
                 }
             }
+        },
+        {
+            deep: true  
         })
 
 
