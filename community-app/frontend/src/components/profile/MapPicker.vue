@@ -12,6 +12,7 @@ const defaultCoords = { lat: 52.52, long: 13.404954 };
 const defaultZoom = 5;
 
 const mapContainer = ref(null);
+let mapStyles = [];
 
 const icon = L.icon({
     iconUrl: iconUrl,
@@ -51,7 +52,22 @@ onMounted(()=>{
         { icon }
     );
 
-    enabled(map, marker, !props.disabled);
+    mapStyles = mapContainer.value.classList;
+
+    console.log (mapStyles);
+
+    watch(()=>props.disabled, (newValue)=>{
+        enabled(map, marker, !newValue);
+        newValue ? mapStyles.add ('disabled') : mapStyles.remove('disabled');
+    });
+
+    watch(()=>props.coords, (newValue)=>{
+        if ( newValue && map && marker)
+        {
+            updateMarkerPosition (marker, map, newValue, props.zoom);
+        }
+    })
+
 })
 
 onUnmounted(()=>{
@@ -63,22 +79,12 @@ onUnmounted(()=>{
     }
 })
 
-watch(()=>props.coords, (newValue)=>{
-    if ( newValue && map && marker)
-    {
-        updateMarkerPosition (marker, map, newValue, props.zoom);
-    }
-})
-
-watch(()=>props.disabled, (newValue)=>{
-    enabled(map, marker, !newValue);
-})
 
 </script>
 
 <template>
     <div class="mapWithOverlay d-flex align-items-top justify-content-center">
-        <div ref="mapContainer" class="map-container" :class="{ disabled: disabled }"></div>
+        <div ref="mapContainer" class="map-container"></div>
         <div v-if="searching" class="searching">
             Searching...
         </div>

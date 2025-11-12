@@ -411,6 +411,10 @@ $tag-dark:  #666;
         font-size: 0.8rem;
       }
 
+      &.disabled{
+        opacity: 0.5;
+      }
+
     }
   }
 
