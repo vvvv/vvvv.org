@@ -20,15 +20,15 @@ function toPlace(value){
     }
 }
 
-export function useNominatimState( { result, loading, error }){
+export function useNominatimState( { result, searching, error }){
 
     let stage = 'idle';
 
     return computed(()=>{
 
-        if (loading.value)
+        if (searching.value)
         {
-            return { type: 'loading'};
+            return { type: 'searching'};
         }
 
         if (error.value)

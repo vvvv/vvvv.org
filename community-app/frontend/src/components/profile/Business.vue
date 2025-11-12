@@ -34,7 +34,7 @@ const uploader = ref(null);
 const limit = 500;
 
 const formHelper = useFormHelper(form);
-const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler } = useMapHelper(form, formHelper);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler, disabled, searching, setWatchers : mapHelperSetWatchers } = useMapHelper(form, formHelper);
 
 const emptyCompany = {
   enabled: false,
@@ -146,6 +146,7 @@ const rules = {
 
 onMounted(()=>{
   prepareData();
+  mapHelperSetWatchers();
 })
 
 watch (()=>data, (newValue)=>{
@@ -278,6 +279,10 @@ const errors = computed(()=>{
   return null;
 })
 
+const mapText = computed(()=>{
+  return disabled.value ? "Provide Country, City and Street to adjust the pin position." : "If the pin is not correctly placed automatically, drag and drop it to your location."
+})
+
 </script>
 
 <template>
@@ -378,8 +383,8 @@ const errors = computed(()=>{
             <div class="d-flex flex-column w-100">
               <div class="row">
                 <div class="col-12 map">
-                  <p class="info">Drag and drop the pin to set your location:</p>
-                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom"/>
+                  <p class="info">{{ mapText }}</p>
+                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom" :disabled="disabled" :searching="searching"/>
                   <div class="attribution">
                       We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.
                   </div>

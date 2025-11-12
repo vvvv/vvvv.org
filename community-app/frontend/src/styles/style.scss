@@ -371,6 +371,11 @@ $tag-dark:  #666;
       color: #333;
     }
 
+    .mapWithOverlay
+    {
+      position: relative;
+    };
+
     p{
       font-size: inherit;
       margin-bottom: 0.5rem;
@@ -383,6 +388,14 @@ $tag-dark:  #666;
       color: #999;
     }
 
+    .searching{
+      position: absolute;
+      z-index: 1000;
+      background-color: #000;
+      padding: 0.2rem 1rem;
+      color: #fff;
+    }
+
     .map-container
     {
       width: 100%;
@@ -393,6 +406,11 @@ $tag-dark:  #666;
       a{
         text-decoration: none;
       }
+
+      .leaflet-control-attribution{
+        font-size: 0.8rem;
+      }
+
     }
   }
 

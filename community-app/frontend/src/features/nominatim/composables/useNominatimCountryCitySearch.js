@@ -8,8 +8,8 @@ export function useNominatimCountryCitySearch () {
     const addressToQuery = ref("");
 
     const queryString = useNominatimQuery ( addressToQuery );
-    const { result, loading, error, searchDebounced } = useNominatimSearch(400);
-    const state = useNominatimState({ result, loading, error });
+    const { result, searching, error, searchDebounced } = useNominatimSearch(400);
+    const state = useNominatimState({ result, searching, error });
 
     const searchResult = ref (null);
 
@@ -29,5 +29,5 @@ export function useNominatimCountryCitySearch () {
     },
     { immediate: false})
 
-    return { addressToQuery, searchResult, loading }
+    return { addressToQuery, searchResult, searching }
 }

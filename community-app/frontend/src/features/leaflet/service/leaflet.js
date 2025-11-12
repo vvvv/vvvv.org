@@ -58,6 +58,23 @@ export function createMap(element, onZoom, options = {})
     return { map, tileLayer };
 }
 
+export function enabled(map, marker, state)
+{
+    if (map && marker)
+    {
+        if (state)
+        {
+            map.dragging.enable();
+            marker.dragging.enable();
+        }
+        else
+        {
+            map.dragging.disable();
+            marker.dragging.disable();
+        }
+    }
+}
+
 export function clearMarkers(map)
 {
     if (!map) return;
