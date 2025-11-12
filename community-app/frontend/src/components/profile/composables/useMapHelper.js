@@ -31,6 +31,19 @@ export function useMapHelper(_form, _formHelper)
         updateLocation(value);
         if (stopWatchingAddress) stopWatchingAddress();
     }
+
+    function checkStreet()
+    {
+        if (address.value.street?.trim() === '')
+        {
+            disabled.value = true;
+            setAddressWatcher();
+        }
+        else
+        {
+            disabled.value = false;
+        }
+    }
     
     setAddressWatcher();
     
@@ -39,10 +52,10 @@ export function useMapHelper(_form, _formHelper)
         if (formHelper)
         {
             watch (()=>formHelper.revertSignal.value, (newValue)=>{
-                addressChangeHandler();
+                checkStreet();
             },
             {
-                immediate: true
+                immediate: false
             })
 
             watch (location, (newValue, oldValue)=>{
@@ -57,15 +70,7 @@ export function useMapHelper(_form, _formHelper)
         }
 
         watch (address, (newValue)=>{
-            if (newValue.street?.trim() === '')
-            {
-                disabled.value = true;
-                setAddressWatcher();
-            }
-            else
-            {
-                disabled.value = false;
-            }
+            checkStreet();
         },
         {
             immediate: true

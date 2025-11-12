@@ -27,7 +27,6 @@ export function useNominatimSearch (delay = 400)
 
         timeoutId = setTimeout(() => {
             controller.abort();
-            console.log ('timeout starts');
         }, 5000);
         
         try{
@@ -40,8 +39,6 @@ export function useNominatimSearch (delay = 400)
         } catch (err){
             result.value = null;
             error.value = err;
-
-            console.log ('catch on timeout');
         } finally{
             searching.value = false;
         }
