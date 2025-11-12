@@ -95,7 +95,7 @@ const titleList = computed(()=>{
         <div class="communityList">
             <p>{{ titleList }}</p>
             <MapView ref="mapRef" :center="center" :zoom="zoom"/>
-            <LogoListView  
+            <LogoListView  v-if="store.selectedSection.key == 'list'" 
                 :loading = "store.loading"
                 :list ="store.list?.list"
                 @click="showBusinessProfile"

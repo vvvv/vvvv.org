@@ -33,8 +33,6 @@ export function useMapView(mapRef, handler)
 
     function fillMap(items){
 
-        console.log (items[0]);
-
         const locations = items.filter((e)=> e.location !== null)
             .map((e)=>{
 

@@ -3,11 +3,18 @@
 import { reactive, ref, watch } from 'vue';
 import { NInput, NDropdown, NButton, NForm } from 'naive-ui';
 import LocationBox from "../src/features/nominatim/components/LocationBox.vue";
-import MapPicker from '../src/components/profile/MapPicker.vue'
-import { useLocationHelper } from '../src/components/profile/composables/useLocationHelper';
+import MapPicker from '../src/components/profile/MapPicker.vue';
+import { useMapHelper } from '../src/components/profile/composables/useMapHelper.js';
+import { useFormHelper } from '../src/components/profile/composables/useFormHelper.js';
 import Constants from '../src/constants'
 
 const key = import.meta.env.VITE_LOCATION_UPDATER;
+
+
+const form = ref([{}]);
+
+const formHelper = useFormHelper(form);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler, disabled, searching, setWatchers : mapHelperSetWatchers } = useMapHelper(form, formHelper);
 
 const types = [
     {
@@ -20,35 +27,16 @@ const types = [
     }
 ]
 
-const defautAddress = {
-    street: '',
-    city: '',
-    postalcode: '',
-    country: ''
-}
-
-const address = ref(defautAddress);
 const type = ref('');
 const loading = ref(false);
 const entities = ref([]);
 const selected = ref(null);
-
-const addressObject = {
-    address
-}
-
-const { location, locationHandler, zoom, zoomHandler } = useLocationHelper();
-
-watch (location, (newValue)=>{
-    console.log (newValue);
-})
 
 async function onChangeType(_type)
 {
     type.value = _type;
 
     selected.value = null;
-    address.value = defautAddress;
     location.value = null;
 
     try{
@@ -70,7 +58,7 @@ async function onChangeType(_type)
         }
                 
         const json = await response.json();
-        
+
         entities.value = json.data.map(e => {
             return {
                 label: e.name,
@@ -82,7 +70,8 @@ async function onChangeType(_type)
                         street: e.location_street,
                         postalcode: e.location_postalcode,
                         country: e.location_country
-                    }
+                    },
+                    location: e.location ? formHelper.transformer.map.toLocation(e.location) : null
                 }
             }
         })
@@ -95,6 +84,8 @@ async function onChangeType(_type)
     finally{
         loading.value = false;
     }
+
+    mapHelperSetWatchers();
 }
 
 function onChangeEntity(entity)
@@ -102,7 +93,26 @@ function onChangeEntity(entity)
     location.value = null;
 
     selected.value = entity;
-    address.value = entity.address;
+
+    form.value[0] = {
+            location_street: entity.address.street,
+            location_city: entity.address.city,
+            location_postalcode: entity.address.postalcode,
+            location_country: entity.address.country
+    }
+    
+    
+    if (location.value)
+    {
+        location.value = entity.location;
+        updateLoc(location.value);
+    }
+    else
+    {
+        console.log ("search address");
+        address.value = entity.address;
+    }
+
 }
 
 async function update()
@@ -113,13 +123,17 @@ async function update()
         {
             type: selected.value.type,
             name: selected.value.name,
-            location: location.value,
             address: {
                 location_country: address.value.country,
                 location_city: address.value.city,
                 location_postalcode: address.value.postalcode,
                 location_street: address.value.street,
             }
+        }
+
+        if (location.value)
+        {
+            payload.location = location.value;
         }
 
         try{
@@ -156,16 +170,6 @@ function updateCoords(loc)
     console.log (loc);
 }
 
-// function addressChangeHandler()
-// {
-//     const add = {
-//         street: address.value.location_street,
-//         city: address.value.location_city,
-//         postalcode: address.value.location_postalcode,
-//         country: address.value.location_country
-//     }
-// }
-
 </script>
 <template>
     <div>
@@ -180,21 +184,25 @@ function updateCoords(loc)
         </NDropdown>
     </div>
 
-    <div>
+    <div id="profile">
         {{  selected?.name || '' }}
         <NForm @input="addressChangeHandler">
-            <NInput v-model:value="address.street" placeholder="Street"></NInput>
-            <NInput v-model:value="address.city" placeholder="City"></NInput>
-            <NInput v-model:value="address.postalcode" placeholder="Postalcode"></NInput>
-            <NInput v-model:value="address.country" placeholder="Country"></NInput>
+            <NInput v-model:value="form[0].location_street" placeholder="Street"></NInput>
+            <NInput v-model:value="form[0].location_city" placeholder="City"></NInput>
+            <NInput v-model:value="form[0].location_postalcode" placeholder="Postalcode"></NInput>
+            <NInput v-model:value="form[0].location_country" placeholder="Country"></NInput>
         </NForm>
            
         <div v-if="loading">Loading...</div>
         
-        <MapPicker :coords="location" @coords="updateCoords" :zoom="zoom"/>
+         <div class="d-flex flex-column w-100">
+            <div class="row">
+                <div class="col-12 map">
+                    <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom" :disabled="disabled" :searching="searching"/>
+                </div>
+            </div>
+         </div>
     
-        <LocationBox :location="location" @location="locationHandler" :address="address" @zoom="zoomHandler"/>
-
         <NButton @click="update">Update</NButton>
 
     </div>
