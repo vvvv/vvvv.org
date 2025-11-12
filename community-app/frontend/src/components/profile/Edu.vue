@@ -30,7 +30,7 @@ const eduExists = ref(false);
 const uploader = ref(null);
 
 const formHelper = useFormHelper(form);
-const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler } = useMapHelper(form, formHelper);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler, disabled, setWatchers : mapHelperSetWatchers } = useMapHelper(form, formHelper);
 
 const emptyData = {
   enabled: false,
@@ -124,7 +124,8 @@ const rules = {
 }
 
 onMounted(()=>{
-  prepareData()
+  prepareData();
+  mapHelperSetWatchers();
 })
 
 watch (()=>data, (newValue)=>{

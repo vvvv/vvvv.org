@@ -7,10 +7,12 @@ export function useFormHelper(_form)
 
     let prevFormValue = cloneDeep(form.value);
     let originalData = cloneDeep(form.value);
+    
+    const revertSignal = ref(0);
 
     const changed = ref(false);
 
-    watch(form, (newVal, oldVal) => {
+    watch(form, (newVal) => {
             if (prevFormValue !== null)
                 {
                     if (!isEqual(newVal, prevFormValue)) 
@@ -31,6 +33,8 @@ export function useFormHelper(_form)
         form.value = cloneDeep(originalData);
         prevFormValue = cloneDeep(originalData);
         changed.value = false;
+
+        revertSignal.value = revertSignal.value + 1;
     }
 
     function setNewData(data)
@@ -75,5 +79,5 @@ export function useFormHelper(_form)
         }
     }
 
-    return { revert, changed, prevFormValue, setNewData, transformer }
+    return { revert, revertSignal, changed, prevFormValue, setNewData, transformer }
 }

@@ -1,11 +1,11 @@
 <script setup>
 
 import { ref, onMounted, watch, onUnmounted, watchEffect  } from 'vue'
-import { createMap, addDraggableMarker, updateMarkerPosition, clearMarkers } from '../../features/leaflet/service/leaflet.js'
+import { createMap, addDraggableMarker, updateMarkerPosition, clearMarkers, enabled } from '../../features/leaflet/service/leaflet.js'
 import iconUrl from "@static/img/icons/leaflet-marker-icon-black.png"
 import "leaflet/dist/leaflet.css";
 
-const props = defineProps(['coords', 'zoom']);
+const props = defineProps(['coords', 'zoom', 'disabled', 'searching']);
 const emit = defineEmits(['coords', 'zoom']);
 
 const defaultCoords = { lat: 52.52, long: 13.404954 };
@@ -50,6 +50,8 @@ onMounted(()=>{
         },
         { icon }
     );
+
+    enabled(map, marker, !props.disabled);
 })
 
 onUnmounted(()=>{
@@ -68,8 +70,17 @@ watch(()=>props.coords, (newValue)=>{
     }
 })
 
+watch(()=>props.disabled, (newValue)=>{
+    enabled(map, marker, !newValue);
+})
+
 </script>
 
 <template>
-    <div ref="mapContainer" class="map-container"></div>
+    <div class="mapWithOverlay d-flex align-items-top justify-content-center">
+        <div ref="mapContainer" class="map-container" :class="{ disabled: disabled }"></div>
+        <div v-if="searching" class="searching">
+            Searching...
+        </div>
+    </div>
 </template>
