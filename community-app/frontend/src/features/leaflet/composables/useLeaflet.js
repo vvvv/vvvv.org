@@ -69,7 +69,7 @@ export function useLeaflet(options = {})
         })
 
         group = addGroup(map.value, group, markers);
-        map.value.fitBounds(group.getBounds());
+        map.value.fitBounds(group.getBounds(), { padding: [25, 25]});
     }
 
     return { mapContainer, map, showLocation, addLocations }

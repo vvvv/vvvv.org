@@ -14,7 +14,7 @@ function makeAddress(item)
     addressFields.forEach(field => {
         const value = item[field.name];
         if (value && value !== '') {
-            address.push(value);
+            address.push(value.trim());
         }
         else if (field.required)
         {
