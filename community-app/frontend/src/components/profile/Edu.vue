@@ -30,7 +30,7 @@ const eduExists = ref(false);
 const uploader = ref(null);
 
 const formHelper = useFormHelper(form);
-const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler, disabled, setWatchers : mapHelperSetWatchers } = useMapHelper(form, formHelper);
+const { location, zoom, address, updateZoom, updateLoc, addressChangeHandler, disabled, searching, setWatchers : mapHelperSetWatchers } = useMapHelper(form, formHelper);
 
 const emptyData = {
   enabled: false,
@@ -357,7 +357,7 @@ const errors = computed(()=>{
               <div class="row">
                 <div class="col-12 map">
                   <p class="info">Drag and drop the pin to set your location:</p>
-                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom"/>
+                  <MapPicker :coords="location" @coords="updateLoc" :zoom="zoom" @zoom="updateZoom" :disabled="disabled" :searching="searching"/>
                   <div class="attribution">
                       We're using OpenStreetMap's <a href="https://nominatim.org/">Nominatim</a> for map lookups &#x2764.
                   </div>

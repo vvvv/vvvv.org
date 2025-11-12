@@ -9,21 +9,21 @@ import LogoListView from '../components/LogoListView.vue';
 import ConnectionListView from '../components/ConnectionListView.vue';
 import MapView from '../features/leaflet/components/MapView.vue';
 import { useMapView } from './composables/useMapView';
+import '../styles/style.scss'
 
 const router = useRouter();
 const route = useRoute();
 const store = useEduListStore();
+const emit = defineEmits(['logout']);
+const mapRef = ref(null);
+
+const { fillMap, center, zoom } = useMapView(mapRef, showEduProfile);
+
 const pageSizes = [
     { label: '10 per page', value: 10 },
     { label: '50 per page', value: 50 },
     { label: '100 per page', value: 100 }
 ]
-
-const mapRef = ref(null);
-
-const { fillMap, center, zoom } = useMapView(mapRef, showEduProfile);
-
-const emit = defineEmits(['logout']);
 
 onMounted( async ()=>
 {
