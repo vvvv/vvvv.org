@@ -16,13 +16,12 @@ const personsPicker = ref([]);
 const placeholderPerson = getValue(props.path, "placeholderPerson", props.type);
 const placeholderRole = getValue(props.path, "placeholderRole", props.type);
 
-onMounted(()=>{
-
-    if (persons.value && persons.value.length == 0)
-    {
-        addNew();  
-    }
-})
+// onMounted(()=>{
+//     if (persons.value && persons.value.length == 0)
+//     {
+//         addNew();  
+//     }
+// })
 
 watchEffect(()=>{
 })
