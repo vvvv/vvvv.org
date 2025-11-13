@@ -264,7 +264,7 @@ const hireCardVisible = computed(()=>{
 
           <template v-if="description">
             <div class="mb-4 description">
-              <p v-html="description"></p>
+              <p v-html="description" class="markdown-content"></p>
             </div>
           </template>
 
