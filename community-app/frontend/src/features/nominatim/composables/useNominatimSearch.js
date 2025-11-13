@@ -27,7 +27,7 @@ export function useNominatimSearch (delay = 400)
 
         timeoutId = setTimeout(() => {
             controller.abort();
-        }, 5000);
+        }, 7000);
         
         try{
             searching.value = true;

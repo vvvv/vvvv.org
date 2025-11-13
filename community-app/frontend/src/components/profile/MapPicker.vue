@@ -57,6 +57,9 @@ onMounted(()=>{
     watch(()=>props.disabled, (newValue)=>{
         enabled(map, marker, !newValue);
         newValue ? mapStyles.add ('disabled') : mapStyles.remove('disabled');
+    },
+    {
+        immediate: true    
     });
 
     watch(()=>props.coords, (newValue)=>{

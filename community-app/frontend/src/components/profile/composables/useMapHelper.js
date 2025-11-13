@@ -12,33 +12,26 @@ export function useMapHelper(_form, _formHelper)
     const { addressToQuery, searchResult, searching } = useNominatimCountryCitySearch();
 
     let stopWatchingAddress = null;
+    let manuallyAdjusted = false; 
+    let reverted = false;
     const disabled = ref(true);
-    
-    function setAddressWatcher()
-    {
-        if (stopWatchingAddress) stopWatchingAddress();
-
-        stopWatchingAddress = watch (address, (newValue)=>{
-            addressToQuery.value = newValue;
-        },
-        {
-            immediate: true,
-            deep: true
-        })
-    }
 
     function updateLoc(value)
     {
         updateLocation(value);
-        if (stopWatchingAddress) stopWatchingAddress();
+        manuallyAdjusted = true;
     }
 
     function checkStreet()
     {
-        if (address.value.street?.trim() === '')
+        
+        if (address.value.street?.trim() === '' ||
+            address.value.city?.trim() === '' ||
+            address.value.country?.trim() === ''
+            )
         {
             disabled.value = true;
-            setAddressWatcher();
+            manuallyAdjusted = false;
         }
         else
         {
@@ -46,14 +39,19 @@ export function useMapHelper(_form, _formHelper)
         }
     }
     
-    setAddressWatcher();
-    
     function setWatchers()
     {
+
+        addressChangeHandler();
+        checkStreet();
+        manuallyAdjusted = false;
+
         if (formHelper)
         {
-            watch (()=>formHelper.revertSignal.value, (newValue)=>{
-                checkStreet();
+            watch (()=>formHelper.revertSignal.value, ()=>{
+                reverted = true;
+                manuallyAdjusted = false;
+                addressChangeHandler();
             },
             {
                 immediate: false
@@ -70,11 +68,19 @@ export function useMapHelper(_form, _formHelper)
             })
         }
 
-        watch (address, (newValue)=>{
+        watch (address, (newValue, oldValue)=>{
+            if (oldValue !== null && !manuallyAdjusted)
+            {
+
+                if (newValue.country !== '' && newValue.city !== '')
+                {
+                    addressToQuery.value = newValue;
+                }
+            }
             checkStreet();
         },
         {
-            immediate: true
+            immediate: false
         })
 
         watch (form, (newValue, oldValue)=>{
@@ -88,7 +94,7 @@ export function useMapHelper(_form, _formHelper)
                     {
                         formHelper.changed.value = false;
                     }
-                    setAddressWatcher();
+                    manuallyAdjusted = false;
                 }
             }
         },
@@ -98,7 +104,15 @@ export function useMapHelper(_form, _formHelper)
 
 
         watch (searchResult, (newValue)=>{
-            locationHandler(newValue);
+            if (reverted)
+            {
+                formHelper.changed.value = false;
+                reverted = false;
+            }
+            else
+            {   
+                locationHandler(newValue);
+            }
         })
     }
 
