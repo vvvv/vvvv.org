@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted, toRaw } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { createMap, setView, makeMarker, addGroup, clearMarkers } from '../service/leaflet'
 import iconUrl from "@static/img/icons/leaflet-marker-icon-black.png"
 

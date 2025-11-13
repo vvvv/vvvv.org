@@ -94,7 +94,10 @@ export function addGroup(map, group, markers)
 {
     if (!map) return;
 
+    //Options:
+    //https://github.com/Leaflet/Leaflet.markercluster/blob/master/src/MarkerClusterGroup.js
     const g = group ? group.clearLayers() : L.markerClusterGroup({
+        maxClusterRadius: 40,
         showCoverageOnHover: false, // disables the blue polygon/halo
         spiderfyOnMaxZoom: true,    // keeps spiderfying at max zoom if needed
         zoomToBoundsOnClick: true
