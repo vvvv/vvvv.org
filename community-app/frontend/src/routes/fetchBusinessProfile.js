@@ -21,7 +21,7 @@ export default async function fetchBusinessProfile(slug)
     
         const data = {...json.data[0]};
 
-        data.people = data.people.filter(p => p.User_Role_id.user_id !== null);
+        data.people = data.people.filter(p => p.User_Role_id !== null);
 
         data.people = data.people.map (p=>(
             {

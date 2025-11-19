@@ -82,7 +82,7 @@ const url = computed(()=>{
                 <div class="col-12 col-md-6 col-lg-8 mt-md-0 pt-md-0 profileContent">
                     <template v-if="edu.description">
                         <div class="border-top d-flex d-md-none mt-2 mb-4"></div>
-                        <p v-html="edu.description"></p>
+                        <p v-html="edu.description" class="markdown-content"></p>
                     </template>
                     <MaintainedBy class="maintained mt-4 pt-3 border-top d-block d-md-none" :data="edu.owner"/>
                 </div>

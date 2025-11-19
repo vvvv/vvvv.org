@@ -37,7 +37,7 @@ defineProps(['type']);
             Custom Fields
             <InfoButton :info="Helps['customFields'].help"/>
         </template>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column w-100">
             <template v-for="(field, index) in model.fields" :key="index">
                 <div class="row mb-3 mb-lg-2">
                     <div class="col-12 col-lg-6 mb-2 mb-lg-0">

@@ -11,3 +11,4 @@
 /community/layout/*
 **/package-lock.json
 **/extensions.json
+/community-app/frontend/.env
