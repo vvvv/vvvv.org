@@ -39,8 +39,8 @@ We have got a new one:
 
 We got updates to the following:
 
-- [VL.Addons](https://www.nuget.org/packages/VL.OpenEXR)
-- [VL.Addons.Skia](https://www.nuget.org/packages/VL.OpenEXR)
+- [VL.Addons](https://www.nuget.org/packages/VL.Addons)
+- [VL.Addons.Skia](https://www.nuget.org/packages/VL.Addons.Skia)
 - [VL.Addons.Control](https://www.nuget.org/packages/VL.Addons.Control)
 - [VL.Addons.Collections](https://www.nuget.org/packages/VL.Addons.Collections)
 - [VL.Addons.Animation](https://www.nuget.org/packages/VL.Addons.Animation)
@@ -67,7 +67,6 @@ We got updates to the following:
 - [VL.Audio.Analysis](https://www.nuget.org/packages/VL.Audio.Analysis)
 - [VL.MediaPipe](https://www.nuget.org/packages/VL.MediaPipe)
 - [VL.PolyTools](https://www.nuget.org/packages/VL.PolyTools)
-- [VL.IO.OSC](https://www.nuget.org/packages/VL.IO.OSC)
 - [VL.IO.PosiStageNet](https://www.nuget.org/packages/VL.IO.PosiStageNet)
 - [VL.MiDi.Music.Utils](https://www.nuget.org/packages/VL.MiDi.Music.Utils)
 - [VL.Devices.DeckLink](https://www.nuget.org/packages/VL.Devices.DeckLink)
