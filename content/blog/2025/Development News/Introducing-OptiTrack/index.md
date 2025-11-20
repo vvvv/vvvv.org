@@ -18,7 +18,7 @@ Here's to introduce support for rigid body and skeleton tracking by [OptiTrack](
 
 Based on their [NatNet SDK](https://optitrack.com/software/natnet-sdk) we've implemented [VL.IO.OptiTrack](https://www.nuget.org/packages/VL.IO.OptiTrack) a NuGet that allows you to receive any data like Markers, RigidBodies and Skeletons streamed by their [Motive](https://optitrack.com/software/motive/) application.
 
-It is trivial to use in vvvv. With just a few clicks you've set up a connection and receive the desired itmes:
+It is trivial to use in vvvv. With just a few clicks you've set up a connection and receive the desired items:
 
 ![](image.png)
 
