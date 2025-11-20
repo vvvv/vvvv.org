@@ -304,6 +304,15 @@ $tag-dark:  #666;
       text-underline-offset: 0.3rem;
       text-decoration-color: #bbb;
     }
+
+    .markdown-content {
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+
   }
 
   .communityList{
