@@ -37,7 +37,7 @@ For each of those types of plugins the app shows a drop-down allowing you to cho
 
 Here is a quick demo of the app as presented at the recent vvvv meetup. Skip to 1:08:16:
 
-{{< youtube "96h-UvwgSvA?t=4096" >}}
+{{< youtube "96h-UvwgSvA" "4096" >}}
 
 Read the repositories readme carefully! There are a lot details to getting this to work properly in production. If you have questions, feel free to open an issue on the repository.
 

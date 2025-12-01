@@ -15,8 +15,8 @@ For embedding external media use these short codes:
 
 * Mastodon: `{{< mastodon "mastodon.xyz/@vvvv/109598445063555699" 550 >}}` Parameters: Link [Height (default=550)]
 * Pixelfed: `{{< pixelfed "pixelfed.social/p/madewithvvvv/509678388578111219" 550 >}}` Parameters: Link [Height (default=550)]
-* Vimeo: `{{< vimeo 761078720 >}}` Parameters: Vimeo ID
-* Youtube `{{< youtube 761078720 >}}` Parameters: Youtube ID
+* Vimeo: `{{< "vimeo" "761078720" >}}` Parameters: "Vimeo ID"
+* Youtube `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
  
 ## Local build:
 * [Download Hugo Extended](https://github.com/gohugoio/hugo/releases/tag/v0.145.0), **Version 0.145**, unzip and place that into your programs folder,
