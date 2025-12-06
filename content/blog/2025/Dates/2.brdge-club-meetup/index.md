@@ -14,7 +14,9 @@ thumb: "BRDGE-meetup-thumbnail-2.png"
 
 ![](BRDGE-meetup-2.png)
 
-Once again and before the year ends we are inviting you to our upcoming **BRDGE Club Meetup** titled: **"How do you data?"**.
+Hello!
+
+As you may or may not know we had our [first BRDGE Club Meetup](https://vvvv.org/blog/2025/brdge-club-meetup/) last September, and are now happy to invite you to our second edition titled: **"How do you data?"**.
 
 In this session we intend to go deeper into the topic of **data management**, something most projects need in one way or another.
 
@@ -35,6 +37,8 @@ Hopefully there's something of interest for everybody and the tools might just s
 - Open discussion
 
 Join us to learn, exchange, and explore how we can **bridge code, design, and scalable experiences together**.
+
+And if you want to be part of the ongoing conversation, consider dropping by our [Element chat BRDGE space](https://matrix.to/#/#brdge:matrix.org).
 
 {{< box >}}
 **Date:** Thursday, December 11<br>
