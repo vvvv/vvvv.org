@@ -1,20 +1,25 @@
-{{ $title := replace .ctx.title " " "" }}                      
-<div class="tab-pane fade{{if eq .index 0}} show active {{end}}" id="v-pills-{{$title}}" role="tabpanel" aria-labelledby="v-pills-{{$title}}-tab">
-    {{ with .ctx.packs }}
-        {{ range . }}
-            {{ partial "packs-pack" .}}
-        {{ end }}
-    {{ end }} 
-    {{ with .ctx.categories }}
-        {{ range . }}
-            <div class="category mb-4">
-                <h3>{{ .title }}</h3>
-                    {{ with .packs }}
-                        {{ range . }}
-                            {{ partial "packs-pack" .}}
-                        {{ end }}
-                    {{ end }} 
-            </div>
-        {{ end }}
-    {{ end }} 
+{{ $title := replace .ctx.title " " "" }}
+<div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="{{.ctx.title}}" id="v-pills-{{$title}}" role="tabpanel" aria-labelledby="v-pills-{{$title}}-tab">
+    <div data-empty hidden="true">
+        No packs for your Filter in this category
+    </div>
+    <div data-content>
+        {{ with .ctx.packs }}
+            {{ range . }}
+                {{ partial "packs-pack" .}}
+            {{ end }}
+        {{ end }} 
+        {{ with .ctx.categories }}
+            {{ range . }}
+                <div class="category mb-4" data-category-sub="{{.title}}">
+                    <h3>{{ .title }}</h3>
+                        {{ with .packs }}
+                            {{ range . }}
+                                {{ partial "packs-pack" .}}
+                            {{ end }}
+                        {{ end }} 
+                </div>
+            {{ end }}
+        {{ end }} 
+    </div>
 </div>
