@@ -1,51 +1,51 @@
-var categories = new Map();
-var packs = new Map();
+// var categories = new Map();
+// var packs = new Map();
 
-window.addEventListener ("load", ()=> {
+// window.addEventListener ("load", ()=> {
 
-
-    const input = document.querySelector('#filter');
+//     const input = document.querySelector('#filter');
     
-    input.addEventListener('input', e=>{
-        const query= e.target.value.trim().toLowerCase();
-        filterItems(query);
-    })
+//     input.addEventListener('input', e=>{
+//         const query= e.target.value.trim().toLowerCase();
+//         filterItems(query);
+//     })
 
-    function filterItems(query)
-    {
-        const result = [...packs.entries()].filter((entry)=>{
+//     function filterItems(query)
+//     {
+//         const result = [...packs.entries()].filter((entry)=>
+//            entry[1].toLowerCase().includes(query)
+//         );
 
-            console.log (entry.value);
+//         const active = result.map( r => r[0]);
 
-            // value.toLowerCase().includes(query);
-        });
+//         [...packs.keys()].forEach(p=>{
+//             p.hidden = active.includes(p) ? false : true;
+//         })
+//     }
 
-        console.log (result);
-    }
-
-    const catItems = document.querySelectorAll('[data-pack-category]');
+//     const catItems = document.querySelectorAll('[data-pack-category]');
     
-    catItems.forEach((c)=>{
-        categories.set(c.dataset.packCategory, c);
-    })
+//     catItems.forEach((c)=>{
+//         categories.set(c.dataset.packCategory, c);
+//     })
 
-    // categories[0].disabled=true;
-    // categories[0].classList.remove('active');
+//     // categories[0].disabled=true;
+//     // categories[0].classList.remove('active');
 
-    const packItems = document.querySelectorAll('[data-pack]');
+//     const packItems = document.querySelectorAll('[data-pack]');
 
-    packItems.forEach((p)=>{
-        const infos = p.querySelectorAll('[data-pack-info]');
+//     packItems.forEach((p)=>{
+//         const infos = p.querySelectorAll('[data-pack-info]');
         
-        var data = "";
+//         var data = "";
         
-        infos.forEach(i=>{
-            data += i.textContent;
-        }) 
+//         infos.forEach(i=>{
+//             data += i.textContent;
+//         }) 
 
-        packs.set(p, data);
-    })
+//         packs.set(p, data);
+//     })
 
-    // console.log (categories);
-    //console.log (packs);
-}, true);
+//     // console.log (categories);
+//     //console.log (packs);
+// }, true);
