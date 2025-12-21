@@ -1,0 +1,96 @@
+#Packs{
+
+    padding-top: 2rem;
+
+    #form{
+        line-height: 1rem;
+
+        button{
+            line-height: 1rem;
+            font-size: 1rem;
+            padding: 1 rem;
+        }
+
+        input{
+            margin: 0 !important;
+        }
+
+        margin: 1rem 0rem;
+    }
+
+    #v-pills-tab {
+        button{
+            text-align: left;
+            background: #ffffff;
+            box-shadow: none;
+            border: none;
+    
+            &:hover{
+                background-color: #eee;
+            }
+    
+            &.active{
+                color: #000;
+                background-color: #ddd;   
+            }
+    
+            &.inactive{
+                color: #aaa;
+            }
+    
+            span{
+                color: #999;
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
+    .packItem{
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0rem;
+        border-radius: 3px;
+        alignment-baseline: baseline;
+
+        // &:hover{
+        //     background-color: #efefef;
+        // }
+
+        h5{
+            padding-bottom: 0;
+            margin-bottom: 0;
+            color: #000;
+            font-weight: bold;
+            
+            a {
+                text-decoration: none;
+            }
+        }
+
+        a {
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+        }
+
+        .authors{
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .totalDownloads{
+            font-size: 0.9rem;
+            color: #999;
+            
+            .number{
+                font-weight: bold;
+                color: #666;
+            }
+        }
+
+        .category{
+            h4{
+
+            }
+        }
+    }
+}

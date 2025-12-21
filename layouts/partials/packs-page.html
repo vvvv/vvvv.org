@@ -1,0 +1,39 @@
+{{ "<!-- PACKS -->" | safeHTML }}
+<section id="Packs">
+    <div class="container">
+        <h2><b>VL Packs</b></h2>
+        <div class="row">
+            <div class="col-3">
+                <form>
+                    <div id="form" class="input-group" style="max-width: 18rem;">
+                        <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
+                        <div class="input-group-append">
+                            <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
+                        </div>
+                    </div>      
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    {{ with .Params.categories }}
+                        {{ range $i, $item := . }}
+                            {{ $title := replace $item.title " " "" }}
+                            <button href="#v-pills-{{$title}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title}}" aria-selected="false">{{.title}} <span data-count hidden="true"></span></button>
+                        {{ end }}   
+                    {{ end }}
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    {{ with .Params.categories }}
+                        {{ range $i, $item := . }}
+                            {{ partial "packs-category" (dict "ctx" $item "index" $i)}}
+                        {{ end }}   
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  
