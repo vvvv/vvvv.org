@@ -1,23 +1,47 @@
 #Packs{
 
-    button{
-        text-align: left;
-        background: #ffffff;
-        box-shadow: none;
-        border: none;
+    padding-top: 2rem;
 
-        &:hover{
-            background-color: #eee;
+    #form{
+        line-height: 1rem;
+
+        button{
+            line-height: 1rem;
+            font-size: 1rem;
+            padding: 1 rem;
         }
 
-        &.active{
-            color: #000;
-            background-color: #ddd;   
+        input{
+            margin: 0 !important;
         }
 
-        span{
-            color: #999;
-            padding-left: 0.5rem;
+        margin: 1rem 0rem;
+    }
+
+    #v-pills-tab {
+        button{
+            text-align: left;
+            background: #ffffff;
+            box-shadow: none;
+            border: none;
+    
+            &:hover{
+                background-color: #eee;
+            }
+    
+            &.active{
+                color: #000;
+                background-color: #ddd;   
+            }
+    
+            &.inactive{
+                color: #aaa;
+            }
+    
+            span{
+                color: #999;
+                padding-left: 0.5rem;
+            }
         }
     }
 

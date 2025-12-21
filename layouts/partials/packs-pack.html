@@ -19,7 +19,11 @@
         {{ if ne .summary ""}}
             <p data-pack-info>{{.summary}}</p>
         {{ end }}
+        <div data-pack-info>
+            Tags: {{ lower (delimit .tags ", ") }}
+        </div>
         <div>
+            Links: 
             <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a>, 
             {{ if ne .projectURL ""}}
             <a href="{{.projectURL}}">Project</a>

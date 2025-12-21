@@ -1,11 +1,19 @@
 {{ "<!-- PACKS -->" | safeHTML }}
 <section id="Packs">
-    <div class="container-fluid">
+    <div class="container">
         <h2><b>VL Packs</b></h2>
-        <div class="input-group" style="max-width: 400px;">
-            <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
-            <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
-        </div>      
+        <div class="row">
+            <div class="col-3">
+                <form>
+                    <div id="form" class="input-group" style="max-width: 18rem;">
+                        <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
+                        <div class="input-group-append">
+                            <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
+                        </div>
+                    </div>      
+                </form>
+            </div>
+        </div>
         <div class="row">
             <div class="col-3">
                 <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">

@@ -13,11 +13,11 @@
             {{ range . }}
                 <div class="category mb-4" data-category-sub="{{.title}}">
                     <h3>{{ .title }}</h3>
-                        {{ with .packs }}
-                            {{ range . }}
-                                {{ partial "packs-pack" .}}
-                            {{ end }}
-                        {{ end }} 
+                    {{ with .packs }}
+                        {{ range . }}
+                            {{ partial "packs-pack" .}} 
+                        {{ end }}
+                    {{ end }} 
                 </div>
             {{ end }}
         {{ end }} 
