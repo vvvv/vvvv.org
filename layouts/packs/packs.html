@@ -16,7 +16,9 @@
         
         {{ partial "footer" . }}
     </div>
-    <script type="module" crossorigin src="{{"/js/vue/app.js" | relURL}}" defer></script>
-    {{ partial "js" . }}
+
+    {{- $packsjs := resources.Get "js/packs.js" -}}
+    <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
+
 </body>
 </html>
