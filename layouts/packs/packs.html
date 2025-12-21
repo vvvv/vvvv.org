@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="scroll-padding">
+    <head>
+        {{ partial "head" . }}
+        <link rel="stylesheet" crossorigin href="{{"/js/vue/main.css" | relURL}}">  
+   </head>
+<body>
+    <div class="main">
+        {{ partial "nav" . }}
+
+        {{ partial "packs-page" .}}
+
+        {{ partial "videoBlocker" . }}
+
+        {{ partial "contact" . }}
+        
+        {{ partial "footer" . }}
+    </div>
+    <script type="module" crossorigin src="{{"/js/vue/app.js" | relURL}}" defer></script>
+    {{ partial "js" . }}
+</body>
+</html>

@@ -1,0 +1,20 @@
+{{ $title := replace .ctx.title " " "" }}                      
+<div class="tab-pane fade{{if not .index}} show active{{end}}" id="v-pills-{{$title}}" role="tabpanel" aria-labelledby="v-pills-{{$title}}-tab">
+    {{ with .ctx.packs }}
+        {{ range . }}
+            {{ partial "packs-pack" .}}
+        {{ end }}
+    {{ end }} 
+    {{ with .ctx.categories }}
+        {{ range . }}
+            <div class="category mb-4">
+                <h3>{{ .title }}</h3>
+                    {{ with .packs }}
+                        {{ range . }}
+                            {{ partial "packs-pack" .}}
+                        {{ end }}
+                    {{ end }} 
+            </div>
+        {{ end }}
+    {{ end }} 
+</div>

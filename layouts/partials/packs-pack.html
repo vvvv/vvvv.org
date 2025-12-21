@@ -1,0 +1,29 @@
+<div class="packItem row">
+    <div class="col-1 no-gutters">
+        <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
+    </div>
+    <div class="col-11">
+        <div class="row">
+            <div class="col-9 d-flex flex-row align-items-baseline">
+                <h5><a href="https://www.nuget.org/packages/{{.id}}" target="_blank">{{.id}}</a></h5>
+                <p class="authors ml-3">
+                    {{ delimit .authors ", " }}
+                </p>
+            </div>
+            <div class="col-3">
+                <div class="text-left totalDownloads">
+                    Downloads: <span class="number">{{ .totalDownloads }}</span>
+                </div>
+            </div>
+        </div>
+        {{ if ne .summary ""}}
+            <p>{{.summary}}</p>
+        {{ end }}
+        <div>
+            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a>, 
+            {{ if ne .projectURL ""}}
+            <a href="{{.projectURL}}">Project</a>
+            {{ end }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+#Packs{
+
+    button{
+        text-align: left;
+        background: #ffffff;
+        box-shadow: none;
+        border: none;
+
+        &:hover{
+            background-color: #eee;
+        }
+
+        &.active{
+            color: #000;
+            background-color: #ddd;   
+        }
+    }
+
+    .packItem{
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0rem;
+        border-radius: 3px;
+        alignment-baseline: baseline;
+
+        // &:hover{
+        //     background-color: #efefef;
+        // }
+
+        h5{
+            padding-bottom: 0;
+            margin-bottom: 0;
+            color: #000;
+            font-weight: bold;
+            
+            a {
+                text-decoration: none;
+            }
+        }
+
+        a {
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+        }
+
+        .authors{
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .totalDownloads{
+            font-size: 0.9rem;
+            color: #999;
+            
+            .number{
+                font-weight: bold;
+                color: #666;
+            }
+        }
+
+        .category{
+            h4{
+                
+            }
+        }
+    }
+}
