@@ -1,4 +1,4 @@
-<div class="packItem row" data-pack="{{.id}}">
+<div class="packItem row" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
     <div class="col-1 no-gutters">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
     </div>
@@ -6,6 +6,7 @@
         <div class="row">
             <div class="col-9 d-flex flex-row align-items-baseline">
                 <h5><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h5>
+                <span data-badge class="ml-3" hidden></span>
                 <p class="authors ml-3" data-pack-info>
                     {{ delimit .authors ", " }}
                 </p>

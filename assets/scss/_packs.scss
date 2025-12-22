@@ -19,11 +19,17 @@
     }
 
     #v-pills-tab {
+
         button{
             text-align: left;
             background: #ffffff;
             box-shadow: none;
             border: none;
+
+            .badge{
+                color: #fff;
+                padding: 0.3rem 0.5rem;
+            }
     
             &:hover{
                 background-color: #eee;
@@ -36,6 +42,10 @@
     
             &.inactive{
                 color: #aaa;
+            }
+
+            &.bold{
+                font-weight: bold;
             }
     
             span{
