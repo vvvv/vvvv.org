@@ -39,6 +39,16 @@
             margin: 0 !important;
         }
 
+        #clearBtn{
+            border-color: #ccc;
+            color: #000;
+
+            &:hover{
+                background-color: #eee;
+                color: #000;
+            }
+        }
+
         margin: 1rem 0rem;
     }
 
