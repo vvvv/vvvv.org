@@ -16,6 +16,7 @@ window.addEventListener ("load", ()=> {
     const data = collectData();
     fillUpdates();
     setUpSearchField();
+
     content.hidden = false;
     processing.hidden = true;
 
@@ -45,14 +46,14 @@ window.addEventListener ("load", ()=> {
             const elements = updatedPacks.map(e=>e.element);
             contentItem.append(...elements);
 
-            const newCategory = {
-                    title: "Updates",
-                    contentElement: contentItem,
-                    menuElement: menuItem,
-                    packs: updatedPacks
-            };
+            const updatesCategory = data.filter((d)=>d.title === 'Updates');
 
-            data.push(newCategory);
+            if (updatesCategory)
+            {
+                updatesCategory.contentElement = contentItem;
+                updatesCategory.menuElement = menuItem;
+                updatesCategory.packs = updatedPacks;
+            }
 
         }
         
@@ -221,7 +222,7 @@ window.addEventListener ("load", ()=> {
                 const a = document.createElement("a");
                 a.textContent = i.title;
                 a.href = `#`;
-                a.onclick = ()=>{ $(`button[data-category-menu="${i.title}"]`).tab('show') };
+                a.dataset.target = i.title;
                 li.appendChild(a);
                 ul.appendChild(li);
             })
@@ -234,9 +235,15 @@ window.addEventListener ("load", ()=> {
         data.forEach((e)=>{
             const empty = e.contentElement.querySelector('[data-empty]');
 
-            if (!empty.hidden)
+            if (empty && !empty.hidden)
             {
-                empty.replaceChildren(div);
+                empty.replaceChildren(div.cloneNode(true));
+                const links = empty.getElementsByTagName('a');
+                [...links].forEach(a=>{
+                    a.addEventListener('click', ()=>{
+                        $(`button[data-category-menu="${a.dataset.target}"]`).tab('show');
+                    })
+                })
             }
         })
 
@@ -314,14 +321,7 @@ window.addEventListener ("load", ()=> {
             element.hidden = !state;
         }
     }
-
-    function getMenuItemsWithPacks()
-    {
-        data.forEach(c=>{
-
-        });
-    }
-    
+   
     function collectData()
     {
         // Getting Menu Map
