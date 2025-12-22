@@ -1,31 +1,56 @@
-const content = [
-    {
-        title: String,
-        menuElement: HTMLElement,
-        contentElement: HTMLElement,
-        packs: [{HTMLElement, String}],
-        categories: [
-            {
-                title: String,
-                contentElement: HTMLElement,
-                packs: [{HTMLElement, String}]
-            }
-        ]
-    }
-]
-
-
-
 window.addEventListener ("load", ()=> {
 
+    const filtered = document.querySelector('[data-filter]');
+    const filteredCount = filtered.querySelector('[data-filter-count]');
+    const twoWeeks = 14 * 24 * 60 * 60 * 1000;
+    const updatedPacks = [];
+    
     const data = collectData();
+    fillUpdates();
     setUpSearchField();
 
     /////////////////////////////////////////
+
+    function fillUpdates()
+    {
+        const menuItem = document.querySelector('[data-category-menu = "Updates"]');
+        const contentItem = document.querySelector('[data-category-content = "Updates"]');
+
+        if (updatedPacks.length == 0)
+        {
+            menuItem.disabled = true;
+            menuItem.classList.add('inactive');   
+        }
+        else
+        {
+            menuItem.disabled = false;
+            menuItem.classList.add('active');
+
+            const badge = menuItem.querySelector('[data-badge]');
+            badge.hidden = false;
+            badge.textContent = updatedPacks.length;
+
+            updatedPacks.sort((a,b)=>a.element.dataset.pack.localeCompare(b.element.dataset.pack));
+            const elements = updatedPacks.map(e=>e.element);
+            contentItem.append(...elements);
+
+            const newCategory = {
+                    title: "Updates",
+                    contentElement: contentItem,
+                    menuElement: menuItem,
+                    packs: updatedPacks
+            };
+
+            data.push(newCategory);
+
+        }
+        
+    }
    
     function filterItems(query)
     {
         var counter = 0;
+        const foundPacks = new Set();
 
         if (query === '')
         {
@@ -41,16 +66,22 @@ window.addEventListener ("load", ()=> {
                     e.menuElement.querySelector('[data-count]').hidden = true;
                 }
 
-                e.categories.forEach(c=>{
-                    c.contentElement.hidden = false;
-
-                    c.packs.forEach(p=>{
-                        p.element.hidden = false;
+                if (e.categories)
+                {
+                    e.categories.forEach(c=>{
+                        c.contentElement.hidden = false;
+    
+                        c.packs.forEach(p=>{
+                            p.element.hidden = false;
+                        })
                     })
-                })
+                }
 
                 e.menuElement.classList.remove('inactive');
             })
+
+            filtered.hidden = true;
+
             return;
         }
 
@@ -64,11 +95,18 @@ window.addEventListener ("load", ()=> {
                 
                 counter += e.packs.length;
 
-                e.packs.forEach(p=>{
-                    p.element.hidden = false;
-                })
+                if (e.packs)
+                {
+                    e.packs.forEach(p=>{
+                        p.element.hidden = false;
+                        foundPacks.add(p.element.dataset.pack);
+                    })
+                }
 
-                e.categories.forEach(c => counter += c.packs.length);
+                if (e.categories)
+                {
+                    e.categories.forEach(c => counter += c.packs.length);
+                }
                 setCounter(e.menuElement, counter);
             }
             else
@@ -82,15 +120,19 @@ window.addEventListener ("load", ()=> {
                         if (c.title.toLowerCase().includes(query))
                         {
                             innerCounter = c.packs.length;
-                            c.packs.forEach((p)=>p.element.hidden = false);
+                            c.packs.forEach((p)=>{
+                                p.element.hidden = false;
+                                foundPacks.add(p.element.dataset.pack);
+                            });
                         }
                         else
                         {
                             c.packs.forEach((p)=>{
                                 if (p.info.includes(query))
                                 {
-                                    innerCounter ++;
+                                    innerCounter++;
                                     p.element.hidden = false;
+                                    foundPacks.add(p.element.dataset.pack);
                                 }
                                 else
                                 {
@@ -115,8 +157,9 @@ window.addEventListener ("load", ()=> {
                 e.packs.forEach((p)=>{
                     if (p.info.includes(query))
                     {
-                        counter ++;
+                        counter++;
                         p.element.hidden = false;
+                        foundPacks.add(p.element.dataset.pack);
                     }
                     else
                     {
@@ -128,8 +171,13 @@ window.addEventListener ("load", ()=> {
             }        
 
             setCounter(e.menuElement, counter);
-
         })
+
+        if (foundPacks.size > 0)
+        {
+            filtered.hidden = false;
+            filteredCount.textContent = foundPacks.size;
+        }
     }
 
     function setCounter(item, count)
@@ -217,8 +265,6 @@ window.addEventListener ("load", ()=> {
 
         const data = collectCategories(menuMap);
 
-        console.log(data);
-
         return data;
     }
 
@@ -275,11 +321,44 @@ window.addEventListener ("load", ()=> {
     
                 return {element: p, info: data};
             })
+            
+            // Set Updated / New badges
+            result.forEach (p => setBadge(p));
     
             return result;
         }
 
         return null;
+    }
+
+    function setBadge(pack)
+    {
+        const lastPublished = parseInt(pack.element.dataset.lastPublished);
+        const firstPublished = parseInt(pack.element.dataset.firstPublished);
+
+        const badge = pack.element.querySelector('[data-badge]');
+
+        if (new Date(lastPublished).getTime() + twoWeeks > Date.now()) 
+        {
+            badge.hidden = false;
+            if (firstPublished != lastPublished) {
+                badge.textContent = "UPDATED";
+                badge.classList.add("badge","badge-primary");
+            }
+            else{
+                badge.textContent = "NEW";
+                badge.classList.add("badge","badge-success");
+            }
+
+            updatedPacks.push({
+                element: pack.element.cloneNode(true),
+                info: pack.info
+            })
+        }
+        else
+        {
+            badge.hidden = true;
+        }
     }
  
 }, true);

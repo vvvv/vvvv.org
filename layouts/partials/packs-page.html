@@ -3,7 +3,7 @@
     <div class="container">
         <h2><b>VL Packs</b></h2>
         <div class="row">
-            <div class="col-3">
+            <div class="col-3 align-self-baseline">
                 <form>
                     <div id="form" class="input-group" style="max-width: 18rem;">
                         <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
@@ -13,6 +13,9 @@
                     </div>      
                 </form>
             </div>
+            <div class="col-9 align-self-baseline">
+                Total Count: {{.Params.totalCount}}<span data-filter hidden="true">, Found: <span data-filter-count></span></span>
+            </div>
         </div>
         <div class="row">
             <div class="col-3">
@@ -20,7 +23,11 @@
                     {{ with .Params.categories }}
                         {{ range $i, $item := . }}
                             {{ $title := replace $item.title " " "" }}
-                            <button href="#v-pills-{{$title}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title}}" aria-selected="false">{{.title}} <span data-count hidden="true"></span></button>
+                            <button href="#v-pills-{{$title}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title}}" aria-selected="false">
+                                {{.title}}
+                                <span data-badge class="badge badge-secondary" hidden="true"></span>
+                                <span data-count hidden="true"></span>
+                            </button>
                         {{ end }}   
                     {{ end }}
                 </div>
