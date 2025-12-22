@@ -2,6 +2,21 @@
 
     padding-top: 2rem;
 
+    .emptyContent
+    {
+        ul{
+            list-style: none;
+            padding-left: 0;
+        }
+
+        a{
+            margin-right: 0.5rem;
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+        }
+    }
+
     #form{
         line-height: 1rem;
 
@@ -18,18 +33,21 @@
         margin: 1rem 0rem;
     }
 
-    #v-pills-tab {
+    #toc {
 
         button{
             text-align: left;
             background: #ffffff;
             box-shadow: none;
             border: none;
-            padding: 0.3rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+            margin-bottom: 3px;
 
             .badge{
                 color: #fff;
-                padding: 0.3rem 0.5rem;
+                padding: 0.2rem 0.4rem;
+                font-weight: inherit;
             }
     
             &:hover{
@@ -71,16 +89,11 @@
             margin-bottom: 0;
             color: #000;
             font-weight: bold;
-            
+            font-size: 1.1rem;
+
             a {
                 text-decoration: none;
             }
-        }
-
-        a {
-            text-decoration: underline;
-            text-decoration-color: #ccc;
-            text-underline-offset: 0.2rem;
         }
 
         .authors{
@@ -91,17 +104,43 @@
         .totalDownloads{
             font-size: 0.9rem;
             color: #999;
-            
+                       
             .number{
-                font-weight: bold;
                 color: #666;
+            }
+
+            img{
+                height: 1rem;
+            }
+        }
+
+        .summary{
+            margin-bottom: 0.5rem;
+        }
+
+        .links{
+            color: #666;
+            font-size: 0.9rem;
+            a{
+                margin-right: 0.5rem;
+                text-decoration: underline;
+                text-decoration-color: #ccc;
+                text-underline-offset: 0.2rem;
+            }
+        }
+
+        .tags{
+            margin-top: 0.8rem;
+
+            .badge{
+                font-size: 0.8rem;
+                font-weight: inherit;
+                background-color: #eee;
+                border-radius: 2px;
             }
         }
 
         .category{
-            h4{
-
-            }
         }
     }
 }

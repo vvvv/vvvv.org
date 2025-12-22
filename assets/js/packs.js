@@ -1,13 +1,23 @@
+window.addEventListener ('DOMContentLoaded',()=>{
+    const content = document.getElementById('packsContent');
+    content.hidden = true;
+});
+
 window.addEventListener ("load", ()=> {
 
     const filtered = document.querySelector('[data-filter]');
     const filteredCount = filtered.querySelector('[data-filter-count]');
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const updatedPacks = [];
+    const content = document.getElementById('packsContent');
+    const processing = document.getElementById('packsProcessing');
+    content.hidden = true;
     
     const data = collectData();
     fillUpdates();
     setUpSearchField();
+    content.hidden = false;
+    processing.hidden = true;
 
     /////////////////////////////////////////
 
@@ -51,6 +61,7 @@ window.addEventListener ("load", ()=> {
     {
         var counter = 0;
         const foundPacks = new Set();
+        const menuItemsWithPacks = [];
 
         if (query === '')
         {
@@ -108,6 +119,10 @@ window.addEventListener ("load", ()=> {
                     e.categories.forEach(c => counter += c.packs.length);
                 }
                 setCounter(e.menuElement, counter);
+                if (counter > 0)
+                {
+                    menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                }
             }
             else
             {
@@ -171,6 +186,11 @@ window.addEventListener ("load", ()=> {
             }        
 
             setCounter(e.menuElement, counter);
+            if (counter > 0)
+            {
+                menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+            }
+            
         })
 
         if (foundPacks.size > 0)
@@ -178,6 +198,47 @@ window.addEventListener ("load", ()=> {
             filtered.hidden = false;
             filteredCount.textContent = foundPacks.size;
         }
+
+        addCategoryLinksToEmpty(menuItemsWithPacks);
+    }
+
+    function addCategoryLinksToEmpty(items)
+    {
+        const div = document.createElement("div");
+        const p = document.createElement("p");
+        div.appendChild(p);
+        div.classList.add('emptyContent');
+        
+        if (items.length)
+        {
+            p.textContent = "No packs here. These categories have some:";
+            const ul = document.createElement("ul");
+            div.appendChild(ul);
+
+            items.forEach(i=>{
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.textContent = i.title;
+                a.href = `#`;
+                a.onclick = ()=>{ $(`button[data-category-menu="${i.title}"]`).tab('show') };
+                li.appendChild(a);
+                ul.appendChild(li);
+            })
+        }
+        else
+        {
+            p.textContent = "No packs found."
+        }
+
+        data.forEach((e)=>{
+            const empty = e.contentElement.querySelector('[data-empty]');
+
+            if (!empty.hidden)
+            {
+                empty.replaceChildren(div);
+            }
+        })
+
     }
 
     function setCounter(item, count)
@@ -251,6 +312,13 @@ window.addEventListener ("load", ()=> {
         {
             element.hidden = !state;
         }
+    }
+
+    function getMenuItemsWithPacks()
+    {
+        data.forEach(c=>{
+
+        });
     }
     
     function collectData()

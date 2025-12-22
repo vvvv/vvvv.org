@@ -2,7 +2,8 @@
 <html class="scroll-padding">
     <head>
         {{ partial "head" . }}
-        <link rel="stylesheet" crossorigin href="{{"/js/vue/main.css" | relURL}}">  
+        {{- $packsjs := resources.Get "js/packs.js" -}}
+        <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
    </head>
 <body>
     <div class="main">
@@ -14,9 +15,6 @@
         
         {{ partial "footer" . }}
     </div>
-
-    {{- $packsjs := resources.Get "js/packs.js" -}}
-    <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
 
     {{ partial "js" . }}
 
