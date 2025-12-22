@@ -1,8 +1,6 @@
 {{ $title := replace .ctx.title " " "" }}
 <div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="{{.ctx.title}}" id="v-pills-{{$title}}" role="tabpanel" aria-labelledby="v-pills-{{$title}}-tab">
-    <div data-empty hidden="true">
-        No packs for your Filter in this category
-    </div>
+    <div data-empty hidden="true"></div>
     <div data-content>
         {{ with .ctx.packs }}
             {{ range . }}
@@ -12,7 +10,7 @@
         {{ with .ctx.categories }}
             {{ range . }}
                 <div class="category mb-4" data-category-sub="{{.title}}">
-                    <h3>{{ .title }}</h3>
+                    <h4>{{ .title }}</h4>
                     {{ with .packs }}
                         {{ range . }}
                             {{ partial "packs-pack" .}} 
