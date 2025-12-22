@@ -5,7 +5,6 @@
     <div class="container">
         <div class="d-flex">
             <h2><b>VL Packs</b></h2>
-            <div class="ml-auto lastUpdated d-none d-md-block">Updated: {{$createdAt}}</div>
         </div>
         <div id="packsProcessing">Processing...</div>
         <div id="packsContent">
@@ -30,7 +29,7 @@
                         {{ with .Params.categories }}
                             {{ range $i, $item := . }}
                                 {{ $title := replace $item.title " " "" }}
-                                <button href="#v-pills-{{$title}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title}}" aria-selected="false">
+                                <button href="#v-pills-{{$title | urlize}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title | urlize}}" aria-selected="false">
                                     {{.title}}
                                     <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
                                     <span data-count hidden="true"></span>
@@ -38,6 +37,7 @@
                             {{ end }}   
                         {{ end }}
                     </div>
+                    <div class="ml-auto lastUpdated d-none d-md-block">Updated: {{$createdAt}}</div>
                 </div>
                 <div class="col-6 col-sm-7 col-md-9">
                     <div class="tab-content" id="v-pills-tabContent">

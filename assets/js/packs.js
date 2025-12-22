@@ -24,8 +24,8 @@ window.addEventListener ("load", ()=> {
 
     function fillUpdates()
     {
-        const menuItem = document.querySelector('[data-category-menu = "Updates"]');
-        const categoryItem = document.querySelector('[data-category-content = "Updates"]');
+        const menuItem = document.querySelector('[data-category-menu = "New & Updated"]');
+        const categoryItem = document.querySelector('[data-category-content = "New & Updated"]');
         const contentItem = categoryItem.querySelector('[data-content]');
 
         if (updatedPacks.length == 0)
@@ -46,7 +46,7 @@ window.addEventListener ("load", ()=> {
             const elements = updatedPacks.map(e=>e.element);
             contentItem.append(...elements);
 
-            const updatesCategory = data.filter((d)=>d.title === 'Updates');
+            const updatesCategory = data.filter((d)=>d.title === 'New & Updated');
 
             if (updatesCategory)
             {

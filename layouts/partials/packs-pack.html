@@ -1,4 +1,6 @@
 {{ $download := resources.Get "img/icons/ArrowDownload24Filled.svg" }}
+{{ $package := resources.Get "img/icons/Box24Regular.svg" }}
+{{ $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" }}
 <div class="packItem row" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
     <div class="d-none d-lg-block col-md-1">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
@@ -18,6 +20,9 @@
                 </div>
             </div>
         </div>
+
+        <div class="version"><img src="{{$package.RelPermalink}}"/>{{ .latestVersion }} • {{$latestDate}}</div>
+        
         {{ if ne .summary ""}}
             <div class="summary" data-pack-info>{{.summary}}</div>
         {{ end }}
