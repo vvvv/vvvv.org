@@ -1,7 +1,12 @@
 {{ "<!-- PACKS -->" | safeHTML }}
+{{ $createdAt := div .Params.createdAt 1000 | int | dateFormat "2 Jan 2006, 15:04:05" }}
+
 <section id="Packs">
     <div class="container">
-        <h2><b>VL Packs</b></h2>
+        <div class="d-flex">
+            <h2><b>VL Packs</b></h2>
+            <div class="ml-auto lastUpdated d-none d-md-block">Updated: {{$createdAt}}</div>
+        </div>
         <div id="packsProcessing">Processing...</div>
         <div id="packsContent">
             <div class="row">
@@ -15,7 +20,7 @@
                         </div>      
                     </form>
                 </div>
-                <div class="col-6 col-sm-7 col-md-9 align-self-baseline">
+                <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
                     Total: {{.Params.totalCount}}<span data-filter hidden="true">, Found: <span data-filter-count></span></span>
                 </div>
             </div>

@@ -25,7 +25,16 @@
         <div class="links">
             <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
             {{ if ne .projectURL ""}}
-            <a href="{{.projectURL}}">Project</a>
+                <a href="{{.projectURL}}">Project</a>
+            {{ end }}
+            {{ with .links }}
+                {{ range . }}
+                    {{ if eq .title "Sponsor!"}}
+                        <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
+                    {{ else }}
+                        <a href="{{.link}}">{{.title}}</a>
+                    {{ end }}
+                {{ end }}
             {{ end }}
         </div>
 
