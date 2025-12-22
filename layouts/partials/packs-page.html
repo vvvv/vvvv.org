@@ -20,7 +20,7 @@
                     </form>
                 </div>
                 <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
-                    Total: {{.Params.totalCount}}<span data-filter hidden="true">, Found: <span data-filter-count></span></span>
+                    <span data-filter hidden="true">Found: <span data-filter-count></span></span>
                 </div>
             </div>
             <div class="row">
@@ -37,7 +37,9 @@
                             {{ end }}   
                         {{ end }}
                     </div>
-                    <div class="ml-auto lastUpdated d-none d-md-block">Updated: {{$createdAt}}</div>
+                    <div class="ml-auto lastUpdated d-none d-md-block">
+                        Total: {{.Params.totalCount}}<br/>
+                        Updated: {{$createdAt}}</div>
                 </div>
                 <div class="col-6 col-sm-7 col-md-9">
                     <div class="tab-content" id="v-pills-tabContent">
