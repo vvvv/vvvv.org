@@ -35,6 +35,11 @@
 
     #toc {
 
+        .nav-link {
+            color: inherit;
+            -webkit-text-fill-color: inherit;
+        }
+
         button{
             text-align: left;
             background: #ffffff;
@@ -79,6 +84,10 @@
         padding: 1rem 0rem;
         border-radius: 3px;
         alignment-baseline: baseline;
+
+        &:first-of-type {
+            padding-top: 0;
+        }
 
         // &:hover{
         //     background-color: #efefef;

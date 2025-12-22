@@ -24,7 +24,8 @@ window.addEventListener ("load", ()=> {
     function fillUpdates()
     {
         const menuItem = document.querySelector('[data-category-menu = "Updates"]');
-        const contentItem = document.querySelector('[data-category-content = "Updates"]');
+        const categoryItem = document.querySelector('[data-category-content = "Updates"]');
+        const contentItem = categoryItem.querySelector('[data-content]');
 
         if (updatedPacks.length == 0)
         {

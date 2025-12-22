@@ -5,7 +5,7 @@
         <div id="packsProcessing">Processing...</div>
         <div id="packsContent">
             <div class="row">
-                <div class="col-4 col-md-3 align-self-baseline">
+                <div class="col-6 col-sm-5 col-md-3 align-self-baseline">
                     <form>
                         <div id="form" class="input-group" style="max-width: 18rem;">
                             <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
@@ -15,12 +15,12 @@
                         </div>      
                     </form>
                 </div>
-                <div class="col-8 col-md-9 align-self-baseline">
+                <div class="col-6 col-sm-7 col-md-9 align-self-baseline">
                     Total: {{.Params.totalCount}}<span data-filter hidden="true">, Found: <span data-filter-count></span></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-4 col-md-3">
+                <div class="col-6 col-sm-5 col-md-3">
                     <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical">
                         {{ with .Params.categories }}
                             {{ range $i, $item := . }}
@@ -34,7 +34,7 @@
                         {{ end }}
                     </div>
                 </div>
-                <div class="col-8 col-md-9">
+                <div class="col-6 col-sm-7 col-md-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         {{ with .Params.categories }}
                             {{ range $i, $item := . }}
