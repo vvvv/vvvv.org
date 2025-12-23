@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html class="scroll-padding">
+    <head>
+        {{ partial "head" . }}
+        {{- $packsjs := resources.Get "js/packs.js" -}}
+        <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
+   </head>
+<body>
+    <div class="main">
+        {{ partial "nav" . }}
+
+        {{ partial "packs-page" .}}
+
+        {{ partial "contact" . }}
+        
+        {{ partial "footer" . }}
+    </div>
+
+    {{ partial "js" . }}
+
+</body>
+</html>

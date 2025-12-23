@@ -1,0 +1,56 @@
+{{ "<!-- PACKS -->" | safeHTML }}
+{{ $createdAt := div .Params.createdAt 1000 | int | dateFormat "2 Jan 2006, 15:04:05" }}
+
+<section id="Packs">
+    <div class="container">
+        <div class="d-flex">
+            <h2><b>VL Packs</b></h2>
+        </div>
+        <div id="packsProcessing">Processing...</div>
+        <div id="packsContent">
+            <div class="row">
+                <div class="col-6 col-sm-5 col-md-3 align-self-baseline">
+                    <form>
+                        <div id="form" class="input-group" style="max-width: 18rem;">
+                            <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
+                            <div class="input-group-append">
+                                <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
+                            </div>
+                        </div>      
+                    </form>
+                </div>
+                <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
+                    <span data-filter hidden="true">Found: <span data-filter-count></span></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-sm-5 col-md-3">
+                    <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical">
+                        {{ with .Params.categories }}
+                            {{ range $i, $item := . }}
+                                {{ $title := replace $item.title " " "" }}
+                                <button href="#v-pills-{{$title | urlize}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title | urlize}}" aria-selected="false">
+                                    {{.title}}
+                                    <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+                                    <span data-count hidden="true"></span>
+                                </button>
+                            {{ end }}   
+                        {{ end }}
+                    </div>
+                    <div class="ml-auto lastUpdated d-none d-md-block">
+                        Total: {{.Params.totalCount}}<br/>
+                        Updated: {{$createdAt}}</div>
+                </div>
+                <div class="col-6 col-sm-7 col-md-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        {{ with .Params.categories }}
+                            {{ range $i, $item := . }}
+                                {{ partial "packs-category" (dict "ctx" $item "index" $i)}}
+                            {{ end }}   
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  

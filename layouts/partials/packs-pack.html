@@ -1,0 +1,55 @@
+{{ $download := resources.Get "img/icons/ArrowDownload24Filled.svg" }}
+{{ $package := resources.Get "img/icons/Box24Regular.svg" }}
+{{ $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" }}
+<div class="packItem row" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
+    <div class="d-none d-lg-block col-md-1">
+        <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
+    </div>
+    <div class="d-block col-12 col-md-11">
+        <div class="row mb-2">
+            <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
+                <h5><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h5>
+                <span data-badge class="ml-md-3" hidden></span>
+                <div class="authors ml-md-3" data-pack-info>
+                    {{ delimit .authors ", " }}
+                </div>
+            </div>
+            <div class="col-12 col-md-3 col-lg-2">
+                <div class="text-left totalDownloads">
+                   <img src="{{$download.RelPermalink}}"/> <span class="number">{{ .totalDownloads }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="version"><img src="{{$package.RelPermalink}}"/>{{ .latestVersion }} • {{$latestDate}}</div>
+        
+        {{ if ne .summary ""}}
+            <div class="summary" data-pack-info>{{.summary}}</div>
+        {{ end }}
+
+        <div class="links">
+            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
+            {{ if ne .projectURL ""}}
+                <a href="{{.projectURL}}">Project</a>
+            {{ end }}
+            {{ with .links }}
+                {{ range . }}
+                    {{ if eq .title "Sponsor!"}}
+                        <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
+                    {{ else }}
+                        <a href="{{.link}}">{{.title}}</a>
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </div>
+
+        <div class="tags">
+            {{ with .tags}}
+                {{ range . }}
+                <span class="badge" data-pack-info>{{ . }}</span>
+                {{ end }}
+            {{ end }}
+            <!-- Tags: {{ lower (delimit .tags ", ") }} -->
+        </div>
+    </div>
+</div>

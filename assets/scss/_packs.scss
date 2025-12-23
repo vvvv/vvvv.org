@@ -1,0 +1,202 @@
+#Packs{
+
+    padding-top: 2rem;
+
+    .lastUpdated{
+        margin-top: 1rem;
+        border-top: 1px solid #eee;
+        padding-top: 1rem;
+        color: #aaa;
+        font-size: 0.8rem;
+    }
+
+    .emptyContent
+    {
+        ul{
+            list-style: none;
+            padding-left: 0;
+        }
+
+        a{
+            margin-right: 0.5rem;
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+            font-weight: bold;
+        }
+    }
+
+    #form{
+        line-height: 1rem;
+
+        button{
+            line-height: 1rem;
+            font-size: 1rem;
+            padding: 1 rem;
+        }
+
+        input{
+            margin: 0 !important;
+        }
+
+        #clearBtn{
+            border-color: #ccc;
+            color: #000;
+
+            &:hover{
+                background-color: #eee;
+                color: #000;
+            }
+        }
+
+        margin: 1rem 0rem;
+    }
+
+    #toc {
+
+        .nav-link {
+            color: inherit;
+            -webkit-text-fill-color: inherit;
+        }
+
+        button{
+            text-align: left;
+            background: #ffffff;
+            box-shadow: none;
+            border: none;
+            padding: 0.2rem 0.4rem;
+            border-radius: 2px;
+            margin-bottom: 3px;
+
+            .badge{
+                color: #fff;
+                padding: 0.2rem 0.4rem;
+                font-weight: inherit;
+            }
+    
+            &:hover{
+                background-color: #eee;
+            }
+    
+            &.active{
+                color: #000;
+                background-color: #ddd;   
+            }
+    
+            &.inactive{
+                color: #aaa;
+            }
+
+            &.bold{
+                font-weight: bold;
+            }
+    
+            span{
+                color: #999;
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
+    .packItem{
+        border-bottom: 1px solid #eee;
+        padding: 1rem 0rem;
+        border-radius: 3px;
+        alignment-baseline: baseline;
+
+        &:first-of-type {
+            padding-top: 0;
+        }
+
+        .version{
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+
+            img{
+                margin-top: -2px;
+                height: 1rem;
+                margin-right: 0.5rem;
+                color: #666;
+            }
+        }
+
+        h5{
+            padding-bottom: 0;
+            margin-bottom: 0;
+            color: #000;
+            font-weight: bold;
+            font-size: 1.1rem;
+
+            a {
+                text-decoration: none;
+            }
+        }
+
+        .authors{
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .totalDownloads{
+            font-size: 0.9rem;
+            color: #999;
+                       
+            .number{
+                color: #666;
+            }
+
+            img{
+                height: 1rem;
+            }
+        }
+
+        .summary{
+            margin-bottom: 0.5rem;
+        }
+
+        .links{
+            color: #666;
+            font-size: 0.9rem;
+            a{
+                margin-right: 0.5rem;
+                text-decoration: underline;
+                text-decoration-color: #ccc;
+                text-underline-offset: 0.2rem;
+
+                &:hover{
+                   color: #000; 
+                }
+            }
+
+            .badge-sponsor{
+                background-color: hsl(340, 84%, 70%);
+                padding: 0.2rem 0.5rem;
+                font-weight: inherit;
+                font-size: inherit;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 3px;
+
+                &:hover{
+                   background-color: hsl(340, 84%, 60%);
+                   color: #fff;
+                }
+            }
+        }
+
+        .tags{
+            margin-top: 0.8rem;
+
+            .badge{
+                font-size: 0.8rem;
+                font-weight: inherit;
+                background-color: #eee;
+                border-radius: 2px;
+            }
+        }
+
+        .category{
+        }
+    }
+}
