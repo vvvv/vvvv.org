@@ -123,7 +123,10 @@ window.addEventListener ("load", ()=> {
                 setCounter(e.menuElement, counter);
                 if (counter > 0)
                 {
-                    menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                    if (!menuItemsWithPacks.find(m => m.title == e.title))
+                    {
+                        menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                    }
                 }
             }
             else
@@ -190,7 +193,10 @@ window.addEventListener ("load", ()=> {
             setCounter(e.menuElement, counter);
             if (counter > 0)
             {
-                menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                if (!menuItemsWithPacks.find(m=>m.title==e.title))
+                {
+                    menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                }
             }
             
         })
