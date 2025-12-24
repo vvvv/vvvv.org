@@ -10,21 +10,25 @@
         font-size: 0.8rem;
     }
 
-    h1{
-        font-size: 1.6rem;
-        margin-bottom: 1.5rem;
-        color: #000;
-    }
-
-    h2{
-        font-size: 1.4rem;
-        margin: 1rem 0rem 1.5rem;
-        color: #333;
-
-        &:first-child{
-            margin-top: 0;
+    #packsContent
+    {
+        h1{
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: #000;
+        }
+    
+        h2{
+            font-size: 1.4rem;
+            margin: 1rem 0rem 1.5rem;
+            color: #333;
+    
+            &:first-child{
+                margin-top: 0;
+            }
         }
     }
+
 
     .emptyContent
     {
@@ -117,13 +121,14 @@
 
     .packItem{
         border-bottom: 1px solid #eee;
-        padding: 1rem 0rem;
+        padding: 0 1rem 1rem;
         border-radius: 3px;
+        margin-bottom: 1rem;
         alignment-baseline: baseline;
 
-        &:first-of-type {
-            padding-top: 0;
-        }
+        // &:first-of-type {
+        //     padding-top: 0;
+        // }
 
         .version{
             font-size: 0.9rem;
