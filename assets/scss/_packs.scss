@@ -101,6 +101,7 @@
     
             &.inactive{
                 color: #aaa;
+                pointer-events: none;
             }
 
             &.bold{
