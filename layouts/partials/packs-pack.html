@@ -5,11 +5,11 @@
 
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
 
-<article class="packItem row" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
+<article class="packItem row no-gutters" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
     <div class="d-none d-lg-block col-md-1">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
     </div>
-    <div class="d-block col-12 col-md-11">
+    <div class="d-block col-12 col-md-11 pl-md-4">
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
@@ -18,7 +18,7 @@
                     {{- delimit .authors ", " -}}
                 </div>
             </div>
-            <div class="col-12 col-md-3 col-lg-2">
+            <div class="col-12 col-md-3 col-md-1">
                 <div class="text-left totalDownloads">
                    <img src="{{$download.RelPermalink}}"/> <span class="number">{{ .totalDownloads }}</span>
                 </div>
