@@ -15,12 +15,26 @@ window.addEventListener ("load", ()=> {
     
     const data = collectData();
     fillUpdates();
+    setUpCategoryLinks();
     setUpSearchField();
 
     content.hidden = false;
     processing.hidden = true;
 
     /////////////////////////////////////////
+
+
+    function setUpCategoryLinks()
+    {
+        const elements = document.querySelectorAll('[data-category-link');
+
+        [...elements].forEach(e=>{
+            e.addEventListener('click', ()=>{
+                $(`button[data-category-menu="${e.dataset.categoryLink}"]`).tab('show');
+                console.log (e.dataset.categoryLink);
+            })
+        })
+    }
 
     function fillUpdates()
     {
@@ -36,7 +50,6 @@ window.addEventListener ("load", ()=> {
         else
         {
             menuItem.disabled = false;
-            menuItem.classList.add('active');
 
             const badge = menuItem.querySelector('[data-badge]');
             badge.hidden = false;

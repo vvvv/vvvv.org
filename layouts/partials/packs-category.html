@@ -3,9 +3,11 @@
     <h1>{{.ctx.title}}</h1>
     <div data-empty hidden="true"></div>
     <div data-content>
+        {{ $showCategories := eq .ctx.title "All" }}
         {{ with .ctx.packs }}
             {{ range . }}
-                {{ partial "packs-pack" .}}
+                {{ $ctx := merge . (dict "showCategories" $showCategories) }}
+                {{ partial "packs-pack" $ctx}}
             {{ end }}
         {{ end }} 
         {{ with .ctx.categories }}
@@ -14,7 +16,7 @@
                     <h2>{{ .title }}</h2>
                     {{ with .packs }}
                         {{ range . }}
-                            {{ partial "packs-pack" .}} 
+                            {{ partial "packs-pack" . }} 
                         {{ end }}
                     {{ end }} 
                 </div>
