@@ -104,12 +104,12 @@
             }
     
             &.inactive{
-                color: #aaa;
+                color: #bbb;
                 pointer-events: none;
             }
 
             &.bold{
-                font-weight: bold;
+                font-weight: 600;
             }
     
             span{

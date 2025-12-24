@@ -77,6 +77,7 @@ window.addEventListener ("load", ()=> {
                 {
                     e.menuElement.disabled = false;
                     e.menuElement.querySelector('[data-count]').hidden = true;
+                    e.menuElement.classList.remove('inactive');
                 }
 
                 if (e.categories)
@@ -89,8 +90,6 @@ window.addEventListener ("load", ()=> {
                         })
                     })
                 }
-
-                e.menuElement.classList.remove('inactive');
             })
 
             filtered.hidden = true;
@@ -266,11 +265,13 @@ window.addEventListener ("load", ()=> {
                 countElement.hidden = false;
                 countElement.textContent = count;
                 item.classList.remove('inactive');
+                // item.classList.add('bold');
             }
             else
             {
                 countElement.hidden = true;
                 item.classList.add('inactive');
+                // item.classList.remove('bold');
             }
         }
     }
