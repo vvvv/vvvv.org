@@ -1,24 +1,16 @@
-window.addEventListener ('DOMContentLoaded',()=>{
-    const content = document.getElementById('packsContent');
-    content.hidden = true;
-});
-
 window.addEventListener ("load", ()=> {
 
     const filtered = document.querySelector('[data-filter]');
     const filteredCount = filtered.querySelector('[data-filter-count]');
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const updatedPacks = [];
-    const content = document.getElementById('packsContent');
     const processing = document.getElementById('packsProcessing');
-    content.hidden = true;
     
     const data = collectData();
     fillUpdates();
     setUpCategoryLinks();
     setUpSearchField();
 
-    content.hidden = false;
     processing.hidden = true;
 
     /////////////////////////////////////////
@@ -299,8 +291,6 @@ window.addEventListener ("load", ()=> {
             filterItems(input.value);
         }
     
-        input.focus();
-
         clearBtn.addEventListener('click', () => {
             input.value = '';
             input.focus();
