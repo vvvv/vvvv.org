@@ -43,6 +43,6 @@ Read the repositories readme carefully! There are a lot details to getting this 
 
 ## Sponsor credits
 
-For the sponsoring of this development we bow to [spacemusic.com](http://spacemusic.com) and [hansen.ch](http://hansen.ch).
+For the sponsoring of this development we bow to Studio Jan Henrik Hansen ([spacemusic.com](http://spacemusic.com), [hansen.ch](http://hansen.ch)).
 
 If you also have a request for custom development, please [get in touch](mailto:devvvvs@vvvv.org)!

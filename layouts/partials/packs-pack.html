@@ -1,6 +1,10 @@
 {{- $download := resources.Get "img/icons/ArrowDownload24Filled.svg" -}}
 {{- $package := resources.Get "img/icons/Box24Regular.svg" -}}
+{{- $category := resources.Get "img/icons/FolderOpenFilled.svg" -}}
+{{- $link := resources.Get "img/icons/InsertLinkFilled.svg" -}}
+
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
+
 <article class="packItem row" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
     <div class="d-none d-lg-block col-md-1">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
@@ -20,16 +24,21 @@
                 </div>
             </div>
         </div>
-        <div class="version"><img src="{{$package.RelPermalink}}"/>{{ .latestVersion }} • {{$latestDate}}</div>
+
         {{- if ne .summary "" -}}
             <div class="summary" data-pack-info>{{.summary}}</div>
         {{- end -}}
 
+        <div class="version">
+            <img src="{{$package.RelPermalink}}" alt="Latest version"/>{{ .latestVersion }} • {{$latestDate}}
+        </div>
+
         <div class="links">
-            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
+            <img src="{{$link.RelPermalink}}" alt="Links"/>
             {{ if ne .projectURL ""}}
-                <a href="{{.projectURL}}">Project</a>
+                <a href="{{.projectURL}}">Website</a>
             {{ end }}
+            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
             {{ with .links }}
                 {{ range . }}
                     {{ if eq .title "Sponsor!"}}
@@ -40,6 +49,21 @@
                 {{ end }}
             {{ end }}
         </div>
+
+        {{ if eq .showCategories true}}
+            <div class="categories" alt="Categories">
+                <img src="{{$category.RelPermalink}}"/>
+                {{ with .categories}}
+                    {{ range . }}
+                        {{ with index . 0 }}
+                            <a href="#" data-category-link="{{ . }}">{{ . }}</a> 
+                        {{ end }}
+                    {{ end }}
+                {{ else }}
+                    <a href="#" data-category-link="Unsorted">Unsorted</a>
+                {{ end }}
+            </div>
+        {{ end }}
 
         <div class="tags">
             {{ with .tags}}

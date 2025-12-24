@@ -1,26 +1,32 @@
-window.addEventListener ('DOMContentLoaded',()=>{
-    const content = document.getElementById('packsContent');
-    content.hidden = true;
-});
-
 window.addEventListener ("load", ()=> {
 
     const filtered = document.querySelector('[data-filter]');
     const filteredCount = filtered.querySelector('[data-filter-count]');
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const updatedPacks = [];
-    const content = document.getElementById('packsContent');
     const processing = document.getElementById('packsProcessing');
-    content.hidden = true;
     
     const data = collectData();
     fillUpdates();
+    setUpCategoryLinks();
     setUpSearchField();
 
-    content.hidden = false;
     processing.hidden = true;
 
     /////////////////////////////////////////
+
+
+    function setUpCategoryLinks()
+    {
+        const elements = document.querySelectorAll('[data-category-link');
+
+        [...elements].forEach(e=>{
+            e.addEventListener('click', ()=>{
+                $(`button[data-category-menu="${e.dataset.categoryLink}"]`).tab('show');
+                console.log (e.dataset.categoryLink);
+            })
+        })
+    }
 
     function fillUpdates()
     {
@@ -36,7 +42,6 @@ window.addEventListener ("load", ()=> {
         else
         {
             menuItem.disabled = false;
-            menuItem.classList.add('active');
 
             const badge = menuItem.querySelector('[data-badge]');
             badge.hidden = false;
@@ -77,6 +82,7 @@ window.addEventListener ("load", ()=> {
                 {
                     e.menuElement.disabled = false;
                     e.menuElement.querySelector('[data-count]').hidden = true;
+                    e.menuElement.classList.remove('inactive');
                 }
 
                 if (e.categories)
@@ -89,8 +95,6 @@ window.addEventListener ("load", ()=> {
                         })
                     })
                 }
-
-                e.menuElement.classList.remove('inactive');
             })
 
             filtered.hidden = true;
@@ -266,11 +270,13 @@ window.addEventListener ("load", ()=> {
                 countElement.hidden = false;
                 countElement.textContent = count;
                 item.classList.remove('inactive');
+                // item.classList.add('bold');
             }
             else
             {
                 countElement.hidden = true;
                 item.classList.add('inactive');
+                // item.classList.remove('bold');
             }
         }
     }
@@ -285,8 +291,6 @@ window.addEventListener ("load", ()=> {
             filterItems(input.value);
         }
     
-        input.focus();
-
         clearBtn.addEventListener('click', () => {
             input.value = '';
             input.focus();
@@ -424,11 +428,14 @@ window.addEventListener ("load", ()=> {
                 badge.textContent = "NEW";
                 badge.classList.add("badge","badge-success");
             }
-
-            updatedPacks.push({
-                element: pack.element.cloneNode(true),
-                info: pack.info
-            })
+            
+            if (pack.element.querySelector('.categories'))
+            {
+                updatedPacks.push({
+                    element: pack.element.cloneNode(true),
+                    info: pack.info
+                })
+            }
         }
         else
         {
