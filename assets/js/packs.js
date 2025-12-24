@@ -428,11 +428,14 @@ window.addEventListener ("load", ()=> {
                 badge.textContent = "NEW";
                 badge.classList.add("badge","badge-success");
             }
-
-            updatedPacks.push({
-                element: pack.element.cloneNode(true),
-                info: pack.info
-            })
+            
+            if (pack.element.querySelector('.categories'))
+            {
+                updatedPacks.push({
+                    element: pack.element.cloneNode(true),
+                    info: pack.info
+                })
+            }
         }
         else
         {
