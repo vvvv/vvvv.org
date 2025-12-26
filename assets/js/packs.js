@@ -6,7 +6,10 @@ window.addEventListener ("load", ()=> {
     const toc = document.getElementById('toc');
     const dropdownToc = document.getElementById('dropdownToc');
     const found = document.getElementById('filterCount');
-    
+    const input = document.querySelector('#filter');
+
+    let query = input.value;
+
     toc.hidden = true;
 
     // const data = collectData();
@@ -50,6 +53,7 @@ window.addEventListener ("load", ()=> {
                 const value = menu.get(categoryTitle);
                 value.elements.forEach(e=>
                 {
+                    e.hidden = !isVisible(e);
                     contentDiv.appendChild(e);
                 });
 
@@ -69,6 +73,7 @@ window.addEventListener ("load", ()=> {
                         let count = 0;
 
                         c.elements.forEach(e=>{
+                            e.hidden = !isVisible(e);
                             div.appendChild(e);
                             if (!e.hidden) count++;
                         });
@@ -90,7 +95,7 @@ window.addEventListener ("load", ()=> {
     {
         const content = document.querySelector('[data-category-content]');
         const elements = Array.from(content.getElementsByTagName('article'));
-
+        
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
 
         menu.set("All", {
@@ -102,12 +107,12 @@ window.addEventListener ("load", ()=> {
 
         fillUpdated(elements, menuItems);
 
-        for (const el of elements)
+        for (const element of elements)
         {
             let paths;
 
             try {
-                paths = JSON.parse(el.dataset.categories);
+                paths = JSON.parse(element.dataset.categories);
             }
             catch{
                 continue;
@@ -119,12 +124,12 @@ window.addEventListener ("load", ()=> {
 
                 if (item)
                 {
-                    item.elements.push(el);
+                    item.elements.push(element);
                 }
                 else{
                     menu.set("Unsorted",{
                         name: "Unsorted",
-                        elements: [el],
+                        elements: [element],
                         children: new Map(),
                         menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
                     })
@@ -153,19 +158,19 @@ window.addEventListener ("load", ()=> {
 
                     if (childNode)
                     {
-                        childNode.elements.push(el);
+                        childNode.elements.push(element);
                     }
                     else
                     {
                         parentNode.children.set(child, {
                             name: child,
-                            elements: [el]
+                            elements: [element]
                         })
                     }
                 }
                 else
                 {
-                    parentNode.elements.push(el);
+                    parentNode.elements.push(element);
                 }
             }
         }
@@ -222,28 +227,11 @@ window.addEventListener ("load", ()=> {
 
                 count = value.elements.length;
 
-                value.elements.forEach(e => e.hidden = false);
-                
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c => {
                         count+=c.elements.length;
-                        c.elements.forEach(e => e.hidden = false)
                     })
-                }
-
-                const countSpan = value.menuItem.querySelector('[data-count]');
-
-                if (count > 0)
-                {
-                    value.menuItem.classList.remove('inactive');
-                    countSpan.textContent = count;
-                    countSpan.hidden = false;
-                }
-                else
-                {
-                    value.menuItem.classList.add('inactive');
-                    countSpan.hidden = true;
                 }
             }
             else
@@ -251,37 +239,41 @@ window.addEventListener ("load", ()=> {
                 count = 0;
 
                 value.elements.forEach(e=>{
-                        e.hidden = !e.dataset.search.toLowerCase().includes(query);
-                        if (!e.hidden) count++;
+                    if (isVisible(e)) count++;
                 })
 
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c=>{
-                        [...c.elements].forEach(e=>{
-                                const searchField = e.dataset.search.toLowerCase().includes(query);
-                                const categoriesField = e.dataset.categories.toLowerCase().includes(query);
-                                e.hidden = !(searchField || categoriesField);
-                                if (!e.hidden) count++;
+                        c.elements.forEach(e=>{
+                            if (isVisible(e)) count++;
                         })
                     })
                 }
 
-                const countSpan = value.menuItem.querySelector('[data-count]');
+            }
 
-                if (count > 0)
-                {
-                    value.menuItem.classList.remove('inactive');
-                    countSpan.textContent = count;
-                    countSpan.hidden = false;
-                }
-                else
-                {
-                    value.menuItem.classList.add('inactive');
-                    countSpan.hidden = true;
-                }
+            const countSpan = value.menuItem.querySelector('[data-count]');
+
+            if (count > 0)
+            {
+                value.menuItem.classList.remove('inactive');
+                countSpan.textContent = count;
+                countSpan.hidden = false;
+            }
+            else
+            {
+                value.menuItem.classList.add('inactive');
+                countSpan.hidden = true;
             }
         })
+    }
+
+    function isVisible(e)
+    {
+        const searchField = e.dataset?.search?.toLowerCase().includes(query);
+        const categoriesField = e.dataset?.categories?.toLowerCase().includes(query);
+        return searchField || categoriesField;
     }
 
     function filterContent(content, query)
@@ -290,8 +282,7 @@ window.addEventListener ("load", ()=> {
 
         [...content.children].forEach (e=>{
             
-            e.hidden = !e.dataset?.search?.toLowerCase().includes(query);
-            
+            e.hidden = !isVisible(e);
             if (!e.hidden) totalCount++;
 
             if (e.classList.contains('section'))
@@ -304,12 +295,12 @@ window.addEventListener ("load", ()=> {
                 if (title.textContent.toLowerCase().includes(query))
                 {
                     [...packs].forEach(p=>p.hidden = false);
-                    count+=packs.length;    
+                    count+=packs.length;
                 }
                 else
                 {
                     [...packs].forEach(p=>{
-                        p.hidden = !p.dataset?.search?.toLowerCase().includes(query);
+                        p.hidden = !isVisible(e);
                         if (!p.hidden) count++;                        
                     })
                 }
@@ -443,7 +434,6 @@ window.addEventListener ("load", ()=> {
     function setUpSearchField()
     {
         const clearBtn = document.getElementById('clearBtn');
-        const input = document.querySelector('#filter');
 
         if (input.value)
         {
@@ -457,7 +447,7 @@ window.addEventListener ("load", ()=> {
         });
     
         input.addEventListener('input', e=>{
-            const query= e.target.value.trim().toLowerCase();
+            query= e.target.value.trim().toLowerCase();
             filterItems(query);
         })
 
