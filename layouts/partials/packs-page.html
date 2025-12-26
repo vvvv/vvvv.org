@@ -6,7 +6,6 @@
         <div class="d-flex">
             <h2><b>VL Packs</b></h2>
         </div>
-        <div id="packsProcessing">Processing...</div>
         <div id="packsContent">
             <div class="row">
                 <div class="col-6 col-sm-5 col-md-3 align-self-baseline">
@@ -16,20 +15,22 @@
                             <div class="input-group-append">
                                 <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
                             </div>
-                        </div>      
+                        </div>
                     </form>
                 </div>
                 <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
-                    <span data-filter hidden="true">Found: <span data-filter-count></span></span>
+                    <div id="filterCount">Found: <span></span></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-sm-5 col-md-3">
-                    <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical">
+                <!-- Menu Large Screens -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div id="packsProcessing">Processing...</div>
+                    <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
                         {{ with .Params.categories }}
                             {{ range $i, $item := . }}
                                 {{ $title := replace $item.title " " "" }}
-                                <button href="#v-pills-{{$title | urlize}}" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-{{$title | urlize}}" aria-selected="false">
+                                <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{ .title }}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
                                     {{.title}}
                                     <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
                                     <span data-count hidden="true"></span>
@@ -37,16 +38,16 @@
                             {{ end }}   
                         {{ end }}
                     </div>
-                    <div class="ml-auto lastUpdated d-none d-md-block">
+                    <div class="ml-auto lastUpdated">
                         Total: {{.Params.totalCount}}<br/>
-                        Updated: {{$createdAt}}</div>
+                        Updated: {{$createdAt}}
+                    </div>
                 </div>
-                <div class="col-6 col-sm-7 col-md-9">
+                <!--  -->
+                <div class="col-6 col-md-8 col-lg-9">
                     <div class="tab-content" id="v-pills-tabContent">
-                        {{ with .Params.categories }}
-                            {{ range $i, $item := . }}
-                                {{ partial "packs-category" (dict "ctx" $item "index" $i)}}
-                            {{ end }}   
+                        {{ with index .Params.categories 0 }}
+                            {{ partial "packs-category" (dict "ctx" . "index" 0)}}   
                         {{ end }}
                     </div>
                 </div>

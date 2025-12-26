@@ -1,6 +1,7 @@
 #Packs{
 
     padding-top: 2rem;
+    font-size: 1rem;
 
     .lastUpdated{
         margin-top: 1rem;
@@ -8,6 +9,18 @@
         padding-top: 1rem;
         color: #aaa;
         font-size: 0.8rem;
+    }
+
+    .dropdown-menu-scroll {
+        max-height: 20rem;   /* adjust as needed */
+        overflow-y: auto;
+    }
+
+    .sticky-offset
+    {
+        top: 61px;
+        background-color: #fff;
+        padding-bottom: 1rem;
     }
 
     #packsContent
@@ -73,7 +86,7 @@
     }
 
     #toc {
-
+     
         .nav-link {
             color: inherit;
             -webkit-text-fill-color: inherit;
@@ -86,7 +99,7 @@
             border: none;
             padding: 0.2rem 0.4rem;
             border-radius: 2px;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
 
             .badge{
                 color: #fff;
@@ -99,8 +112,19 @@
             }
     
             &.active{
-                color: #000;
-                background-color: #ddd;   
+                // color: #000;
+                // background-color: #ddd;
+                color: #fff;
+                background-color: #888;
+                
+                .badge{
+                    color: #000;
+                    background-color: #fff;
+                }
+
+                span{
+                    color: #fff;
+                }
             }
     
             &.inactive{
@@ -121,7 +145,7 @@
 
     .packItem{
         border-bottom: 1px solid #eee;
-        padding: 0 1rem 1rem;
+        padding: 0 1rem 1rem 0;
         border-radius: 3px;
         margin-bottom: 1rem;
         alignment-baseline: baseline;
