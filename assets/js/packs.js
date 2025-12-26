@@ -72,7 +72,6 @@ window.addEventListener ("load", ()=> {
                             div.appendChild(e);
                             if (!e.hidden) count++;
                         });
-
                         div.hidden = count == 0;
 
                         contentDiv.appendChild(div);
@@ -225,7 +224,7 @@ window.addEventListener ("load", ()=> {
 
                 value.elements.forEach(e => e.hidden = false);
                 
-                if (value.children.length)
+                if (value.children && value.children.size)
                 {
                     value.children.forEach(c => {
                         count+=c.elements.length;
@@ -259,18 +258,12 @@ window.addEventListener ("load", ()=> {
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c=>{
-                        if (c.name.toLowerCase().includes(query))
-                        {
-                            [...c.elements].forEach(e=>e.hidden = false);
-                            count+=c.elements.length;
-                        }
-                        else
-                        {
-                            [...c.elements].forEach(e=>{
-                                e.hidden = !e.dataset.search.toLowerCase().includes(query);
+                        [...c.elements].forEach(e=>{
+                                const searchField = e.dataset.search.toLowerCase().includes(query);
+                                const categoriesField = e.dataset.categories.toLowerCase().includes(query);
+                                e.hidden = !(searchField || categoriesField);
                                 if (!e.hidden) count++;
-                            })
-                        }
+                        })
                     })
                 }
 

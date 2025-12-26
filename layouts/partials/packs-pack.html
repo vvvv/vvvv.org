@@ -5,13 +5,13 @@
 
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
 
-<article class="packItem row no-gutters" data-pack="{{.id}}" 
+<article class="packItem row ml-1" data-pack="{{.id}}" 
     data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
     data-last-published="{{.lastPublished}}" 
     data-first-published="{{.firstPublished}}"
     data-search="{{printf "%s %s %s %s" .id .summary (delimit .authors " ") (delimit .tags " ") | lower}}"
     >
-    <div class="d-none d-lg-block col-md-1">
+    <div class="d-none d-lg-block col-md-1 pl-0 pr-2">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
     </div>
     <div class="d-block col-12 pl-0 col-md-11 pl-lg-4">
