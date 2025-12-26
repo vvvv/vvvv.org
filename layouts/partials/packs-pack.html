@@ -5,11 +5,16 @@
 
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
 
-<article class="packItem row no-gutters" data-pack="{{.id}}" data-last-published="{{.lastPublished}}" data-first-published="{{.firstPublished}}">
+<article class="packItem row no-gutters" data-pack="{{.id}}" 
+    data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
+    data-last-published="{{.lastPublished}}" 
+    data-first-published="{{.firstPublished}}"
+    data-search="{{printf "%s %s %s %s" .id .summary (delimit .authors " ") (delimit .tags " ") | lower}}"
+    >
     <div class="d-none d-lg-block col-md-1">
-        <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid"/></a>
+        <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
     </div>
-    <div class="d-block col-12 col-md-11 pl-md-4">
+    <div class="d-block col-12 pl-0 col-md-11 pl-lg-4">
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
@@ -18,10 +23,8 @@
                     {{- delimit .authors ", " -}}
                 </div>
             </div>
-            <div class="col-12 col-md-3 col-md-1">
-                <div class="text-left totalDownloads">
-                   <img src="{{$download.RelPermalink}}"/> <span class="number">{{ .totalDownloads }}</span>
-                </div>
+            <div class="col-12 col-md-3 col-lg-2 text-left totalDownloads">
+                   <img src="{{$download.RelPermalink}}" role="presentation"/> <span class="number">{{ .totalDownloads }}</span>
             </div>
         </div>
 
@@ -30,11 +33,11 @@
         {{- end -}}
 
         <div class="version">
-            <img src="{{$package.RelPermalink}}" alt="Latest version"/>{{ .latestVersion }} • {{$latestDate}}
+            <img src="{{$package.RelPermalink}}" alt="Latest version" role="presentation" aria-hidden="true"/>{{ .latestVersion }} • {{$latestDate}}
         </div>
 
         <div class="links">
-            <img src="{{$link.RelPermalink}}" alt="Links"/>
+            <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
             {{ if ne .projectURL ""}}
                 <a href="{{.projectURL}}">Website</a>
             {{ end }}
@@ -52,7 +55,7 @@
 
         {{ if eq .showCategories true}}
             <div class="categories" alt="Categories">
-                <img src="{{$category.RelPermalink}}"/>
+                <img src="{{$category.RelPermalink}}" role="presentation" aria-hidden="true"/>
                 {{ with .categories}}
                     {{ range . }}
                         {{ with index . 0 }}

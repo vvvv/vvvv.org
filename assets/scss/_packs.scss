@@ -1,6 +1,7 @@
 #Packs{
 
     padding-top: 2rem;
+    font-size: 1rem;
 
     .lastUpdated{
         margin-top: 1rem;
@@ -98,7 +99,7 @@
             border: none;
             padding: 0.2rem 0.4rem;
             border-radius: 2px;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
 
             .badge{
                 color: #fff;
@@ -111,8 +112,15 @@
             }
     
             &.active{
-                color: #000;
-                background-color: #ddd;   
+                // color: #000;
+                // background-color: #ddd;
+                color: #fff;
+                background-color: #888;
+                
+                .badge{
+                    color: #000;
+                    background-color: #fff;
+                }
             }
     
             &.inactive{
