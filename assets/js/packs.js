@@ -271,9 +271,7 @@ window.addEventListener ("load", ()=> {
 
     function isVisible(e)
     {
-        const searchField = e.dataset?.search?.toLowerCase().includes(query);
-        const categoriesField = e.dataset?.categories?.toLowerCase().includes(query);
-        return searchField || categoriesField;
+        return e.dataset?.search?.toLowerCase().includes(query);
     }
 
     function filterContent(content, query)
@@ -295,16 +293,15 @@ window.addEventListener ("load", ()=> {
                 if (title.textContent.toLowerCase().includes(query))
                 {
                     [...packs].forEach(p=>p.hidden = false);
-                    count+=packs.length;
+                    count += packs.length;
                 }
                 else
                 {
                     [...packs].forEach(p=>{
-                        p.hidden = !isVisible(e);
+                        p.hidden = !isVisible(p);
                         if (!p.hidden) count++;                        
                     })
                 }
-
                 e.hidden = count == 0;
                 if (!e.hidden) totalCount += count;
             }
