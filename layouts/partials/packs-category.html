@@ -1,19 +1,22 @@
 {{ $title := replace .ctx.title " " "" }}
-<div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="{{.ctx.title}}" id="v-pills-{{$title | urlize}}" role="tabpanel" aria-labelledby="v-pills-{{$title | urlize}}-tab">
-    <div data-empty hidden="true"></div>
+<div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="content" id="v-pills-content" role="tabpanel" aria-labelledby="v-pills-{{$title | urlize}}-tab">
+    <h1>{{.ctx.title}}</h1>
+    <div data-empty hidden="true" class="emptyContent"></div>
     <div data-content>
+        {{ $showCategories := eq .ctx.title "All" }}
         {{ with .ctx.packs }}
             {{ range . }}
-                {{ partial "packs-pack" .}}
+                {{ $ctx := merge . (dict "showCategories" $showCategories) }}
+                {{ partial "packs-pack" $ctx}}
             {{ end }}
         {{ end }} 
         {{ with .ctx.categories }}
             {{ range . }}
                 <div class="category mb-4" data-category-sub="{{.title}}">
-                    <h4>{{ .title }}</h4>
+                    <h2>{{ .title }}</h2>
                     {{ with .packs }}
                         {{ range . }}
-                            {{ partial "packs-pack" .}} 
+                            {{ partial "packs-pack" . }} 
                         {{ end }}
                     {{ end }} 
                 </div>

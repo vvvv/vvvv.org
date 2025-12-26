@@ -1,272 +1,450 @@
-window.addEventListener ('DOMContentLoaded',()=>{
-    const content = document.getElementById('packsContent');
-    content.hidden = true;
-});
-
 window.addEventListener ("load", ()=> {
 
-    const filtered = document.querySelector('[data-filter]');
-    const filteredCount = filtered.querySelector('[data-filter-count]');
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const updatedPacks = [];
-    const content = document.getElementById('packsContent');
     const processing = document.getElementById('packsProcessing');
-    content.hidden = true;
+    const toc = document.getElementById('toc');
+    const dropdownToc = document.getElementById('dropdownToc');
+    const found = document.getElementById('filterCount');
     
-    const data = collectData();
-    fillUpdates();
-    setUpSearchField();
+    toc.hidden = true;
 
-    content.hidden = false;
+    // const data = collectData();
+
+    let menu = new Map();
+
+    // fillUpdates();
+    collectMenu();
+    buildMenu();
+
+    setUpSearchField();
+    setUpCategoryLinks();
+
     processing.hidden = true;
+    toc.hidden = false;
 
     /////////////////////////////////////////
 
-    function fillUpdates()
+    function buildMenu()
     {
-        const menuItem = document.querySelector('[data-category-menu = "New & Updated"]');
-        const categoryItem = document.querySelector('[data-category-content = "New & Updated"]');
-        const contentItem = categoryItem.querySelector('[data-content]');
+        const content = document.getElementById('v-pills-content');
+        const contentDiv = content.querySelector('[data-content]');
 
-        if (updatedPacks.length == 0)
+        //Setup Menu Items
+        const menuItems = toc.getElementsByTagName('button');
+        // const dropdownItems = dropdownToc.getElementsByTagName('button');
+
+        [...menuItems].forEach(button=>{
+            const categoryTitle = button.dataset.categoryMenu;
+            button.setAttribute("href", "#v-pills-content");
+            button.setAttribute("aria-controls", "v-pills-content");
+
+            //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
+            $(button).on('shown.bs.tab', () => {            
+                const title = content.getElementsByTagName('h1')[0];
+                contentDiv.replaceChildren();
+                
+                showContentForEmpty(false);
+                
+                title.textContent = categoryTitle;
+                const value = menu.get(categoryTitle);
+                value.elements.forEach(e=>
+                {
+                    contentDiv.appendChild(e);
+                });
+
+                if (value.children.size)
+                {
+                    const sortedSections = Array.from(value.children.values()).sort((a, b)=>{a.name.localeCompare(b.name)});
+    
+                    sortedSections.forEach(c=>{
+                        
+                        const h2 = document.createElement('h2');
+                        h2.textContent = c.name;
+                        
+                        const div = document.createElement('div');
+                        div.classList.add('section');
+                        div.appendChild(h2);
+                        
+                        let count = 0;
+
+                        c.elements.forEach(e=>{
+                            div.appendChild(e);
+                            if (!e.hidden) count++;
+                        });
+
+                        div.hidden = count == 0;
+
+                        contentDiv.appendChild(div);
+    
+                    });
+                }
+
+                setUpCategoryLinks();
+            });
+        });
+
+        showFoundCounter(false);
+    }
+
+    function collectMenu()
+    {
+        const content = document.querySelector('[data-category-content]');
+        const elements = Array.from(content.getElementsByTagName('article'));
+
+        const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
+
+        menu.set("All", {
+            name: "All",
+            elements: elements,
+            children: [],
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
+        })
+
+        fillUpdated(elements, menuItems);
+
+        for (const el of elements)
         {
-            menuItem.disabled = true;
-            menuItem.classList.add('inactive');   
-        }
-        else
-        {
-            menuItem.disabled = false;
-            menuItem.classList.add('active');
+            let paths;
 
-            const badge = menuItem.querySelector('[data-badge]');
-            badge.hidden = false;
-            badge.textContent = updatedPacks.length;
-
-            updatedPacks.sort((a,b)=>a.element.dataset.pack.localeCompare(b.element.dataset.pack));
-            const elements = updatedPacks.map(e=>e.element);
-            contentItem.append(...elements);
-
-            const updatesCategory = data.filter((d)=>d.title === 'New & Updated');
-
-            if (updatesCategory)
-            {
-                updatesCategory.contentElement = contentItem;
-                updatesCategory.menuElement = menuItem;
-                updatesCategory.packs = updatedPacks;
+            try {
+                paths = JSON.parse(el.dataset.categories);
+            }
+            catch{
+                continue;
             }
 
+            if (!paths.length)
+            {
+               const item = menu.get("Unsorted");
+
+                if (item)
+                {
+                    item.elements.push(el);
+                }
+                else{
+                    menu.set("Unsorted",{
+                        name: "Unsorted",
+                        elements: [el],
+                        children: new Map(),
+                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
+                    })
+                } 
+            }
+
+            for (const path of paths)
+            {
+                const [parent, child] = path;
+
+                if (!menu.has(parent))
+                {
+                    menu.set(parent, {
+                        name: parent,
+                        children: new Map(),
+                        elements: [],
+                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == parent)
+                    })
+                }
+
+                const parentNode = menu.get(parent);
+
+                if (child)
+                {
+                    const childNode = parentNode.children.get(child);
+
+                    if (childNode)
+                    {
+                        childNode.elements.push(el);
+                    }
+                    else
+                    {
+                        parentNode.children.set(child, {
+                            name: child,
+                            elements: [el]
+                        })
+                    }
+                }
+                else
+                {
+                    parentNode.elements.push(el);
+                }
+            }
         }
+
+        return menu;
+    }
+
+
+    function setUpCategoryLinks()
+    {
+        const elements = document.querySelectorAll('[data-category-link');
+
+        [...elements].forEach(e=>{
+            e.addEventListener('click', ()=>{
+                $(`button[data-category-menu="${e.dataset.categoryLink}"]`).tab('show');
+            })
+        })
+    }
+
+    function fillUpdated(elements, menuItems)
+    {
+        const updatedPacks = [];
+        const title = "New & Updated";
+
+        elements.forEach (e=>{
+            const updated = setNewUpdatedBadge(e); 
+            if (updated) updatedPacks.push(e);
+        });
+
+        updatedPacks.sort((a,b)=>a.element.dataset.pack.localeCompare(b.element.dataset.pack));
+        
+        const menuItem = menuItems.find(m=>m.dataset.categoryMenu == title);
+        
+        const badge = menuItem.querySelector('[data-badge]');
+        badge.hidden = !updatedPacks.length;
+        badge.textContent = updatedPacks.length;
+
+        menu.set(title, {
+            name: title,
+            elements: updatedPacks,
+            children: [],
+            menuItem: menuItem 
+        });
         
     }
-   
-    function filterItems(query)
+
+    function filterToc(query)
     {
-        var counter = 0;
-        const foundPacks = new Set();
-        const menuItemsWithPacks = [];
-
-        if (query === '')
-        {
-            data.forEach((e)=>{
-                e.packs.forEach((p)=>{
-                    p.element.hidden = false;
-                })
-                setVisibility(e.contentElement, true);
-
-                if (e.menuElement)
-                {
-                    e.menuElement.disabled = false;
-                    e.menuElement.querySelector('[data-count]').hidden = true;
-                }
-
-                if (e.categories)
-                {
-                    e.categories.forEach(c=>{
-                        c.contentElement.hidden = false;
-    
-                        c.packs.forEach(p=>{
-                            p.element.hidden = false;
-                        })
-                    })
-                }
-
-                e.menuElement.classList.remove('inactive');
-            })
-
-            filtered.hidden = true;
-
-            return;
-        }
-
-        data.forEach((e)=>{
-
-            counter = 0;
-            
-            if (e.title.toLowerCase().includes(query))
+        let count = 0;
+        
+        menu.forEach((value, key)=>{
+            if (key.toLowerCase().includes(query))
             {
-                setVisibility(e.contentElement, true);
-                
-                counter += e.packs.length;
 
-                if (e.packs)
+                count = value.elements.length;
+
+                value.elements.forEach(e => e.hidden = false);
+                
+                if (value.children.length)
                 {
-                    e.packs.forEach(p=>{
-                        p.element.hidden = false;
-                        foundPacks.add(p.element.dataset.pack);
+                    value.children.forEach(c => {
+                        count+=c.elements.length;
+                        c.elements.forEach(e => e.hidden = false)
                     })
                 }
 
-                if (e.categories)
+                const countSpan = value.menuItem.querySelector('[data-count]');
+
+                if (count > 0)
                 {
-                    e.categories.forEach(c => counter += c.packs.length);
+                    value.menuItem.classList.remove('inactive');
+                    countSpan.textContent = count;
+                    countSpan.hidden = false;
                 }
-                setCounter(e.menuElement, counter);
-                if (counter > 0)
+                else
                 {
-                    menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                    value.menuItem.classList.add('inactive');
+                    countSpan.hidden = true;
                 }
             }
             else
             {
-                if (e.categories)
-                {
-                    e.categories.forEach(c=>{
+                count = 0;
 
-                        var innerCounter = 0;
-
-                        if (c.title.toLowerCase().includes(query))
-                        {
-                            innerCounter = c.packs.length;
-                            c.packs.forEach((p)=>{
-                                p.element.hidden = false;
-                                foundPacks.add(p.element.dataset.pack);
-                            });
-                        }
-                        else
-                        {
-                            c.packs.forEach((p)=>{
-                                if (p.info.includes(query))
-                                {
-                                    innerCounter++;
-                                    p.element.hidden = false;
-                                    foundPacks.add(p.element.dataset.pack);
-                                }
-                                else
-                                {
-                                    p.element.hidden = true;
-                                }
-                            })
-                        }
-
-                        if (innerCounter > 0)
-                        {
-                            c.contentElement.hidden = false;
-                            counter += innerCounter;
-                        }
-                        else
-                        {
-                            c.contentElement.hidden = true;
-                        }
-
-                    });              
-                }
-                
-                e.packs.forEach((p)=>{
-                    if (p.info.includes(query))
-                    {
-                        counter++;
-                        p.element.hidden = false;
-                        foundPacks.add(p.element.dataset.pack);
-                    }
-                    else
-                    {
-                        p.element.hidden = true;
-                    }
+                value.elements.forEach(e=>{
+                        e.hidden = !e.dataset.search.toLowerCase().includes(query);
+                        if (!e.hidden) count++;
                 })
 
-                setVisibility(e.contentElement, counter > 0);
-            }        
+                if (value.children && value.children.size)
+                {
+                    value.children.forEach(c=>{
+                        if (c.name.toLowerCase().includes(query))
+                        {
+                            [...c.elements].forEach(e=>e.hidden = false);
+                            count+=c.elements.length;
+                        }
+                        else
+                        {
+                            [...c.elements].forEach(e=>{
+                                e.hidden = !e.dataset.search.toLowerCase().includes(query);
+                                if (!e.hidden) count++;
+                            })
+                        }
+                    })
+                }
 
-            setCounter(e.menuElement, counter);
-            if (counter > 0)
-            {
-                menuItemsWithPacks.push({title: e.title, element: e.menuElement});
+                const countSpan = value.menuItem.querySelector('[data-count]');
+
+                if (count > 0)
+                {
+                    value.menuItem.classList.remove('inactive');
+                    countSpan.textContent = count;
+                    countSpan.hidden = false;
+                }
+                else
+                {
+                    value.menuItem.classList.add('inactive');
+                    countSpan.hidden = true;
+                }
             }
-            
         })
-
-        if (foundPacks.size > 0)
-        {
-            filtered.hidden = false;
-            filteredCount.textContent = foundPacks.size;
-        }
-
-        addCategoryLinksToEmpty(menuItemsWithPacks);
     }
 
-    function addCategoryLinksToEmpty(items)
+    function filterContent(content, query)
     {
-        const div = document.createElement("div");
-        const p = document.createElement("p");
-        div.appendChild(p);
-        div.classList.add('emptyContent');
-        
-        if (items.length)
-        {
-            p.textContent = "No packs here. These categories have some:";
-            const ul = document.createElement("ul");
-            div.appendChild(ul);
+        let totalCount = 0;
 
-            items.forEach(i=>{
+        [...content.children].forEach (e=>{
+            
+            e.hidden = !e.dataset?.search?.toLowerCase().includes(query);
+            
+            if (!e.hidden) totalCount++;
+
+            if (e.classList.contains('section'))
+            {
+                const packs = e.getElementsByTagName('article');
+                const title = e.getElementsByTagName('h2')[0];
+
+                let count = 0;
+
+                if (title.textContent.toLowerCase().includes(query))
+                {
+                    [...packs].forEach(p=>p.hidden = false);
+                    count+=packs.length;    
+                }
+                else
+                {
+                    [...packs].forEach(p=>{
+                        p.hidden = !p.dataset?.search?.toLowerCase().includes(query);
+                        if (!p.hidden) count++;                        
+                    })
+                }
+
+                e.hidden = count == 0;
+                if (!e.hidden) totalCount += count;
+            }
+        })
+
+        showContentForEmpty(totalCount == 0);
+        
+        showFoundCounter();
+    }
+
+    function showFoundCounter(visible = true)
+    {
+
+        if (!visible)
+        {
+            found.hidden = true;
+            return;
+        }
+
+        const total = getTotalCount();
+        if (total)
+        {
+            found.getElementsByTagName('span')[0].textContent = total;
+            found.hidden = false;
+        }
+        else{
+            found.hidden = true;
+        }
+    }
+
+    function resetFilter(content, toc)
+    {
+        content.querySelectorAll('[hidden]').forEach(e=>e.hidden = false);
+        toc.querySelectorAll('[data-category-menu]').forEach(e=>{
+            e.hidden = false;
+            e.querySelector('[data-count]').hidden = true;
+            e.classList.remove('inactive');
+        });
+
+        menu.forEach((value)=>{
+            value.elements.forEach(e=>e.hidden = false);
+            if (value.children.length) 
+            {
+                value.children.forEach(c=>{
+                    c.elements.forEach(e=>e.hidden = false);
+                })
+            }
+                    
+        })
+
+        showFoundCounter(false);
+    }
+
+    function filterItems(query)
+    {
+        const content = document.querySelector('[data-content]');
+        const toc = document.getElementById('toc');
+        
+        if (query == "")
+        {
+            resetFilter(content, toc);
+            showContentForEmpty(false);
+            return;
+        }
+        
+        filterToc(query);
+        filterContent(content, query);
+    }
+
+    function showContentForEmpty(visible)
+    {
+        const empty = document.querySelector('[data-empty]');
+        empty.replaceChildren();
+        
+        if (!visible)
+        {
+            empty.hidden = true;
+            return;
+        }
+            
+        const p = document.createElement("p");
+        empty.appendChild(p);
+                
+        const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
+        const withoutAll = active.filter(a=>a.name!=="All")?.sort((a,b)=>a.name.localeCompare(b.name));
+        const count = getTotalCount();
+
+        if (withoutAll.length)
+        {
+            const ul = document.createElement("ul");
+            empty.appendChild(ul);
+            
+            p.textContent = `${count} Packs found in these categories:`;
+
+            withoutAll.forEach(i=>{
                 const li = document.createElement("li");
                 const a = document.createElement("a");
-                a.textContent = i.title;
+                a.textContent = i.name;
                 a.href = `#`;
-                a.dataset.target = i.title;
+                a.dataset.target = i.name;
+                a.addEventListener('click', ()=>{
+                    $(`button[data-category-menu="${i.name}"]`).tab('show');
+                });
                 li.appendChild(a);
                 ul.appendChild(li);
             })
+
         }
         else
         {
             p.textContent = "No packs found."
         }
 
-        data.forEach((e)=>{
-            const empty = e.contentElement.querySelector('[data-empty]');
-
-            if (empty && !empty.hidden)
-            {
-                empty.replaceChildren(div.cloneNode(true));
-                const links = empty.getElementsByTagName('a');
-                [...links].forEach(a=>{
-                    a.addEventListener('click', ()=>{
-                        $(`button[data-category-menu="${a.dataset.target}"]`).tab('show');
-                    })
-                })
-            }
-        })
+        if (empty)
+        {
+            empty.hidden = false;
+        }
 
     }
 
-    function setCounter(item, count)
+    function getTotalCount()
     {
-        if (item)
-        {
-            item.disabled = count == 0;
-            const countElement = item.querySelector('[data-count]');
-            if (count > 0)
-            {
-                countElement.hidden = false;
-                countElement.textContent = count;
-                item.classList.remove('inactive');
-            }
-            else
-            {
-                countElement.hidden = true;
-                item.classList.add('inactive');
-            }
-        }
+        const total = document.querySelector('[data-category-menu="All"]').querySelector('[data-count]').textContent;
+        return total;
     }
 
     function setUpSearchField()
@@ -276,11 +454,9 @@ window.addEventListener ("load", ()=> {
 
         if (input.value)
         {
-            filterItems(input.value);
+            filterItems(input.value.trim().toLowerCase());
         }
     
-        input.focus();
-
         clearBtn.addEventListener('click', () => {
             input.value = '';
             input.focus();
@@ -307,107 +483,16 @@ window.addEventListener ("load", ()=> {
             }
         });
     }
-
-    function setVisibility(element, state)
+  
+    function setNewUpdatedBadge(element)
     {
-        const content = element.querySelector('[data-content]');
-        if (content) content.hidden = !state;
+        const lastPublished = parseInt(element.dataset.lastPublished);
+        const firstPublished = parseInt(element.dataset.firstPublished);
 
-        const empty = element.querySelector('[data-empty]');
-        if (empty) empty.hidden = state;
+        const badge = element.querySelector('[data-badge]');
+        const badgeNeeded = new Date(lastPublished).getTime() + twoWeeks > Date.now();
 
-        if (!content)
-        {
-            element.hidden = !state;
-        }
-    }
-   
-    function collectData()
-    {
-        // Getting Menu Map
-        const menuMap = new Map();
-        const catMenuItems = document.querySelectorAll('[data-category-menu]');
-
-        catMenuItems.forEach((c)=>{
-            menuMap.set(c.dataset.categoryMenu, c);
-        })
-
-        const data = collectCategories(menuMap);
-
-        return data;
-    }
-
-    function collectCategories(menuMap)
-    {
-        const catContent = document.querySelectorAll('[data-category-content]');
-        
-        if (catContent)
-        {
-            const data = [...catContent].map((category)=>{
-                const title = category.dataset.categoryContent;
-    
-                const newCategory = {
-                    title,
-                    contentElement: category,
-                    menuElement: menuMap.get(title),
-                    packs: collectPacks(category)
-                };
-    
-                const subcategories = category.querySelectorAll('[data-category-sub]');
-                if (subcategories)
-                {
-                    newCategory.categories = [...subcategories].map(c=>{
-                        return {
-                            title: c.dataset.categorySub,
-                            contentElement: c,
-                            packs: collectPacks(c)
-                        }
-                    });
-                }
-    
-                return newCategory;
-            })
-
-            return data;
-        }
-
-        return null;
-    }
-
-    function collectPacks(element)
-    {
-        const packs = element.querySelectorAll(':scope > [data-pack], :scope > [data-content] > [data-pack]');
-
-        if (packs)
-        {
-            const result = [...packs].map((p)=>{
-                var data = "";
-    
-                const info = p.querySelectorAll('[data-pack-info');
-                info.forEach((i)=>{
-                    data += i.textContent.toLowerCase();
-                });
-    
-                return {element: p, info: data};
-            })
-            
-            // Set Updated / New badges
-            result.forEach (p => setBadge(p));
-    
-            return result;
-        }
-
-        return null;
-    }
-
-    function setBadge(pack)
-    {
-        const lastPublished = parseInt(pack.element.dataset.lastPublished);
-        const firstPublished = parseInt(pack.element.dataset.firstPublished);
-
-        const badge = pack.element.querySelector('[data-badge]');
-
-        if (new Date(lastPublished).getTime() + twoWeeks > Date.now()) 
+        if (badgeNeeded) 
         {
             badge.hidden = false;
             if (firstPublished != lastPublished) {
@@ -418,16 +503,13 @@ window.addEventListener ("load", ()=> {
                 badge.textContent = "NEW";
                 badge.classList.add("badge","badge-success");
             }
-
-            updatedPacks.push({
-                element: pack.element.cloneNode(true),
-                info: pack.info
-            })
         }
         else
         {
             badge.hidden = true;
         }
+
+        return badgeNeeded;
     }
  
 }, true);
