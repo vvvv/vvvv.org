@@ -54,7 +54,7 @@ window.addEventListener ("load", ()=> {
                 value.elements.forEach(e=>
                 {
                     e.hidden = !isVisible(e);
-                    contentDiv.appendChild(e);
+                    contentDiv.appendChild(e.cloneNode(true));
                 });
 
                 if (value.children.size)
@@ -74,9 +74,13 @@ window.addEventListener ("load", ()=> {
 
                         c.elements.forEach(e=>{
                             e.hidden = !isVisible(e);
-                            div.appendChild(e);
-                            if (!e.hidden) count++;
+                            div.appendChild(e.cloneNode(true));
+                            if (!e.hidden) 
+                                {   
+                                    count++;
+                                }
                         });
+
                         div.hidden = count == 0;
 
                         contentDiv.appendChild(div);
@@ -219,34 +223,39 @@ window.addEventListener ("load", ()=> {
 
     function filterToc(query)
     {
-        let count = 0;
+        const set = new Set();
         
         menu.forEach((value, key)=>{
             if (key.toLowerCase().includes(query))
             {
+                set.clear();
 
-                count = value.elements.length;
+                value.elements.forEach(e=>{
+                    set.add(e.dataset.pack);
+                })
 
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c => {
-                        count+=c.elements.length;
+                        c.elements.forEach(e=>{
+                            set.add(e.dataset.pack);
+                        })
                     })
                 }
             }
             else
             {
-                count = 0;
+                set.clear();
 
                 value.elements.forEach(e=>{
-                    if (isVisible(e)) count++;
+                    if (isVisible(e)) set.add(e.dataset.pack);
                 })
 
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c=>{
                         c.elements.forEach(e=>{
-                            if (isVisible(e)) count++;
+                            if (isVisible(e)) set.add(e.dataset.pack);
                         })
                     })
                 }
@@ -255,10 +264,10 @@ window.addEventListener ("load", ()=> {
 
             const countSpan = value.menuItem.querySelector('[data-count]');
 
-            if (count > 0)
+            if (set.size > 0)
             {
                 value.menuItem.classList.remove('inactive');
-                countSpan.textContent = count;
+                countSpan.textContent = set.size;
                 countSpan.hidden = false;
             }
             else
