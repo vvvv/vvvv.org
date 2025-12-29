@@ -15,6 +15,7 @@ window.addEventListener ("load", ()=> {
     // const data = collectData();
 
     let menu = new Map();
+    const totalSet = new Set();
 
     // fillUpdates();
     collectMenu();
@@ -232,6 +233,7 @@ window.addEventListener ("load", ()=> {
 
                 value.elements.forEach(e=>{
                     set.add(e.dataset.pack);
+                    totalSet.add(e.dataset.pack);
                 })
 
                 if (value.children && value.children.size)
@@ -239,6 +241,7 @@ window.addEventListener ("load", ()=> {
                     value.children.forEach(c => {
                         c.elements.forEach(e=>{
                             set.add(e.dataset.pack);
+                            totalSet.add(e.dataset.pack);
                         })
                     })
                 }
@@ -248,14 +251,22 @@ window.addEventListener ("load", ()=> {
                 set.clear();
 
                 value.elements.forEach(e=>{
-                    if (isVisible(e)) set.add(e.dataset.pack);
+                    if (isVisible(e)) 
+                    {
+                        set.add(e.dataset.pack);
+                        totalSet.add(e.dataset.pack);
+                    }
                 })
 
                 if (value.children && value.children.size)
                 {
                     value.children.forEach(c=>{
                         c.elements.forEach(e=>{
-                            if (isVisible(e)) set.add(e.dataset.pack);
+                            if (isVisible(e)) 
+                            {
+                                set.add(e.dataset.pack);
+                                totalSet.add(e.dataset.pack);
+                            }
                         })
                     })
                 }
@@ -330,7 +341,8 @@ window.addEventListener ("load", ()=> {
             return;
         }
 
-        const total = getTotalCount();
+        const total = totalSet.size;
+
         if (total)
         {
             found.getElementsByTagName('span')[0].textContent = total;
@@ -369,13 +381,15 @@ window.addEventListener ("load", ()=> {
         const content = document.querySelector('[data-content]');
         const toc = document.getElementById('toc');
         
+        totalSet.clear();
+
         if (query == "")
         {
             resetFilter(content, toc);
             showContentForEmpty(false);
             return;
         }
-        
+
         filterToc(query);
         filterContent(content, query);
     }
@@ -396,7 +410,7 @@ window.addEventListener ("load", ()=> {
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
         const withoutAll = active.filter(a=>a.name!=="All")?.sort((a,b)=>a.name.localeCompare(b.name));
-        const count = getTotalCount();
+        const count = totalSet.size;
 
         if (withoutAll.length)
         {
@@ -429,12 +443,6 @@ window.addEventListener ("load", ()=> {
             empty.hidden = false;
         }
 
-    }
-
-    function getTotalCount()
-    {
-        const total = document.querySelector('[data-category-menu="All"]').querySelector('[data-count]').textContent;
-        return total;
     }
 
     function setUpSearchField()
