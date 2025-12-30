@@ -3,14 +3,20 @@
 
 <section id="Packs">
     <div class="container">
-        <div class="d-flex">
+        <div class="d-flex align-items-baseline mb-1">
             <h2><b>VL Packs</b></h2>
+            <div id="filterCount" class="ml-4">Found: <span></span></div>
         </div>
         <div id="packsContent">
             <div class="row">
-                <div class="col-6 col-sm-5 col-md-3 align-self-baseline">
+                <div class="col-5 d-md-none mb-0 pb-0">
+                    <button id="menuToggle" class="btn btn-secondary">
+                        ☰ Categories
+                    </button>
+                </div>
+                <div class="col-7 col-sm-5 col-md-3 mt-md-2 align-self-baseline">
                     <form>
-                        <div id="form" class="input-group" style="max-width: 18rem;">
+                        <div id="form" class="input-group mt-0" style="max-width: 18rem;">
                             <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
                             <div class="input-group-append">
                                 <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
@@ -18,33 +24,34 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
-                    <div id="filterCount">Found: <span></span></div>
-                </div>
             </div>
             <div class="row">
-                <!-- Menu Large Screens -->
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div id="packsProcessing">Processing...</div>
-                    <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
-                        {{ with .Params.categories }}
-                            {{ range $i, $item := . }}
-                                {{ $title := replace $item.title " " "" }}
-                                <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{ .title }}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
-                                    {{.title}}
-                                    <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
-                                    <span data-count hidden="true"></span>
-                                </button>
-                            {{ end }}   
-                        {{ end }}
+                <div id="sidebar" class="col-8 col-md-4 col-lg-3">
+                    <div class="header mb-2">
+                        <button id="menuClose" type="button" class="btn btn-dark d-md-none">Close</button>
                     </div>
-                    <div class="ml-auto lastUpdated">
-                        Total: {{.Params.totalCount}}<br/>
-                        Updated: {{$createdAt}}
+                    <div class="content">
+                        <div id="packsProcessing">Processing...</div>
+                        <div class="nav nav-pills flex-column sidebar" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
+                            {{ with .Params.categories }}
+                                {{ range $i, $item := . }}
+                                    {{ $title := replace $item.title " " "" }}
+                                    <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{ .title }}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                        {{.title}}
+                                        <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+                                        <span data-count hidden="true"></span>
+                                    </button>
+                                {{ end }}   
+                            {{ end }}
+                        </div>
+                        <div class="ml-auto lastUpdated">
+                            Total: {{.Params.totalCount}}<br/>
+                            Updated: {{$createdAt}}
+                        </div>
                     </div>
                 </div>
                 <!--  -->
-                <div class="col-6 col-md-8 col-lg-9">
+                <div class="col-12 col-md-8 col-lg-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         {{ with index .Params.categories 0 }}
                             {{ partial "packs-category" (dict "ctx" . "index" 0)}}   
@@ -54,4 +61,5 @@
             </div>
         </div>
     </div>
+    <div id="sidebar-backdrop"></div>
 </section>  

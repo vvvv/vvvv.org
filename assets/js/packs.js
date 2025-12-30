@@ -7,6 +7,9 @@ window.addEventListener ("load", ()=> {
     const dropdownToc = document.getElementById('dropdownToc');
     const found = document.getElementById('filterCount');
     const input = document.querySelector('#filter');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const menuToggle = document.getElementById('menuToggle');
 
     let query = input.value;
 
@@ -23,6 +26,7 @@ window.addEventListener ("load", ()=> {
 
     setUpSearchField();
     setUpCategoryLinks();
+    setUpMenuToggle();
 
     processing.hidden = true;
     toc.hidden = false;
@@ -193,6 +197,24 @@ window.addEventListener ("load", ()=> {
                 $(`button[data-category-menu="${e.dataset.categoryLink}"]`).tab('show');
             })
         })
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarBackdrop.classList.remove('active');
+        document.body.classList.remove('sidebar-open');
+    }
+
+    function setUpMenuToggle()
+    {
+        sidebar.addEventListener('click', closeSidebar);
+        sidebarBackdrop.addEventListener('click', closeSidebar);
+        
+        menuToggle.addEventListener('click', function(){
+            sidebar.classList.toggle('active');
+            sidebarBackdrop.classList.toggle('active');
+            document.body.classList.add('sidebar-open');
+        });
     }
 
     function fillUpdated(elements, menuItems)
