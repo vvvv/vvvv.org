@@ -31,8 +31,8 @@ Doors open: 18:30
 
 ## Online
 Zoom and YouTube links will be shared shortly before the meetup.
-<!--[Watch via Youtube](https://www.youtube.com/live/96h-UvwgSvA)<br>-->
-<!--[Join via Zoom](https://us02web.zoom.us/j/84842322872?pwd=tn8wgdZWaMpcbUJ4kMPuZyZ8lmTZof.1)-->
+[Watch via Youtube](https://youtube.com/live/7RdgcqFrmcY)<br>
+[Join via Zoom](https://us02web.zoom.us/j/85080344589?pwd=WENbXQkIZa7R6UwpLVKKVeNjg8ozIr.1)
 {{< /box >}}
 
 ##  Want to share your work?
