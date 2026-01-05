@@ -30,7 +30,6 @@ Doors open: 18:30
 <!--**[RSVP here](https://thenodeinstitute.org/event/31st-vvvv-worldwide-meetup/)**-->
 
 ## Online
-Zoom and YouTube links will be shared shortly before the meetup.
 [Watch via Youtube](https://youtube.com/live/7RdgcqFrmcY)<br>
 [Join via Zoom](https://us02web.zoom.us/j/85080344589?pwd=WENbXQkIZa7R6UwpLVKKVeNjg8ozIr.1)
 {{< /box >}}
