@@ -13,7 +13,7 @@ But a few things still happened towards the end, one of which we can already sha
 
 ![alt text](packman.png)
 
-Work on the promised Package Manager (that will change everyones live) is moving forward. And apart from the one that is going to ship with vvvv, there is also going to be an online version for everyone to browse. And you can **[preview it right here, right now](https://vvvv.org/packs)**.
+Work on the promised Package Manager (that will change everyone's life) is moving forward. And apart from the one that is going to ship with vvvv, there is also going to be an online version for everyone to browse. And you can **[preview it right here, right now](https://vvvv.org/packs)**.
 
 Further:
 - The [32nd vvvv meetup](https://vvvv.org/blog/2025/32.-vvvv-worldwide-meetup/) was announced by [chk](https://vvvv.org/people/chk)
