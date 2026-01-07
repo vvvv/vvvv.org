@@ -50,6 +50,11 @@
                                     </button>
                                 {{ end }}   
                             {{ end }}
+
+                            <!-- <div class="border-top mt-2 pt-2">
+                                    <button href="#v-pills-content" class="nav-link" data-category-menu="staticDotNet" data-static="true" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
+                                    <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-static="true" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
+                            </div> -->
                         </div>
                         <div class="ml-auto lastUpdated">
                             Updated: {{$createdAt}}
@@ -63,7 +68,23 @@
                             {{ partial "packs-category" (dict "ctx" . "index" 0)}}   
                         {{ end }}
                     </div>
+
                 </div>
+
+                <!-- Static Content -->
+                <!-- <div id="staticContent" class="d-none">
+                    <div class="tab-content static" id="staticDotNet">
+                            <h4>vvvv can reference any .NET NuGet!</h4>
+                            <p>The ones you see listed in this browser have been specifically tailored to be used with vvvv but for advanced users it is perfectly fine to reference any .NET NuGet out there.</p>
+                            <p>To browse all publicly available .NET NuGets, see: <a href="http://nuget.org" target="_blank">nuget.org</a></p> 
+                    </div>
+                    <div class="tab-content static" id="staticAddYours">
+                        <p>Want to share your own pack?<br/>
+                        See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html">Publishing NuGets</a></p>
+                        <p>Already have a pack on <a href="http://nuget.org" target="_blank">nuget.org</a> and want it to show up in the browser?<br/> 
+                        See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html#categorize-the-pack">Categorizing a pack</a></p>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

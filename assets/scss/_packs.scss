@@ -9,6 +9,14 @@ body.sidebar-open {
     padding-top: 2rem;
     font-size: 1rem;
 
+    .static{
+        a{
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+        }
+    }
+
     .topLinks{
         a{
             text-decoration: underline;

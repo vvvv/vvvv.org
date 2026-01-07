@@ -10,6 +10,14 @@ window.addEventListener ("load", ()=> {
     const menuToggle = document.getElementById('menuToggle');
     const empty = document.querySelector('[data-empty]');
     const totalSpan = document.getElementById('totalCount');
+    const content = document.getElementById('v-pills-content');
+    const contentDiv = content.querySelector('[data-content]'); 
+    const title = document.getElementById('categoryTitle');
+    const titleCount = document.getElementById('categoryCount');
+    const staticDotNet = document.getElementById('staticDotNet');
+    const staticAddYours =  document.getElementById('staticAddYours');
+
+    const staticContent = { staticDotNet, staticAddYours };
 
     let query = input.value;
 
@@ -18,7 +26,6 @@ window.addEventListener ("load", ()=> {
     let menu = new Map();
     const totalSet = new Set();
 
-    // fillUpdates();
     collectMenu();
     buildMenu();
 
@@ -34,12 +41,8 @@ window.addEventListener ("load", ()=> {
 
     function buildMenu()
     {
-        const content = document.getElementById('v-pills-content');
-        const contentDiv = content.querySelector('[data-content]');
-        const title = content.getElementsByTagName('h1')[0];
-
         //Setup Menu Items
-        const menuItems = toc.getElementsByTagName('button');
+        const menuItems = Array.from(toc.getElementsByTagName('button'));
         const totalPacksCount = Array.from(contentDiv.getElementsByTagName('article')).filter(e=>!e.dataset.deprecated).length;
 
         if (totalSpan)
@@ -47,27 +50,33 @@ window.addEventListener ("load", ()=> {
             totalSpan.getElementsByTagName('span')[0].textContent = totalPacksCount;
             totalSpan.hidden = false;
         }
-        
-        title.textContent += ` (${totalPacksCount})`;
-        
-        [...menuItems].forEach(button=>{
+
+        showTitleCount();
+
+        for (const button of menuItems)
+        {
+
             const categoryTitle = button.dataset.categoryMenu;
             button.setAttribute("href", "#v-pills-content");
             button.setAttribute("aria-controls", "v-pills-content");
 
             const menuEntry = menu.get(categoryTitle);
-            
+
+            console.log (menuEntry);
+
+            if (!menuEntry) continue;
+
             // Set menu Inactive if there is no elements
-            let totalCount = menuEntry?.elements?.length;
+            let totalCount = menuEntry.elements.length;
             
-            menuEntry?.children.forEach(c=>{
+            menuEntry.children.forEach(c=>{
                 totalCount += c.elements.length;
             });
 
             if (!totalCount)
             {
-                const countSpan = menuEntry?.menuItem.querySelector('[data-count]');
-                menuEntry?.menuItem.classList.add('inactive');
+                const countSpan = menuEntry.menuItem.querySelector('[data-count]');
+                menuEntry.menuItem.classList.add('inactive');
 
                 if (countSpan)
                 {
@@ -77,13 +86,29 @@ window.addEventListener ("load", ()=> {
         
             //On click, push HTML items into the right panel.
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
-            $(button).on('shown.bs.tab', () => {            
+            $(button).on('shown.bs.tab', () => {
+
+                window.scrollTo(0, 0);
+                
+                // if (button.dataset.static)
+                // {
+                //     contentDiv.replaceChildren();
+                //     const element = staticContent[button.dataset.categoryMenu];
+                //     contentDiv.appendChild(element);
+
+                //     title.textContent = button.textContent;
+                //     titleCount.hidden = true;
+
+                //     return;
+                // }
+
+                titleCount.hidden = false;
                 
                 contentDiv.replaceChildren();
                 
                 showContentForEmpty("");
-                
-                title.textContent = `${categoryTitle} (${totalCount})`;
+               
+                sortElements(menuEntry.elements);
 
                 menuEntry.elements.forEach(e=>
                 {
@@ -106,6 +131,8 @@ window.addEventListener ("load", ()=> {
                         
                         let count = 0;
 
+                        sortElements(c.elements);
+
                         c.elements.forEach(e=>{
                             e.hidden = !isVisible(e);
                             div.appendChild(e.cloneNode(true));
@@ -122,11 +149,18 @@ window.addEventListener ("load", ()=> {
                     });
                 }
 
+                title.textContent = categoryTitle;
+                
                 setUpCategoryLinks();
+                showTitleCount();
             });
-        });
+        }
 
-        showFoundCounter(false);
+    }
+
+    function sortElements(elements)
+    {
+        elements.sort((a, b)=>a.dataset.pack.localeCompare(b.dataset.pack));
     }
 
     function collectMenu()
@@ -157,21 +191,21 @@ window.addEventListener ("load", ()=> {
 
         for (const element of elements)
         {
-            let paths;
+            let paths;           
             
             if (element.dataset.deprecated)
             {
                 deprecated.elements.push(element);
                 continue;
             }
-
+                
             try {
                 paths = JSON.parse(element.dataset.categories);
             }
             catch{
                 continue;
             }
-
+                
             if (!paths.length)
             {
                const item = menu.get("Unsorted");
@@ -193,6 +227,8 @@ window.addEventListener ("load", ()=> {
             for (const path of paths)
             {
                 const [parent, child] = path;
+
+                if (!parent) continue;
 
                 if (!menu.has(parent))
                 {
@@ -286,6 +322,7 @@ window.addEventListener ("load", ()=> {
         const set = new Set();
         
         menu.forEach((value, key)=>{
+
             if (key.toLowerCase().includes(query))
             {
                 set.clear();
@@ -387,8 +424,22 @@ window.addEventListener ("load", ()=> {
         })
 
         showContentForEmpty(query);
-        
         showFoundCounter();
+    }
+
+    function showTitleCount()
+    {
+        let total = Array.from(contentDiv.getElementsByTagName('article'));
+
+        if (title.textContent !== 'Deprecated')
+        {
+            total = total.filter(e=>!e.dataset.deprecated);
+        }
+
+        const visible = total.filter((a)=>!a.hidden);
+        const count = visible.length != total.length ? `${visible.length} of ${total.length}` : total.length; 
+
+        titleCount.textContent = `(${count})`;
     }
 
     function showFoundCounter(visible = true)
@@ -410,20 +461,27 @@ window.addEventListener ("load", ()=> {
         else{
             found.hidden = true;
         }
+
     }
 
     function resetFilter(content, toc)
     {
         content.querySelectorAll('[hidden]').forEach(e=>e.hidden = false);
         toc.querySelectorAll('[data-category-menu]').forEach(e=>{
-            e.hidden = false;
-            e.querySelector('[data-count]').hidden = true;
-            e.classList.remove('inactive');
+            
+            if (!e.dataset.static)
+            {
+                e.hidden = false;
+                e.querySelector('[data-count]').hidden = true;
+                e.classList.remove('inactive');
+            }
+            
         });
 
         menu.forEach((value)=>{
-            value.elements.forEach(e=>e.hidden = false);
-            if (value.children.length) 
+
+            value.elements?.forEach(e=>e.hidden = false);
+            if (value.children?.length) 
             {
                 value.children.forEach(c=>{
                     c.elements.forEach(e=>e.hidden = false);
@@ -446,11 +504,14 @@ window.addEventListener ("load", ()=> {
         {
             resetFilter(content, toc);
             showContentForEmpty(query);
+            showTitleCount();
             return;
         }
 
         filterToc(query);
         filterContent(content, query);
+        showFoundCounter();
+        showTitleCount();
     }
 
     function showContentForEmpty(query = "")
@@ -578,6 +639,11 @@ window.addEventListener ("load", ()=> {
         }
 
         return badgeNeeded;
+    }
+
+    function staticClick(event)
+    {
+        console.log (event);
     }
  
 }, true);
