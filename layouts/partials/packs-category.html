@@ -1,8 +1,7 @@
 {{ $title := replace .ctx.title " " "" }}
 <div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="content" id="v-pills-content" role="tabpanel" aria-labelledby="v-pills-{{$title | urlize}}-tab">
     <h1>{{.ctx.title}}</h1>
-    <div data-empty hidden="true" class="emptyContent"></div>
-    <div data-content>
+    <div data-content>      
         {{ $showCategories := eq .ctx.title "All" }}
         {{ with .ctx.packs }}
             {{ range . }}
@@ -23,4 +22,5 @@
             {{ end }}
         {{ end }} 
     </div>
+    <div data-empty hidden="true" class="emptyContent"></div>
 </div>

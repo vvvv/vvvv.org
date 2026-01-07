@@ -9,6 +9,19 @@ body.sidebar-open {
     padding-top: 2rem;
     font-size: 1rem;
 
+    .topLinks{
+        a{
+            text-decoration: underline;
+            text-decoration-color: #ccc;
+            text-underline-offset: 0.2rem;
+            margin-right: 1rem;
+        }
+    }
+
+    .counts{
+        color: #666;
+    }
+
     /* Desktop behavior */
     @media (min-width: 768px) {
         #sidebar {
@@ -265,7 +278,7 @@ body.sidebar-open {
         //     }
         // }
 
-        .links, .categories, .version{
+        .links, .categories, .version, .author{
             color: #888;
             font-size: 0.9rem;
 
@@ -310,6 +323,7 @@ body.sidebar-open {
                 background-color: #eee;
                 border-radius: 2px;
                 color: #444;
+                margin-right: 0.3rem;
             }
         }
     }

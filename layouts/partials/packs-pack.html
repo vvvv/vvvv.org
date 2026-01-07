@@ -1,5 +1,6 @@
 {{- $download := resources.Get "img/icons/ArrowDownload24Filled.svg" -}}
 {{- $package := resources.Get "img/icons/Box24Regular.svg" -}}
+{{- $author := resources.Get "img/icons/PersonCircle24Regular.svg" -}}
 {{- $category := resources.Get "img/icons/FolderOpenFilled.svg" -}}
 {{- $link := resources.Get "img/icons/InsertLinkFilled.svg" -}}
 
@@ -9,18 +10,19 @@
     data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
     data-last-published="{{.lastPublished}}" 
     data-first-published="{{.firstPublished}}"
-    data-search="{{printf "%s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .tags " ") (.categories | jsonify | safeHTMLAttr) | lower}}"
+    {{- if eq .deprecated  true }}data-deprecated="true" hidden="true"{{- end -}}
+    data-search="{{printf "%s %s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") (.categories | jsonify | safeHTMLAttr) | lower}}"
     >
-    <div class="d-none d-lg-block col-md-1 pl-0 pr-2">
+    <div class="col-1 col-md-1 pl-0 pr-2">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
     </div>
-    <div class="d-block col-12 pl-0 col-md-11 pl-lg-4">
+    <div class="d-block col-11 pl-0 col-md-11 pl-lg-4">
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
                 <span data-badge class="ml-md-3" hidden></span>
                 <div class="authors ml-md-3" data-pack-info>
-                    {{- delimit .authors ", " -}}
+                    {{- delimit .owners ", " -}}
                 </div>
             </div>
             <div class="col-12 col-md-3 col-lg-2 text-left totalDownloads">
@@ -33,47 +35,50 @@
         {{- end -}}
 
         <div class="version">
-            <img src="{{$package.RelPermalink}}" alt="Latest version" role="presentation" aria-hidden="true"/>{{ .latestVersion }} • {{$latestDate}}
+            <img src="{{$package.RelPermalink}}" alt="Latest version" role="presentation" aria-hidden="true"/>{{- .latestVersion }} • {{$latestDate}}
+        </div>
+
+        <div class="author">
+            <img src="{{$author.RelPermalink}}" alt="Authors" role="presentation" aria-hidden="true"/>{{- delimit .authors ", " -}}
         </div>
 
         <div class="links">
             <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
-            {{ if ne .projectURL ""}}
+            {{- if ne .projectURL "" -}}
                 <a href="{{.projectURL}}">Website</a>
-            {{ end }}
-            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
-            {{ with .links }}
-                {{ range . }}
-                    {{ if eq .title "Sponsor!"}}
+            {{- end -}}
+            {{- with .links -}}
+                {{- range . -}}
+                    {{- if eq .title "Sponsor!" -}}
                         <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
-                    {{ else }}
+                    {{- else -}}
                         <a href="{{.link}}">{{.title}}</a>
-                    {{ end }}
-                {{ end }}
-            {{ end }}
+                    {{- end -}}
+                {{- end -}}
+            {{- end -}}
         </div>
 
-        {{ if eq .showCategories true}}
+        {{- if eq .showCategories true -}}
             <div class="categories" alt="Categories">
                 <img src="{{$category.RelPermalink}}" role="presentation" aria-hidden="true"/>
-                {{ with .categories}}
-                    {{ range . }}
-                        {{ with index . 0 }}
-                            <a href="#" data-category-link="{{ . }}">{{ . }}</a> 
-                        {{ end }}
-                    {{ end }}
-                {{ else }}
+                {{- with .categories -}}
+                    {{- range . -}}
+                        {{- with index . 0 -}}
+                            <a href="#" data-category-link="{{ . }}">{{- . -}}</a> 
+                        {{- end -}}
+                    {{- end -}}
+                {{- else -}}
                     <a href="#" data-category-link="Unsorted">Unsorted</a>
-                {{ end }}
+                {{- end -}}
             </div>
-        {{ end }}
+        {{- end -}}
 
         <div class="tags">
-            {{ with .tags}}
-                {{ range . }}
-                <span class="badge" data-pack-info>{{ . }}</span>
-                {{ end }}
-            {{ end }}
+            {{- with .tags -}}
+                {{- range . -}}
+                <span class="badge" data-pack-info>{{- . -}}</span>
+                {{- end -}}
+            {{- end -}}
         </div>
     </div>
 </article>
