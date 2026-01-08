@@ -21,7 +21,6 @@
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
-                <span data-badge class="ml-md-3" hidden></span>
                 <div class="authors ml-md-3" data-pack-info>
                     {{- delimit .owners ", " -}}
                 </div>
