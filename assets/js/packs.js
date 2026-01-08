@@ -8,7 +8,7 @@ window.addEventListener ("load", ()=> {
     const sidebar = document.getElementById('sidebar');
     const sidebarBackdrop = document.getElementById('sidebar-backdrop');
     const menuToggle = document.getElementById('menuToggle');
-    const empty = document.querySelector('[data-empty]');
+    const alsoFound = document.querySelector('[data-alsoFound]');
     const totalSpan = document.getElementById('totalCount');
     const content = document.getElementById('v-pills-content');
     const contentDiv = content.querySelector('[data-content]'); 
@@ -16,6 +16,8 @@ window.addEventListener ("load", ()=> {
     const titleCount = document.getElementById('categoryCount');
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
+    let currentCategory = 'All';
+    const alsoFoundElement = null;
 
     const staticContent = { staticDotNet, staticAddYours };
 
@@ -26,6 +28,7 @@ window.addEventListener ("load", ()=> {
     let menu = new Map();
     const totalSet = new Set();
 
+    transformSearchField();
     collectMenu();
     buildMenu();
 
@@ -38,6 +41,25 @@ window.addEventListener ("load", ()=> {
 
     /////////////////////////////////////////
            
+
+    function transformSearchField()
+    {
+        const packs = Array.from(contentDiv.getElementsByTagName('article'));
+        const toExcludeString = ',.;-!?[]"\'';
+
+        packs.forEach(p=>{
+            const words = new Set();
+
+            const searchString = p.dataset.search.toLowerCase();
+            
+            const categories = JSON.parse(p.dataset.categories.toLowerCase());
+
+            categories.forEach(c=>words.add(c));
+
+            searchString.split(" ").filter(c=>!toExcludeString.includes(c)).forEach(s=>words.add(s));
+            p.dataset.search = Array.from(words).join(", ");
+        })
+    }
 
     function buildMenu()
     {
@@ -61,8 +83,6 @@ window.addEventListener ("load", ()=> {
             button.setAttribute("aria-controls", "v-pills-content");
 
             const menuEntry = menu.get(categoryTitle);
-
-            console.log (menuEntry);
 
             if (!menuEntry) continue;
 
@@ -88,6 +108,7 @@ window.addEventListener ("load", ()=> {
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
             $(button).on('shown.bs.tab', () => {
 
+                currentCategory = categoryTitle;
                 window.scrollTo(0, 0);
                 
                 // if (button.dataset.static)
@@ -105,9 +126,7 @@ window.addEventListener ("load", ()=> {
                 titleCount.hidden = false;
                 
                 contentDiv.replaceChildren();
-                
-                showContentForEmpty("");
-               
+                               
                 sortElements(menuEntry.elements);
 
                 menuEntry.elements.forEach(e=>
@@ -153,6 +172,8 @@ window.addEventListener ("load", ()=> {
                 
                 setUpCategoryLinks();
                 showTitleCount();
+
+                makeAlsoFound();
             });
         }
 
@@ -271,7 +292,7 @@ window.addEventListener ("load", ()=> {
 
     function setUpCategoryLinks()
     {
-        const elements = document.querySelectorAll('[data-category-link');
+        const elements = document.querySelectorAll('[data-category-link]');
 
         [...elements].forEach(e=>{
             e.addEventListener('click', ()=>{
@@ -323,7 +344,7 @@ window.addEventListener ("load", ()=> {
         
         menu.forEach((value, key)=>{
 
-            if (key.toLowerCase().includes(query))
+            if (key.toLowerCase().startsWith(query))
             {
                 set.clear();
 
@@ -387,7 +408,22 @@ window.addEventListener ("load", ()=> {
 
     function isVisible(e)
     {
-        return e.dataset?.search?.toLowerCase().includes(query);
+        try{
+            if (e.dataset.pack.toLowerCase().includes(query))
+                return true;
+            
+            const words = e.dataset.search.split(', ');
+
+            for (const w of words)
+            {
+                if (w.startsWith(query))
+                    return true;
+            }    
+            return false;
+        }
+        catch (error) {
+            return false;
+        }
     }
 
     function filterContent(content, query)
@@ -406,7 +442,7 @@ window.addEventListener ("load", ()=> {
 
                 let count = 0;
 
-                if (title.textContent.toLowerCase().includes(query))
+                if (title.textContent.toLowerCase().startsWith(query))
                 {
                     [...packs].forEach(p=>p.hidden = false);
                     count += packs.length;
@@ -423,7 +459,7 @@ window.addEventListener ("load", ()=> {
             }
         })
 
-        showContentForEmpty(query);
+        makeAlsoFound();
         showFoundCounter();
     }
 
@@ -503,7 +539,7 @@ window.addEventListener ("load", ()=> {
         if (query == "")
         {
             resetFilter(content, toc);
-            showContentForEmpty(query);
+            makeAlsoFound();
             showTitleCount();
             return;
         }
@@ -514,35 +550,40 @@ window.addEventListener ("load", ()=> {
         showTitleCount();
     }
 
-    function showContentForEmpty(query = "")
+    function makeAlsoFound()
     {
 
-        if (query == "")
-        {
-            empty.hidden = true;
+        if (currentCategory == 'All')
             return;
-        }
 
-        empty.hidden = false;
-        empty.replaceChildren();
+        const alsoFoundClone = alsoFound.cloneNode(true);
+        contentDiv.appendChild(alsoFoundClone);
+        
+        const content = alsoFoundClone.getElementsByClassName('emptyContent')[0];
+
+        content.replaceChildren();
                     
         const p = document.createElement("p");
-        empty.appendChild(p);
+        content.appendChild(p);
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
-        const withoutAll = active.filter(a=>a.name!=="All")?.sort((a,b)=>a.name.localeCompare(b.name));
+        const withoutCurrent = active.filter(a=>a.name!==currentCategory && a.name!=='All')?.sort((a,b)=>a.name.localeCompare(b.name));
         const count = totalSet.size;
 
-        if (withoutAll.length)
+        const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
+
+        if (withoutCurrent.length)
         {
             const ul = document.createElement("ul");
-            empty.appendChild(ul);
+            content.appendChild(ul);
 
             const packs = count > 1 ? "Packs" : "Pack"; 
-            
-            p.textContent = `${count} ${packs} found in these categories:`;
 
-            withoutAll.forEach(i=>{
+            const also = packsInCurrent.length ? " also " : "";
+            
+            p.textContent = `${count} ${packs}${also} found in these categories:`;
+
+            withoutCurrent.forEach(i=>{
                 const li = document.createElement("li");
                 const a = document.createElement("a");
                 a.textContent = i.name;
@@ -559,11 +600,6 @@ window.addEventListener ("load", ()=> {
         else
         {
             p.textContent = "No packs found."
-        }
-
-        if (empty)
-        {
-            empty.hidden = false;
         }
 
     }

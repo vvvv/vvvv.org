@@ -30,6 +30,10 @@ body.sidebar-open {
         color: #666;
     }
 
+    #categoryCount{
+        color: #999;
+    }
+
     /* Desktop behavior */
     @media (min-width: 768px) {
         #sidebar {
@@ -270,7 +274,7 @@ body.sidebar-open {
             }
         }
 
-        .summary{
+        .description{
             margin: 0.8rem 0;
         }
 
