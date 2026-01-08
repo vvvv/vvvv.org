@@ -553,14 +553,13 @@ window.addEventListener ("load", ()=> {
     function makeAlsoFound()
     {
 
-        if (currentCategory == 'All')
+        if (currentCategory == 'All' || query == '')
             return;
 
         const alsoFoundClone = alsoFound.cloneNode(true);
         contentDiv.appendChild(alsoFoundClone);
         
         const content = alsoFoundClone.getElementsByClassName('emptyContent')[0];
-
         content.replaceChildren();
                     
         const p = document.createElement("p");
