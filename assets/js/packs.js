@@ -37,11 +37,35 @@ window.addEventListener ("load", ()=> {
     setUpCategoryLinks();
     setUpMenuToggle();
 
+    checkURLParams();
+
     processing.hidden = true;
     toc.hidden = false;
 
     /////////////////////////////////////////
            
+    function checkURLParams()
+    {
+        const paramsString = window.location.search;
+        const hash = window.location.hash;
+        const params = new URLSearchParams(paramsString);
+
+        const category = params.get('c');
+
+        if (category)
+        {
+                const button = $(`button[data-category-menu="${category}"]`);
+                
+                if (hash)
+                {
+                    button.on('shown.bs.tab', function (event) {
+                        location.href=hash;
+                    })
+                }
+
+                button.tab('show');
+        }
+    }
 
     function transformSearchField()
     {
@@ -95,6 +119,8 @@ window.addEventListener ("load", ()=> {
         {
             $(button).on('shown.bs.tab', () => {
 
+                updateHistory(categoryTitle)
+
                 window.scrollTo(0, 0);
                 isStatic = true;
 
@@ -139,6 +165,8 @@ window.addEventListener ("load", ()=> {
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
             $(button).on('shown.bs.tab', () => {
 
+                updateHistory(categoryTitle);
+
                 isStatic = false;
                 
                 currentCategory = categoryTitle;
@@ -164,6 +192,7 @@ window.addEventListener ("load", ()=> {
                         
                         const h2 = document.createElement('h2');
                         h2.textContent = c.name;
+                        h2.id = c.name;
                         
                         const div = document.createElement('div');
                         div.classList.add('section');
@@ -198,6 +227,14 @@ window.addEventListener ("load", ()=> {
             });
         }
 
+    }
+
+    function updateHistory(category)
+    {
+        const path = window.location.href.split('?')[0];
+        const uri = encodeURI(`${path}?c=${category}`);
+
+        history.replaceState(null, "", uri);
     }
 
     function sortElements(elements)

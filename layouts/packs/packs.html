@@ -2,8 +2,6 @@
 <html class="scroll-padding">
     <head>
         {{ partial "head" . }}
-        {{- $packsjs := resources.Get "js/packs.js" -}}
-        <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
    </head>
 <body>
     <div class="main">
@@ -17,6 +15,9 @@
     </div>
 
     {{ partial "js" . }}
+
+    {{- $packsjs := resources.Get "js/packs.js" | minify -}}
+    <script type="text/javascript" src="{{ $packsjs.RelPermalink | relURL }}" defer></script>
 
 </body>
 </html>
