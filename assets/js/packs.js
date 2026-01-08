@@ -8,7 +8,7 @@ window.addEventListener ("load", ()=> {
     const sidebar = document.getElementById('sidebar');
     const sidebarBackdrop = document.getElementById('sidebar-backdrop');
     const menuToggle = document.getElementById('menuToggle');
-    const alsoFound = document.querySelector('[data-alsoFound]');
+    const alsoFound = document.getElementById('alsoFound');
     const totalSpan = document.getElementById('totalCount');
     const content = document.getElementById('v-pills-content');
     const contentDiv = content.querySelector('[data-content]'); 
@@ -16,8 +16,9 @@ window.addEventListener ("load", ()=> {
     const titleCount = document.getElementById('categoryCount');
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
-    let currentCategory = 'All';
     const alsoFoundElement = null;
+    let currentCategory = 'All';
+    let isStatic = false;
 
     const staticContent = { staticDotNet, staticAddYours };
 
@@ -65,6 +66,21 @@ window.addEventListener ("load", ()=> {
     {
         //Setup Menu Items
         const menuItems = Array.from(toc.getElementsByTagName('button'));
+
+        const dynamicMenuItems = [];
+        const staticMenuItems = [];
+
+        menuItems.forEach(b=>{
+            if (b.dataset.static)
+            {
+                staticMenuItems.push(b);
+            }
+            else
+            {
+                dynamicMenuItems.push(b);
+            }
+        });
+
         const totalPacksCount = Array.from(contentDiv.getElementsByTagName('article')).filter(e=>!e.dataset.deprecated).length;
 
         if (totalSpan)
@@ -75,12 +91,27 @@ window.addEventListener ("load", ()=> {
 
         showTitleCount();
 
-        for (const button of menuItems)
+        for (const button of staticMenuItems)
+        {
+            $(button).on('shown.bs.tab', () => {
+
+                window.scrollTo(0, 0);
+                isStatic = true;
+
+                contentDiv.replaceChildren();
+                const element = staticContent[button.dataset.categoryMenu];
+
+                contentDiv.appendChild(element.cloneNode(true));
+
+                title.textContent = button.textContent;
+                titleCount.hidden = true;
+            })
+        }
+
+        for (const button of dynamicMenuItems)
         {
 
             const categoryTitle = button.dataset.categoryMenu;
-            button.setAttribute("href", "#v-pills-content");
-            button.setAttribute("aria-controls", "v-pills-content");
 
             const menuEntry = menu.get(categoryTitle);
 
@@ -108,20 +139,10 @@ window.addEventListener ("load", ()=> {
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
             $(button).on('shown.bs.tab', () => {
 
+                isStatic = false;
+                
                 currentCategory = categoryTitle;
                 window.scrollTo(0, 0);
-                
-                // if (button.dataset.static)
-                // {
-                //     contentDiv.replaceChildren();
-                //     const element = staticContent[button.dataset.categoryMenu];
-                //     contentDiv.appendChild(element);
-
-                //     title.textContent = button.textContent;
-                //     titleCount.hidden = true;
-
-                //     return;
-                // }
 
                 titleCount.hidden = false;
                 
@@ -535,7 +556,7 @@ window.addEventListener ("load", ()=> {
         const toc = document.getElementById('toc');
         
         totalSet.clear();
-
+        
         if (query == "")
         {
             resetFilter(content, toc);
@@ -543,11 +564,17 @@ window.addEventListener ("load", ()=> {
             showTitleCount();
             return;
         }
-
+        
+        if (isStatic)
+        {
+            $('button[data-category-menu="All"]').tab('show');
+        }
+        
         filterToc(query);
         filterContent(content, query);
         showFoundCounter();
         showTitleCount();
+
     }
 
     function makeAlsoFound()
