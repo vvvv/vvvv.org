@@ -53,8 +53,16 @@
                                 {{ end }}   
                             {{ end }}
                             
-                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-static="true" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
-                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-static="true" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
+                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="toSponsor" data-type="dynamic" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                Packs to sponsor &#9829;
+                                <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+                                <span data-count hidden="true"></span>
+                            </button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="onDemand" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                On Demand <img src="{{$build.RelPermalink}}" width="16px" role="presentation"/>
+                            </button>
 
                         </div>
                         <div class="ml-auto lastUpdated">
@@ -82,12 +90,6 @@
             </div>
             <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent"></div>
         </div>
-        <div class="row ml-1 mt-4" id="nothingFound">
-            <div class="col-1 col-md-1 pl-0 pr-2">
-                <img loading="lazy" src="{{$build.RelPermalink}}" class="img-fluid" role="presentation"/></a>
-            </div>
-            <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent">Anything missing?<br/>It can probably added <b><a href="https://thegraybook.vvvv.org/reference/libraries/on-demand.html">on demand!</a></b></div>
-        </div>
         <div class="tab-content static" id="staticDotNet">
             <p><b>vvvv can reference any .NET NuGet!</b></p>
             <p>The ones you see listed in this browser have been specifically tailored to be used with vvvv but for advanced users it is perfectly fine to reference any .NET NuGet out there.</p>
@@ -98,6 +100,14 @@
             See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html">Publishing NuGets</a></p>
             <p>Already have a pack on <a href="https://nuget.org" target="_blank">nuget.org</a> and want it to show up in the browser?<br/> 
             See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html#categorize-the-pack">Categorizing a pack</a></p>
+        </div>
+        <div class="tab-content static" id="onDemand">
+            <div class="row ml-1 mt-4">
+                <div class="col-1 col-md-1 pl-0 pr-2">
+                    <img src="{{$build.RelPermalink}}" class="img-fluid" role="presentation"/></a>
+                </div>
+                <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent">Anything missing?<br/>It can probably added <b><a href="https://thegraybook.vvvv.org/reference/libraries/on-demand.html">on demand!</a></b></div>
+            </div>
         </div>
     </div>
 </section>  

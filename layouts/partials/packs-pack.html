@@ -5,6 +5,15 @@
 {{- $link := resources.Get "img/icons/InsertLinkFilled.svg" -}}
 {{- $seen := newScratch -}}
 
+{{- $toSponsor := false -}}
+{{- with .links -}}
+    {{- range . -}}
+        {{- if eq .title "Sponsor!" -}}
+            {{- $toSponsor = true -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
 
 <article class="packItem row ml-1" data-pack="{{.id}}" 
@@ -12,6 +21,7 @@
     data-last-published="{{.lastPublished}}" 
     data-first-published="{{.firstPublished}}"
     {{- if eq .deprecated  true }}data-deprecated="true" hidden="true"{{- end -}}
+    {{- if $toSponsor -}}data-sponsor="true"{{- end -}}
     data-search="{{printf "%s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") | lower}}"
     >
     <div class="col-1 col-md-1 pl-0 pr-2">

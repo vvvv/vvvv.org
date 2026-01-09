@@ -17,18 +17,20 @@ window.addEventListener ("load", ()=> {
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
     const alsoFound = document.getElementById('alsoFound');
-    const nothingFound = document.getElementById('nothingFound');
+    const onDemand = document.getElementById('onDemand');
     const alsoFoundElement = null;
     let currentCategory = 'All';
     let isStatic = false;
 
-    const staticContent = { staticDotNet, staticAddYours };
+    const staticContent = { staticDotNet, staticAddYours, onDemand };
 
     let query = input.value;
 
     toc.hidden = true;
 
     let menu = new Map();
+    const dynamicCollection = new Map();
+
     const totalSet = new Set();
 
     transformSearchField();
@@ -93,17 +95,24 @@ window.addEventListener ("load", ()=> {
         //Setup Menu Items
         const menuItems = Array.from(toc.getElementsByTagName('button'));
 
-        const dynamicMenuItems = [];
-        const staticMenuItems = [];
+        const items = {
+            category: [],
+            dynamic: [],
+            static: []
+        }
 
         menuItems.forEach(b=>{
-            if (b.dataset.static)
+
+            switch (b.dataset.type)
             {
-                staticMenuItems.push(b);
-            }
-            else
-            {
-                dynamicMenuItems.push(b);
+                case 'static':
+                    items.static.push(b);
+                    break;
+                case 'dynamic':
+                    items.dynamic.push(b);
+                    break;
+                default:    
+                    items.category.push(b);
             }
         });
 
@@ -117,7 +126,7 @@ window.addEventListener ("load", ()=> {
 
         showTitleCount();
 
-        for (const button of staticMenuItems)
+        for (const button of items.static)
         {
             $(button).on('shown.bs.tab', () => {
 
@@ -136,7 +145,53 @@ window.addEventListener ("load", ()=> {
             })
         }
 
-        for (const button of dynamicMenuItems)
+        for (const button of items.dynamic)
+        {
+            $(button).on('shown.bs.tab', () => {
+
+                const menuEntry = menu.get(button.dataset.categoryMenu);
+                
+                if (!menuEntry)
+                    return;
+                
+                window.scrollTo(0, 0);
+                isStatic = false;
+
+                contentDiv.replaceChildren();
+                updateHistory(menuEntry.name);
+                currentCategory = menuEntry.name;
+
+                sortElements(menuEntry.elements);
+
+                const totalCount = menuEntry.elements.length;
+
+                if (!totalCount)
+                {
+                    const countSpan = menuEntry.menuItem.querySelector('[data-count]');
+                    menuEntry.menuItem.classList.add('inactive');
+
+                    if (countSpan)
+                    {
+                        countSpan.hidden = true;
+                    }
+                }
+
+                menuEntry.elements.forEach(e=>
+                {
+                    e.hidden = !isVisible(e);
+                    contentDiv.appendChild(e.cloneNode(true));
+                });
+                
+                title.textContent = currentCategory;
+                titleCount.hidden = false;
+                
+                setUpCategoryLinks();
+                showTitleCount();
+                addInfo();
+            })
+        }
+
+        for (const button of items.category)
         {
 
             const categoryTitle = button.dataset.categoryMenu;
@@ -180,13 +235,13 @@ window.addEventListener ("load", ()=> {
                                
                 sortElements(menuEntry.elements);
 
-                menuEntry.elements.forEach(e=>
+                menuEntry.elements?.forEach(e=>
                 {
                     e.hidden = !isVisible(e);
                     contentDiv.appendChild(e.cloneNode(true));
                 });
 
-                if (menuEntry.children.size)
+                if (menuEntry.children?.size)
                 {
                     const sortedSections = Array.from(menuEntry.children.values()).sort((a, b)=>a.name.localeCompare(b.name));
     
@@ -248,7 +303,6 @@ window.addEventListener ("load", ()=> {
     {
         const content = document.querySelector('[data-category-content]');
         const elements = Array.from(content.getElementsByTagName('article'));
-        
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
 
         const deprecated = {
@@ -265,8 +319,17 @@ window.addEventListener ("load", ()=> {
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
         };
 
-        menu.set("All", all)
-        menu.set("Deprecated", deprecated)
+        const toSponsor = {
+            name: "Packs to sponsor",
+            elements: elements.filter(e=>e.dataset.sponsor),
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
+        };
+
+        dynamicCollection.set("toSponsor", toSponsor)
+
+        menu.set("All", all);
+        menu.set("Deprecated", deprecated);
+        menu.set("toSponsor", toSponsor);
 
         fillUpdated (elements, menuItems, 15);
 
@@ -452,17 +515,21 @@ window.addEventListener ("load", ()=> {
 
             const countSpan = value.menuItem.querySelector('[data-count]');
 
-            if (set.size > 0)
+            if (countSpan)
             {
-                value.menuItem.classList.remove('inactive');
-                countSpan.textContent = set.size;
-                countSpan.hidden = false;
+                if (set.size > 0)
+                {
+                    value.menuItem.classList.remove('inactive');
+                    countSpan.textContent = set.size;
+                    countSpan.hidden = false;
+                }
+                else
+                {
+                    value.menuItem.classList.add('inactive');
+                    countSpan.hidden = true;
+                }
             }
-            else
-            {
-                value.menuItem.classList.add('inactive');
-                countSpan.hidden = true;
-            }
+            
         })
     }
 
@@ -565,7 +632,7 @@ window.addEventListener ("load", ()=> {
         content.querySelectorAll('[hidden]').forEach(e=>e.hidden = false);
         toc.querySelectorAll('[data-category-menu]').forEach(e=>{
             
-            if (!e.dataset.static)
+            if (e.dataset.type != 'static')
             {
                 e.hidden = false;
                 e.querySelector('[data-count]').hidden = true;
@@ -628,7 +695,7 @@ window.addEventListener ("load", ()=> {
             return;
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
-        const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory)?.sort((a,b)=>a.name.localeCompare(b.name));
+        const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory && a.menuItem.dataset.type !== 'dynamic')?.sort((a,b)=>a.name.localeCompare(b.name));
         const count = totalSet.size;
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
@@ -671,7 +738,7 @@ window.addEventListener ("load", ()=> {
         {
             title.textContent = 'Nothing Found';
             titleCount.hidden = true;
-            const nothingFoundClone = nothingFound.cloneNode(true);
+            const nothingFoundClone = onDemand.cloneNode(true);
             infoDiv.appendChild(nothingFoundClone);
         }
 
