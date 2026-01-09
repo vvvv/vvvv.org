@@ -160,6 +160,8 @@ window.addEventListener ("load", ()=> {
                 window.scrollTo(0, 0);
                 isStatic = true;
 
+                sortDropdown.hidden = true;
+
                 if (!sortChanged)
                 {
                     sortType = 'title';
@@ -188,6 +190,8 @@ window.addEventListener ("load", ()=> {
                 
                 if (!menuEntry)
                     return;
+
+                sortDropdown.hidden = false;
 
                 if (!sortChanged)
                 {
@@ -263,6 +267,8 @@ window.addEventListener ("load", ()=> {
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
             $(button).on('shown.bs.tab', () => {
 
+                sortDropdown.hidden = false;
+                
                 if (!sortChanged)
                 {
                     sortType = categoryTitle == 'All' ? 'date' : 'title';
