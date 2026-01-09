@@ -18,12 +18,17 @@ window.addEventListener ("load", ()=> {
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
     const staticOnDemand = document.getElementById('staticOnDemand');
+    const sortDropdown = document.getElementById('sort');
+
     const alsoFoundElement = null;
     let currentCategory = 'All';
     let isStatic = false;
 
     const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
     const menuTitleMap = new Map();
+
+    let sortType = 'date';
+    let sortChanged = false;
 
     let query = input.value;
 
@@ -37,6 +42,7 @@ window.addEventListener ("load", ()=> {
     collectMenu();
     buildMenu();
 
+    setUpSort();
     setUpSearchField();
     setUpCategoryLinks();
     setUpMenuToggle();
@@ -47,6 +53,25 @@ window.addEventListener ("load", ()=> {
     toc.hidden = false;
 
     /////////////////////////////////////////
+
+    function setUpSort()
+    {
+        sortDropdown.addEventListener('change', (event)=>{
+            sortType = event.target.value;
+            sortChanged = true;
+            sortVisible();
+        });
+
+        sortDropdown.value = sortType;
+    }
+
+    function sortVisible()
+    {
+        const elements = Array.from(contentDiv.getElementsByTagName('article'));
+        sortElements(elements);
+        contentDiv.replaceChildren();
+        elements.forEach(e=>contentDiv.appendChild(e));
+    }
            
     function checkURLParams()
     {
@@ -135,6 +160,12 @@ window.addEventListener ("load", ()=> {
                 window.scrollTo(0, 0);
                 isStatic = true;
 
+                if (!sortChanged)
+                {
+                    sortType = 'title';
+                    sortDropdown.value = sortType;
+                }
+
                 const sectionTitle = button.dataset.title;
                 
                 contentDiv.replaceChildren();
@@ -157,6 +188,12 @@ window.addEventListener ("load", ()=> {
                 
                 if (!menuEntry)
                     return;
+
+                if (!sortChanged)
+                {
+                    sortType = 'title';
+                    sortDropdown.value = sortType;
+                }
                 
                 window.scrollTo(0, 0);
                 isStatic = false;
@@ -225,6 +262,12 @@ window.addEventListener ("load", ()=> {
             //On click, push HTML items into the right panel.
             //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
             $(button).on('shown.bs.tab', () => {
+
+                if (!sortChanged)
+                {
+                    sortType = categoryTitle == 'All' ? 'date' : 'title';
+                    sortDropdown.value = sortType;
+                }
 
                 updateHistory(categoryTitle);
 
@@ -300,7 +343,16 @@ window.addEventListener ("load", ()=> {
 
     function sortElements(elements)
     {
-        elements.sort((a, b)=>a.dataset.pack.localeCompare(b.dataset.pack));
+        switch (sortType)
+        {
+            case 'title':
+                elements.sort((a, b)=>a.dataset.pack.localeCompare(b.dataset.pack));
+                break;
+            case 'date':
+                elements.sort((a,b)=>{
+                    return parseInt(b.dataset.lastPublished) - parseInt(a.dataset.lastPublished);
+                });
+        }
     }
 
     function collectMenu()
@@ -337,8 +389,6 @@ window.addEventListener ("load", ()=> {
         menuTitleMap.set('On Demand', 'staticOnDemand');
         menuTitleMap.set('Add your Pack', 'staticAddYours');
         menuTitleMap.set('.Net Nugets', 'staticDotNet');
-
-        fillUpdated (elements, menuItems, 15);
 
         for (const element of elements)
         {
@@ -447,25 +497,6 @@ window.addEventListener ("load", ()=> {
             sidebarBackdrop.classList.toggle('active');
             document.body.classList.add('sidebar-open');
         });
-    }
-
-    function fillUpdated(elements, menuItems, count)
-    {
-        const title = "Latest";
-
-        const updatedPacks = elements.sort((a,b)=>parseInt(a.dataset.lastPublished) < parseInt(b.dataset.lastPublished)).slice(0, count);
-    
-        updatedPacks.sort((a,b)=>parseInt(a.dataset.lastPublished) < parseInt(b.dataset.lastPublished));
-        
-        const menuItem = menuItems.find(m=>m.dataset.categoryMenu == title);
-
-        menu.set(title, {
-            name: title,
-            elements: updatedPacks,
-            children: [],
-            menuItem: menuItem 
-        });
-        
     }
 
     function filterToc(query)

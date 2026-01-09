@@ -1,6 +1,14 @@
 {{ $title := replace .ctx.title " " "" }}
 <div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="content" id="v-pills-content" role="tabpanel" aria-labelledby="v-pills-{{$title | urlize}}-tab">
-    <h1><span id="categoryTitle">{{.ctx.title}}</span> <span id="categoryCount">(...)</span></h1>
+    <div class="d-flex">
+        <h1><span id="categoryTitle">{{.ctx.title}}</span> <span id="categoryCount">(...)</span></h1>
+        <div class="ml-auto">
+            <select name="Sort" id="sort">
+                <option value="title">By Title</option>
+                <option value="date" selected>By Date</option>
+            </select>
+        </div>
+    </div>
     <div data-content>      
         {{ $showCategories := eq .ctx.title "All" }}
         {{ with .ctx.packs }}
