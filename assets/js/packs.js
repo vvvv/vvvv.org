@@ -48,6 +48,7 @@ window.addEventListener ("load", ()=> {
     setUpMenuToggle();
 
     checkURLParams();
+    sortVisible();
 
     processing.hidden = true;
     toc.hidden = false;
@@ -95,6 +96,10 @@ window.addEventListener ("load", ()=> {
                 }
 
                 button.tab('show');
+        }
+        else
+        {
+            $(`button[data-category-menu="All"]`).tab('show');
         }
     }
 
@@ -268,7 +273,7 @@ window.addEventListener ("load", ()=> {
             $(button).on('shown.bs.tab', () => {
 
                 sortDropdown.hidden = false;
-                
+
                 if (!sortChanged)
                 {
                     sortType = categoryTitle == 'All' ? 'date' : 'title';
