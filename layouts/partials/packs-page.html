@@ -1,6 +1,7 @@
 {{- "<!-- PACKS -->" | safeHTML -}}
 {{- $createdAt := div .Params.createdAt 1000 | int | dateFormat "2 Jan 2006, 15:04:05" -}}
 {{- $warning := resources.Get "img/icons/ChatWarning24Regular.svg" -}}
+{{- $build := resources.Get "img/icons/ClockAlarm20Regular.svg" -}}
 
 <section id="Packs">
     <div class="container">
@@ -80,6 +81,12 @@
                 <img loading="lazy" src="{{$warning.RelPermalink}}" class="img-fluid" role="presentation"/></a>
             </div>
             <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent"></div>
+        </div>
+        <div class="row ml-1 mt-4" id="nothingFound">
+            <div class="col-1 col-md-1 pl-0 pr-2">
+                <img loading="lazy" src="{{$build.RelPermalink}}" class="img-fluid" role="presentation"/></a>
+            </div>
+            <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent">Anything missing?<br/>It can probably added <b><a href="https://thegraybook.vvvv.org/reference/libraries/on-demand.html">on demand!</a></b></div>
         </div>
         <div class="tab-content static" id="staticDotNet">
             <p><b>vvvv can reference any .NET NuGet!</b></p>

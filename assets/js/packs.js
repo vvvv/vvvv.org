@@ -8,7 +8,6 @@ window.addEventListener ("load", ()=> {
     const sidebar = document.getElementById('sidebar');
     const sidebarBackdrop = document.getElementById('sidebar-backdrop');
     const menuToggle = document.getElementById('menuToggle');
-    const alsoFound = document.getElementById('alsoFound');
     const totalSpan = document.getElementById('totalCount');
     const content = document.getElementById('v-pills-content');
     const contentDiv = content.querySelector('[data-content]'); 
@@ -16,6 +15,8 @@ window.addEventListener ("load", ()=> {
     const titleCount = document.getElementById('categoryCount');
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
+    const alsoFound = document.getElementById('alsoFound');
+    const nothingFound = document.getElementById('nothingFound');
     const alsoFoundElement = null;
     let currentCategory = 'All';
     let isStatic = false;
@@ -619,24 +620,24 @@ window.addEventListener ("load", ()=> {
 
         if (currentCategory == 'All' || query == '')
             return;
-
-        const alsoFoundClone = alsoFound.cloneNode(true);
-        contentDiv.appendChild(alsoFoundClone);
-        
-        const content = alsoFoundClone.getElementsByClassName('emptyContent')[0];
-        content.replaceChildren();
-                    
-        const p = document.createElement("p");
-        content.appendChild(p);
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
-        const withoutCurrent = active.filter(a=>a.name!==currentCategory && a.name!=='All')?.sort((a,b)=>a.name.localeCompare(b.name));
+        const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory)?.sort((a,b)=>a.name.localeCompare(b.name));
         const count = totalSet.size;
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
 
         if (withoutCurrent.length)
         {
+            const alsoFoundClone = alsoFound.cloneNode(true);
+            contentDiv.appendChild(alsoFoundClone);
+            
+            const content = alsoFoundClone.getElementsByClassName('emptyContent')[0];
+            content.replaceChildren();
+                        
+            const p = document.createElement("p");
+            content.appendChild(p);
+
             const ul = document.createElement("ul");
             content.appendChild(ul);
 
@@ -660,9 +661,10 @@ window.addEventListener ("load", ()=> {
             })
 
         }
-        else
+        else if (!active.length)
         {
-            p.textContent = "No packs found."
+            const nothingFoundClone = nothingFound.cloneNode(true);
+            contentDiv.appendChild(nothingFoundClone);
         }
 
     }
