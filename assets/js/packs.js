@@ -14,22 +14,22 @@ window.addEventListener ("load", ()=> {
     const infoDiv = content.querySelector('[data-info]'); 
     const title = document.getElementById('categoryTitle');
     const titleCount = document.getElementById('categoryCount');
+    const alsoFound = document.getElementById('alsoFound');
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
-    const alsoFound = document.getElementById('alsoFound');
-    const onDemand = document.getElementById('onDemand');
+    const staticOnDemand = document.getElementById('staticOnDemand');
     const alsoFoundElement = null;
     let currentCategory = 'All';
     let isStatic = false;
 
-    const staticContent = { staticDotNet, staticAddYours, onDemand };
+    const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
+    const menuTitleMap = new Map();
 
     let query = input.value;
 
     toc.hidden = true;
 
     let menu = new Map();
-    const dynamicCollection = new Map();
 
     const totalSet = new Set();
 
@@ -54,7 +54,9 @@ window.addEventListener ("load", ()=> {
         const hash = window.location.hash;
         const params = new URLSearchParams(paramsString);
 
-        const category = params.get('c');
+        const c = params.get('c')
+
+        let category = menuTitleMap.get(c) || c;
 
         if (category)
         {
@@ -129,19 +131,21 @@ window.addEventListener ("load", ()=> {
         for (const button of items.static)
         {
             $(button).on('shown.bs.tab', () => {
-
-                updateHistory(categoryTitle)
-
+                
                 window.scrollTo(0, 0);
                 isStatic = true;
 
+                const sectionTitle = button.dataset.title;
+                
                 contentDiv.replaceChildren();
                 const element = staticContent[button.dataset.categoryMenu];
-
+                
                 contentDiv.appendChild(element.cloneNode(true));
-
-                title.textContent = button.textContent;
+                
+                title.textContent = sectionTitle;
                 titleCount.hidden = true;
+                
+                updateHistory(sectionTitle);
             })
         }
 
@@ -325,11 +329,14 @@ window.addEventListener ("load", ()=> {
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
         };
 
-        dynamicCollection.set("toSponsor", toSponsor)
-
         menu.set("All", all);
         menu.set("Deprecated", deprecated);
         menu.set("toSponsor", toSponsor);
+
+        menuTitleMap.set('Packs to sponsor', 'toSponsor');
+        menuTitleMap.set('On Demand', 'staticOnDemand');
+        menuTitleMap.set('Add your Pack', 'staticAddYours');
+        menuTitleMap.set('.Net Nugets', 'staticDotNet');
 
         fillUpdated (elements, menuItems, 15);
 

@@ -53,14 +53,14 @@
                                 {{ end }}   
                             {{ end }}
                             
-                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
-                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
+                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-title=".Net Nugets" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-title="Add your Pack" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
                             <button href="#v-pills-content" class="nav-link" data-category-menu="toSponsor" data-type="dynamic" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
                                 Packs to sponsor &#9829;
                                 <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
                                 <span data-count hidden="true"></span>
                             </button>
-                            <button href="#v-pills-content" class="nav-link" data-category-menu="onDemand" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticOnDemand" data-title="On Demand" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
                                 On Demand <img src="{{$build.RelPermalink}}" width="16px" role="presentation"/>
                             </button>
 
@@ -101,7 +101,7 @@
             <p>Already have a pack on <a href="https://nuget.org" target="_blank">nuget.org</a> and want it to show up in the browser?<br/> 
             See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html#categorize-the-pack">Categorizing a pack</a></p>
         </div>
-        <div class="tab-content static" id="onDemand">
+        <div class="tab-content static" id="staticOnDemand">
             <div class="row ml-1 mt-4">
                 <div class="col-1 col-md-1 pl-0 pr-2">
                     <img src="{{$build.RelPermalink}}" class="img-fluid" role="presentation"/></a>
