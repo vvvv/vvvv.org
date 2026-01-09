@@ -22,6 +22,7 @@ window.addEventListener ("load", ()=> {
 
     const alsoFoundElement = null;
     let currentCategory = 'All';
+    let currentMenuItem = null;
     let isStatic = false;
 
     const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
@@ -68,10 +69,18 @@ window.addEventListener ("load", ()=> {
 
     function sortVisible()
     {
-        const elements = Array.from(contentDiv.getElementsByTagName('article'));
-        sortElements(elements);
-        contentDiv.replaceChildren();
-        elements.forEach(e=>contentDiv.appendChild(e));
+        if (!currentMenuItem)
+            currentMenuItem = toc.querySelector('[data-category-menu="All"]');
+
+        const sections = Array.from(contentDiv.getElementsByTagName('section'));
+
+        sections.forEach(s=>{
+            const elements = Array.from(s.getElementsByTagName('article'));
+            sortElements(elements);
+            elements.forEach(e=>s.appendChild(e));
+        })
+        
+        sections.forEach(s=>contentDiv.appendChild(s));
     }
            
     function checkURLParams()
@@ -305,13 +314,13 @@ window.addEventListener ("load", ()=> {
     
                     sortedSections.forEach(c=>{
                         
+                        const section = document.createElement('section');
                         const h2 = document.createElement('h2');
                         h2.textContent = c.name;
                         h2.id = c.name;
                         
-                        const div = document.createElement('div');
-                        div.classList.add('section');
-                        div.appendChild(h2);
+                        section.classList.add('section');
+                        section.appendChild(h2);
                         
                         let count = 0;
 
@@ -319,16 +328,16 @@ window.addEventListener ("load", ()=> {
 
                         c.elements.forEach(e=>{
                             e.hidden = !isVisible(e);
-                            div.appendChild(e.cloneNode(true));
+                            section.appendChild(e.cloneNode(true));
                             if (!e.hidden) 
                                 {   
                                     count++;
                                 }
                         });
 
-                        div.hidden = count == 0;
+                        section.hidden = count == 0;
 
-                        contentDiv.appendChild(div);
+                        contentDiv.appendChild(section);
     
                     });
                 }
