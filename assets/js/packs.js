@@ -594,6 +594,9 @@ window.addEventListener ("load", ()=> {
         const content = document.querySelector('[data-content]');
         const toc = document.getElementById('toc');
         
+        title.textContent = currentCategory;
+        titleCount.hidden = false;
+        
         totalSet.clear();
         
         if (query == "")
@@ -608,6 +611,7 @@ window.addEventListener ("load", ()=> {
         {
             $('button[data-category-menu="All"]').tab('show');
         }
+        
         
         filterToc(query);
         filterContent(content, query);
@@ -666,6 +670,8 @@ window.addEventListener ("load", ()=> {
         }
         else if (!active.length)
         {
+            title.textContent = 'Nothing Found';
+            titleCount.hidden = true;
             const nothingFoundClone = nothingFound.cloneNode(true);
             infoDiv.appendChild(nothingFoundClone);
         }
