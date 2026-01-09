@@ -20,6 +20,7 @@
     data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
     data-last-published="{{.lastPublished}}" 
     data-first-published="{{.firstPublished}}"
+    data-downloadcount="{{.totalDownloads}}"
     {{- if eq .deprecated  true }}data-deprecated="true" hidden="true"{{- end -}}
     {{- if $toSponsor -}}data-sponsor="true"{{- end -}}
     data-search="{{printf "%s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") | lower}}"

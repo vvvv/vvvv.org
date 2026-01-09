@@ -289,7 +289,7 @@ window.addEventListener ("load", ()=> {
 
                 if (!sortChanged)
                 {
-                    sortType = categoryTitle == 'All' ? 'date' : 'title';
+                    sortType = categoryTitle == 'All' ? 'newest' : 'title';
                     sortDropdown.value = sortType;
                 }
 
@@ -371,12 +371,28 @@ window.addEventListener ("load", ()=> {
         switch (sortType)
         {
             case 'title':
-                elements.sort((a, b)=>a.dataset.pack.localeCompare(b.dataset.pack));
+                elements.sort((a, b)=>{
+                    const idA = a.dataset.pack.toLowerCase().startsWith("vl.") ? a.dataset.pack.slice(3) : a.dataset.pack;
+                    const idB = b.dataset.pack.toLowerCase().startsWith("vl.") ? b.dataset.pack.slice(3) : b.dataset.pack;
+                    return idA.localeCompare(idB);
+                });
+                break;
+            case 'newest':
+                elements.sort((a,b)=>{
+                    return parseInt(a.dataset.firstPublished) - parseInt(b.dataset.firstPublished);
+                });
                 break;
             case 'date':
+            case 'updated':
                 elements.sort((a,b)=>{
                     return parseInt(b.dataset.lastPublished) - parseInt(a.dataset.lastPublished);
                 });
+                break;
+            case 'download':
+                elements.sort((a,b)=>{
+                    return parseInt(b.dataset.downloadcount) - parseInt(a.dataset.downloadcount);
+                });
+                break;
         }
     }
 
