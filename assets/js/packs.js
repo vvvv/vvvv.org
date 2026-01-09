@@ -10,7 +10,8 @@ window.addEventListener ("load", ()=> {
     const menuToggle = document.getElementById('menuToggle');
     const totalSpan = document.getElementById('totalCount');
     const content = document.getElementById('v-pills-content');
-    const contentDiv = content.querySelector('[data-content]'); 
+    const contentDiv = content.querySelector('[data-content]');
+    const infoDiv = content.querySelector('[data-info]'); 
     const title = document.getElementById('categoryTitle');
     const titleCount = document.getElementById('categoryCount');
     const staticDotNet = document.getElementById('staticDotNet');
@@ -224,7 +225,7 @@ window.addEventListener ("load", ()=> {
                 setUpCategoryLinks();
                 showTitleCount();
 
-                makeAlsoFound();
+                addInfo();
             });
         }
 
@@ -518,7 +519,7 @@ window.addEventListener ("load", ()=> {
             }
         })
 
-        makeAlsoFound();
+        addInfo();
         showFoundCounter();
     }
 
@@ -598,7 +599,7 @@ window.addEventListener ("load", ()=> {
         if (query == "")
         {
             resetFilter(content, toc);
-            makeAlsoFound();
+            addInfo();
             showTitleCount();
             return;
         }
@@ -615,8 +616,10 @@ window.addEventListener ("load", ()=> {
 
     }
 
-    function makeAlsoFound()
+    function addInfo()
     {
+
+        infoDiv.replaceChildren();
 
         if (currentCategory == 'All' || query == '')
             return;
@@ -630,7 +633,7 @@ window.addEventListener ("load", ()=> {
         if (withoutCurrent.length)
         {
             const alsoFoundClone = alsoFound.cloneNode(true);
-            contentDiv.appendChild(alsoFoundClone);
+            infoDiv.appendChild(alsoFoundClone);
             
             const content = alsoFoundClone.getElementsByClassName('emptyContent')[0];
             content.replaceChildren();
@@ -664,7 +667,7 @@ window.addEventListener ("load", ()=> {
         else if (!active.length)
         {
             const nothingFoundClone = nothingFound.cloneNode(true);
-            contentDiv.appendChild(nothingFoundClone);
+            infoDiv.appendChild(nothingFoundClone);
         }
 
     }
