@@ -622,10 +622,9 @@ window.addEventListener ("load", ()=> {
 
     function addInfo()
     {
-
         infoDiv.replaceChildren();
 
-        if (currentCategory == 'All' || query == '')
+        if (query == '')
             return;
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
@@ -634,7 +633,7 @@ window.addEventListener ("load", ()=> {
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
 
-        if (withoutCurrent.length)
+        if (currentCategory != 'All' && withoutCurrent.length)
         {
             const alsoFoundClone = alsoFound.cloneNode(true);
             infoDiv.appendChild(alsoFoundClone);
