@@ -72,14 +72,18 @@ window.addEventListener ("load", ()=> {
         if (!currentMenuItem)
             currentMenuItem = toc.querySelector('[data-category-menu="All"]');
 
-        const sections = Array.from(contentDiv.getElementsByTagName('section'));
+        // go over direct items
+        const elements = Array.from(contentDiv.children).filter(el=>el.tagName === 'ARTICLE');
+        sortElements(elements);
+        elements.forEach(e=>contentDiv.appendChild(e));
 
+        // go over sections
+        const sections = Array.from(contentDiv.getElementsByTagName('section'));
         sections.forEach(s=>{
             const elements = Array.from(s.getElementsByTagName('article'));
             sortElements(elements);
             elements.forEach(e=>s.appendChild(e));
         })
-        
         sections.forEach(s=>contentDiv.appendChild(s));
     }
            
@@ -315,9 +319,10 @@ window.addEventListener ("load", ()=> {
                     sortedSections.forEach(c=>{
                         
                         const section = document.createElement('section');
+                        section.id = c.name;
+                        
                         const h2 = document.createElement('h2');
                         h2.textContent = c.name;
-                        h2.id = c.name;
                         
                         section.classList.add('section');
                         section.appendChild(h2);
