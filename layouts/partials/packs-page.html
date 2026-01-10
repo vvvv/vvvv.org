@@ -1,16 +1,27 @@
-{{ "<!-- PACKS -->" | safeHTML }}
-{{ $createdAt := div .Params.createdAt 1000 | int | dateFormat "2 Jan 2006, 15:04:05" }}
+{{- "<!-- PACKS -->" | safeHTML -}}
+{{- $createdAt := div .Params.createdAt 1000 | int | dateFormat "2 Jan 2006, 15:04:05" -}}
+{{- $warning := resources.Get "img/icons/ChatWarning24Regular.svg" -}}
+{{- $build := resources.Get "img/icons/ClockAlarm20Regular.svg" -}}
 
 <section id="Packs">
     <div class="container">
-        <div class="d-flex">
-            <h2><b>VL Packs</b></h2>
+        <div class="d-block d-lg-flex align-items-baseline mb-3">
+            <h2><b>Packs and Extensions for vvvv</b></h2>
+            <div class="ml-auto topLinks mt-2">
+                <a href="https://thegraybook.vvvv.org/reference/hde/managing-nugets.html#managing-nugets" target="_blank">Managing Nugets</a>
+                <a href="https://thegraybook.vvvv.org/changelog/nuget-compatibility-chart.html#nuget-compatibility-chart" target="_blank">Compatibility Chart</a>
+            </div>
         </div>
         <div id="packsContent">
             <div class="row">
-                <div class="col-6 col-sm-5 col-md-3 align-self-baseline">
+                <div class="col-12 d-md-none mb-3 pb-0">
+                    <button id="menuToggle" class="btn btn-secondary">
+                        ☰ Categories
+                    </button>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3 mt-md-2 align-self-baseline">
                     <form>
-                        <div id="form" class="input-group" style="max-width: 18rem;">
+                        <div id="form" class="input-group mt-0">
                             <input id="filter" type="text" class="form-control my-3" placeholder="Filter...">
                             <div class="input-group-append">
                                 <button id="clearBtn" class="btn btn-outline-secondary" type="button">&times;</button>
@@ -18,39 +29,84 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-6 col-sm-7 col-md-9 align-self-baseline d-flex">
-                    <div id="filterCount">Found: <span></span></div>
-                </div>
             </div>
             <div class="row">
-                <!-- Menu Large Screens -->
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div id="packsProcessing">Processing...</div>
-                    <div class="nav nav-pills flex-column" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
-                        {{ with .Params.categories }}
-                            {{ range $i, $item := . }}
-                                {{ $title := replace $item.title " " "" }}
-                                <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{ .title }}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
-                                    {{.title}}
-                                    <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
-                                    <span data-count hidden="true"></span>
-                                </button>
-                            {{ end }}   
-                        {{ end }}
+                <div id="sidebar" class="col-8 col-md-4 col-lg-3">
+                    <div class="header mb-2">
+                        <button id="menuClose" type="button" class="btn btn-dark d-md-none">Close</button>
                     </div>
-                    <div class="ml-auto lastUpdated">
-                        Total: {{.Params.totalCount}}<br/>
-                        Updated: {{$createdAt}}
+                    <div class="content">
+                        <div id="packsProcessing">Processing...</div>
+                        <div class="d-flex mb-2 border-bottom pb-2 counts">
+                            <div id="totalCount" hidden="true">Total: <span></span></div>
+                            <div id="filterCount" class="ml-4" hidden="true">Found: <span></span></div>
+                        </div>
+                        <div class="nav nav-pills flex-column sidebar" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
+                            {{ with .Params.categories }}
+                                {{ range $i, $item := . }}
+                                    {{ $title := replace $item.title " " "" }}
+                                    <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                        {{.title}}
+                                        <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+                                        <span data-count hidden="true"></span>
+                                    </button>
+                                {{ end }}   
+                            {{ end }}
+                            
+                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-title=".Net Nugets" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-title="Add your Pack" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="toSponsor" data-type="dynamic" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                Packs to sponsor &#9829;
+                                <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+                                <span data-count hidden="true"></span>
+                            </button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticOnDemand" data-title="On Demand" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                On Demand <img src="{{$build.RelPermalink}}" width="16px" role="presentation"/>
+                            </button>
+
+                        </div>
+                        <div class="ml-auto lastUpdated">
+                            Updated: {{$createdAt}}
+                        </div>
                     </div>
                 </div>
                 <!--  -->
-                <div class="col-6 col-md-8 col-lg-9">
+                <div class="col-12 col-md-8 col-lg-9">
                     <div class="tab-content" id="v-pills-tabContent">
                         {{ with index .Params.categories 0 }}
                             {{ partial "packs-category" (dict "ctx" . "index" 0)}}   
                         {{ end }}
                     </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+    <div id="sidebar-backdrop"></div>
+    <div id="staticContent" hidden="true">
+        <div class="row ml-1" id="alsoFound">
+            <div class="col-1 col-md-1 pl-0 pr-2">
+                <img loading="lazy" src="{{$warning.RelPermalink}}" class="img-fluid" role="presentation"/></a>
+            </div>
+            <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent"></div>
+        </div>
+        <div class="tab-content static" id="staticDotNet">
+            <p><b>vvvv can reference any .NET NuGet!</b></p>
+            <p>The ones you see listed in this browser have been specifically tailored to be used with vvvv but for advanced users it is perfectly fine to reference any .NET NuGet out there.</p>
+            <p>To browse all publicly available .NET NuGets, see: <a href="https://nuget.org" target="_blank">nuget.org</a></p> 
+        </div>
+        <div class="tab-content static" id="staticAddYours">
+            <p>Want to share your own pack?<br/>
+            See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html">Publishing NuGets</a></p>
+            <p>Already have a pack on <a href="https://nuget.org" target="_blank">nuget.org</a> and want it to show up in the browser?<br/> 
+            See <a href="https://thegraybook.vvvv.org/reference/extending/publishing.html#categorize-the-pack">Categorizing a pack</a></p>
+        </div>
+        <div class="tab-content static" id="staticOnDemand">
+            <div class="row ml-1 mt-4">
+                <div class="col-1 col-md-1 pl-0 pr-2">
+                    <img src="{{$build.RelPermalink}}" class="img-fluid" role="presentation"/></a>
+                </div>
+                <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent">Anything missing?<br/>It can probably added <b><a href="https://thegraybook.vvvv.org/reference/libraries/on-demand.html">on demand!</a></b></div>
             </div>
         </div>
     </div>

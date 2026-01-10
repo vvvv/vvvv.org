@@ -1,79 +1,140 @@
 {{- $download := resources.Get "img/icons/ArrowDownload24Filled.svg" -}}
 {{- $package := resources.Get "img/icons/Box24Regular.svg" -}}
+{{- $author := resources.Get "img/icons/PersonCircle24Regular.svg" -}}
 {{- $category := resources.Get "img/icons/FolderOpenFilled.svg" -}}
 {{- $link := resources.Get "img/icons/InsertLinkFilled.svg" -}}
+{{- $seen := newScratch -}}
+
+{{- $toSponsor := false -}}
+{{- with .links -}}
+    {{- range . -}}
+        {{- if eq .title "Sponsor!" -}}
+            {{- $toSponsor = true -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
 
 {{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
 
-<article class="packItem row no-gutters" data-pack="{{.id}}" 
+<article class="packItem row ml-1" data-pack="{{.id}}" 
     data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
     data-last-published="{{.lastPublished}}" 
     data-first-published="{{.firstPublished}}"
-    data-search="{{printf "%s %s %s %s" .id .summary (delimit .authors " ") (delimit .tags " ") | lower}}"
+    data-downloadcount="{{.totalDownloads}}"
+    {{- if eq .deprecated  true }}data-deprecated="true" hidden="true"{{- end -}}
+    {{- if $toSponsor -}}data-sponsor="true"{{- end -}}
+    data-search="{{printf "%s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") | lower}}"
     >
-    <div class="d-none d-lg-block col-md-1">
+    <div class="col-1 col-md-1 pl-0 pr-2">
         <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
     </div>
-    <div class="d-block col-12 pl-0 col-md-11 pl-lg-4">
+    <div class="d-block col-11 pl-0 col-md-11 pl-lg-4">
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
-                <span data-badge class="ml-md-3" hidden></span>
                 <div class="authors ml-md-3" data-pack-info>
-                    {{- delimit .authors ", " -}}
+                    {{- with .owners -}}
+                        {{ $last := sub (len .) 1 }}
+                        {{- range $i, $o := . -}}
+                            <a href="https://www.nuget.org/profiles/{{$o}}" target="_blank">{{$o}}</a>{{- if lt $i $last -}}, {{ end }} 
+                        {{- end -}}
+                    {{- end -}}
                 </div>
             </div>
-            <div class="col-12 col-md-3 col-lg-2 text-left totalDownloads">
-                   <img src="{{$download.RelPermalink}}" role="presentation"/> <span class="number">{{ .totalDownloads }}</span>
-            </div>
+
         </div>
 
         {{- if ne .summary "" -}}
-            <div class="summary" data-pack-info>{{.summary}}</div>
+            <div class="description" data-pack-info>{{.summary}}</div>
         {{- end -}}
 
-        <div class="version">
-            <img src="{{$package.RelPermalink}}" alt="Latest version" role="presentation" aria-hidden="true"/>{{ .latestVersion }} • {{$latestDate}}
-        </div>
+        <div class="row my-3">
+            <div class="col">
+                <div class="version">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{$package.RelPermalink}}" alt="Latest version" role="presentation" aria-hidden="true"/>
+                        </div>
+                        <div class="col">
+                            {{- .latestVersion }} • {{$latestDate}}
+                        </div>
+                    </div>
+                </div>
 
-        <div class="links">
-            <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
-            {{ if ne .projectURL ""}}
-                <a href="{{.projectURL}}">Website</a>
-            {{ end }}
-            <a href="https://www.nuget.org/packages/{{.id}}">Nuget</a> 
-            {{ with .links }}
-                {{ range . }}
-                    {{ if eq .title "Sponsor!"}}
-                        <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
-                    {{ else }}
-                        <a href="{{.link}}">{{.title}}</a>
-                    {{ end }}
-                {{ end }}
-            {{ end }}
-        </div>
-
-        {{ if eq .showCategories true}}
-            <div class="categories" alt="Categories">
-                <img src="{{$category.RelPermalink}}" role="presentation" aria-hidden="true"/>
-                {{ with .categories}}
-                    {{ range . }}
-                        {{ with index . 0 }}
-                            <a href="#" data-category-link="{{ . }}">{{ . }}</a> 
-                        {{ end }}
-                    {{ end }}
-                {{ else }}
-                    <a href="#" data-category-link="Unsorted">Unsorted</a>
-                {{ end }}
+                <div class="author">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{$author.RelPermalink}}" alt="Authors" role="presentation" aria-hidden="true"/>
+                        </div>
+                        <div class="col">
+                            {{- delimit .authors ", " -}}
+                        </div>
+                    </div>
+                </div>
             </div>
-        {{ end }}
+            <div class="col">
+                <div class="links">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
+                        </div>
+                        <div class="col">
+                            {{- if ne .projectURL "" -}}
+                                <a href="{{.projectURL}}">Website</a>
+                            {{- end -}}
+                            {{- with .links -}}
+                                {{- range . -}}
+                                    {{- if eq .title "Sponsor!" -}}
+                                        <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
+                                    {{- else -}}
+                                        <a href="{{.link}}">{{.title}}</a>
+                                    {{- end -}}
+                                {{- end -}}
+                            {{- end -}}
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="categories" alt="Categories">
+                    <div class="row">
+                        <div class="col-1">
+                            <img src="{{$category.RelPermalink}}" role="presentation" aria-hidden="true"/>
+                        </div>
+                        <div class="col">
+                            {{- with .categories -}}
+                                {{- range . -}}
+                                    {{- with index . 0 -}}
+                                        {{- if not ($seen.Get .) -}}
+                                            {{- $seen.Set . true -}}
+                                            <a href="#" data-category-link="{{ . }}">{{- . -}}</a> 
+                                        {{- end -}}
+                                    {{- end -}}
+                                {{- end -}}
+                            {{- else -}}
+                                <a href="#" data-category-link="Unsorted">Unsorted</a>
+                            {{- end -}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-lg-none w-100"></div>
+            <div class="col-6 col-lg-2 links flex-break">
+                <div class="row">
+                    <div class="col-1">
+                        <img src="{{$download.RelPermalink}}" role="presentation"/>
+                    </div>
+                    <div class="col"><span class="number">{{- .totalDownloads -}}</span></div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="tags">
-            {{ with .tags}}
-                {{ range . }}
-                <span class="badge" data-pack-info>{{ . }}</span>
-                {{ end }}
-            {{ end }}
+            {{- with .tags -}}
+                {{- range . -}}
+                <span class="badge" data-pack-info>{{- . -}}</span>
+                {{- end -}}
+            {{- end -}}
         </div>
     </div>
 </article>

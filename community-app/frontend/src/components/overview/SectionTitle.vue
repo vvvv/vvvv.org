@@ -1,7 +1,7 @@
 <script setup>
 import SyncButton from "../SyncButton.vue"
 
-defineProps(['showRefresh', 'loading', 'title', 'link', 'isExternal']);
+defineProps(['showRefresh', 'loading', 'title', 'link', 'isExternal', 'target']);
 const emit = defineEmits(['showAll', 'sync']);
 
 </script>
@@ -11,7 +11,8 @@ const emit = defineEmits(['showAll', 'sync']);
         <div class="d-flex align-items-center pl-0">
             <template v-if="link">
                 <a v-if="!isExternal" :href="link" @click.prevent="emit('showAll')" class="pr-3"><h2>{{title}}</h2></a>
-                <a v-else :href="link" class="pr-3" target="_blank"><h2>{{title}}</h2></a>
+                <a v-else-if="target" :href="link" class="pr-3" :target="target"><h2>{{title}}</h2></a>
+                <a v-else :href="link" class="pr-3" :target="target"><h2>{{title}}</h2></a>
             </template> 
             <h2 v-else>{{ title }}</h2>
             <slot></slot>

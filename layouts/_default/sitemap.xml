@@ -25,6 +25,10 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>{{- .Site.BaseURL -}}packs</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>{{- .Site.BaseURL -}}community</loc>
     <changefreq>weekly</changefreq>
   </url>
