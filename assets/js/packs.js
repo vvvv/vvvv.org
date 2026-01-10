@@ -20,7 +20,6 @@ window.addEventListener ("load", ()=> {
     const staticOnDemand = document.getElementById('staticOnDemand');
     const sortDropdown = document.getElementById('sort');
 
-    const alsoFoundElement = null;
     let currentCategory = 'All';
     let currentMenuItem = null;
     let isStatic = false;
@@ -28,7 +27,7 @@ window.addEventListener ("load", ()=> {
     const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
     const menuTitleMap = new Map();
 
-    let sortType = 'date';
+    let sortType = 'newest';
     let sortChanged = false;
 
     let query = input.value;
@@ -379,13 +378,18 @@ window.addEventListener ("load", ()=> {
                 break;
             case 'newest':
                 elements.sort((a,b)=>{
-                    return parseInt(a.dataset.firstPublished) - parseInt(b.dataset.firstPublished);
+                    const aLast = a.dataset.firstPublished;
+                    const bLast = b.dataset.firstPublished;
+
+                    return parseInt(bLast) - parseInt(aLast);
                 });
                 break;
-            case 'date':
             case 'updated':
                 elements.sort((a,b)=>{
-                    return parseInt(b.dataset.lastPublished) - parseInt(a.dataset.lastPublished);
+                    const aLast = a.dataset.lastPublished;
+                    const bLast = b.dataset.lastPublished;
+
+                    return parseInt(bLast) - parseInt(aLast);
                 });
                 break;
             case 'download':
@@ -402,23 +406,40 @@ window.addEventListener ("load", ()=> {
         const elements = Array.from(content.getElementsByTagName('article'));
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
 
+        const items = {
+            all: [],
+            deprecated: []
+        }
+
+        for (const e of elements)
+        {
+            if (e.dataset.deprecated)
+            {
+                items.deprecated.push(e);
+            }
+            else
+            {
+                items.all.push(e);
+            }
+        }
+
         const deprecated = {
             name: "Deprecated",
-            elements: [],
+            elements: items.deprecated,
             children: new Map(),
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Deprecated")
         };
 
         const all = {
             name: "All",
-            elements: elements.filter(e=>!e.dataset.deprecated),
+            elements: items.all,
             children: [],
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
         };
 
         const toSponsor = {
             name: "Packs to sponsor",
-            elements: elements.filter(e=>e.dataset.sponsor),
+            elements: items.all.filter(e=>e.dataset.sponsor),
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
         };
 
@@ -431,15 +452,9 @@ window.addEventListener ("load", ()=> {
         menuTitleMap.set('Add your Pack', 'staticAddYours');
         menuTitleMap.set('.Net Nugets', 'staticDotNet');
 
-        for (const element of elements)
+        for (const element of items.all)
         {
             let paths;           
-            
-            if (element.dataset.deprecated)
-            {
-                deprecated.elements.push(element);
-                continue;
-            }
                 
             try {
                 paths = JSON.parse(element.dataset.categories);
@@ -817,7 +832,7 @@ window.addEventListener ("load", ()=> {
         {
             title.textContent = 'Nothing Found';
             titleCount.hidden = true;
-            const nothingFoundClone = onDemand.cloneNode(true);
+            const nothingFoundClone = staticOnDemand.cloneNode(true);
             infoDiv.appendChild(nothingFoundClone);
         }
 
