@@ -19,6 +19,7 @@ window.addEventListener ("load", ()=> {
     const staticAddYours =  document.getElementById('staticAddYours');
     const staticOnDemand = document.getElementById('staticOnDemand');
     const sortDropdown = document.getElementById('sort');
+    const menuItemButton = document.getElementById('staticContent').querySelector('[data-category-menu]');
 
     let currentCategory = 'All';
     let currentMenuItem = null;
@@ -28,6 +29,7 @@ window.addEventListener ("load", ()=> {
     const menuTitleMap = new Map();
 
     let sortType = 'newest';
+    let selectedMenuType = 'categories';
     let sortChanged = false;
 
     let query = input.value;
@@ -35,16 +37,28 @@ window.addEventListener ("load", ()=> {
     toc.hidden = true;
 
     let menu = new Map();
+    let owners = new Map();
+    let fixed = new Map();
 
     const totalSet = new Set();
 
+    const items = {
+        all: [],
+        deprecated: []
+    }
+
+    setTotalPacksCount();
+    
     transformSearchField();
+    collectOwners();
     collectMenu();
+    collectFixed();
     buildMenu();
 
     setUpSort();
     setUpSearchField();
     setUpCategoryLinks();
+    setUpMenuSwitch();
     setUpMenuToggle();
 
     checkURLParams();
@@ -54,6 +68,18 @@ window.addEventListener ("load", ()=> {
     toc.hidden = false;
 
     /////////////////////////////////////////
+
+    function setTotalPacksCount()
+    {
+        const totalPacksCount = Array.from(contentDiv.getElementsByTagName('article')).filter(e=>!e.dataset.deprecated).length;
+
+        if (totalSpan)
+        {
+            totalSpan.getElementsByTagName('span')[0].textContent = totalPacksCount;
+            totalSpan.hidden = false;
+        }
+
+    }
 
     function setUpSort()
     {
@@ -134,140 +160,177 @@ window.addEventListener ("load", ()=> {
         })
     }
 
-    function buildMenu()
+    function getMenuEntry(name)
     {
-        //Setup Menu Items
-        const menuItems = Array.from(toc.getElementsByTagName('button'));
-
-        const items = {
-            category: [],
-            dynamic: [],
-            static: []
+        switch (selectedMenuType)
+        {
+            case 'categories':
+                return menu.get(name);
+            case 'owners':
+                return owners.get(name);
         }
+    }
 
-        menuItems.forEach(b=>{
+    function categoryButton(button)
+    {
 
-            switch (b.dataset.type)
-            {
-                case 'static':
-                    items.static.push(b);
-                    break;
-                case 'dynamic':
-                    items.dynamic.push(b);
-                    break;
-                default:    
-                    items.category.push(b);
-            }
+        const categoryTitle = button.dataset.categoryMenu;
+
+        const menuEntry = getMenuEntry(categoryTitle);
+
+        if (!menuEntry) return;
+
+        // Set menu Inactive if there is no elements
+        let totalCount = menuEntry.elements.length;
+        
+        menuEntry.children?.forEach(c=>{
+            totalCount += c.elements.length;
         });
 
-        const totalPacksCount = Array.from(contentDiv.getElementsByTagName('article')).filter(e=>!e.dataset.deprecated).length;
-
-        if (totalSpan)
+        if (!totalCount)
         {
-            totalSpan.getElementsByTagName('span')[0].textContent = totalPacksCount;
-            totalSpan.hidden = false;
+            const countSpan = menuEntry.menuItem.querySelector('[data-count]');
+            menuEntry.menuItem.classList.add('inactive');
+
+            if (countSpan)
+            {
+                countSpan.hidden = true;
+            }
         }
+    
+        //On click, push HTML items into the right panel.
+        //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
+        $(button).on('shown.bs.tab', () => {
 
-        showTitleCount();
+            sortDropdown.hidden = false;
 
-        for (const button of items.static)
-        {
-            $(button).on('shown.bs.tab', () => {
-                
-                window.scrollTo(0, 0);
-                isStatic = true;
+            if (!sortChanged)
+            {
+                sortType = categoryTitle == 'All' ? 'newest' : 'title';
+                sortDropdown.value = sortType;
+            }
 
-                sortDropdown.hidden = true;
+            updateHistory(categoryTitle);
 
-                if (!sortChanged)
-                {
-                    sortType = 'title';
-                    sortDropdown.value = sortType;
-                }
-
-                const sectionTitle = button.dataset.title;
-                
-                contentDiv.replaceChildren();
-                const element = staticContent[button.dataset.categoryMenu];
-                
-                contentDiv.appendChild(element.cloneNode(true));
-                
-                title.textContent = sectionTitle;
-                titleCount.hidden = true;
-                
-                updateHistory(sectionTitle);
-            })
-        }
-
-        for (const button of items.dynamic)
-        {
-            $(button).on('shown.bs.tab', () => {
-
-                const menuEntry = menu.get(button.dataset.categoryMenu);
-                
-                if (!menuEntry)
-                    return;
-
-                sortDropdown.hidden = false;
-
-                if (!sortChanged)
-                {
-                    sortType = 'title';
-                    sortDropdown.value = sortType;
-                }
-                
-                window.scrollTo(0, 0);
-                isStatic = false;
-
-                contentDiv.replaceChildren();
-                updateHistory(menuEntry.name);
-                currentCategory = menuEntry.name;
-
-                sortElements(menuEntry.elements);
-
-                const totalCount = menuEntry.elements.length;
-
-                if (!totalCount)
-                {
-                    const countSpan = menuEntry.menuItem.querySelector('[data-count]');
-                    menuEntry.menuItem.classList.add('inactive');
-
-                    if (countSpan)
-                    {
-                        countSpan.hidden = true;
-                    }
-                }
-
-                menuEntry.elements.forEach(e=>
-                {
-                    e.hidden = !isVisible(e);
-                    contentDiv.appendChild(e.cloneNode(true));
-                });
-                
-                title.textContent = currentCategory;
-                titleCount.hidden = false;
-                
-                setUpCategoryLinks();
-                showTitleCount();
-                addInfo();
-            })
-        }
-
-        for (const button of items.category)
-        {
-
-            const categoryTitle = button.dataset.categoryMenu;
-
-            const menuEntry = menu.get(categoryTitle);
-
-            if (!menuEntry) continue;
-
-            // Set menu Inactive if there is no elements
-            let totalCount = menuEntry.elements.length;
+            isStatic = false;
             
-            menuEntry.children.forEach(c=>{
-                totalCount += c.elements.length;
+            currentCategory = categoryTitle;
+            window.scrollTo(0, 0);
+
+            titleCount.hidden = false;
+            
+            contentDiv.replaceChildren();
+                            
+            sortElements(menuEntry.elements);
+
+            menuEntry.elements?.forEach(e=>
+            {
+                e.hidden = !isVisible(e);
+                contentDiv.appendChild(e.cloneNode(true));
             });
+
+            if (menuEntry.children?.size)
+            {
+                const sortedSections = Array.from(menuEntry.children.values()).sort((a, b)=>a.name.localeCompare(b.name));
+
+                sortedSections.forEach(c=>{
+                    
+                    const section = document.createElement('section');
+                    section.id = c.name;
+                    
+                    const h2 = document.createElement('h2');
+                    h2.textContent = c.name;
+                    
+                    section.classList.add('section');
+                    section.appendChild(h2);
+                    
+                    let count = 0;
+
+                    sortElements(c.elements);
+
+                    c.elements.forEach(e=>{
+                        e.hidden = !isVisible(e);
+                        section.appendChild(e.cloneNode(true));
+                        if (!e.hidden) 
+                            {   
+                                count++;
+                            }
+                    });
+
+                    section.hidden = count == 0;
+
+                    contentDiv.appendChild(section);
+
+                });
+            }
+
+            title.textContent = categoryTitle;
+            
+            setUpCategoryLinks();
+            showTitleCount();
+
+            addInfo();
+        });
+    }
+
+    function staticButton(button)
+    {
+
+        $(button).on('shown.bs.tab', () => {
+            
+            window.scrollTo(0, 0);
+            isStatic = true;
+
+            sortDropdown.hidden = true;
+
+            if (!sortChanged)
+            {
+                sortType = 'title';
+                sortDropdown.value = sortType;
+            }
+
+            const sectionTitle = button.dataset.title;
+            
+            contentDiv.replaceChildren();
+            const element = staticContent[button.dataset.categoryMenu];
+            
+            contentDiv.appendChild(element.cloneNode(true));
+            
+            title.textContent = sectionTitle;
+            titleCount.hidden = true;
+            
+            updateHistory(sectionTitle);
+        })
+    }
+
+    function dynamicButton(button)
+    {
+
+        $(button).on('shown.bs.tab', () => {
+
+            const menuEntry = getMenuEntry(button.dataset.categoryMenu);
+            
+            if (!menuEntry)
+                return;
+
+            sortDropdown.hidden = false;
+
+            if (!sortChanged)
+            {
+                sortType = 'title';
+                sortDropdown.value = sortType;
+            }
+            
+            window.scrollTo(0, 0);
+            isStatic = false;
+
+            contentDiv.replaceChildren();
+            updateHistory(menuEntry.name);
+            currentCategory = menuEntry.name;
+
+            sortElements(menuEntry.elements);
+
+            const totalCount = menuEntry.elements.length;
 
             if (!totalCount)
             {
@@ -279,81 +342,75 @@ window.addEventListener ("load", ()=> {
                     countSpan.hidden = true;
                 }
             }
-        
-            //On click, push HTML items into the right panel.
-            //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
-            $(button).on('shown.bs.tab', () => {
 
-                sortDropdown.hidden = false;
-
-                if (!sortChanged)
-                {
-                    sortType = categoryTitle == 'All' ? 'newest' : 'title';
-                    sortDropdown.value = sortType;
-                }
-
-                updateHistory(categoryTitle);
-
-                isStatic = false;
-                
-                currentCategory = categoryTitle;
-                window.scrollTo(0, 0);
-
-                titleCount.hidden = false;
-                
-                contentDiv.replaceChildren();
-                               
-                sortElements(menuEntry.elements);
-
-                menuEntry.elements?.forEach(e=>
-                {
-                    e.hidden = !isVisible(e);
-                    contentDiv.appendChild(e.cloneNode(true));
-                });
-
-                if (menuEntry.children?.size)
-                {
-                    const sortedSections = Array.from(menuEntry.children.values()).sort((a, b)=>a.name.localeCompare(b.name));
-    
-                    sortedSections.forEach(c=>{
-                        
-                        const section = document.createElement('section');
-                        section.id = c.name;
-                        
-                        const h2 = document.createElement('h2');
-                        h2.textContent = c.name;
-                        
-                        section.classList.add('section');
-                        section.appendChild(h2);
-                        
-                        let count = 0;
-
-                        sortElements(c.elements);
-
-                        c.elements.forEach(e=>{
-                            e.hidden = !isVisible(e);
-                            section.appendChild(e.cloneNode(true));
-                            if (!e.hidden) 
-                                {   
-                                    count++;
-                                }
-                        });
-
-                        section.hidden = count == 0;
-
-                        contentDiv.appendChild(section);
-    
-                    });
-                }
-
-                title.textContent = categoryTitle;
-                
-                setUpCategoryLinks();
-                showTitleCount();
-
-                addInfo();
+            menuEntry.elements.forEach(e=>
+            {
+                e.hidden = !isVisible(e);
+                contentDiv.appendChild(e.cloneNode(true));
             });
+            
+            title.textContent = currentCategory;
+            titleCount.hidden = false;
+            
+            setUpCategoryLinks();
+            showTitleCount();
+            addInfo();
+        })
+    }
+
+    function buildMenu()
+    {
+        toc.replaceChildren();
+
+        let items = [];
+
+        switch (selectedMenuType)
+        {
+            case 'categories':
+                items = Array.from(menu.values()).sort((a,b) => a.index-b.index);
+                break;
+            case 'owners':
+                items = Array.from(owners.values()).sort((a,b) => a.name.localeCompare(b.name));
+                break;
         }
+
+        for (m of items)
+        {
+            switch (m.menuItem.dataset.type)
+            {
+                case 'static':
+                    staticButton(m.menuItem);
+                    break;
+                case 'dynamic':
+                    dynamicButton(m.menuItem);
+                    break;
+                default:    
+                    categoryButton(m.menuItem);
+            }
+
+            toc.appendChild(m.menuItem);
+        }
+
+        const fixedItems = Array.from(fixed.values()).sort((a,b) => a.index-b.index);
+
+        for (m of fixedItems)
+        {
+            switch (m.menuItem.dataset.type)
+            {
+                case 'static':
+                    staticButton(m.menuItem);
+                    break;
+                case 'dynamic':
+                    dynamicButton(m.menuItem);
+                    break;
+                default:    
+                    categoryButton(m.menuItem);
+            }
+
+            toc.appendChild(m.menuItem);
+        }
+
+        showTitleCount();
 
     }
 
@@ -400,16 +457,57 @@ window.addEventListener ("load", ()=> {
         }
     }
 
+    function collectOwners()
+    {
+        const content = document.querySelector('[data-category-content]');
+        const elements = Array.from(content.getElementsByTagName('article'));
+
+        let index = 0;
+
+        for (const e of elements)
+        {
+            if (e.dataset.deprecated)
+                continue;
+
+            const ownersTags = e.getElementsByClassName('owners')[0].getElementsByTagName('a');
+            const ownerNames = Array.from(ownersTags).map(o=>o.textContent);
+
+            ownerNames.forEach(o=>{
+                
+                index++;
+
+                let stripped = o.replace(/,\s*$/, "");
+                const owner = owners.get(stripped);
+                if (owner)
+                {
+                    owner.elements.push(e);
+                }
+                else
+                {
+                    const menuItem = menuItemButton.cloneNode(true);
+                    
+                    menuItem.dataset.categoryMenu = stripped;
+                    menuItem.prepend(stripped);
+                    
+                    console.log (menuItem);
+
+                    owners.set(stripped, {
+                        name: stripped,
+                        index: index,
+                        elements: [e],
+                        menuItem: menuItem
+                    })
+                }
+            })
+        }
+
+    }
+
     function collectMenu()
     {
         const content = document.querySelector('[data-category-content]');
         const elements = Array.from(content.getElementsByTagName('article'));
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
-
-        const items = {
-            all: [],
-            deprecated: []
-        }
 
         for (const e of elements)
         {
@@ -423,38 +521,21 @@ window.addEventListener ("load", ()=> {
             }
         }
 
-        const deprecated = {
-            name: "Deprecated",
-            elements: items.deprecated,
-            children: new Map(),
-            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Deprecated")
-        };
-
         const all = {
             name: "All",
+            index: 0,
             elements: items.all,
             children: [],
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
         };
 
-        const toSponsor = {
-            name: "Packs to sponsor",
-            elements: items.all.filter(e=>e.dataset.sponsor),
-            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
-        };
-
-        menu.set("All", all);
-        menu.set("Deprecated", deprecated);
-        menu.set("toSponsor", toSponsor);
-
-        menuTitleMap.set('Packs to sponsor', 'toSponsor');
-        menuTitleMap.set('On Demand', 'staticOnDemand');
-        menuTitleMap.set('Add your Pack', 'staticAddYours');
-        menuTitleMap.set('.Net Nugets', 'staticDotNet');
+        let index = 0;
 
         for (const element of items.all)
         {
-            let paths;           
+            let paths;
+            
+            index++;
                 
             try {
                 paths = JSON.parse(element.dataset.categories);
@@ -474,6 +555,7 @@ window.addEventListener ("load", ()=> {
                 else{
                     menu.set("Unsorted",{
                         name: "Unsorted",
+                        index: index,
                         elements: [element],
                         children: new Map(),
                         menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
@@ -491,6 +573,7 @@ window.addEventListener ("load", ()=> {
                 {
                     menu.set(parent, {
                         name: parent,
+                        index: index,
                         children: new Map(),
                         elements: [],
                         menuItem: menuItems.find(m=>m.dataset.categoryMenu == parent)
@@ -522,7 +605,60 @@ window.addEventListener ("load", ()=> {
             }
         }
 
+        const deprecated = {
+            name: "Deprecated",
+            index: index++,
+            elements: items.deprecated,
+            children: new Map(),
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Deprecated")
+        };
+
+        menu.set("All", all);
+        menu.set("Deprecated", deprecated);
+
         return menu;
+    }
+
+    function collectFixed()
+    {
+        const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
+
+        let index = 0;
+
+        const staticDotNet = {
+            name: ".Net Nugets",
+            index: index++,
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "staticDotNet")
+        };
+
+        const addYours = {
+            name: "Add your Pack",
+            index: index++,
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "staticAddYours")
+        };
+
+        const toSponsor = {
+            name: "Packs to sponsor",
+            index: index++,
+            elements: items.all.filter(e=>e.dataset.sponsor),
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
+        };
+
+        const staticOnDemand = {
+            name: "On Demand",
+            index: index++,
+            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "staticOnDemand")
+        };
+
+        fixed.set("toSponsor", toSponsor);
+        fixed.set("addYours", addYours);
+        fixed.set("staticDotNet", staticDotNet);
+        fixed.set("staticOnDemand", staticOnDemand);
+
+        menuTitleMap.set('Packs to sponsor', 'toSponsor');
+        menuTitleMap.set('On Demand', 'staticOnDemand');
+        menuTitleMap.set('Add your Pack', 'staticAddYours');
+        menuTitleMap.set('.Net Nugets', 'staticDotNet');
     }
 
 
@@ -541,6 +677,27 @@ window.addEventListener ("load", ()=> {
         sidebar.classList.remove('active');
         sidebarBackdrop.classList.remove('active');
         document.body.classList.remove('sidebar-open');
+    }
+
+    function setUpMenuSwitch()
+    {
+        const menuSwitch = document.getElementById('menuSwitch');
+        const buttons = Array.from(menuSwitch.getElementsByTagName('button'));
+
+        buttons.forEach(b=>{         
+            b.addEventListener('click', function(){  
+                
+                const buttonName = b.textContent.toLowerCase();
+
+                if (selectedMenuType !== buttonName)
+                {
+                    buttons.forEach(b=>b.classList.remove('selected'));
+                    b.classList.add('selected');
+                    selectedMenuType = buttonName;
+                    buildMenu();
+                }
+            });
+        })
     }
 
     function setUpMenuToggle()

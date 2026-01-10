@@ -9,6 +9,20 @@ body.sidebar-open {
     padding-top: 2rem;
     font-size: 1rem;
 
+    #menuSwitch{
+        button{
+            background-color: #fff;
+            border: 1px solid #ddd;
+            text-transform: inherit;
+            font-weight: inherit;
+        }
+
+        .selected{
+            background-color: #ccc;
+            font-weight: bold;
+        }
+    }
+
     section{
         padding: 0 0 1rem;
     }
