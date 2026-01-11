@@ -417,7 +417,24 @@ window.addEventListener ("load", ()=> {
 
         showTitleCount();
 
-        $(`button[data-category-menu="${items[0].name}"]`).tab('show');
+        const itemToHighlight = items.find(i=>{
+
+            if (i.elements?.some(e=>e.hidden != true))
+                return true;
+
+            i.children?.forEach(c=>{
+                if (c.elements?.some(e=>e.hidden != true))
+                    return true;
+            })
+
+            return false;
+        });
+
+        const menuToSelect = itemToHighlight.name ?? items[0].name;
+
+        console.log (menuToSelect);
+
+        $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
 
     }
 
@@ -699,16 +716,17 @@ window.addEventListener ("load", ()=> {
                     buttons.forEach(b=>b.classList.remove('selected'));
                     b.classList.add('selected');
                     selectedMenuType = type;
-                    buildMenu();
-
+                    
                     filterToc();
                     filterContent();
+
+                    buildMenu();
                     
                     if (query)
                     {
                         showFoundCounter();
-                        showTitleCount();
                     }
+                    showTitleCount();
                 }
             });
         })
@@ -1027,7 +1045,7 @@ window.addEventListener ("load", ()=> {
         });
     
         input.addEventListener('input', e=>{
-            query= e.target.value.trim().toLowerCase();
+            query = e.target.value.trim().toLowerCase();
             filterItems();
         })
 
