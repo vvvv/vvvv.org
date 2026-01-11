@@ -160,15 +160,20 @@ window.addEventListener ("load", ()=> {
         })
     }
 
-    function getMenuEntry(name)
+    function getCurrentMenu()
     {
         switch (selectedMenuType)
         {
             case 'categories':
-                return menu.get(name);
+                return menu;
             case 'owners':
-                return owners.get(name);
+                return owners;
         }
+    }
+
+    function getMenuEntry(name)
+    {
+        return getCurrentMenu().get(name);
     }
 
     function categoryButton(button)
@@ -412,6 +417,8 @@ window.addEventListener ("load", ()=> {
 
         showTitleCount();
 
+        $(`button[data-category-menu="${items[0].name}"]`).tab('show');
+
     }
 
     function updateHistory(category)
@@ -488,8 +495,6 @@ window.addEventListener ("load", ()=> {
                     
                     menuItem.dataset.categoryMenu = stripped;
                     menuItem.prepend(stripped);
-                    
-                    console.log (menuItem);
 
                     owners.set(stripped, {
                         name: stripped,
@@ -687,14 +692,23 @@ window.addEventListener ("load", ()=> {
         buttons.forEach(b=>{         
             b.addEventListener('click', function(){  
                 
-                const buttonName = b.textContent.toLowerCase();
+                const type = b.dataset.type;
 
-                if (selectedMenuType !== buttonName)
+                if (selectedMenuType !== type)
                 {
                     buttons.forEach(b=>b.classList.remove('selected'));
                     b.classList.add('selected');
-                    selectedMenuType = buttonName;
+                    selectedMenuType = type;
                     buildMenu();
+
+                    filterToc();
+                    filterContent();
+                    
+                    if (query)
+                    {
+                        showFoundCounter();
+                        showTitleCount();
+                    }
                 }
             });
         })
@@ -712,9 +726,11 @@ window.addEventListener ("load", ()=> {
         });
     }
 
-    function filterToc(query)
+    function filterToc()
     {
         const set = new Set();
+
+        const menu = getCurrentMenu();
         
         menu.forEach((value, key)=>{
 
@@ -804,11 +820,11 @@ window.addEventListener ("load", ()=> {
         }
     }
 
-    function filterContent(content, query)
+    function filterContent()
     {
         let totalCount = 0;
 
-        [...content.children].forEach (e=>{
+        Array.from(contentDiv.children).forEach (e=>{
             
             e.hidden = !isVisible(e);
             if (!e.hidden) totalCount++;
@@ -878,9 +894,9 @@ window.addEventListener ("load", ()=> {
 
     }
 
-    function resetFilter(content, toc)
+    function resetFilter()
     {
-        content.querySelectorAll('[hidden]').forEach(e=>e.hidden = false);
+        contentDiv.querySelectorAll('[hidden]').forEach(e=>e.hidden = false);
         toc.querySelectorAll('[data-category-menu]').forEach(e=>{
             
             if (e.dataset.type != 'static')
@@ -891,6 +907,8 @@ window.addEventListener ("load", ()=> {
             }
             
         });
+
+        const menu = getCurrentMenu();
 
         menu.forEach((value)=>{
 
@@ -907,11 +925,8 @@ window.addEventListener ("load", ()=> {
         showFoundCounter(false);
     }
 
-    function filterItems(query)
-    {
-        const content = document.querySelector('[data-content]');
-        const toc = document.getElementById('toc');
-        
+    function filterItems()
+    {     
         title.textContent = currentCategory;
         titleCount.hidden = false;
         
@@ -919,7 +934,7 @@ window.addEventListener ("load", ()=> {
         
         if (query == "")
         {
-            resetFilter(content, toc);
+            resetFilter();
             addInfo();
             showTitleCount();
             return;
@@ -930,9 +945,8 @@ window.addEventListener ("load", ()=> {
             $('button[data-category-menu="All"]').tab('show');
         }
         
-        
-        filterToc(query);
-        filterContent(content, query);
+        filterToc();
+        filterContent();
         showFoundCounter();
         showTitleCount();
 
@@ -944,6 +958,8 @@ window.addEventListener ("load", ()=> {
 
         if (query == '')
             return;
+
+        const menu = getCurrentMenu();
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
         const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory && a.menuItem.dataset.type !== 'dynamic')?.sort((a,b)=>a.name.localeCompare(b.name));
@@ -1012,7 +1028,7 @@ window.addEventListener ("load", ()=> {
     
         input.addEventListener('input', e=>{
             query= e.target.value.trim().toLowerCase();
-            filterItems(query);
+            filterItems();
         })
 
         document.addEventListener('keydown', (e) => {
