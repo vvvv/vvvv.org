@@ -38,21 +38,31 @@
                     <div class="content">
                         <div id="packsProcessing">Processing...</div>
                         <div class="d-flex mb-2 border-bottom pb-2 counts">
-                            <div id="totalCount" hidden="true">Total: <span></span></div>
+                            <div id="totalCount" hidden="true">Packs: <span></span></div>
                             <div id="filterCount" class="ml-4" hidden="true">Found: <span></span></div>
                         </div>
+                        <div id="menuSwitch" class="btn-group btn-group-sm mt-1 mb-3" role="group" aria-label="Types">
+                            <button type="button" class="btn selected" data-type="categories">By Category</button>
+                            <button type="button" class="btn" data-type="owners">By Owner</button>
+                        </div>
                         <div class="nav nav-pills flex-column sidebar" id="toc" role="tablist" aria-orientation="vertical" hidden="false">
+
                             {{ with .Params.categories }}
                                 {{ range $i, $item := . }}
                                     {{ $title := replace $item.title " " "" }}
-                                    <button href="#v-pills-content" class="nav-link{{if eq $i 0}} active {{end}}" data-category-menu="{{.title}}" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+                                    <button href="#v-pills-content" 
+                                        class="nav-link{{if eq $i 0}} active {{end}}" 
+                                        data-category-menu="{{.title}}" 
+                                        data-toggle="pill" role="tab" 
+                                        aria-controls="v-pills-content" 
+                                        aria-selected="false">
                                         {{.title}}
                                         <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
                                         <span data-count hidden="true"></span>
                                     </button>
                                 {{ end }}   
                             {{ end }}
-                            
+
                             <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-title=".Net Nugets" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
                             <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-title="Add your Pack" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
                             <button href="#v-pills-content" class="nav-link" data-category-menu="toSponsor" data-type="dynamic" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
@@ -109,5 +119,10 @@
                 <div class="d-block col-11 pl-0 col-md-11 pl-lg-4 emptyContent">Anything missing?<br/>It can probably added <b><a href="https://thegraybook.vvvv.org/reference/libraries/on-demand.html">on demand!</a></b></div>
             </div>
         </div>
+        <button href="#v-pills-content" class="nav-link" data-category-menu="" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+            <span class="name"></span>
+            <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+            <span data-count hidden="true"></span>
+        </button>
     </div>
 </section>  
