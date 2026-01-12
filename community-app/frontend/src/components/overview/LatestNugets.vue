@@ -38,7 +38,7 @@ function showAll()
 
 <template>
     <div class="section pl-4 nugets">
-        <SectionTitle :showRefresh="true" :loading="loading" title="Latest #VL NuGets" @sync="sync(true)" :link="Constants.NUGET_ORG" :isExternal="true"/>
+        <SectionTitle :showRefresh="true" :loading="loading" title="Latest #VL NuGets" @sync="sync(true)" link="/packs" :isExternal="true" target="_self"/>
         <div class="row pt-1">
             <template v-if="loading">
                 <NSkeleton text :repeat="5" class="mb-4 mx-3"></NSkeleton>
