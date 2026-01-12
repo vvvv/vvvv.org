@@ -317,7 +317,9 @@ window.addEventListener ("load", ()=> {
 
         $(button).on('shown.bs.tab', () => {
 
-            const menuEntry = getMenuEntry(button.dataset.categoryMenu);
+            const category = button.dataset.categoryMenu;
+
+            const menuEntry = fixed.get(category);
             
             if (!menuEntry)
                 return;
