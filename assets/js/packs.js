@@ -18,6 +18,7 @@ window.addEventListener ("load", ()=> {
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
     const staticOnDemand = document.getElementById('staticOnDemand');
+    const sortDiv = document.getElementById('sortDiv'); 
     const sortDropdown = document.getElementById('sort');
     const menuItemButton = document.getElementById('staticContent').querySelector('[data-category-menu]');
 
@@ -211,7 +212,7 @@ window.addEventListener ("load", ()=> {
         //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
         $(button).on('shown.bs.tab', () => {
 
-            sortDropdown.hidden = false;
+            sortDiv.hidden = false;
 
             if (!sortChanged)
             {
@@ -290,7 +291,7 @@ window.addEventListener ("load", ()=> {
             window.scrollTo(0, 0);
             isStatic = true;
 
-            sortDropdown.hidden = true;
+            sortDiv.hidden = true;
 
             if (!sortChanged)
             {
@@ -324,7 +325,7 @@ window.addEventListener ("load", ()=> {
             if (!menuEntry)
                 return;
 
-            sortDropdown.hidden = false;
+            sortDiv.hidden = false;
 
             if (!sortChanged)
             {
@@ -752,15 +753,18 @@ window.addEventListener ("load", ()=> {
     }
 
     function setUpMenuToggle()
-    {
-        sidebar.addEventListener('click', closeSidebar);
-        sidebarBackdrop.addEventListener('click', closeSidebar);
-        
+    {        
         menuToggle.addEventListener('click', function(){
             sidebar.classList.toggle('active');
             sidebarBackdrop.classList.toggle('active');
             document.body.classList.add('sidebar-open');
         });
+
+        const elementsToClose = [toc, menuClose, sidebarBackdrop];
+
+        elementsToClose.forEach(e=>{
+            e.addEventListener('click', closeSidebar);
+        })
     }
 
     function filterToc()
