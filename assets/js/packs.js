@@ -118,7 +118,7 @@ window.addEventListener ("load", ()=> {
         const hash = window.location.hash;
         const params = new URLSearchParams(paramsString);
 
-        const c = params.get('c')
+        const c = params.get('c');
 
         let category = menuTitleMap.get(c) || c;
 
@@ -180,11 +180,16 @@ window.addEventListener ("load", ()=> {
     {
 
         const categoryTitle = button.dataset.categoryMenu;
-
         const menuEntry = getMenuEntry(categoryTitle);
-
-        if (!menuEntry) return;
-
+        
+        if (!menuEntry) 
+            return;
+        
+        const countSpan = menuEntry.menuItem.querySelector('[data-count]');
+        
+        if (!query)
+            countSpan.hidden = true;
+        
         // Set menu Inactive if there is no elements
         let totalCount = menuEntry.elements.length;
         
@@ -193,8 +198,7 @@ window.addEventListener ("load", ()=> {
         });
 
         if (!totalCount)
-        {
-            const countSpan = menuEntry.menuItem.querySelector('[data-count]');
+        {    
             menuEntry.menuItem.classList.add('inactive');
 
             if (countSpan)
@@ -420,20 +424,23 @@ window.addEventListener ("load", ()=> {
         const itemToHighlight = items.find(i=>{
 
             if (i.elements?.some(e=>e.hidden != true))
+            {
                 return true;
+            }
 
             i.children?.forEach(c=>{
-                if (c.elements?.some(e=>e.hidden != true))
+                if (c.elements?.some(e=>e.hidden !== true))
+                {
                     return true;
+                }
             })
 
             return false;
         });
 
-        const menuToSelect = itemToHighlight.name ?? items[0].name;
+        const menuToSelect = itemToHighlight ? itemToHighlight.name : items[0].name;
 
-        console.log (menuToSelect);
-
+        toc.querySelector(`button[data-category-menu="${menuToSelect}"]`).classList.remove('active');
         $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
 
     }
@@ -441,7 +448,15 @@ window.addEventListener ("load", ()=> {
     function updateHistory(category)
     {
         const path = window.location.href.split('?')[0];
-        const uri = encodeURI(`${path}?c=${category}`);
+        
+        const types = {
+            categories: "c",
+            owners: "o"
+        }
+
+        const type = types[selectedMenuType];
+        
+        const uri = encodeURI(`${path}?${type}=${category}`);
 
         history.replaceState(null, "", uri);
     }
@@ -545,7 +560,7 @@ window.addEventListener ("load", ()=> {
 
         const all = {
             name: "All",
-            index: 0,
+            index: menuItems.findIndex(m=>m.name == 'All'),
             elements: items.all,
             children: [],
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
@@ -577,7 +592,7 @@ window.addEventListener ("load", ()=> {
                 else{
                     menu.set("Unsorted",{
                         name: "Unsorted",
-                        index: index,
+                        index: menuItems.findIndex(m=>m.name == 'Unsorted'),
                         elements: [element],
                         children: new Map(),
                         menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
@@ -595,7 +610,7 @@ window.addEventListener ("load", ()=> {
                 {
                     menu.set(parent, {
                         name: parent,
-                        index: index,
+                        index: menuItems.findIndex(m=>m.dataset.categoryMenu == parent),
                         children: new Map(),
                         elements: [],
                         menuItem: menuItems.find(m=>m.dataset.categoryMenu == parent)
@@ -627,9 +642,11 @@ window.addEventListener ("load", ()=> {
             }
         }
 
+        menu.get('Unsorted').index = menu.size+1;
+
         const deprecated = {
             name: "Deprecated",
-            index: index++,
+            index: menu.size,
             elements: items.deprecated,
             children: new Map(),
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Deprecated")
@@ -776,7 +793,10 @@ window.addEventListener ("load", ()=> {
                 set.clear();
 
                 value.elements.forEach(e=>{
-                    if (isVisible(e)) 
+
+                    e.hidden = !isVisible(e);
+
+                    if (!e.hidden) 
                     {
                         set.add(e.dataset.pack);
                         totalSet.add(e.dataset.pack);
@@ -787,7 +807,10 @@ window.addEventListener ("load", ()=> {
                 {
                     value.children.forEach(c=>{
                         c.elements.forEach(e=>{
-                            if (isVisible(e)) 
+
+                            e.hidden = !isVisible(e);
+
+                            if (!e.hidden) 
                             {
                                 set.add(e.dataset.pack);
                                 totalSet.add(e.dataset.pack);
@@ -901,7 +924,7 @@ window.addEventListener ("load", ()=> {
 
         const total = totalSet.size;
 
-        if (total)
+        if (total && query)
         {
             found.getElementsByTagName('span')[0].textContent = total;
             found.hidden = false;
@@ -1002,8 +1025,10 @@ window.addEventListener ("load", ()=> {
             const packs = count > 1 ? "Packs" : "Pack"; 
 
             const also = packsInCurrent.length ? " also " : "";
+
+            const where = selectedMenuType == 'categories' ? "in these categories" : "by these owners";
             
-            p.textContent = `${count} ${packs}${also} found in these categories:`;
+            p.textContent = `${count} ${packs}${also} found ${where}:`;
 
             withoutCurrent.forEach(i=>{
                 const li = document.createElement("li");
