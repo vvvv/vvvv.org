@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-01-08"
+date: "2026-01-13"
 title: "Introducing: An online browser for VL Packs"
 description: "For everyone to see what you're patching with"
 ---
@@ -19,9 +19,9 @@ Introducing: **http://vvvv.org/packs**
 
 You get the idea: It's basically a convenient replacement for browsing [nuget.org](http://nuget.org). But here we show you only NuGets that have been specifically tailord for vvvv.
 
-Do you find anything missing? We can most likely add it [on demand](https://thegraybook.vvvv.org/reference/libraries/on-demand.html)!
-
 And yes, we're also working on a package manager that's built into vvvv and will allow you to reference NuGets at the click of a button (replacing the current manual install workflow), will auto-restore any missing NuGets and help you with resolving version conflicts. More on that one later...
+
+And remember: If you're looking for a pack and can't find it, we can most likely add it [on demand](https://thegraybook.vvvv.org/reference/libraries/on-demand.html)!
 
 ## Call to action for NuGet owners
 
