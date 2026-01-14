@@ -63,13 +63,8 @@
                                 {{ end }}   
                             {{ end }}
 
-                            <button href="#v-pills-content" class="nav-link border-top mt-2 pt-2" data-category-menu="staticDotNet" data-type="static" data-title=".Net Nugets" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
+                            <button href="#v-pills-content" class="nav-link" data-category-menu="staticDotNet" data-type="static" data-title=".Net Nugets" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">.Net Nugets</button>
                             <button href="#v-pills-content" class="nav-link" data-category-menu="staticAddYours" data-type="static" data-title="Add your Pack" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">Add your Pack</button>
-                            <button href="#v-pills-content" class="nav-link" data-category-menu="toSponsor" data-type="dynamic" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
-                                Packs to sponsor &#9829;
-                                <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
-                                <span data-count hidden="true"></span>
-                            </button>
                             <button href="#v-pills-content" class="nav-link" data-category-menu="staticOnDemand" data-title="On Demand" data-type="static" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
                                 On Demand <img src="{{$build.RelPermalink}}" width="16px" role="presentation"/>
                             </button>
@@ -121,6 +116,11 @@
         </div>
         <button href="#v-pills-content" class="nav-link" data-category-menu="" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
             <span class="name"></span>
+            <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
+            <span data-count hidden="true"></span>
+        </button>
+        <button href="#v-pills-content" id="toSponsor" class="nav-link" data-category-menu="Packs to Sponsor" data-toggle="pill" role="tab" aria-controls="v-pills-content" aria-selected="false">
+            Packs to sponsor &#9829;
             <span data-badge class="badge badge-secondary ml-2" hidden="true"></span>
             <span data-count hidden="true"></span>
         </button>

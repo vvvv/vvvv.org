@@ -315,7 +315,7 @@ body.sidebar-open {
         //     }
         // }
 
-        .links, .categories, .version, .author{
+        .links, .categories, .version, .author, .owners{
             color: #888;
             font-size: 0.9rem;
 
@@ -325,9 +325,9 @@ body.sidebar-open {
             }
 
             a{
-                margin-right: 0.5rem;
+                margin-right: 0.7rem;
                 text-decoration: underline;
-                text-decoration-color: #ddd;
+                text-decoration-color: #dfdfdf;
                 text-underline-offset: 0.2rem;
 
                 &:hover{

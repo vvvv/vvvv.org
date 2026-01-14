@@ -154,10 +154,17 @@ blog = '/blog/:sections[1]/:slug'
 		
 		[params.Download.beta]
 		Headline = "vvvv beta"
-		Copy = "In development since 2001, vvvv beta has been used by many companies worldwide to create large media environments."
-		Text  = "Download vvvv beta"
+		Copy = "Or are you looking for the now legendary"
+		Copy2 = "?"
+		Text  = "vvvv beta"
 		Link = "https://legacy.vvvv.org/downloads"
 		Target = "_blank"
+
+		[params.Download.packs]
+		Headline = "Packs and Extensions"
+		Copy = "By default vvvv ships with small range of core libraries. Here you can browse all available optional packs to see what functionality can be added as needed. Extensions are packs that extend vvvv itself."
+		Text = "Explore Packs"
+		Link = "/packs"
 
 		[params.Showcase]
 		headline = "Showcase"

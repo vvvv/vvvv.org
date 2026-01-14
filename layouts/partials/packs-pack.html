@@ -34,10 +34,9 @@
                 <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
                 <div class="authors ml-md-3 owners" data-pack-info>
                     {{- with .owners -}}
-                        {{ $last := sub (len .) 1 }}
-                        {{- range $i, $o := . -}}
-                            <a href="https://www.nuget.org/profiles/{{$o}}" target="_blank">{{$o}}</a>{{- if lt $i $last -}}, {{ end }} 
-                        {{- end -}}
+                        {{- range . -}}
+                            <a href="https://www.nuget.org/profiles/{{.}}" target="_blank">{{.}}</a>
+                        {{- end -}} 
                     {{- end -}}
                 </div>
             </div>
