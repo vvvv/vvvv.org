@@ -26,8 +26,11 @@ And remember: If you're looking for a pack and can't find it, we can most likely
 ## Call to action for NuGet owners
 
 If you maintain a NuGet, this is a good moment to polish your package for visibility:
+- Make sure your packs have a tag "VL" to have it picked up by the browser 
 - Add a unique [Icon](https://learn.microsoft.com/en-us/nuget/reference/nuspec#icon), make it 512x512 so we can display them nicely in certain places
 - Make sure to have a meaningful [description](https://learn.microsoft.com/en-us/nuget/reference/nuspec#description)
+- Add a [Sponsorship Link](https://learn.microsoft.com/en-us/nuget/nuget-org/package-sponsorship-on-nuget-org) if applicable
 - [Categorize your NuGet](https://thegraybook.vvvv.org/reference/extending/publishing.html#categorize-the-pack), so it shows up in the browser accordingly
+- And while at it, just for completeness, consider adding yourself to the [Github](https://vvvv.org/people/?section=connections&type=github) and [NuGet](https://vvvv.org/people/?section=connections&type=nuget) connections via [your profile](https://vvvv.org/edit-profile/)
 
 In the rare case that you have a pack that is no longer meant to be used (e.g. because it has a better alternative), please mark it as "Deprecated" in your [nuget.org Manage Packages](https://www.nuget.org/account/Packages) page.
