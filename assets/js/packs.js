@@ -51,8 +51,6 @@ window.addEventListener ("load", ()=> {
         deprecated: []
     }
 
-    modifyCategories();
-
     setTotalPacksCount();
     
     transformSearchField();
@@ -74,11 +72,6 @@ window.addEventListener ("load", ()=> {
     toc.hidden = false;
 
     /////////////////////////////////////////
-
-    function modifyCategories()
-    {             
-        
-    }
 
     function setTotalPacksCount()
     {
@@ -1053,7 +1046,6 @@ window.addEventListener ("load", ()=> {
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
         const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory && a.menuItem.dataset.type !== 'dynamic')?.sort((a,b)=>a.name.localeCompare(b.name));
-        const count = totalSet.size;
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
 
@@ -1071,16 +1063,25 @@ window.addEventListener ("load", ()=> {
             const ul = document.createElement("ul");
             content.appendChild(ul);
 
-            let count = 0;
+            const foundPacks = new Set();
 
             withoutCurrent.forEach(i=>{
+
+                let count = 0;
+
                 const li = document.createElement("li");
                 const a = document.createElement("a");
                 
-                count = i.elements.filter(e=>!e.hidden).length;
+                i.elements.filter(e=>!e.hidden).forEach(e=>{
+                    foundPacks.add(e.dataset.pack);
+                    count++;
+                });
                 
                 i.children?.forEach(c=>{
-                    count += c.elements.filter(e=>!e.hidden).length;
+                    c.elements.filter(e=>!e.hidden).forEach(e=>{
+                        foundPacks.add(e.dataset.pack);
+                        count++;
+                    });
                 })
 
                 a.textContent = `${i.name} (${count})`;
@@ -1092,12 +1093,13 @@ window.addEventListener ("load", ()=> {
 
                 li.appendChild(a);
                 ul.appendChild(li);
+
             });
 
-            const packs = count > 1 ? "Some Packs are" : "A Pack is"; 
+            const packs = foundPacks.size > 1 ? "Some Packs are" : "A Pack is"; 
             const also = packsInCurrent.length ? " also " : "";
-            const categories = count > 1 ? "in these categories" : "in this category";
-            const owners = count > 1 ? "by these owners" : "by this owner";
+            const categories = withoutCurrent.length > 1 ? "in these categories" : "in this category";
+            const owners = withoutCurrent.length > 1 ? "by these owners" : "by this owner";
             const where = selectedMenuType == 'categories' ? categories : owners;           
             p.textContent = `${packs}${also} found ${where}:`;
 
