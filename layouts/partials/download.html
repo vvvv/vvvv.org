@@ -17,7 +17,7 @@
             {{ end }}
         </div>
         <div class="row">
-            <div class="col-xl-7 mb-5">
+            <div class="col-12 col-lg-6 mb-5">
                 {{ with .Site.Params.download.gamma }}
                 <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4>
                 <p>{{ .Copy }}</p>
@@ -35,7 +35,7 @@
                 </ul> 
                 
                 <div class="row">
-                    <div class="col-12 col-lg-7">                       
+                    <div class="col-12 col-lg-5">                       
                         <div class="tab-content" id="download-tabContent">
                             <!-- 64bit Tab -->
                             <div class="tab-pane fade show active" id="download-x64" role="tabpanel" aria-labelledby="tabs-download-x64">
@@ -93,25 +93,39 @@
                         </div>
                           
                     </div>
-                    <div class="col-12 col-lg-5 mt-4 mt-lg-0">
-                        <a href="{{ .LibrariesLink }}" class="btn btn-secondary btn-xl font-weight-normal"  target="{{ .LibrariesTarget }}" onclick="plausible('additionalpacks')">{{ .LibrariesText }}</a>
-                        
-                        <div class="col-12 mt-2 mt-lg-5 btn btn-xl font-weight-normal text-left pl-0 mr-5 mr-lg-0" id="PreviousReleases">
-                            <a href="{{ .ChangeLogLink }}" target="{{ .ChangeLogTarget }}">{{ .ChangeLogText }}</a>
-                        </div>
+                    <div class="col-12 col-lg-7 mt-4 mt-lg-0" id="PreviousReleases">                        
+                        <a href="{{ .ChangeLogLink }}" class="link" target="{{ .ChangeLogTarget }}">{{ .ChangeLogText }}</a>
                     </div>
                 </div>
                {{ end }}
             </div>
 
-            <div class="col-xl-4 ml-auto mt-5 mt-sm-0">
-                {{ with .Site.Params.download.beta }}
-                <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4> 
-                <p>{{ .Copy }}</p>
-                <a href="{{ .Link }}" class="btn btn-secondary btn-xl font-weight-normal mb-2" target="{{ .Target }}" onclick="plausible('gotobeta')">{{ .Text }}</a>
+            <div class="col-12 col-lg-6 ml-auto mt-3 mt-lg-0">
+                {{ with .Site.Params.download.packs }}
+                    <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4> 
+                    <div class="row">
+                        <div class="col-5">
+                            <a href="{{ .Link }}" onclick="plausible('additionalpacks')">
+                                <img src="/img/PacksBrowser.png" class="img-fluid withShadow" loading="lazy" alt="Pack Browser"/>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <p>{{ .Copy }}</p>
+                            <a href="{{ .Link }}" class="btn btn-secondary btn-xl mb-2" onclick="plausible('additionalpacks')">{{ .Text }}</a>
+                        </div>
+                    </div>
                 {{ end }}
             </div>
         </div>
+         {{ with .Site.Params.download.beta }}
+        <div class="row mt-5 mt-lg-0">
+            <div id="beta">
+                <div class="col">
+                    {{.Copy}} <a href="{{ .Link }}" class="link" target="{{ .Target }}" onclick="plausible('gotobeta')">{{ .Text }}</a> {{.Copy2}}
+                </div>
+            </div>
+        </div>
+        {{ end }}
     </div>
 </section>
 

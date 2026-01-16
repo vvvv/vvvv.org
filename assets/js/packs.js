@@ -18,6 +18,8 @@ window.addEventListener ("load", ()=> {
     const staticDotNet = document.getElementById('staticDotNet');
     const staticAddYours =  document.getElementById('staticAddYours');
     const staticOnDemand = document.getElementById('staticOnDemand');
+    const toSponsor = document.getElementById('toSponsor');
+    const sortDiv = document.getElementById('sortDiv'); 
     const sortDropdown = document.getElementById('sort');
     const menuItemButton = document.getElementById('staticContent').querySelector('[data-category-menu]');
 
@@ -39,6 +41,8 @@ window.addEventListener ("load", ()=> {
     let menu = new Map();
     let owners = new Map();
     let fixed = new Map();
+
+    let escCount = 0;
 
     const totalSet = new Set();
 
@@ -178,12 +182,11 @@ window.addEventListener ("load", ()=> {
 
     function categoryButton(button)
     {
-
-        const categoryTitle = button.dataset.categoryMenu;
-        const menuEntry = getMenuEntry(categoryTitle);
-        
+        let categoryTitle = button.dataset.categoryMenu;
+        let menuEntry = getMenuEntry(categoryTitle);
+                   
         if (!menuEntry) 
-            return;
+           return;
         
         const countSpan = menuEntry.menuItem.querySelector('[data-count]');
         
@@ -211,7 +214,8 @@ window.addEventListener ("load", ()=> {
         //jquery - replace it with native addeventlistener, when switching to bootstrap 5.
         $(button).on('shown.bs.tab', () => {
 
-            sortDropdown.hidden = false;
+            sortDiv.hidden = false;
+            escCount = 0;
 
             if (!sortChanged)
             {
@@ -289,8 +293,9 @@ window.addEventListener ("load", ()=> {
             
             window.scrollTo(0, 0);
             isStatic = true;
+            escCount = 0;
 
-            sortDropdown.hidden = true;
+            sortDiv.hidden = true;
 
             if (!sortChanged)
             {
@@ -309,6 +314,7 @@ window.addEventListener ("load", ()=> {
             titleCount.hidden = true;
             
             updateHistory(sectionTitle);
+            infoDiv.replaceChildren();
         })
     }
 
@@ -317,12 +323,17 @@ window.addEventListener ("load", ()=> {
 
         $(button).on('shown.bs.tab', () => {
 
-            const menuEntry = getMenuEntry(button.dataset.categoryMenu);
+            console.log (button.dataset.categoryMenu)
+            
+            escCount = 0;
+            const category = button.dataset.categoryMenu;
+
+            const menuEntry = fixed.get(category);
             
             if (!menuEntry)
                 return;
 
-            sortDropdown.hidden = false;
+            sortDiv.hidden = false;
 
             if (!sortChanged)
             {
@@ -398,6 +409,7 @@ window.addEventListener ("load", ()=> {
             }
 
             toc.appendChild(m.menuItem);
+            
         }
 
         const fixedItems = Array.from(fixed.values()).sort((a,b) => a.index-b.index);
@@ -439,10 +451,28 @@ window.addEventListener ("load", ()=> {
         });
 
         const menuToSelect = itemToHighlight ? itemToHighlight.name : items[0].name;
+        
+        // Inject Separators     
+        const lastItem = items[items.length-1].name;
+        injectSeparators(["Extensions", lastItem]);
 
-        toc.querySelector(`button[data-category-menu="${menuToSelect}"]`).classList.remove('active');
+        toc.querySelector(`button[data-category-menu="${menuToSelect}"]`)?.classList.remove('active');
         $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
 
+    }
+
+    function injectSeparators(elements)
+    {
+        for (const e of elements)
+        {
+            const element = toc.querySelector(`[data-category-menu="${e}"]`);
+            if (element)
+            {
+                const div = document.createElement('div');
+                div.classList.add('border-bottom', 'my-2');
+                element.after(div);
+            }
+        }
     }
 
     function updateHistory(category)
@@ -546,6 +576,11 @@ window.addEventListener ("load", ()=> {
         const elements = Array.from(content.getElementsByTagName('article'));
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
 
+        //Inject Packs To Sponsor
+        const featured = menuItems.find(m=>m.dataset.categoryMenu=='Featured');
+        featured.after(toSponsor);
+        menuItems.splice(menuItems.indexOf(featured)+1, 0, toSponsor);
+                
         for (const e of elements)
         {
             if (e.dataset.deprecated)
@@ -558,15 +593,27 @@ window.addEventListener ("load", ()=> {
             }
         }
 
+        let index = 0;
+
         const all = {
             name: "All",
-            index: menuItems.findIndex(m=>m.name == 'All'),
+            index: index,
             elements: items.all,
             children: [],
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
         };
 
-        let index = 0;
+        const packsToSponsor = {
+            name: "toSponsor",
+            index: menuItems.findIndex(m=>m.dataset.categoryMenu == 'Featured')+1,
+            elements: items.all.filter(e=>e.dataset.sponsor),
+            children: [],
+            menuItem: toSponsor
+        };
+
+        menuTitleMap.set('Packs to sponsor &#9829;', 'toSponsor');
+
+        const unsortedTitle = 'Unsorted';
 
         for (const element of items.all)
         {
@@ -583,19 +630,19 @@ window.addEventListener ("load", ()=> {
                 
             if (!paths.length)
             {
-               const item = menu.get("Unsorted");
+               const item = menu.get(unsortedTitle);
 
                 if (item)
                 {
                     item.elements.push(element);
                 }
                 else{
-                    menu.set("Unsorted",{
-                        name: "Unsorted",
-                        index: menuItems.findIndex(m=>m.name == 'Unsorted'),
+                    menu.set(unsortedTitle,{
+                        name: unsortedTitle,
+                        index: menuItems.findIndex(m=>m.name == unsortedTitle),
                         elements: [element],
                         children: new Map(),
-                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
+                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == unsortedTitle)
                     })
                 } 
             }
@@ -653,6 +700,7 @@ window.addEventListener ("load", ()=> {
         };
 
         menu.set("All", all);
+        menu.set("Packs to Sponsor", packsToSponsor);
         menu.set("Deprecated", deprecated);
 
         return menu;
@@ -676,25 +724,16 @@ window.addEventListener ("load", ()=> {
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "staticAddYours")
         };
 
-        const toSponsor = {
-            name: "Packs to sponsor",
-            index: index++,
-            elements: items.all.filter(e=>e.dataset.sponsor),
-            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "toSponsor")
-        };
-
         const staticOnDemand = {
             name: "On Demand",
             index: index++,
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "staticOnDemand")
         };
 
-        fixed.set("toSponsor", toSponsor);
         fixed.set("addYours", addYours);
         fixed.set("staticDotNet", staticDotNet);
         fixed.set("staticOnDemand", staticOnDemand);
 
-        menuTitleMap.set('Packs to sponsor', 'toSponsor');
         menuTitleMap.set('On Demand', 'staticOnDemand');
         menuTitleMap.set('Add your Pack', 'staticAddYours');
         menuTitleMap.set('.Net Nugets', 'staticDotNet');
@@ -750,15 +789,18 @@ window.addEventListener ("load", ()=> {
     }
 
     function setUpMenuToggle()
-    {
-        sidebar.addEventListener('click', closeSidebar);
-        sidebarBackdrop.addEventListener('click', closeSidebar);
-        
+    {        
         menuToggle.addEventListener('click', function(){
             sidebar.classList.toggle('active');
             sidebarBackdrop.classList.toggle('active');
             document.body.classList.add('sidebar-open');
         });
+
+        const elementsToClose = [toc, menuClose, sidebarBackdrop];
+
+        elementsToClose.forEach(e=>{
+            e.addEventListener('click', closeSidebar);
+        })
     }
 
     function filterToc()
@@ -997,14 +1039,15 @@ window.addEventListener ("load", ()=> {
     {
         infoDiv.replaceChildren();
 
-        if (query == '')
+        if (query == '' || isStatic)
+        {
             return;
+        }
 
         const menu = getCurrentMenu();
                 
         const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
         const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory && a.menuItem.dataset.type !== 'dynamic')?.sort((a,b)=>a.name.localeCompare(b.name));
-        const count = totalSet.size;
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
 
@@ -1022,26 +1065,45 @@ window.addEventListener ("load", ()=> {
             const ul = document.createElement("ul");
             content.appendChild(ul);
 
-            const packs = count > 1 ? "Packs" : "Pack"; 
-
-            const also = packsInCurrent.length ? " also " : "";
-
-            const where = selectedMenuType == 'categories' ? "in these categories" : "by these owners";
-            
-            p.textContent = `${count} ${packs}${also} found ${where}:`;
+            const foundPacks = new Set();
 
             withoutCurrent.forEach(i=>{
+
+                let count = 0;
+
                 const li = document.createElement("li");
                 const a = document.createElement("a");
-                a.textContent = i.name;
+                
+                i.elements.filter(e=>!e.hidden).forEach(e=>{
+                    foundPacks.add(e.dataset.pack);
+                    count++;
+                });
+                
+                i.children?.forEach(c=>{
+                    c.elements.filter(e=>!e.hidden).forEach(e=>{
+                        foundPacks.add(e.dataset.pack);
+                        count++;
+                    });
+                })
+
+                a.textContent = `${i.name} (${count})`;
                 a.href = `#`;
                 a.dataset.target = i.name;
                 a.addEventListener('click', ()=>{
                     $(`button[data-category-menu="${i.name}"]`).tab('show');
                 });
+
                 li.appendChild(a);
                 ul.appendChild(li);
-            })
+
+            });
+
+            const packs = foundPacks.size > 1 ? "Some Packs are" : "A Pack is"; 
+            const also = packsInCurrent.length ? " also " : "";
+            const categories = withoutCurrent.length > 1 ? "in these categories" : "in this category";
+            const owners = withoutCurrent.length > 1 ? "by these owners" : "by this owner";
+            const where = selectedMenuType == 'categories' ? categories : owners;           
+            p.textContent = `${packs}${also} found ${where}:`;
 
         }
         else if (!active.length)
@@ -1064,6 +1126,10 @@ window.addEventListener ("load", ()=> {
         }
     
         clearBtn.addEventListener('click', () => {
+            if (isStatic)
+            {
+                $(`button[data-category-menu="All"]`).tab('show');
+            }
             input.value = '';
             input.focus();
             input.dispatchEvent(new Event('input', { bubbles: true }));
@@ -1086,9 +1152,26 @@ window.addEventListener ("load", ()=> {
             }
 
             if (e.key === 'Escape') {
-                input.value = '';
-                input.focus();
-                input.dispatchEvent(new Event('input', { bubbles: true }));
+                if (!escCount)
+                {
+                    escCount++;
+                    if (isStatic)
+                    {
+                        $(`button[data-category-menu="All"]`).tab('show');
+                    }
+                    input.value = '';
+                    input.focus();
+                    input.dispatchEvent(new Event('input', { bubbles: true }));                       
+                }
+                else {                 
+                    escCount = 0;
+                    $(`button[data-category-menu="All"]`).tab('show');
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+            else
+            {
+                escCount = 0;
             }
 
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {

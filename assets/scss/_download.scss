@@ -5,6 +5,15 @@
         border-color: $orange;
     }
 
+    .withShadow{
+        box-shadow: 0 0 12px 5px rgba(0,0,0,.2);
+        filter: brightness(80%);
+
+        &:hover{
+            filter: none;
+        }
+    }
+
     #download-tabs{
         .tab{
             margin-right: 1rem;
@@ -135,15 +144,12 @@
         }
     }
 
-    #PreviousReleases
+    .link
     {
         color: #ccc;
         
-        a
-        {
-            border-bottom: 1px solid #888;
-            text-decoration: none;
-        }
+        border-bottom: 1px solid #888;
+        text-decoration: none;
     }
     
     

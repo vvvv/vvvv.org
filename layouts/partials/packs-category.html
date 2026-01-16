@@ -2,7 +2,7 @@
 <div class="tab-pane fade{{if eq .index 0}} show active {{end}}" data-category-content="content" id="v-pills-content" role="tabpanel" aria-labelledby="v-pills-{{$title | urlize}}-tab">
     <div class="d-flex">
         <h1><span id="categoryTitle">{{.ctx.title}}</span> <span id="categoryCount">(...)</span></h1>
-        <div class="ml-auto">
+        <div class="ml-auto" id="sortDiv">
             Sort by: 
             <select name="Sort" id="sort" class="ml-1">
                 <option value="title">Title</option>
