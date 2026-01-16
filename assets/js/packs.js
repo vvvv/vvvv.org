@@ -597,7 +597,7 @@ window.addEventListener ("load", ()=> {
 
         const all = {
             name: "All",
-            index: index,
+            index: 0,
             elements: items.all,
             children: [],
             menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
