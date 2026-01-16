@@ -613,6 +613,8 @@ window.addEventListener ("load", ()=> {
 
         menuTitleMap.set('Packs to sponsor &#9829;', 'toSponsor');
 
+        const unsortedTitle = 'Unsorted';
+
         for (const element of items.all)
         {
             let paths;
@@ -628,19 +630,19 @@ window.addEventListener ("load", ()=> {
                 
             if (!paths.length)
             {
-               const item = menu.get("Unsorted");
+               const item = menu.get(unsortedTitle);
 
                 if (item)
                 {
                     item.elements.push(element);
                 }
                 else{
-                    menu.set("Unsorted",{
-                        name: "Unsorted",
-                        index: menuItems.findIndex(m=>m.name == 'Unsorted'),
+                    menu.set(unsortedTitle,{
+                        name: unsortedTitle,
+                        index: menuItems.findIndex(m=>m.name == unsortedTitle),
                         elements: [element],
                         children: new Map(),
-                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Unsorted")
+                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == unsortedTitle)
                     })
                 } 
             }
