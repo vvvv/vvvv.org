@@ -1,6 +1,6 @@
 ---
 date: "2026-01-06"
-title: "vvvvhat happened in December 2026"
+title: "vvvvhat happened in December 2025"
 description: "Last month in review"
 categories: Monthly Reviews
 author: joreg 
