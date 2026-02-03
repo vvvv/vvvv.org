@@ -4,7 +4,8 @@ author: "The NODE Institute"
 date: "2026-02-02"
 title: "UI Frameworks & Patterns in vvvv — New Workshop with Phlegma"
 description: "February 26 + 27, 2026 — 18:00–21:00 CET"
-where:
+where: 
+  location_name: "Online"
   from_date: "1772128800"
   to_date: "1772226000"
 ---
@@ -41,6 +42,6 @@ The goal is to give participants a clear mental model of how UI development in v
 
 Nils Weger ([Phlegma](https://vvvv.org/people/phlegma))  is a Media System Designer with two decades of experience building interactive tools and interfaces. His work ranges from robotic sculpting systems to control panels and multi‑touch installations. He has collaborated with Studio Brüll, Meso, Nsynk and others, and has been teaching vvvv since the early days.
 
-Registration
-All details and tickets are available here:
+**Registration
+All details and tickets are available here**:
 https://thenodeinstitute.org/courses/ui-frameworks-patterns-in-vvvv/
