@@ -1,15 +1,15 @@
 ---
 categories: "Dates"
 author: "The NODE Institute"
-date: "2026-02-26"
+date: "2026-02-02"
 title: "UI Frameworks & Patterns in vvvv — New Workshop with Phlegma"
 description: "February 26 + 27, 2026 — 18:00–21:00 CET"
 where:
-  from_date: "1772128800"
-  to_date: "1772226000"
+  from_date: "1772125200"
+  to_date: "1772136000"
 ---
 
-![](TNI-Winter-Season-25_VVVV_UI-Workflow-1536x864.jpg)
+![](uiws.jpg)
 
 ## [UI Frameworks & Patterns in vvvv](https://thenodeinstitute.org/courses/ui-frameworks-patterns-in-vvvv/)  
 February 26 + 27, 2026 — 18:00–21:00 CET  
