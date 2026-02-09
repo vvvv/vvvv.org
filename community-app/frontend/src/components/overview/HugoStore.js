@@ -9,8 +9,7 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
     year: '2-digit',
     hour: "numeric",
     minute: "numeric",
-    timeZone: "UTC",
-    timeZoneName: "short",
+    timeZone: "Europe/Berlin"
 });
 
 export const useHugoStore = defineStore ('hugoStore',{
@@ -122,7 +121,15 @@ function toDate(stamp) {
 
     if (!stamp) return null;
 
-    const date = new Date(stamp * 1000);
+    let date;
+
+    if (typeof stamp === "number") {
+        date = new Date(stamp * 1000);
+    }
+    else if (typeof stamp === "string") {
+        date = Date.parse(stamp);
+    }
+
     const dateParts = formatter.formatToParts(date);
 
     return {

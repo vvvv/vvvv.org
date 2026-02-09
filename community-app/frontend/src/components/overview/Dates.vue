@@ -24,8 +24,6 @@ onMounted(async ()=>{
     finally {
         loading.value = false;
     }
-
-    console.log (store.dates[tab.value]);
 })
 
 </script>
@@ -33,23 +31,6 @@ onMounted(async ()=>{
 <template>
     <div class="section pl-4">
         <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true">
-            <template #buttons>
-                <div style="margin-top: -0.2rem;">
-                    <NButtonGroup>
-                        <NButton 
-                            v-for="tabName in tabs"
-                            size="small" 
-                            @click="tab = tabName"
-                            class="mr-2"
-                            :ghost="tab !== tabName"
-                            :strong="tab !== tabname"
-                            :color="tab === tabName ? '#aaaaaa' : '#bbbbbb'"
-                            >
-                            {{ tabName }}
-                        </NButton>
-                    </NButtonGroup>
-                </div>
-            </template>
         </SectionTitle>
         <template v-if="loading">
             <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
