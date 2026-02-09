@@ -1,4 +1,7 @@
 {{ if or .Params.who .Params.where }}
+{{ $dateAndTime := time.Now }}
+{{ $hasTimezone := false}}
+{{ $time := $dateAndTime.Format "15:04" }}
 <div class="meta mb-5">
     <table>
   {{ with .Params.who }}
@@ -14,24 +17,60 @@
       {{with .location_name}}
       <tr><td><b>Location: </b></td><td>{{.}}</td></tr>
       {{end}}
+      {{ if or .street .additional .city .country_name}}
         <tr><td><b>Where: </b></td><td>{{with .street}}{{.}}, {{end}}{{with .additional}}{{.}}, {{end}}{{with .city}}{{.}}, {{end}}{{with .country_name}}{{.}}{{end}}</td></tr>
-      {{ if .lat}}
+      {{ end }}
+        {{ if .lat}}
         {{ if and (ne .lat "None") (ne .long "None")}}
             <tr><td><b>Lat / Long: </b></td><td>{{.lat}} {{.long}}</td></tr>
         {{end}}
       {{end}}
       {{ with .from_date }}
-        {{ $dateAndTime := time (int .) }}
+        {{/* as int */}}
+        {{ if eq (printf "%T" .) "int" }}
+          {{ $dateAndTime = time . 0 }}
+        {{/* as int string */}}
+        {{ else if and (eq (printf "%T" .) "string") (findRE `^\d+$` .) }}
+          {{/* subtract 1 hour to be compatible with "Europe/Berlin" */}}  
+          {{ $dateAndTime = time (sub (int .) 3600) }}
+        {{/* as Human-readable: 2026-02-26T18:00:00 or add +0200 when a Timezone other than CET*/}}
+        {{ else }}
+          {{ $hasTimezone = or (findRE `Z$` .) (findRE `[+-]\d{2}:?\d{2}$` .) }}
+          {{ $dateAndTime = time.AsTime . }}
+        {{ end }}
+
         {{ $date := $dateAndTime.Format "02 Jan 2006" }}
-        {{ $time := $dateAndTime.Format "15:04" }}
+        {{ if $hasTimezone }}
+          {{ $time = $dateAndTime.Format "15:04 (-07:00)" }}
+        {{ else }}
+          {{ $time = $dateAndTime.Format "15:04" }}
+        {{ end }}
         {{ if ne . "0" }}
             <tr><td><b>{{ if ne $.Params.where.to_date . }}From:{{else}}When:{{end}} </b></td><td>{{$date}}{{ if ne $time "00:00"}} {{$time}}{{end}}</td></tr>
         {{ end }}
       {{end}}
+
       {{with .to_date}}
-        {{ $dateAndTime := time (int .) }}
+        
+        {{/* as int */}}
+        {{ if eq (printf "%T" .) "int" }}
+          {{ $dateAndTime = time . }}
+        {{/* as int string */}}
+        {{ else if and (eq (printf "%T" .) "string") (findRE `^\d+$` .) }}
+          {{/* subtract 1 hour to be compatible with "Europe/Berlin" */}}  
+          {{ $dateAndTime = time (sub (int .) 3600) }}
+        {{/* as Human-readable: 2026-02-26T18:00:00-0200 YYYY-MM-DDTHH:MM:SS-ZONE */}}
+        {{ else }}
+          {{ $hasTimezone = or (findRE `Z$` .) (findRE `[+-]\d{2}:?\d{2}$` .) }}
+          {{ $dateAndTime = time.AsTime . }}
+        {{ end }}
+
         {{ $date := $dateAndTime.Format "02 Jan 2006" }}
-        {{ $time := $dateAndTime.Format "15:04" }}
+        {{ if $hasTimezone }}
+          {{ $time = $dateAndTime.Format "15:04 (-07:00)" }}
+        {{ else }}
+          {{ $time = $dateAndTime.Format "15:04" }}
+        {{ end }}
         {{ if and (ne . "0") (ne $.Params.where.from_date . ) }}
             <tr><td><b>To: </b></td><td>{{$date}}{{ if ne $time "00:00"}} {{$time}}{{end}} </td></tr>
         {{ end }}

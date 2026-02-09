@@ -6,8 +6,8 @@ title: "UI Frameworks & Patterns in vvvv — New Workshop with Phlegma"
 description: "February 26 + 27, 2026 — 18:00–21:00 CET"
 where: 
   location_name: "Online"
-  from_date: "1772128800"
-  to_date: "1772226000"
+  from_date: "2026-02-26T18:00:00"
+  to_date: "2026-02-27T21:00:00"
 ---
 
 ![](uiws.jpg)

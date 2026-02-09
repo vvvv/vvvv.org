@@ -4,6 +4,7 @@ pagination.pagerSize = 20
 pagination.path = "page"
 summaryLength = 20
 title = "vvvv - visual live-programming for .NET"
+timeZone = "Europe/Berlin"
 
 [sitemap]
   changefreq = 'daily'
