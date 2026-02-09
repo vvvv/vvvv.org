@@ -43,7 +43,7 @@
         {{ if $hasTimezone }}
           {{ $time = $dateAndTime.Format "15:04 (-07:00)" }}
         {{ else }}
-          {{ $time = $dateAndTime.Format "15:04" }}
+          {{ $time = $dateAndTime.Format "15:04 CET" }}
         {{ end }}
         {{ if ne . "0" }}
             <tr><td><b>{{ if ne $.Params.where.to_date . }}From:{{else}}When:{{end}} </b></td><td>{{$date}}{{ if ne $time "00:00"}} {{$time}}{{end}}</td></tr>
@@ -69,7 +69,7 @@
         {{ if $hasTimezone }}
           {{ $time = $dateAndTime.Format "15:04 (-07:00)" }}
         {{ else }}
-          {{ $time = $dateAndTime.Format "15:04" }}
+          {{ $time = $dateAndTime.Format "15:04 CET" }}
         {{ end }}
         {{ if and (ne . "0") (ne $.Params.where.from_date . ) }}
             <tr><td><b>To: </b></td><td>{{$date}}{{ if ne $time "00:00"}} {{$time}}{{end}} </td></tr>
