@@ -3,11 +3,15 @@ title: Learn
 firstColumn:
   - item: 
       text: > 
-            <a href="https://thenodeinstitute.org/courses/vvvv-beginner-class-winter-2025/" target="_blank">Beginner class starting Octorber 27</a>
+            <a href="https://thenodeinstitute.org/courses/ui-frameworks-patterns-in-vvvv/" target="_blank">February 26/27: UI Frameworks &amp; Patterns</a>
       image: /img/icons/mortarboard-fill.svg
   - item: 
       text: > 
-            <a href="https://thenodeinstitute.org/courses/#uagb-tabs__tab0" target="_blank">Courses at The NODE Institute</a>
+            <a href="https://thenodeinstitute.org/courses/interactive-sketches-with-vvvv/" target="_blank">Interactive Sketches</a>
+      image: /img/icons/mortarboard-fill.svg
+  - item: 
+      text: > 
+            <a href="https://thenodeinstitute.org/courses/#uagb-tabs__tab1" target="_blank">Courses at The NODE Institute</a>
       image: /img/icons/mortarboard-fill.svg
 secondColumn:
   - item: 
