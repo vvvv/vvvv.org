@@ -2,7 +2,12 @@
 <html class="scroll-padding">
     <head>
         {{ partial "head.html" . }}
-     
+
+        <!-- Cactus css -->
+        {{ if .IsPage }}
+            <script src="{{ "/js/cactus.js" | relURL }}"></script>
+            <link rel="stylesheet" href="{{ "/css/cactus.css" | relURL }}" type="text/css">
+        {{ end }}     
    </head>
 <body>
     <div class="main">

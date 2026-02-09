@@ -48,7 +48,14 @@
                         <div class="comments mt-5">
                             <hr class="mt-5"/>
                             <h2 class="display-1 mb-3">Comments:</h2>
-                            <p class="bold">{{ .Site.Params.Blog.CommentsTempDisabled}}</p>
+                            {{ if not .Params.imported}}
+                                {{ partial "blog/comments.html" . }}
+                            {{ else}}
+                                <p class="bold">{{ .Site.Params.Blog.CommentsDisabled}}</p>
+                                {{ with .Resources.Match "comments/*" }}
+                                    {{ partial "blog/comments-imported" . }}
+                                {{ end }}
+                            {{ end }}
                         </div>
                     </div>
                 </div>
