@@ -12,8 +12,8 @@
   "link": {{ .Permalink | jsonify }},
   "thumb": {{ $thumb.Permalink | jsonify }},
   "description": {{ .Description | jsonify }},
-  {{- with .From -}}"from": {{ . }},{{- end -}}
-  {{- with .To -}}"to": {{ . }},{{- end -}}
+  {{- with .From -}}"from": {{ . | jsonify}},{{- end -}}
+  {{- with .To -}}"to": {{ . | jsonify}},{{- end -}}
   {{- with .City -}}"city": {{ .  | jsonify }},{{- end -}}
   {{- with .Country -}}"country": {{ .  | jsonify }},{{- end -}} 
   "pubDate": {{ .PubDate }}
