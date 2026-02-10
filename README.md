@@ -6,7 +6,7 @@ Source of [vvvv.org](http://vvvv.org)
 - Browse [the blog folder](https://github.com/vvvv/vvvv.org/tree/main/content/blog/) to see how existing posts are written
 - Create a new folder in the `\{currentYear]\News` or `\{currentYear]\Dates` folder (depending on the type of your post) with a short name describing the post (that folder name is just for the folder structure, no other relevance)
 - The only file that is mandatory in your folder is the `index.md` file. Best copy one over from another blogpost and modify it
-- For posts of type `date` you need to enter from- and to- dates in the format: "2026-02-26T18:00:00" or "2026-02-26T18:00:00+02:00" for a specific timeoffset.
+- For posts of type `date` you need to enter from- and to- dates in the format: "2026-02-26T18:00:00" (defaulting to CET timezone) or "2026-02-26T18:00:00+02:00" to specify an offset from CET.
 - To preview your post locally, see the section "Local Build" below
 - Finally make a pull-request from your fork to this repo
 
