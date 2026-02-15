@@ -29,6 +29,7 @@ window.addEventListener ("load", ()=> {
 
     const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
     const menuTitleMap = new Map();
+    const menuKeyMap = new Map();
 
     let sortType = 'newest';
     let selectedMenuType = 'categories';
@@ -611,7 +612,8 @@ window.addEventListener ("load", ()=> {
             menuItem: toSponsor
         };
 
-        menuTitleMap.set('Packs to sponsor &#9829;', 'toSponsor');
+        menuTitleMap.set('Packs to Sponsor &#9829;', 'toSponsor');
+        menuKeyMap.set('toSponsor', 'Packs to Sponsor');
 
         const unsortedTitle = 'Unsorted';
 
@@ -735,8 +737,13 @@ window.addEventListener ("load", ()=> {
         fixed.set("staticOnDemand", staticOnDemand);
 
         menuTitleMap.set('On Demand', 'staticOnDemand');
+        menuKeyMap.set('staticOnDemand', 'On Demand');
+
         menuTitleMap.set('Add your Pack', 'staticAddYours');
+        menuKeyMap.set('staticAddYours', 'Add your Pack');
+
         menuTitleMap.set('.Net Nugets', 'staticDotNet');
+        menuKeyMap.set('staticDotNet', '.Net Nugets');
     }
 
 
@@ -1086,11 +1093,16 @@ window.addEventListener ("load", ()=> {
                     });
                 })
 
-                a.textContent = `${i.name} (${count})`;
+                const category = menuKeyMap.get(i.name) || i.name;
+
+                console.log (i.name, category);
+                console.log (menuKeyMap);
+
+                a.innerHTML = `${category} (${count})`;
                 a.href = `#`;
                 a.dataset.target = i.name;
                 a.addEventListener('click', ()=>{
-                    $(`button[data-category-menu="${i.name}"]`).tab('show');
+                    $(`button[data-category-menu="${category}"]`).tab('show');
                 });
 
                 li.appendChild(a);
