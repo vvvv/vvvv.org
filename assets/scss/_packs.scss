@@ -29,9 +29,9 @@ body.sidebar-open {
 
     #sort{
         background-color: #f0f0f0;
-        border: 1px solid #aaa;
+        border: none;
         border-radius: 3px;
-        padding: 0.2rem 1rem;
+        padding: 0.3rem 1rem;
     }
 
     .static{
@@ -43,6 +43,10 @@ body.sidebar-open {
     }
 
     .topLinks{
+        border-left: 1px solid #ccc;
+        padding-left: 1rem;
+        margin-left: 2rem;
+
         a{
             text-decoration: underline;
             text-decoration-color: #ccc;

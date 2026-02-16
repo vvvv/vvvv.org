@@ -4,16 +4,14 @@
 
 <section id="Packs">
     <div class="container">
-        <div class="d-block d-lg-flex align-items-baseline mb-3">
-            <h2><b>Packs and Extensions for vvvv</b></h2>
-            <div class="ml-auto topLinks mt-2">
+        <div class="d-flex align-items-baseline mb-3">
+            <h2><b>Packs for vvvv</b></h2>
+            <div class="topLinks mt-2">
                 {{ if eq . $packs }}
                     <a href="{{ $about.RelPermalink }}" class="btn btn-light">About</a>
                 {{ else if eq . $about }}              
-                    <a href="{{ $packs.RelPermalink }}" class="btn btn-light">Packs</a>    
+                    <a href="{{ $packs.RelPermalink }}" class="btn btn-light">Browse</a>    
                 {{ end }}
-                <a href="https://thegraybook.vvvv.org/reference/hde/managing-nugets.html#managing-nugets" target="_blank">Managing Nugets</a>
-                <a href="https://thegraybook.vvvv.org/changelog/nuget-compatibility-chart.html#nuget-compatibility-chart" target="_blank">Compatibility Chart</a>
             </div>
         </div>
     </div>

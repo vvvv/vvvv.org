@@ -15,3 +15,10 @@ You're looking at an [online browser for VL packs]({{< relref "_index.md" >}}).
 Side note: Packs are distributed via the .NET NuGet infrastructure and vvvv can also ingest almost any NuGet found on <a href="https://www.nuget.org/" target="_blank">nuget.org</a>.
 
 The browser's index updates once every 4 hours.
+
+**More Information**
+
+<ul>
+    <li><a href="https://thegraybook.vvvv.org/reference/hde/managing-nugets.html#managing-nugets" target="_blank">Managing Nugets</a></li>
+    <li><a href="https://thegraybook.vvvv.org/changelog/nuget-compatibility-chart.html#nuget-compatibility-chart" target="_blank">Compatibility Chart</a></li>
+</ul>
