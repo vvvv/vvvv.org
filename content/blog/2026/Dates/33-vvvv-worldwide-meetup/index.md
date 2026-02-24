@@ -28,7 +28,7 @@ Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.s
 The NODE Institute<br>
 Wipperstrasse 13, 12055 Berlin<br>
 Doors open: 18:30
-<!--**[RSVP here](https://thenodeinstitute.org/event/31st-vvvv-worldwide-meetup/)**-->
+[RSVP here](https://thenodeinstitute.org/event/33-vvvv-worldwide-meetup/)
 
 ## Online
 [Watch via Youtube](https://youtube.com/live/a1orG-VlDy8)<br>
