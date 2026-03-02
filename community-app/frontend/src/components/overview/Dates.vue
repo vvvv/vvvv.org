@@ -36,7 +36,7 @@ onMounted(async ()=>{
             <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
         </template>
         <template v-else>
-            <DateList v-if="store.dates[tab]" :isPast="tab == 'past'" :data="store.dates[tab]"/>
+            <DateList v-if="store.dates[tab]" :data="store.dates[tab]"/>
             <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div>
         </template>
     </div>
