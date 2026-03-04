@@ -20,7 +20,7 @@ Coming up at The NODE Institute: The [33rd vvvvorldwide meetup](https://thenodei
 Many thanks to those of you who help complete vvvv with countless additions! For an overview of libraries available for vvvv [start here](https://vvvv.org/packs/).
 
 We have a new one:
-- [VL.IO.NFC](https://www.nuget.org/packages/VL.IO.CEF)
+- [VL.IO.NFC](https://www.nuget.org/packages/VL.IO.NFC)
 
 We got updates to the following:
 - [VL.Audio.LTC](https://www.nuget.org/packages/VL.Audio.LTC)
