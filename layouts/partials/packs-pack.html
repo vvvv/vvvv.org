@@ -78,8 +78,10 @@
                             <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
                         </div>
                         <div class="col">
-                            {{- if ne .projectURL "" -}}
-                                <a href="{{.projectURL}}">Website</a>
+                            {{- with .projectURL -}}
+                                {{- if ne . "" -}}
+                                    <a href="{{.}}">Website</a>
+                                {{- end -}}
                             {{- end -}}
                             {{- with .links -}}
                                 {{- range . -}}
