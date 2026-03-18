@@ -10,14 +10,17 @@ thumb: vvvv70-thumb.jpg
 ![vvvv gamma 7.0 release](header-7.png)
 <small>Artwork by Arístides García aka [lasal](https://vvvv.org/people/lasal)</small>
  
-Here is to introduce **vvvv gamma 7.0** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
+Here is to introduce **vvvv gamma 7.1** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
 
 {{< box >}}
-__[Download vvvv gamma 7.0](http://vvvv.org/#Download)__  
+__[Download vvvv gamma 7.1](http://vvvv.org/#Download)__  
 
 - [Full Change Log](https://thegraybook.vvvv.org/changelog/7.x.html)
 - [Get started](https://thegraybook.vvvv.org/reference/getting-started/overview.html)  
 - [Buy a license](https://store.vvvv.org)
+
+__Bugfix releases__
+- 7.1 on March 18, 2026
 
 {{< /box >}}
 
