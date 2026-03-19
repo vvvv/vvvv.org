@@ -74,7 +74,7 @@
             <div class="col">
                 <div class="links">
                     <div class="row">
-                        <div class="col-1">
+                        <div class="col-1" {{- if or (not .projectURL) (eq .projectURL "") (not .links) (eq (len .links) 0) -}}hidden{{- end -}}>
                             <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
                         </div>
                         <div class="col">

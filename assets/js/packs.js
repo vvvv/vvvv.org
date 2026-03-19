@@ -37,7 +37,7 @@ window.addEventListener ("load", ()=> {
     const menuKeyMap = new Map();
 
     let sortType = 'newest';
-    let selectedMenuType = isExtensions ? 'owners' : 'categories';
+    let selectedMenuType = 'categories';
     let sortChanged = false;
 
     let query = input.value;
