@@ -9,8 +9,7 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
     year: '2-digit',
     hour: "numeric",
     minute: "numeric",
-    timeZone: "UTC",
-    timeZoneName: "short",
+    timeZone: "Europe/Berlin"
 });
 
 export const useHugoStore = defineStore ('hugoStore',{
@@ -85,6 +84,8 @@ function dateItem(item)
 {
     let dates = "";
 
+    let isPast = false;
+
     if (item.from)
     {
         const from = toDate(item.from);
@@ -103,9 +104,9 @@ function dateItem(item)
             dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute} - 
                      ${to.day} ${to.month} ${to.year}, ${to.hour}:${to.minute}`
         }
+        
+        isPast = new Date(from.date) < new Date();
     }
-
-    const isPast = new Date(item.from * 1000) < new Date();
 
     return{
         title: item.title,
@@ -122,7 +123,15 @@ function toDate(stamp) {
 
     if (!stamp) return null;
 
-    const date = new Date(stamp * 1000);
+    let date;
+
+    if (typeof stamp === "number") {
+        date = new Date(stamp * 1000);
+    }
+    else if (typeof stamp === "string") {
+        date = Date.parse(stamp);
+    }
+
     const dateParts = formatter.formatToParts(date);
 
     return {
@@ -131,5 +140,6 @@ function toDate(stamp) {
         day: dateParts.find(d => d.type == 'day')?.value,
         hour: dateParts.find(d => d.type == 'hour')?.value,
         minute: dateParts.find(d => d.type == 'minute')?.value,
+        date: date
     }
 }
