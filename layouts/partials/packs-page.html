@@ -1,24 +1,29 @@
 {{- "<!-- PACKS -->" | safeHTML -}}
 {{ $packs := .GetPage "Packs/_index.md" }}
+{{ $extensions := .GetPage "Extensions/_index.md" }}
 {{ $about := .GetPage "Packs/about.md" }}
+{{ $title := "" }}
+{{ if eq . $packs }}
+    {{ $title = "Packs for vvvv"}}
+{{ else if eq . $extensions }}
+    {{ $title = "Extensions for vvvv"}}
+{{ else if eq . $about }}
+    {{ $title = "Packs for vvvv"}}
+{{ end }}
 
 <section id="Packs">
     <div class="container">
         <div class="d-flex align-items-baseline mb-3">
-            <h2><b>Packs for vvvv</b></h2>
+            <h2><b>{{$title}}</b></h2>
             <div class="topLinks mt-2">
-                {{ if eq . $packs }}
-                    <a href="{{ $about.RelPermalink }}" class="btn btn-light">About</a>
-                {{ else if eq . $about }}              
-                    <a href="{{ $packs.RelPermalink }}" class="btn btn-light">Browse</a>    
-                {{ end }}
+                <a href="{{ $packs.RelPermalink }}" class="btn btn-light">Packs</a> 
+                <a href="{{ $extensions.RelPermalink }}" class="btn btn-light">Extensions</a>
+                <a href="{{ $about.RelPermalink }}" class="btn btn-light">About</a>
             </div>
         </div>
     </div>
     <div class="container">
-
         {{ $variant := .Params.variant | default "packs-list" }}
-        {{ partial $variant . }}
-        
+        {{ partial $variant . }}      
     </div>
 </section>  

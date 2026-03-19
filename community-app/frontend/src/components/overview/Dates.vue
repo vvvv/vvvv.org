@@ -11,8 +11,6 @@ const store = useHugoStore();
 const loading = ref(false);
 const tab = ref('upcoming');
 
-const tabs = ['upcoming', 'past'];
-
 onMounted(async ()=>{   
     try {
         loading.value = true;
