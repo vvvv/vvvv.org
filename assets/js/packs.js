@@ -1,5 +1,10 @@
 window.addEventListener ("load", ()=> {
 
+    if (window.location.pathname === '/packs/about/')
+        return;
+
+    const isExtensions = window.location.pathname === '/extensions/';
+
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const processing = document.getElementById('packsProcessing');
     const toc = document.getElementById('toc');
@@ -21,18 +26,18 @@ window.addEventListener ("load", ()=> {
     const toSponsor = document.getElementById('toSponsor');
     const sortDiv = document.getElementById('sortDiv'); 
     const sortDropdown = document.getElementById('sort');
-    const menuItemButton = document.getElementById('staticContent').querySelector('[data-category-menu]');
+    const menuItemButton = document.getElementById('staticContent')?.querySelector('[data-category-menu]');
 
     let currentCategory = 'All';
     let currentMenuItem = null;
     let isStatic = false;
 
-    const staticContent = { staticDotNet, staticAddYours, staticOnDemand };
+    const staticContent = isExtensions ? {} : { staticDotNet, staticAddYours, staticOnDemand };
     const menuTitleMap = new Map();
     const menuKeyMap = new Map();
 
     let sortType = 'newest';
-    let selectedMenuType = 'categories';
+    let selectedMenuType = isExtensions ? 'owners' : 'categories';
     let sortChanged = false;
 
     let query = input.value;
@@ -57,7 +62,8 @@ window.addEventListener ("load", ()=> {
     transformSearchField();
     collectOwners();
     collectMenu();
-    collectFixed();
+    if (!isExtensions) collectFixed();
+
     buildMenu();
 
     setUpSort();
@@ -289,34 +295,39 @@ window.addEventListener ("load", ()=> {
 
     function staticButton(button)
     {
+        if (button)
+        {
+            $(button).on('shown.bs.tab', () => {
+                        
+                        window.scrollTo(0, 0);
+                        isStatic = true;
+                        escCount = 0;
 
-        $(button).on('shown.bs.tab', () => {
-            
-            window.scrollTo(0, 0);
-            isStatic = true;
-            escCount = 0;
+                        sortDiv.hidden = true;
 
-            sortDiv.hidden = true;
+                        if (!sortChanged)
+                        {
+                            sortType = 'title';
+                            sortDropdown.value = sortType;
+                        }
 
-            if (!sortChanged)
-            {
-                sortType = 'title';
-                sortDropdown.value = sortType;
-            }
+                        const sectionTitle = button.dataset.title;
+                        
+                        contentDiv.replaceChildren();
+                        const element = staticContent[button.dataset.categoryMenu];
 
-            const sectionTitle = button.dataset.title;
-            
-            contentDiv.replaceChildren();
-            const element = staticContent[button.dataset.categoryMenu];
-            
-            contentDiv.appendChild(element.cloneNode(true));
-            
-            title.textContent = sectionTitle;
-            titleCount.hidden = true;
-            
-            updateHistory(sectionTitle);
-            infoDiv.replaceChildren();
-        })
+                        if (element)
+                        {
+                            contentDiv.appendChild(element.cloneNode(true));
+                            
+                            title.textContent = sectionTitle;
+                            titleCount.hidden = true;
+                            
+                            updateHistory(sectionTitle);
+                            infoDiv.replaceChildren();
+                        }
+            })
+        }
     }
 
     function dynamicButton(button)
@@ -366,8 +377,11 @@ window.addEventListener ("load", ()=> {
 
             menuEntry.elements.forEach(e=>
             {
-                e.hidden = !isVisible(e);
-                contentDiv.appendChild(e.cloneNode(true));
+                if (e)
+                {
+                    e.hidden = !isVisible(e);
+                    contentDiv.appendChild(e.cloneNode(true));
+                }
             });
             
             title.textContent = currentCategory;
@@ -397,40 +411,46 @@ window.addEventListener ("load", ()=> {
 
         for (m of items)
         {
-            switch (m.menuItem.dataset.type)
+            if (m.menuItem)
             {
-                case 'static':
-                    staticButton(m.menuItem);
-                    break;
-                case 'dynamic':
-                    dynamicButton(m.menuItem);
-                    break;
-                default:    
-                    categoryButton(m.menuItem);
+                switch (m.menuItem.dataset.type)
+                {
+                    case 'static':
+                        staticButton(m.menuItem);
+                        break;
+                    case 'dynamic':
+                        dynamicButton(m.menuItem);
+                        break;
+                    default:    
+                        categoryButton(m.menuItem);
+                }
+    
+                toc.appendChild(m.menuItem);
             }
-
-            toc.appendChild(m.menuItem);
             
         }
 
-        const fixedItems = Array.from(fixed.values()).sort((a,b) => a.index-b.index);
-
-        for (m of fixedItems)
+        if (fixed.size)
         {
-            switch (m.menuItem.dataset.type)
+            const fixedItems = Array.from(fixed.values()).sort((a,b) => a.index-b.index);
+            for (m of fixedItems)
             {
-                case 'static':
-                    staticButton(m.menuItem);
-                    break;
-                case 'dynamic':
-                    dynamicButton(m.menuItem);
-                    break;
-                default:    
-                    categoryButton(m.menuItem);
+                switch (m.menuItem.dataset.type)
+                {
+                    case 'static':
+                        staticButton(m.menuItem);
+                        break;
+                    case 'dynamic':
+                        dynamicButton(m.menuItem);
+                        break;
+                    default:    
+                        categoryButton(m.menuItem);
+                }
+    
+                toc.appendChild(m.menuItem);
             }
-
-            toc.appendChild(m.menuItem);
         }
+
 
         showTitleCount();
 
@@ -451,14 +471,18 @@ window.addEventListener ("load", ()=> {
             return false;
         });
 
-        const menuToSelect = itemToHighlight ? itemToHighlight.name : items[0].name;
-        
-        // Inject Separators     
-        const lastItem = items[items.length-1].name;
-        injectSeparators(["Extensions", lastItem]);
+        if (items.length)
+        {
+            const menuToSelect = itemToHighlight ? itemToHighlight.name : items[0].name;
+            
+            // Inject Separators     
+            const lastItem = items[items.length-1].name;
+            injectSeparators(["Packs to Sponsor", lastItem]);
+    
+            toc.querySelector(`button[data-category-menu="${menuToSelect}"]`)?.classList.remove('active');
+            $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
+        }
 
-        toc.querySelector(`button[data-category-menu="${menuToSelect}"]`)?.classList.remove('active');
-        $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
 
     }
 
@@ -554,17 +578,20 @@ window.addEventListener ("load", ()=> {
                 }
                 else
                 {
-                    const menuItem = menuItemButton.cloneNode(true);
-                    
-                    menuItem.dataset.categoryMenu = stripped;
-                    menuItem.prepend(stripped);
-
-                    owners.set(stripped, {
-                        name: stripped,
-                        index: index,
-                        elements: [e],
-                        menuItem: menuItem
-                    })
+                    if (menuItemButton)
+                    {
+                        const menuItem = menuItemButton.cloneNode(true);
+                        
+                        menuItem.dataset.categoryMenu = stripped;
+                        menuItem.prepend(stripped);
+    
+                        owners.set(stripped, {
+                            name: stripped,
+                            index: index,
+                            elements: [e],
+                            menuItem: menuItem
+                        })
+                    }
                 }
             })
         }
@@ -579,9 +606,12 @@ window.addEventListener ("load", ()=> {
 
         //Inject Packs To Sponsor
         const featured = menuItems.find(m=>m.dataset.categoryMenu=='Featured');
-        featured.after(toSponsor);
-        menuItems.splice(menuItems.indexOf(featured)+1, 0, toSponsor);
-                
+        if (featured)
+        {
+            featured.after(toSponsor);
+            menuItems.splice(menuItems.indexOf(featured)+1, 0, toSponsor);
+        }
+
         for (const e of elements)
         {
             if (e.dataset.deprecated)
@@ -691,7 +721,11 @@ window.addEventListener ("load", ()=> {
             }
         }
 
-        menu.get('Unsorted').index = menu.size+1;
+        const unsorted = menu.get('Unsorted');
+        if (unsorted)
+        {
+            menu.get('Unsorted').index = menu.size+1;
+        } 
 
         const deprecated = {
             name: "Deprecated",
@@ -767,6 +801,8 @@ window.addEventListener ("load", ()=> {
     function setUpMenuSwitch()
     {
         const menuSwitch = document.getElementById('menuSwitch');
+        if (!menuSwitch) return;
+
         const buttons = Array.from(menuSwitch.getElementsByTagName('button'));
 
         buttons.forEach(b=>{         
@@ -796,7 +832,7 @@ window.addEventListener ("load", ()=> {
     }
 
     function setUpMenuToggle()
-    {        
+    { 
         menuToggle.addEventListener('click', function(){
             sidebar.classList.toggle('active');
             sidebarBackdrop.classList.toggle('active');
@@ -806,7 +842,10 @@ window.addEventListener ("load", ()=> {
         const elementsToClose = [toc, menuClose, sidebarBackdrop];
 
         elementsToClose.forEach(e=>{
-            e.addEventListener('click', closeSidebar);
+            if (e)
+            {
+                e.addEventListener('click', closeSidebar);
+            }
         })
     }
 
@@ -870,20 +909,23 @@ window.addEventListener ("load", ()=> {
 
             }
 
-            const countSpan = value.menuItem.querySelector('[data-count]');
-
-            if (countSpan)
+            if (value.menuItem)
             {
-                if (set.size > 0)
+                const countSpan = value.menuItem.querySelector('[data-count]');
+    
+                if (countSpan)
                 {
-                    value.menuItem.classList.remove('inactive');
-                    countSpan.textContent = set.size;
-                    countSpan.hidden = false;
-                }
-                else
-                {
-                    value.menuItem.classList.add('inactive');
-                    countSpan.hidden = true;
+                    if (set.size > 0)
+                    {
+                        value.menuItem.classList.remove('inactive');
+                        countSpan.textContent = set.size;
+                        countSpan.hidden = false;
+                    }
+                    else
+                    {
+                        value.menuItem.classList.add('inactive');
+                        countSpan.hidden = true;
+                    }
                 }
             }
             
@@ -1052,8 +1094,8 @@ window.addEventListener ("load", ()=> {
         }
 
         const menu = getCurrentMenu();
-                
-        const active = Array.from(menu.values()).filter(m => m.menuItem.querySelector('[data-count]').hidden == false);
+         
+        const active = Array.from(menu.values()).filter(m => m.menuItem && m.menuItem.querySelector('[data-count]').hidden == false);
         const withoutCurrent = active.filter(a=>a.name!=='All' && a.name!==currentCategory && a.menuItem.dataset.type !== 'dynamic')?.sort((a,b)=>a.name.localeCompare(b.name));
 
         const packsInCurrent = Array.from(contentDiv.getElementsByTagName('article')).filter(e => !e.hidden);
@@ -1120,10 +1162,13 @@ window.addEventListener ("load", ()=> {
         }
         else if (!active.length)
         {
-            title.textContent = 'Nothing Found';
-            titleCount.hidden = true;
-            const nothingFoundClone = staticOnDemand.cloneNode(true);
-            infoDiv.appendChild(nothingFoundClone);
+            if (staticOnDemand)
+            {
+                title.textContent = 'Nothing Found';
+                titleCount.hidden = true;
+                const nothingFoundClone = staticOnDemand.cloneNode(true);
+                infoDiv.appendChild(nothingFoundClone);
+            }
         }
 
     }

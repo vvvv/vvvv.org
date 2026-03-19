@@ -3,22 +3,26 @@
 {{ $extensions := .GetPage "Extensions/_index.md" }}
 {{ $about := .GetPage "Packs/about.md" }}
 {{ $title := "" }}
+{{ $active := "" }}
 {{ if eq . $packs }}
     {{ $title = "Packs for vvvv"}}
+    {{ $active = "packs" }}
 {{ else if eq . $extensions }}
-    {{ $title = "Extensions for vvvv"}}
+    {{ $title = "Extensions for vvvv" }}
+    {{ $active = "extensions" }}
 {{ else if eq . $about }}
-    {{ $title = "Packs for vvvv"}}
+    {{ $title = "About"}}
+    {{ $active = "about" }}
 {{ end }}
 
 <section id="Packs">
     <div class="container">
         <div class="d-flex align-items-baseline mb-3">
             <h2><b>{{$title}}</b></h2>
-            <div class="topLinks mt-2">
-                <a href="{{ $packs.RelPermalink }}" class="btn btn-light">Packs</a> 
-                <a href="{{ $extensions.RelPermalink }}" class="btn btn-light">Extensions</a>
-                <a href="{{ $about.RelPermalink }}" class="btn btn-light">About</a>
+            <div class="topLinks ml-auto">
+                <a href="{{ $packs.RelPermalink }}" class="btn btn-light {{if eq $active "packs"}} active {{end}}">Packs</a> 
+                <a href="{{ $extensions.RelPermalink }}" class="btn btn-light {{if eq $active "extensions"}} active {{end}}">Extensions</a>
+                <a href="{{ $about.RelPermalink }}" class="btn btn-light {{if eq $active "about"}} active {{end}}">About</a>
             </div>
         </div>
     </div>
