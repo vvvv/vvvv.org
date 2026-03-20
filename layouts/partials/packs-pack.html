@@ -73,27 +73,29 @@
             </div>
             <div class="col">
                 <div class="links">
-                    <div class="row">
-                        <div class="col-1">
-                            <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
-                        </div>
-                        <div class="col">
-                            {{- with .projectURL -}}
-                                {{- if ne . "" -}}
-                                    <a href="{{.}}">Website</a>
-                                {{- end -}}
-                            {{- end -}}
-                            {{- with .links -}}
-                                {{- range . -}}
-                                    {{- if eq .title "Sponsor!" -}}
-                                        <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
-                                    {{- else -}}
-                                        <a href="{{.link}}">{{.title}}</a>
+                    {{- if or (and .projectURL (ne .projectURL "")) (and .links (gt (len .links) 0)) -}}
+                        <div class="row">
+                            <div class="col-1">
+                                <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
+                            </div>
+                            <div class="col">
+                                {{- with .projectURL -}}
+                                    {{- if ne . "" -}}
+                                        <a href="{{.}}">Website</a>
                                     {{- end -}}
                                 {{- end -}}
-                            {{- end -}}
+                                {{- with .links -}}
+                                    {{- range . -}}
+                                        {{- if eq .title "Sponsor!" -}}
+                                            <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
+                                        {{- else -}}
+                                            <a href="{{.link}}">{{.title}}</a>
+                                        {{- end -}}
+                                    {{- end -}}
+                                {{- end -}}
+                            </div>
                         </div>
-                    </div>
+                    {{- end -}}
                 </div>
         
                 <div class="categories" alt="Categories">
