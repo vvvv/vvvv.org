@@ -1,7 +1,7 @@
 window.addEventListener ("load", ()=> {
 
     if (window.location.pathname === '/packs/about/')
-        return;
+    return;
 
     const isExtensions = window.location.pathname === '/extensions/';
 
@@ -604,22 +604,18 @@ window.addEventListener ("load", ()=> {
         const elements = Array.from(content.getElementsByTagName('article'));
         const menuItems = Array.from(document.querySelectorAll('[data-category-menu]'));
 
-        //Inject Packs To Sponsor
-        const featured = menuItems.find(m=>m.dataset.categoryMenu=='Featured');
-        if (featured)
-        {
+        // Inject Packs To Sponsor
+        const featured = menuItems.find(m => m.dataset.categoryMenu == 'Featured');
+        if (featured) {
             featured.after(toSponsor);
-            menuItems.splice(menuItems.indexOf(featured)+1, 0, toSponsor);
+            menuItems.splice(menuItems.indexOf(featured) + 1, 0, toSponsor);
         }
 
-        for (const e of elements)
-        {
-            if (e.dataset.deprecated)
-            {
+        for (const e of elements) {
+            if (e.dataset.deprecated) {
                 items.deprecated.push(e);
-            }
-            else
-            {
+                continue;
+            } else {
                 items.all.push(e);
             }
         }
@@ -631,13 +627,13 @@ window.addEventListener ("load", ()=> {
             index: 0,
             elements: items.all,
             children: [],
-            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "All")
+            menuItem: menuItems.find(m => m.dataset.categoryMenu == "All")
         };
 
         const packsToSponsor = {
             name: "toSponsor",
-            index: menuItems.findIndex(m=>m.dataset.categoryMenu == 'Featured')+1,
-            elements: items.all.filter(e=>e.dataset.sponsor),
+            index: menuItems.findIndex(m => m.dataset.categoryMenu == 'Featured') + 1,
+            elements: items.all.filter(e => e.dataset.sponsor),
             children: [],
             menuItem: toSponsor
         };
@@ -647,92 +643,78 @@ window.addEventListener ("load", ()=> {
 
         const unsortedTitle = 'Unsorted';
 
-        for (const element of items.all)
-        {
+        for (const element of items.all) {
             let paths;
-            
+
             index++;
-                
+
             try {
                 paths = JSON.parse(element.dataset.categories);
-            }
-            catch{
+            } catch {
                 continue;
             }
-                
-            if (!paths.length)
-            {
-               const item = menu.get(unsortedTitle);
 
-                if (item)
-                {
+            if (!paths.length) {
+                const item = menu.get(unsortedTitle);
+
+                if (item) {
                     item.elements.push(element);
-                }
-                else{
-                    menu.set(unsortedTitle,{
+                } else {
+                    menu.set(unsortedTitle, {
                         name: unsortedTitle,
-                        index: menuItems.findIndex(m=>m.name == unsortedTitle),
+                        index: menuItems.findIndex(m => m.name == unsortedTitle),
                         elements: [element],
                         children: new Map(),
-                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == unsortedTitle)
-                    })
-                } 
+                        menuItem: menuItems.find(m => m.dataset.categoryMenu == unsortedTitle)
+                    });
+                }
             }
 
-            for (const path of paths)
-            {
+            for (const path of paths) {
                 const [parent, child] = path;
 
                 if (!parent) continue;
 
-                if (!menu.has(parent))
-                {
+                if (!menu.has(parent)) {
                     menu.set(parent, {
                         name: parent,
-                        index: menuItems.findIndex(m=>m.dataset.categoryMenu == parent),
+                        index: menuItems.findIndex(m => m.dataset.categoryMenu == parent),
                         children: new Map(),
                         elements: [],
-                        menuItem: menuItems.find(m=>m.dataset.categoryMenu == parent)
-                    })
+                        menuItem: menuItems.find(m => m.dataset.categoryMenu == parent)
+                    });
                 }
 
                 const parentNode = menu.get(parent);
 
-                if (child)
-                {
+                if (child) {
                     const childNode = parentNode.children.get(child);
 
-                    if (childNode)
-                    {
+                    if (childNode) {
                         childNode.elements.push(element);
-                    }
-                    else
-                    {
+                    } else {
                         parentNode.children.set(child, {
                             name: child,
                             elements: [element]
-                        })
+                        });
                     }
-                }
-                else
-                {
+                } else {
                     parentNode.elements.push(element);
                 }
             }
         }
 
         const unsorted = menu.get('Unsorted');
-        if (unsorted)
-        {
-            menu.get('Unsorted').index = menu.size+1;
-        } 
+        if (unsorted) {
+            menu.get('Unsorted').index = menu.size + 1;
+        }
 
         const deprecated = {
             name: "Deprecated",
             index: menu.size,
             elements: items.deprecated,
             children: new Map(),
-            menuItem: menuItems.find(m=>m.dataset.categoryMenu == "Deprecated")
+            menuItem: menuItems.find(m => m.dataset.categoryMenu == "Deprecated")
         };
 
         menu.set("All", all);
@@ -1219,8 +1201,11 @@ window.addEventListener ("load", ()=> {
                     input.value = '';
                     input.focus();
                     input.dispatchEvent(new Event('input', { bubbles: true }));                       
+
                 }
                 else {                 
+
+
                     escCount = 0;
                     $(`button[data-category-menu="All"]`).tab('show');
                     input.dispatchEvent(new Event('input', { bubbles: true }));
