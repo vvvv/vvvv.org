@@ -12,7 +12,7 @@ thumb: "pf-logo-icon.jpg"
 
 Hey, we're pixel.forest()! 👋
 
-We run a new community space in Berlin where artists and creative coders work, learn, and hang out together - with workshops and events around vvvv, TouchDesigner and similar tools. And we are happy to share with you that we have set a date for our first vvvv workshop about [**Interactive Particle Systems**](https://pixel-forest.com/workshops/interactive-particle-systems-in-vvvv-with-rosi-grillmair/), led by Rosi Grillmair aka *remony*!
+We run a new community space in Berlin where artists and creative coders work, learn, and hang out together - with workshops and events around vvvv, TouchDesigner and similar tools. And we are happy to share with you that we have set a date for our first vvvv workshop about [**Interactive Particle Systems**](https://pixel-forest.com/workshops/interactive-particle-systems-in-vvvv-with-rosi-grillmair/), led by Rosi Grillmair aka [*remony*](https://vvvv.org/people/remony)!
 
 In this two-day workshop you will get to know the absolute fundamentals navigating vvvv and the powerful shader patching library [VL.FUSE](https://www.thefuselab.io/) – and create real-time particle systems and simulations, reacting to various input methods. Rosi will guide you from touching your first particles, noise functions and fluids to setting up your own compute shaders, whole landscapes of force fields and reactive environments. 
 
