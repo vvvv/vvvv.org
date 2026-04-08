@@ -26,14 +26,14 @@ https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026/
 You will dive into the architectural layer of VL, where reactive dataflow meets structured system design. The course helps you develop the mental models needed to move from intuitive patching to intentional, scalable architecture. You will learn how to:
 
 - combine dataflow logic with object‑oriented structures
-- design classes, instances, records, and data models
+- design classes, records, and data models
 - structure logic into modular, reusable components
 - manage state and complexity in larger systems
 - apply these principles in a real interactive project
 
 ## Need to know the basics first?
 
-The additional [vvvv Beginner Class](https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026), led by Gabriela Gordillo and Rosi Grillmair, will guide you through everything you need to get started with patching in vvvv across eight sessions. When enrolling in the Intermediate Foundations course, you can add the Beginner Class at a reduced rate, or just sign up for it individually.
+The additional [vvvv Beginner Class](https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026), led by [Gabriela Gordillo](https://vvvv.org/people/gabriela/) and [Rosi Grillmair](https://vvvv.org/people/remony/), will guide you through everything you need to get started with patching in vvvv across eight sessions. When enrolling in the Intermediate Foundations course, you can add the Beginner Class at a reduced rate, or just sign up for it individually.
 
 ## About the instructor
 
