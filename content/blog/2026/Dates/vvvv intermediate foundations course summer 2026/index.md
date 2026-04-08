@@ -26,7 +26,7 @@ https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026/
 You will dive into the architectural layer of VL, where reactive dataflow meets structured system design. The course helps you develop the mental models needed to move from intuitive patching to intentional, scalable architecture. You will learn how to:
 
 - combine dataflow logic with object‑oriented structures
-- design classes, instances, records, and data models
+- design classes, records, and data models
 - structure logic into modular, reusable components
 - manage state and complexity in larger systems
 - apply these principles in a real interactive project
