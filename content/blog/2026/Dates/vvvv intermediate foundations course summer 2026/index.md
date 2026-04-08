@@ -33,7 +33,7 @@ You will dive into the architectural layer of VL, where reactive dataflow meets 
 
 ## Need to know the basics first?
 
-The additional [vvvv Beginner Class](https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026), led by Gabriela Gordillo and Rosi Grillmair, will guide you through everything you need to get started with patching in vvvv across eight sessions. When enrolling in the Intermediate Foundations course, you can add the Beginner Class at a reduced rate, or just sign up for it individually.
+The additional [vvvv Beginner Class](https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026), led by [Gabriela Gordillo](https://vvvv.org/people/gabriela/) and [Rosi Grillmair](https://vvvv.org/people/remony/), will guide you through everything you need to get started with patching in vvvv across eight sessions. When enrolling in the Intermediate Foundations course, you can add the Beginner Class at a reduced rate, or just sign up for it individually.
 
 ## About the instructor
 
