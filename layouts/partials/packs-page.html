@@ -17,9 +17,9 @@
 
 <section id="Packs">
     <div class="container">
-        <div class="d-flex align-items-baseline mb-3">
-            <h2><b>{{$title}}</b></h2>
-            <div class="topLinks ml-auto">
+        <div class="d-flex flex-column flex-lg-row align-items-baseline mb-3">
+            <h2 class="order-2 order-lg-1 mt-lg-0 mt-3"><b>{{$title}}</b></h2>
+            <div class="order-1 order-lg-2 topLinks ml-lg-auto">
                 <a href="{{ $packs.RelPermalink }}" class="btn btn-light {{if eq $active "packs"}} active {{end}}">Packs</a> 
                 <a href="{{ $extensions.RelPermalink }}" class="btn btn-light {{if eq $active "extensions"}} active {{end}}">Extensions</a>
                 <a href="{{ $about.RelPermalink }}" class="btn btn-light {{if eq $active "about"}} active {{end}}">About</a>

@@ -88,9 +88,20 @@ blog = '/blog/:sections[1]/:slug'
 			[[params.menu.main]]
 				name = 'support'
 			[[params.menu.main]]
-				name = 'download'
+				name = 'Download vvvv'
+				url = '/download'
 				style = 'download'
-
+				icon = 'download'
+			[[params.menu.main]]
+				name = 'Packs for vvvv'
+				url = '/packs'
+				style = 'packs'
+				icon = 'pack'
+			[[params.menu.main]]
+				name = 'Extensions for vvvv'
+				url = '/extensions'
+				style= 'packs'
+				icon = 'extension'
 
 		# Hero section
 		[params.Hero]
@@ -116,8 +127,8 @@ blog = '/blog/:sections[1]/:slug'
 
 		[params.Download.gamma]
 
-		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39385/artifacts/content/vvvv_gamma_7.0-win-x64_setup.exe"
-		StableLinkARM = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39386/artifacts/content/vvvv_gamma_7.0-win-arm64_setup.exe"
+		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39869/artifacts/content/vvvv_gamma_7.1-win-x64_setup.exe"
+		StableLinkARM = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39870/artifacts/content/vvvv_gamma_7.1-win-arm64_setup.exe"
 		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
 		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
 
@@ -129,7 +140,7 @@ blog = '/blog/:sections[1]/:slug'
 		TabMac = "Mac / Parallels"
 
 		StableText  = "Download: Stable"
-		StableVersion = "Version: 7.0"
+		StableVersion = "Version: 7.1"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
