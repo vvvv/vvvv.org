@@ -24,7 +24,7 @@
     {{- $selectedStyle = "selected" -}}
 {{- end -}}
 {{- with index $ctx "url" -}}
-    {{- $url = . -}}
+    {{- $url = . | absLangURL -}}
 {{- end -}}
 {{- with index $ctx "localurl" -}}
     {{- $url = . | absLangURL -}}
@@ -33,7 +33,7 @@
 <li {{ if $style -}}class="{{- $style -}}"{{- end }}>
     <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }} title="{{$name}}">
         {{- if $icon -}}
-            {{- $icon.Content | safeHTML -}} <span class="d-md-none pl-3">{{$name}}</span>
+            {{- $icon.Content | safeHTML -}} <span class="title">{{$name}}</span>
         {{- else -}}
             {{- $name -}}
         {{- end -}}
