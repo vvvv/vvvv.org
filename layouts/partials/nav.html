@@ -6,10 +6,10 @@
 <div id="vvvv-navbar">
     {{ partial "logoAndToggler"}}
     <div id="vvvv-menu">
-        <ul class="d-flex">
+        <ul>
            {{- range .Site.Params.menu.main -}}
                 {{ partial "nav-item" (dict "ctx" . "selected" $selected) }}
-            {{- end -}}
+            {{- end -}}          
         </ul>
     </div>
 </div>
