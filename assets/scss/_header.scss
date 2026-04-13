@@ -83,6 +83,12 @@
         list-style: none;
         margin-right: .25rem;
         list-style: none;
+        display: flex;
+
+        .title{
+            display: none;
+            padding-left: 1rem;
+          }
   
         li {
           margin-right: 0;
@@ -128,7 +134,6 @@
           .selected
           {    
             color: #ffa800 !important;
-            stroke: #ffa800;
             background-color: transparent;
 
             svg{
@@ -201,6 +206,11 @@
 
         ul {
          flex-direction: column;
+
+         .title{
+            display: inline;
+          }
+
         }
 
         .download {
