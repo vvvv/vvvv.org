@@ -83,15 +83,23 @@
         list-style: none;
         margin-right: .25rem;
         list-style: none;
-        display: flex;
-        list-style: none;
   
         li {
           margin-right: 0;
           margin-left: 0;
           margin: 0;
           line-height: 1em;
-  
+
+          svg{
+              color: #aaa;
+              height: 1rem;
+
+              &:hover
+              {
+                color: #ff9000!important;
+              }
+          }
+
           a
           {
             list-style: none;
@@ -113,35 +121,53 @@
   
             &:hover
             {
-              color: #ff9000!important;
+              color: #ff9000 !important;
             }
           }
        
           .selected
           {    
             color: #ffa800 !important;
+            stroke: #ffa800;
             background-color: transparent;
+
+            svg{
+              color: #ffa800;
+            }
           }
         }
   
         .download {
-          padding-right: .5rem;
-          padding-left: .5rem;
-          margin: 0rem 0rem 0rem 1rem;
+          padding: 0 0.5rem;
+          margin: 0rem 1rem 0rem 1rem;
           border-radius: 6px;
           background-color: #000;
-          color: #ffa800;
           line-height: 1em;
           width: fit-content;
-          transition: all .35s;
-  
-          a {
-            color: #fff;
-            
-            &:hover
-            {
-              color: #ffa800 !important;
+          transition: all 0s;
+
+          .selected{
+            svg{
+              color: #ffa800;
+              stroke: #ffa800;
             }
+          }
+
+          &:hover
+          {
+            cursor: pointer;
+            svg{
+              color: #000 !important;
+              stroke: #000 !important;
+            }
+
+            background-color: #ffa800;
+          }
+          svg{
+              color: #fff;
+              height: 1rem;
+              stroke-width: 0.05rem;
+              stroke: #fff;
           }
         }
       }
@@ -178,8 +204,16 @@
         }
 
         .download {
+          padding: 0 !important;
           margin-top: 1rem !important;
           margin-left: 0rem !important;
+          
+          &:hover
+          {
+            span{
+              color: #000;
+            }
+          }
         }
     }
   }
