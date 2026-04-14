@@ -1,6 +1,6 @@
 {{ "<!-- Features -->" | safeHTML }}
 
-  {{ $features := site.GetPage "section" "features"}}
+  {{ $features := site.GetPage "features"}}
   {{ $feature := index (where $features.Pages ".Params.title" (.Scratch.Get "sectionTitle")) 0}}
   {{ $content := sort ($feature.Resources.ByType "page") ".Params.id" "asc"}}
 
