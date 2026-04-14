@@ -3,10 +3,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="{{ .Site.Params.author }}">
 <meta name="description" content="{{if isset .Params "description"}}{{.Params.description}}{{else}}{{.Site.Params.description}}{{end}}">
-<link rel="image_src" href="{{ partial "partial.ogimage" . }}" />
+<link rel="image_src" href="{{ partial "ogimage" . }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
 <link rel="shortlink" href="{{ .Permalink }}" />
-{{ partial "partial.ogdata" . }}
+{{ partial "ogdata" . }}
 <meta itemprop="name" content="{{ .Site.Params.title }}" />
 
 <title>{{ .Title }}</title>
