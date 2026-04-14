@@ -28,3 +28,15 @@ For embedding external media use these short codes:
 
 To run in the browser and to be able to access the site from the same local wifi (eg. checking on mobile), run hugo with:
 `hugo serve --bind 0.0.0.0 --baseURL http://IP:1313` where IP is your IP from `ipconfig`
+
+## Header:
+Hugo generates Header for Forum / Graybook / Store:
+http://vvvv.org/headers
+
+Forum/Graybook/Store have html from this generated page in their templates.
+
+CSS is requested live from:
+https://vvvv.org/scss/_header.min.css
+
+
+

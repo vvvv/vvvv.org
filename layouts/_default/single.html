@@ -24,7 +24,7 @@
                             {{ end }}
                     
                             {{ with .Params.author }}
-                                <span class="link mr-3">posted by: <a href="{{ printf "author/%s/" . | lower| relURL }}" >{{ . }}</a></span>
+                                <span class="link mr-3">posted by: <a href="{{ printf "author/%s/" . | relURL | urlize }}" >{{ . }}</a></span>
                             {{ end }}
                     
                             {{ if $guest }}
