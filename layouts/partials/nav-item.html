@@ -4,6 +4,17 @@
 {{- $url := index $ctx "name" | absLangURL -}}
 {{- $selectedStyle := "" -}}
 {{- $style := "" -}}
+{{- $icon := false -}}
+
+{{- with index $ctx "icon" -}}
+    {{- if eq . "pack" -}}
+        {{- $icon = resources.Get "img/icons/Box24Filled.svg" -}}
+    {{- else if eq . "download" -}}
+        {{- $icon = resources.Get "img/icons/ArrowDownload24Filled.svg" -}}
+    {{- else -}}
+        {{- $icon = resources.Get "img/icons/ExtensionFilled.svg" -}}        
+    {{- end -}}
+{{- end -}}
 
 {{- with index $ctx "style" -}}
     {{- $style = . -}}
@@ -20,5 +31,11 @@
 {{- end -}}
 
 <li {{ if $style -}}class="{{- $style -}}"{{- end }}>
-    <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }}>{{- $name -}}</a>
+    <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }} title="{{$name}}">
+        {{- if $icon -}}
+            {{- $icon.Content | safeHTML -}} <span class="title">{{$name}}</span>
+        {{- else -}}
+            {{- $name -}}
+        {{- end -}}
+    </a>
 </li>

@@ -88,9 +88,20 @@ blog = '/blog/:sections[1]/:slug'
 			[[params.menu.main]]
 				name = 'support'
 			[[params.menu.main]]
-				name = 'download'
+				name = 'Download vvvv'
+				url = '/download'
 				style = 'download'
-
+				icon = 'download'
+			[[params.menu.main]]
+				name = 'Packs for vvvv'
+				url = '/packs'
+				style = 'packs'
+				icon = 'pack'
+			[[params.menu.main]]
+				name = 'Extensions for vvvv'
+				url = '/extensions'
+				style= 'packs'
+				icon = 'extension'
 
 		# Hero section
 		[params.Hero]

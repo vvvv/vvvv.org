@@ -9,7 +9,7 @@
         <ul>
            {{- range .Site.Params.menu.main -}}
                 {{ partial "nav-item" (dict "ctx" . "selected" $selected) }}
-            {{- end -}}          
+            {{- end -}}
         </ul>
     </div>
 </div>
