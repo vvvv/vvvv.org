@@ -24,7 +24,7 @@
     {{- $selectedStyle = "selected" -}}
 {{- end -}}
 {{- with index $ctx "url" -}}
-    {{- $url = . -}}
+    {{- $url = . | absLangURL -}}
 {{- end -}}
 {{- with index $ctx "localurl" -}}
     {{- $url = . | absLangURL -}}
