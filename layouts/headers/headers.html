@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html class="scroll-padding">
     <head>
-        {{- $CSS := resources.Get "scss/_header.scss" | toCSS | minify -}}
+        {{ $opts := dict "outputStyle" "compressed" "transpiler" "dartsass"}}
+        {{- $CSS := resources.Get "scss/_header.scss" | css.Sass $opts -}}
         <link rel="stylesheet" href="{{- $CSS.RelPermalink | absLangURL }}" type="text/css">
         {{- $JS := resources.Get "js/header.js" | js.Build | minify -}}
         <script type="text/javascript" src="{{- $JS.RelPermalink | absLangURL }}"></script>

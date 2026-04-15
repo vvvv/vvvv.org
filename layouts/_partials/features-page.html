@@ -1,3 +1,5 @@
+{{ $sections := sort (site.GetPage "section" "features").Pages ".Params.id" "asc" }}
+
 {{ "<!-- Features -->" | safeHTML }}
 <section id="Features">
     <div class="container">
@@ -13,8 +15,6 @@
           <div class="col-12 d-flex justify-content-center">
             <ul class="nav nav-pills featuresMenu mt-3" id="feature-page-pills">
               <!-- Overview Menu -->
-              {{ $features := site.GetPage "section" "features"}}
-              {{ $sections := sort (site.GetPage "section" "features").Pages ".Params.id" "asc" }}
               {{ range $index, $value := $sections }}
               <li class="nav-item mx-md-1">
                 <a class="nav-link" href="#Features{{.Params.id}}">{{ .Title }}</a>
