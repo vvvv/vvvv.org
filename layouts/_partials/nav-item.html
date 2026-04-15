@@ -1,6 +1,8 @@
 {{- $ctx := .ctx -}}
 {{- $selected := .selected -}}
 {{- $name := index $ctx "name" -}}
+{{- $text := index $ctx "text" -}}
+{{- $titleHidden := index $ctx "titleHiddenOnDesktop" -}}
 {{- $url := index $ctx "name" | absLangURL -}}
 {{- $selectedStyle := "" -}}
 {{- $style := "" -}}
@@ -30,10 +32,10 @@
     {{- $url = . | absLangURL -}}
 {{- end -}}
 
-<li {{ if $style -}}class="{{- $style -}}"{{- end }}>
+<li {{ if $style -}}class="{{- $style -}}"{{- end }} style="line-height: 1em;">
     <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }} title="{{$name}}">
         {{- if $icon -}}
-            {{- $icon.Content | safeHTML -}} <span class="title">{{$name}}</span>
+            {{- $icon.Content | safeHTML -}} <span class="title {{if $titleHidden}}hidden{{end}}">{{default $name $text}}</span>
         {{- else -}}
             {{- $name -}}
         {{- end -}}
