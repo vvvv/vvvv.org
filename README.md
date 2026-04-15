@@ -19,8 +19,9 @@ For embedding external media use these short codes:
 * Youtube `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
  
 ## Local build:
-* [Download Hugo Extended](https://github.com/gohugoio/hugo/releases/tag/v0.145.0), **Version 0.145**, unzip and place that into your programs folder,
-* Add it to your path (environment variables)
+* [Download Hugo](https://github.com/gohugoio/hugo/releases/), unzip and place that into some folder
+* [Download Dart-Sass](https://github.com/sass/dart-sass/releases/), unzip and place that into the same folder
+* Add this folder to your PATH (environment variables)
 * Powershell: 
   * `cd C:\dev\vvvv.org`
   * `hugo server`
