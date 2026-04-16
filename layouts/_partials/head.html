@@ -43,11 +43,8 @@
 <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" type="text/css">
 {{ "<!-- Custom SASS -->" | safeHTML }}
 
-{{ $opts := dict
-    "outputStyle" "compressed"
-    "transpiler" "dartsass"
-}}
-{{ $style := resources.Get "scss/main.scss" | css.Sass $opts }}
+{{ $opts := dict "outputStyle" "compressed" "transpiler" "dartsass"}}
+{{ $style := resources.Get "scss/main.scss" | css.Sass $opts | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $style.Permalink | relURL }}" type="text/css">
 
 {{ "<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->" | safeHTML }}
