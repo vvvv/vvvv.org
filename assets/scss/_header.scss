@@ -1,6 +1,7 @@
 @use 'shared' as theme;
 
 $strongOrange: #ff9000;
+$strongOrangeHover: #ffa600;
 
 //Hack for Forum's sidepanels.
 // --header-bottom is calculated by js: it is the bottom of the #vvvv-navbar
@@ -105,7 +106,6 @@ $strongOrange: #ff9000;
           svg{
               color: #aaa;
               height: 16px;
-              transform: translateY(-2px);
 
               &:hover
               {
@@ -117,6 +117,8 @@ $strongOrange: #ff9000;
           {
             list-style: none;
             line-height: 13px;
+            font-size: 13px;
+            font-weight: 700;
             box-sizing: border-box;
             background-color: transparent;
             text-decoration: none;
@@ -126,9 +128,10 @@ $strongOrange: #ff9000;
             display: block;
             border-bottom: none;
             text-transform: uppercase;
-            font-size: 13px;
-            font-weight: 700;
             color: #fff;
+
+            display: flex;
+            align-items: center;
   
             &:hover
             {
@@ -151,30 +154,38 @@ $strongOrange: #ff9000;
           padding: 0 0.5rem;
           margin: 0rem 1rem 0rem 1rem;
           border-radius: 6px;
-          background-color: #000;
+          background-color: $strongOrange;
           line-height: 1em;
           width: fit-content;
           transition: all 0s;
 
-          .selected{
-            svg{
-              color: $strongOrange;
-              stroke: $strongOrange;
-            }
+          // .selected{
+          //   svg{
+          //     color: $strongOrange;
+          //     stroke: $strongOrange;
+          //   }
+          // }
+
+          a:hover, svg:hover{
+            color: #fff !important;
           }
 
-          a:hover{
-            color: #000;
+          &:hover {
+            background-color: $strongOrangeHover;
           }
 
-          &:hover
-          {
-            svg{
-              color: $strongOrange;
-              stroke: $strongOrange;
-            }
+          // a:hover{
+          //   color: #000;
+          // }
 
-          }
+          // &:hover
+          // {
+          //   svg{
+          //     color: $strongOrange;
+          //     stroke: $strongOrange;
+          //   }
+
+          // }
           
           svg{
               color: #fff;
