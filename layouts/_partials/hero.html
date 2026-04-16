@@ -1,16 +1,53 @@
 {{ "<!-- HEADER -->" | safeHTML }}
+
+{{- $features := (site.GetPage "features").Pages -}}
+{{- $features = sort $features ".Params.id" "asc" -}}
+{{- $arrow := resources.Get "svg/arrow.svg" -}}
+
 <header class="d-flex align-items-center">
-  <div id="hero-text" class="ml-3 ml-md-5">
-    <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
-    <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
-  </div>
   <div id="hero-content">
-    <img id="hero-image"
-        src="/img/header_70_5_3072.jpg" 
-        srcset="/img/header_70_5_3072.jpg 3072w"
-        sizes="(max-width: 1024px) 1024px,
-               (max-width: 1500px) 1800px,
-               3000px"/>
+    <div id="hero-image">
+      <img src="/img/header_70_5_3072.jpg" 
+          srcset="/img/header_70_5_3072.jpg 3072w"
+          sizes="(max-width: 1024px) 1024px,
+                (max-width: 1500px) 1800px,
+                3000px"/>
+    </div>
+    <div id="hero-box">
+      <div id="hero-text" class="ml-2">
+        <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
+        <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
+        <hr/>
+        <div class="featureTitle">
+          {{ range $index, $elem:=$features }}
+            <section class="{{ if eq $index 0 }}selected visible{{ end }}" 
+                {{ with .Params.image }}
+                  {{with .url}} data-img="{{($elem.Resources.GetMatch .).RelPermalink | absURL}}" {{end}}
+                  {{with .title}} data-img-title="{{.}}" {{end}}
+                  {{with .author}} data-img-author="{{.}}" {{end}}
+                  {{with .photographer}} data-img-photographer="{{.}}" {{end}}
+                {{end}}
+              >
+              {{ .Title }}<br/>
+              {{ with .Params.url}}
+                <a href="{{.}}">Read more</a>
+              {{ end }}
+            </section>
+          {{ end }}
+        </div>
+        <ul class="pagination d-flex">
+          {{ range $index, $elem:=$features }}
+            <li {{if eq $index 0}}class="selected"{{end}} data-index="{{$index}}"></li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="arrows">
+        {{ if true }}
+          <div>{{- $arrow.Content | safeHTML -}}</div>
+          <div class="right">{{- $arrow.Content | safeHTML -}}</div>
+        {{ end }}  
+      </div>
+    </div>
     <div id="hero-attribution">
       <div class="title">7.0</div>
       <div class="author">Arístides García</div>
