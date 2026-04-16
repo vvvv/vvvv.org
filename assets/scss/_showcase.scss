@@ -1,3 +1,5 @@
+@use 'shared'  as theme;
+
 #Showcase
 {
 
@@ -36,7 +38,7 @@
     opacity: 0.5;
   }
   .swiper-pagination-bullet-active {
-    background-color: $orange;
+    background-color: theme.$orange;
     opacity: 1;
   }
   

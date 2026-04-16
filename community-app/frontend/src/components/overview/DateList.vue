@@ -6,7 +6,7 @@ const { data, isPast = false } = defineProps(['data', 'isPast']);
 
 <template>
     <div v-if="data.length" class="dates">
-        <template v-for="(item, index) in data.slice(0, 3)">
+        <template v-for="(item, index) in data.slice(0, 4)">
             <div class="mt-0 mb-0 row border-bottom mb-2 pb-3 d-flex align-items-center" :class="{ 'text-muted': item.past }">
                 <div class="col-2 col-lg-1 pl-0 mr-lg-0 pr-lg-0">
                     <a :href="item.link">
