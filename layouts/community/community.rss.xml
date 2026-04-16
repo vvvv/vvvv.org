@@ -4,7 +4,7 @@
 {{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
 {{- $lastMonthInReview := index $pages 0 -}}
 {{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
-{{- $dates := first 3 (sort $blogDates "Date" "desc") -}}
+{{- $dates := first 4 (sort $blogDates "Date" "desc") -}}
 {{- $siteRes := .Resources -}}
 
 <rss version="2.0"
