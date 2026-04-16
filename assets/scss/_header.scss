@@ -139,10 +139,11 @@ $strongOrangeHover: #ffa600;
             }
           }
        
-          .selected
+          &.selected
           {    
-            color: $strongOrange !important;
-            background-color: transparent;
+            a{
+              color: $strongOrange !important;
+            }
 
             svg{
               color: $strongOrange;
@@ -159,12 +160,20 @@ $strongOrangeHover: #ffa600;
           width: fit-content;
           transition: all 0s;
 
-          // .selected{
-          //   svg{
-          //     color: $strongOrange;
-          //     stroke: $strongOrange;
-          //   }
-          // }
+          &.selected{
+            a{
+              color: $strongOrange !important;
+            }
+
+            background-color: #000;
+
+            svg{
+              color: $strongOrange;
+              stroke: $strongOrange;
+            }
+
+            pointer-events: none;
+          }
 
           a:hover, svg:hover{
             color: #fff !important;
@@ -173,20 +182,7 @@ $strongOrangeHover: #ffa600;
           &:hover {
             background-color: $strongOrangeHover;
           }
-
-          // a:hover{
-          //   color: #000;
-          // }
-
-          // &:hover
-          // {
-          //   svg{
-          //     color: $strongOrange;
-          //     stroke: $strongOrange;
-          //   }
-
-          // }
-          
+         
           svg{
               color: #fff;
               stroke-width: 0.05rem;

@@ -32,8 +32,8 @@
     {{- $url = . | absLangURL -}}
 {{- end -}}
 
-<li {{ if $style -}}class="{{- $style -}}"{{- end }} style="line-height: 1em;">
-    <a href="{{- $url -}}" {{ if $selectedStyle }} class="selected" {{ end }} title="{{$name}}">
+<li class="{{- $style -}}{{if $selectedStyle}} selected{{end}}" style="line-height: 1em;">
+    <a href="{{- $url -}}" title="{{$name}}">
         {{- if $icon -}}
             {{- $icon.Content | safeHTML -}} <span class="title {{if $titleHidden}}hidden{{end}}">{{default $name $text}}</span>
         {{- else -}}
