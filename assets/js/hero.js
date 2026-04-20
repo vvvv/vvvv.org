@@ -76,7 +76,6 @@ if (window.location.pathname === '/')
 
         function setup()
         {
-
             stateEvent.addEventListener('changed:index', (e)=>{
 
                 console.log (e);
@@ -101,6 +100,10 @@ if (window.location.pathname === '/')
                 const activeTitles = slides.length - 2;
                 slides.forEach((slide, index)=>{
                     slide.addEventListener('click', ()=>{
+
+                        if (appState.isAnimating)
+                            return;
+
                         switch (index)
                         {
                             case 0:
@@ -135,6 +138,10 @@ if (window.location.pathname === '/')
             {
                 featureLines.forEach((line, index) => {
                     line.addEventListener('click', (e) => {
+
+                        if (appState.isAnimating)
+                            return;
+
                         appState.index = index;
                     });
                 });
@@ -147,6 +154,10 @@ if (window.location.pathname === '/')
 
                 arrows.forEach(arrow => {
                     arrow.addEventListener('click', ()=>{
+
+                        if (appState.isAnimating)
+                            return;
+
                         const nextIndex = arrow.classList.contains('right') ? (appState.index+1) % activeTitles : appState.index-1 < 0 ? activeTitles-1 : appState.index-1;
                         appState.index = nextIndex;
                     })
