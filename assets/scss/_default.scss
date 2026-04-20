@@ -1,33 +1,10 @@
 $strongOrange: #ff9000;
 $strongOrangeHover: #ffa600;
 $orange: $strongOrange; //#c0830a;
-$orange-link-hover: #ff8800;
-$orange-hover: #ffa600;//#ee4b28;
+$orange-link-hover: $strongOrangeHover; //#ff8800;
+$orange-hover: $strongOrangeHover; //#ee4b28;
 $header-dark: #282828;
+$blue: #4489CC;
 
 $sans: "Open Sans", sans-serif;
 $serif: "Roboto Slab", serif;
-
-html{
-  scroll-behavior: smooth;
-}
-
-.btn-xl
-{
-    padding: 10px 20px;
-}
-
-.btn
-{
-    border-radius: 6px;
-}
-
-.btn-default
-{
-    border: none;
-}
-
-.mediaShadow
-{
-  box-shadow: 0px 7px 25px 7px rgba(0, 0, 0, 0.4);
-}
