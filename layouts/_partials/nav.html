@@ -1,4 +1,4 @@
-{{ $selected := $.Params.title }}
+{{ $selected := default $.Params.title $.Section }}
 {{ with site.Store.Get "SelectedItem" }}
     {{ $selected = .}}
     {{ site.Store.Delete "SelectedItem"}}
