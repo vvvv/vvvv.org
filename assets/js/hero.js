@@ -3,72 +3,15 @@ if (window.location.pathname === '/')
 {
     document.addEventListener("DOMContentLoaded", async () => {        
     
-        const heroContent = document.getElementById('hero-content');
-        const imageTag = document.getElementById('hero-image').getElementsByTagName('img')[0];
+        const hero = document.getElementById('hero-content');
+        const heroImage = document.getElementById('hero-image'); 
+        const imageTag = heroImage.getElementsByTagName('img')[0];
 
-        const title = heroContent.getElementsByClassName('title')[0];
-        const author = heroContent.getElementsByClassName('author')[0];
-        const photographer = heroContent.getElementsByClassName('photographer')[0];
-
-        let images = [];
-        let currentIndex = 0;
-
-        function setHeroImage(index)
-        {
-            const image = images[index];
-
-            imageTag.setAttribute('src', image.url);
-            imageTag.setAttribute('srcset', `${image.url}, 3072w`);
-
-            title.textContent = image.title;
-            author.textContent = image.author;
-            photographer.textContent = image.photographer;
-        }
-
-        function makeTagVisible()
-        {
-            heroContent.style.visibility = 'visible';
-            heroContent.style.opacity = '1';
-        }
-    
-        imageTag.addEventListener('load', makeTagVisible);
-
-        imageTag.addEventListener('click', ()=>{
-            currentIndex = (currentIndex + images.length + 1) % images.length;
-            setHeroImage(currentIndex);
-        });
-
-
-        // try{
-        //     images = await fetchHero();
-        //     currentIndex=Math.floor(Math.random()*(images.length));
-        //     setHeroImage(currentIndex);
-        // }
-        // catch (error) {
-        //     makeTagVisible();
-        //     console.log ("Can't fetch project images");
-        // }
-
-        async function fetchHero()
-        {
-            const response = await fetch('https://data.vvvv.org/items/Hero');
-
-            if (!response.ok)
-            {
-                const json = await response.json();
-                throw new Error (json);
-            }
-
-            const json = await response.json();
-
-            return json.data.map (d=>{
-                return {
-                    url: d.image,
-                    title: d.title,
-                    author: d.author,
-                    photographer: d.photographer,
-                }
-            })
+        const attr = document.getElementById('hero-attribution');
+        const attribution = {
+            title: attr.getElementsByClassName('title')[0],
+            author: attr.getElementsByClassName('author')[0],
+            photographer: attr.getElementsByClassName('photographer')[0]
         }
 
         const heroBox = document.getElementById('hero-box');
@@ -77,57 +20,227 @@ if (window.location.pathname === '/')
         const featureLines = Array.from(heroBox.getElementsByTagName('li'));
         const arrows = Array.from(heroBox.getElementsByClassName('arrows')[0].getElementsByTagName('div'));
 
-        let currentFeature = 0;
+        const track = document.getElementById('track');
+        const slides = Array.from(track.getElementsByClassName('slide'));
+        const total = slides.length;
 
-        if (arrows.length)
-        {
-            const count = featureLines.length;
-            arrows.forEach(arrow => {
-                arrow.addEventListener('click', ()=>{
-                    const nextIndex = arrow.classList.contains('right') ? (currentFeature+1) % count : currentFeature-1 < 0 ? count-1 : currentFeature-1;
-                    featureLines[nextIndex].click();
-                })
-            })
+        let currentFeature = 1;
+        let animating = false;
+
+        let images = [];
+        let currentIndex = 0;
+
+        const stateEvent = new EventTarget();
+
+        const appStateCore = {
+            index: -1,
+            lastIndex: -1,
+            isAnimating: false
         }
 
-        if (featureTexts.length)
-        {
-            featureTexts.forEach(text => {
-                
-                const img = text.dataset.img;
-                if (img) 
-                    images.push({
-                        url: img,
-                        title: "",
-                        author: "",
-                        photographer: "",
+        const appState = new Proxy(appStateCore,{
+                set (target, prop, value) {
+
+                    if (prop === 'index')
+                    {
+                        target['lastIndex'] = Math.max(target[prop], 0);
+                        target[prop] = value;
+                    }
+                    
+                    target[prop] = value;
+
+                    const event = new CustomEvent (`changed:${prop}`, {
+                        detail: {
+                            value: value,
+                            state: {...target}
+                        } 
                     });
 
-                text.addEventListener('transitionend', ()=>{
-                    if (!text.classList.contains('selected'))
-                    {
-                        text.classList.remove('visible');
-                    }
-                })
+                    stateEvent.dispatchEvent(event);
 
-            });
-            setHeroImage(0);
-        }
+                    return true;
+                }
+        });
 
-        if (featureLines.length)
+        setup();
+        init();
+
+        function init()
         {
-            featureLines.forEach(line => {
-                line.addEventListener('click', (e) => {
-                    featureLines[currentFeature].classList.remove('selected');
-                    e.target.classList.add('selected');
-                    currentFeature = e.target.dataset.index;
-                    featureTexts.forEach(t => t.classList.remove('selected'));
-                    featureTexts[currentFeature].classList.add('selected', 'visible');
-                    
-                    setHeroImage(currentFeature);
-                });
-            });
+            updateTrackWithoutAnimation(0);
+            slides[1].classList.toggle('active');
+            appState.index = 0;
+            setAttribution(1);
+            hero.style.setProperty('opacity', 1);
         }
+
+        function setup()
+        {
+
+            stateEvent.addEventListener('changed:index', (e)=>{
+
+                console.log (e);
+
+                const { value, state } = e.detail;
+
+                if (state.isAnimating || value === state.lastIndex)
+                    return;
+
+                animate(value);
+
+            })
+
+            //setup track:
+            track.addEventListener('transitionend', ()=>{
+                appState.isAnimating = false;
+            })
+
+            //setup images:
+            if (slides.length)
+            {
+                const activeTitles = slides.length - 2;
+                slides.forEach((slide, index)=>{
+                    slide.addEventListener('click', ()=>{
+                        switch (index)
+                        {
+                            case 0:
+                                appState.index = activeTitles - 1;
+                                break;
+                            case slides.length - 1:
+                                appState.index = 0;
+                                break;    
+                            default: 
+                                appState.index = index - 1;    
+                        }
+                    })
+                })
+            }
+
+
+            //setup texts
+            if (featureTexts.length)
+            {
+                featureTexts.forEach(text => {
+                    text.addEventListener('transitionend', ()=>{
+                        if (!text.classList.contains('selected'))
+                        {
+                            text.classList.remove('visible');
+                        }
+                    })
+                });            
+            }
+
+            //setup featureLines 
+            if (featureLines.length)
+            {
+                featureLines.forEach((line, index) => {
+                    line.addEventListener('click', (e) => {
+                        appState.index = index;
+                    });
+                });
+            }
+
+            //setup arrows:
+            if (arrows.length)
+            {
+                const activeTitles = slides.length - 2;
+
+                arrows.forEach(arrow => {
+                    arrow.addEventListener('click', ()=>{
+                        const nextIndex = arrow.classList.contains('right') ? (appState.index+1) % activeTitles : appState.index-1 < 0 ? activeTitles-1 : appState.index-1;
+                        appState.index = nextIndex;
+                    })
+                })
+            }
+
+            //setup resize:
+            window.addEventListener('resize', ()=>{
+                updateTrackWithoutAnimation(appState.index);
+            });   
+        }
+
+        function updateTrackWithoutAnimation(index)
+        {
+            track.classList.add('no-transition');              
+            updateTrack(index);
+            track.offsetWidth;
+            track.classList.remove('no-transition');
+        }
+
+
+        function animate(index) {
+
+            appState.isAnimating = true;
+            
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index + 1);
+            });
+
+            featureLines[appState.lastIndex].classList.remove('selected');
+            featureLines[index].classList.add('selected');
+            
+            featureTexts[appState.lastIndex].classList.remove('selected');
+            featureTexts[index].classList.add('selected', 'visible');
+
+            attribution.title.text = featureTexts[index].dataset.title;
+            attribution.author.text = featureTexts[index].dataset.author;
+            attribution.photographer.text = featureTexts[index].dataset.photographer;
+
+            setAttribution(index);
+
+            updateTrack(index);
+        }
+
+        function updateTrack(index) {
+
+            arrows[0].classList.toggle('disabled', index === 0);
+            arrows[1].classList.toggle('disabled', index === total - 3);
+
+            const heroW  = heroImage.offsetWidth;
+            const slideW = heroW * 0.80;
+            const offset = (heroW - slideW) / 2;
+            track.style.transform = `translateX(${offset - index * slideW - slideW }px)`;
+        }
+
+        function setAttribution(index)
+        {
+            attribution.title.innerHTML = featureTexts[index].dataset.title;
+            attribution.author.innerHTML = featureTexts[index].dataset.author;
+            attribution.photographer.innerHTML = featureTexts[index].dataset.photographer || "";
+        }
+
+
+        // function makeTagVisible()
+        // {
+        //     hero.style.visibility = 'visible';
+        //     hero.style.opacity = '1';
+        // }
+
+
+
+
+        // async function fetchHero()
+        // {
+        //     const response = await fetch('https://data.vvvv.org/items/Hero');
+
+        //     if (!response.ok)
+        //     {
+        //         const json = await response.json();
+        //         throw new Error (json);
+        //     }
+
+        //     const json = await response.json();
+
+        //     return json.data.map (d=>{
+        //         return {
+        //             url: d.image,
+        //             title: d.title,
+        //             author: d.author,
+        //             photographer: d.photographer,
+        //         }
+        //     })
+        // }
+
     })
 }
     

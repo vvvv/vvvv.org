@@ -1,0 +1,21 @@
+
+{{ $ctx := .ctx }}
+{{ $hero := .hero }}
+
+{{ with $ctx.Params.image }}
+    {{ $src := .src }} 
+        {{with $src}}
+            {{ $src = ($hero.Resources.GetMatch .).RelPermalink | absURL }}
+        {{ end }}
+        <div class="slide"
+                {{with .title}} data-img-title="{{.}}" {{end}}
+                {{with .author}} data-img-author="{{.}}" {{end}}
+                {{with .photographer}} data-img-photographer="{{.}}" {{end}}
+            >
+            <img  src="{{$src}}" 
+            srcset="{{$src}}"
+            sizes="30vw"
+            loading="lazy"
+            alt="{{.title}}"/>
+        </div>
+{{ end }}

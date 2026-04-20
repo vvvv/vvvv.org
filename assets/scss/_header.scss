@@ -1,8 +1,5 @@
 @use 'shared' as theme;
 
-$strongOrange: #ff9000;
-$strongOrangeHover: #ffa600;
-
 //Hack for Forum's sidepanels.
 // --header-bottom is calculated by js: it is the bottom of the #vvvv-navbar
 .discourse-root .menu-panel.slide-in {
@@ -109,7 +106,7 @@ $strongOrangeHover: #ffa600;
 
               &:hover
               {
-                color: $strongOrange !important;
+                color: theme.$strongOrange !important;
               }
           }
 
@@ -135,18 +132,18 @@ $strongOrangeHover: #ffa600;
   
             &:hover
             {
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
             }
           }
        
           &.selected
           {    
             a{
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
             }
 
             svg{
-              color: $strongOrange;
+              color: theme.$strongOrange;
             }
           }
         }
@@ -155,21 +152,21 @@ $strongOrangeHover: #ffa600;
           padding: 0 0.5rem;
           margin: 0rem 1rem 0rem 1rem;
           border-radius: 6px;
-          background-color: $strongOrange;
+          background-color: theme.$strongOrange;
           line-height: 1em;
           width: fit-content;
           transition: all 0s;
 
           &.selected{
             a{
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
             }
 
             background-color: #000;
 
             svg{
-              color: $strongOrange;
-              stroke: $strongOrange;
+              color: theme.$strongOrange;
+              stroke: theme.$strongOrange;
             }
 
             pointer-events: none;
@@ -180,7 +177,7 @@ $strongOrangeHover: #ffa600;
           }
 
           &:hover {
-            background-color: $strongOrangeHover;
+            background-color: theme.$strongOrangeHover;
           }
          
           svg{
