@@ -14,12 +14,12 @@ thumb: "ss26_vvvv_beginner-thumb.jpg"
 
 Creative technology is evolving fast. Tools that enable real‑time visuals, interactive installations, and rapid prototyping are becoming essential skills across design, art, and digital culture. If you’ve been wanting to step into this world, the VVVV Beginner Class is one of the most accessible and thoughtfully designed ways to start.
 
-Our next cohort begins next Monday on April 27, and we’re opening the doors for a few more participants who want to build a solid foundation in visual programming.
+Our next cohort **begins next Monday on April 27**, and we’re opening the doors for a few more participants who want to build a solid foundation in visual programming.
 
 **Last call - sign up here:**<br />
 https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026
 
-Use the voucher code *boostyourvvvv* at checkout to get 30% off — both on the Beginner Class alone and on the bundle with the [vvvv Intermediate Foundations Class](https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026).
+Use the voucher code ***boostyourvvvv*** at checkout to **get 30% off** — both on the Beginner Class alone and on the bundle with the [vvvv Intermediate Foundations Class](https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026).
 
 ## What will I learn?
 
