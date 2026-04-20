@@ -2,20 +2,36 @@
 {{ $ctx := .ctx }}
 {{ $hero := .hero }}
 
+{{ $widths := slice 800 1024 1200 }}
+{{ $srcset := slice }}
+
 {{ with $ctx.Params.image }}
-    {{ $src := .src }} 
-        {{with $src}}
-            {{ $src = ($hero.Resources.GetMatch .).RelPermalink | absURL }}
+    {{ $img := $ctx.Params.image }}
+    {{ $link := "" }}
+        {{with .src}}
+            {{ $src := $hero.Resources.GetMatch . }}
+            {{ $link = $src.RelPermalink | absURL }}
+
+            {{ range $widths }}
+                {{ $resized := $src.Resize (printf "%dx webp q80" .) }}
+                {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink . ) }}
+            {{ end }}
+
+            {{ $originalWebp := $src.Process "webp q80" }}
+            {{ $srcset = $srcset | append (printf "%s %dw" $originalWebp.RelPermalink $originalWebp.Width) }}
+
+            <div class="slide"
+                    {{with $img.title}} data-img-title="{{.}}" {{end}}
+                    {{with $img.author}} data-img-author="{{.}}" {{end}}
+                    {{with $img.photographer}} data-img-photographer="{{.}}" {{end}}
+                >
+                <img  src="{{ ($src.Resize "800x webp q90").RelPermalink }}" 
+                srcset="{{ delimit $srcset ", " }}"
+                alt="{{$img.title}}"
+                sizes="100vw"
+                loading="lazy"
+                />
+            </div>
         {{ end }}
-        <div class="slide"
-                {{with .title}} data-img-title="{{.}}" {{end}}
-                {{with .author}} data-img-author="{{.}}" {{end}}
-                {{with .photographer}} data-img-photographer="{{.}}" {{end}}
-            >
-            <img  src="{{$src}}" 
-            srcset="{{$src}}"
-            sizes="30vw"
-            loading="lazy"
-            alt="{{.title}}"/>
-        </div>
+
 {{ end }}
