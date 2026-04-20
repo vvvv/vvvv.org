@@ -170,6 +170,7 @@ header {
                 opacity: 0;
                 transition: 0.2s opacity ease;
                 display: none;
+            
 
                 &.selected{
                     opacity: 1;
@@ -179,19 +180,25 @@ header {
                     display: block;
                 }
 
-                a{
-                    border: none;
-                    height: 1rem;
-                    color: #000;
-                    background-color: #fff;
-                    font-size: 1rem;
-                    padding: 0rem 1rem;
-                    border-radius: 1px;
-                    transition: 0.2s background-color ease;
-                    line-height: 1.5rem;
-
+                a {
                     &:hover{
-                        background-color: #bbb;
+                        color: inherit;
+                    }
+
+                    &.button{
+                        border: none;
+                        height: 1rem;
+                        color: #000;
+                        background-color: #fff;
+                        font-size: 1rem;
+                        padding: 0rem 1rem;
+                        border-radius: 1px;
+                        transition: 0.2s background-color ease;
+                        line-height: 1.5rem;
+
+                        &:hover{
+                            background-color: #bbb;
+                        }
                     }
                 }
             }

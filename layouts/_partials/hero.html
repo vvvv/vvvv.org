@@ -8,15 +8,11 @@
   <div id="hero-content">
     <div id="hero-image">
       <div id="track">
-        {{ if true }}
-          {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (last 1 $features) 0)) }}
-        {{ end }}
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (last 1 $features) 0)) }}
         {{ range $index, $elem:=$features }}
           {{ partial "hero-slide" (dict "hero" $hero "ctx" .) }}
         {{ end }}
-        {{ if true }}
-          {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
-        {{ end }}
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
       </div>
     </div>
     <div id="hero-box">
@@ -33,10 +29,13 @@
                   {{with .photographer}} data-photographer="{{.}}" {{end}}
                 {{end}}
               >
-              {{ .Title }}<br/>
               {{ with .Params.button}}
-                <a href="{{.url}}">{{default "Read more" .title }}</a>
+                <a href="{{.url}}" alt="{{$elem.Params.title}}" {{if .isExternal}}target="_blank"{{end}}>{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</a><br/>
+                <a href="{{.url}}" class="button" {{if .isExternal}}target="_blank"{{end}}>{{default "Read more" .title }}</a>
+              {{ else }}
+                {{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}
               {{ end }}
+              </div>
             </section>
           {{ end }}
         </div>
@@ -47,15 +46,13 @@
         </ul>
       </div>
       <div class="arrows">
-        {{ if true }}
-          <div>{{- $arrow.Content | safeHTML -}}</div>
-          <div class="right">{{- $arrow.Content | safeHTML -}}</div>
-        {{ end }}  
+        <div>{{- $arrow.Content | safeHTML -}}</div>
+        <div class="right">{{- $arrow.Content | safeHTML -}}</div> 
       </div>
     </div>
     <div id="hero-attribution">
-      <div class="title">7.0</div>
-      <div class="author">Arístides García</div>
+      <div class="title"></div>
+      <div class="author"></div>
       <div class="photographer"></div>
     </div>
   </div>

@@ -70,7 +70,7 @@ if (window.location.pathname === '/')
             updateTrackWithoutAnimation(0);
             slides[1].classList.toggle('active');
             appState.index = 0;
-            setAttribution(1);
+            setAttribution(0);
             hero.style.setProperty('opacity', 1);
         }
 
@@ -215,42 +215,11 @@ if (window.location.pathname === '/')
 
         function setAttribution(index)
         {
-            attribution.title.innerHTML = featureTexts[index].dataset.title;
-            attribution.author.innerHTML = featureTexts[index].dataset.author;
+            attr.style.display = featureTexts[index].dataset.title || featureTexts[index].dataset.author || featureTexts[index].dataset.photographer ? '' : 'none';
+            attribution.title.innerHTML = featureTexts[index].dataset.title || "";
+            attribution.author.innerHTML = featureTexts[index].dataset.author || "";
             attribution.photographer.innerHTML = featureTexts[index].dataset.photographer || "";
         }
-
-
-        // function makeTagVisible()
-        // {
-        //     hero.style.visibility = 'visible';
-        //     hero.style.opacity = '1';
-        // }
-
-
-
-
-        // async function fetchHero()
-        // {
-        //     const response = await fetch('https://data.vvvv.org/items/Hero');
-
-        //     if (!response.ok)
-        //     {
-        //         const json = await response.json();
-        //         throw new Error (json);
-        //     }
-
-        //     const json = await response.json();
-
-        //     return json.data.map (d=>{
-        //         return {
-        //             url: d.image,
-        //             title: d.title,
-        //             author: d.author,
-        //             photographer: d.photographer,
-        //         }
-        //     })
-        // }
 
     })
 }

@@ -4,6 +4,7 @@ weight: 0
 button:
     title: "Read more"
     url: https://thenodeinstitute.org/courses/vvvv-beginner-class-summer-2026
+    isExternal: true
 image: 
     src: beginnerclass.jpg
     title: 

@@ -1,5 +1,7 @@
 ---
-title: "vvvv gamma 7.1 is out!"
+title: |-
+    Out now:
+    vvvv gamma 7.1
 weight: 2
 button:
     title: Download
