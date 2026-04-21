@@ -14,6 +14,8 @@ if (window.location.pathname === '/')
             photographer: attr.getElementsByClassName('photographer')[0]
         }
 
+        let offsetDistance = 0.8;
+
         const heroBox = document.getElementById('hero-box');
 
         const featureTexts = Array.from(heroBox.getElementsByTagName('section'));
@@ -76,6 +78,8 @@ if (window.location.pathname === '/')
 
         function setup()
         {
+            getOffset();
+
             stateEvent.addEventListener('changed:index', (e)=>{
 
                 console.log (e);
@@ -166,8 +170,15 @@ if (window.location.pathname === '/')
 
             //setup resize:
             window.addEventListener('resize', ()=>{
+                getOffset();
                 updateTrackWithoutAnimation(appState.index);
             });   
+        }
+
+        function getOffset()
+        {
+            const offsetProp = getComputedStyle(document.documentElement).getPropertyValue('--offset-distance');
+            offsetDistance = parseFloat(offsetProp);
         }
 
         function updateTrackWithoutAnimation(index)
@@ -208,14 +219,14 @@ if (window.location.pathname === '/')
             arrows[1].classList.toggle('disabled', index === total - 3);
 
             const heroW  = heroImage.offsetWidth;
-            const slideW = heroW * 0.80;
+            const slideW = heroW * offsetDistance;
             const offset = (heroW - slideW) / 2;
             track.style.transform = `translateX(${offset - index * slideW - slideW }px)`;
         }
 
         function setAttribution(index)
         {
-            attr.style.display = featureTexts[index].dataset.title || featureTexts[index].dataset.author || featureTexts[index].dataset.photographer ? '' : 'none';
+            attr.style.display = featureTexts[index].dataset.title || featureTexts[index].dataset.author || featureTexts[index].dataset.photographer ? 'block' : 'none';
             attribution.title.innerHTML = featureTexts[index].dataset.title || "";
             attribution.author.innerHTML = featureTexts[index].dataset.author || "";
             attribution.photographer.innerHTML = featureTexts[index].dataset.photographer || "";
