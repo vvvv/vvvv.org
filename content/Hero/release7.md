@@ -1,6 +1,8 @@
 ---
-title: "vvvv gamma 7.1 is out!"
-weight: 2
+title: |-
+    Out now:
+    vvvv gamma 7.1
+weight: 3
 button:
     title: Download
     url: https://thegraybook.vvvv.org/changelog/7.x.html

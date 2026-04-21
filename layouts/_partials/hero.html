@@ -1,26 +1,21 @@
 {{ "<!-- HEADER -->" | safeHTML }}
 
 {{- $hero := site.GetPage "hero" -}}
-{{- $features := $hero.Pages.ByWeight.Reverse -}}
-{{- $arrow := resources.Get "svg/arrow.svg" -}}
+{{- $features := $hero.Pages.ByWeight -}}
 
 <header class="d-flex align-items-center">
   <div id="hero-content">
     <div id="hero-image">
       <div id="track">
-        {{ if true }}
-          {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (last 1 $features) 0)) }}
-        {{ end }}
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (last 1 $features) 0)) }}
         {{ range $index, $elem:=$features }}
           {{ partial "hero-slide" (dict "hero" $hero "ctx" .) }}
         {{ end }}
-        {{ if true }}
-          {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
-        {{ end }}
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
       </div>
     </div>
     <div id="hero-box">
-      <div id="hero-text" class="ml-2">
+      <div id="hero-text">
         <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
         <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
         <hr/>
@@ -33,29 +28,32 @@
                   {{with .photographer}} data-photographer="{{.}}" {{end}}
                 {{end}}
               >
-              {{ .Title }}<br/>
               {{ with .Params.button}}
-                <a href="{{.url}}">{{default "Read more" .title }}</a>
+                <a href="{{.url}}" alt="{{$elem.Params.title}}" {{if .isExternal}}target="_blank"{{end}}>{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</a><br/>
+                <a href="{{.url}}" class="button" {{if .isExternal}}target="_blank"{{end}}>{{default "Read more" .title }}</a>
+              {{ else }}
+                {{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}
               {{ end }}
             </section>
           {{ end }}
         </div>
-        <ul class="pagination d-flex">
+
+      </div>
+      <div id="hero-pagination">
+        <ul class="pagination">
           {{ range $index, $elem:=$features }}
             <li {{if eq $index 0}}class="selected"{{end}} data-index="{{$index}}"></li>
           {{ end }}
         </ul>
-      </div>
-      <div class="arrows">
-        {{ if true }}
-          <div>{{- $arrow.Content | safeHTML -}}</div>
-          <div class="right">{{- $arrow.Content | safeHTML -}}</div>
-        {{ end }}  
+        <div class="arrows">
+          <div class="icon arrow-icon"></div>
+          <div class="icon arrow-icon right"></div> 
+       </div>
       </div>
     </div>
     <div id="hero-attribution">
-      <div class="title">7.0</div>
-      <div class="author">Arístides García</div>
+      <div class="title"></div>
+      <div class="author"></div>
       <div class="photographer"></div>
     </div>
   </div>

@@ -100,16 +100,6 @@
           margin: 0;
           line-height: 1em;
 
-          svg{
-              color: #aaa;
-              height: 16px;
-
-              &:hover
-              {
-                color: theme.$strongOrange !important;
-              }
-          }
-
           a
           {
             list-style: none;
@@ -133,6 +123,10 @@
             &:hover
             {
               color: theme.$strongOrange !important;
+
+              .icon{
+                background-color: theme.$strongOrange;
+              }
             }
           }
        
@@ -142,10 +136,42 @@
               color: theme.$strongOrange !important;
             }
 
-            svg{
-              color: theme.$strongOrange;
+            .icon{
+              background-color: theme.$strongOrange;
             }
           }
+        }
+
+        .icon{
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+
+            &:hover{
+              background-color: theme.$orange !important;
+            }
+
+            &.download-icon
+            {
+              -webkit-mask-image: url('/img/icons/ArrowDownload24Filled.svg');
+              mask-image: url('/img/icons/ArrowDownload24Filled.svg');
+            }
+
+            &.pack-icon
+            {
+              background-color: #fff;
+              -webkit-mask-image: url('/img/icons/Box24Filled.svg');
+              mask-image: url('/img/icons/Box24Filled.svg');
+              background-color: #aaa;
+            }
+
+            &.extension
+            {
+              -webkit-mask-image: url('/img/icons/ExtensionFilled.svg');
+              mask-image: url('/img/icons/ExtensionFilled.svg');
+            }
         }
   
         .download {
@@ -164,26 +190,23 @@
 
             background-color: #000;
 
-            svg{
-              color: theme.$strongOrange;
-              stroke: theme.$strongOrange;
+            .icon {
+              background-color: theme.$strongOrange;
             }
 
             pointer-events: none;
           }
 
-          a:hover, svg:hover{
+          a:hover{
             color: #fff !important;
+          }
+
+          .icon:hover{
+            background-color: #fff;
           }
 
           &:hover {
             background-color: theme.$strongOrangeHover;
-          }
-         
-          svg{
-              color: #fff;
-              stroke-width: 0.05rem;
-              stroke: #fff;
           }
         }
       }
