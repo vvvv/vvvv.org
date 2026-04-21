@@ -8,6 +8,6 @@ button:
 image: 
     src: beginnerclass.jpg
     title: 
-    author: 
-    photographer: 
+    author: "Hosted by:"
+    photographer: The NODE Institute
 ---
