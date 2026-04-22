@@ -100,16 +100,6 @@
           margin: 0;
           line-height: 1em;
 
-          svg{
-              color: #aaa;
-              height: 16px;
-
-              &:hover
-              {
-                color: theme.$strongOrange !important;
-              }
-          }
-
           a
           {
             list-style: none;
@@ -133,6 +123,14 @@
             &:hover
             {
               color: theme.$strongOrange !important;
+
+              .icon{
+                background-color: theme.$strongOrange;
+
+                &.download-icon{
+                    background-color: #fff;
+                }
+              }
             }
           }
        
@@ -142,10 +140,36 @@
               color: theme.$strongOrange !important;
             }
 
-            svg{
-              color: theme.$strongOrange;
+            .icon{
+              background-color: theme.$strongOrange;
             }
           }
+        }
+
+        .icon{
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+
+            &:hover{
+              background-color: theme.$orange !important;
+            }
+
+            &.download-icon
+            {
+              -webkit-mask-image: var(--icon-download);
+              mask-image: var(--icon-download);
+              pointer-events: none;
+            }
+
+            &.pack-icon
+            {
+              -webkit-mask-image: var(--icon-pack);
+              mask-image: var(--icon-pack);
+              background-color: #aaa;
+            }
         }
   
         .download {
@@ -164,26 +188,23 @@
 
             background-color: #000;
 
-            svg{
-              color: theme.$strongOrange;
-              stroke: theme.$strongOrange;
+            .icon {
+              background-color: theme.$strongOrange;
             }
 
             pointer-events: none;
           }
 
-          a:hover, svg:hover{
+          a:hover{
             color: #fff !important;
+          }
+
+          .icon:hover{
+            background-color: #fff;
           }
 
           &:hover {
             background-color: theme.$strongOrangeHover;
-          }
-         
-          svg{
-              color: #fff;
-              stroke-width: 0.05rem;
-              stroke: #fff;
           }
         }
       }
@@ -227,13 +248,6 @@
           padding: 0 !important;
           margin-top: 1rem !important;
           margin-left: 0rem !important;
-          
-          &:hover
-          {
-            span{
-              color: #000;
-            }
-          }
         }
     }
   }

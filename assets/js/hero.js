@@ -14,6 +14,8 @@ if (window.location.pathname === '/')
             photographer: attr.getElementsByClassName('photographer')[0]
         }
 
+        let offsetDistance = 0.8;
+
         const heroBox = document.getElementById('hero-box');
 
         const featureTexts = Array.from(heroBox.getElementsByTagName('section'));
@@ -70,12 +72,13 @@ if (window.location.pathname === '/')
             updateTrackWithoutAnimation(0);
             slides[1].classList.toggle('active');
             appState.index = 0;
-            setAttribution(1);
+            setAttribution(0);
             hero.style.setProperty('opacity', 1);
         }
 
         function setup()
         {
+            getOffset();
 
             stateEvent.addEventListener('changed:index', (e)=>{
 
@@ -101,6 +104,10 @@ if (window.location.pathname === '/')
                 const activeTitles = slides.length - 2;
                 slides.forEach((slide, index)=>{
                     slide.addEventListener('click', ()=>{
+
+                        if (appState.isAnimating)
+                            return;
+
                         switch (index)
                         {
                             case 0:
@@ -135,6 +142,10 @@ if (window.location.pathname === '/')
             {
                 featureLines.forEach((line, index) => {
                     line.addEventListener('click', (e) => {
+
+                        if (appState.isAnimating)
+                            return;
+
                         appState.index = index;
                     });
                 });
@@ -147,6 +158,10 @@ if (window.location.pathname === '/')
 
                 arrows.forEach(arrow => {
                     arrow.addEventListener('click', ()=>{
+
+                        if (appState.isAnimating)
+                            return;
+
                         const nextIndex = arrow.classList.contains('right') ? (appState.index+1) % activeTitles : appState.index-1 < 0 ? activeTitles-1 : appState.index-1;
                         appState.index = nextIndex;
                     })
@@ -155,8 +170,15 @@ if (window.location.pathname === '/')
 
             //setup resize:
             window.addEventListener('resize', ()=>{
+                getOffset();
                 updateTrackWithoutAnimation(appState.index);
             });   
+        }
+
+        function getOffset()
+        {
+            const offsetProp = getComputedStyle(document.documentElement).getPropertyValue('--offset-distance');
+            offsetDistance = parseFloat(offsetProp);
         }
 
         function updateTrackWithoutAnimation(index)
@@ -197,49 +219,18 @@ if (window.location.pathname === '/')
             arrows[1].classList.toggle('disabled', index === total - 3);
 
             const heroW  = heroImage.offsetWidth;
-            const slideW = heroW * 0.80;
+            const slideW = heroW * offsetDistance;
             const offset = (heroW - slideW) / 2;
             track.style.transform = `translateX(${offset - index * slideW - slideW }px)`;
         }
 
         function setAttribution(index)
         {
-            attribution.title.innerHTML = featureTexts[index].dataset.title;
-            attribution.author.innerHTML = featureTexts[index].dataset.author;
+            attr.style.display = featureTexts[index].dataset.title || featureTexts[index].dataset.author || featureTexts[index].dataset.photographer ? 'block' : 'none';
+            attribution.title.innerHTML = featureTexts[index].dataset.title || "";
+            attribution.author.innerHTML = featureTexts[index].dataset.author || "";
             attribution.photographer.innerHTML = featureTexts[index].dataset.photographer || "";
         }
-
-
-        // function makeTagVisible()
-        // {
-        //     hero.style.visibility = 'visible';
-        //     hero.style.opacity = '1';
-        // }
-
-
-
-
-        // async function fetchHero()
-        // {
-        //     const response = await fetch('https://data.vvvv.org/items/Hero');
-
-        //     if (!response.ok)
-        //     {
-        //         const json = await response.json();
-        //         throw new Error (json);
-        //     }
-
-        //     const json = await response.json();
-
-        //     return json.data.map (d=>{
-        //         return {
-        //             url: d.image,
-        //             title: d.title,
-        //             author: d.author,
-        //             photographer: d.photographer,
-        //         }
-        //     })
-        // }
 
     })
 }
