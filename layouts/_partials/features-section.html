@@ -1,8 +1,8 @@
 {{ "<!-- Features -->" | safeHTML }}
 
-  {{ $features := site.GetPage "features" }}
-  {{ $feature := index (where $features.Pages ".Params.title" (.Scratch.Get "sectionTitle")) 0 }}
-  {{ $content := sort ($feature.Resources.ByType "page") ".Params.id" "asc" }}
+  {{ $features := site.GetPage "features"}}
+  {{ $feature := index (where $features.Pages ".Params.title" (.Scratch.Get "sectionTitle")) 0}}
+  {{ $content := sort ($feature.Resources.ByType "page") ".Params.id" "asc"}}
 
   <div class="row justify-content-start">
 

@@ -1,40 +1,43 @@
+{{ $featuresPage := site.GetPage "features" }}
+{{ $sections := $featuresPage.Pages.ByWeight }}
+
 {{ "<!-- Live Visual Programming -->" | safeHTML }}
-<section id="Features">
-    <div class="container">
+<section id="Features" class="home">
+  <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">{{ .Site.Params.Features.headline }}</h2>
+                <h2 class="section-heading">{{ $featuresPage.Title }}</h2>
                 <hr class="primary">
             </div>
         </div>
-        <!-- Pills -->
-        <div class="row stickyRow mb-5">
-          <div class="col-12 d-flex justify-content-center">
-            <ul class="nav nav-pills featuresMenu mt-3" id="pills-tab" role="tablist">
-              <!-- Overview Menu -->
-              {{ $features := site.GetPage "section" "features"}}
-              {{ $sections := sort (site.GetPage "section" "features").Pages ".Params.id" "asc" }}
-              {{ range $index, $value := $sections }}
-              <li class="nav-item mx-md-1" role="presentation">
-                <a class="nav-link {{ if (eq $index 0) }} active {{end}}" id="link-{{ replaceRE "(\\s)" "" .Params.title }}" data-toggle="pill" href="#{{ replaceRE "(\\s)" "" .Params.title }}" role="tab" aria-controls="v-pills-{{ .Params.id }}" aria-selected="false">{{ .Title }}</a>
-              </li>
-              {{ end }}
-            </ul>
+  </div>
+  <div class="container-fluid">
+      <h1></h1>               
+      <div class="row">
+          <div class="col-4 mr-4">
+              <aside>
+                <nav>
+                  <ul class="nav nav-tabs featuresMenu" role="tablist">
+                    {{ range $index, $elem:=$sections }}
+                      <li role="presentation">
+                        <button class="nav-link{{if eq $index 0}} active{{end}}" data-toggle="tab" data-target="#feature-{{$elem.Title | urlize}}" type="button" role="tab" aria-controls="home" aria-selected="true">
+                          {{$elem.Title}}
+                        </button>
+                      </li>
+                    {{ end }}
+                  </ul>
+                </nav>
+              </aside>
           </div>
-        </div>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="TopFeatures" role="tabpanel" aria-labelledby="pills-topfeatures-tab">
-            {{ .Scratch.Set "sectionTitle" "Top Features"}}
-            {{ partial "features-section" .}}
+          <div class="col-7 tab-content">
+            {{ range $index, $elem:=$sections }}
+              <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | urlize}}" role="tabpanel" aria-labelledby="home-tab">
+                <h2 class="h2">{{$elem.Title}}</h2>
+                {{ $elem.Summary }}
+                <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
+              </div>
+            {{ end }}
           </div>
-          <div class="tab-pane fade" id="Language" role="tabpanel" aria-labelledby="pills-languages-tab">
-            {{ .Scratch.Set "sectionTitle" "Language"}}
-            {{ partial "features-section" .}}
-          </div>
-          <div class="tab-pane fade" id="Libraries" role="tabpanel" aria-labelledby="pills-libraries-tab">
-            {{ .Scratch.Set "sectionTitle" "Libraries"}}
-            {{ partial "features-section" .}}
-          </div>
-        </div>
-    </div>
+      </div>
+  </div>
 </section>

@@ -8,3 +8,39 @@ $blue: #4489CC;
 
 $sans: "Open Sans", sans-serif;
 $serif: "Roboto Slab", serif;
+
+// Icons
+
+:root {
+  --icon-pack: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none"><path d="M13.409 2.513a3.75 3.75 0 0 0-2.818 0l-2.19.888l9.592 3.73l3.374-1.303a1.747 1.747 0 0 0-.46-.275l-7.498-3.04zM22 7.191l-9.25 3.574v10.923c.224-.045.444-.112.659-.199l7.498-3.04A1.75 1.75 0 0 0 22 16.827V7.192zM11.25 21.688V10.765L2 7.191v9.637a1.75 1.75 0 0 0 1.093 1.621l7.498 3.04c.215.087.435.153.659.2zM2.633 5.828L12 9.447l3.917-1.514l-9.543-3.71l-3.281 1.33c-.17.069-.324.162-.46.275z" fill="currentColor"></path></g></svg>');
+
+  --icon-download: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none"><path d="M5.25 20.5h13.498a.75.75 0 0 1 .101 1.494l-.101.006H5.25a.75.75 0 0 1-.102-1.493l.102-.007h13.498H5.25zm6.633-18.497L12 1.996a1 1 0 0 1 .993.883l.007.117v12.59l3.294-3.293a1 1 0 0 1 1.32-.083l.094.083a1 1 0 0 1 .083 1.32l-.083.095l-4.997 4.996a1 1 0 0 1-1.32.084l-.094-.083l-5.004-4.997a1 1 0 0 1 1.32-1.498l.094.083L11 15.58V2.996a1 1 0 0 1 .883-.993L12 1.996l-.117.007z" fill="currentColor"></path></g></svg>');
+
+  --icon-arrow: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24"><g fill="none"><path d="M 8.0006629,0 C 7.7226375,0 7.443284,0.10614641 7.2311429,0.31827572 L 0.31819398,7.2312245 c -0.42425864,0.4242391 -0.42425864,1.1133575 0,1.5376255 l 6.91294892,6.912949 c 0.4242825,0.424268 1.1133573,0.424268 1.5376255,0 0.424268,-0.424268 0.424268,-1.111943 0,-1.536211 L 3.7088915,9.0871257 H 45.990054 V 8.0007445  6.9143634 H 3.7088915 L 8.7687683,1.8544866 c 0.424268,-0.4242608 0.424268,-1.11195515 0,-1.53621088 C 8.5566343,0.10614641 8.2786881,0 8.0006629,0 Z" fill="currentColor"/></path></g></svg>'); 
+}
+
+// To be removed on merge with Hero
+
+html{
+  scroll-behavior: smooth;
+}
+
+.btn-xl
+{
+    padding: 10px 20px;
+}
+
+.btn
+{
+    border-radius: 6px;
+}
+
+.btn-default
+{
+    border: none;
+}
+
+.mediaShadow
+{
+  box-shadow: 0px 7px 25px 7px rgba(0, 0, 0, 0.4);
+}

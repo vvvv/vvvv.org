@@ -1,0 +1,8 @@
+{{ define "sidebar" }}
+  {{ partial "features/sidebar.html" (dict "current" . "context" .) }}
+{{ end }}
+
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+{{ end }}
