@@ -126,6 +126,10 @@
 
               .icon{
                 background-color: theme.$strongOrange;
+
+                &.download-icon{
+                    background-color: #fff;
+                }
               }
             }
           }
@@ -155,22 +159,16 @@
 
             &.download-icon
             {
-              -webkit-mask-image: url('/img/icons/ArrowDownload24Filled.svg');
-              mask-image: url('/img/icons/ArrowDownload24Filled.svg');
+              -webkit-mask-image: var(--icon-download);
+              mask-image: var(--icon-download);
+              pointer-events: none;
             }
 
             &.pack-icon
             {
-              background-color: #fff;
-              -webkit-mask-image: url('/img/icons/Box24Filled.svg');
-              mask-image: url('/img/icons/Box24Filled.svg');
+              -webkit-mask-image: var(--icon-pack);
+              mask-image: var(--icon-pack);
               background-color: #aaa;
-            }
-
-            &.extension
-            {
-              -webkit-mask-image: url('/img/icons/ExtensionFilled.svg');
-              mask-image: url('/img/icons/ExtensionFilled.svg');
             }
         }
   
