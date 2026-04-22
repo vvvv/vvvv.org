@@ -1,8 +1,8 @@
-{{ $selected := $.Params.title }}
+{{ $selected := default $.Section $.Params.title }}
 {{ with site.Store.Get "SelectedItem" }}
     {{ $selected = .}}
     {{ site.Store.Delete "SelectedItem"}}
-{{ end }}
+{{ end }}  
 <div id="vvvv-navbar">
     {{ partial "logoAndToggler"}}
     <div id="vvvv-menu">

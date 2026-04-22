@@ -10,11 +10,11 @@
 
 {{- with index $ctx "icon" -}}
     {{- if eq . "pack" -}}
-        {{- $icon = resources.Get "img/icons/Box24Filled.svg" -}}
+        {{- $icon = "pack-icon" -}}
     {{- else if eq . "download" -}}
-        {{- $icon = resources.Get "img/icons/ArrowDownload24Filled.svg" -}}
+        {{- $icon = "download-icon" -}}
     {{- else -}}
-        {{- $icon = resources.Get "img/icons/ExtensionFilled.svg" -}}        
+        {{- $icon = "extension" -}}        
     {{- end -}}
 {{- end -}}
 
@@ -35,7 +35,7 @@
 <li class="{{- $style -}}{{if $selectedStyle}} selected{{end}}" style="line-height: 1em;">
     <a href="{{- $url -}}" title="{{$name}}">
         {{- if $icon -}}
-            {{- $icon.Content | safeHTML -}} <span class="title {{if $titleHidden}}hidden{{end}}">{{default $name $text}}</span>
+            <div class="icon {{$icon}}"></div> <span class="title {{if $titleHidden}}hidden{{end}}">{{default $name $text}}</span>
         {{- else -}}
             {{- $name -}}
         {{- end -}}

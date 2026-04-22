@@ -1,8 +1,5 @@
 @use 'shared' as theme;
 
-$strongOrange: #ff9000;
-$strongOrangeHover: #ffa600;
-
 //Hack for Forum's sidepanels.
 // --header-bottom is calculated by js: it is the bottom of the #vvvv-navbar
 .discourse-root .menu-panel.slide-in {
@@ -103,16 +100,6 @@ $strongOrangeHover: #ffa600;
           margin: 0;
           line-height: 1em;
 
-          svg{
-              color: #aaa;
-              height: 16px;
-
-              &:hover
-              {
-                color: $strongOrange !important;
-              }
-          }
-
           a
           {
             list-style: none;
@@ -135,58 +122,89 @@ $strongOrangeHover: #ffa600;
   
             &:hover
             {
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
+
+              .icon{
+                background-color: theme.$strongOrange;
+
+                &.download-icon{
+                    background-color: #fff;
+                }
+              }
             }
           }
        
           &.selected
           {    
             a{
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
             }
 
-            svg{
-              color: $strongOrange;
+            .icon{
+              background-color: theme.$strongOrange;
             }
           }
+        }
+
+        .icon{
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+
+            &:hover{
+              background-color: theme.$orange !important;
+            }
+
+            &.download-icon
+            {
+              -webkit-mask-image: var(--icon-download);
+              mask-image: var(--icon-download);
+              pointer-events: none;
+            }
+
+            &.pack-icon
+            {
+              -webkit-mask-image: var(--icon-pack);
+              mask-image: var(--icon-pack);
+              background-color: #aaa;
+            }
         }
   
         .download {
           padding: 0 0.5rem;
           margin: 0rem 1rem 0rem 1rem;
           border-radius: 6px;
-          background-color: $strongOrange;
+          background-color: theme.$strongOrange;
           line-height: 1em;
           width: fit-content;
           transition: all 0s;
 
           &.selected{
             a{
-              color: $strongOrange !important;
+              color: theme.$strongOrange !important;
             }
 
             background-color: #000;
 
-            svg{
-              color: $strongOrange;
-              stroke: $strongOrange;
+            .icon {
+              background-color: theme.$strongOrange;
             }
 
             pointer-events: none;
           }
 
-          a:hover, svg:hover{
+          a:hover{
             color: #fff !important;
           }
 
-          &:hover {
-            background-color: $strongOrangeHover;
+          .icon:hover{
+            background-color: #fff;
           }
-         
-          svg{
-              color: #fff;
-              stroke-width: 0.05rem;
-              stroke: #fff;
+
+          &:hover {
+            background-color: theme.$strongOrangeHover;
           }
         }
       }
@@ -230,13 +248,6 @@ $strongOrangeHover: #ffa600;
           padding: 0 !important;
           margin-top: 1rem !important;
           margin-left: 0rem !important;
-          
-          &:hover
-          {
-            span{
-              color: #000;
-            }
-          }
         }
     }
   }
