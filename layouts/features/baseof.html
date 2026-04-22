@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="scroll-padding">
+    <head>
+        {{ partial "head" . }}     
+   </head>
+<body>
+    <div class="main">
+        {{ partial "nav" . }}
+        
+        <section id="Features">
+            <div class="container-fluid">               
+                <div class="row">
+                    <div class="col-12 col-lg-4 mr-4">
+                        <aside>
+                            {{ block "sidebar" . }}{{ end }}
+                        </aside>
+                    </div>
+                    <div class="col-12 col-lg-7">
+                        <main>
+                            {{ block "main" . }}{{ end }}
+                        </main>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        {{ partial "videoBlocker" . }}
+
+        {{ partial "contact" . }}
+        
+        {{ partial "footer" . }}
+
+        {{ partial "js" . }}
+    </div>
+</body>
+</html>

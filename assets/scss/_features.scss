@@ -3,54 +3,103 @@
 #Features
 {
   position: relative;
-  background-color: #333;
+  background-color: #fff;
+  // margin: 0 10%;
+  max-width: 1300px;
+  margin: 0 auto;
 
-  #Feature-Sections
-  {
-    h2
-    {
-      font-weight: 700;
+  padding-top: 3rem;
+
+  h1, h2{
+    margin-bottom: 1rem;
+  }
+
+  h3{
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    aside {
+      position: sticky;
+      top: 7rem;
     }
   }
 
-  img
-  {
-    background-color: #ddd;
+  @media (max-width: 769px) {
+    aside {
+      position: static;
+    }
   }
 
-  .stickyRow
-  {
-    top: 69px; 
-    position: sticky; 
-    z-index: 999;
+  aside {
+    padding: 0;
+    height: fit-content;
+  }
+
+  main {
+    min-width: 0; /* prevents overflow issues */
+  }
+
+  
+  img{
+      max-width: 100%;
+      height: auto;
   }
 
   .featuresMenu
   {
-    border-radius: 7px;
-    box-shadow: 0px 5px 20px 5px rgba(0,0,0,0.50);
-    background-color: #000000;
+    // border-radius: 5px;
+    // box-shadow: 0px 5px 20px 5px rgba(0,0,0,0.50);
+    // background-color: #f0f0f0;
+    list-style: none;
+    // background-color: #eee;
 
-    padding: 0.5em;
+    padding: 0.5rem 0rem;
 
-    li {
+    li{
       margin: 0;
+      // padding: 0.5rem 0rem;
+      width: 100%;
+      position: relative;
+      padding: 0.5rem 0rem;
+    }
+
+    li:not(:last-child)::after {
+      display: block;
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
     }
 
     .nav-link
     {
-      color: #ddd;
-      padding: 0.3em 0.4em;
-      margin: 0px;
+      color: #000;
+      margin: 0rem;
+      padding: 1rem 1rem;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background-color: inherit;
 
-      @media (min-width: 576px) {
+      border-radius: 3px;
+
+      // background-color: #eee;
+
+      @media (max-width: 991px) {
+        margin: 0.5rem;
         padding: 0.3em 1.5em;
       }
       
       &.active
       {
-        background-color: theme.$orange;
+        background-color: #000; //theme.$orange;
         color: #fff;
+        cursor: pointer;
+        pointer-events: none;
+        
 
         &:hover
         {
@@ -60,27 +109,20 @@
 
       &:hover
       {
-        color: theme.$orange;
+        background-color: #ddd;
       }
     }
   } 
 
   h2
   {
-    color: #fff;
-  }
-
-  .title
-  {
-    color: #fff; 
-    font-weight: bold;
+    color: #000;
   }
 
   .mediaShadow
   {
     box-shadow: 0 4px 15px 3px rgba(0,0,0,.3);
   }
-
   
   .description
   {

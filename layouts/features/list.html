@@ -1,0 +1,15 @@
+{{ define "sidebar" }}
+  {{ $pages := .CurrentSection.RegularPages.ByWeight }}
+  {{ if gt (len $pages) 0 }}
+    {{ $first := index $pages 0 }}
+    {{ partial "features/sidebar.html" (dict "current" $first "context" .) }}
+  {{ end }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $pages := .CurrentSection.RegularPages.ByWeight }}
+  {{ if gt (len $pages) 0 }}
+    {{ $first := index $pages 0 }}
+    {{ $first.Content }}
+  {{ end }}
+{{ end }}
