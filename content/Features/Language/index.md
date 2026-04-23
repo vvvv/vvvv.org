@@ -1,6 +1,6 @@
 ---
 title: Language
-weight: 3
+weight: 99
 ---
 
 * Combines metaphors known from dataflow, functional and object-oriented programming
