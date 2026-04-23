@@ -5,6 +5,8 @@ weight: 1
 
 vvvv has built-in support for editing and running applications across multiple PCs. A feature called "boygrouping" automatically transmits program changes made on your main PC to all connected clients. Like this, from a programming perspective, most overhead of creating distributed applications is removed.
 
+![CoreLib](/features/largescaleinteractive/Lib_CoreLib.png)
+
 	Projection Mapping
 
 Large-scale often means projection-mapping. Since requirements here are very diverse vvvv comes with support for different options. vvvv integrates auto-clibration systems by [VIOSO], [Scalable Display Systems] and [Screenberry].
