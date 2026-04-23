@@ -6,11 +6,11 @@ title: "Hello Photoshop"
 slug: "hello-photoshop-0"
 description: ""
 imported: "true"
-thumb: "PS-VVVV-Release.PNG"
+thumb: "PS-VVVV-Release-1.png"
 ---
 
 
-![](PS-VVVV-Release.PNG) 
+![](PS-VVVV-Release-1.png) 
 
 This one is for all pixelpeople out there.
 
@@ -32,5 +32,5 @@ At the moment DX9 is used for input/output of textures, but thanks to the modula
 * Photoshop (EX9.Texture). 
 Anyone?
 
-Available for testing in latest [alpha](https://vvvv.org/downloads/previews).
+Available for testing in latest [alpha](https://legacy.vvvv.org/downloads/previews).
 happy photopatching.

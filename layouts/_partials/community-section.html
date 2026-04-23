@@ -1,0 +1,32 @@
+{{ "<!-- Community -->" | safeHTML }}
+
+    {{ $content := site.GetPage "section" "Community-section" }}
+    {{ $links := sort (where ($content.Resources.ByType "page") ".Params.follow" false) ".Params.id" "asc" }}
+<section id="Community">
+        <div class="container">
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-headin">{{ .Site.Params.Community.headline }}</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        <div class="card-group mt-4 row-cols-1 row-cols-md-2 row-cols-xl-4">
+            {{ range $links }}
+              <div class="col mb-4">
+                <div class="card text-center h-100 py-3">
+                    <div class="card-body">
+                        <a href="{{ .Params.link }}" class="noUnderline" target="_blank">
+                            <img src ="{{ .Params.icon | relURL }}" alt = "{{ .Params.alt }}" style="height: 32px">
+                        </a>
+                        <h3 class="mt-4">{{ .Params.title }}</h3>
+                        <p class="text-muted mb-0">{{ .Params.description }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ .Params.link }}" class="btn btn-default btn-xl noUnderline onWhite" target="_blank">{{ .Params.buttonText }}</a>
+                        </div>
+                    </div>
+                </div>
+              {{ end }}
+        </div>
+    </div>
+</section>

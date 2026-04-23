@@ -1,5 +1,10 @@
 ---
 title: Community
 type: community
-description: Chat, Forum, Meetups, ...
+layout: community
+outputs:
+- html
+- RSS
+- json
+theme:
 ---

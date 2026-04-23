@@ -1,0 +1,254 @@
+@use 'shared' as theme;
+
+//Hack for Forum's sidepanels.
+// --header-bottom is calculated by js: it is the bottom of the #vvvv-navbar
+.discourse-root .menu-panel.slide-in {
+  top: var(--header-bottom, 0);
+}
+
+#vvvv-navbar
+{
+  font-weight: 400;
+  text-align: left;
+  font-size: 16px;
+  font-family: open sans,helvetica neue,Arial,sans-serif;
+  color: #333;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1020;
+  background-color: #282828;
+  border-bottom: 1px #222 solid;
+  transition: color .35s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &:has( ~ .ember-application) {
+    position: relative;
+  }
+
+  .logo {
+    background-color: transparent;
+    text-decoration: none;
+    transition: all .35s;
+    border: none;
+    margin-left: 3rem;
+    color: #ffa800;
+    border-bottom: none;
+    height: 60px;
+  }
+
+  .vvvv-hamburger{
+      display: none;
+    }
+
+    #vvvv-hamburgerButton {
+      margin: 0;
+      font-family: inherit;
+      overflow: visible;
+      text-transform: none;
+      -webkit-appearance: button;
+      padding: .25rem .75rem;
+      font-size: 1.25rem;
+      line-height: 1;
+      background-color: transparent;
+      border-radius: .25rem;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+    }
+
+    .vvvv-hamburger-stripes {
+      div {
+        width: 25px;
+        height: 2px;
+        background-color: #fff;
+        margin: 6px 0;
+      }
+    }
+   
+    #vvvv-menu {
+      margin-right: 2rem;
+      
+      ul {
+        margin-top: 0;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+        margin-right: .25rem;
+        list-style: none;
+        display: flex;
+
+        .title{
+            padding-left: 1rem;
+            display: inline;
+          }
+        
+        .hidden{
+          display: none;
+        }
+  
+        li {
+          margin-right: 0;
+          margin-left: 0;
+          margin: 0;
+          line-height: 1em;
+
+          a
+          {
+            list-style: none;
+            line-height: 13px;
+            font-size: 13px;
+            font-weight: 700;
+            box-sizing: border-box;
+            background-color: transparent;
+            text-decoration: none;
+            transition: all .35s;
+            border: none;
+            padding: 0.5rem;
+            display: block;
+            border-bottom: none;
+            text-transform: uppercase;
+            color: #fff;
+
+            display: flex;
+            align-items: center;
+  
+            &:hover
+            {
+              color: theme.$strongOrange !important;
+
+              .icon{
+                background-color: theme.$strongOrange;
+
+                &.download-icon{
+                    background-color: #fff;
+                }
+              }
+            }
+          }
+       
+          &.selected
+          {    
+            a{
+              color: theme.$strongOrange !important;
+            }
+
+            .icon{
+              background-color: theme.$strongOrange;
+            }
+          }
+        }
+
+        .icon{
+            width: 1rem;
+            height: 1rem;
+            background-color: #fff;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+
+            &:hover{
+              background-color: theme.$orange !important;
+            }
+
+            &.download-icon
+            {
+              -webkit-mask-image: var(--icon-download);
+              mask-image: var(--icon-download);
+              pointer-events: none;
+            }
+
+            &.pack-icon
+            {
+              -webkit-mask-image: var(--icon-pack);
+              mask-image: var(--icon-pack);
+              background-color: #aaa;
+            }
+        }
+  
+        .download {
+          padding: 0 0.5rem;
+          margin: 0rem 1rem 0rem 1rem;
+          border-radius: 6px;
+          background-color: theme.$strongOrange;
+          line-height: 1em;
+          width: fit-content;
+          transition: all 0s;
+
+          &.selected{
+            a{
+              color: theme.$strongOrange !important;
+            }
+
+            background-color: #000;
+
+            .icon {
+              background-color: theme.$strongOrange;
+            }
+
+            pointer-events: none;
+          }
+
+          a:hover{
+            color: #fff !important;
+          }
+
+          .icon:hover{
+            background-color: #fff;
+          }
+
+          &:hover {
+            background-color: theme.$strongOrangeHover;
+          }
+        }
+      }
+    }
+
+  @media screen and (max-width: 850px) {
+
+      .logo {
+        margin-left: 1rem;
+      }
+
+      .vvvv-hamburger{
+        display: block;
+      }
+
+      #vvvv-menu{
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        padding: 1rem 0em 1rem 1rem;
+        margin-right: 0;
+        background-color: #282828;
+
+
+        &.visible{
+          display: flex !important;
+        }
+
+        ul {
+         flex-direction: column;
+
+          .hidden{
+            display: inline;
+          }
+        }
+
+        .download {
+          padding: 0 !important;
+          margin-top: 1rem !important;
+          margin-left: 0rem !important;
+        }
+    }
+  }
+}

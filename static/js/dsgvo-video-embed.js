@@ -9,6 +9,11 @@
  (function () {
     // Config
 
+    const ytelement = document.getElementById('youtubeBlocker');
+    const vimeoElement = document.getElementById('vimeoBlocker');
+
+    if (!ytelement || !vimeoElement) return;
+
     const youtube = document.getElementById('youtubeBlocker').innerHTML;
     const vimeo = document.getElementById('vimeoBlocker').innerHTML;
 

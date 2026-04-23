@@ -6,7 +6,7 @@ title: "VL: Xenko 3D Engine Update #2"
 slug: "vl-xenko-3d-engine-update-2"
 description: ""
 imported: "true"
-thumb: "10_BoxEntity.PNG"
+thumb: "10_BoxEntity-1.png"
 ---
 
 
@@ -31,32 +31,32 @@ We found two appealing ways to create custom entities that can also be combined 
 
 ## 1. Patching Entities
 Let's look inside the BoxEntity from the last blog post:
-![](10_BoxEntity.PNG)
+![](10_BoxEntity-1.png)
 
 As you can see, it adds a **BoxComponent** to the entity on *Create* (white) and exposes parameters like Color, Transformation, Enabled etc. as input pins on *Update* (gray). This is more or less an arbitrary choice of how the BoxEntity is designed and it will probably change a bit before it becomes official. The patch is also an example of how vl's [process nodes](https://vvvv.gitbooks.io/the-gray-book/content/en/reference/vl/nodes.html) work nicely together with the entity component model. Each instance of an entity or a component can be represented by a process node and connected with each other in an understandable way.
 
 In the patch we saw the **EmptyEntity** node, which is a general entity object that contains nothing more than a **TransformComponent**, hence the transform input pin. To make something useful with it, we add more components (e.g. model, material, audio, physics etc.) to it. There are many of them and you can combine them as it suits your use case. The big advantage here is, that the components are able to interact with each other via the common parent entity and that the scene graph system automatically processes them in an optimized way. This is where it gets interesting!
 
 Let's say we want the box from the patch above to emit a sound from its current position. In order to do that we only have to add a **SpatialAudioComponent** to the same entity as the box component:
-![](20_BassBoxEntit_r.PNG) 
+![](20_BassBoxEntit_r-1.png) 
 
 Since the SpatialAudioComponent and the BoxComponent have a common parent entity they will share the same transformation. Also, if an entity has child entities, the children get transformed by the parent. We could use that feature to add an **AxisEntity** to our custom entity:
-![](25_BassBoxEntit_r.PNG) 
+![](25_BassBoxEntit_r-1.png) 
 
 Again, there is no need to connect the input transformation to the AxisEntity since it gets added as a child to the main entity and gets transformed automatically. 
 Here is what a little scene could look like:
-![](30_BassBoxScene.PNG)
+![](30_BassBoxScene-1.png)
 
-![](35_BassBoxScene_r.PNG)
+![](35_BassBoxScene_r-1.png)
 Let's add a second one and let them rotate in the scene to hear the spatial audio effect. Aaaaaand action! (works best with headphones):
 {{< vimeo "305013010" >}}
 
 ## 2. Prefabs
 There is also a super easy way to design custom entities in xenko's game studio and use them in your patch. Suppose we have a 3d model with animation and skinning imported and edited in game studio. All we have to do now is to create a prefab from it and give it a meaningful name:
-![](40_AstroPrefab.PNG) 
+![](40_AstroPrefab-1.png) 
 
 Learn more about xenko's prefab workflow [here](https://doc.xenko.com/latest/en/manual/game-studio/prefabs/index.html). Once we have that it's as simple as this to use it in your scene:
-![](50_AstroPrefabP_r.PNG) 
+![](50_AstroPrefabP_r-1.png) 
 
 Ridiculous! 
 And finally we will start the walk animation:

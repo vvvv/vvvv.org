@@ -12,11 +12,11 @@ release:
     app_file: "sites/default/files/vvvv_50beta35.5_x86.zip"
     app_file_64: "sites/default/files/vvvv_50beta35.5_x64.zip"
 imported: "true"
-thumb: "355.PNG"
+thumb: "355-1.png"
 ---
 
 
-![](355.PNG)
+![](355-1.png)
 
 Basically a maintenance and bugfix vvvv release, wouldn't there be so much new VL stuff in it.
 

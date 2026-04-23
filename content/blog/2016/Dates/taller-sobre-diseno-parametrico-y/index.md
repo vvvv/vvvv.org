@@ -18,11 +18,11 @@ where:
     lat: "43.319620"
     long: "-1.979599"
 imported: "true"
-thumb: "CIMG1147.JPG"
+thumb: "img.jpg"
 ---
 
 
-![Lamp](CIMG1147.JPG) 
+![Lamp](img.jpg) 
 
 Este Taller de 2 días estará enfocado al desarrollo de herramientas inspiradas en la arquitectura y diseño industrial, con el fin de fabricar piezas tridimensionales modulares en papel y cartulina.
 Estará orientado a cualquiera interesado en patrones geométricos, arquitectura, diseño de escenografía, 3D Mapping.

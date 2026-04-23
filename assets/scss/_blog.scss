@@ -1,3 +1,5 @@
+@use 'shared'  as theme;
+
 .prev-next-top
 {
     top: 60px;
@@ -14,12 +16,12 @@ hr.thin{
 .prev-next-search
 {
     background-color: #fff;
-    padding: 1em 0em;
+    padding: 0.50em 0em;
     z-index: 1;
 
     &.dark
     {
-        background-color: $header-dark;
+        background-color: theme.$header-dark;
         color: #fff;
     }
 
@@ -31,7 +33,7 @@ hr.thin{
 
         &:hover
         {
-            color: $orange-link-hover;
+            color: theme.$orange-link-hover;
         }
     }
 
@@ -43,7 +45,7 @@ hr.thin{
         padding-bottom: 1.3em;
         padding-top: 0.9em;
 
-        font-family: $sans;
+        font-family: theme.$sans;
 
         .btn
         {
@@ -91,7 +93,7 @@ section#Blog
 
     //Home
     h2.recent {
-        font-family: $serif;
+        font-family: theme.$serif;
         font-weight: 700;
         font-size: 1.5em !important;
         line-height: 1.3em;
@@ -105,7 +107,7 @@ section#Blog
 
         .list {
 
-            font-family: $sans;
+            font-family: theme.$sans;
 
         }
         
@@ -131,7 +133,7 @@ section#Blog
 
         h4
         {
-            font-family: $serif;
+            font-family: theme.$serif;
             font-weight: 700;
             font-size: 1em;    
         }
@@ -139,7 +141,7 @@ section#Blog
 
     .post{
 
-        // font-family: $sans;
+        // font-family: theme.$sans;
         font-size: 0.95em;
         line-height: 1.6em; 
         color: #444;
@@ -147,14 +149,14 @@ section#Blog
         .post-meta
         {
             color: #666;
-            font-family: $serif;
+            font-family: theme.$serif;
             font-weight: 500;
             font-size: 0.9em;
         }
 
         h2
         {
-            font-family: $serif;
+            font-family: theme.$serif;
             font-weight: 700;
             font-size: 1.2em !important;
             line-height: 1.3em;
@@ -171,6 +173,11 @@ section#Blog
 //Single Pages + Lists
 #Blog
 {
+
+    .cactus-login-close
+    {
+        scale: inherit;
+    }
 
     .signpill
     {
@@ -197,14 +204,14 @@ section#Blog
     }
 
     .pagination{
-        font-family: $sans;
+        font-family: theme.$sans;
         
         a{
             color: #000;
 
             &:hover
             {
-                color: $orange;
+                color: theme.$orange;
                 background-color: #fff;
             }
         }
@@ -234,7 +241,7 @@ section#Blog
         {
             color: #777;
             font-size: 0.8em;
-            font-family: $sans;
+            font-family: theme.$sans;
         }
 
         h1
@@ -263,7 +270,7 @@ section#Blog
 
         &:hover
         {
-            color: $orange-link-hover;
+            color: theme.$orange-link-hover;
         }
     }
 
@@ -288,7 +295,7 @@ section#Blog
 
         h2
         {
-            font-family: $serif;
+            font-family: theme.$serif;
             font-weight: 700;
             font-size: 2.3em;
             line-height: 1.3em;
@@ -305,15 +312,14 @@ section#Blog
         .description
         {
             color: #777;
-            font-family: $sans;
+            font-family: theme.$sans;
             margin-bottom: 0.5em;
         }
 
         .content{
 
             margin-top: 2.5em;
-            font-family: $sans;
-            $base-font: 1em;
+            font-family: theme.$sans;
 
             table {
                 width: 100%;
@@ -385,35 +391,35 @@ section#Blog
             }
 
             h1{
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-size: 1.8em;
                 margin-top: 1.1em;
                 margin-bottom: 1em;
             }
 
             h2{
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-size: 1.6em;
                 margin-top: 1.1em;
                 margin-bottom: 1em;
             }
 
             h3{
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-size: 1.4em;
                 margin-top: 1.1em;
                 margin-bottom: 1em;
             }
 
             h4{
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-size: 1.2em;
                 margin-top: 1.1em;
                 margin-bottom: 1em;
             }
 
             h5{
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-size: 1.1em;
                 font-weight: bold;
                 margin-top: 1.1em;
@@ -493,7 +499,7 @@ section#Blog
                 border-block-end: 1px solid #ddd;
             }
 
-            font-family: $sans;
+            font-family: theme.$sans;
             --cactus-text-color--soft: #999;
             --cactus-border-radius: 0px;
             --cactus-border-color: #ddd;
@@ -509,7 +515,7 @@ section#Blog
 
             button:hover:enabled
             {
-                background-color: $orange;
+                background-color: theme.$orange;
                 color: #fff;
             }
 
@@ -531,7 +537,7 @@ section#Blog
     
             &:hover
             {
-                color: $orange-link-hover;
+                color: theme.$orange-link-hover;
             }
 
             &.btn
@@ -572,11 +578,11 @@ section#Blog
         .list
         {
 
-            font-family: $sans;
+            font-family: theme.$sans;
             
             h4
             {
-                font-family: $serif;
+                font-family: theme.$serif;
                 font-weight: 700;
                 font-size: 1em;    
             }
@@ -612,7 +618,7 @@ section#Blog
             // }
 
             .link{
-                color: $orange;
+                color: theme.$orange;
             }
         }
     }

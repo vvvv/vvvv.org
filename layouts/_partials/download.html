@@ -1,0 +1,132 @@
+{{ "<!-- DOWNLOAD -->" | safeHTML }}
+<section id="Download">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                {{ with .Site.Params.download }}
+                    <h2 class="section-heading">{{ .Headline }}</h2>
+                    <hr>
+                {{ end }}
+            </div>
+        </div>
+        <div class="row mb-4">
+            {{ with .Site.Params.download }}
+            <div class="col-lg-8 offset-lg-2 mt-4 text-center">
+                <p class="text-faded">{{ .Copy | markdownify }}</p>
+            </div>
+            {{ end }}
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 mb-5">
+                {{ with .Site.Params.download.gamma }}
+                <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4>
+                <p>{{ .Copy }}</p>
+
+                <ul class="nav mb-3" id="download-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="btn btn-link tab active" href="#" id="tabs-download-x64" data-toggle="pill" data-target="#download-x64" role="tab" aria-controls="download-x64" aria-selected="true">{{ .Tab64bit }}</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="btn btn-link tab" href="#" id="tabs-download-arm" data-toggle="pill" data-target="#download-arm" role="tab" aria-controls="download-arm" aria-selected="false">{{ .TabARM }}</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-link tab" href="#" id="tabs-download-mac" data-toggle="pill" data-target="#download-mac" role="tab" aria-controls="download-mac" aria-selected="false">{{ .TabMac }}</button>
+                    </li>
+                </ul> 
+                
+                <div class="row">
+                    <div class="col-12 col-lg-5">                       
+                        <div class="tab-content" id="download-tabContent">
+                            <!-- 64bit Tab -->
+                            <div class="tab-pane fade show active" id="download-x64" role="tabpanel" aria-labelledby="tabs-download-x64">
+                                <!-- Stable Download -->
+                                <div class="mb-4">
+                                    <a 
+                                        href="{{ .StableLink64 }}" 
+                                        class="btn btn-primary btn-xl mb-2" 
+                                        id="stableDownload"
+                                        onclick="plausible('download')" 
+                                        target="{{ .Target }}">
+                                        {{ .StableText }}
+                                    </a>
+                                    <div class="version text">&nbsp;&nbsp;{{ .StableVersion | markdownify }}</div>
+                                </div>
+                                <!-- Preview Download -->
+                                <a  
+                                    data-link="{{ .CurrentPreview64BuildType }}"
+                                    data-currentPreviewTitle="{{ .CurrentPreviewTitle }}"
+                                    class="btn btn-secondary btn-xl previewButton mb-2">
+                                    {{ .PreviewText }}
+                                </a>
+                                <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
+                            </div>
+                            <!-- ARM Tab -->
+                            <div class="tab-pane fade" id="download-arm" role="tabpanel" aria-labelledby="tabs-download-arm">
+                                <!-- Stable Download -->
+                                {{ if not (eq .StableLinkARM "") }}
+                                    <div class="mb-4">
+                                        <a 
+                                            href="{{ .StableLinkARM }}" 
+                                            class="btn btn-primary btn-xl mb-2" 
+                                            id="stableDownload" 
+                                            target="{{ .Target }}">
+                                            {{ .StableText }}
+                                        </a>
+                                        <div class="version text">&nbsp;&nbsp;{{ .StableVersion | markdownify }}</div>
+                                    </div>
+                                {{ end }}
+                                
+                                <!-- Preview Download -->
+                                <a 
+                                    data-link="{{ .CurrentPreviewArmBuildType }}"
+                                    data-currentPreviewTitle="{{ .CurrentPreviewTitle }}"
+                                    class="btn btn-secondary btn-xl previewButton mb-2"
+                                    onclick="plausible('download')">
+                                    {{ .PreviewText }}
+                                </a>
+                                <div class="version text">&nbsp;&nbsp;{{ .PreviewVersion | markdownify }}</div>
+                            </div>
+                            <!-- MAC Tab -->
+                            <div class="tab-pane fade smallerText" id="download-mac" role="tabpanel" aria-labelledby="tabs-download-mac">
+                                {{ .MacText | markdownify }}
+                            </div>
+                        </div>
+                          
+                    </div>
+                    <div class="col-12 col-lg-7 mt-4 mt-lg-0" id="PreviousReleases">                        
+                        <a href="{{ .ChangeLogLink }}" class="link" target="{{ .ChangeLogTarget }}">{{ .ChangeLogText }}</a>
+                    </div>
+                </div>
+               {{ end }}
+            </div>
+
+            <div class="col-12 col-lg-6 ml-auto mt-3 mt-lg-0">
+                {{ with .Site.Params.download.packs }}
+                    <h4 class="mb-4 underlined"><strong>{{ .Headline }}</strong></h4> 
+                    <div class="row">
+                        <div class="col-5">
+                            <a href="{{ .Link }}" onclick="plausible('additionalpacks')">
+                                <img src="/img/PacksBrowser.png" class="img-fluid withShadow" loading="lazy" alt="Pack Browser"/>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <p>{{ .Copy }}</p>
+                            <a href="{{ .Link }}" class="btn btn-secondary btn-xl mb-2" onclick="plausible('additionalpacks')">{{ .Text }}</a>
+                        </div>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+         {{ with .Site.Params.download.beta }}
+        <div class="row mt-5 mt-lg-0">
+            <div id="beta">
+                <div class="col">
+                    {{.Copy}} <a href="{{ .Link }}" class="link" target="{{ .Target }}" onclick="plausible('gotobeta')">{{ .Text }}</a> {{.Copy2}}
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</section>
+
+

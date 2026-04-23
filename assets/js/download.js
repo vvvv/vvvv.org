@@ -1,3 +1,65 @@
+let selectedTab;
+const userAgent = navigator.userAgent.toLowerCase();
+
+if (userAgent.includes('macintosh'))
+{
+    selectedTab = '#tabs-download-mac'
+}
+else if (userAgent.includes('arm'))
+{
+    selectedTab = '#tabs-download-arm'
+}
+else
+{
+    selectedTab = '#tabs-download-x64';
+}
+
+$(selectedTab).tab('show')
+
+const tip = tippy('.previewButton', {
+    content: 'Loading...',
+    placement:'right',
+    arrow:true,
+    trigger:'click',
+    animation: 'fade',
+    allowHTML: true,
+    hideOnClick: true,
+    interactive: true,
+    maxWidth: 'none',
+    duration: [200, 0],
+    onCreate(instance) {
+        instance._isLoaded = false;
+      },
+
+    onShow(instance) {
+
+        const buildType = instance.reference.dataset.link;
+            
+        Promise.allSettled([getLatestBuild(buildType, "")])
+        .then((result) => {
+            
+            var div=`
+            <div class="row">
+                <div class="col mx-0 mb-4">
+                    ${result[0].value}
+                </div>
+            </div>
+            `;
+            
+            document.getElementById('gammaPreviews').innerHTML = div;
+            var content = document.getElementById('previewDownloadTemplate').innerHTML;
+
+            instance.setContent(content);
+            instance._isLoaded = true;
+            var closeButton = instance.popper.getElementsByClassName('close')[0];
+            closeButton.onclick = function() {
+                instance.hide();
+            }
+            
+        });
+      },
+  });
+
 function getTeamcity()
 {
     var teamcity = "https://teamcity.vvvv.org";
@@ -18,52 +80,6 @@ function getBuildsLink(buildType, branch)
 
     return getTeamcity() + `/guestAuth/app/rest/builds?locator=branch:name:${_b},buildType:${buildType},status:SUCCESS,state:finished&count=4`;
 }
-
-var tip = tippy('#previewButton', {
-    content: 'Loading...',
-    placement:'right',
-    arrow:true,
-    trigger:'click',
-    animation: 'fade',
-    allowHTML: true,
-    hideOnClick: true,
-    interactive: true,
-    maxWidth: 'none',
-    duration: [200, 0],
-    onCreate(instance) {
-        instance._isLoaded = false;
-      },
-
-    onShow(instance) {
-        if (!instance._isLoaded)
-        {
-            const currentPreviewBuildType = instance.reference.getAttribute("data-currentPreviewBuildType");
-            
-            Promise.allSettled([getLatestBuild(currentPreviewBuildType, "")])
-            .then((result) => {
-                
-                var div=`
-                <div class="row">
-                    <div class="col mx-0 mb-4">
-                        ${result[0].value}
-                    </div>
-                </div>
-                `;
-                
-                document.getElementById('gammaPreviews').innerHTML = div;
-                var content = document.getElementById('previewDownloadTemplate').innerHTML;
-
-                instance.setContent(content);
-                instance._isLoaded = true;
-                var closeButton = instance.popper.getElementsByClassName('close')[0];
-                closeButton.onclick = function() {
-                    instance.hide();
-                }
-                
-            });
-        }
-      },
-  });
 
 async function getLatestBuild(buildType, branch)
 {

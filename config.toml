@@ -1,16 +1,15 @@
-baseURL = "https://visualprogramming.net/"
+baseURL = "https://vvvv.org/"
 languageCode = "en-us"
-paginate = 20
-paginatePath = "page"
+pagination.pagerSize = 20
+pagination.path = "page"
 summaryLength = 20
 title = "vvvv - visual live-programming for .NET"
-relativeURLs = "true"
+timeZone = "Europe/Berlin"
 
 [sitemap]
   changefreq = 'daily'
   filename = 'sitemap.xml'
   priority = -1 # priority omitted from rendered sitemap
-
 
 [Services.RSS]
   limit = 10
@@ -48,10 +47,13 @@ blog = '/blog/:sections[1]/:slug'
   [outputFormats.RSS]
     mediatype = "application/rss+xml"
     baseName = "index"
+  [outputFormats.json]
+    mediatype = "application/json"
+    baseName = "index"
 
 [params]
 
-		title = "vvvv - visual live-progamming for .NET"
+		title = "vvvv - visual live-programming for .NET"
 		author = "vvvv group"
 		description = "vvvv is a visual live-programming environment for .NET"
 		
@@ -63,23 +65,45 @@ blog = '/blog/:sections[1]/:slug'
 
 		# Navigation
 		[params.navigation]
-		brand 		= "visualprogramming.net"
+		home = "vvvv.org"
 
-		[params.navigation.links]
-		features  = "Features"
-		blog = "Blog"
-		download  = "Download"
-		showcase = "Showcase"
-		Learn = "Learn"
-		community = "Community"
-		licensing = "Licensing"
-		support = "Support"
-		contact   = "contact"
+		[params.menu]
+			[[params.menu.main]]
+				name = 'features'
+			[[params.menu.main]]
+				name = 'blog'
+			[[params.menu.main]]
+				name = 'showcase'
+			[[params.menu.main]]
+				name = 'learn'
+				url = 'https://thegraybook.vvvv.org/'
+			[[params.menu.main]]
+				name = 'forum'
+				url = 'https://forum.vvvv.org/'
+			[[params.menu.main]]
+				name = 'community'
+			[[params.menu.main]]
+				name = 'licensing'
+				url = 'https://store.vvvv.org/'
+			[[params.menu.main]]
+				name = 'support'
+			[[params.menu.main]]
+				name = 'Download vvvv'
+				text = 'Download'
+				url = '/download'
+				style = 'download'
+				icon = 'download'
+			[[params.menu.main]]
+				name = 'Packs for vvvv'
+				titleHiddenOnDesktop = 'true'
+				url = '/packs'
+				style = 'packs'
+				icon = 'pack'
 
 		# Hero section
 		[params.Hero]
 		vvvv     = "vvvv"
-		subtitle   = "A visual live-programming environment that takes you from <b>rapid prototyping</b> to <b>final production.</b>"
+		subtitle   = "<span class='backBox'>A visual live-programming environment that takes you from <b>rapid prototyping</b> to <b>final production.</b></span>"
 		tryitButton = "Download"
 		tryitButtonLink = "Download"
 		requestADemoButton = "Request a tour"
@@ -99,18 +123,27 @@ blog = '/blog/:sections[1]/:slug'
 		Copy = 'vvvv is free without any restrictions for non-commercial use.<br/>Commercial use requires a <a href="https://store.vvvv.org/" target="_blank">License</a>.'
 
 		[params.Download.gamma]
+
+		StableLink64 = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39869/artifacts/content/vvvv_gamma_7.1-win-x64_setup.exe"
+		StableLinkARM = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:39870/artifacts/content/vvvv_gamma_7.1-win-arm64_setup.exe"
+		CurrentPreview64BuildType = "vvvv_gamma_Build20225"
+		CurrentPreviewArmBuildType = "vvvv_gamma_BuildWinArm64"
+
 		Headline = "vvvv gamma"
 		Copy = "First released in April 2020, vvvv gamma is the next generation of vvvv, entirely rewritten from scratch."
 
+		Tab64bit = "Windows"
+		TabARM = "Windows Arm"
+		TabMac = "Mac / Parallels"
+
 		StableText  = "Download: Stable"
-    		StableLink = "https://teamcity.vvvv.org/guestAuth/app/rest/builds/id:38435/artifacts/content/vvvv_gamma_6.6_setup.exe"
-		StableVersion = "Version: 6.6"
+		StableVersion = "Version: 7.1"
 
 		PreviewText = "Download: Preview"
 		PreviewLink = "PreviewDownloads"
 		PreviewVersion = "Unstable, daily preview builds"
-		
-		CurrentPreviewBuildType = "vvvv_gamma_Build20225"
+
+		MacText = '<p>vvvv does not have a native version for macOS!</p><p>But if you`re running on Apple silicon and using <a href="https://www.parallels.com/de/products/desktop/" target="_blank">Parallels</a> is an option for you, please use the "Windows Arm" builds and see <a href="https://thegraybook.vvvv.org/reference/best-practice/vvvv-on-mac.html" target="_blank">Running vvvv on a Mac</a> for some fine-print!</p>'
 
 		LibrariesText  = "Additional Libraries"
 		LibrariesLink = "https://thegraybook.vvvv.org/reference/libraries/overview.html"
@@ -125,15 +158,22 @@ blog = '/blog/:sections[1]/:slug'
 		[params.Download.gamma.previewWindow]
 		Title = "Latest Previews"
 		Subtitle ="Don't use for production!"
-		Text = 'These are daily development builds. If you find one to be broken, try an earlier one.<p>Please mark problems you report in the <a href="https://discourse.vvvv.org/c/vvvv-gamma/" target="_blank">forum</a> with the *preview* tag or visit us in the <a href="https://app.element.io/#/room/#vvvv:matrix.org" target="_blank">chat</a> to talk about issues you encounter.</p>'
+		Text = 'These are daily development builds. If you find one to be broken, try an earlier one.<p>Please mark problems you report in the <a href="https://forum.vvvv.org/c/vvvv-gamma/" target="_blank">forum</a> with the *preview* tag or visit us in the <a href="https://app.element.io/#/room/#vvvv:matrix.org" target="_blank">chat</a> to talk about issues you encounter.</p>'
 
 		
 		[params.Download.beta]
 		Headline = "vvvv beta"
-		Copy = "In development since 2001, vvvv beta has been used by many companies worldwide to create large media environments."
-		Text  = "Go to vvvv.org"
-		Link = "https://vvvv.org/downloads"
+		Copy = "Or are you looking for the now legendary"
+		Copy2 = "?"
+		Text  = "vvvv beta"
+		Link = "https://legacy.vvvv.org/downloads"
 		Target = "_blank"
+
+		[params.Download.packs]
+		Headline = "Packs and Extensions"
+		Copy = "By default vvvv ships with small range of core libraries. Here you can browse all available optional packs to see what functionality can be added as needed. Extensions are packs that extend vvvv itself."
+		Text = "Explore Packs"
+		Link = "/packs"
 
 		[params.Showcase]
 		headline = "Showcase"
@@ -154,35 +194,12 @@ blog = '/blog/:sections[1]/:slug'
 		Warning = "\\* Looking for older blog posts? Find them at: [vvvv.org/blog](https://vvvv.org/blog/1575+1576+25+23+24+39+26+1461+127+126+124)."
 		Categories = ["Monthly Reviews", "News", "Development News", "Dates", "vvvv gamma Releases", "vvvv beta Releases", "vvvv beta Addon Releases", "Guest Posts"]
 		CommentsDisabled = "Comments are no longer accepted for this post."
+		CommentsTempDisabled = "Comments are temporarily disabled."
 		Devvvvs = ["devvvv", "joreg", "gregsn", "tonfilm", "robotanton", "untone", "elias", "azeno", "oschatz", "max"]
 
 	#Community section
-	  [params.Community]
-		headline = "Community"
-
-		[[params.Community.list]]
-		img = "/img/icons/Discourse-32x32_gray.png"
-		imgAlt = "vvvv Forum"
-		title = "Forum"
-		description = "Get answers to your questions or find them in existing discussions in the vvvv forum."
-		link = "https://discourse.vvvv.org/c/vvvv-gamma"
-		text = "Open Forum"
-
-		[[params.Community.list]]
-		img = "/img/icons/element-32x32-black.png"
-		imgAlt = "vvvv on Matrix"
-		title = "Chat"
-		description = "Join us for a chat: Get help 24/7 or just hang out with your fellow patchers."
-		link = "https://matrix.to/#/#vvvv:matrix.org"
-		text = "Open Chat"
-
-		[[params.Community.list]]
-		img = "/img/icons/logo-mbz-gray.png"
-		imgAlt = "vvvv Mobilizon"
-		title = "Meetups"
-		description = "Join us for a meetup: real-world, in-person drinks and presentations around vvvv."
-		link = "https://mobilize.berlin/@vvvvmeetups"
-		text = "Open Meetups"
+	    [params.Community]
+	    headline = "Community"
 
 	# Learn section
 		[params.Learn]

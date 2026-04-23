@@ -1,0 +1,32 @@
+{{- /* Last Month in Review */ -}}
+
+{{- $pages := slice -}}
+{{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
+{{- $lastMonthInReview := index $pages 0 -}}
+{{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
+{{- $dates := first 4 (sort $blogDates "Date" "desc") -}}  
+{{- $siteRes := .Resources -}}
+
+{
+  {{- with $lastMonthInReview -}}
+    {{- $thumb := resources.Get "img/grey-thumb.png" -}}
+          {{- $pageRes := .Resources -}}
+            {{- with .Params.thumb -}}
+              {{- with $pageRes.GetMatch . -}}
+                  {{- $thumb = . -}}
+              {{- end -}}
+          {{- end -}}
+    {{- $thumbSite := $thumb.Fill "80x80 jpg" -}}
+    "lastMonthInReview": {
+      "title": {{- .Title | jsonify -}},
+      "link": "{{- .Permalink -}}",
+      "thumb": "{{- $thumbSite.Permalink -}}",
+      "description": {{- .Params.description | jsonify -}},
+      "pubDate": {{- .Date.Unix -}}
+    },
+  {{- end -}}
+
+  "dates":[
+    {{ partial "community/dateitems.json" $dates }}
+  ]
+}

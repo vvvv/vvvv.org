@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html class="scroll-padding">
+    <head>
+        {{ partial "head" . }}     
+   </head>
+<body data-spy="scroll" data-target="#feature-page-pills" data-offset="450">
+    <div class="main">
+        {{ partial "nav" . }}
+        
+        {{ partial "features-page" .}}
+
+        {{ partial "videoBlocker" . }}
+
+        {{ partial "contact" . }}
+        
+        {{ partial "footer" . }}
+
+        {{ partial "js" . }}
+    </div>
+</body>
+</html>

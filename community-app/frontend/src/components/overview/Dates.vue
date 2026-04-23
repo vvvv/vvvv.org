@@ -1,0 +1,41 @@
+<script setup>
+
+import { ref, onMounted } from 'vue';
+import { NTag, NEllipsis, NSkeleton, NButton, NButtonGroup } from 'naive-ui'
+import { useHugoStore } from './Hugostore.js'
+import Constants from '../../constants.js';
+import SectionTitle from './SectionTitle.vue'
+import DateList from "./DateList.vue";
+
+const store = useHugoStore();
+const loading = ref(false);
+const tab = ref('upcoming');
+
+onMounted(async ()=>{   
+    try {
+        loading.value = true;
+        await store.fetch(true);
+    }
+    catch(error) {
+        console.log (error);
+    }
+    finally {
+        loading.value = false;
+    }
+})
+
+</script>
+
+<template>
+    <div class="section pl-4">
+        <SectionTitle :showRefresh="false" :loading="loading" title="Dates" :link="Constants.BLOG_DATES" :isExternal="true">
+        </SectionTitle>
+        <template v-if="loading">
+            <NSkeleton text :repeat="6" class="mb-4 mx-3"></NSkeleton>
+        </template>
+        <template v-else>
+            <DateList v-if="store.dates[tab]" :data="store.dates[tab]"/>
+            <div v-else class="m-3">Okay, Houston... we have a problem here.<br/>Try again later.</div>
+        </template>
+    </div>
+</template>

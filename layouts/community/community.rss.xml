@@ -1,0 +1,69 @@
+{{- /* Last Month in Review */ -}}
+
+{{- $pages := slice -}}
+{{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
+{{- $lastMonthInReview := index $pages 0 -}}
+{{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
+{{- $dates := first 4 (sort $blogDates "Date" "desc") -}}
+{{- $siteRes := .Resources -}}
+
+<rss version="2.0"
+xmlns:vvvv="https://vvvv.org/rss"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:media="http://search.yahoo.com/mrss/">
+
+  <channel>
+    <title>vvvv &#8211; Overview</title>
+    <link>{{ .Permalink }}</link>
+    {{- with .OutputFormats.Get "RSS" -}}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end -}}
+    <image>
+			<title>vvvv &#8211; Overview</title>
+			<link>{{.Site.BaseURL}}</link>
+			<url>{{ "img/ogVVVV.jpg" | absURL }}</url>
+		</image>
+    <description>A RSS news feed for vvvv community section</description>
+    <generator>Hugo -- gohugo.io</generator>
+    {{ with $.Site.LanguageCode }}
+    <language>{{.}}</language>
+    {{end}}
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+
+    {{ with $lastMonthInReview}}
+      <item>
+        <title>{{ .Title }}</title>
+        <link>{{ .Permalink }}</link>
+        {{ with .Params.author }}
+          <dc:creator>{{.}}</dc:creator>
+        {{end}}
+        <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+        <category>{{ .Params.categories }}</category>
+        {{ $thumb := resources.Get "img/grey-thumb.png"}}
+          {{ $pageRes := .Resources}}
+            {{ with .Params.thumb}}
+              {{ with $pageRes.GetMatch .}}
+                  {{ $thumb = . }}
+              {{ end }}
+          {{ end }}
+        {{ $thumbSite := $thumb.Fill "80x80 jpg"}}
+        <guid isPermaLink="false">{{ printf "%s#%s" .Permalink (.Date.Format "02-01-06") }}</guid>
+        <description>{{- .Params.description | html -}}</description>
+        {{ $thumbRSS := $thumb.Resize "600x jpeg"}}
+        {{ $sizeInBytes := len $thumbRSS.Content }}
+        <enclosure url="{{ $thumbRSS.Permalink }}" length="{{ $sizeInBytes }}" type="image/jpeg" />
+      </item>
+    {{ end }}
+
+    {{- range $dates -}}
+      {{- $data := dict
+        "Item" .
+        "Category" ""
+      -}}
+      {{ partial "community/dateitem.xml" $data -}}
+    {{- end -}}
+
+  </channel>
+</rss>

@@ -7,9 +7,9 @@ slug: "detectfaces"
 description: ""
 imported: "true"
 originalType: "stuff"
-thumb: "GCA.PNG"
+thumb: "face.png"
 ---
 
 
-![](GCA.PNG) 
+![](face.png) 
 

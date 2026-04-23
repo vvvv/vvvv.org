@@ -7,14 +7,14 @@ slug: "vvvv빠"
 description: ""
 imported: "true"
 originalType: "stuff"
-thumb: "DSC01975.JPG"
+thumb: "sticker.jpg"
 ---
 
 
 I love vvvv, then,
 I've made ​​just once, so even if I use it right?
 
-![](DSC01975.JPG) 
+![](sticker.jpg) 
 
-![](DSC01976.JPG) 
+![](sticker2.jpg) 
 

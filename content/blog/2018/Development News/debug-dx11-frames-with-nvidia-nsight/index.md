@@ -6,7 +6,7 @@ title: "Debug DX11 Frames with Nvidia Nsight"
 slug: "debug-dx11-frames-with-nvidia-nsight"
 description: ""
 imported: "true"
-thumb: "01_QuickLaunch.PNG"
+thumb: "01_QuickLaunch-1.png"
 ---
 
 
@@ -22,7 +22,7 @@ The steps are pretty simple:
 - Download and install: https://developer.nvidia.com/nsight-graphics
 
 - Start the application, click "Quick Launch" and you should see this screen:
-![](01_QuickLaunch.PNG) 
+![](01_QuickLaunch-1.png) 
 
 - Add your vvvv.exe and press "Launch"
 
@@ -34,7 +34,7 @@ The steps are pretty simple:
 ![](eO1heDllNp.gif) 
 
 - Or have more details, timeline, API calls, timings etc. in the Nsight application:
-![](02_Inspect.PNG) 
+![](02_Inspect-1.png) 
 
 That's it, just so you know.
 Yours, devvvvs

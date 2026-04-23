@@ -1,0 +1,84 @@
+@use 'shared'  as theme;
+
+html{
+  scroll-behavior: smooth;
+}
+
+.main
+{
+  min-height: 80%;
+}
+
+.btn-xl
+{
+    padding: 10px 20px;
+}
+
+.btn
+{
+    border-radius: 5px;
+}
+
+.btn-default
+{
+    border: none;
+}
+
+.mediaShadow
+{
+  box-shadow: 0px 7px 25px 7px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary {
+    border-color: theme.$strongOrange;
+    color: #fff;
+    background-color: theme.$strongOrange;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    border-color: theme.$strongOrangeHover;
+    color: #fff;
+    background-color: theme.$strongOrangeHover;
+    box-shadow: none;
+}
+
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    background-image: none;
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+    border-color: theme.$strongOrange;
+    background-color: theme.$strongOrange;
+}
+
+.btn-primary .badge {
+    color: theme.$strongOrange;
+    background-color: #fff;
+}

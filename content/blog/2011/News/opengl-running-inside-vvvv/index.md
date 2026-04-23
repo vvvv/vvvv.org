@@ -7,9 +7,9 @@ slug: "opengl-running-inside-vvvv"
 description: ""
 imported: "true"
 originalType: "stuff"
-thumb: "Capture.PNG"
+thumb: "Capture-1.png"
 ---
 
 
-![](Capture.PNG) 
+![](Capture-1.png) 
 

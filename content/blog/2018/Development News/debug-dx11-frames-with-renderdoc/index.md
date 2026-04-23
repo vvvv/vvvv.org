@@ -6,7 +6,7 @@ title: "Debug DX11 Frames with RenderDoc"
 slug: "debug-dx11-frames-with-renderdoc"
 description: ""
 imported: "true"
-thumb: "01_Launch.PNG"
+thumb: "01_Launch-1.png"
 ---
 
 
@@ -17,18 +17,18 @@ The steps are pretty simple:
 - Download and install: https://renderdoc.org
 
 - Start the application and enter the vvvv instance you want to start:
-![](01_Launch.PNG) 
+![](01_Launch-1.png) 
 
 - Press "Launch" and load any patch/scene with dx11 and you should see some debug HUD in the renderer
 
 - Press **F12 or PRINT** to capture the latest frame. Go back to RenderDoc and you should see a list of captured frames:
-![](02_Captures.PNG) 
+![](02_Captures-1.png) 
 
 - Double click or "Open..." a capture to inspect your frame like this:
-![](03_Inspect.PNG) 
+![](03_Inspect-1.png) 
 
 - You can even right-click a pixel and ask for it's history. E.g. which shaders did write into it and inspect the shader and shader resources:
-![](04_PixelHistory.PNG) 
+![](04_PixelHistory-1.png) 
 
 RenderDoc was originally developed by Crytek for the Cryengine and was open sourced in 2014: https://www.cryengine.com/renderdoc
 

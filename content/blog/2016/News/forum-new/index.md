@@ -6,7 +6,7 @@ title: "Forum. New!"
 slug: "forum.-new"
 description: ""
 imported: "true"
-thumb: "categories.PNG"
+thumb: "cats.png"
 ---
 
 
@@ -14,7 +14,7 @@ dir patchers,
 
 in a quest to gradually modernize vvvv.org we present to you step one: a new forum. 
 
-![](categories.PNG) 
+![](cats.png) 
 
 ## Here is what's new
 * the forum is now using the brilliant open-source software https://discourse.org so you may want to check out their site to get an overview of the possibilities
@@ -30,7 +30,7 @@ in a quest to gradually modernize vvvv.org we present to you step one: a new for
 ** **general**: General statements or discussions not necessarily about vvvv or vl
 ** **website**: Discussion about the vvvv.org website including this forum, the wiki, the blogs,...
 
-![](tags.PNG) 
+![](taggs.png) 
 
 ## Use of Tags
 Instead of using a usercontributed tag-cloud approach as we did in the old forum so far we decided to try something different this time and only use tags very selectively:

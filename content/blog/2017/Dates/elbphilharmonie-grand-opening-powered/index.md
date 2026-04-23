@@ -16,11 +16,11 @@ where:
     lat: "52.520007"
     long: "13.404954"
 imported: "true"
-thumb: "IMG_7266.JPG"
+thumb: "elb.jpg"
 ---
 
 
-![](IMG_7266.JPG) 
+![](elb.jpg) 
 
 TONIGHT!
 We are super proud to be part of the grand opening of Elbphilharmonie Hamburg.

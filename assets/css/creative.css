@@ -55,6 +55,13 @@ a:focus {
   border-bottom: 1px solid #999;
 }
 
+#Support .card
+{
+  background-color: #444;
+  color: #ccc;
+  border-color: #2f2f2f;
+}
+
 
 #about a {
   text-decoration: none;
@@ -303,28 +310,7 @@ aside {
     }
 }
 
-header {
-    position: relative;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    overflow: hidden;
-    padding: 2em 0 4em;
 
-    /* For smaller mobile image */
-    /* background-image: url(../img/header_6.0_1500.jpg);
-    background-position: 71% 0%;
-    height: 400px; */
-
-    background-image: url(../img/header_6.0.jpg);
-    background-position: 71% 0%;
-    height: 600px;
-
-}
 
 /* For smaller mobile image */
 /* 
@@ -333,28 +319,28 @@ header {
       background-image: url(../img/header_6.0.jpg);
       min-height: 600px;
   }
-} */
+}
 
 @media (min-width: 768px)
 {
   header{
-    background-position: 65% 0%;
+    background-position: center bottom;
   }
 }
 
 @media (min-width: 1500px)
 {
   header{
-    background-position: center top;
+    background-position: center bottom;
   }
 }
 
 @media (min-width: 2250px){
   header {
-      background-image: url(../img/header_6.0_3072.jpg);
+      background-image: url(../img/refik-anadol-frank-gehry-blueprints-ai-generated-landscapes-guggenheim-bilbao-designboom-large02.jpg);
       min-height: 819px;
   }
-}
+} */
 
 .section-heading {
     margin-top: 0;
@@ -412,25 +398,10 @@ header {
   color: #777 !important;
 }
 
-#Community
-{
-  background-color: #eee;
-}
-
-#Learn
-{
-  background-color: #fff;
-}
-
 .paddingRight
 {
   padding-right: 3em;
 }
-
-.community-box {
-  background-color: #666;
-}
-
 
 .text-primary {
     color: #666666;
@@ -511,63 +482,7 @@ fieldset[disabled] .btn-default.active {
     background-color: #222;
 }
 
-.btn-primary {
-    border-color: #ffa800;
-    color: #fff;
-    background-color: #ffa800;
-    -webkit-transition: all .35s;
-    -moz-transition: all .35s;
-    transition: all .35s;
-}
-
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary.focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-    border-color: #ed431f;
-    color: #fff;
-    background-color: #ee4b28;
-    box-shadow: none;
-}
-
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-    background-image: none;
-}
-
-.btn-primary.disabled,
-.btn-primary[disabled],
-fieldset[disabled] .btn-primary,
-.btn-primary.disabled:hover,
-.btn-primary[disabled]:hover,
-fieldset[disabled] .btn-primary:hover,
-.btn-primary.disabled:focus,
-.btn-primary[disabled]:focus,
-fieldset[disabled] .btn-primary:focus,
-.btn-primary.disabled.focus,
-.btn-primary[disabled].focus,
-fieldset[disabled] .btn-primary.focus,
-.btn-primary.disabled:active,
-.btn-primary[disabled]:active,
-fieldset[disabled] .btn-primary:active,
-.btn-primary.disabled.active,
-.btn-primary[disabled].active,
-fieldset[disabled] .btn-primary.active {
-    border-color: #ffa800;
-    background-color: #ffa800;
-}
-
-.btn-primary .badge {
-    color: #ffa800;
-    background-color: #fff;
-}
-
 .btn {
-    /* border: 0; */
-    border-radius: 300px;
     text-transform: uppercase;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
     font-weight: 700;
@@ -599,75 +514,6 @@ img::selection {
 img::-moz-selection {
     color: #fff;
     background: 0 0;
-}
-
-#Support
-{
-  background-color: #333;
-}
-
-#Support p, #Support ul
-{
-  font-size: 0.9rem;
-}
-
-#Support .smaller
-{
-  font-size: smaller;
-  line-height: 2em !important;
-}
-
-#Support hr.divider
-{
-  border-color: #666;
-  border-width: 1px;
-}
-
-.vline-right
-{
-  height:100%;
-  /* margin-right: 1px; */
-  border-right: 10px solid #a00;
-}
-
-.v-divider{
-  margin-left:5px;
-  margin-right:5px;
-  width:1px;
-  height:100%;
-  border-left:1px solid gray;
- }
-
-.main
-{
-  min-height: 80%;
-}
-
-.WindowsIcon
-{
-  background: url(../img/windows_20px.png) no-repeat center;
-  margin-left: 1em;
-  padding: 20px 20px 20px 0px;
-}
-
-.blueColor
-{
-  background-color: #4489CC;
-}
-
-.borderBlue
-{
-  border-color: #4489CC;
-}
-
-.textBlue
-{
-  color: #4489CC;
-}
-
-.grayColor
-{
-  background-color: #333;
 }
 
 .collapsing{
