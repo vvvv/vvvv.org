@@ -55,10 +55,13 @@ header {
         height: 100%;
         overflow: hidden;
         transition: opacity 0.4s, filter 0.4s, transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
-        opacity: 0.2;
-        // filter: blur(4px);
+        opacity: 0.3;
         transform-origin: left center;
         cursor: pointer;
+
+        &:hover{
+            opacity: 0.4;
+        }
 
         &.active {
             opacity: 1;
