@@ -4,7 +4,7 @@ weight: 1
 button:
     title: "Read more"
     url: /features/largescaleinteractive/
-    isExternal: true
+    isExternal: false
 image: 
     src: beginnerclass.jpg
     title: 

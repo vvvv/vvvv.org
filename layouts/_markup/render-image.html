@@ -4,5 +4,5 @@
     <figcaption>{{ .Title }}</figcaption>
   </figure>
 {{ else }}
-  <img src="{{ .Destination | absURL }}" alt="{{ .Text }}">
+  <img src="{{ .Destination | absURL }}" alt="{{ .Text }}" title="{{.Text}}">
 {{ end }}
