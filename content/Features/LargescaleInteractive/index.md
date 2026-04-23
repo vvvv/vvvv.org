@@ -7,7 +7,7 @@ vvvv has built-in support for editing and running applications across multiple P
 
 ![CoreLib](/features/largescaleinteractive/Lib_CoreLib.png)
 
-	Projection Mapping
+### Pojection Mapping
 
 Large-scale often means projection-mapping. Since requirements here are very diverse vvvv comes with support for different options. vvvv integrates auto-clibration systems by [VIOSO], [Scalable Display Systems] and [Screenberry].
 
@@ -15,13 +15,13 @@ If you need any other existing system integrated, please get in touch.
 
 Alternatively vvvv also ships with all the tools that let you build custom projection mapping workflows. See the [Projectio Mapping] section in the packs browser for existing options. 
 
-	Interaction
+### Interaction
 	
 When it comes to  For capturing interaction with crowds, vvvv supports [Augmenta] and [BlueIOT] Positional tracking from Tracking crowds 
 
-	motion capture, depth sensors, lidars
+###	motion capture, depth sensors, lidars
 	
-	Tracking, Augmenta, blueiot
+###	Tracking, Augmenta, blueiot
 
 <!--more-->
 
