@@ -1,5 +1,5 @@
 ---
-id: 22
+weight: 22
 author: Responsive Spaces
 title: Welser Profile - HQ Digital Staging
 subtitle:

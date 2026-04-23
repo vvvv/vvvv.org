@@ -1,5 +1,5 @@
 ---
-id: 40
+weight: 40
 author: 38e Studio
 title: Bewegte Orte („Moving Places“)
 subtitle: 

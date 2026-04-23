@@ -1,5 +1,5 @@
 ---
-id: 4
+weight: 4
 author: BADABOOMBERLIN
 title: Schattenfänger
 subtitle:

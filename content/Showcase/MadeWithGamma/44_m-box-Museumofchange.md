@@ -1,5 +1,5 @@
 ---
-id: 44
+weight: 44
 author: m-box
 title: KUWAIT PAVILLION - EXPO OSAKA
 subtitle: 

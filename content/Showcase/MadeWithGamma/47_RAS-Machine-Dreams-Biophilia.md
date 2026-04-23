@@ -1,5 +1,5 @@
 ---
-id: 47
+weight: 47
 author: Refik Anadol Studio
 title: "Machine Dreams: Biophilia"
 subtitle: 

@@ -1,5 +1,5 @@
 ---
-id: 26
+weight: 26
 author: Studio Brüll
 title: ALL ELECTRIC SOCIETY PARK
 subtitle: Experience the Future of Sustainable Energy

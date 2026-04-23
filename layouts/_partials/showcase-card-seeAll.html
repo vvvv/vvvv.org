@@ -1,6 +1,7 @@
 
-{{ $content := site.GetPage "section" "showcase" }}
-{{ $TotalProjects := len ($content.Resources.ByType "page") }}
+{{ $content := site.GetPage "showcase/madewithgamma" }}
+
+{{ $TotalProjects := len ($content.Pages) }}
 
 <div class="swiper-slide py-4 px-3">
     <div class="card text-white card-has-bg click-col h-100 justify-content-center">
@@ -8,7 +9,7 @@
             <div class="col">
                 <div class="d-flex justify-content-center mb-3">There are {{ $TotalProjects }} recent projects to discover.</div>
                 <div class="d-flex justify-content-center">
-                    <a class="btn btn-primary align-self-center" href="{{ "/showcase/#projects" | relURL }}">See All</a>
+                    <a class="btn btn-primary align-self-center" href="{{ "/showcase/#recent-projects" | relURL }}">See All</a>
                 </div>
             </div>
         </div>
