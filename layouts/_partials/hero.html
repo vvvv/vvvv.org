@@ -1,19 +1,59 @@
 {{ "<!-- HEADER -->" | safeHTML }}
+
+{{- $hero := site.GetPage "hero" -}}
+{{- $features := $hero.Pages.ByWeight -}}
+
 <header class="d-flex align-items-center">
-  <div id="hero-text" class="ml-3 ml-md-5">
-    <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
-    <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
-  </div>
   <div id="hero-content">
-    <img id="hero-image"
-        src="/img/header_70_5_3072.jpg" 
-        srcset="/img/header_70_5_3072.jpg 3072w"
-        sizes="(max-width: 1024px) 1024px,
-               (max-width: 1500px) 1800px,
-               3000px"/>
+    <div id="hero-image">
+      <div id="track">
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (last 1 $features) 0)) }}
+        {{ range $index, $elem:=$features }}
+          {{ partial "hero-slide" (dict "hero" $hero "ctx" .) }}
+        {{ end }}
+        {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
+      </div>
+    </div>
+    <div id="hero-box">
+      <div id="hero-text">
+        <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
+        <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
+        <hr/>
+        <div class="featureTitle">
+          {{ range $index, $elem:=$features }}
+            <section class="{{ if eq $index 0 }}selected visible{{ end }}" 
+                {{ with .Params.image }}
+                  {{with .title}} data-title="{{.}}" {{end}}
+                  {{with .author}} data-author="{{.}}" {{end}}
+                  {{with .photographer}} data-photographer="{{.}}" {{end}}
+                {{end}}
+              >
+              {{ with .Params.button}}
+                <a href="{{.url}}" alt="{{$elem.Params.title}}" {{if .isExternal}}target="_blank"{{end}}>{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</a><br/>
+                <a href="{{.url}}" class="button" {{if .isExternal}}target="_blank"{{end}}>{{default "Read more" .title }}</a>
+              {{ else }}
+                {{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}
+              {{ end }}
+            </section>
+          {{ end }}
+        </div>
+
+      </div>
+      <div id="hero-pagination">
+        <ul class="pagination">
+          {{ range $index, $elem:=$features }}
+            <li {{if eq $index 0}}class="selected"{{end}} data-index="{{$index}}"></li>
+          {{ end }}
+        </ul>
+        <div class="arrows">
+          <div class="icon arrow-icon"></div>
+          <div class="icon arrow-icon right"></div> 
+       </div>
+      </div>
+    </div>
     <div id="hero-attribution">
-      <div class="title">7.0</div>
-      <div class="author">Arístides García</div>
+      <div class="title"></div>
+      <div class="author"></div>
       <div class="photographer"></div>
     </div>
   </div>
