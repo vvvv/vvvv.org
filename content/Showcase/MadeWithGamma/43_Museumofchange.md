@@ -1,6 +1,6 @@
 ---
 id: 43
-author: ***
+author: Museum Of Change
 title: Museum Of Change
 subtitle: 
 link: https://www.museumofchange.art
