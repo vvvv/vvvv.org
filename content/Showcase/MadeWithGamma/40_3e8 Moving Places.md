@@ -1,6 +1,6 @@
 ---
 weight: 40
-author: 38e Studio
+author: 3e8 Studio
 title: Bewegte Orte („Moving Places“)
 subtitle: 
 link: https://3e8.studio/works/bewegte-orte/
