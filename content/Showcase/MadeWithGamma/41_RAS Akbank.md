@@ -1,5 +1,5 @@
 ---
-id: 41
+weight: 41
 author: Refik Anadol Studio
 title: DATAFALL AKBANK
 subtitle: 

@@ -1,5 +1,5 @@
 ---
-id: 5
+weight: 5
 author: m-box
 title: Technoseum - Energie Mediawall
 subtitle:

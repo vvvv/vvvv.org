@@ -5,21 +5,10 @@
 
   background-color: #222;
 
-  .lazyload,
-  .lazyloading {
-    opacity: 0;
-  }
-
-  .lazyloaded {
-    opacity: 1;
-    transition: opacity 300ms;
-  }
-
   img
   {
     background: none;
     font-size: 1em;
-    font-family: "open sans", "helvetica neue", "Arial", "sans-serif";
   }
 
   .swiper {
@@ -111,7 +100,6 @@
     border-radius: 2px;
     color: #ddd;
     font-size: 0.8em;
-    font-family: "open sans", "helvetica neue", "Arial", "sans-serif";
   }
 
   .card{
@@ -125,7 +113,9 @@
 
     box-shadow: 0 0 12px 5px rgba(0,0,0,0.2);
 
-    .card-meta{color:orange}
+    .card-meta{
+      color:#aaa
+    }
     
     .card-body{
       padding: 0px;
@@ -161,8 +151,9 @@
     
     .card-img
     {
-      height: auto;
-      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      // max-height: 600px;
       &:hover 
       {
         background-size: 130%;

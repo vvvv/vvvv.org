@@ -1,0 +1,8 @@
+{{ $resize := .resize }}
+{{ $ctx := .ctx }}
+{{ $src := resources.Get .ctx.Params.img }}
+
+{{ with $src }}
+    {{ $img := ($src.Fill $resize).RelPermalink }}
+    <img class="card-img" loading="lazy" src="{{$img}}" alt="{{ $ctx.Params.Title }}">
+{{ end }}
