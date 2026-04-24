@@ -16,6 +16,18 @@ The first time you start vvvv, you're being greated by the Help Browser that poi
 - Live programming
 - Premium logging 
 
+## Devices 
+* Kinect v1, v2, Azure
+* Intel RealSense, Orbbec Astra, StereoLabs ZED, Nuitrack
+* Industrial cameras by The Imaging Source
+* uEye & uEye+ cameras by IDS-Imaging 
+* Hand tracking devices by Ultraleap
+* DeckLink capture cards by Blackmagic Design
+
+## Protocols
+
+* SerialPort, OSC, MIDI, Redis, DMX, Art-Net, Firmata, UDP, TCP, RCP, WebSocket, HTTP, ZMQ, MQTT, ...
+
 <!--more-->
 
 After more.

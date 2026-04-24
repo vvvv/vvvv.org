@@ -3,25 +3,37 @@ title: Large-scale & Interactive
 weight: 1
 ---
 
-vvvv has built-in support for editing and running applications across multiple PCs. A feature called "boygrouping" automatically transmits program changes made on your main PC to all connected clients. Like this, from a programming perspective, most overhead of creating distributed applications is removed.
+![](./image.png)
 
-![CoreLib](/features/largescaleinteractive/Lib_CoreLib.png)
+vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved, vvvv coordinates them with a feature called "Boygrouping" that allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
+
+![Boygroup](boygroup-schema.png)
 
 ### Pojection Mapping
 
-Large-scale often means projection-mapping. Since requirements here are very diverse vvvv comes with support for different options. vvvv integrates auto-clibration systems by [VIOSO], [Scalable Display Systems] and [Screenberry].
+Large-scale often means projection-mapping. Since requirements here are very diverse, vvvv comes with support for different options. vvvv integrates the following auto-clibration systems:
+- [VIOSO](https://vioso.com)
+- [Scalable Display Systems](https://www.scalabledisplay.com/)
+- [Screenberry](https://screenberry.com/) 
+- If you need any other existing system integrated, don't hesitate to [get in touch](mailto:devvvvs@vvvv.org).
 
-If you need any other existing system integrated, please get in touch.
-
-Alternatively vvvv also ships with all the tools that let you build custom projection mapping workflows. See the [Projectio Mapping] section in the packs browser for existing options. 
+Alternatively vvvv also ships with tooling that help you build custom projection mapping workflows. See the [Projection Mapping](https://vvvv.org/packs/?c=Projection%20Mapping) section in the packs browser for all options. 
 
 ### Interaction
 	
-When it comes to  For capturing interaction with crowds, vvvv supports [Augmenta] and [BlueIOT] Positional tracking from Tracking crowds 
+For capturing interaction with crowds, vvvv supports the following tracking systems which give you individual peoples position in very large spaces:
+- [Augmenta](https://augmenta.tech/) 
+- [BlueIOT](https://www.blueiot.com/)
+  
+Further, a range depth sensors and lidars is supported that allow you to create custom solutions, see the [Devices section](http://localhost:1313/packs/?c=Devices#Depth%20Cameras) in the packs browser for all options.
 
-###	motion capture, depth sensors, lidars
-	
-###	Tracking, Augmenta, blueiot
+###	Motion Capture
+
+Full-body, professional skeletal motion capture is supported via the following systems:
+- [OptiTrack]()
+- [Captury]()
+
+Further, a range of lower-cost options are available, see the [Motion Capture](http://localhost:1313/packs/?c=Motion%20Capture) section of the packs browser.
 
 <!--more-->
 

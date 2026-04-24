@@ -3,7 +3,10 @@ title: Custom Media Server
 weight: 2
 ---
 
-When off-the-shelf Media Servers don't suite your needs, create your own with vvvv. All tooling is there for you to customize and tailor to your specific needs:
+When off-the-shelf media servers don't suite your needs, create your own with vvvv! All tooling is there for you to customize and tailor to your specific needs:
+
+plugin architecture
+gui
 
 - Multichannel audio with support for VST3 plugins
 - Video and image stack playback
@@ -13,6 +16,7 @@ When off-the-shelf Media Servers don't suite your needs, create your own with vv
 - Controlling lights and lasers LaserAnimation Sollinger, Moncha, Etherdream
 - Tracking, motion capture: Augmenta
 - Presets 
+- Connect anything
 
 <!--more-->
 
