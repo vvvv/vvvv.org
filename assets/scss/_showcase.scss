@@ -114,7 +114,11 @@
     box-shadow: 0 0 12px 5px rgba(0,0,0,0.2);
 
     .card-meta{
-      color:#aaa
+      color:#bbb;
+      font-weight: bold;
+      border-top: 1px solid #444;
+      margin-top: 1rem;
+      padding-top: 0.5rem;
     }
     
     .card-body{
