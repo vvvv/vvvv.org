@@ -10,6 +10,7 @@
   {{ $pages := .CurrentSection.RegularPages.ByWeight }}
   {{ if gt (len $pages) 0 }}
     {{ $first := index $pages 0 }}
+    <h2>{{ $first.Title }}</h2>
     {{ $first.Content }}
   {{ end }}
 {{ end }}

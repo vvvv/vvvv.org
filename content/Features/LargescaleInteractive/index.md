@@ -3,9 +3,11 @@ title: Large-scale & Interactive
 weight: 1
 ---
 
-![](./image.png)
+![Large-scale interactive spaces](image.png "Refik Anadol Studio")
 
 vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved, vvvv coordinates them with a feature called "Boygrouping" that allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
+
+<!--more-->
 
 ![Boygroup](boygroup-schema.png)
 
@@ -34,7 +36,3 @@ Full-body, professional skeletal motion capture is supported via the following s
 - [Captury]()
 
 Further, a range of lower-cost options are available, see the [Motion Capture](http://localhost:1313/packs/?c=Motion%20Capture) section of the packs browser.
-
-<!--more-->
-
-After more.

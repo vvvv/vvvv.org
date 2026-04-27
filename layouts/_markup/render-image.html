@@ -1,8 +1,37 @@
-{{ if .Title }}
-  <figure>
-    <img src="{{ .Destination | absURL }}" alt="{{ .Text }}">
-    <figcaption>{{ .Title }}</figcaption>
-  </figure>
-{{ else }}
-  <img src="{{ .Destination | absURL }}" alt="{{ .Text }}" title="{{.Text}}">
-{{ end }}
+
+
+{{- $img := .Page.Resources.GetMatch .Destination -}}
+{{- $titleArray := slice -}}
+{{- with .Text -}}{{$titleArray = $titleArray | append .}}{{- end -}}
+{{- with .Title -}}{{$titleArray = $titleArray | append .}}{{- end -}}
+{{- $title := "" -}}
+{{- if $titleArray -}}
+  {{- $title = delimit $titleArray " / " -}}
+{{- end -}}
+{{- $widths := slice 400 800 1000 -}}
+{{- $srcset := slice -}}
+{{- $sizes := slice -}}
+{{- with $title -}}
+<figure>
+{{- end -}}
+{{- if $img -}}
+  {{- range $w := $widths -}}
+    {{- $resized := $img.Resize (printf "%dx webp q80" $w) -}}
+    {{- $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink $w) -}}
+  {{- end -}}
+  {{- $src := ($img.Resize "800x webp q80").RelPermalink -}}
+    <img 
+      src="{{ $src }}" 
+      srcset="{{ delimit $srcset ", " }}" 
+      sizes="auto" 
+      loading="lazy"
+      {{- with .Text }}alt="{{ . }}"{{ end -}}
+      {{- with $title }}title="{{ . }}"{{ end -}}
+      />
+  {{- else -}}
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" />
+{{- end -}}
+{{- with $title -}}
+    <figcaption>{{$title}}</figcaption>
+</figure>
+{{end}}

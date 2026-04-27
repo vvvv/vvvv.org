@@ -32,8 +32,8 @@
           <div class="col-7 ml-4 tab-content">
             {{ range $index, $elem:=$sections }}
               <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | urlize}}" role="tabpanel" aria-labelledby="home-tab">
-                <h2 class="h2">{{$elem.Title}}</h2>
-                {{ $elem.Summary }}
+                <h2>{{$elem.Title}}</h2>
+                {{ .Summary }}
                 <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
               </div>
             {{ end }}
