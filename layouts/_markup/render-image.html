@@ -11,17 +11,25 @@
 {{- $widths := slice 400 800 1000 -}}
 {{- $srcset := slice -}}
 {{- $sizes := slice -}}
+{{- $resized := slice -}}
+{{- $isBlog := eq .Page.Section "blog" -}}
+{{- $src := "" -}}
 {{- with $title -}}
 <figure>
 {{- end -}}
 {{- if $img -}}
-  {{- range $w := $widths -}}
-    {{- $resized := $img.Resize (printf "%dx webp q80" $w) -}}
-    {{- $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink $w) -}}
+  {{ if $isBlog -}}
+    {{- $src = $img -}}
+  {{- else -}}
+    {{- range $w := $widths -}}
+      {{- $resizedImg := $img.Resize (printf "%dx webp q90" $w) -}}
+      {{- $srcset = $srcset | append (printf "%s %dw" $resizedImg.RelPermalink $w) -}}
+      {{- $resized = $resized | append $resizedImg -}}
+    {{- end -}}
+    {{- $src = index $resized 2 -}}
   {{- end -}}
-  {{- $src := ($img.Resize "800x webp q80").RelPermalink -}}
     <img 
-      src="{{ $src }}" 
+      src="{{ $src.RelPermalink }}" 
       srcset="{{ delimit $srcset ", " }}" 
       sizes="auto" 
       loading="lazy"

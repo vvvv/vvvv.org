@@ -38,6 +38,23 @@
 
   main {
     min-width: 0; /* prevents overflow issues */
+
+      a:not(:has(img))
+      {
+          text-decoration: underline;
+          text-underline-offset: 0.2rem;
+          text-decoration-color: #ccc;
+
+          &:hover
+          {
+              color: theme.$orange-link-hover;
+          }
+      }
+
+      li::marker {
+        content: '—  ';
+      }
+
   }
 
   
