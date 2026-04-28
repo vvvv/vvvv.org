@@ -168,11 +168,11 @@ blog = '/blog/:sections[1]/:slug'
 		Link = "https://legacy.vvvv.org/downloads"
 		Target = "_blank"
 
-		[params.Download.Pricing]
+		[params.Download.commercialuse]
 		Headline = "Commercial use"
 		Copy = 'vvvv is free without any restrictions for non-commercial use. Commercial use requires a License.'
 		Text = "Buy Licenses"
-		Link = "/licensing"
+		Link = "https://store.vvvv.org/"
 
 		[params.Download.packs]
 		Headline = "Packs"
