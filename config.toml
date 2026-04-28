@@ -120,7 +120,6 @@ blog = '/blog/:sections[1]/:slug'
 		# Download section
 		[params.Download]
 		Headline = "Download"
-		Copy = 'vvvv is free without any restrictions for non-commercial use.<br/>Commercial use requires a <a href="https://store.vvvv.org/" target="_blank">License</a>.'
 
 		[params.Download.gamma]
 
@@ -163,15 +162,21 @@ blog = '/blog/:sections[1]/:slug'
 		
 		[params.Download.beta]
 		Headline = "vvvv beta"
-		Copy = "Or are you looking for the now legendary"
+		Copy = "Looking for the now legendary"
 		Copy2 = "?"
 		Text  = "vvvv beta"
 		Link = "https://legacy.vvvv.org/downloads"
 		Target = "_blank"
 
+		[params.Download.Pricing]
+		Headline = "Commercial use"
+		Copy = 'vvvv is free without any restrictions for non-commercial use. Commercial use requires a License.'
+		Text = "Buy Licenses"
+		Link = "/licensing"
+
 		[params.Download.packs]
-		Headline = "Packs and Extensions"
-		Copy = "By default vvvv ships with small range of core libraries. Here you can browse all available optional packs to see what functionality can be added as needed. Extensions are packs that extend vvvv itself."
+		Headline = "Packs"
+		Copy = "By default vvvv ships with small range of core libraries. Browse all available optional packs."
 		Text = "Explore Packs"
 		Link = "/packs"
 
