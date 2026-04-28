@@ -10,7 +10,9 @@ The first option is to export the program to run it as normal app (*). It can be
 
 This means that you apps created with vvvv can directly be shared via online stores like the [Microsoft Store](https://apps.microsoft.com/home?hl=en-US&gl=DE) or [Steam Store](https://store.steampowered.com/):
 
-[![Microsoft Store](ms.png)](https://apps.microsoft.com/home?hl=en-US&gl=DE) [![Steam Store](steam.png)](https://store.steampowered.com/)
+[{{< pic src="ms.png" alt="Microsoft Store" title="Microsoft Store" >}}](https://apps.microsoft.com/home?hl=en-US&gl=DE)
+
+[{{< pic src="steam.png" alt="Steam Store" title="Steam Store" >}}](https://store.steampowered.com/)
 
 This form of deployment is included with any commercial [Developer License](https://store.vvvv.org/). 
 

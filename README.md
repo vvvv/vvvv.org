@@ -16,7 +16,8 @@ For embedding external media use these short codes:
 * Mastodon: `{{< mastodon "mastodon.xyz/@vvvv/109598445063555699" 550 >}}` Parameters: Link [Height (default=550)]
 * Pixelfed: `{{< pixelfed "pixelfed.social/p/madewithvvvv/509678388578111219" 550 >}}` Parameters: Link [Height (default=550)]
 * Vimeo: `{{< "vimeo" "761078720" >}}` Parameters: "Vimeo ID"
-* Youtube `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
+* Youtube: `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
+* Pic (image, that hugo won't rescale): {{< pic src="foo.png" alt="bar" title="bar" >}} 
  
 ## Local build:
 * [Download Hugo](https://github.com/gohugoio/hugo/releases/), unzip and place that into some folder
