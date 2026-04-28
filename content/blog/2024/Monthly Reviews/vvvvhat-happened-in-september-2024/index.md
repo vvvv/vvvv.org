@@ -12,7 +12,7 @@ Autumn leavvvves...
 
 Let's see what we do have though:
 - Not entirely new, but finally available in a stable NuGet: [Support for ZED stereo cameras by Stereolabs](https://visualprogramming.net/blog/2024/introducing-support-for-zed-stereo-cameras-by-stereolabs/)
-- Work on a VST host has started and we're happy to have this development sponsored in parts by long-time vvvv power users [m-box](https://www.m-box.de/), [SCHNELLE BUNTE BILDER](https://schnellebuntebilder.de/) and [3e8.studio](http://3e8.studio/)
+- Work on a VST host has started and we're happy to have this development sponsored in parts by long-time vvvv power users [m-box](https://www.m-box.de/), [SCHNELLE BUNTE BILDER](https://schnellebuntebilder.de/) and [3e8](http://3e8.studio/)
 - Also in the works is support for RPLidar's A-series by [Slamtec](https://www.slamtec.com/), sponsored by Emanuele Foti
 - And we haven't mentioned here yet that we have an ARM-build brewing for optimal performance on those types of processors. More on this later..
 - Ongoing is further work on: Global Channels, Presets, Bindings, Transitions
