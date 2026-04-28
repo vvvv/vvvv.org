@@ -31,7 +31,7 @@
     <img 
       src="{{ $src.RelPermalink }}" 
       srcset="{{ delimit $srcset ", " }}" 
-      sizes="auto" 
+      sizes="100vw" 
       loading="lazy"
       {{- with .Text }}alt="{{ . }}"{{ end -}}
       {{- with $title }}title="{{ . }}"{{ end -}}
