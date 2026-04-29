@@ -88,8 +88,6 @@ if (window.location.pathname === '/')
 
             stateEvent.addEventListener('changed:index', (e)=>{
 
-                console.log (e);
-
                 const { value, state } = e.detail;
 
                 if (state.isAnimating || value === state.lastIndex)
@@ -264,14 +262,12 @@ if (window.location.pathname === '/')
 
             progressBar.style.transition = 'none';
             progressBar.style.width = '0%';
-  
-            
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    progressBar.style.transition = `width ${interval}ms linear`;
-                    progressBar.style.width = '100%';
-                });
-            });
+
+            void progressBar.offsetWidth;
+
+            progressBar.style.transition = `width ${interval}ms linear`;
+            progressBar.style.width = '100%';
+              
         }
 
     })
