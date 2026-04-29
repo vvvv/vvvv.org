@@ -11,11 +11,20 @@
   padding-top: 3rem;
 
   h1, h2{
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
   }
+
 
   h3{
     font-size: 1.5rem;
+  }
+
+  h1, h2, h3, h4{
+
+    &:not(:first-child)
+    {
+      margin-top: 3rem;
+    }
   }
 
   @media (min-width: 768px) {
@@ -38,6 +47,23 @@
 
   main {
     min-width: 0; /* prevents overflow issues */
+
+      a:not(:has(img))
+      {
+          text-decoration: underline;
+          text-underline-offset: 0.2rem;
+          text-decoration-color: #ccc;
+
+          &:hover
+          {
+              color: theme.$orange-link-hover;
+          }
+      }
+
+      li::marker {
+        content: '—  ';
+      }
+
   }
 
   

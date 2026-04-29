@@ -6,12 +6,12 @@
   <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 class="section-heading">{{ $featuresPage.Title }}</h1>
+                <h2 class="section-heading">{{ $featuresPage.Title }}</h2>
                 <hr class="primary">
             </div>
         </div>
   </div>
-  <div class="container-fluid">
+  <div class="container">
       <h1></h1>               
       <div class="row">
           <div class="col-4 mr-4">
@@ -29,11 +29,11 @@
                 </nav>
               </aside>
           </div>
-          <div class="col-7 tab-content">
+          <div class="col-7 ml-4 tab-content">
             {{ range $index, $elem:=$sections }}
               <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | urlize}}" role="tabpanel" aria-labelledby="home-tab">
                 <h2>{{$elem.Title}}</h2>
-                {{ $elem.Summary }}
+                {{ .Summary }}
                 <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
               </div>
             {{ end }}
