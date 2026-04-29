@@ -242,20 +242,21 @@ if (window.location.pathname === '/')
 
         function startAutoplay() {
 
-            resetAndStartProgress();
-
-            slideTimer = setInterval(() => {
+            progressBar.addEventListener('transitionend', ()=>{
                 const activeTitles = slides.length - 2;
+                appState.isAnimating = false;
                 appState.index = (appState.index+1) % activeTitles;
                 resetAndStartProgress();
-            }, interval);
+            })
+
+            resetAndStartProgress();
         }
 
         function stopAutoplay() {
-            clearInterval(slideTimer);
             progressBar.style.transition = 'none';
             progressBar.style.width = '0%';
             progressBarContainer.style.visibility = 'hidden';
+            appState.isAnimating = false;
         }
 
         function resetAndStartProgress() {
