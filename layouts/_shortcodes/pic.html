@@ -1,10 +1,16 @@
 {{ $src := .Get "src" }}
 {{ $alt := .Get "alt" | default "" }}
 {{ $title := .Get "title" | default "" }}
+{{ $width := .Get "width" | default "" }}
 
 {{ $img := .Page.Resources.GetMatch $src }}
 
 {{ if $img }}
+
+    {{ if $width }}
+        {{ $img = $img.Resize (printf "%dx" (int $width))}}
+    {{ end }}
+
     {{- with $title -}}
         <figure>
     {{- end -}}
