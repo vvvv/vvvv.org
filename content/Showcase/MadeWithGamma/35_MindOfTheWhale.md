@@ -1,5 +1,5 @@
 ---
-id: 35
+weight: 35
 author: Marshmallow Laser Feast
 title: Seeing Echoes in the Mind of the Whale
 subtitle: 

@@ -1,5 +1,5 @@
 ---
-id: 7
+weight: 7
 author: bildwerk
 title: ZOOM Trickfilm Studio
 subtitle:

@@ -1,5 +1,5 @@
 ---
-id: 34
+weight: 34
 author: Studio MUX
 title: LightSpray — Digital Graffiti
 subtitle: 

@@ -1,5 +1,5 @@
 ---
-id: 18
+weight: 18
 author: m-box
 title: Wattenmeer Besucherzentrum
 subtitle:
