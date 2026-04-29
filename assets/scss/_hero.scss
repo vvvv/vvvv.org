@@ -91,7 +91,7 @@ header {
     bottom: 0;
     width: 500px;
     height: 500px;
-    padding: 0rem 7rem 0rem 2rem;
+    padding: 0rem 7rem 0rem 0rem;
     background-color: rgb( 0, 0, 0, 0.7 );
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -102,9 +102,28 @@ header {
     justify-content: space-between;
 }
 
+#progressbar
+{
+    width: 100%;
+    height: 2px;
+    background-color: #555;
+    position: absolute;
+    bottom: 0;
+
+    .bar{
+        height: 100%;
+        background-color: theme.$blue;
+        width: 0%;
+    }
+
+    .active{
+        width: 100%;
+    }
+}
+
 #hero-pagination{
 
-    margin-bottom: 1rem;
+    margin: 0rem 1rem 1rem 2rem;
 
     .arrows{
         width: 100%;
@@ -199,13 +218,41 @@ header {
     }
 }
 
+#hero-text-mobile{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    z-index: 14;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(7px);
+    padding: 1rem 2rem 1rem 1.4rem;
+    visibility: hidden;
+
+    p {
+        font-size: 1em;
+        font-weight: 200;
+        text-transform: uppercase;
+        color: #ccc;
+        padding: 0;
+        margin: 0;
+    }
+    b{
+        font-weight: 700;
+        color: #fff;
+    }
+}
+
 #hero-text {
     width: 100%;
-    font-family: theme.$sans;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     z-index: 13;
     position: relative;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
+    margin-left: 2rem;
 
     p {
         font-size: 1em;
@@ -213,6 +260,10 @@ header {
         text-transform: uppercase;
         line-height: 1.5em;
         color: rgba(255, 255, 255, 0.8);
+    }
+
+    b{
+        color: #fff;
     }
 
     .featureTitle {
@@ -257,13 +308,13 @@ header {
                     color: #000;
                     background-color: #fff;
                     font-size: 1rem;
-                    padding: 0rem 1rem;
+                    padding: 0.2rem 1rem;
                     border-radius: 1px;
                     transition: 0.2s background-color ease;
                     line-height: 1.5rem;
 
                     &:hover{
-                        background-color: #bbb;
+                        background-color: theme.$orange;
                     }
                 }
             }
@@ -322,7 +373,7 @@ header {
     #hero-box{
         left: 0;
         width: 100%;
-        padding: 0rem 1.5rem;
+        padding: 0rem;
         height: 40%;
     }
 
@@ -333,13 +384,10 @@ header {
 
         .vvvv{
             display: none;
-            // font-size: 2rem;
-            // line-height: 2rem;
         }
 
         p{
             display: none;
-            // font-size: 0.9rem;
         }
 
         .featureTitle
@@ -373,12 +421,20 @@ header {
         top: auto;
         height: auto;
     }
+
+    #hero-text-mobile{
+        visibility: visible;
+    }
 }
 
 @media (height < 650px)
 {
     header{
         height: 250px;
+    }
+
+    #hero-text-mobile{
+        visibility: none;
     }
 
     #hero-content {
