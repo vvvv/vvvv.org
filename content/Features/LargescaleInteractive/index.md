@@ -3,11 +3,14 @@ title: Large-scale & Interactive
 weight: 1
 ---
 
-## Boygrouping
 
 ![Large-scale interactive spaces](image.png "Refik Anadol Studio")
 
-vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved, vvvv coordinates them with a feature called "Boygrouping" that allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
+vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved.
+
+## Boygrouping
+
+"Boygrouping" feature allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
 
 ![Boygroup](boygroup-schema.png)
 
@@ -41,10 +44,11 @@ Full-body, professional skeletal motion capture is supported via the following s
 
 Further, a range of lower-cost options are available, see the [Motion Capture](/packs/?c=Motion%20Capture) section of the packs browser.
 
-## Lasers
+## Lasers & Lighting
+
+![Lasers](Fluidic-WhiteVoid.png "WhiteVoid: Fluidic")
+
 vvvv allows you to create laser shows that go beyond playing back predefined animations. A comfortable set of nodes to generate geometric primitives and complex 2d paths allows you to direct any number of lasers. 
 
-For a list of supported laser hardware see the [Lasers](/packs/?c=Devices#Lasers) section of the packs browser.
-
-## Lighting
-For a list of supported lighting hardware see the [Lighting](/packs/?c=Devices#Lighting) section of the packs browser.
+- [Lasers](/packs/?c=Devices#Lasers) - list of supported laser hardware
+- [Lighting](/packs/?c=Devices#Lighting) - list of supported lighting hardware

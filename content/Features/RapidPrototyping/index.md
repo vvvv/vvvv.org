@@ -16,7 +16,12 @@ The first time you start vvvv, you're being greated by the Help Browser that poi
 - Live programming
 - Premium logging 
 
-## Devices 
+## Devices & Protocols 
+
+![Protocols](Protocols_Amir.jpg "Amir Bastan")
+
+Devices:
+
 * Kinect v1, v2, Azure
 * Intel RealSense, Orbbec Astra, StereoLabs ZED, Nuitrack
 * Industrial cameras by The Imaging Source
@@ -24,10 +29,11 @@ The first time you start vvvv, you're being greated by the Help Browser that poi
 * Hand tracking devices by Ultraleap
 * DeckLink capture cards by Blackmagic Design
 
-## Protocols
+Protocols:
 
 * SerialPort, OSC, MIDI, Redis, DMX, Art-Net, Firmata, UDP, TCP, RCP, WebSocket, HTTP, ZMQ, MQTT, ...
 
-<!--more-->
+![vvvv IO](vvvv-IO-5-2.png)
 
-After more.
+
+<!--more-->
