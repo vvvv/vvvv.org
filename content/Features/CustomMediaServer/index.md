@@ -21,4 +21,9 @@ Here's what vvvv provides that you can mix and match into your own idea of a med
 
 <!--more-->
 
+- mbox
+- spacemusic
+- schema
+- lecloneur
+
 After more.
