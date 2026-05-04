@@ -4,7 +4,8 @@
 {{- $pages = (where .Site.RegularPages "Params.categories" "Monthly Reviews").ByDate.Reverse -}}
 {{- $lastMonthInReview := index $pages 0 -}}
 {{- $blogDates := where .Site.RegularPages "Params.categories" "Dates" -}}
-{{- $dates := first 8 (sort $blogDates "Date" "desc") -}}  
+{{- $blogDates = where $blogDates "Params.ShowAsCommunityDate" "!=" false -}}
+{{- $dates := first 4 (sort $blogDates "Date" "desc") -}}  
 {{- $siteRes := .Resources -}}
 
 {
