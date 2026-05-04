@@ -8,6 +8,7 @@ where:
     country_name: "pixel.forest(), Berlin"
     from_date: "2026-05-09T18:00:00"
 thumb: "pf-logo-icon.jpg"
+ShowAsCommunityDate: false
 ---
 
 Hey, we're pixel.forest()! 👋
