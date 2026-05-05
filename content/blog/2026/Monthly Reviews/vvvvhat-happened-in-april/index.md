@@ -1,22 +1,30 @@
 ---
-date: "2026-05-03"
+date: "2026-05-05"
 title: "vvvvhat happened in April 2026"
 description: "Last month in review"
 categories: Monthly Reviews
 author: joreg
 ---
+So what's cooking?
 
+Coming up:
+- May 21: Join us for the [34th worldwide vvvv meetup](https://vvvv.org/blog/2026/34.-vvvv-worldwide-meetup/)
+- June 25-28: Join us for another edition of the cozy [LINK Summer Camp](https://vvvv.org/blog/2026/link-the-vvvv-summer-camp-26-registration-open/)
+- September 9-13: Save the date for this years [Ars Electronica](https://ars.electronica.art/futurebegins/en/)...
 
-[Upcoming Meetup - 34th](https://vvvv.org/blog/2026/34.-vvvv-worldwide-meetup/)
-[LINK Summer Camp](https://vvvv.org/blog/2026/link-the-vvvv-summer-camp-26-registration-open/)
+Otherwise work is still going on as mentioned earlier with Lasers, Package Manager, Boygrouping. All waiting to get ready for proper previews...
 
+Smaller noticable updates in the meantime:
+- [VL.IO.NDI](https://www.nuget.org/packages/VL.IO.NDI) was updated to latest NDI 6.x
+- [VL.Devices.ZED](https://www.nuget.org/packages/VL.Devices.ZED) was updated to StereoLabs SDK 5.2.1 and now supports the receiving of streams ZED camera streams
+- [VL.Devices.IDS](https://www.nuget.org/packages/VL.Devices.IDS) was updated to IDSImaging API 1.15.0.4
+
+As always, so much more to come...
 
 ## Learning vvvv
-Here some learning opportunities:
+The next best learning opportunity for people already familiar with the basics, but want to take their vvvv a step further:
 
-- In person in Berlin, 9th and 10th of May [Interactive particle System in vvvv](https://pixel-forest.com/workshops/interactive-particle-systems-in-vvvv-with-rosi-grillmair/) hosted by Rosi Grillmair.
-
-- Online, starting June 29: [vvvv Intermediate Foundations](https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026/)  hosted by The NODE Institute
+- Starting June 29, 4 online sessions: [vvvv Intermediate Foundations](https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026/)  hosted by The NODE Institute
 
 ## Contributions
 
@@ -48,14 +56,13 @@ We got updates to the following:
 - [VL.SimpleHTTP](https://www.nuget.org/packages/VL.SimpleHTTP)
 - [VL.OpenWeather](https://www.nuget.org/packages/VL.OpenWeather)
 - [VL.MediaPipe](https://www.nuget.org/packages/VL.MediaPipe)
-- [PaddleOCRSharp-VL-1.5](https://www.nuget.org/packages/PaddleOCRSharp-VL-1.5)
 - [VL.SCSynth](https://www.nuget.org/packages/VL.SCSynth)
 - [VL.IO.WebSocket](https://www.nuget.org/packages/VL.IO.WebSocket)
 
 ## Jobs
 
 - Always keep an eye on the [vvvv job board](https://discourse.vvvv.org/c/jobs)
-- There maybe some more on [The Interactive & Immersive Job Board](https://jobs.interactiveimmersive.io/jobs/) and [dasauge.de](https://dasauge.de/sta/Vvvv/)
+- There maybe some more on [The Interactive & Immersive Job Board](https://jobs.interactiveimmersive.io/jobs/)
 - If you need a vvvv specialist or are one yourself, check out this listing of [vvvv specialists available for hire](https://vvvv.org/forhire/)
 
-
+That was it for April.
