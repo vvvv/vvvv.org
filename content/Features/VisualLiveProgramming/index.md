@@ -5,13 +5,11 @@ weight: 3
 
 vvvv is a visual-first and fully live-programming environment. While it is possible to develop parts of your applications by writing code in C#/.NET, this is mostly a preference but hardly ever a necessity. 
 
-{{< vimeo "478019070" 400 >}}
+{{< vimeo "478105897" 400 >}}
 
 ## One mode: Runtime
 
 No matter if you "patch" visually or you write parts of your code in C#, any change you make is live. Compilation is happening in the background and you don't have to wait for your program to restart (think: State Hot-Reload!). This allows for quick iterations and is important for creating and debugging realtime interactive applications.
-
-{{< vimeo "478105897" 400 >}}
 
 ## VL features
 

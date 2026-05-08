@@ -9,21 +9,22 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 Here's what vvvv provides that you can mix and match into your own idea of a media server:
 
+## Audio, Video, Lasers and Lights
+
 - Video and image stack playback, including .dds files for highest performance
 - Multichannel audio with support for [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) plugins
+- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping)
+
+- Lights
+- Lasers
+
+## Realtime Content
 - 3d rendering engine based on [Stride](https://skia.org/)
 - 2d rendering engine based on [Skia](https://skia.org/)
-- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping)
-- Lasers
-- Lights
+
+## Custom UI
+
+## Plugin Architecture
+
 - plugin architecture
 - gui
-
-<!--more-->
-
-- mbox
-- spacemusic
-- schema
-- lecloneur
-
-After more.
