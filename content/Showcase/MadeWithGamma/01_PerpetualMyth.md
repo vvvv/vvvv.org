@@ -1,5 +1,5 @@
 ---
-id: 1
+weight: 1
 author: Arístides García
 title: Perpetual Myth
 subtitle:

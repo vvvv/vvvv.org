@@ -1,5 +1,5 @@
 ---
-id: 8
+weight: 8
 author: m-box
 title: Zwinger Xperience Dresden
 subtitle:

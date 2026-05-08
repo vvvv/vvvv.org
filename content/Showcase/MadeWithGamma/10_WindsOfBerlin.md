@@ -1,5 +1,5 @@
 ---
-id: 10
+weight: 10
 author: Refik Anadol
 title: Winds of Berlin
 subtitle:

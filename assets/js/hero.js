@@ -1,7 +1,12 @@
 
 if (window.location.pathname === '/')
 {
-    document.addEventListener("DOMContentLoaded", async () => {        
+    document.addEventListener("DOMContentLoaded", async () => { 
+        
+        const interval = 7000; //7 sec
+        const progressBarContainer = document.getElementById('progressbar'); 
+        const progressBar = progressBarContainer.getElementsByClassName('bar')[0];
+        let slideTimer;
     
         const hero = document.getElementById('hero-content');
         const heroImage = document.getElementById('hero-image'); 
@@ -74,6 +79,7 @@ if (window.location.pathname === '/')
             appState.index = 0;
             setAttribution(0);
             hero.style.setProperty('opacity', 1);
+            startAutoplay();
         }
 
         function setup()
@@ -81,8 +87,6 @@ if (window.location.pathname === '/')
             getOffset();
 
             stateEvent.addEventListener('changed:index', (e)=>{
-
-                console.log (e);
 
                 const { value, state } = e.detail;
 
@@ -143,6 +147,8 @@ if (window.location.pathname === '/')
                 featureLines.forEach((line, index) => {
                     line.addEventListener('click', (e) => {
 
+                        stopAutoplay();
+
                         if (appState.isAnimating)
                             return;
 
@@ -158,6 +164,8 @@ if (window.location.pathname === '/')
 
                 arrows.forEach(arrow => {
                     arrow.addEventListener('click', ()=>{
+
+                        stopAutoplay();
 
                         if (appState.isAnimating)
                             return;
@@ -230,6 +238,37 @@ if (window.location.pathname === '/')
             attribution.title.innerHTML = featureTexts[index].dataset.title || "";
             attribution.author.innerHTML = featureTexts[index].dataset.author || "";
             attribution.photographer.innerHTML = featureTexts[index].dataset.photographer || "";
+        }
+
+        function startAutoplay() {
+
+            progressBar.addEventListener('transitionend', ()=>{
+                const activeTitles = slides.length - 2;
+                appState.isAnimating = false;
+                appState.index = (appState.index+1) % activeTitles;
+                resetAndStartProgress();
+            })
+
+            resetAndStartProgress();
+        }
+
+        function stopAutoplay() {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+            progressBarContainer.style.visibility = 'hidden';
+            appState.isAnimating = false;
+        }
+
+        function resetAndStartProgress() {
+
+            progressBar.style.transition = 'none';
+            progressBar.style.width = '0%';
+
+            void progressBar.offsetWidth;
+
+            progressBar.style.transition = `width ${interval}ms linear`;
+            progressBar.style.width = '100%';
+              
         }
 
     })

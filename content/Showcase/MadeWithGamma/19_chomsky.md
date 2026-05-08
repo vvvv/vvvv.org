@@ -1,5 +1,5 @@
 ---
-id: 19
+weight: 19
 author: SCHNELLE BUNTE BILDER
 title: CHOM5KY vs CHOMSKY
 subtitle:

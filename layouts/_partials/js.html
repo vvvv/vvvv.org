@@ -10,7 +10,7 @@
 {{- $downloadjs := resources.Get "js/download.js" -}}
 {{- $headerjs := resources.Get "js/header.js" -}}
 {{- $herojs := resources.Get "js/hero.js" -}}
-{{- $jsfiles := slice $creativejs $downloadjs $headerjs $herojs | resources.Concat "js/vvvv.js" | js.Build -}}
+{{- $jsfiles := slice $creativejs $downloadjs $headerjs $herojs | resources.Concat "js/vvvv.js" | js.Build | minify -}}
 <script type="text/javascript" src="{{ $jsfiles.RelPermalink | relURL }}" defer></script>
 
 {{ "<!-- DSGVO Video Blocker -->" | safeHTML }}

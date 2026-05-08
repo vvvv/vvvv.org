@@ -1,5 +1,5 @@
 ---
-id: 31
+weight: 31
 author: Responsive Spaces
 title: Nexus
 subtitle: 

@@ -14,6 +14,9 @@
         {{ partial "hero-slide" (dict "hero" $hero "ctx" (index (first 1 $features) 0)) }}
       </div>
     </div>
+    <div id="hero-text-mobile">
+        <p>{{ .Site.Params.Hero.subtitle | safeHTML}}</p>
+    </div>
     <div id="hero-box">
       <div id="hero-text">
         <div class="vvvv">{{ .Site.Params.Hero.vvvv }}</div>
@@ -37,7 +40,6 @@
             </section>
           {{ end }}
         </div>
-
       </div>
       <div id="hero-pagination">
         <ul class="pagination">
@@ -49,6 +51,9 @@
           <div class="icon arrow-icon"></div>
           <div class="icon arrow-icon right"></div> 
        </div>
+      </div>
+      <div id="progressbar">
+        <div class="bar"></div>
       </div>
     </div>
     <div id="hero-attribution">

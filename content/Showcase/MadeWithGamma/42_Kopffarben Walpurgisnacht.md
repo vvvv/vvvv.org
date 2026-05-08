@@ -1,5 +1,5 @@
 ---
-id: 42
+weight: 42
 author: Kopffarben
 title: Mendelssohn's "Die erste Walpurgisnacht"
 subtitle: 

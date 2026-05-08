@@ -1,5 +1,5 @@
 ---
-id: 24
+weight: 24
 author: Studio Brüll 
 title: DATA CORRELATIONS
 subtitle:

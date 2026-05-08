@@ -1,5 +1,5 @@
 ---
-id: 20
+weight: 20
 author: Natan Sinigaglia
 title: Fragile Cosmos
 subtitle: 

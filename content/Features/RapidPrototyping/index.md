@@ -21,8 +21,6 @@ Data running through your app can be explored and manipulated at any stage which
 
 ## Limitless Connectivity
 
-![vvvv IO](vvvv-IO-5-2.png)
-
 vvvv can talk to a wide range of protocols and devices using individual packs. These can be installed at the click of a button using the built-in package manager.  
 
 For a listing of whats available, check out these section in the online packs browser:

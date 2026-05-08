@@ -52,6 +52,6 @@ So please go ahead and test drive all your plugins. Let us know in the comments 
 Development of this library is supported by the following sponsors:
 - Gold: [m box](https://github.com/m-box-de)
 - Silver: [SCHNELLE BUNTE BILDER](https://schnellebuntebilder.de/)
-- Silver: [3e8.studio](http://3e8.studio/)
+- Silver: [3e8](http://3e8.studio/)
 
 If you also have a request for custom development, don't hesitate to [get in touch](mailto:devvvvs@vvvv.org)!

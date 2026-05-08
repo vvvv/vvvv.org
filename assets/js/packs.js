@@ -334,9 +334,7 @@ window.addEventListener ("load", ()=> {
     {
 
         $(button).on('shown.bs.tab', () => {
-
-            console.log (button.dataset.categoryMenu)
-            
+          
             escCount = 0;
             const category = button.dataset.categoryMenu;
 
@@ -1119,9 +1117,6 @@ window.addEventListener ("load", ()=> {
 
                 const category = menuKeyMap.get(i.name) || i.name;
 
-                console.log (i.name, category);
-                console.log (menuKeyMap);
-
                 a.innerHTML = `${category} (${count})`;
                 a.href = `#`;
                 a.dataset.target = i.name;
@@ -1250,11 +1245,6 @@ window.addEventListener ("load", ()=> {
         }
 
         return badgeNeeded;
-    }
-
-    function staticClick(event)
-    {
-        console.log (event);
     }
  
 }, true);

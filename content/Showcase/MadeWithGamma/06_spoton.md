@@ -1,5 +1,5 @@
 ---
-id: 6
+weight: 6
 author: Responsive Spaces
 title: Spot on
 subtitle:

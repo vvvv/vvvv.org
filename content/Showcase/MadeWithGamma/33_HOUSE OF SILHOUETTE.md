@@ -1,5 +1,5 @@
 ---
-id: 33
+weight: 33
 author: Responsive Spaces
 title: HOUSE OF SILHOUETTE
 subtitle: 

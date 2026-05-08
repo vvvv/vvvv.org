@@ -1,5 +1,5 @@
 ---
-id: 17
+weight: 17
 author: m-box
 title: Schüco Digitaler Showroom 
 subtitle:

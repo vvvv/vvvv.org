@@ -79,7 +79,7 @@ Plus an update on an entry in the forum’s work-in-progress section:
 
 {{< vimeo 1128827190 >}}  
 
-DATA SOIL | City in the Cloud, Data on the Ground by [3e8.studio](https://3e8.studio) is an interactive exhibit visualizing public data of Munich, currently on display in the exhibition "City in the Cloud, Data on the Ground" at the Architekturmuseum in Pinakothek der Moderne Munich, curated by Damjan Kokalevski.
+DATA SOIL | City in the Cloud, Data on the Ground by [3e8](https://3e8.studio) is an interactive exhibit visualizing public data of Munich, currently on display in the exhibition "City in the Cloud, Data on the Ground" at the Architekturmuseum in Pinakothek der Moderne Munich, curated by Damjan Kokalevski.
 
 ## Jobs
 - Always keep an eye on the [vvvv job board](https://forum.vvvv.org/c/jobs)

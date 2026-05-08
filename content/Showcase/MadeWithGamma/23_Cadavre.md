@@ -1,5 +1,5 @@
 ---
-id: 23
+weight: 23
 author: STUDIO MUX
 title: Exquisite Corpse
 subtitle: Digital exhibit for art education in the museum
