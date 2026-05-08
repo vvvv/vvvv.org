@@ -12,8 +12,6 @@ vvvv is built to run large-scale interactive spaces. No matter the number of PCs
 
 "Boygrouping" feature allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
 
-![Boygroup](boygroup-schema.png)
-
 ## Pojection Mapping
 
 Large-scale often means projection-mapping. Since requirements here are rather diverse, vvvv comes with support for different options. 

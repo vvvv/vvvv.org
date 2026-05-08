@@ -3,7 +3,7 @@ title: Rapid Prototyping
 weight: 4
 ---
 
-![Protocols](Protocols_Amir.jpg "Amir Bastan")
+![](RapidPrototyping-Logos.png)
 
 vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
 

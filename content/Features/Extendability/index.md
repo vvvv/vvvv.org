@@ -3,7 +3,7 @@ title: Extendability
 weight: 6
 ---
 
-![](image.png)
+![](CSharp-DotNet-Nuget.png)
 
 vvvv is not a monolithic software. Its core is rather slim with many [optional packs](https://vvvv.org/packs) to augment its functionality. 
 
