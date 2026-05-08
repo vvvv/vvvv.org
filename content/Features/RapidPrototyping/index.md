@@ -3,37 +3,32 @@ title: Rapid Prototyping
 weight: 4
 ---
 
-Here's what makes vvvv a rapid prototyping environment for any realtime media application:
-
-Getting vvvv up and running takes less then 2 minutes. The download is just x MB and there is no signup or registration procedure. So within 2 minutes you have access to the full possibilities of vvvv without any artificial limitations. 
-
-The first time you start vvvv, you're being greated by the Help Browser that points you to courses, video tutorials, example patches, the documentation, the forum, the chat and more. All information around vvvv is in one place, only waiting to be explored!
-
-- Using [Remoter] you can batch-install a new version on multiple PCs in parallel 
-- Quick setup: From download to initial run: 3 min
-- A package manager to install optional libraries with a single click
-- Deployment with a single click
-- Live programming
-- Premium logging 
-
-## Devices & Protocols 
-
 ![Protocols](Protocols_Amir.jpg "Amir Bastan")
 
-Devices:
+vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
 
-* Kinect v1, v2, Azure
-* Intel RealSense, Orbbec Astra, StereoLabs ZED, Nuitrack
-* Industrial cameras by The Imaging Source
-* uEye & uEye+ cameras by IDS-Imaging 
-* Hand tracking devices by Ultraleap
-* DeckLink capture cards by Blackmagic Design
+## Quick Setup
 
-Protocols:
+Getting vvvv up and running takes less then 2 minutes. The download is minimal, there is no signup or registration procedure and no copy-protection that would prevent you from installing vvvv on as many devices you need. Within 2 minutes you have access to the full possibilities of vvvv without any artificial limitations.
 
-* SerialPort, OSC, MIDI, Redis, DMX, Art-Net, Firmata, UDP, TCP, RCP, WebSocket, HTTP, ZMQ, MQTT, ...
+## Effortless iteration
+
+vvvv has one mode: Runtime. Any change you make is immediately applied, no need to restart or wait for a compilation. 
+
+Data running through your app can be explored and manipulated at any stage which is essential to debugging and tweaking applications that work with live user input. 
+
+<!--more-->
+
+## Limitless Connectivity
 
 ![vvvv IO](vvvv-IO-5-2.png)
 
+vvvv can talk to a wide range of protocols and devices using individual packs. These can be installed at the click of a button using the built-in package manager.  
 
-<!--more-->
+For a listing of whats available, check out these section in the online packs browser:
+- [IO](https://vvvv.org/packs/?c=IO)
+- [Devices](https://vvvv.org/packs/?c=Devices)
+
+## Simple deployment
+
+Deploying an app created with vvvv takes a single click, which exports a windows application. There is no need to deploy vvvv itself, simply share the export with anyone and they can see/test your app.
