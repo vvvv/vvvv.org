@@ -20,24 +20,3 @@ VL is what we call the visual language in vvvv. It has support for code regions 
 There is no limit in datatypes. Besides the primitive built-in types you can reference any .NET library and even create your own datatypes as needed.
 
 <!--more-->
-
-### Advanced Type System 
-
-![](image-1.png)
-
-* Statically typed
-* Automagic type inference
-* First class support for mutable and immutable datatypes
-* Generics aka parametric polymorphism (with bounded quantification)
-* Interfaces aka subtype polymorphism
-  
-### Supportive IDE
-
-![](image-2.png)
-
-* Runtime value inspection
-* Reactive/Async programming
-* Easy multithreading
-* Extendable with custom plugins
-* Consumes any .NET assembly by providing all methods as nodes
-* Compiles to C# using Roslyn
