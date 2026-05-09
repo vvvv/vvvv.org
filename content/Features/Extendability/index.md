@@ -8,7 +8,7 @@ weight: 6
 vvvv is not a monolithic software. Its core is rather slim with many [optional packs](https://vvvv.org/packs) to augment its functionality. 
 
 If you're still missing a feature, here are your options:
-- [Get in touch](mailto:devvvvs@vvvv.org), we're available for custom development
+- [Get in touch](mailto:devvvvs@vvvv.org), we offer custom feature development, support and consulting
 - Help yourself by writing a custom node or an editor extension 
 
 ## Custom nodes

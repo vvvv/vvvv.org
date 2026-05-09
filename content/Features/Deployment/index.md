@@ -21,6 +21,8 @@ This form of deployment is included with any commercial [Developer License](http
 - Linux, MacOS: Console apps<br>
 </small>
 
+commandline compiler for build automation
+
 ## Device License
 
 The alternative to an export is simply running vvvv on the target PC. Like this, a program stays fully inspectable and editable while running. 

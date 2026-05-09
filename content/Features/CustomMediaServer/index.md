@@ -3,28 +3,33 @@ title: Custom Media Server
 weight: 2
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv! All tooling is there for you to customize and tailor to your specific needs. Build a custom UI and finally export your program as a windows app for easy [deployment](../Deployment).
+When off-the-shelf media servers don't suite your needs, create your own with vvvv! All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
 
 ![Screenshot]()
 
-Here's what vvvv provides that you can mix and match into your own idea of a media server:
+## Audio, Video, Lights and Lasers
 
-## Audio, Video, Lasers and Lights
+- Video playback based on Mediafoundation
+- Image sequence playback (.dds files for best performance/quality)
+- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty systems
+- Shader based image effects (TextureFX)
+- Multichannel audio engine
+- [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) plugin integration 
+- Art-Net, DMX, sACN for controlling stage lights
+- LaserAnimation Sollinger, Etherdream, Helios, Moncha for Laser output
 
-- Video and image stack playback, including .dds files for highest performance
-- Multichannel audio with support for [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) plugins
-- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping)
+## Realtime Graphics
 
-- Lights
-- Lasers
+- [Stride](https://stride3d.org/) based 3d rendering engine 
+- [Skia](https://skia.org/) based 2d rendering engine 
+- [Rive](https://rive.app/) integration including bi-directional data-binding
+- [CEF]() for website rendering
 
-## Realtime Content
-- 3d rendering engine based on [Stride](https://skia.org/)
-- 2d rendering engine based on [Skia](https://skia.org/)
+## User Interfaces
 
-## Custom UI
+- [Dear ImGui](https://github.com/ocornut/imgui) for building custom bi-directional UIs
+- [Various other solutions](http://vvvv.org/packs/?c=UI) for building UIs
 
 ## Plugin Architecture
 
-- plugin architecture
-- gui
+When building a large modular media server, at some point you'll want it to support a custom idea of plugins. Check out this [demo app with plugins](https://github.com/vvvv/AppWithPluginsDemo/) to learn how to set this up.
