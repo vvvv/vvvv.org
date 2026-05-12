@@ -21,6 +21,21 @@
     }
   }
 
+  main{
+    a{
+      color: theme.$linkOrange !important;
+      text-decoration: none !important;
+
+      &:hover{
+        text-decoration: underline !important;
+        text-decoration-color: #333 !important;
+        color: #000 !important;
+      }
+      // text-decoration-thickness: 2px !important;
+      // text-underline-offset: 3px !important;
+    }
+  }
+
   position: relative;
   background-color: #fff;
   // margin: 0 10%;
