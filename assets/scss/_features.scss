@@ -2,6 +2,17 @@
 
 #Features
 {
+
+  .logos{
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    row-gap: 1rem;
+    line-height: 1rem;
+    margin: 1rem 0rem 2rem;
+    gap: 2rem;
+  }
+
   position: relative;
   background-color: #fff;
   // margin: 0 10%;
