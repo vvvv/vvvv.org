@@ -3,7 +3,11 @@ title: Extendability
 weight: 6
 ---
 
-![](CSharp-DotNet-Nuget.png)
+<div class="logos justified">
+    <a href="" target="_blank" title="C#"><img src="/features/extendability/logos/csharp.png" alt="C#"/></a>
+    <a href="" target="_blank" title=".NET"><img src="/features/extendability/logos/dotnet.png" alt=".NET"/></a>
+    <a href="https://nuget.org" target="_blank" title="Nuget"><img src="/features/extendability/logos/nuget.png" alt="Nuget"/></a>
+</div>
 
 vvvv is not a monolithic software. Its core is rather slim with many [optional packs](https://vvvv.org/packs) to augment its functionality. 
 

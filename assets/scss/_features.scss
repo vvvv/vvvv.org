@@ -11,6 +11,14 @@
     line-height: 1rem;
     margin: 1rem 0rem 2rem;
     gap: 2rem;
+
+    &.justified{
+      justify-content: space-between;
+      
+      img{
+        width: 9rem;
+      }
+    }
   }
 
   position: relative;
