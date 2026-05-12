@@ -14,7 +14,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty systems
 - Shader based image effects (TextureFX)
 - Multichannel audio engine
-- [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) plugin integration 
+- [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
 - Art-Net, DMX, sACN for controlling stage lights
 - LaserAnimation Sollinger, Etherdream, Helios, Moncha for Laser output
 

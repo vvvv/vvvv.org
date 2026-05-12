@@ -10,7 +10,7 @@ vvvv is built to run large-scale interactive spaces. No matter the number of PCs
 
 ## Distributed Rendering
 
-The "Boygrouping" feature allows for programming and running applications across multiple PCs. Any change to the program on the main PC is immediately duplicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
+When a single PC is not enough to render the number of outputs you need, simply scale your app across multiple PCs. A feature called "Boygrouping" keeps all your render machines n'sync. Any change to the program on the main PC is immediately replicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
 
 ## Pojection Mapping
 
