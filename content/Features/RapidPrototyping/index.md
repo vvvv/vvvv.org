@@ -16,6 +16,7 @@ weight: 4
     <a href="" target="_blank"><img src="/features/rapidprototyping/logos/arduino.png" alt="arduino"/></a>
     <a href="" target="_blank"><img src="/features/rapidprototyping/logos/arduino.png" alt="arduino"/></a>
     <a href="" target="_blank"><img src="/features/rapidprototyping/logos/arduino.png" alt="arduino"/></a>
+    <img src="/features/rapidprototyping/logos/andmanymore.png" alt="And maaaany more..." title="And maaaany more..."/>
 </div>
 
 vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
