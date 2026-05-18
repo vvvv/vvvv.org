@@ -21,8 +21,8 @@
     }
   }
 
-  main{
-    a{
+  main, .container{
+    a:not(.btn){
       color: theme.$linkOrange !important;
       text-decoration: none !important;
 
