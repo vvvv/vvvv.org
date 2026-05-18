@@ -4,9 +4,9 @@ weight: 6
 ---
 
 <div class="logos justified">
-    <a href="" target="_blank" title="C#"><img src="/features/extendability/logos/csharp.png" alt="C#"/></a>
-    <a href="" target="_blank" title=".NET"><img src="/features/extendability/logos/dotnet.png" alt=".NET"/></a>
-    <a href="https://nuget.org" target="_blank" title="Nuget"><img src="/features/extendability/logos/nuget.png" alt="Nuget"/></a>
+    <a href="https://thegraybook.vvvv.org/reference/extending/writing-nodes.html" target="_blank" title="Writing nodes using C#"><img src="/features/extendability/logos/csharp.png" alt="C#"/></a>
+    <a href="https://thegraybook.vvvv.org/reference/extending/using-net-libraries.html" target="_blank" title="Using .NET Libraries"><img src="/features/extendability/logos/dotnet.png" alt=".NET"/></a>
+    <a href="https://www.nuget.org/packages?q=tag%3Avl&prerel=true" target="_blank" title="Nuget"><img src="/features/extendability/logos/nuget.png" alt="Nuget"/></a>
 </div>
 
 vvvv is not a monolithic software. Its core is rather slim with many [optional packs](https://vvvv.org/packs) to augment its functionality. 
