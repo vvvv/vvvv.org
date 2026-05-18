@@ -13,8 +13,12 @@ No matter if you "patch" visually or you write parts of your code in C#, any cha
 
 ## VL features
 
-VL is what we call the visual language in vvvv. It has support for code regions like loops and conditionals, it allows you to apply patterns known from object oriented, as well as functional programming. Parts of your programs can run async or on different threads. Using programming features like generics and delegates gives you full flexibility when creating your applications. 
-
-There is no limit in datatypes. Besides the primitive built-in types you can reference any .NET library and even create your own datatypes as needed.
+VL is what we call the visual language in vvvv. It has:
+- Code regions like **loops and conditionals**
+- Allows you to apply **design patterns** known from **object oriented** and **functional** programming 
+- Parts of your programs can run **async** or on **different threads**
+- Programming features like **generics** and **delegates** give you full flexibility 
+- No limit in datatypes. Besides the primitive built-in types you create your own datatypes as needed.
+- You can reference **any .NET library** 
 
 <!--more-->

@@ -16,7 +16,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - Multichannel audio engine
 - [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
 - Art-Net, DMX, sACN for controlling stage lights
-- LaserAnimation Sollinger, Etherdream, Helios, Moncha for Laser output
+- [LaserAnimation Sollinger](https://laseranimation.com/), [Etherdream](https://ether-dream.com/), [Helios](https://www.helios-laser.com/), [Moncha](https://www.showtacle.jp/v18/lasershowsoftware/hardware/moncha2/) for Laser output
 
 ## Realtime Graphics
 
