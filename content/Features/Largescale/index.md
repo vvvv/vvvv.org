@@ -1,12 +1,11 @@
 ---
-title: Large-scale & Interactive
+title: Large-scale
 weight: 1
 ---
 
-
-![Large-scale interactive spaces](image.png "Refik Anadol Studio")
-
 vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved.
+
+![Living Architecture: Ghery](image.png "Refik Anadol Studio")
 
 ## Distributed Rendering
 
@@ -26,21 +25,9 @@ The following projector auto-calibration systems are integrated:
 
 Alternatively vvvv also ships with tooling that help you build custom projection mapping workflows. See the [Projection Mapping](/packs/?c=Projection%20Mapping) section in the packs browser for all options. 
 
-## Interaction
-	
-For capturing interaction with crowds, vvvv supports the following tracking systems which give you individual peoples position (and more) in large spaces:
-- [Augmenta](https://augmenta.tech/) 
-- [BlueIOT](https://www.blueiot.com/)
-  
-Further, a range of depth sensors and lidars is supported that allow you to create custom solutions, see the [Devices section](/packs/?c=Devices#Depth%20Cameras) in the packs browser for all options.
+## LED Synchronization
 
-##	Motion Capture
-
-Full-body, professional skeletal motion capture is supported via the following systems:
-- [OptiTrack]()
-- [Captury]()
-
-Further, a range of lower-cost options are available, see the [Motion Capture](/packs/?c=Motion%20Capture) section of the packs browser.
+Using professional Quadro Sync cards by Nvidia, multiple PCs outputs can be VSynced to seamlessly drive large LED screens. In those setups 
 
 ## Lasers & Lighting
 

@@ -27,4 +27,4 @@ commandline compiler for build automation
 
 The alternative to an export is simply running vvvv on the target PC. Like this, a program stays fully inspectable and editable while running. 
 
-This form of deployment is not included with a Developer License and requires an additional [Device License](https://store.vvvv.org/) per instance of vvvv running.
+This form of deployment requires a [Device License](https://store.vvvv.org/) per instance of vvvv running.

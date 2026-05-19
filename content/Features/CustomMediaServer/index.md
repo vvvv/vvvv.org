@@ -1,6 +1,6 @@
 ---
-title: Custom Media Server
-weight: 2
+title: Media Server
+weight: 3
 ---
 
 When off-the-shelf media servers don't suite your needs, create your own with vvvv! All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
@@ -9,14 +9,14 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ## Audio, Video, Lights and Lasers
 
-- Video playback based on Mediafoundation
+- Video playback based on Microsoft Media Foundation or VLC
 - Image sequence playback (.dds files for best performance/quality)
-- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty systems
+- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty integrations
 - Shader based image effects (TextureFX)
 - Multichannel audio engine
 - [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
 - Art-Net, DMX, sACN for controlling stage lights
-- [LaserAnimation Sollinger](https://laseranimation.com/), [Etherdream](https://ether-dream.com/), [Helios](https://www.helios-laser.com/), [Moncha](https://www.showtacle.jp/v18/lasershowsoftware/hardware/moncha2/) for Laser output
+- [LaserAnimation Sollinger](https://laseranimation.com/), [Ether Dream Laser DAC](https://ether-dream.com/), [Helios Laser DAC](https://bitlasers.com/helios-laser-dac/), [Moncha Laser DAC](https://www.showtacle.jp/v18/lasershowsoftware/hardware/moncha2/) for Laser output
 
 ## Realtime Graphics
 
