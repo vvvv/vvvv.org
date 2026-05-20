@@ -3,9 +3,9 @@ title: Large-scale
 weight: 1
 ---
 
-vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved.
-
 ![Living Architecture: Ghery](image.png "Refik Anadol Studio")
+
+vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved.
 
 ## Distributed Rendering
 

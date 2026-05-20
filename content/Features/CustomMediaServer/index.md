@@ -3,9 +3,9 @@ title: Media Server
 weight: 3
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv! All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
+![Media Server. mbox](mbox_mediaserver.png)
 
-![Screenshot]()
+When off-the-shelf media servers don't suite your needs, create your own with vvvv! All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
 
 ## Audio, Video, Lights and Lasers
 
