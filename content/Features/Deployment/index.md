@@ -10,10 +10,12 @@ Programs created with vvvv can conveniently be deployed in 2 distinct ways:
 ## Export
 The first option is to export the program to run it as normal app (*). It can be wrapped in an installer and handed to clients who don't have to know anything about vvvv in order to run it. 
 
-Like this, apps created with vvvv can be shared via online stores like:
+Like this, apps created with vvvv can also be shared via online stores like:
 
-- [Microsoft Store](https://apps.microsoft.com/home?hl=en-US&gl=DE)
 - [Steam Store](https://store.steampowered.com/)
+- [Microsoft Store](https://apps.microsoft.com/home?hl=en-US&gl=DE)
+
+There is even a [commandline compiler](https://thegraybook.vvvv.org/reference/hde/exporting.html#the-commandline-compiler) that allows for automating builds without having to open vvvv. 
 
 This form of deployment is included with any commercial [Developer License](https://store.vvvv.org/). 
 
@@ -22,8 +24,6 @@ This form of deployment is included with any commercial [Developer License](http
 - Windows: Desktop and Console apps<br>
 - Linux, MacOS: Console apps<br>
 </small>
-
-commandline compiler for build automation
 
 ## Device License
 
