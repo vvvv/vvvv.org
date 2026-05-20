@@ -3,7 +3,7 @@ title: Interactive
 weight: 2
 ---
 
-![Fluidic](Fluidic-WhiteVoid.png "WhiteVoid")
+![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")
 
 ## Crowd Tracking
 	

@@ -3,9 +3,9 @@ title: Media Server
 weight: 3
 ---
 
-![Media Server. mbox](mbox_mediaserver.png)
+When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv! All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
+![m-control Media Server](mbox_mediaserver.png "m box")
 
 ## Audio, Video, Lights and Lasers
 
@@ -23,12 +23,12 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - [Stride](https://stride3d.org/) based 3d rendering engine 
 - [Skia](https://skia.org/) based 2d rendering engine 
 - [Rive](https://rive.app/) integration including bi-directional data-binding
-- [CEF]() for website rendering
+- [CEF]() for rendering web content
 
 ## User Interfaces
 
 - [Dear ImGui](https://github.com/ocornut/imgui) for building custom bi-directional UIs
-- [Various other solutions](http://vvvv.org/packs/?c=UI) for building UIs
+- [Various other solutions](http://vvvv.org/packs/?c=UI)
 
 ## Plugin Architecture
 
