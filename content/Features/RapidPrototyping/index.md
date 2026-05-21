@@ -1,7 +1,9 @@
 ---
 title: Rapid Prototyping
-weight: 4
+weight: 5
 ---
+
+vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
 
 <div class="logos">
     <a href="" target="_blank" title="Arduino"><img src="/features/rapidprototyping/logos/arduino.png" alt="Arduino"/></a>
@@ -18,8 +20,6 @@ weight: 4
     <a href="" target="_blank"><img src="/features/rapidprototyping/logos/arduino.png" alt="arduino"/></a>
     <a href="/packs"><img src="/features/rapidprototyping/logos/andmanymore.png" alt="And maaaany more..." title="VL Packs"/></a>
 </div>
-
-vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
 
 ## Quick Setup
 

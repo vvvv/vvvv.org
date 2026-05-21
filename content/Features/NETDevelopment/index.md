@@ -3,9 +3,9 @@ title: ".NET Development"
 weight: 5
 ---
 
-![alt text](image.png)
-
 vvvv is a .NET development environment in a sense comparable to [Visual Studio](https://visualstudio.microsoft.com/) and [Raider](https://www.jetbrains.com/rider/). What they share is their capability to develop apps using libraries that are available in the .NET ecosystem,
+
+![vvvv](image.png)
 
 Only, vvvv has a focus on [visual live-programming](../VisualLiveProgramming/index.md) which benefits applications that require [rapid prototyping](../RapidPrototyping/index.md) or have IO that goes beyond the standard mouse/keayboard/touch-screen.
 
