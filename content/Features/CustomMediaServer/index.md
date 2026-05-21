@@ -5,7 +5,7 @@ weight: 3
 
 When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
 
-![m-control Media Server](mbox_mediaserver2.png "m box")
+![m-control Media Server](mbox_mediaserver3.png "m box")
 
 ## Audio, Video, Lights and Lasers
 
