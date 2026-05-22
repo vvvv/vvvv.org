@@ -13,7 +13,7 @@
         <div class="card-group mt-4 row-cols-1 row-cols-md-2 row-cols-xl-4">
             {{ range $links }}
               <div class="col mb-4">
-                <div class="card text-center h-100 py-3">
+                <div class="card text-center h-100 py-3 shadow">
                     <div class="card-body">
                         <a href="{{ .Params.link }}" class="noUnderline" target="_blank">
                             <img src ="{{ .Params.icon | relURL }}" alt = "{{ .Params.alt }}" style="height: 32px">

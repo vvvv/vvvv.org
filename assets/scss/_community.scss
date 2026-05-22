@@ -6,11 +6,16 @@
 
     .card{
         background-color: #fff;
-        border-bottom: 1px solid theme.$linkOrange; 
+        border-bottom: 3px solid theme.$blue; 
 
         .card-footer{
             background-color: inherit;
             border: none;
+        }
+
+        h3{
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     }
     
