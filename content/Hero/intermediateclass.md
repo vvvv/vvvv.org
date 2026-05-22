@@ -1,6 +1,6 @@
 ---
 title: "vvvv intermediate class starting June 29"
-weight: 1
+weight: 2
 button:
     title: "Sign Up"
     url: https://thenodeinstitute.org/courses/vvvv-intermediate-foundations-summer-2026/

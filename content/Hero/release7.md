@@ -1,14 +1,14 @@
 ---
 title: |-
     Latest release:
-    vvvv gamma 7.1
-weight: 3
+    vvvv gamma 7.2
+weight: 1
 button:
     title: Download
     url: /download/
 image: 
-    src: header_70_5_3072.jpg
-    title: "7.0"
+    src: header_70_4_3072.jpg
+    title: "7"
     author: "Arístides García"
     photographer: 
 ---
