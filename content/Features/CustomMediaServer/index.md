@@ -7,7 +7,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ![Elbphilharmonie](sbb_mediaserver.png "Schnelle Bunte Bilder")
 
-## Audio, Video, Lights and Lasers
+### Audio, Video, Lights and Lasers
 
 - Video playback based on Microsoft Media Foundation or VLC
 - Image sequence playback (.dds files for best performance/quality)
@@ -18,19 +18,19 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - Art-Net, DMX, sACN for controlling stage lights
 - [LaserAnimation Sollinger](https://laseranimation.com/), [Ether Dream Laser DAC](https://ether-dream.com/), [Helios Laser DAC](https://bitlasers.com/helios-laser-dac/), [Moncha Laser DAC](https://www.showtacle.jp/v18/lasershowsoftware/hardware/moncha2/) for Laser output
 
-## Realtime Graphics
+### Realtime Graphics
 
 - [Stride](https://stride3d.org/) based 3d rendering engine 
 - [Skia](https://skia.org/) based 2d rendering engine 
 - [Rive](https://rive.app/) integration including bi-directional data-binding
 - [CEF]() for rendering web content
 
-## User Interfaces
+### User Interfaces
 
 - [Dear ImGui](https://github.com/ocornut/imgui) for building custom bi-directional UIs
 - [Various other solutions](http://vvvv.org/packs/?c=UI)
 
-## Plugin Architecture
+### Plugin Architecture
 
 When building a large modular media server, at some point you'll want it to support a custom idea of plugins. Check out this [demo app with plugins](https://github.com/vvvv/AppWithPluginsDemo/) to learn how to set this up.
 

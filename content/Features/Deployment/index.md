@@ -7,7 +7,7 @@ weight: 7
 
 Programs created with vvvv can conveniently be deployed in 2 distinct ways:
 
-## Export
+### Export
 The first option is to export the program to run it as normal app (*). It can be wrapped in an installer and handed to clients who don't have to know anything about vvvv in order to run it. 
 
 Like this, apps created with vvvv can also be shared via online stores like:
@@ -27,7 +27,7 @@ This form of deployment is included with any commercial [Developer License](http
 - Linux, MacOS: Console apps<br>
 </small>
 
-## Device License
+### Device License
 
 The alternative to an export is simply running vvvv on the target PC. Like this, a program stays fully inspectable and editable while running. 
 

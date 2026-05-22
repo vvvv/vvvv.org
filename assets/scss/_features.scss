@@ -24,15 +24,28 @@
 
     &.justified{
       justify-content: space-between;
-      width: 80%;
       
       img{
         width: 9rem;
+      }
+
+      @media (max-width: 1000px) {
+        width: 100%;
+        img{
+          width: 6rem;
+        }
       }
     }
   }
 
   main, .tab-content{
+
+    position: relative;
+    background-color: #fff;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    padding-top: 0;
     
     p, ul{
       width: 90%;
@@ -61,21 +74,18 @@
     }
   }
 
-  position: relative;
-  background-color: #fff;
-  // margin: 0 10%;
-  max-width: 1300px;
-  margin: 0 auto;
-
-  padding-top: 3rem;
-
-  h1, h2{
+  h1, h2, h3{
     margin-bottom: 1.2rem;
+    font-weight: bold;
+    color: #000;
   }
 
+  h2{
+    font-size: 2.5rem;
+  }
 
   h3{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   h1, h2, h3, h4{
@@ -206,10 +216,6 @@
         background-color: #ddd;
       }
 
-      // @media (max-width: 991px) {
-      //   margin: 0.5rem;
-      //   padding: 0.3em 1.5em;
-      // }
     }
 
     @media (max-width: 768px)
