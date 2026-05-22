@@ -19,6 +19,7 @@
 
     &.justified{
       justify-content: space-between;
+      width: 80%;
       
       img{
         width: 9rem;
@@ -27,17 +28,31 @@
   }
 
   main, .tab-content{
+    
+    p, ul{
+      width: 90%;
+    }
+
+    @media (max-width: 1200px) {
+      p, ul{
+        width: 100%;
+      }
+    }
+
     a:not(.btn){
-      color: theme.$linkOrange !important;
-      text-decoration: none !important;
+      //color: theme.$linkOrange !important;
+      color: #000 !important;
+      // text-decoration: none !important;
 
       &:hover{
-        text-decoration: underline !important;
-        text-decoration-color: #333 !important;
-        color: #000 !important;
+        // text-decoration-color: #333 !important;
+        text-decoration-color: theme.$linkOrange !important;
+        color: theme.$linkOrange !important;
       }
-      // text-decoration-thickness: 2px !important;
-      // text-underline-offset: 3px !important;
+
+      text-decoration-thickness: 2px !important;
+      text-underline-offset: 3px !important;
+      text-decoration-color: theme.$orange;
     }
   }
 
@@ -103,7 +118,7 @@
       }
 
       li::marker {
-        content: '—  ';
+        content: '—  ' !important;
       }
 
   }
@@ -123,6 +138,8 @@
     // background-color: #eee;
 
     padding: 0.5rem 0rem;
+
+    font-size: 1.05rem;
 
     li{
       margin: 0;
@@ -146,6 +163,10 @@
       display: none;
     }
 
+    li:first-child{
+      padding-top: 0;
+    }
+
     .nav-link
     {
       color: #000;
@@ -156,7 +177,8 @@
       border: none;
       background-color: inherit;
 
-      border-radius: 3px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
 
       // background-color: #eee;
       
@@ -165,7 +187,8 @@
         background-color: #000; //theme.$orange;
         color: #fff;
         cursor: pointer;
-        pointer-events: none;      
+        pointer-events: none;
+        // border-bottom: 3px solid theme.$orange;
 
         &:hover
         {
@@ -191,7 +214,7 @@
       column-gap: 1rem;
       list-style: none;
       padding: 0;
-      margin-bottom: 2rem;
+      margin: 1rem 0 2rem;
       
       li {     
         box-sizing: border-box;

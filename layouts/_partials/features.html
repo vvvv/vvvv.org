@@ -14,7 +14,7 @@
   <div class="container">
       <h1></h1>               
       <div class="row">
-          <div class="col-12 col-md-4 mr-4">
+          <div class="col-12 col-md-3 mr-4">
               <aside>
                 <nav>
                   <ul class="nav nav-tabs featuresMenu" role="tablist">
@@ -29,9 +29,10 @@
                 </nav>
               </aside>
           </div>
-          <div class="col-12 col-md-7 ml-md-4 tab-content">
+          <div class="col-12 col-md-8 ml-md-4 tab-content">
             {{ range $index, $elem:=$sections }}
               <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | anchorize}}" role="tabpanel" aria-labelledby="home-tab">
+                <main>
                 <h2>{{$elem.Title}}</h2>
                 {{ if (in .RawContent "<!--more-->") }}
                   {{ .Summary }}
@@ -39,6 +40,7 @@
                 {{ else }}
                   {{ .Content }}
                 {{ end }}
+                </main>
               </div>
             {{ end }}
           </div>
