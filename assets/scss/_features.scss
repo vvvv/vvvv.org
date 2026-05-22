@@ -13,8 +13,9 @@
     align-items: center;
     row-gap: 1rem;
     line-height: 1rem;
-    margin: 1rem 0rem 2rem;
-    gap: 2rem;
+    margin: 2rem 0rem 2rem;
+    row-gap: 1.5rem;
+    column-gap: 2.6rem;
 
     &.justified{
       justify-content: space-between;
