@@ -3,9 +3,9 @@ title: Media Server
 weight: 3
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
+When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](/features/Deployment).
 
-![m-control Media Server](mbox_mediaserver3.png "m box")
+![Elbphilharmonie](sbb_mediaserver.png "Schnelle Bunte Bilder")
 
 ## Audio, Video, Lights and Lasers
 
@@ -33,3 +33,5 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 ## Plugin Architecture
 
 When building a large modular media server, at some point you'll want it to support a custom idea of plugins. Check out this [demo app with plugins](https://github.com/vvvv/AppWithPluginsDemo/) to learn how to set this up.
+
+![m-control Media Server](mbox_mediaserver3.png "m box")

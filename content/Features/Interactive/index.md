@@ -3,7 +3,8 @@ title: Interactive
 weight: 2
 ---
 
-![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")
+![Schifffahrtsmuseum](sbb-interactive2.png "Schnelle Bunte Bilder")
+
 
 ## Crowd Tracking
 	
@@ -25,3 +26,5 @@ Further, a range of lower-cost options are available, see the [Motion Capture](/
 
 https://www.interactive-scape.com/
 TUIO, Gestures, Lidars
+
+![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")
