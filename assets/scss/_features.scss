@@ -17,6 +17,11 @@
     row-gap: 1.5rem;
     column-gap: 2.6rem;
 
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+
+    padding: 2rem 0;
+
     &.justified{
       justify-content: space-between;
       width: 80%;

@@ -12,8 +12,10 @@ The first option is to export the program to run it as normal app (*). It can be
 
 Like this, apps created with vvvv can also be shared via online stores like:
 
-- [Steam Store](https://store.steampowered.com/)
-- [Microsoft Store](https://apps.microsoft.com/home?hl=en-US&gl=DE)
+<div class="logos">
+    <a href="https://store.steampowered.com/" target="_blank" title="Steam Store"><img class="mr-2" src="/features/deployment/logos/steam-store.png" alt="Steam Store"/>Steam Store</a>
+    <a href="https://apps.microsoft.com/home?hl=en-US&gl=DE" target="_blank" title="Microsoft Store"><img class="mr-2" src="/features/deployment/logos/ms-store.png" alt="Microsoft Store"/>Microsoft Store</a>
+</div>
 
 There is even a [commandline compiler](https://thegraybook.vvvv.org/reference/hde/exporting.html#the-commandline-compiler) that allows for automating builds without having to open vvvv. 
 
