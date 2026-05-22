@@ -16,8 +16,8 @@ Further, a range of depth sensors and lidars is supported that allow you to crea
 ##	Motion Capture
 
 Full-body, professional skeletal motion capture is supported via the following systems:
-- [OptiTrack]()
-- [Captury]()
+- [OptiTrack](https://optitrack.com/)
+<!-- - [Captury](https://captury.com/) -->
 
 Further, a range of lower-cost options are available, see the [Motion Capture](/packs/?c=Motion%20Capture) section of the packs browser.
 
