@@ -3,6 +3,10 @@
 #Features
 {
 
+  .nav-tabs{
+    border-bottom: none;
+  }
+
   .logos{
     display: flex;
     flex-flow: wrap;
@@ -69,6 +73,9 @@
   }
 
   @media (max-width: 769px) {
+
+    padding-top: 1rem;
+
     aside {
       position: static;
     }
@@ -124,7 +131,7 @@
       padding: 0.5rem 0rem;
     }
 
-    li:not(:last-child)::after {
+    li::after {
       display: block;
       content: "";
       position: absolute;
@@ -132,6 +139,10 @@
       width: 100%;
       height: 1px;
       background-color: #eee;
+    }
+
+    li:last-child::after{
+      display: none;
     }
 
     .nav-link
@@ -147,19 +158,13 @@
       border-radius: 3px;
 
       // background-color: #eee;
-
-      @media (max-width: 991px) {
-        margin: 0.5rem;
-        padding: 0.3em 1.5em;
-      }
       
       &.active
       {
         background-color: #000; //theme.$orange;
         color: #fff;
         cursor: pointer;
-        pointer-events: none;
-        
+        pointer-events: none;      
 
         &:hover
         {
@@ -170,6 +175,35 @@
       &:hover
       {
         background-color: #ddd;
+      }
+
+      // @media (max-width: 991px) {
+      //   margin: 0.5rem;
+      //   padding: 0.3em 1.5em;
+      // }
+    }
+
+    @media (max-width: 768px)
+    {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr); /* Change 3 to 2 for two columns */
+      column-gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      
+      li {     
+        box-sizing: border-box;
+        padding: 0rem 0rem;
+      }
+
+      li:last-child::after{
+        display: block;
+      }
+
+      .nav-link
+      {
+        padding: 0.5rem 0.5rem;
       }
     }
   } 

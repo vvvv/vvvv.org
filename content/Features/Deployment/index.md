@@ -3,7 +3,7 @@ title: Deployment
 weight: 7
 ---
 
-![We Live in an Ocean of Air](mlf-ocean-of-air.png "Marshmallow Laser Feast")
+![We Live in an Ocean of Air](../Interactive/mlf-ocean-of-air.png "Marshmallow Laser Feast")
 
 Programs created with vvvv can conveniently be deployed in 2 distinct ways:
 
