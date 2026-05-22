@@ -3,7 +3,7 @@ title: Interactive
 weight: 2
 ---
 
-![Schifffahrtsmuseum](sbb-interactive2.png "Schnelle Bunte Bilder")
+![We Live in an Ocean of Air](mlf-ocean-of-air.png "Marshmallow Laser Feast")
 
 
 ## Crowd Tracking
@@ -27,4 +27,4 @@ Further, a range of lower-cost options are available, see the [Motion Capture](/
 https://www.interactive-scape.com/
 TUIO, Gestures, Lidars
 
-![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")
+![Moving Places](3e8-interactive.png "3e8")
