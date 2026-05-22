@@ -23,7 +23,7 @@ Hidden in the lakeside village of Heidesee about one hour south of Berlin sits a
 For one long weekend in June, this unique site becomes home to [LINK - the vvvv Summer Camp 2026](https://thenodeinstitute.org/event/link-the-vvvv-summer-camp-2026): a gathering for everyone who loves vvvv, creative coding, visual experimentation, or simply spending time with curious, generous people.
 
 **[Sign up now](https://thenodeinstitute.org/event/link-the-vvvv-summer-camp-2026/?v=7d0db380a5b9)** before it is too late!<br />
-Registration closes on May 17th, 2026.
+Registration closes on May 31, 2026.
 
 {{< box >}}
 **When:** June 25th - 28th, 2026
