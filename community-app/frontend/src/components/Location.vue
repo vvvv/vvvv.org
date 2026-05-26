@@ -17,4 +17,5 @@ const text = computed(() => {
         <NIcon size="1.2rem" class="mr-1"><LocationOutline /></NIcon>
         {{ text }} 
     </div>
+    <p v-else>- - -</p>
 </template>
