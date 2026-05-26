@@ -12,8 +12,14 @@
   "link": {{ .Permalink | jsonify }},
   "thumb": {{ $thumb.Permalink | jsonify }},
   "description": {{ .Description | jsonify }},
-  {{- with .From -}}"from": {{ . | jsonify}},{{- end -}}
-  {{- with .To -}}"to": {{ . | jsonify}},{{- end -}}
+  {{- with .From -}}
+    {{- $isoDate := partial "community/getISOdate.html" . -}}
+    "from": {{ $isoDate | jsonify}},
+  {{- end -}}
+  {{- with .To -}}
+    {{- $isoDate := partial "community/getISOdate.html" . -}}
+    "to": {{ $isoDate | jsonify}},
+  {{- end -}}
   {{- with .City -}}"city": {{ .  | jsonify }},{{- end -}}
   {{- with .Country -}}"country": {{ .  | jsonify }},{{- end -}} 
   "pubDate": {{ .PubDate }}
