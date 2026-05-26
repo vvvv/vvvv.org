@@ -138,6 +138,11 @@ h3{
     font-size: 1.6rem;
 }
 
+h1{
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
 p {
     margin-bottom: 20px;
     line-height: 1.5;
