@@ -918,7 +918,7 @@ window.addEventListener ("load", ()=> {
             if (e.dataset.pack.toLowerCase().includes(query))
                 return true;
             
-            const words = e.dataset.search.split(', ');
+            const words = e.dataset.search.split(/\s*,\s*/);
 
             for (const w of words)
             {
