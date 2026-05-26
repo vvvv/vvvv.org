@@ -10,7 +10,6 @@ vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitle
     <a href="https://www.raspberrypi.com/" target="_blank" title="RaspberryPi"><img src="/features/rapidprototyping/logos/raspberrypi.png" alt="RaspberryPi"/></a>
     <a href="https://en.wikipedia.org/wiki/MIDI" target="_blank" title="Midi"><img src="/features/rapidprototyping/logos/midi.png" alt="Midi"/></a>
     <a href="https://en.wikipedia.org/wiki/Open_Sound_Control" target="_blank" title="OSC"><img src="/features/rapidprototyping/logos/osc.png" alt="OSC"/></a>
-    <a href="https://ndi.video/" target="_blank" title="NDI"><img src="/features/rapidprototyping/logos/ndi.png" alt="NDI"/></a>
     <a href="https://www.tuio.org/" target="_blank" title="TUIO"><img src="/features/rapidprototyping/logos/tuio.png" alt="TUIO"/></a>
     <a href="https://rabbitcontrol.cc/" target="_blank" title="Rabbitcontrol"><img src="/features/rapidprototyping/logos/rcp.png" alt="RCP"/></a>
     <a href="https://mqtt.org/getting-started/" target="_blank" title="MQTT"><img src="/features/rapidprototyping/logos/mqtt.png" alt="MQTT"/></a>
@@ -22,8 +21,9 @@ vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitle
     <a href="https://en.wikipedia.org/wiki/Art-Net" target="_blank" title="Art-Net"><img src="/features/rapidprototyping/logos/art-net.png" alt="Art-Net"/></a>
     <a href="https://www.vixenlights.com/docs/concepts/sacn/" target="_blank" title="sACN"><img src="/features/rapidprototyping/logos/sacn.png" alt="sACN"/></a>
     <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank" title="Websocket"><img src="/features/rapidprototyping/logos/websocket.png" alt="Websocket"/></a>
-    <a href="https://de.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" title="HTTP"><img src="/features/rapidprototyping/logos/http.png" alt="HTTP"/></a>
+    <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank" title="HTTP"><img src="/features/rapidprototyping/logos/http.png" alt="HTTP"/></a>
     <a href="https://spout.zeal.co/" target="_blank" title="Spout"><img src="/features/rapidprototyping/logos/spout.png" alt="Spout"/></a>
+    <a href="https://ndi.video/" target="_blank" title="NDI"><img src="/features/rapidprototyping/logos/ndi.png" alt="NDI"/></a>
     <a href="https://www.ableton.com/en/link/" target="_blank" title="Ableton Link"><img src="/features/rapidprototyping/logos/ableton-link.png" alt="Ableton Link"/></a>
     <a href="/packs"><img src="/features/rapidprototyping/logos/andmanymore.png" alt="And maaaany more..." title="VL Packs"/></a>
 </div>
