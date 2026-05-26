@@ -1,5 +1,5 @@
 ---
-title: "Your own Media Server"
+title: "vvvv as a custom Media Server"
 weight: 2
 button:
     title: "Read more"

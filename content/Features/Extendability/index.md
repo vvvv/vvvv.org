@@ -21,6 +21,8 @@ Custom nodes can be written in pure C#/.NET. No proprietary plugin-wrapping boil
 
 If you know how to write code, [extending vvvv](https://thegraybook.vvvv.org/reference/extending/overview.html) with your own nodes is trivial.
 
+<!--more-->
+
 ### Editor Extensions
 
 Editor extensions allow you to extend the vvvv editor with your own tools. For a listing of available extensions, see [Extensions](https://vvvv.org/extensions). To create your own, see [Editor Extensions](https://thegraybook.vvvv.org/reference/extending/editor-extensions.html) in the Gray Book.

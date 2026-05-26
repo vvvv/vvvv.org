@@ -14,6 +14,8 @@ For capturing interaction with crowds, vvvv supports the following tracking syst
   
 Further, a range of depth sensors and lidars is supported that allow you to create custom solutions, see the [Devices section](/packs/?c=Devices#Depth%20Cameras) in the packs browser for all options.
 
+<!--more-->
+
 ###	Motion Capture
 
 Full-body, professional skeletal motion capture is supported via [OptiTrack](https://optitrack.com/).

@@ -1,5 +1,5 @@
 ---
-title: "Deploy your project"
+title: "Killer feature #9: Deployment"
 weight: 3
 button:
     title: "Read more"

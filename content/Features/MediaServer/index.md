@@ -17,13 +17,14 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - Support for [protocols to control stage lights](https://vvvv.org/packs/?c=Devices#Lighting) (Art-Net, DMX, sACN, PosiStage)
 - Support for [Lasers](https://vvvv.org/packs/?c=Devices#Lasers) (LaserAnimation Sollinger, Ether Dream, Helios, Moncha, LaserCube) plus a set of nodes to generate paths with blanking
   
+<!--more-->
+
 ### Realtime Graphics
 
 - [Stride](https://stride3d.org/) based 3d rendering engine 
 - [Skia](https://skia.org/) based 2d rendering engine 
 - [Rive](https://rive.app/) integration including bi-directional data-binding
 - [CEF]() for rendering web content
-
 
 ### Plugin Architecture
 
@@ -34,4 +35,4 @@ When building a large modular media server, at some point you'll want it to supp
 - [Dear ImGui](https://github.com/ocornut/imgui) for building custom bi-directional UIs
 - [Various other solutions](http://vvvv.org/packs/?c=UI)
 
-![m-control Media Server](mbox_mediaserver3.png "m box")
+![Custom UI for the m-control Media Server](mbox_mediaserver3.png "m box")
