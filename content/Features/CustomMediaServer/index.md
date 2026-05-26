@@ -1,30 +1,37 @@
 ---
-title: Custom Media Server
-weight: 2
+title: Media Server
+weight: 3
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv! All tooling is there for you to customize and tailor to your specific needs. Build a custom UI and finally export your program as a windows app for easy [deployment](../Deployment).
+When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific needs. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](/features/Deployment).
 
-![Screenshot]()
+![Elbphilharmonie](sbb_mediaserver.png "Schnelle Bunte Bilder")
 
-Here's what vvvv provides that you can mix and match into your own idea of a media server:
+### Audio, Video, Lights and Lasers
 
-## Audio, Video, Lasers and Lights
+- Video playback based on Microsoft Media Foundation <!-- or VLC -->
+- Image sequence playback (.dds files for best performance/quality)
+- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty integrations
+- Shader based image effects (TextureFX)
+- Multichannel audio engine with [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
+- Support for [protocols to control stage lights](https://vvvv.org/packs/?c=Devices#Lighting) (Art-Net, DMX, sACN, PosiStage)
+- Support for [Lasers](https://vvvv.org/packs/?c=Devices#Lasers) (LaserAnimation Sollinger, Ether Dream, Helios, Moncha, LaserCube) plus a set of nodes to generate paths with blanking
+  
+### Realtime Graphics
 
-- Video and image stack playback, including .dds files for highest performance
-- Multichannel audio with support for [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) plugins
-- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping)
+- [Stride](https://stride3d.org/) based 3d rendering engine 
+- [Skia](https://skia.org/) based 2d rendering engine 
+- [Rive](https://rive.app/) integration including bi-directional data-binding
+- [CEF]() for rendering web content
 
-- Lights
-- Lasers
 
-## Realtime Content
-- 3d rendering engine based on [Stride](https://skia.org/)
-- 2d rendering engine based on [Skia](https://skia.org/)
+### Plugin Architecture
 
-## Custom UI
+When building a large modular media server, at some point you'll want it to support a custom idea of plugins. Check out this [demo app with plugins](https://github.com/vvvv/AppWithPluginsDemo/) to learn how to set this up.
 
-## Plugin Architecture
+### User Interfaces
 
-- plugin architecture
-- gui
+- [Dear ImGui](https://github.com/ocornut/imgui) for building custom bi-directional UIs
+- [Various other solutions](http://vvvv.org/packs/?c=UI)
+
+![m-control Media Server](mbox_mediaserver3.png "m box")

@@ -6,7 +6,7 @@
   <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading">{{ $featuresPage.Title }}</h2>
+                <h1 class="section-heading">{{ $featuresPage.Title }}</h1>
                 <hr class="primary">
             </div>
         </div>
@@ -14,13 +14,13 @@
   <div class="container">
       <h1></h1>               
       <div class="row">
-          <div class="col-4 mr-4">
+          <div class="col-12 col-md-3 mr-4">
               <aside>
                 <nav>
                   <ul class="nav nav-tabs featuresMenu" role="tablist">
                     {{ range $index, $elem:=$sections }}
                       <li role="presentation">
-                        <button class="nav-link{{if eq $index 0}} active{{end}}" data-toggle="tab" data-target="#feature-{{$elem.Title | urlize}}" type="button" role="tab" aria-controls="home" aria-selected="true">
+                        <button class="nav-link{{if eq $index 0}} active{{end}}" data-toggle="tab" data-target="#feature-{{$elem.Title | anchorize}}" type="button" role="tab" aria-controls="home" aria-selected="true">
                           {{$elem.Title}}
                         </button>
                       </li>
@@ -29,12 +29,18 @@
                 </nav>
               </aside>
           </div>
-          <div class="col-7 ml-4 tab-content">
+          <div class="col-12 col-md-8 ml-md-4 tab-content">
             {{ range $index, $elem:=$sections }}
-              <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | urlize}}" role="tabpanel" aria-labelledby="home-tab">
+              <div class="tab-pane{{if eq $index 0}} active{{end}}" id="feature-{{.Title | anchorize}}" role="tabpanel" aria-labelledby="home-tab">
+                <main>
                 <h2>{{$elem.Title}}</h2>
-                {{ .Summary }}
-                <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
+                {{ if (in .RawContent "<!--more-->") }}
+                  {{ .Summary }}
+                  <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
+                {{ else }}
+                  {{ .Content }}
+                {{ end }}
+                </main>
               </div>
             {{ end }}
           </div>
