@@ -9,7 +9,8 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
     year: '2-digit',
     hour: "numeric",
     minute: "numeric",
-    timeZone: "Europe/Berlin"
+    timeZone: "CET",
+    timeZoneName: 'short'
 });
 
 export const useHugoStore = defineStore ('hugoStore',{
@@ -93,16 +94,16 @@ function dateItem(item)
         
         if (!item.to)
         {
-            dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute}`
+            dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute} (CET)`
         }
         else if (from.day == to.day && from.month == to.month && from.year == to.year)
         {
-            dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute} - ${to.hour}:${to.minute}`
+            dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute} - ${to.hour}:${to.minute} (CET)`
         }
         else
         {
             dates = `${from.day} ${from.month} ${from.year}, ${from.hour}:${from.minute} - 
-                     ${to.day} ${to.month} ${to.year}, ${to.hour}:${to.minute}`
+                     ${to.day} ${to.month} ${to.year}, ${to.hour}:${to.minute} (CET)`
         }
         
         isPast = new Date(from.date) < new Date();

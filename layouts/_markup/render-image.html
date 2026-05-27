@@ -37,7 +37,7 @@
       {{- with $title }}title="{{ . }}"{{ end -}}
       />
   {{- else -}}
-    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" />
+    <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy"/>
 {{- end -}}
 {{- with $title -}}
     <figcaption>{{$title}}</figcaption>

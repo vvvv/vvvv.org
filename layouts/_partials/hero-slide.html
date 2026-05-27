@@ -15,11 +15,11 @@
                 {{ $link = $src.RelPermalink | absURL }}
 
                 {{ range $widths }}
-                    {{ $resized := $src.Resize (printf "%dx webp q80" .) }}
+                    {{ $resized := $src.Resize (printf "%dx webp q90" .) }}
                     {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink . ) }}
                 {{ end }}
 
-                {{ $originalWebp := $src.Process "webp q80" }}
+                {{ $originalWebp := $src.Process "webp q90" }}
                 {{ $srcset = $srcset | append (printf "%s %dw" $originalWebp.RelPermalink $originalWebp.Width) }}
 
                 <div class="slide"
@@ -30,7 +30,7 @@
                     <img  src="{{ ($src.Resize "800x webp q90").RelPermalink }}" 
                     srcset="{{ delimit $srcset ", " }}"
                     alt="{{$img.title}}"
-                    sizes="300vw"
+                    sizes="100vw"
                     loading="lazy"
                     />
                 </div>

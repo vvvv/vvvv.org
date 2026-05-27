@@ -11,11 +11,11 @@ vvvv is built to run large-scale interactive spaces. No matter the number of PCs
 
 When a single PC is not enough to render the number of outputs you need, simply scale your app across multiple PCs. A feature called "Boygrouping" keeps all your render machines n'sync. Any change to the program on the main PC is immediately replicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
 
+<!--more-->
+
 ### Pojection Mapping
 
-Large-scale often means projection-mapping. Since requirements here are rather diverse, vvvv comes with support for different options. 
-
-<!--more-->
+Large-scale often means projection-mapping. Since requirements here are rather diverse, vvvv comes with support for different options: 
 
 The following projector auto-calibration systems are integrated:
 - [VIOSO](https://vioso.com)

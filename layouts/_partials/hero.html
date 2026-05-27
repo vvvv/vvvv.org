@@ -1,7 +1,7 @@
 {{ "<!-- HEADER -->" | safeHTML }}
 
 {{- $hero := site.GetPage "hero" -}}
-{{- $features := $hero.Pages.ByWeight -}}
+{{- $features := where ($hero.Pages.ByWeight) "Draft" false -}}
 
 <header class="d-flex align-items-center">
   <div id="hero-content">
