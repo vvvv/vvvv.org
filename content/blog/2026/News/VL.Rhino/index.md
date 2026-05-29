@@ -4,16 +4,16 @@ title: "VL.Rhino - Rhino & Grasshopper for vvvv, now available"
 description: "Design your world in Rhino, make it interactive in vvvv."
 categories: "News"
 author: "wmc"
-thumb: "heroimage.jpg"
+thumb: "hero-720.jpg"
 ---
 
 Hey everyone,
 
 after maintaining VL.Rhino.3dm for a while, I've built out a full professional version. It's available now: **VL.Rhino**.
 
-![Overview](heroimage.jpg)
+![Overview](og-image.jpg)
 
-Most of you probably know VL.Rhino.3dm for `.3dm` reading, no Rhino installation needed. VL.Rhino keeps that and adds the missing half of the workflow. It also comes with significantly improved geometry reading performance over the free version.
+Many of you probably know VL.Rhino.3dm for `.3dm` reading, no Rhino installation needed. VL.Rhino keeps that and adds a lot more to the workflow. It also comes with significantly improved geometry reading performance over the free version.
 
 ## What's new
 
@@ -31,6 +31,8 @@ Beyond that:
 - **Adaptive curve sampling** — chord deviation, tangent angle, edge length, recursion depth
 
 No Rhino installation required for any of the above. The Grasshopper Live-Link and Rhino.Compute are the only feature that need Rhino 7 or 8 running alongside.
+
+![Objects](feature-geo.jpg)
 
 ## The workflow idea behind it
 
