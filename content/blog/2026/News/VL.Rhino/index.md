@@ -32,7 +32,7 @@ Beyond that:
 
 No Rhino installation required for any of the above. The Grasshopper Live-Link and Rhino.Compute are the only feature that need Rhino 7 or 8 running alongside.
 
-![Objects](feature-geo.jpg)
+![Objects](feature-geo-800.jpg)
 
 ## The workflow idea behind it
 
