@@ -49,4 +49,6 @@ More info and purchase: [vlrhino.com](https://vlrhino.com)
 
 Happy to answer questions and would love to see what you build with it.
 
+The free VL.Rhino.3dm stays as is, just run "nuget install VL.Rhino.3dm" and try it. 
+
 Moritz
