@@ -12,6 +12,7 @@ where:
   from_date: "2026-06-25T12:00:00"
   to_date: "2026-06-28T12:00:00"
 thumb: "thumb.jpg"
+ShowAsCommunityDate: false
 ---
 
 ![](link-summercamp.png)
