@@ -45,9 +45,11 @@ Data running through your app can be explored and manipulated at any stage which
 vvvv can talk to a wide range of protocols and devices using individual packs. These can be installed at the click of a button using the built-in package manager.  
 
 For a listing of whats available, check out these section in the online packs browser:
-- [IO](https://vvvv.org/packs/?c=IO)
-- [Devices](https://vvvv.org/packs/?c=Devices)
+- [IO](https://vvvv.org/packs/?c=IO) (Protocolls, Web APIs, ...)
+- [Devices](https://vvvv.org/packs/?c=Devices) (Cameras, Lasers, Robots,...)
 
 ### Simple deployment
 
 Deploying an app created with vvvv takes a single click, which exports a windows application. There is no need to deploy vvvv itself, simply share the export with anyone and they can see/test your app. For more, see [Deployment](../Deployment).
+
+![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")

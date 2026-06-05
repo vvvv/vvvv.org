@@ -3,13 +3,13 @@ title: Large-scale
 weight: 1
 ---
 
-vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved.
+vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved, vvvv is your single entry-point to build and run distributed systems.
 
 ![Living Architecture: Ghery](image.png "Refik Anadol Studio")
 
 ### Distributed Rendering
 
-When a single PC is not enough to render the number of outputs you need, simply scale your app across multiple PCs. A feature called "Boygrouping" keeps all your render machines n'sync. Any change to the program on the main PC is immediately replicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
+When a single PC is not enough to render the number of outputs you need, simply scale your app across multiple PCs. An upcomming feature called "Boygrouping" keeps all your render machines n'sync. Any change to the program on the main PC is immediately replicated on all connected clients. Combined with vvvv's [live programming approach](../VisualLiveProgramming/) this removes most overhead of creating distributed applications.
 
 <!--more-->
 
@@ -35,3 +35,5 @@ Apart from outputting to screens or projections, vvvv allows you to create laser
 
 - [Lighting](/packs/?c=Devices#Lighting) (Art-Net, DMX, sACN, PosiStage)
 - [Lasers](/packs/?c=Devices#Lasers) (LaserAnimation Sollinger, Ether Dream, Helios, Moncha, LaserCube) plus a set of nodes to generate paths with blanking
+
+![Polytopes 2025](ExperiensS-66599_PhotoStephaneSbyBalmy.jpg "ExperiensS x 665.99, Photo: Stéphane Sby Balmy")
