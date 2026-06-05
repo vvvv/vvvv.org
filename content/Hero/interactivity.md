@@ -1,9 +1,9 @@
 ---
-title: "Killer feature #9: Deployment"
-weight: 3
+title: "From Multi Touch to Motion Capture"
+weight: 1
 button:
     title: "Read more"
-    url: /features/deployment/
+    url: /features/interactive/
 image: 
     src: OceanOfAir-MLF.png
     title: We Live in an Ocean of Air

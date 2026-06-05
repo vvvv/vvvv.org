@@ -1,12 +1,12 @@
 ---
-title: "vvvv as a custom Media Server"
-weight: 2
+title: "Own your Media Server"
+weight: 3
 button:
     title: "Read more"
     url: /features/mediaserver/
 image: 
-    src: Elbphilharmonie-SBB2.png
-    title: Elbphilharmonie
-    author: Schnelle Bunte Bilder
-    photographer: 
+    src: moc-1.png
+    title: Museum Of Change
+    author: SHA.ART GmbH
+    photographer: "Photo: Ouriel Morgensztern"
 ---

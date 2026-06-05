@@ -1,6 +1,6 @@
 ---
 title: "As Rapid as you are"
-weight: 5
+weight: 4
 button:
     title: "Rapid Prototyping"
     url: /features/rapidprototyping/
