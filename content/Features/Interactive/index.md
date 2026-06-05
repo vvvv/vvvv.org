@@ -2,9 +2,9 @@
 title: Interactive
 weight: 2
 ---
+Interactivity is a wide topic and often involves external systems, sensors or protocols. vvvv brings them all together and connects them to realtime output.
 
 ![We Live in an Ocean of Air](mlf-ocean-of-air.png "Marshmallow Laser Feast")
-
 
 ### Crowd Tracking
 	
@@ -13,6 +13,8 @@ For capturing interaction with crowds, vvvv supports the following tracking syst
 - [BlueIOT](https://www.blueiot.com/)
   
 Further, a range of depth sensors and lidars is supported that allow you to create custom solutions, see the [Devices section](/packs/?c=Devices#Depth%20Cameras) in the packs browser for all options.
+
+<!--more-->
 
 ###	Motion Capture
 

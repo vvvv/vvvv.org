@@ -11,6 +11,8 @@ vvvv is a visual-first and fully live-programming environment. While it is possi
 
 No matter if you "patch" visually or you write parts of your code in C#, any change you make is live. Compilation is happening in the background and you don't have to wait for your program to restart (think: State Hot-Reload!). This allows for quick iterations and is important for creating and debugging realtime interactive applications.
 
+<!--more-->
+
 ### The Visual Language
 
 VL is what we call the visual language in vvvv. It has:
@@ -20,5 +22,3 @@ VL is what we call the visual language in vvvv. It has:
 - Programming features like **generics** and **delegates** give you full flexibility 
 - No limit in datatypes. Besides the primitive built-in types you create your own datatypes as needed.
 - You can reference **any .NET library** 
-
-<!--more-->

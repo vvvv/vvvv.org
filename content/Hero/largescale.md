@@ -1,5 +1,5 @@
 ---
-title: "Large Scale"
+title: "How vvvv supports the Large-scale"
 weight: 3
 button:
     title: "Read more"
