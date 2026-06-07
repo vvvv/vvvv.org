@@ -260,6 +260,7 @@ header {
         text-transform: uppercase;
         line-height: 1.5em;
         color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0;
     }
 
     b{
@@ -325,15 +326,15 @@ header {
         border-color: #fff;
         border-width: 1px;
         max-width: 30%;
-        margin: 2rem 0;
+        margin: 1rem 0 2rem;
     }
 
     .vvvv
     {
         padding: 0px;
-        margin: 0 0 1rem 0;
+        margin: 1rem 0 0.5rem 0;
         font-weight: 400;
-        font-size: 5rem;
+        font-size: 4.5rem;
         line-height: 5rem;
         letter-spacing: 0.5rem;
     }
