@@ -4,7 +4,7 @@ weight: 7
 ---
 For deployment, vvvv offers full flexibility. Whether you prefer to ship your code as an app or rather have vvvv itself running on premise, it is up to you to decide. 
 
-![We Live in an Ocean of Air](../Interactive/mlf-ocean-of-air.png "Marshmallow Laser Feast")
+![We Live in an Ocean of Air](OceanOfAir-MLF-2.png "Marshmallow Laser Feast")
 
 ### Export
 The first option is to export the program to run it as normal app (*). It can be wrapped in an installer and handed to clients who don't have to know anything about vvvv in order to run it. 
