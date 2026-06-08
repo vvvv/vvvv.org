@@ -13,7 +13,7 @@ When a single PC is not enough to render the number of outputs you need, simply 
 
 <!--more-->
 
-### Pojection Mapping
+### Projection Mapping
 
 Large-scale often means projection-mapping. Since requirements here are rather diverse, vvvv comes with support for different options: 
 
@@ -25,7 +25,7 @@ The following projector auto-calibration systems are integrated:
 
 Alternatively vvvv also ships with tooling that help you build custom projection mapping workflows. See the [Projection Mapping](/packs/?c=Projection%20Mapping) section in the packs browser for all options. 
 
-### LED walls
+### LED Walls
 
 When a single PC is not enough to drive a LED wall and perfect frame sync is needed across multiple PCs, vvvv supports the use of NVIDIA Quadro Sync cards to seamlessly drive large LED screens. 
 
@@ -33,7 +33,7 @@ When a single PC is not enough to drive a LED wall and perfect frame sync is nee
 
 Apart from outputting to screens or projections, vvvv allows you to create laser and light shows that go beyond playing back predefined animations. Realtime control for both media is available via a range of packs you can find in the following categories:
 
-- [Lighting](/packs/?c=Devices#Lighting) (Art-Net, DMX, sACN, PosiStage)
+- [Lighting](/packs/?c=Devices#Lighting)  <!--(Art-Net, DMX, sACN, PosiStage) -->
 - [Lasers](/packs/?c=Devices#Lasers) <!-- (LaserAnimation Sollinger, Ether Dream, Helios, Moncha, LaserCube) plus a set of nodes to generate paths with blanking -->
 
 ![Polytopes 2025](ExperiensS-66599_PhotoStephaneSbyBalmy.jpg "ExperiensS x 665.99, Photo: Stéphane Sby Balmy")
