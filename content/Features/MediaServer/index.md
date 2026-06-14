@@ -3,7 +3,7 @@ title: Media Server
 weight: 3
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific use case. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](/features/Deployment).
+When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific use case. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
 
 ![Elbphilharmonie](sbb_mediaserver.png "Schnelle Bunte Bilder")
 
@@ -11,7 +11,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 - Video playback based on Microsoft Media Foundation <!-- or VLC -->
 - Image sequence playback (.dds files for best performance/quality)
-- [Projection Mapping](../LargescaleInteractive#Projection%20Mapping) support via multiple thirdparty integrations
+- [Projection Mapping](../Largescale#Projection%20Mapping) support via multiple thirdparty integrations
 - Shader based image effects (TextureFX)
 - Multichannel audio engine with [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
 - Support for [protocols to control stage lights](https://vvvv.org/packs/?c=Devices#Lighting)
@@ -21,7 +21,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ### Realtime Graphics
 
-- [Stride](https://stride3d.org/) based 3d/VR rendering engine 
+- [Stride](https://stride3d.net/) based 3d/VR rendering engine 
 - [Skia](https://skia.org/) based 2d rendering engine 
 - [Rive](https://rive.app/) integration including bi-directional data-binding
 - [CEF](https://www.nuget.org/packages/VL.CEF) for rendering web content

@@ -25,4 +25,4 @@ If you know how to write code, [extending vvvv](https://thegraybook.vvvv.org/ref
 
 ### Editor Extensions
 
-Editor extensions allow you to extend the vvvv editor with your own tools. For a listing of available extensions, see [Extensions](https://vvvv.org/extensions). To create your own, see [Editor Extensions](https://thegraybook.vvvv.org/reference/extending/editor-extensions.html) in the Gray Book.
+Editor extensions allow you to extend the vvvv editor with your own tools. For a listing of available extensions, see [Extensions](https://vvvv.org/extensions). To create your own, see [Editor Extensions](https://thegraybook.vvvv.org/reference/extending/editor-extensions.html) in [The Gray Book](https://thegraybook.vvvv.org/).

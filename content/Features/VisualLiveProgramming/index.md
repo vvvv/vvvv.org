@@ -15,7 +15,7 @@ No matter if you "patch" visually or you write parts of your code in C#, any cha
 
 ### The Visual Language
 
-VL is what we call the visual language in vvvv. It has:
+VL is what we call the visual language in vvvv. Its main features are:
 - Code regions like **loops and conditionals**
 - Allows you to apply **design patterns** known from **object oriented**,  **functional** and **reactive** programming 
 - Parts of your programs can run **async** or on **different threads**
