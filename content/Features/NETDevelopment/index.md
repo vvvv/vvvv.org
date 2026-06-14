@@ -7,11 +7,11 @@ vvvv is a .NET development environment in a sense comparable to [Visual Studio](
 
 ![The vvvv editor with tool windows](image-4.png)
 
-Only, vvvv has a focus on [visual live-programming](../VisualLiveProgramming/index.md) which benefits applications that require [rapid prototyping](../RapidPrototyping/index.md) or have IO that goes beyond the standard mouse/keyboard/touch-screen.
+Only, vvvv has a focus on [visual live-programming](/features/visualLiveprogramming/index.md) which benefits applications that require [rapid prototyping](/features/rapidprototyping/index.md) or have IO that goes beyond the standard mouse/keyboard/touch-screen.
 
 ### Visual and textual code
 
-While vvvv is a visual-first development environment, you can also choose to [write parts of your apps using C#](../Extendability/). vvvv's [visual language VL](../VisualLiveProgramming/) is best at high/mid-level organization of code while text-code often excells at implementing fine-grained algorithms. The key is finding the right balance for yourself, which vvvv allows you to do. 
+While vvvv is a visual-first development environment, you can also choose to [write parts of your apps using C#](/features/extendability/). vvvv's [visual language VL](/features/visualLiveprogramming/) is best at high/mid-level organization of code while text-code often excells at implementing fine-grained algorithms. The key is finding the right balance for yourself, which vvvv allows you to do. 
 
 <!--more-->
 

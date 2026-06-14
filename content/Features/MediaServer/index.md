@@ -3,7 +3,7 @@ title: Media Server
 weight: 3
 ---
 
-When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific use case. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](../Deployment).
+When off-the-shelf media servers don't suite your needs, create your own with vvvv. All the components typically needed (video, audio, realtime graphics, lights, lasers) are there for you to customize and tailor to your specific use case. Combine with your own idea of a UI and finally export your media server as a windows app for easy [deployment](/features/deployment).
 
 ![Elbphilharmonie](sbb_mediaserver.png "Schnelle Bunte Bilder")
 

@@ -50,6 +50,6 @@ For a listing of whats available, check out these section in the online packs br
 
 ### Simple deployment
 
-Deploying an app created with vvvv takes a single click, which exports a windows application. There is no need to deploy vvvv itself, simply share the export with anyone and they can see/test your app. For more, see [Deployment](../Deployment/).
+Deploying an app created with vvvv takes a single click, which exports a windows application. There is no need to deploy vvvv itself, simply share the export with anyone and they can see/test your app. For more, see [Deployment](/features/deployment/).
 
 ![Fluidic](Fluidic-WhiteVoid.png "WHITEvoid")
