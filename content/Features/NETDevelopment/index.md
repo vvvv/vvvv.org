@@ -3,7 +3,7 @@ title: ".NET Development"
 weight: 6
 ---
 
-vvvv is a .NET development environment in a sense comparable to [Visual Studio](https://visualstudio.microsoft.com/) and [Raider](https://www.jetbrains.com/rider/). What they share is their capability to develop apps using libraries that are available in the .NET ecosystem.
+vvvv is a .NET development environment in a sense comparable to [Visual Studio](https://visualstudio.microsoft.com/) and [Rider](https://www.jetbrains.com/rider/). What they share is their capability to develop apps using libraries that are available in the .NET ecosystem.
 
 ![The vvvv editor with tool windows](image-4.png)
 

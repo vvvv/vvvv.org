@@ -11,7 +11,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 - Video playback based on Microsoft Media Foundation <!-- or VLC -->
 - Image sequence playback (.dds files for best performance/quality)
-- [Projection Mapping](/features/largescale#projection%20mapping) support via multiple thirdparty integrations
+- [Projection Mapping](/features/largescale#projection-mapping) support via multiple thirdparty integrations
 - Shader based image effects (TextureFX)
 - Multichannel audio engine with [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 
 - Support for [protocols to control stage lights](https://vvvv.org/packs/?c=Devices#Lighting)
