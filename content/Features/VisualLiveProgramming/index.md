@@ -1,6 +1,6 @@
 ---
 title: Visual Live-Programming
-weight: 4
+weight: 5
 ---
 
 vvvv is a visual-first and fully live-programming environment. While it is possible to develop parts of your applications by writing code in C#/.NET, this is mostly a preference but hardly ever a necessity. 

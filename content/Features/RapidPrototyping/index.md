@@ -1,6 +1,6 @@
 ---
 title: Rapid Prototyping
-weight: 5
+weight: 4
 ---
 
 vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitless connectivity and simple deployment are key to building any realtime media application. 
@@ -46,7 +46,7 @@ vvvv can talk to a wide range of protocols and devices using individual packs. T
 
 For a listing of whats available, check out these section in the online packs browser:
 - [IO](https://vvvv.org/packs/?c=IO) (Protocolls, Web APIs, ...)
-- [Devices](https://vvvv.org/packs/?c=Devices) (Cameras, Lasers, Robots,...)
+- [Devices](https://vvvv.org/packs/?c=Devices) (Cameras, Lasers, Robots, ...)
 
 ### Simple deployment
 

@@ -1,6 +1,6 @@
 ---
 title: Extendability
-weight: 6
+weight: 7
 ---
 vvvv is not a monolithic software. Its core is rather slim with many [optional packs](https://vvvv.org/packs) to augment its functionality. 
 

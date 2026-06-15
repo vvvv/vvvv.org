@@ -1,6 +1,6 @@
 ---
 title: Deployment
-weight: 7
+weight: 8
 ---
 For deployment, vvvv offers full flexibility. Whether you prefer to ship your code as an app or rather have vvvv itself running on premise, it is up to you to decide. 
 
