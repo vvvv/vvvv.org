@@ -10,14 +10,15 @@ vvvv is not a monolithic software. Its core is rather slim with many [optional p
     <a href="https://www.nuget.org/packages?q=tag%3Avl&prerel=true" target="_blank" title="Nuget"><img src="/features/extendability/logos/nuget.png" alt="Nuget"/></a>
 </div>
 
-
 If you're still missing a feature, here are your options:
 - [Get in touch](mailto:devvvvs@vvvv.org), we offer custom feature development, support and consulting
 - Help yourself by writing a custom node or an editor extension: 
 
 ### Custom nodes
 
-Custom nodes can be written in pure C#/.NET. No proprietary plugin-wrapping boilerplate code is needed. Any method written in C# is available as node in VL, meaning simple nodes really just take a few lines of code.
+The simplest way to create custom, reusable nodes is wrapping a group of nodes away in a new node. Do this for a bunch of nodes and create your own reusable pack of nodes which you can share on [nuget.org](http://nuget.org).  
+
+Alternatively custom nodes can be written in pure C# or F#. No proprietary plugin-wrapping boilerplate code is needed. Any method written in code is available as node in VL, meaning simple nodes really just take a few lines of code.
 
 If you know how to write code, [extending vvvv](https://thegraybook.vvvv.org/reference/extending/overview.html) with your own nodes is trivial.
 

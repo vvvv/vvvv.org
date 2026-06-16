@@ -9,8 +9,8 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ### Audio, Video, Lights and Lasers
 
-- Video playback based on Microsoft Media Foundation <!-- or VLC -->
 - Image sequence playback (.dds files for best performance/quality)
+- Video playback based on Microsoft Media Foundation <!-- or VLC -->
 - [Projection Mapping](/features/largescale#projection-mapping) support via multiple thirdparty integrations
 - Shader based image effects (TextureFX)
 - Multichannel audio engine with [VST3](https://en.wikipedia.org/wiki/Virtual_Studio_Technology) audio plugin integration 

@@ -16,11 +16,11 @@ Like this, apps created with vvvv can also be shared via online stores like:
     <a href="https://apps.microsoft.com/home" target="_blank" title="Microsoft Store"><img class="mr-2" src="/features/deployment/logos/ms-store.png" alt="Microsoft Store"/>Microsoft Store</a>
 </div>
 
+<!--more-->
+
 There is also a [commandline compiler](https://thegraybook.vvvv.org/reference/hde/exporting.html#the-commandline-compiler) that allows for automating builds without having to open vvvv. 
 
 This form of deployment is included with any commercial [Developer License](https://store.vvvv.org/). 
-
-<!--more-->
 
 <small>
 (*) As of vvvv 7.x the following exports are supported:<br>
