@@ -17,14 +17,14 @@ But that's not all, vvvv also supports the following text languages:
 <!--more-->
 - You can [write parts of your apps using C#](/features/extendability/) or F#
 - If you prefer Python, see how [CSnakes](https://github.com/tonybaloney/CSnakes) allows you to embed Python code into .NET projects
-- For shader coding vvvv uses [SDSL](https://doc.stride3d.net/latest/en/manual/graphics/effects-and-shaders/shading-language/index.html) which is a very smart superset of HLSL
+- For shader coding vvvv uses [SDSL](https://doc.stride3d.net/latest/en/manual/graphics/effects-and-shaders/shading-language/index.html) which is a superset of HLSL
 
 ### Version Control
 One of the challenges with visual programming often is version control. We haven't solved this entirely but two aspects make vvvv quite version control friendly:
 - Projects can easily be split into as many documents as feels appropriate for a project to prevent conflicts when working in teams
-- Documents are saved in format and can be merged using the [git mergetool](https://github.com/vvvv/MergeVLDocs) we provide
+- Documents are saved in text format and can be merged using the [git mergetool](https://github.com/vvvv/MergeVLDocs) we provide
   
-### Distributed Computing
+### Distributed Rendering
 vvvv is built to facilitate the creation of [large-scale installations](/features/large-scale#distributed-rendering) out of the box. Orchestrate any number of PCs from a single primary to run your apps across numerous outputs. What others call [nDisplay](https://dev.epicgames.com/documentation/unreal-engine/ndisplay-overview-for-unreal-engine), we call "Boygrouping".
 
 ### Exposing parameters
@@ -34,9 +34,9 @@ Three things make it particularly easy in vvvv to quickly build control surfaces
 - [Dear ImGui](https://github.com/ocornut/imgui) integration for building even complex control UIs in no time
 
 ### Debugging
-vvvv comes with [a range of debug views](https://thegraybook.vvvv.org/reference/hde/debugging.html) include a premium log view that helps identify issues in your patches and jump to the source of messages at a click.
+vvvv comes with [a range of debug views](https://thegraybook.vvvv.org/reference/hde/debugging.html) that include a log view that helps identify issues in your patches and jump to the source of messages at a click.
 
-Since VL compiles to C# using [Roslyn](https://github.com/dotnet/roslyn), it is possible to attach a debugger and set break points in C# for advanced debugging purposes.
+Since VL compiles to C# using [Roslyn](https://github.com/dotnet/roslyn), it is possible to [attach a debugger](https://thegraybook.vvvv.org/reference/hde/debugging.html#attaching-visual-studio) and set break points in C# for advanced debugging purposes.
 
 ### Observability
 The ability to observe the behavior of your applications over time, regarding logging and metrics is key when it comes to developing more complex projects. Being a development environment for .NET allows vvvv to take full advantage of all the features and technologies available in the .NET ecosystem. No need to reinvent the wheel, pushing structured data to a dashboard like [Grafana](https://grafana.com/) for analysis, is solved.
