@@ -26,6 +26,10 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 - [Rive](https://rive.app/) integration including bi-directional data-binding
 - [CEF](https://www.nuget.org/packages/VL.CEF) for rendering web content
 
+### Integrations
+
+When it comes to running content of other engines or media servers through vvvv or the other way round, running vvvv content through other media servers or engines, there are not limits. It always comes down to texture and parameter sharing and can be realized in many ways. If you need a hand with this, we'd be happy to help, please [get in touch](mailto:devvvvs@vvvv.org).
+
 ### Plugin Architecture
 
 When building a large modular media server, at some point you'll want it to support a custom idea of plugins. Check out this [demo app with plugins](https://github.com/vvvv/AppWithPluginsDemo/) to learn how to set this up.
