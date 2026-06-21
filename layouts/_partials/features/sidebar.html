@@ -1,0 +1,13 @@
+{{ $current := .current }}
+{{ $ctx := .context }}
+{{ $pages := $ctx.CurrentSection.RegularPages.ByWeight }}
+
+<nav>
+  <ul class="featuresMenu">
+    {{ range $pages }}
+      <li>
+        <a href="{{ .RelPermalink }}" class="nav-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>

@@ -2,55 +2,218 @@
 
 #Features
 {
-  position: relative;
-  background-color: #333;
 
-  #Feature-Sections
-  {
-    h2
-    {
-      font-weight: 700;
+  .nav-tabs{
+    border-bottom: none;
+  }
+
+  .logos{
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    row-gap: 1rem;
+    line-height: 1rem;
+    margin: 2rem 0rem 2rem;
+    row-gap: 1.5rem;
+    column-gap: 2.6rem;
+
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+
+    padding: 2rem 0;
+
+    &.justified{
+      justify-content: space-between;
+      
+      img{
+        width: 9rem;
+      }
+
+      @media (max-width: 1000px) {
+        width: 100%;
+        img{
+          width: 6rem;
+        }
+      }
     }
   }
 
-  img
-  {
-    background-color: #ddd;
+  main, .tab-content{
+
+    position: relative;
+    background-color: #fff;
+    max-width: 1300px;
+    margin: 0 auto;
+
+    padding-top: 0;
+    
+    p, ul{
+      width: 90%;
+    }
+
+    @media (max-width: 1200px) {
+      p, ul{
+        width: 100%;
+      }
+    }
+
+    a:not(.btn){
+      //color: theme.$linkOrange !important;
+      color: #000 !important;
+      // text-decoration: none !important;
+
+      &:hover{
+        // text-decoration-color: #333 !important;
+        text-decoration-color: theme.$linkOrange !important;
+        color: theme.$linkOrange !important;
+      }
+
+      text-decoration-thickness: 2px !important;
+      text-underline-offset: 3px !important;
+      text-decoration-color: theme.$orange;
+    }
+    
+    .btn {
+      text-decoration: none;
+      
+      &:hover{
+        color: #fff;
+        background-color: theme.$orange;
+        border-color: theme.$orange;
+      }
+    }
   }
 
-  .stickyRow
-  {
-    top: 69px; 
-    position: sticky; 
-    z-index: 999;
+  h1, h2, h3{
+    margin-bottom: 1.2rem;
+    font-weight: bold;
+    color: #000;
+  }
+
+  h2{
+    font-size: 2.5rem;
+  }
+
+  h3{
+    font-size: 1.7rem;
+  }
+
+  h1, h2, h3, h4{
+
+    &:not(:first-child)
+    {
+      margin-top: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    aside {
+      position: sticky;
+      top: 7rem;
+    }
+  }
+
+  @media (max-width: 769px) {
+
+    padding-top: 1rem;
+
+    aside {
+      position: static;
+    }
+  }
+
+  aside {
+    padding: 0;
+    height: fit-content;
+  }
+
+  main {
+    min-width: 0; /* prevents overflow issues */
+
+      a:not(:has(img))
+      {
+          text-decoration: underline;
+          text-underline-offset: 0.2rem;
+          text-decoration-color: #ccc;
+
+          &:hover
+          {
+              color: theme.$orange-link-hover;
+          }
+      }
+
+      li::marker {
+        content: '—  ' !important;
+      }
+
+  }
+
+  
+  img{
+      max-width: 100%;
+      height: auto;
   }
 
   .featuresMenu
   {
-    border-radius: 7px;
-    box-shadow: 0px 5px 20px 5px rgba(0,0,0,0.50);
-    background-color: #000000;
+    // border-radius: 5px;
+    // box-shadow: 0px 5px 20px 5px rgba(0,0,0,0.50);
+    // background-color: #f0f0f0;
+    list-style: none;
+    // background-color: #eee;
 
-    padding: 0.5em;
+    padding: 0.5rem 0rem;
 
-    li {
+    font-size: 1.05rem;
+
+    li{
       margin: 0;
+      // padding: 0.5rem 0rem;
+      width: 100%;
+      position: relative;
+      padding: 0.5rem 0rem;
+    }
+
+    li::after {
+      display: block;
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #eee;
+    }
+
+    li:last-child::after{
+      display: none;
+    }
+
+    li:first-child{
+      padding-top: 0;
     }
 
     .nav-link
     {
-      color: #ddd;
-      padding: 0.3em 0.4em;
-      margin: 0px;
+      color: #000;
+      margin: 0rem;
+      padding: 1rem 1rem;
+      width: 100%;
+      text-align: left;
+      border: none;
+      background-color: inherit;
 
-      @media (min-width: 576px) {
-        padding: 0.3em 1.5em;
-      }
+      border-radius: 5px;
+      transition: background-color 0.3s;
+
+      // background-color: #eee;
       
       &.active
       {
-        background-color: theme.$orange;
+        background-color: #000; //theme.$orange;
         color: #fff;
+        cursor: pointer;
+        pointer-events: none;
+        // border-bottom: 3px solid theme.$orange;
 
         &:hover
         {
@@ -60,27 +223,45 @@
 
       &:hover
       {
-        color: theme.$orange;
+        background-color: #ddd;
+      }
+
+    }
+
+    @media (max-width: 768px)
+    {
+      display: grid !important;
+      grid-template-columns: repeat(2, 1fr); /* Change 3 to 2 for two columns */
+      column-gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 2rem;
+      
+      li {     
+        box-sizing: border-box;
+        padding: 0rem 0rem;
+      }
+
+      li:last-child::after{
+        display: block;
+      }
+
+      .nav-link
+      {
+        padding: 0.5rem 0.5rem;
       }
     }
   } 
 
   h2
   {
-    color: #fff;
-  }
-
-  .title
-  {
-    color: #fff; 
-    font-weight: bold;
+    color: #000;
   }
 
   .mediaShadow
   {
     box-shadow: 0 4px 15px 3px rgba(0,0,0,.3);
   }
-
   
   .description
   {

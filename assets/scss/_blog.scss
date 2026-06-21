@@ -28,7 +28,6 @@ hr.thin{
     a
     {
         text-decoration: none;
-        border-bottom: 1px solid #ccc;
         color: inherit;
 
         &:hover
@@ -47,7 +46,14 @@ hr.thin{
 
         font-family: theme.$sans;
 
-        .btn
+        a:not(.btn)
+        {
+            text-decoration: underline;
+            text-decoration-color: #000 !important;
+            text-decoration-thickness: 1px !important;
+        }
+
+        a.btn
         {
             color: #fff !important;
             font-size: 0.9em;
@@ -63,7 +69,6 @@ hr.thin{
             border-bottom: none;
             background-color: #ccc;
         }
-
     }
 
 }
@@ -76,9 +81,9 @@ hr.thin{
 .guestLabel
 {
     background-color: #aaa;
-    border-radius: 1em;
+    border-radius: 10px;
     border: none;
-    padding: 0.3em 0.8em;
+    padding: 0.2em 0.8em;
     color: #fff;
     font-size: 0.75rem;
     white-space: nowrap;
@@ -174,6 +179,14 @@ section#Blog
 #Blog
 {
 
+    min-width: 0;
+    max-width: 100%;
+    flex-grow: 1;
+    overflow: initial;
+    // margin-top: 3em;
+    margin-bottom: 5em;
+
+
     .cactus-login-close
     {
         scale: inherit;
@@ -208,11 +221,12 @@ section#Blog
         
         a{
             color: #000;
+            text-decoration: none !important;
 
             &:hover
             {
                 color: theme.$orange;
-                background-color: #fff;
+                background-color: #efefef;
             }
         }
 
@@ -255,23 +269,18 @@ section#Blog
         }
     }
 
-    min-width: 0;
-    max-width: 100%;
-    flex-grow: 1;
-    overflow: initial;
-    // margin-top: 3em;
-    margin-bottom: 5em;
-
-    a:not(:has(img))
+    a:not(:has(img), .btn)
     {
-        text-decoration: none;
-        border-bottom: 1px solid #ccc;
-        color: inherit;
+      color: #000 !important;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px !important;
+      text-decoration-color: theme.$orange;
 
-        &:hover
-        {
-            color: theme.$orange-link-hover;
-        }
+      &:hover{
+        text-decoration-color: theme.$linkOrange !important;
+        color: theme.$linkOrange !important;
+      }
     }
 
     .border-below
@@ -291,6 +300,10 @@ section#Blog
             {
                 color: #888;
             }
+
+            
+            line-height: 2rem;
+
         } 
 
         h2
@@ -314,6 +327,13 @@ section#Blog
             color: #777;
             font-family: theme.$sans;
             margin-bottom: 0.5em;
+        }
+
+        .header{
+            a{
+                text-decoration-color: #000;
+                text-decoration-thickness: 1px;
+            }
         }
 
         .content{
@@ -605,17 +625,6 @@ section#Blog
             {
                 background-color: #ffffff !important;
             }
-
-            // li:after {
-            //     content:''; 
-            //     display:block; 
-            //     position:absolute;  /* position this at the bottom */
-            //     bottom:0;
-            //     left:0;            /* left and right determine length of line, the longer you want it, the closer to 0 these values should be */
-            //     right:90%;
-            //     height:1px;
-            //     background:#ddd;    /* match the font color */
-            // }
 
             .link{
                 color: theme.$orange;
