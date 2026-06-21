@@ -5,7 +5,7 @@ weight: 1
 
 vvvv is built to run large-scale interactive spaces. No matter the number of PCs involved, it is your single entry-point to build and run distributed systems.
 
-![Living Architecture: Ghery](LivingArchitecture2.jpg "Refik Anadol Studio")
+![Living Architecture: Ghery](LivingArchitecture-RAS.PNG "Refik Anadol Studio")
 
 ### Distributed Rendering
 
