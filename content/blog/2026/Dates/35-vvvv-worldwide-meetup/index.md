@@ -10,15 +10,15 @@ where:
     country: "de"
     country_name: "Germany"
     from_date: "2026-07-16T19:00:00"
-    to_date: "2026-05-16T22:00:00"
+    to_date: "2026-07-16T22:00:00"
 thumb: "vvvvMeetup35-KeyVisual-Thumb.jpg"
 ---
 
 ![](vvvvMeetup35-KeyVisual-16-9.jpg)
 
-*Artwork by [Rosi Grillmair](https://www.instagram.com/remony4444/), visualising heat data of the city of Frankfurt am Main at [display - Raum für digitale Praxis](https://d-i-s-p-l-a-y.de).*
+*Artwork by [Rosi Grillmair](/people/remony), visualising heat data of the city of Frankfurt am Main at [display - Raum für digitale Praxis](https://d-i-s-p-l-a-y.de).*
 
-Here's to announce the 35th vvvv worldwide meetup on **July 16st, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
+Here's to announce the 35th vvvv worldwide meetup on **July 16th, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
 Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)  
 
