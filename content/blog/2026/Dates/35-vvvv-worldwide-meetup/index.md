@@ -1,7 +1,7 @@
 ---
 categories: "Dates"
 author: "The NODE Institute"
-date: "2026-06-10"
+date: "2026-06-22"
 title: "35. vvvv worldwide meetup"
 description: "IRL and real-time!"
 where: 
