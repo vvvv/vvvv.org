@@ -1,10 +1,9 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-01-14"
+date: "2026-06-22"
 title: "Introducing: A package manager VL Packs"
 description: ""
-draft: true
 ---
 
 Patchers!
@@ -15,16 +14,20 @@ So, granularity with packs is great, but as so often, flexibility also comes wit
 
 Up until now, managing those intricacies was up to you, using a simple commandline tool to install and update packs. Today we're introducing **Packman** who will help you a great deal with organizing the packs used by your apps. So please clear all your assumptions about managing packs in vvvv because once again: Everything you know is wrong!
 
-![alt text](image.png)
+Available for testing in [vvvv gamma 8.0 preview builds](/download)!
+
+![Everyone: Packman](image.png)
 
 {{< box >}}
 
-Highlights:
+**Highlights**
 - A single click to download and reference VL packs 
 - Auto-download referenced packs when opening projects
 - Fine-grained, central package version management
 
 {{< /box >}}
+
+## Basic Usage
 
 For basic usage there is not much you need to know:
 - Open Packman using Ctrl + F3
@@ -42,17 +45,23 @@ That's mostly what you need to know for a start.
 
 Next thing you may encounter is that a new version was released for a pack that you reference. Packman will hint this to you like:
 
-<image>
+![](image-1.png)
 
 In case you want to update, simply choose the new version via the dropdown
 
-<image>
+![](image-2.png)
 
-vvvv will now download and reference this new version but also ask you to restart. The reason for the required restart is that vvvv cannot unload the previous version of the pack at runtime. So only a restart makes sure that the newly selected version of the pack is loaded! 
+vvvv will now download and reference this new version but also ask you to restart. 
+
+![](image-3.png)
+
+The reason for the required restart is that vvvv cannot unload the previous version of the pack at runtime. So only a restart makes sure that the newly selected version of the pack is loaded! 
 
 ## Version missmatches
 
 A version missmatch warning generally shows up for referenced packs if the version you've chosen does not match the version of the pack that is currently loaded.
+
+![](image-4.png)
 
 This can happen under different circumstances:
 - If you see this warning after you've just changed the version of a pack, a restart is required to make sure the newly selected version of the pack is loaded
@@ -63,7 +72,7 @@ This can happen under different circumstances:
 
 vvvv ships with a range of packs that it needs itself to run. You can see those listed in the Built-in section:
 
-<image>
+![](image-5.png)
 
 The exact versions of those packs is defined per version of vvvv and cannot be changed! So if you have a version missmatch with one of those, you loose. 
 
@@ -71,9 +80,11 @@ The exact versions of those packs is defined per version of vvvv and cannot be c
 
 In order to reduce "Version missmatch" warnings with built-in packs and help managing versions of packs across multiple documents there is a special feature: When referencing a pack, you can choose "Don't use specific version". This means that you're delegating the decision as to which exact version of a pack is loaded.  
 
-Generally you'd use this option for packs that have the "Built-In" tag, as in those cases the decision regarding the exact version has already been made for you.
+![](image-6.png)
 
-The other situation where this is useful, is larger projects with multiple vl documents that reference the same pack. In such scenarios this feature allows you to centrally manage the version of packs for multiple documents. Simply make sure to only choose specific versions of packs in your main .vl document. In all other documents, referenced by the main document, choose "Don't use specific version". 
+Generally this option is the default for packs that have the "Built-In" tag, as for those, the decision regarding the exact version has already been made for you.
+
+The other situation where this is useful, is larger projects with multiple VL documents that reference the same pack. In such scenarios this feature allows you to centrally manage the version of packs for multiple documents. Simply make sure to only choose specific versions of packs in your main .vl document. In all other documents, referenced by the main document, choose "Don't use specific version". 
 
 ## Vulnerabilities
 
