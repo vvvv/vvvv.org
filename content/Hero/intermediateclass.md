@@ -1,5 +1,5 @@
 ---
-title: "vvvv intermediate class starting June 29"
+title: "vvvv intermediate class from June 29"
 weight: 6
 button:
     title: "Sign Up"

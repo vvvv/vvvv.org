@@ -8,7 +8,7 @@ Interactivity is a wide topic and often involves external systems, sensors or pr
 
 ### Crowd Tracking
 	
-For capturing interaction with crowds, vvvv supports the following tracking systems which give you individual peoples position (and more) in large spaces:
+For capturing interaction with crowds, vvvv supports the following tracking systems which give you positional data (and more) per visitor in large spaces:
 - [Augmenta](https://augmenta.tech/) 
 - [BlueIOT](https://www.blueiot.com/)
   
