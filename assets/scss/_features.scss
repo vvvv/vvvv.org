@@ -7,29 +7,15 @@
       padding-top: 2rem;
   }
 
-
-  // for iOS:
-  .nav-link {
-    touch-action: manipulation;
-
-    @media (hover: none) {
-      &:hover {
-        color: inherit !important; 
-        background-color: transparent !important;
-        opacity: 1 !important;
-      }
-    }
-  }
-
   section {  
     padding: 0rem 0rem 3rem;
     border-bottom: 1px solid #000;
+    display: block;
 
     &:not(:first-of-type)
     {
       padding-top: 3.5rem;
     }
-
 
     @media (max-width: 769px) {
       scroll-margin-top: 90px;
@@ -102,7 +88,7 @@
       width: 90%;
     }
 
-    scroll-margin-top: 270px;
+    scroll-margin-top: 18rem;
 
 
     @media (max-width: 1200px) {
@@ -292,6 +278,18 @@
       &:hover
       {
         background-color: #ddd;
+      }
+
+      // for iOS:
+      @media (hover: none) and (pointer: coarse) {
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            background-color: #000;
+            color: #fff;
+            opacity: 1 !important;
+          }
       }
 
     }
