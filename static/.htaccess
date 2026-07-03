@@ -21,3 +21,13 @@ RewriteRule ^ /business/?b=%2 [R=301,NC,B,L,NE]
 # Redirect /edu/name/ or /edus/name/ with or without trailing slash to /edu/?e=name
 RewriteCond %{REQUEST_URI} ^/edus?/([^/]+)/?$
 RewriteRule ^ /edu/?e=%1 [R=301,NC,B,L,NE]
+
+# Redirect Feature pages:
+RewriteRule ^features/largescale/?$ /features/#large-scale [NE,R=301,L]
+RewriteRule ^features/interactive/?$ /features/#interactive [NE,R=301,L]
+RewriteRule ^features/mediaserver/?$ /features/#media-server [NE,R=301,L]
+RewriteRule ^features/rapidprototyping/?$ /features/#rapid-prototyping [NE,R=301,L]
+RewriteRule ^features/visualliveprogramming/?$ /features/#visual-live-programming [NE,R=301,L]
+RewriteRule ^features/developerfriendly/?$ /features/#developer-friendly [NE,R=301,L]
+RewriteRule ^features/extendability/?$ /features/#extendability [NE,R=301,L]
+RewriteRule ^features/deployment/?$ /features/#deployment [NE,R=301,L]
