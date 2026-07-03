@@ -50,7 +50,7 @@ When installing vvvv, you only get the most basic feature set. Any additional li
 ### Open Source
 While the core of vvvv (editor and compiler) are proprietary, all [libraries are open-source](https://github.com/vvvv). This means not getting stuck when you're facing a bug or missing a feature. In addition, being able to inspect libraries down to the bits is also a great learning resource. 
  
-### Deployment
+### Deployment Options
 vvvv offers multiple [deployment options](/features/deployment/), including a commandline compiler. This allows to include the export of vvvv apps in automated build processes. 
 
 ### No DRM

@@ -1,16 +1,16 @@
 {{ define "sidebar" }}
-  {{ $pages := .CurrentSection.RegularPages.ByWeight }}
-  {{ if gt (len $pages) 0 }}
-    {{ $first := index $pages 0 }}
-    {{ partial "features/sidebar.html" (dict "current" $first "context" .) }}
-  {{ end }}
+  {{ partial "features/sidebar.html" (dict "current" . "context" .) }}
 {{ end }}
 
 {{ define "main" }}
+
   {{ $pages := .CurrentSection.RegularPages.ByWeight }}
-  {{ if gt (len $pages) 0 }}
-    {{ $first := index $pages 0 }}
-    <h2>{{ $first.Title }}</h2>
-    {{ $first.Content }}
+
+  {{ range $pages }}
+      <section id="{{ .Title | anchorize }}">
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+      </section>
   {{ end }}
+
 {{ end }}
