@@ -3,6 +3,43 @@
 #Features
 {
 
+  @media (max-width: 769px) {
+      padding-top: 2rem;
+  }
+
+  section {  
+    padding: 0rem 0rem 3rem;
+    border-bottom: 1px solid #000;
+
+    &:not(:first-of-type)
+    {
+      padding-top: 3.5rem;
+    }
+
+
+    @media (max-width: 769px) {
+      scroll-margin-top: 90px;
+
+      &:first-of-type
+      {
+        scroll-margin-top: 200px;
+      }
+    }
+       
+    @media (min-width: 769px) {
+      scroll-margin-top: -30px;
+      &:not(:first-of-type)
+      {
+        scroll-margin-top: -80px;
+      }
+
+      &:last-of-type
+      {
+        border-bottom: none;
+      }
+    }
+  }
+
   .nav-tabs{
     border-bottom: none;
   }
@@ -45,11 +82,14 @@
     max-width: 1300px;
     margin: 0 auto;
 
-    padding-top: 0;
+    padding-top: 0; 
     
     p, ul{
       width: 90%;
     }
+
+    scroll-margin-top: 270px;
+
 
     @media (max-width: 1200px) {
       p, ul{
@@ -84,21 +124,11 @@
     }
   }
 
-  h1, h2, h3{
+  h1, h2, h3, h4{
+
     margin-bottom: 1.2rem;
     font-weight: bold;
     color: #000;
-  }
-
-  h2{
-    font-size: 2.5rem;
-  }
-
-  h3{
-    font-size: 1.7rem;
-  }
-
-  h1, h2, h3, h4{
 
     &:not(:first-child)
     {
@@ -106,30 +136,54 @@
     }
   }
 
+  h1{
+    font-size: 3rem;
+    padding-bottom: 1rem;
+  }
+
+  h2{
+    font-size: 2.5rem;
+    color: #666;
+  }
+
+  h3{
+    font-size: 1.5rem;
+    color: #333;
+  }
+
   @media (min-width: 768px) {
     aside {
       position: sticky;
       top: 7rem;
     }
+    .aside{
+      z-index: 10;
+    }
   }
 
   @media (max-width: 769px) {
-
-    padding-top: 1rem;
-
     aside {
       position: static;
     }
+
+    .aside{
+      top: 61px;
+      padding-top: 0.5rem;
+      background-color: #fff;
+      z-index: 10;
+    }
+
   }
 
   aside {
     padding: 0;
     height: fit-content;
+    position: sticky;
   }
 
   main {
     min-width: 0; /* prevents overflow issues */
-
+    
       a:not(:has(img))
       {
           text-decoration: underline;

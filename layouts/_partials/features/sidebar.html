@@ -2,11 +2,11 @@
 {{ $ctx := .context }}
 {{ $pages := $ctx.CurrentSection.RegularPages.ByWeight }}
 
-<nav>
-  <ul class="featuresMenu">
+<nav id="features-menu">
+  <ul class="nav featuresMenu">
     {{ range $pages }}
-      <li>
-        <a href="{{ .RelPermalink }}" class="nav-link{{ if eq .RelPermalink $current.RelPermalink }} active{{ end }}">{{ .Title }}</a>
+      <li class="nav-item">
+        <a href="#{{ .Title | anchorize }}" class="nav-link">{{ .Title }}</a>
       </li>
     {{ end }}
   </ul>
