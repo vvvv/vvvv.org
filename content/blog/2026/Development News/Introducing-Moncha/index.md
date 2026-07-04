@@ -17,11 +17,11 @@ When we say "controlling lasers" that means two things:
 
 This first pack (in a series of a couple of more to come) adds support for one specific series of laser DACs, namely the [Moncha](https://www.showtacle.jp/v18/lasershowsoftware/hardware/moncha/). Not sure if you can still buy them but if you find one for cheap second-hand, you now have a modern way to drive
 
-So if you have such a device at hand, **[VL.Devices.Moncha](https://github.com/vvvv/VL.Devices.Moncha)** is the pack you want to get. It supports control of multiple devices and is as simple to use as you can see here: 
+So if you have such a device at hand, **[VL.Devices.Moncha](https://www.nuget.org/packages/VL.Devices.Moncha)** is the pack you want to get. It supports control of multiple devices and is as simple to use as you can see here: 
 
 ![Moncha at work](moncha-patch.png)
 
-In words: Create a spread of points and send them over to the selected device. Now obviously the part of "creating a spread of points" is the tricky one and this is where the upcomming VL.LaserPath pack will come in and do all the heavy work for you. Stay tuned!
+In words: Create a spread of points and send them over to the selected device. Now obviously the part of "creating a spread of points" is the tricky one and this is where the upcoming VL.LaserPath pack will come in and do all the heavy work for you. Stay tuned!
 
 ---
 For the sponsoring of this [open-source](https://github.com/vvvv/VL.Devices.Moncha) development we bow to [ggml](/people/ggml) and [colorsound](/people/colorsound).
