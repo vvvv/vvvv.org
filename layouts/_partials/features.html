@@ -12,9 +12,8 @@
         </div>
   </div>
   <div class="container">
-      <h1></h1>               
       <div class="row">
-          <div class="col-12 col-md-3 mr-4">
+          <div class="col-12 col-md-3 mr-4 sticky-top aside">
               <aside>
                 <nav>
                   <ul class="nav nav-tabs featuresMenu" role="tablist">
@@ -36,7 +35,7 @@
                 <h2>{{$elem.Title}}</h2>
                 {{ if (in .RawContent "<!--more-->") }}
                   {{ .Summary }}
-                  <a class="btn btn-secondary" href="{{$elem.RelPermalink | absURL}}" title="More">Read more</a>
+                  <a class="btn btn-secondary" href="/features#{{$elem.Title | anchorize}}" title="More">Read more</a>
                 {{ else }}
                   {{ .Content }}
                 {{ end }}

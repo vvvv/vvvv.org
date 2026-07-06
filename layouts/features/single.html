@@ -3,6 +3,14 @@
 {{ end }}
 
 {{ define "main" }}
-  <h2>{{ .Title }}</h2>
-  {{ .Content }}
+
+  {{ $pages := .CurrentSection.RegularPages.ByWeight }}
+
+  {{ range $pages }}
+      <section>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+      </section>
+  {{ end }}
+
 {{ end }}

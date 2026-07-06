@@ -28,5 +28,7 @@ Further, a range of lower-cost options are available, see the [Motion Capture](/
 Be it for [tabletop solutions](https://www.interactive-scape.com/), walls or floors using [Lidars](https://vvvv.org/packs/?c=Devices#Lidars), vvvv has all it takes to build touch solutions at any scale:
 - [TUIO](http://tuio.org) - The standard protocol for talking to tangible multi touch surfaces
 - [TrackObjects](https://www.nuget.org/packages/VL.TrackObjects) - To follow and identify objects over time and assigns them a stable and unique ID
+- [Rive](https://rive.app/) integration including bi-directional data-binding
+- [CEF](https://www.nuget.org/packages/VL.CEF) for rendering web content
 
 ![Moving Places](3e8-interactive.png "3e8")

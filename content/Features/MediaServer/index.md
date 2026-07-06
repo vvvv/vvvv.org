@@ -28,7 +28,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ### Integrations
 
-When it comes to running content of other engines or media servers through vvvv or the other way round, running vvvv content through other media servers or engines, there are not limits. It always comes down to texture and parameter sharing and can be realized in many ways. If you need a hand with this, we'd be happy to help, please [get in touch](mailto:devvvvs@vvvv.org).
+When it comes to running content of other engines or media servers through vvvv or the other way round, running vvvv content through other media servers or engines, there are not limits. It always comes down to parameter and texture sharing (think [Spout](https://spout.zeal.co/)) and can be realized in many ways. If you need a hand with this, we'd be happy to help, please [get in touch](mailto:devvvvs@vvvv.org).
 
 ### Plugin Architecture
 
