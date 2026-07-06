@@ -20,7 +20,7 @@ In our ongoing quest to add premium support for dealing with lasers in vvvv, tod
 So if you have one of the mentioned devices at hand, **[VL.Devices.Helios](https://www.nuget.org/packages/VL.Devices.Helios)** is the pack you want to get. If you don't have a Helios DAC yet, but are interested, consider this offer: 
 
 {{< box >}}
-Bitlasers offers a **$10 discount** for vvvv users using the coupon "vvvv10".
+[Bitlasers](https://bitlasers.com/) offers a **$10 discount** for vvvv users using the coupon "vvvv10".
 {{< /box >}}
 
 And here is how it works: VL.Devices.Helios supports control of multiple devices (via USB or Network) and is as simple to use as you can see here: 
