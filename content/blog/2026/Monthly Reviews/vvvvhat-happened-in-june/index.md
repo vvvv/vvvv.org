@@ -54,9 +54,9 @@ New entries on the WIP section of the forum:
 
 ## Gallery
 
-{{< youtube 8tEUMDtiplY >}}
+{{< youtube fEGci2v27mo >}}
 
-Vergessene Helden, documentation of works by students of the [Lette Verein Berlin](/edu/lette-verein-berlin).
+The world’s first Museum of AI Arts and digital ecosystem dedicated to data visualization and AI-based creativity. [DataLand](https://www.dataland.art/).
 
 ## Jobs
 
