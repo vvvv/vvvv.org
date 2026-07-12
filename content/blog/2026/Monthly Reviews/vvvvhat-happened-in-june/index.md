@@ -44,6 +44,14 @@ We got updates to the following:
 - [VL.OCIO](https://www.nuget.org/packages/VL.OCIO)
 - [VL.DBSCAN](https://www.nuget.org/packages/VL.DBSCAN)
 
+
+New entries on the WIP section of the forum:
+- [VL.Devices.LS2Lidar](https://forum.vvvv.org/t/vl-devices-ls2lidar/25160)
+- [Easy installer and one click updater for your apps with Velopack](https://forum.vvvv.org/t/easy-installer-and-one-click-updater-for-your-apps-with-velopack/25163)
+- [Monitor your patches with VL.Prometheus](https://forum.vvvv.org/t/monitor-your-patches-with-vl-prometheus/25164)
+
+
+
 ## Gallery
 
 {{< youtube 8tEUMDtiplY >}}
