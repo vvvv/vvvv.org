@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-07-20"
+date: "2026-07-22"
 title: "Introducing: A package manager for VL Packs"
 description: "Or as we call him: Packman"
 ---
