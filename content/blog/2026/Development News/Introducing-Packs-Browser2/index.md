@@ -1,14 +1,14 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-07-22"
+date: "2026-07-30"
 title: "Introducing: A package manager for VL Packs"
-description: "Or as we call him: Packman"
+description: "Or as we call it: Packman"
 ---
 
 Patchers!
 
-One of vvvv's strengths is its high modularity by providing most of its functionality as optional [packs](https://vvvv.org/packs/). Not only, but especially useful for when you [export apps](https://thegraybook.vvvv.org/reference/hde/exporting.html), since typically you want your deployments to be as slim as possible, ie. really only including libraries that you're using.
+One of vvvv's strengths is its high modularity by providing most of its functionality as optional [packs](https://vvvv.org/packs/). Not only, but especially useful for when you [export apps](https://thegraybook.vvvv.org/reference/hde/exporting.html), since typically you want your deployments to be as slim as possible, ie. really only including libraries that you're using.a
 
 So, granularity with packs is great, but as so often, flexibility also comes with some overhead of managing it: Packs come in different versions, can depend on each other and be compatible amongst each other and a particular version of vvvv itself, or not. You see, complexity.
 
@@ -200,6 +200,20 @@ For larger projects you'll want to have a central place where you can specifiy v
 ### Non-pack references
 
 Pack references are not all. .vl documents can also reference files or .NET framework assemblies. We haven't touched those yet, those still work as before but should also be move to the new References page. 
+
+## Further
+
+Two more things that are quite substantial but merely fit a foot note in this post:
+
+### Smaller download / quicker install
+
+When download + install of vvvv 7.x took roughly around a minute, you'll notice that we're now down to < 20s. Yes that is for download and install combined! How so you ask? Packman makes vvvv even more modular than it has already been. So we now install even less things by default and you only get them as you need them. This includes the whole VL.Stride pack (which amounts to ~1gb on disk). So only the first time you open a patch referencing VL.Stride you'll notice a delay because of the download, but then that's it.
+
+### .NET 10
+
+![](dotnet-logo.png)
+
+With the 8.x branch of releases vvvv switches to [.NET 10](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/). Among general under the hood modernization and improvements this means you get access to all [C# 14 features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14). 
 
 --- 
 
