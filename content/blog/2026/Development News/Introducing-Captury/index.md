@@ -1,7 +1,7 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-07-30"
+date: "2026-09-30"
 title: "Introducing: Support for Captury"
 description: "Highend markerless rigid body and skeleton tracking"
 thumb: "thumb.jpg"

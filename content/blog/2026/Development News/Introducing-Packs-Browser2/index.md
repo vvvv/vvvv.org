@@ -8,15 +8,15 @@ description: "Or as we call it: Packman"
 
 Patchers!
 
-One of vvvv's strengths is its high modularity by providing most of its functionality as optional [packs](https://vvvv.org/packs/). Not only, but especially useful for when you [export apps](https://thegraybook.vvvv.org/reference/hde/exporting.html), since typically you want your deployments to be as slim as possible, ie. really only including libraries that you're using.a
+One of vvvv's strengths is its high modularity by providing most of its functionality as optional [packs](https://vvvv.org/packs/). Not only, but especially useful for when you [export apps](https://thegraybook.vvvv.org/reference/hde/exporting.html), since typically you want your deployments to be as slim as possible, ie. really only including libraries that you're using.
 
 So, granularity with packs is great, but as so often, flexibility also comes with some overhead of managing it: Packs come in different versions, can depend on each other and be compatible amongst each other and a particular version of vvvv itself, or not. You see, complexity.
 
 Up until now, managing those intricacies was up to you, using a simple commandline tool to install and update packs. Today we're introducing **Packman** who will help you a great deal with organizing the packs used by your apps. So please clear all your assumptions about managing packs in vvvv because once again: Everything you know is wrong!
 
-Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
+![Everyone: Packman](image-13.png)
 
-![Everyone: Packmant](image-13.png)
+Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 
 {{< box >}}
 
@@ -31,14 +31,14 @@ Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 
 For basic usage there is not much you need to know:
 - Open Packman using Ctrl + F3
-- Choose the "Available" tab
+- Choose the "Browse..." tab
 - Find the pack you want to use
 - Click the blue "Add" button to download and reference it to your active document
 - Done
   
 If you now save your vl document and open it on another PC, vvvv will automatically download all referenced packs.
 
-Where does vvvv download packs to? The beauty: You don't have to care (somewhere in a system nuget cache). The \nugets folder you've had to manage in earlier versions does not play any role in vvvv gamma > 8.x anymore. 
+Where does vvvv download packs to? The beauty: You don't have to care (somewhere in a system nuget cache). The \nugets folder you've had to manage in earlier vvvversions does not play any role in vvvv gamma > 8.x anymore. 
 
 That's mostly what you need to know for a start. 
 
@@ -95,7 +95,7 @@ nuget.org (the default package repository vvvv gets packs from) maintains a list
 
 When installing a pack, vvvv checks against that list and informs you in case you've chosen a vulnerable version. Keep an eye on the [Log](https://thegraybook.vvvv.org/reference/hde/debugging-log.html) when adding a pack and look out for warnings like the following, to be aware of issues:
 
-![alt text](image-7.png)
+![](image-7.png)
 
 ## Quick VL pack reference
 
@@ -187,11 +187,11 @@ Those extension packs can now be installed via the new "Extensions" tab in Setti
 
 ## What's missing
 
-Here's what we've currently planned to complete for the stable 8.0 release
+Here's what we've currently planned to complete for the stable 8.0 release:
 
 ### Custom nuget source
 
-nuget.org is only the default package repository, but you can also host your private packs on other servers, which is not supported at the time of writing.
+[nuget.org](https://nuget.org) is only the default package repository, but you can also host your private packs on other servers, which is not supported at the time of writing.
 
 ### Central version definition
 
@@ -199,21 +199,21 @@ For larger projects you'll want to have a central place where you can specifiy v
 
 ### Non-pack references
 
-Pack references are not all. .vl documents can also reference files or .NET framework assemblies. We haven't touched those yet, those still work as before but should also be move to the new References page. 
+Pack references are not all. .vl documents can also reference files or .NET framework assemblies. We haven't touched those yet, those still work as before but should also be moved to be accessible via the new References page in Packman. 
 
 ## Further
 
-Two more things that are quite substantial but merely fit a foot note in this post:
+Two more things that are quite substantial changes for 8.x, but merely fit a foot note in this post:
 
 ### Smaller download / quicker install
 
-When download + install of vvvv 7.x took roughly around a minute, you'll notice that we're now down to < 20s. Yes that is for download and install combined! How so you ask? Packman makes vvvv even more modular than it has already been. So we now install even less things by default and you only get them as you need them. This includes the whole VL.Stride pack (which amounts to ~1gb on disk). So only the first time you open a patch referencing VL.Stride you'll notice a delay because of the download, but then that's it.
+When download + installation of vvvv 7.x took roughly around a minute, you'll notice that we're now down to < 20s. Yes that is for download and install combined! How so, you ask? Packman makes vvvv even more modular than it has already been. So we now install even less things by default and you only get them as you need them. This includes the whole VL.Stride pack (which amounts to ~1gb on disk). So only the first time you open a patch referencing VL.Stride you'll notice a delay because of the download, but then that's it.
 
 ### .NET 10
 
 ![](dotnet-logo.png)
 
-With the 8.x branch of releases vvvv switches to [.NET 10](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/). Among general under the hood modernization and improvements this means you get access to all [C# 14 features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14). 
+With the 8.x branch of releases vvvv switches to [.NET 10](https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/). Among general under the hood modernization and improvements this means you get access to all [C# 14 features](https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14). Horray!
 
 --- 
 
