@@ -14,7 +14,7 @@ So, granularity with packs is great, but as so often, flexibility also comes wit
 
 Up until now, managing those intricacies was up to you, using a simple commandline tool to install and update packs. Today we're introducing **Packman** who will help you a great deal with organizing the packs used by your apps. So please clear all your assumptions about managing packs in vvvv because once again: Everything you know is wrong!
 
-![Everyone: Packman](image-13.png)
+![Everyone: Packman](packman.png)
 
 Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 
@@ -29,7 +29,7 @@ Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 
 ## Basic Usage
 
-For basic usage there is not much you need to know:
+For basic usage there is not much syou need to know:
 - Open Packman using Ctrl + F3
 - Choose the "Browse..." tab
 - Find the pack you want to use
@@ -40,69 +40,14 @@ If you now save your vl document and open it on another PC, vvvv will automatica
 
 Where does vvvv download packs to? The beauty: You don't have to care (somewhere in a system nuget cache). The \nugets folder you've had to manage in earlier vvvversions does not play any role in vvvv gamma > 8.x anymore. 
 
-That's mostly what you need to know for a start. 
-
-## Updates 
-
-Next thing you may encounter is that a new version was released for a pack that you reference. Packman will hint this to you like:
-
-![](image-1.png)
-
-In case you want to update, simply choose the new version via the dropdown:
-
-![](image-2.png)
-
-vvvv will now download and reference this new version but also ask you to restart: 
-
-![](image-3.png)
-
-The reason for the required restart is that vvvv cannot replace the version of a pack at runtime. So only a restart makes sure that the newly selected version of the pack is loaded! You can savely click the "Restart vvvv" button there, and vvvv will re-open in the exact same state you were in but with the new reference loaded.  
-
-## Version mismatches
-
-A version mismatch warning generally shows up for referenced packs if the version you've chosen does not match the version of the pack that is currently loaded.
-
-![](image-4.png)
-
-This can happen under different circumstances:
-- If you see this warning after you've just changed the version of a pack, a restart is required to make sure the newly selected version of the pack is loaded (see above)
-- In case multiple of your documents explicitly reference a different version of a pack you'll have to sort things and decide on one version for your whole project (see "Reference no specific version" below)
-- If the warning shows up on a pack that has the "Built-In" tag, you need to understand the role of those packs, read on:
-  
-## Built-in packs
-
-vvvv ships with a range of packs that it needs itself to run. You can see those listed in the Built-in section:
-
-![](image-5.png)
-
-The exact version of those packs is defined per version of vvvv and cannot be changed! 
-
-If you have a version mismatch with one of those, you loose. In such cases, the only thing that helps is choosing "No specific version", read on:
-
-## Reference no specific version
-
-In order to reduce "Version mismatch" warnings with built-in packs and help managing versions of packs across multiple documents there is a special feature: When referencing a pack, you can choose to "not use a specific version". This means that you're delegating the decision as to which exact version of a pack is loaded.  
-
-![](image-6.png)
-
-Generally this option is the default for packs that have the "Built-In" tag, as for those, the decision regarding the exact version has already been made for you.
-
-The other situation where this is useful, is larger projects with multiple VL documents that reference the same pack. In such scenarios this feature is half of what will allow you to centrally manage the version of packs for multiple documents. The other half of the feature is still work in progress, see "What's missing" below.
-
-## Vulnerable packs
-
-nuget.org (the default package repository vvvv gets packs from) maintains a list of packs with [known vulnerabilities](https://learn.microsoft.com/en-us/nuget/api/vulnerability-info) present in individual packs.
-
-When installing a pack, vvvv checks against that list and informs you in case you've chosen a vulnerable version. Keep an eye on the [Log](https://thegraybook.vvvv.org/reference/hde/debugging-log.html) when adding a pack and look out for warnings like the following, to be aware of issues:
-
-![](image-7.png)
+That's mostly what you need to know for a start. There are more details though and you can read about them in the new [gray book chapter on Packman](https://thegraybook.vvvv.org/reference/hde/packman.html).
 
 ## Quick VL pack reference
 
 The best thing about Packman is that in the end you will not even need it that much! If you already know the name of a VL pack you want to reference, you can now simply add it via the Nodebrowser. Check this: 
 
 <video width=100% controls autoplay>
-    <source src="nfc.mp4" type="video/mp4">
+    <source src="packman-nfc.mp4" type="video/mp4">
     Your browser does not support the video tag.  
 </video>
 
@@ -115,7 +60,7 @@ Say what? What does this do exactly? Two things:
 Want to remove the pack again? Same trick:
 
 <video width=100% controls autoplay>
-    <source src="nfc2.mp4" type="video/mp4">
+    <source src="packman-nfc2.mp4" type="video/mp4">
     Your browser does not support the video tag.  
 </video>
 
@@ -135,7 +80,7 @@ The question may arise: When you simply choose to add a reference of a pack via 
 
 Note how this information is also visualized in the version dropdown of each pack. If vvvv is aware of any incompatibilities between a specific version of a pack and the running instance of vvvv you'll see those "Stop" sign icons, meaning those versions of the pack will not work with the current vvvversion.
 
-![](image-11.png)
+![](packman-preferred.png)
 
 Keep in mind that the package-constraints file is edited by humans like you. So the information it provides is only as accurate as it is communaly maintained. 
 
@@ -143,11 +88,11 @@ Keep in mind that the package-constraints file is edited by humans like you. So 
 
 Despite the sheer number of packs available, you may realize that often you only use the same. To give you quick access to those, we've added the idea of favorite packs. You can star packs in the Packman or Helpbrowser:
 
-![](fav.png)
+![](packman-fav.png)
 
 And then get quick access to those in a separate listing:
 
-![](image-8.png)
+![](packman-fav2.png)
 
 Little caveat: If you've used favorites in the Helpbrowser before, those will not be transferred to the new system automatically.
 
@@ -155,7 +100,7 @@ Little caveat: If you've used favorites in the Helpbrowser before, those will no
 
 Also please pay extra attention to this special listing: 
 
-![](image-9.png)
+![](packman-support.png)
 
 Packs don't appear out of thin air. They are made and maintained by your fellow patchers. If a pack is useful to you, please support the creator! 
 
@@ -165,7 +110,7 @@ There is more. Remember how previously you'd have to find a pack, install it and
 
 Now, when searching in the Helpbrowser, it also looks for packs that might fit you term and displays those in a separate section at the very bottom labeled "More Packs". If you find anything here, you can one-click download the pack and get instant access to its helps.
 
-![](image-12.png)
+![](packman-helpbrowser.png)
 
 Note the difference: if you download a pack here, it is simply available offline and you can browse its help patches. It is not yet referenced with any of your documents!
 
@@ -183,7 +128,7 @@ And finally, there is a special type of packs we call "Extensions". They provide
 
 Those extension packs can now be installed via the new "Extensions" tab in Settings:
 
-![](image-10.png)
+![](packman-hde.png)
 
 ## What's missing
 
