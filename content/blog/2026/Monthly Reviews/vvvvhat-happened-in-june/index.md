@@ -26,7 +26,7 @@ Aaand already coming up this week: [The 35th vvvv worldwide meetup](https://vvvv
 
 Many thanks to those of you who help complete vvvv with countless additions! For an overview of libraries available for vvvv [start here](https://vvvv.org/packs/).
 
-We have a two new ones:
+We have two new ones:
 - [VL.Devices.Helios](https://www.nuget.org/packages/VL.Devices.Helios)
 - [VL.IO.Raft](https://www.nuget.org/packages/VL.IO.Raft)
 
