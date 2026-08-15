@@ -7,7 +7,7 @@ slug: "vvvv-intermediates-winter-2026-27-early-bird"
 description: "Early bird registration for the new intermediate program is open until August 31st"
 where: 
     country_name: "The NODE Institute (online)"
-    from_date: "2026-10-27T18:00:00"
+    from_date: "2026-08-31T18:00:00"
 thumb: "ws26_vvvv_intermediates-thumb.jpg"
 ---
 
