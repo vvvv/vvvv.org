@@ -1,3 +1,4 @@
-cd stage.vvvv.org
-git pull
-hugo --buildFuture --minify --baseURL https://stage.vvvv.org/ --cacheDir=/home/vvvv/stage.vvvv.org/tmp
+cd vvvv.org
+git fetch
+git checkout -f origin/main
+hugo --buildFuture --minify --baseURL https://vvvv.org/ --cacheDir=/home/vvvv/vvvv.org/tmp
