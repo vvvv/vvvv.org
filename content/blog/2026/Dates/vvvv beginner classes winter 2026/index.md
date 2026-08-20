@@ -34,7 +34,9 @@ All sessions take place on **Mondays, 18:00 to 21:00 CET**, live and online. Eve
 
 ## What do I need?
 
-A Windows computer with the latest vvvv gamma installed, a 3-button mouse and a second monitor are recommended, and a reasonably capable graphics card helps. No prior programming or vvvv experience required, just curiosity and a willingness to experiment.
+vvvv runs on Windows and macOS (via Parallels), see the [Downloads section](/downloads) four your options.
+
+A 3-button mouse and a second monitor are recommended, and a reasonably capable graphics card helps. No prior programming or vvvv experience required, just curiosity and a willingness to experiment.
 
 ## Already know the basics?
 
