@@ -1,0 +1,48 @@
+---
+categories: "Dates"
+author: "chk"
+date: "2026-08-21"
+title: "vvvv worldwide meetup @ Ars Electronica Festival 2026"
+slug: "vvvv-worldwide-meetup-ars-electronica-festival-2026"
+description: "IRL and real-time!"
+where: 
+    location_name: "Ars Electronica Center, Skyloft"
+    city: "Ars-Electronica-Straße 1, 4040 Linz"
+    country: "at"
+    country_name: "Austria"
+    from_date: "2026-09-12T18:00:00"
+    to_date: "2026-09-12T22:00:00"
+thumb: "vvvvMeetup-ArsElectronica-KeyVisual-Thumb.jpg"
+---
+
+![Amir Bastan presenting at the last vvvv meetup in the AEC Skyloft, during the 2025 festival. Photo by Anna Dießner](vvvvMeetup-ArsElectronica-Stage.jpg)
+
+We are happy to announce a special edition of the vvvv worldwide meetup on **September 12th, 6pm CET** during the **[Ars Electronica Festival 2026](https://ars.electronica.art/festival)** in Linz, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL, with a focus on works that are exhibited during the festival. Join us IRL or online with artist presentations and announcements in the vvvv community.
+
+## Want to share your work?
+
+This is what we are looking for: if there's something you've been developing with vvvv, and you would like to talk about it - let us know! Anything more or less related to vvvv, yourself and your projects. Share some thoughts, share your funny fails. If your piece is part of the festival this year, even better.
+
+Submissions are welcome at **meetup@vvvv.org**. No need to know vvvv or VL to attend, by the way - the presentations are about projects, patches, plugins and contributions made with or for vvvv, but you do not need to know it to enjoy the evening.
+
+Curated and organised by [Simon Weckert](https://www.simonweckert.com/)<br>
+Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)
+
+![vvvv meetup at the Ars Electronica Festival 2026, September 12th, 6pm, Ars Electronica Center Skyloft](vvvvMeetup-ArsElectronica-KeyVisual-16-9.jpg)
+
+{{< box >}}
+## Linz
+Ars Electronica Center, Skyloft<br>
+Ars-Electronica-Straße 1, 4040 Linz<br>
+Doors open: 06:00 pm<br>
+<!--**[RSVP here](https://thenodeinstitute.org/event/...)**-->
+
+## Online
+
+<!-- TODO: add the stream links once the event is set up -->
+[Watch via Youtube](#)<br>
+[Join via Zoom](#)
+
+{{< /box >}}
+
+Any questions? Get in touch via meetup@vvvv.org. See you there!
