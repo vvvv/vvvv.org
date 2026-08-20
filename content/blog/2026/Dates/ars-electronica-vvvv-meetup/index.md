@@ -1,7 +1,7 @@
 ---
 categories: "Dates"
 author: "chk"
-date: "2026-08-21"
+date: "2026-08-20"
 title: "vvvv worldwide meetup @ Ars Electronica Festival 2026"
 slug: "vvvv-worldwide-meetup-ars-electronica-festival-2026"
 description: "IRL and real-time!"
@@ -13,6 +13,7 @@ where:
     from_date: "2026-09-12T18:00:00"
     to_date: "2026-09-12T22:00:00"
 thumb: "vvvvMeetup-ArsElectronica-KeyVisual-Thumb.jpg"
+draft: "true"
 ---
 
 ![Amir Bastan presenting at the last vvvv meetup in the AEC Skyloft, during the 2025 festival. Photo by Anna Dießner](vvvvMeetup-ArsElectronica-Stage.jpg)
