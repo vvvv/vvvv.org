@@ -37,9 +37,7 @@ Doors open: 06:00 pm<br>
 
 ## Online
 
-<!-- TODO: add the stream links once the event is set up -->
-[Watch via Youtube](#)<br>
-[Join via Zoom](#)
+[Watch via Youtube](https://www.youtube.com/live/cUvYqkO2kFc?si=fA6PSMl6E1hM3Wi9)
 
 {{< /box >}}
 
