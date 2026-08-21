@@ -1,7 +1,7 @@
 ---
 categories: "Dates"
 author: "chk"
-date: "2026-08-20"
+date: "2026-08-21"
 title: "vvvv worldwide meetup @ Ars Electronica Festival 2026"
 slug: "vvvv-worldwide-meetup-ars-electronica-festival-2026"
 description: "IRL and real-time!"
@@ -13,20 +13,17 @@ where:
     from_date: "2026-09-12T18:00:00"
     to_date: "2026-09-12T22:00:00"
 thumb: "vvvvMeetup-ArsElectronica-KeyVisual-Thumb.jpg"
-draft: "true"
 ---
 
-![Amir Bastan presenting at the last vvvv meetup in the AEC Skyloft, during the 2025 festival. Photo by Anna Dießner](vvvvMeetup-ArsElectronica-Stage.jpg)
+![Amir Bastan presenting at the last vvvv meetup in the AEC Skyloft, during the 2025 festival. Photo by Flake](vvvvMeetup-ArsElectronica-Stage.jpg)
 
 We are happy to announce a special edition of the vvvv worldwide meetup on **September 12th, 6pm CET** during the **[Ars Electronica Festival 2026](https://ars.electronica.art/festival)** in Linz, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL, with a focus on works that are exhibited during the festival. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
 ## Want to share your work?
 
-This is what we are looking for: if there's something you've been developing with vvvv, and you would like to talk about it - let us know! Anything more or less related to vvvv, yourself and your projects. Share some thoughts, share your funny fails. If your piece is part of the festival this year, even better.
+Are you visiting the festival and would be up for sharing some of your recent vvvv work? We'd like to hear from you! Please get in touch via **meetup@vvvv.org**. 
 
-Submissions are welcome at **meetup@vvvv.org**. No need to know vvvv or VL to attend, by the way - the presentations are about projects, patches, plugins and contributions made with or for vvvv, but you do not need to know it to enjoy the evening.
-
-Curated and organised by [Simon Weckert](https://www.simonweckert.com/)<br>
+Curated and organised by [Simon Weckert](https://www.simonweckert.com/)
 Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.studio/)
 
 ![vvvv meetup at the Ars Electronica Festival 2026, September 12th, 6pm, Ars Electronica Center Skyloft](vvvvMeetup-ArsElectronica-KeyVisual-16-9.jpg)
