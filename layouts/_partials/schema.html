@@ -31,6 +31,29 @@
         "contactType": "technical support",
         "email": "devvvvs@vvvv.org"
       }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://vvvv.org/#sitenav",
+      "name": "Main Navigation",
+      "itemListElement": [
+        {{- $sections := slice "features" "download" "blog" "packs" "showcase" "community" -}}
+        {{- $count := 0 -}}
+        {{- range $path := $sections -}}
+          {{- with site.GetPage $path -}}
+            {{- if $count }},{{ end -}}
+            {{- $count = add $count 1 -}}
+            {{- $desc := .Params.description | default .Summary | default site.Params.description -}}
+            {
+              "@type": "SiteNavigationElement",
+              "position": {{ $count }},
+              "name": {{ .Title | jsonify }},
+              "description": {{ $desc | plainify | jsonify }},
+              "url": {{ .Permalink | jsonify }}
+            }
+          {{- end -}}
+        {{- end -}}
+      ]
     }
   ]
 }
