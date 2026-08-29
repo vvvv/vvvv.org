@@ -172,7 +172,7 @@
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "{{ .Site.BaseURL }}"
+      "item": {{ .Site.BaseURL | jsonify }}
     }
     {{- $position := 1 -}}
     {{- range $index, $page := .Ancestors.Reverse -}}
