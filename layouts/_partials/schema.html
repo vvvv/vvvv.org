@@ -203,6 +203,6 @@
   {{- $crumbs = $crumbs | append $currentCrumb -}}
   {{- $breadcrumbData := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs -}}
 <script type="application/ld+json">
-{{ $breadcrumbData | jsonify (dict "indent" "  ") }}
+{{ $breadcrumbData | jsonify (dict "indent" "  ") | safeJS }}
 </script>
 {{- end -}}
