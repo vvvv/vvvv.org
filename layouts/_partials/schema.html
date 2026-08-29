@@ -186,36 +186,23 @@
 
 {{/* Breadcrumb */}}
 {{- if not .IsHome -}}
+  {{- $crumbs := slice -}}
+  {{- $homeItem := dict "@type" "ListItem" "position" 1 "name" "Home" "item" .Site.BaseURL -}}
+  {{- $crumbs = $crumbs | append $homeItem -}}
+  {{- $pos := 1 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $pos = add $pos 1 -}}
+      {{- $crumb := dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink -}}
+      {{- $crumbs = $crumbs | append $crumb -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $pos = add $pos 1 -}}
+  {{- $currentTitle := .Title | default .Section | default "Page" -}}
+  {{- $currentCrumb := dict "@type" "ListItem" "position" $pos "name" $currentTitle "item" .Permalink -}}
+  {{- $crumbs = $crumbs | append $currentCrumb -}}
+  {{- $breadcrumbData := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs -}}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": {{ .Site.BaseURL | jsonify }}
-    }
-    {{- $position := 1 -}}
-    {{- range $index, $page := .Ancestors.Reverse -}}
-      {{- if not .IsHome -}}
-        {{- $position = add $position 1 -}},
-        {
-          "@type": "ListItem",
-          "position": {{ $position }},
-          "name": {{ .Title | jsonify }},
-          "item": {{ .Permalink | jsonify }}
-        }
-      {{- end -}}
-    {{- end -}},
-    {
-      "@type": "ListItem",
-      "position": {{ add $position 1 }},
-      "name": {{ .Title | jsonify }},
-      "item": {{ .Permalink | jsonify }}
-    }
-  ]
-}
+{{ $breadcrumbData | jsonify (dict "indent" "  ") }}
 </script>
 {{- end -}}
