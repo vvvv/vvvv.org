@@ -2,16 +2,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="{{ .Site.Params.author }}">
-<meta name="description" content="{{if isset .Params "description"}}{{.Params.description}}{{else}}{{.Site.Params.description}}{{end}}">
-<link rel="image_src" href="{{ partial "ogimage" . }}" />
-<link rel="canonical" href="{{ .Permalink }}" />
-<link rel="shortlink" href="{{ .Permalink }}" />
-{{ partial "ogdata" . }}
-<meta itemprop="name" content="{{ .Site.Params.title }}" />
 
 <title>{{ .Title }}</title>
 
-{{ partial "structuredData/structuredData" . }}
+<meta name="description" content="{{if isset .Params "description"}}{{.Params.description}}{{else}}{{.Site.Params.description}}{{end}}">
+
+<link rel="canonical" href="{{ .Permalink }}" />
+
+{{/* <link rel="image_src" href="{{ partial "ogimage" . }}" /> */}}
+{{/* {{ partial "ogdata" . }} */}}
+{{/*{{ partial "structuredData/structuredData" . }}*/}}
+
+<link rel="shortlink" href="{{ .Permalink }}" />
+
+{{ partial "schema.html" . }}
+
+<meta itemprop="name" content="{{ .Site.Params.title }}" />
 
 {{ with .OutputFormats.Get "rss" -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
