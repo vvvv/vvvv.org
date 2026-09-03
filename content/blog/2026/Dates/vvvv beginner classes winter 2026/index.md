@@ -10,6 +10,7 @@ where:
     from_date: "2026-10-19T18:00:00"
     to_date: "2026-12-07T18:00:00"
 thumb: "ws26_vvvv_beginner-thumb.jpg"
+ShowAsCommunityDate: false
 ---
 
 [![vvvv Beginner Classes Winter 2026/27 at The NODE Institute](ws26_vvvv_beginner.jpg)](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog)
