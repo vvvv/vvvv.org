@@ -1,7 +1,7 @@
 ---
 title: |-
     Latest release:
-    vvvv gamma 7.3
+    vvvv gamma 7.4
 weight: 1
 button:
     title: Download
