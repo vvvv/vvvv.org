@@ -1,0 +1,208 @@
+{{/* 1. Home */}}
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://vvvv.org/#website",
+      "url": "https://vvvv.org/",
+      "name": "vvvv",
+      "description": "{{.Site.Params.description}}",
+      "publisher": {
+        "@id": "https://vvvv.org/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://vvvv.org/#organization",
+      "name": "vvvv group",
+      "url": "https://vvvv.org/",
+      "logo": "https://vvvv.org/img/vvvvquad.svg",
+      "sameAs": [
+        "https://mastodon.xyz/@vvvv",
+        "https://www.linkedin.com/company/vvvv-group",
+        "https://www.youtube.com/@vvvvTv42",
+        "https://github.com/vvvv"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "technical support",
+        "email": "devvvvs@vvvv.org"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://vvvv.org/#sitenav",
+      "name": "Main Navigation",
+      "itemListElement": [
+        {{- $sections := slice "features" "download" "blog" "packs" "showcase" "community" -}}
+        {{- $count := 0 -}}
+        {{- range $path := $sections -}}
+          {{- with site.GetPage $path -}}
+            {{- if $count }},{{ end -}}
+            {{- $count = add $count 1 -}}
+            {{- $desc := .Params.description | default .Summary | default site.Params.description -}}
+            {
+              "@type": "SiteNavigationElement",
+              "position": {{ $count }},
+              "name": {{ .Title | jsonify }},
+              "description": {{ $desc | plainify | jsonify }},
+              "url": {{ .Permalink | jsonify }}
+            }
+          {{- end -}}
+        {{- end -}}
+      ]
+    }
+  ]
+}
+</script>
+{{- end -}}
+
+{{/* Download */}}
+{{- if or (eq .Section "download") (eq .RelPermalink "/download/") -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "vvvv gamma",
+  "operatingSystem": "Windows 11",
+  "applicationCategory": "MultimediaApplication",
+  "description": "vvvv is a visual live-programming environment for .NET used for interactive installations, real-time graphics, projection mapping, and custom media servers.",
+  "downloadUrl": "https://vvvv.org/download/",
+  "url": "https://vvvv.org/download/",
+  "softwareVersion": "{{ .Site.Params.latestGammaVersion | default "7.3" }}",
+  "fileFormat": "application/x-msdownload",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Non-Commercial",
+      "price": "0",
+      "priceCurrency": "EUR",
+      "description": "Free for non-commercial, evaluation, and educational use."
+    },
+    {
+      "@type": "Offer",
+      "name": "Commercial License",
+      "url": "https://store.vvvv.org/",
+      "priceCurrency": "EUR",
+      "description": "Commercial licensing available via the vvvv store."
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "vvvv group",
+    "url": "https://vvvv.org"
+  }
+}
+</script>
+{{- end -}}
+
+{{/* Packs */}}
+{{- $items := slice -}}
+{{- if and (eq .Section "packs") .Params.packs -}}
+  {{- $items = .Params.packs -}}
+{{- else if and (eq .Section "extensions") .Params.extensions -}}
+  {{- $items = .Params.extensions -}}
+{{- end -}}
+
+{{- if gt (len $items) 0 -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ if eq .Section "extensions" }}"VL Extensions for vvvv"{{ else }}"VL Packages for vvvv"{{ end }},
+  "description": "Directory of community and official packages, plugins, and libraries for vvvv gamma.",
+  "numberOfItems": {{ len $items }},
+  "itemListElement": [
+    {{- range $index, $pack := $items }}
+    {{- if $index }},{{ end }}
+    {
+      "@type": "ListItem",
+      "position": {{ add $index 1 }},
+      "item": {
+        "@type": "SoftwareApplication",
+        "name": {{ $pack.title | default $pack.id | jsonify }},
+        "description": {{ with $pack.description }}{{ . | jsonify }}{{ else }}"VL package for vvvv gamma"{{ end }},
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows 11",
+        "url": {{ printf "https://vvvv.org/packs/?c=%s#%s" ($pack.category | default "All") $pack.id | jsonify }},
+        {{- with $pack.version }}
+        "softwareVersion": {{ . | jsonify }},
+        {{- end }}
+        {{- with $pack.authors }}
+        "author": {
+          "@type": "Person",
+          "name": {{ . | jsonify }}
+        },
+        {{- end }}
+      }
+    }
+    {{- end }}
+  ]
+}
+</script>
+{{- end -}}
+
+{{/* Blog */}}
+{{- if and (eq .Section "blog") .IsPage -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ .Permalink | jsonify }}
+  },
+  "headline": {{ .Title | jsonify }},
+  "description": {{ with .Description }}{{ . | jsonify }}{{ else }}{{ .Summary | plainify | jsonify }}{{ end }},
+  {{- with .Params.images }}
+  "image": [
+    {{ range $i, $img := . }}{{ if $i }},{{ end }}{{ $img | absURL | jsonify }}{{ end }}
+  ],
+  {{- else }}
+  "image": {{ "https://vvvv.org/img/ogVVVV_gray.jpg" | jsonify }},
+  {{- end }}
+  "datePublished": {{ .Date.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "dateModified": {{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" | jsonify }},
+  "author": {
+    "@type": "Organization",
+    "name": {{ with .Params.author }}{{ . | jsonify }}{{ else }}"vvvv group"{{ end }},
+    "url": "https://vvvv.org"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "vvvv",
+    "url": "https://vvvv.org",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://vvvv.org/img/vvvvquad.svg"
+    }
+  }
+}
+</script>
+{{- end -}}
+
+{{/* Breadcrumb */}}
+{{- if not .IsHome -}}
+  {{- $crumbs := slice -}}
+  {{- $homeItem := dict "@type" "ListItem" "position" 1 "name" "Home" "item" .Site.BaseURL -}}
+  {{- $crumbs = $crumbs | append $homeItem -}}
+  {{- $pos := 1 -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- if not .IsHome -}}
+      {{- $pos = add $pos 1 -}}
+      {{- $crumb := dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink -}}
+      {{- $crumbs = $crumbs | append $crumb -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $pos = add $pos 1 -}}
+  {{- $currentTitle := .Title | default .Section | default "Page" -}}
+  {{- $currentCrumb := dict "@type" "ListItem" "position" $pos "name" $currentTitle "item" .Permalink -}}
+  {{- $crumbs = $crumbs | append $currentCrumb -}}
+  {{- $breadcrumbData := dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs -}}
+<script type="application/ld+json">
+{{ $breadcrumbData | jsonify (dict "indent" "  ") | safeJS }}
+</script>
+{{- end -}}

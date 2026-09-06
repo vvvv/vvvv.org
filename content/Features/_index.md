@@ -2,6 +2,6 @@
 title: Features
 type: features
 layout: features
-description: Why to choose vvvv
+description: "Visual live-programming environment for interactive installations, real-time graphics, projection mapping, and custom media servers."
 ---
 

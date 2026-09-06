@@ -8,10 +8,10 @@ description: "Early bird registration for the new intermediate program is open u
 where: 
     country_name: "The NODE Institute (online)"
     from_date: "2026-08-31T18:00:00"
-thumb: "thumb.jpg"
+thumb: "ws26_vvvv_intermediates-thumb.jpg"
 ---
 
-[![](ws-poster.jpg)](https://thenodeinstitute.org/courses/vvvv-intermediates-bundle-winter-2026-27?utm_source=vvvv&utm_medium=blog)
+[![vvvv Intermediates Program Winter 2026/27 at The NODE Institute](ws26_vvvv_intermediates.jpg)](https://thenodeinstitute.org/courses/vvvv-intermediates-bundle-winter-2026-27?utm_source=vvvv&utm_medium=blog)
 
 Patchers worldwide!
 

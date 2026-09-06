@@ -75,6 +75,10 @@ window.addEventListener ("load", ()=> {
     checkURLParams();
     sortVisible();
 
+    contentDiv.addEventListener('click', (e) => 
+        e.target.closest('.description')?.classList.toggle('expanded')
+    );
+
     processing.hidden = true;
     toc.hidden = false;
 

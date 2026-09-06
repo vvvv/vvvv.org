@@ -1,5 +1,5 @@
 ---
 title: "Blog"
 layout: "archive"
-description: News, Dates, Development updates, ...
+description: "Latest news, development updates, release notes, and community announcements from vvvv."
 ---

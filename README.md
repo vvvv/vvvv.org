@@ -8,6 +8,7 @@ Source of [vvvv.org](http://vvvv.org)
 - The only file that is mandatory in your folder is the `index.md` file. Best copy one over from another blogpost and modify it
 - For posts of type `date` you need to enter from- and to- dates in the format: "2026-02-26T18:00:00" (defaulting to CET timezone) or "2026-02-26T18:00:00+02:00" to specify an offset from CET.
 - To preview your post locally, see the section "Local Build" below
+- Optional: To hide the post from the dates section at the community page, add ''ShowAsCommunityDate: false'' to the header section of your index.md
 - Finally make a pull-request from your fork to this repo
 
 ### Shortcodes
