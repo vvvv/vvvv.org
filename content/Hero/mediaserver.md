@@ -1,6 +1,6 @@
 ---
 title: "Own your Media Server"
-weight: 3
+weight: 40
 button:
     title: "Read more"
     url: /features/mediaserver/
