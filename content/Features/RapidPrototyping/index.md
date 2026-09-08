@@ -30,7 +30,7 @@ vvvv is made for rapid prototyping. A quick setup, effortless iteration, limitle
 
 ### Quick Setup
 
-Getting vvvv up and running takes less then 2 minutes. The download is minimal, there is no signup or registration procedure and no copy-protection that would prevent you from installing vvvv on as many devices you need. Within 2 minutes you have access to the full possibilities of vvvv without any artificial limitations.
+Getting vvvv up and running takes less than 2 minutes. The download is minimal, there is no signup or registration procedure and no copy-protection that would prevent you from installing vvvv on as many devices you need. Within 2 minutes you have access to the full possibilities of vvvv without any artificial limitations.
 
 <!--more-->
 
@@ -44,7 +44,7 @@ Data running through your app can be explored and manipulated at any stage which
 
 vvvv can talk to a wide range of protocols and devices using individual packs. These can be installed at the click of a button using the built-in package manager.  
 
-For a listing of whats available, check out these section in the online packs browser:
+For a listing of what's available, check out these sections in the online packs browser:
 - [IO](https://vvvv.org/packs/?c=IO) (Protocolls, Web APIs, ...)
 - [Devices](https://vvvv.org/packs/?c=Devices) (Cameras, Lasers, Robots, ...)
 
