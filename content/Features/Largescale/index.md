@@ -23,7 +23,7 @@ The following projector auto-calibration systems are integrated:
 <!-- - [Screenberry](https://screenberry.com/) -->
 - If you need any other existing system integrated, don't hesitate to [get in touch](mailto:devvvvs@vvvv.org).
 
-Alternatively vvvv also ships with tooling that help you build custom projection mapping workflows. See the [Projection Mapping](/packs/?c=Projection%20Mapping) section in the packs browser for all options. 
+Alternatively vvvv also ships with tooling that helps you build custom projection mapping workflows. See the [Projection Mapping](/packs/?c=Projection%20Mapping) section in the packs browser for all options. 
 
 ### LED Walls
 
