@@ -1,6 +1,6 @@
 ---
 title: "From Multi Touch to Motion Capture"
-weight: 2
+weight: 30
 button:
     title: "Read more"
     url: /features/interactive/

@@ -5,8 +5,8 @@ button:
     title: "Read more"
     url: /features/largescale/
 image: 
-    src: LivingArchitecture-RAS.png
-    title: "Living Architecture: Gehry"
+    src: RAS-Dataland.png
+    title: "Dataland"
     author: Refik Anadol Studio
     photographer: 
 ---
