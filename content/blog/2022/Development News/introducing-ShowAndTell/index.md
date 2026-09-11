@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-09-20"
-title: "Share your screenshots and thoughts with fellow patchers"
+title: "Introducing: Show & Tell – Instant Rendering & Patch Screenshot Sharing"
 slug: "introducing-show-tell"
-description: "Introducing: Show & Tell"
+description: "Quickly capture and share screenshots of your current renderings and patches with fellow vvvv users."
 thumb: pixelfed-logo.png
 ---
 

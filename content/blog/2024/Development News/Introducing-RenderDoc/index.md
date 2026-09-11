@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "tebjan"
 date: "2024-10-23"
-title: "Easy GPU frame debugging for VL.Stride"
+title: "Introducing: RenderDoc GPU Debugging in VL.Stride"
 slug: "introducing-renderdoc-gpu-debugging"
-description: "Introducing: RenderDoc GPU debugging"
+description: "Inspect, capture, and debug GPU render calls and shaders in VL.Stride using RenderDoc integration."
 thumb: thumb.png
 ---
 

@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-10-06"
-title: "The future is near!"
+title: "Preview: vvvv gamma 2022.5 – Early Previews Available"
 slug: "vvvv-gamma-2022.5-previews-available-now"
-description: "vvvv gamma 2022.5 - Previews available now"
+description: "Early preview builds for vvvv gamma 2022.5 featuring UI creation, cross-platform export, and hybrid coding."
 thumb: 
 draft: false
 ---

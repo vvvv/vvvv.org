@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-09-16"
-title: "An Open Protocol for On-Stage, Live 3D Position Data"
+title: "Introducing: Support for PosiStageNet (PSN)"
 slug: "introducing-support-for-posistagenet"
-description: "Introducing: Support for PosiStageNet"
+description: "Stream live on-stage 3D position data using the open PosiStageNet protocol."
 thumb: thumb.png
 ---
 

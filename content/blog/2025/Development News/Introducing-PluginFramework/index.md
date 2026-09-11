@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-12-01"
-title: "Your vvvv app can now load .dlls!"
+title: "Introducing: Plugins for Exported vvvv Applications"
 slug: "introducing-plugins-for-your-vvvv-apps"
-description: "Introducing: Plugins for your vvvv apps"
+description: "Exported vvvv applications can now dynamically load custom .dll plugins at runtime."
 ---
 
 Dear deVLopers!

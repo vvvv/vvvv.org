@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-14"
-title: "A new way to design and integrate User Interfaces"
+title: "Introducing: Rive – Interactive Vector Graphics & UI Integration"
 slug: "introducing-rive"
-description: "Introducing: Rive"
+description: "Integrate interactive Rive animations with two-way data binding into your vvvv patches."
 draft: true
 ---
 

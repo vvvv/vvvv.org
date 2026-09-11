@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-03-18"
-title: "For your surveillance needs"
+title: "Introducing: Support for Axis Network Cameras"
 slug: "introducing-support-for-network-cameras-by-axis"
-description: "Introducing: Support for Network Cameras by Axis"
+description: "Stream video and control IP network security cameras from Axis directly within vvvv."
 thumb: thumb.png
 ---
 

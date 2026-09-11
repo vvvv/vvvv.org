@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "It can hardly get any simpler"
+title: "Introducing: Effortless Avateering – 3D Avatar Control"
 slug: "introducing-effortless-avateering"
-description: "Introducing: Effortless Avateering"
+description: "Control 3D character avatars with tracked skeleton data in just a few minutes using simple nodes."
 draft: true
 ---
 

@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-19"
-title: "Based on OrbbecSDK-K4A-Wrapper 2.0.11"
+title: "Update: Avateering Support for Orbbec Femto Cameras"
 slug: "update-avateering-support-for-orbbec-femto-cameras"
-description: "Update: Avateering support for Orbbec Femto cameras"
+description: "Avatar control and body tracking update for Orbbec Femto Bolt and Mega depth cameras."
 thumb: thumb.png
 ---
 

@@ -1,8 +1,8 @@
 ---
 date: "2023-03-02"
-title: "All VL libraries are now open-source"
+title: "Introducing: VL.StandardLibs – All VL Libraries Now Open-Source"
 slug: "introducing-vl.standardlibs"
-description: "Introducing: VL.StandardLibs"
+description: "The standard VL core libraries are now open-source and publicly hosted on GitHub."
 categories: "Development News"
 author: "joreg"
 thumb: "open-source.png"

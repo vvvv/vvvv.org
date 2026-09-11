@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-08-31"
-title: "vvvv now plays back Lottie animation files"
+title: "Introducing: Lottie – Vector Animation Playback in vvvv"
 slug: "introducing-lottie"
-description: "Introducing: Lottie"
+description: "Play back lightweight, scalable Lottie vector animation files directly inside vvvv."
 thumb: lottie.png
 ---
 

@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2023-12-20"
-title: "Build Result, App Health and Log"
+title: "Introducing: Debug Views – Build Results, App Health & Logging"
 slug: "introducing-debug-views"
-description: "Introducing: Debug views"
+description: "New built-in debug views in vvvv gamma for inspecting build results, application health, and logs."
 ---
 
 Dear patchers!

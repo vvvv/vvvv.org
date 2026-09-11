@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-08-24"
-title: "A starterkit to develop applications for the Ars Electronica Deep Space"
+title: "Introducing: VL.DeepSpace – Ars Electronica Starter Kit"
 slug: "introducing-vl.deepspace"
-description: "Introducing: VL.DeepSpace"
+description: "Development starter kit and templates for creating multi-display applications for Ars Electronica Deep Space."
 thumb: thumb.png
 ---
 

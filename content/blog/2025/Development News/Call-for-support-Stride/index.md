@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-10-17"
-title: "Invest in speed-up for your pixels and vertices"
+title: "Call for Support: Stride Shader System Rewrite"
 slug: "call-for-support-stride-shader-system-rewrite"
-description: "Call for Support: Stride Shader System Rewrite"
+description: "Help fund the major rewrite of the Stride 3D engine shader system for improved rendering performance."
 thumb: stride-logo-light.png
 ---
 

@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Probably the simplest way to achieve full body tracking"
+title: "Introducing: DollarsMoCap – Full-Body Skeleton Tracking"
 slug: "introducing-dollarsmocap"
-description: "Introducing: DollarsMoCap"
+description: "Simple AI-powered full-body markerless motion capture and skeletal tracking in vvvv."
 thumb: "logo.png"
 ---
 
