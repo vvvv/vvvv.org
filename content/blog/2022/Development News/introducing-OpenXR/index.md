@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-12-13"
-title: "Introducing: Support for OpenXR"
-description: "A common standard for VR/AR devices"
+title: "A common standard for VR/AR devices"
+slug: "introducing-support-for-openxr"
+description: "Introducing: Support for OpenXR"
 thumb: vr-icon-17.jpg
 ---
 ![OpenXR](OpenXR_170px_Feb17.png)

@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-10-28"
-title: "Update: vvvv on Arm for Windows and Mac, Phase 2/2"
-description: "vvvv Arm builds now including VL.Stride"
+title: "vvvv Arm builds now including VL.Stride"
+slug: "update-vvvv-on-arm-for-windows-and-mac-phase-2-2"
+description: "Update: vvvv on Arm for Windows and Mac, Phase 2/2"
 thumb: thumb.png
 ---
 

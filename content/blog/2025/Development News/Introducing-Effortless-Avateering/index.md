@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Introducing: Effortless Avateering"
-description: "It can hardly get any simpler"
+title: "It can hardly get any simpler"
+slug: "introducing-effortless-avateering"
+description: "Introducing: Effortless Avateering"
 draft: true
 ---
 

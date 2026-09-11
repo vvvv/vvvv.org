@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-06-13"
-title: "Introducing: Support for The Imaging Source’s Industrial Cameras"
-description: "For your computer-vision needs"
+title: "For your computer-vision needs"
+slug: "introducing-support-for-the-imaging-sources-industrial-cameras"
+description: "Introducing: Support for The Imaging Source’s Industrial Cameras"
 thumb: thumb.png
 ---
 

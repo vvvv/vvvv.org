@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-24"
-title: "Introducing: Public Channels"
-description: "An app wide parameter store"
+title: "An app wide parameter store"
+slug: "introducing-public-channels"
+description: "Introducing: Public Channels"
 ---
 
 Dear patchers!

@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-05"
-title: "Update: Avateering support for StereoLabs ZED cameras"
-description: "Based on ZED SDK 5.1"
+title: "Based on ZED SDK 5.1"
+slug: "update-avateering-support-for-stereolabs-zed-cameras"
+description: "Update: Avateering support for StereoLabs ZED cameras"
 thumb: thumb.jpg
 ---
 

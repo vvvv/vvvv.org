@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-03-18"
-title: "Introducing: Support for Network Cameras by Axis"
-description: "For your surveillance needs"
+title: "For your surveillance needs"
+slug: "introducing-support-for-network-cameras-by-axis"
+description: "Introducing: Support for Network Cameras by Axis"
 thumb: thumb.png
 ---
 

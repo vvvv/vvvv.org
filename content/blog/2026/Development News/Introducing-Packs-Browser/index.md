@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-01-14"
-title: "Introducing: An online browser for VL Packs"
-description: "For everyone to see what you're patching with"
+title: "For everyone to see what you're patching with"
+slug: "introducing-an-online-browser-for-vl-packs"
+description: "Introducing: An online browser for VL Packs"
 ---
 
 Hello World!

@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Introducing: DollarsMoCap"
-description: "Probably the simplest way to achieve full body tracking"
+title: "Probably the simplest way to achieve full body tracking"
+slug: "introducing-dollarsmocap"
+description: "Introducing: DollarsMoCap"
 thumb: "logo.png"
 ---
 

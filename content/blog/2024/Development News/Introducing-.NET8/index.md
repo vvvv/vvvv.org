@@ -2,8 +2,8 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-01-22"
-title: "Updates: .NET8, C# 12 and Stride 4.2"
-description: "Only the latest and greatest"
+title: "Only the latest and greatest"
+description: "Updates: .NET8, C# 12 and Stride 4.2"
 thumb: dotnet-logo.png
 slug: updates-net8-csharp12-stride4.2
 ---

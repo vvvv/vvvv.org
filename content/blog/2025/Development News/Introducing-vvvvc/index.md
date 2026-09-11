@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-04-01"
-title: "Introducing: vvvvc.exe"
-description: "A commandline compiler for your patches"
+title: "A commandline compiler for your patches"
+slug: "introducing-vvvvc.exe"
+description: "Introducing: vvvvc.exe"
 ---
 
 Dear patchers!

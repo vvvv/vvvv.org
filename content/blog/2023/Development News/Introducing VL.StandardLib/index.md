@@ -1,7 +1,8 @@
 ---
 date: "2023-03-02"
-title: "Introducing: VL.StandardLibs"
-description: "All VL libraries are now open-source"
+title: "All VL libraries are now open-source"
+slug: "introducing-vl.standardlibs"
+description: "Introducing: VL.StandardLibs"
 categories: "Development News"
 author: "joreg"
 thumb: "open-source.png"

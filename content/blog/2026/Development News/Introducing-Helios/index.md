@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-07-06"
-title: "Introducing: Support for the Helios Laser DACs"
-description: "Including support for IDN compatible lasers!"
+title: "Including support for IDN compatible lasers!"
+slug: "introducing-support-for-the-helios-laser-dacs"
+description: "Introducing: Support for the Helios Laser DACs"
 thumb: thumb.png
 ---
 

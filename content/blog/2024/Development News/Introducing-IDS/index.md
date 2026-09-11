@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-08-20"
-title: "Introducing: Support for Industrial Cameras by IDS Imaging"
-description: "For your computer-vision needs"
+title: "For your computer-vision needs"
+slug: "introducing-support-for-industrial-cameras-by-ids-imaging"
+description: "Introducing: Support for Industrial Cameras by IDS Imaging"
 thumb: thumb.png
 ---
 

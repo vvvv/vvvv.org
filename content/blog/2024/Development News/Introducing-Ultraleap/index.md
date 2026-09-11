@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-09-12"
-title: "Introducing: Support for new Ultraleap devices"
-description: "For your hand-tracking needs"
+title: "For your hand-tracking needs"
+slug: "introducing-support-for-new-ultraleap-devices"
+description: "Introducing: Support for new Ultraleap devices"
 thumb: thumb.jpg
 ---
 

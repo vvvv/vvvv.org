@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-12-18"
-title: "Introducing: Support for VST3 audio plugins"
-description: "For your sounding needs"
+title: "For your sounding needs"
+slug: "introducing-support-for-vst3-audio-plugins"
+description: "Introducing: Support for VST3 audio plugins"
 thumb: thumb.png
 ---
 

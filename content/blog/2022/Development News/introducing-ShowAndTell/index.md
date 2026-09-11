@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-09-20"
-title: "Introducing: Show & Tell"
-description: "Share your screenshots and thoughts with fellow patchers"
+title: "Share your screenshots and thoughts with fellow patchers"
+slug: "introducing-show-tell"
+description: "Introducing: Show & Tell"
 thumb: pixelfed-logo.png
 ---
 

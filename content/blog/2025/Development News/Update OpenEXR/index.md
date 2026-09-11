@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-23"
-title: "Update: VL.OpenEXR improvements"
-description: "A treat for your textures"
+title: "A treat for your textures"
+slug: "update-vl.openexr-improvements"
+description: "Update: VL.OpenEXR improvements"
 thumb: thumb.webp
 ---
 

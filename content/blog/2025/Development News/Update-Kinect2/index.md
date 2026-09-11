@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-12-03"
-title: "Update: Avateering support for Kinect2 cameras"
-description: "Keeping legacy devices alive!"
+title: "Keeping legacy devices alive!"
+slug: "update-avateering-support-for-kinect2-cameras"
+description: "Update: Avateering support for Kinect2 cameras"
 thumb: thumb.png
 ---
 

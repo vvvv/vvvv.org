@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-19"
-title: "Update: Avateering support for Orbbec Femto cameras"
-description: "Based on OrbbecSDK-K4A-Wrapper 2.0.11"
+title: "Based on OrbbecSDK-K4A-Wrapper 2.0.11"
+slug: "update-avateering-support-for-orbbec-femto-cameras"
+description: "Update: Avateering support for Orbbec Femto cameras"
 thumb: thumb.png
 ---
 

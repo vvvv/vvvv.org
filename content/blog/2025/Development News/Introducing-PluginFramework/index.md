@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-12-01"
-title: "Introducing: Plugins for your vvvv apps"
-description: "Your vvvv app can now load .dlls!"
+title: "Your vvvv app can now load .dlls!"
+slug: "introducing-plugins-for-your-vvvv-apps"
+description: "Introducing: Plugins for your vvvv apps"
 ---
 
 Dear deVLopers!

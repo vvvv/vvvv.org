@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2023-11-29"
-title: "Introducing: Augmenta"
-description: "A plug & play tracking solution"
+title: "A plug & play tracking solution"
+slug: "introducing-augmenta"
+description: "Introducing: Augmenta"
 thumb: a.png
 ---
 

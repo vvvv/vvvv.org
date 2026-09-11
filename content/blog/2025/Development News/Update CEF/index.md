@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-24"
-title: "Update: VL.CEF improvements"
-description: "For your web rendering needs"
+title: "For your web rendering needs"
+slug: "update-vl.cef-improvements"
+description: "Update: VL.CEF improvements"
 thumb: thumb.png
 ---
 

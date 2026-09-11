@@ -1,7 +1,8 @@
 ---
 date: "2023-10-16"
-title: "Introducing: Remoter 2.0"
-description: "A fancy UI to remote control PCs"
+title: "A fancy UI to remote control PCs"
+slug: "introducing-remoter-2.0"
+description: "Introducing: Remoter 2.0"
 categories: "Development News"
 author: "joreg"
 thumb: "remoter.jpg"
