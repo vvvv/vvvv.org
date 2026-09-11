@@ -1,8 +1,8 @@
 ---
 date: "2023-10-16"
-title: "A fancy UI to remote control PCs"
+title: "Introducing: Remoter 2.0"
 slug: "introducing-remoter-2.0"
-description: "Introducing: Remoter 2.0"
+description: "Manage, monitor, and WakeOnLAN multi-computer PC installations from one place."
 categories: "Development News"
 author: "joreg"
 thumb: "remoter.jpg"

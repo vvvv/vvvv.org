@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2023-11-29"
-title: "A plug & play tracking solution"
+title: "Introducing: Augmenta"
 slug: "introducing-augmenta"
-description: "Introducing: Augmenta"
+description: "Plug & play object and audience tracking for interactive spaces without rolling custom blob-trackers."
 thumb: a.png
 ---
 

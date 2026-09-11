@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-19"
-title: "Based on OrbbecSDK-K4A-Wrapper 2.0.11"
+title: "Update: Avateering Support for Orbbec Cameras"
 slug: "update-avateering-support-for-orbbec-femto-cameras"
-description: "Update: Avateering support for Orbbec Femto cameras"
+description: "Effortless character avatar control for Femto Bolt & Mega depth sensors based on K4A-Wrapper 2.0.11."
 thumb: thumb.png
 ---
 

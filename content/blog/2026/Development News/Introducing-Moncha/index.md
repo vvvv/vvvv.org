@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-06-04"
-title: "For your lasering needs"
+title: "Introducing: Support for Moncha Laser DACs"
 slug: "introducing-support-for-the-moncha-laser-dac"
-description: "Introducing: Support for the Moncha Laser DAC"
+description: "For your lasering needs: Premium hardware controller compatibility and point generation nodes."
 thumb: thumb.png
 ---
 

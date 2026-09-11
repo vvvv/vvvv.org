@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-07-06"
-title: "Including support for IDN compatible lasers!"
+title: "Introducing: Support for Helios DACs"
 slug: "introducing-support-for-the-helios-laser-dacs"
-description: "Introducing: Support for the Helios Laser DACs"
+description: "Control laser hardware using Bitlasers USB controllers and IDN network protocol."
 thumb: thumb.png
 ---
 

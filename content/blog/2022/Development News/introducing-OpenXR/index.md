@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-12-13"
-title: "A common standard for VR/AR devices"
+title: "Introducing: Support for OpenXR"
 slug: "introducing-support-for-openxr"
-description: "Introducing: Support for OpenXR"
+description: "Access virtual and augmented reality devices via the open-source Stride 3D engine."
 thumb: vr-icon-17.jpg
 ---
 ![OpenXR](OpenXR_170px_Feb17.png)

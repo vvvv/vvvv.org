@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-08-20"
-title: "For active glasses based 3d viewing"
+title: "Introducing: Support for Stereoscopic Rendering"
 slug: "introducing-support-for-stereoscopic-rendering"
-description: "Introducing: Support for stereoscopic rendering"
+description: "Native active 3D glasses capabilities using NVIDIA RTX graphics hardware."
 thumb: thumb.png
 ---
 

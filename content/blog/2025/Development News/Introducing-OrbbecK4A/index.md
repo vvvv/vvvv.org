@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-09"
-title: "Adding body tracking for Bolt and Mega cameras"
+title: "Introducing: Support for Orbbec Devices via K4A"
 slug: "introducing-support-for-orbbec-femto-devices-via-k4a"
-description: "Introducing: Support for Orbbec Femto devices via K4A"
+description: "Depth sensing and skeletal tracking for Femto Bolt & Mega cameras using Azure Kinect SDK compatibility."
 thumb: thumb.png
 ---
 

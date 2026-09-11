@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-24"
-title: "Connect your app parameters to RCP, OSCQuery, OSC, Midi, Redis,..."
+title: "Introducing: Channel Bindings"
 slug: "introducing-channel-bindings"
-description: "Introducing: Channel Bindings"
+description: "Unified remote parameter integration connecting your application to RCP, OSC, MIDI, and Redis."
 ---
 
 Dear patchers! 

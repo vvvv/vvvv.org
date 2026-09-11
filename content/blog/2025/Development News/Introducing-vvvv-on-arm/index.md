@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-05-05"
-title: "Native builds for Arm CPUs"
+title: "Introducing: vvvv on Arm for Windows & Mac"
 slug: "introducing-vvvv-on-arm-for-windows-and-mac-phase-1-2"
-description: "Introducing: vvvv on Arm for Windows and Mac, Phase 1/2"
+description: "Say what? Native CPU architecture support for Snapdragon Copilot+ laptops and Apple Silicon via Parallels!"
 thumb: thumb.png
 ---
 

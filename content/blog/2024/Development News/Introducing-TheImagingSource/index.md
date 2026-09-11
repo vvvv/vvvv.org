@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-06-13"
-title: "For your computer-vision needs"
+title: "Introducing: Support for The Imaging Source"
 slug: "introducing-support-for-the-imaging-sources-industrial-cameras"
-description: "Introducing: Support for The Imaging Source’s Industrial Cameras"
+description: "For your computer-vision needs: High-performance industrial cameras and frame grabbers."
 thumb: thumb.png
 ---
 

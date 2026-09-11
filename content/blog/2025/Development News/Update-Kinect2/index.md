@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-12-03"
-title: "Keeping legacy devices alive!"
+title: "Update: Avateering Support for Kinect2"
 slug: "update-avateering-support-for-kinect2-cameras"
-description: "Update: Avateering support for Kinect2 cameras"
+description: "Keeping legacy devices alive! Effortless skeletal character control for Microsoft depth sensors."
 thumb: thumb.png
 ---
 

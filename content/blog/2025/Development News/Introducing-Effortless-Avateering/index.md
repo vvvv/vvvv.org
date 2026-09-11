@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "It can hardly get any simpler"
+title: "Introducing: Effortless Avateering"
 slug: "introducing-effortless-avateering"
-description: "Introducing: Effortless Avateering"
+description: "It can hardly get any simpler: Animate 3D character models using motion capture data in minutes."
 draft: true
 ---
 

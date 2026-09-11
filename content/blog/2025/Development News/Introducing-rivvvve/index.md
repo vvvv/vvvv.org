@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-14"
-title: "A new way to design and integrate User Interfaces"
+title: "Introducing: Rive UI Integration"
 slug: "introducing-rive"
-description: "Introducing: Rive"
+description: "Ship interactive vector graphics with two-way data binding directly in your patches."
 draft: true
 ---
 

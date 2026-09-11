@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-05"
-title: "Based on ZED SDK 5.1"
+title: "Update: Avateering Support for ZED Cameras"
 slug: "update-avateering-support-for-stereolabs-zed-cameras"
-description: "Update: Avateering support for StereoLabs ZED cameras"
+description: "Effortless character avatar control based on StereoLabs SDK 5.1 release."
 thumb: thumb.jpg
 ---
 

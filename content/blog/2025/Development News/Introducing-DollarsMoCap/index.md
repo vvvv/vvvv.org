@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Probably the simplest way to achieve full body tracking"
+title: "Introducing: DollarsMoCap Skeleton Tracking"
 slug: "introducing-dollarsmocap"
-description: "Introducing: DollarsMoCap"
+description: "Probably the simplest way to achieve AI-powered full-body motion capture using a single webcam!"
 thumb: "logo.png"
 ---
 

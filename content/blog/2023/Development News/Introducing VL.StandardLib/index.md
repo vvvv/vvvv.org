@@ -1,8 +1,8 @@
 ---
 date: "2023-03-02"
-title: "All VL libraries are now open-source"
+title: "Introducing: VL.StandardLibs"
 slug: "introducing-vl.standardlibs"
-description: "Introducing: VL.StandardLibs"
+description: "Free at last! Core engine functionality and standard packages are now open-source on GitHub."
 categories: "Development News"
 author: "joreg"
 thumb: "open-source.png"

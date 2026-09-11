@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-07-30"
-title: "Or as we call it: Packman"
+title: "Introducing: VL Package Manager (Packman)"
 slug: "introducing-a-package-manager-for-vl-packs"
-description: "Introducing: A package manager for VL Packs"
+description: "Integrated UI to discover and install community extensions into your project."
 ---
 
 Patchers!

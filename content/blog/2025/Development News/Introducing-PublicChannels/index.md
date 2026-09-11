@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-24"
-title: "An app wide parameter store"
+title: "Introducing: Public Channels Parameter Store"
 slug: "introducing-public-channels"
-description: "Introducing: Public Channels"
+description: "Define named variables and inspect them live using the new Channel Browser UI."
 ---
 
 Dear patchers!

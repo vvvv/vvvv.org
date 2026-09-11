@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-03-18"
-title: "For your surveillance needs"
+title: "Introducing: Support for Axis IP Cameras"
 slug: "introducing-support-for-network-cameras-by-axis"
-description: "Introducing: Support for Network Cameras by Axis"
+description: "For your surveillance needs: Control security hardware and stream video directly into your patches."
 thumb: thumb.png
 ---
 

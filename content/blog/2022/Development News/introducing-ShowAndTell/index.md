@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-09-20"
-title: "Share your screenshots and thoughts with fellow patchers"
+title: "Introducing: Show & Tell"
 slug: "introducing-show-tell"
-description: "Introducing: Show & Tell"
+description: "Press one keyboard shortcut to capture and publish patch screenshots to the community."
 thumb: pixelfed-logo.png
 ---
 

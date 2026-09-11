@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-24"
-title: "For your web rendering needs"
+title: "Update: VL.CEF HTML Web Content"
 slug: "update-vl.cef-improvements"
-description: "Update: VL.CEF improvements"
+description: "For your browser rendering needs: Upgraded Chromium engine with bi-directional JavaScript interaction."
 thumb: thumb.png
 ---
 
