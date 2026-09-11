@@ -22,8 +22,8 @@ This time of the year again. Meet your fellow patchers IRL:
 
 - September 9: 11:00 [Live-programming Deep Space 8K with vvvv](https://ars.electronica.art/negotiatinghumanity/en/view/live-programming-deep-space-8k-with-vvvv-3a338ddb450c8193b667deec448c483f/)
 - September 10: 20:00 [Inner Radiance](https://ars.electronica.art/negotiatinghumanity/en/view/inner-radiance-38e38ddb450c8108937ace74543497c8/) by [blackistone](https://vvvv.org/people/blackistone) et al.
-- September 11: 17:00 as part of [Endless Possibilities](https://ars.electronica.art/negotiatinghumanity/en/view/endless-possibilities-30038ddb450c8324a91681957a452f56/), a meetup for the worldwide Deep Space community
 - September 10: 16:00 Patch battle during [Creative Coding Buffet](https://ars.electronica.art/negotiatinghumanity/en/view/creative-coding-open-house-thu-10-9-3a838ddb450c81f396ddfbb621ddeaa0) 
+- September 11: 17:00 as part of [Endless Possibilities](https://ars.electronica.art/negotiatinghumanity/en/view/endless-possibilities-30038ddb450c8324a91681957a452f56/), a meetup for the worldwide Deep Space community
 - September 12: 13:00 Free 🍕 at the [vvvv day at the Creative Coding Open House](https://ars.electronica.art/negotiatinghumanity/en/view/creative-coding-open-house-sat-12-9-3a838ddb450c81d39acadf12fbdb148f) 
 - September 12: 18:00 The 36th [vvvv worldwide meetup](https://vvvv.org/blog/2026/vvvv-worldwide-meetup-ars-electronica-festival-2026/)
 
