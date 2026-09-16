@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-24"
-title: "For your web rendering needs"
+title: "Update: Improvements for the Web Content & JavaScript Integration via VL.CEF"
+description: "Updates to the latest version of the underlying Chromium Embedded Framework"
 slug: "update-vl.cef-improvements"
-description: "Update: VL.CEF improvements"
 thumb: thumb.png
 ---
 

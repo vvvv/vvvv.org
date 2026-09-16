@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-08-20"
-title: "For active glasses based 3d viewing"
+title: "Introducing: Support for stereoscopic rendering"
+description: "Native support for 3d viewing using active 3D glasses"
 slug: "introducing-support-for-stereoscopic-rendering"
-description: "Introducing: Support for stereoscopic rendering"
 thumb: thumb.png
 ---
 

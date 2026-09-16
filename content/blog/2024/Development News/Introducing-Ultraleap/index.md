@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-09-12"
-title: "For your hand-tracking needs"
+title: "Introducing: Support for new Ultraleap Hand Tracking devices"
+description: "For both Gemini and Hyperion driver liness"
 slug: "introducing-support-for-new-ultraleap-devices"
-description: "Introducing: Support for new Ultraleap devices"
 thumb: thumb.jpg
 ---
 

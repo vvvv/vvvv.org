@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-09-25"
-title: "For your depth-sensing needs"
+title: "Introducing: Support for ZED stereo cameras by Stereolabs"
+description: "For your depth-sensing needs"
 slug: "introducing-support-for-zed-stereo-cameras-by-stereolabs"
-description: "Introducing: Support for ZED stereo cameras by Stereolabs"
 thumb: thumb.jpg
 ---
 

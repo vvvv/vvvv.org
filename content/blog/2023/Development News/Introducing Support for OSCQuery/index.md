@@ -1,8 +1,8 @@
 ---
 date: "2023-10-31"
-title: "A quick way to expose parameters to the world"
+title: "Introducing: Support for the OSCQuery protocol"
 slug: "introducing-support-for-the-oscquery-protocol"
-description: "Introducing: Support for the OSCQuery protocol"
+description: "A quick way to expose parameters to the world"
 categories: "Development News"
 author: "joreg"
 thumb: "oscquery.png"

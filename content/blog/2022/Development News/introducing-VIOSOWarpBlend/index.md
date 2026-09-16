@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-07-20"
-title: "A projector auto-alignment system"
+title: "Introducing: VIOSO Projector Warping and Blending"
 slug: "introducing-vioso-projector-warping-and-blending"
-description: "Introducing: VIOSO Projector Warping and Blending"
+description: "For multi-projector geometry warping and edge blending"
 thumb: v.jpg
 ---
 

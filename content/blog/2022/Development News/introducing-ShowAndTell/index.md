@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-09-20"
-title: "Share your screenshots and thoughts with fellow patchers"
+title: "Introducing: Share your screenshots and thoughts with fellow patchers"
 slug: "introducing-show-tell"
-description: "Introducing: Show & Tell"
+description: "New HDE feature: Show & Tell"
 thumb: pixelfed-logo.png
 ---
 

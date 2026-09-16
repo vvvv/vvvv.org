@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-11-25"
-title: "Highend Rigid Body and Skeleton tracking"
+title: "Introducing: Support for Motion Capturing by OptiTrack"
+description: "Highend optical Rigid Body and Skeleton tracking"
 slug: "introducing-support-for-optitrack"
-description: "Introducing: Support for OptiTrack"
 thumb: "optitrackmocap_logo.jpg"
 ---
 

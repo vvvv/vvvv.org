@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-10-28"
-title: "vvvv Arm builds now including VL.Stride"
+title: "Update: vvvv on Arm for Windows and Mac now support VL.Stride, Phase 2/2"
+description: "For full 3D rendering support on all CPUs"
 slug: "update-vvvv-on-arm-for-windows-and-mac-phase-2-2"
-description: "Update: vvvv on Arm for Windows and Mac, Phase 2/2"
 thumb: thumb.png
 ---
 

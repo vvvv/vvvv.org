@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-04-01"
-title: "A commandline compiler for your patches"
+title: "Introducing: vvvvc.exe – A commandline compiler for your patches"
 slug: "introducing-vvvvc.exe"
-description: "Introducing: vvvvc.exe"
+description: "Export your patches to standalone Windows executables from the command line"
 ---
 
 Dear patchers!

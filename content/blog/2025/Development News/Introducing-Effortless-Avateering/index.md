@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "It can hardly get any simpler"
+title: "Introducing: Effortless Avateering - Control rigged 3d models"
+description: "It can hardly get any simpler"
 slug: "introducing-effortless-avateering"
-description: "Introducing: Effortless Avateering"
 draft: true
 ---
 

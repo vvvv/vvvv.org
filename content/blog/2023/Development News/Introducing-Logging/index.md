@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2023-12-20"
-title: "Build Result, App Health and Log"
+title: "Introducing: New Debug Views for imporved error tracking"
 slug: "introducing-debug-views"
-description: "Introducing: Debug views"
+description: "Build Result, App Health and Log"
 ---
 
 Dear patchers!

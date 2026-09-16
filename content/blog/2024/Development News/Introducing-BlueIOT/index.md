@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-05-14"
-title: "An indoor positional tracking solution"
+title: "Introducing: Support for indoor positional tracking by Blueiot"
 slug: "introducing-blueiot-real-time-location-system"
-description: "Introducing: Blueiot real-time location system"
+description: "A real-time location system (RTLS) for audience and object tracking"
 thumb: pin.jpg
 ---
 

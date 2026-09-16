@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2024-12-18"
-title: "For your sounding needs"
+title: "Introducing: Support for VST3 audio plugins"
+description: "Control Instruments and Effects right from your patches"
 slug: "introducing-support-for-vst3-audio-plugins"
-description: "Introducing: Support for VST3 audio plugins"
 thumb: thumb.png
 ---
 

@@ -2,9 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-24"
-title: "A complete cueing solution for your apps parameters"
+title: "Introducing: Presets and Transitions"
+description: "Snapshot, recall, and smoothly transition your apps parameters"
 slug: "introducing-presets-and-transitions"
-description: "Introducing: Presets and Transitions"
 ---
 
 Dear patchers!
