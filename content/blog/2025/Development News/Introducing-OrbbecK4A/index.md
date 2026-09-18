@@ -4,6 +4,7 @@ author: "joreg"
 date: "2025-07-09"
 title: "Introducing: Support for Orbbec Femto devices via K4A"
 description: "Adding body tracking for Bolt and Mega cameras"
+slug: "introducing-support-for-orbbec-femto-devices-via-k4a"
 thumb: thumb.png
 ---
 

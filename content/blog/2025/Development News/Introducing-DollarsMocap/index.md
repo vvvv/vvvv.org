@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Introducing: DollarsMoCap"
-description: "Probably the simplest way to achieve full body tracking"
+title: "Introducing: DollarsMoCap – Markerless Full-Body Skeleton Tracking"
+slug: "introducing-dollarsmocap"
+description: "Probably the simplest way to achieve full body tracking from a single RGB camera"
 thumb: "logo.png"
 ---
 

@@ -4,6 +4,7 @@ author: "joreg"
 date: "2026-06-04"
 title: "Introducing: Support for the Moncha Laser DAC"
 description: "For your lasering needs"
+slug: "introducing-support-for-the-moncha-laser-dac"
 thumb: thumb.png
 ---
 

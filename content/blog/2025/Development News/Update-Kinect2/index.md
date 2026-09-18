@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2025-12-03"
 title: "Update: Avateering support for Kinect2 cameras"
-description: "Keeping legacy devices alive!"
+description: "Effortless skeletal tracking and 3D avatar control for legacy Microsoft Kinect2 depth cameras"
+slug: "update-avateering-support-for-kinect2-cameras"
 thumb: thumb.png
 ---
 

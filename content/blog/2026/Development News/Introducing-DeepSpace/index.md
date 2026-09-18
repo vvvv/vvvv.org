@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2026-08-24"
-title: "Introducing: VL.DeepSpace"
-description: "A starterkit to develop applications for the Ars Electronica Deep Space"
+title: "Introducing: VL.DeepSpace - A starter kit for the Ars Electronica Deep Space"
+description: "Templates and building blocks for interactive stereo 3D applications in the Deep Space"
+slug: "introducing-vl.deepspace"
 thumb: thumb.png
 ---
 

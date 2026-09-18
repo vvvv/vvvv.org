@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2024-10-15"
 title: "Introducing: Support for RPLidar devices by Slamtec"
-description: "For your surface-scanning needs"
+description: "For your interactive touch and surface-scanning applications"
+slug: "introducing-support-for-rplidar-devices-by-slamtec"
 thumb: thumb.jpg
 ---
 

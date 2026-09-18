@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-23"
-title: "Update: VL.OpenEXR improvements"
-description: "A treat for your textures"
+title: "Update: Support for more .exr formats via VL.OpenEXR"
+description: "Now with DWAA/DWAB compression and support for tiled images" 
+slug: "update-vl.openexr-improvements"
 thumb: thumb.webp
 ---
 

@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2025-03-18"
 title: "Introducing: Support for Network Cameras by Axis"
-description: "For your surveillance needs"
+description: "Stream video and control IP network security cameras for your surveillance needs"
+slug: "introducing-support-for-network-cameras-by-axis"
 thumb: thumb.png
 ---
 

@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2026-07-30"
 title: "Introducing: A package manager for VL Packs"
-description: "Or as we call it: Packman"
+description: "Use Packman to discover, install, and manage VL packs"
+slug: "introducing-a-package-manager-for-vl-packs"
 ---
 
 Patchers!

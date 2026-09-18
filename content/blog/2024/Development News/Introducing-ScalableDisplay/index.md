@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2024-01-15"
 title: "Introducing: Projector Calibration by Scalable Display Technologies"
-description: "A projector auto-alignment system"
+description: "Projection mapping simplified: Multi-projector alignment and edge blending at the click of a button"
+slug: "introducing-projector-calibration-by-scalable-display-technologies"
 thumb: s.png
 ---
 
