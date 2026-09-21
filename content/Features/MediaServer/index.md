@@ -21,7 +21,7 @@ When off-the-shelf media servers don't suite your needs, create your own with vv
 
 ### Realtime Graphics
 
-- [Stride](https://stride3d.net/) based 3d/VR rendering engine 
+- [Stride](https://stride3d.net/) based (3d, stereoscopic, VR) rendering engine 
 - [Skia](https://skia.org/) based 2d rendering engine 
 - [Rive](https://rive.app/) integration including bi-directional data-binding
 - [CEF](https://www.nuget.org/packages/VL.CEF) for rendering web content
