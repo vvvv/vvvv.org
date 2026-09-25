@@ -471,6 +471,17 @@ section#Blog
                     background-color: #f3f3f3;
                     border: none;
                     padding: 2em;
+                    margin-top: 2em;
+
+                    > :first-child
+                    {
+                        margin-top: 0;
+                    }
+
+                    > :last-child
+                    {
+                        margin-bottom: 0;
+                    }
                 }
             }
         }
