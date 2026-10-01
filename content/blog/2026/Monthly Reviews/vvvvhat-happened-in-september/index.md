@@ -16,7 +16,7 @@ Let's see what else: We're focused on ironing out final issues with [Packman](ht
 
 October starts the winter season of vvvv courses hosted by [The NODE Institute](https://thenodeinstitute.org/):
 
-- [Beginners: Playful Patching in vvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog) from October 19
+- [Beginners: Playful Patching in vvvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog) from October 19
 - [Advanced TextureFX Techniques](https://thenodeinstitute.org/courses/advanced-texturefx-techniques-in-vvvv/?v=5f02f0889301) October 27 and November 3
 
 A realworld course:
