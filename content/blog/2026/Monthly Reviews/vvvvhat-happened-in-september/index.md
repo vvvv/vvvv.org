@@ -17,8 +17,10 @@ Let's see what else: We're focused on ironing out final issues with [Packman](ht
 October starts the winter season of vvvv courses hosted by [The NODE Institute](https://thenodeinstitute.org/):
 
 - [Beginners: Playful Patching in vvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog) from October 19
-
 - [Advanced TextureFX Techniques](https://thenodeinstitute.org/courses/advanced-texturefx-techniques-in-vvvv/?v=5f02f0889301) October 27 and November 3
+
+A realworld course:
+- [Beginners: Lantern Coding](https://ticket.nodeforum.org/play-test/5065727/) October 9, Frankfurt
 
 And here's a recent 3 part free online course by Carlo Gioia of [AVENUE CoVE](https://www.avenuecove.eu/):
 1) [vvvv gamma Fundamentals: Real-Time Visual Programming](https://www.youtube.com/watch?v=TIuMqy0Gx1o)
