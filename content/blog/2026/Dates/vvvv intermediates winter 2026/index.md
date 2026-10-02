@@ -26,10 +26,6 @@ Sign up here: **[thenodeinstitute.org/courses/vvvv-intermediates-bundle-winter-2
 
 This season covers a broad collection of topics - take all of it, or just the parts you need. Massive thanks to all the instructors for making this possible!
 
-- **27 Oct + 3 Nov 2026**<br>
-**[Advanced TextureFX Techniques in vvvv](https://thenodeinstitute.org/courses/advanced-texturefx-techniques-in-vvvv?utm_source=vvvv&utm_medium=blog)** by [Irwin Quemener](https://thenodeinstitute.org/instructor/lecloneur?utm_source=vvvv&utm_medium=blog)<br>
-From using TextureFX nodes to writing your own ones in SDSL - feedback-driven water, displaced terrain, color grading, and a fully interactive composition built from nothing but textures.
-
 - **10 + 17 Nov 2026**<br>
 **[Applied 2D & 3D Math for Creative Coders](https://thenodeinstitute.org/courses/applied-2d-3d-math-for-creative-coders?utm_source=vvvv&utm_medium=blog)** by [Toby Knyvett](https://thenodeinstitute.org/instructor/toby-knyvett?utm_source=vvvv&utm_medium=blog)<br>
 Vectors, matrices, quaternions and fields - patched yourself in Skia and Stride, until gimbal lock,  Signed Distance Fields and your own cameras stop being something to survive.
@@ -37,6 +33,10 @@ Vectors, matrices, quaternions and fields - patched yourself in Skia and Stride,
 - **24 Nov 2026**<br>
 **[Driving Particle Systems from Geospatial Data in vvvv](https://thenodeinstitute.org/courses/driving-particle-systems-from-geospatial-data-in-vvvv?utm_source=vvvv&utm_medium=blog)** by [Rosi Grillmair](https://thenodeinstitute.org/instructor/rosi-grillmair?utm_source=vvvv&utm_medium=blog)<br>
 Turn real datasets into living, GPU-driven particle art: color maps out of GIS software become the control signals for emission, size, color and forces in VL.Fuse.
+
+- **1 Dec + 2 Dec 2026**<br>
+**[Advanced TextureFX Techniques in vvvv](https://thenodeinstitute.org/courses/advanced-texturefx-techniques-in-vvvv?utm_source=vvvv&utm_medium=blog)** by [Irwin Quemener](https://thenodeinstitute.org/instructor/lecloneur?utm_source=vvvv&utm_medium=blog)<br>
+From using TextureFX nodes to writing your own ones in SDSL - feedback-driven water, displaced terrain, color grading, and a fully interactive composition built from nothing but textures.
 
 - **8 + 15 Dec 2026**<br>
 **[Pixels in Space: Projection Mapping & Immersive Setups in vvvv](https://thenodeinstitute.org/courses/pixels-in-space-projection-mapping-immersive-setups-in-vvvv?utm_source=vvvv&utm_medium=blog)** by [Simon Weckert](https://thenodeinstitute.org/instructor/dlvr?utm_source=vvvv&utm_medium=blog)<br>
