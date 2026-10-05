@@ -1,6 +1,6 @@
 ---
 title: "How vvvv supports the Large-scale"
-weight: 1
+weight: 10
 button:
     title: "Read more"
     url: /features/largescale/
