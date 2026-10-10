@@ -1,7 +1,7 @@
 ---
 title: |-
-    VVVV Beginner Class
-    Pt I: Playful Patching
+    vvvv Beginner Class
+    Starting on October 19th
 weight: 5
 button:
     title: Learn more...
