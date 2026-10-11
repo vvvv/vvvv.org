@@ -16,7 +16,7 @@ thumb: "vvvvMeetup36-KeyVisual-Thumb.jpg"
 
 ![](vvvvMeetup36-KeyVisual-16-9.jpg)
 
-*Artwork by [Kevin Blackistone](/people/blackistone)*
+*Artwork by [Kevin Blackistone](https://blackistone.com/)*
 
 Here's to announce the 36th vvvv worldwide meetup on **November 12th, 7pm CET**, hosted by **[The NODE Institute](https://thenodeinstitute.org/)**. This is the meetup for creatives and developers using the visual programming environment vvvv and its visual language VL. Join us IRL or online with artist presentations and announcements in the vvvv community.
 
@@ -26,11 +26,11 @@ Supported by [Studio Brüll](https://studiobruell.de/) & [3e8](https://www.3e8.s
 ## Berlin
 The NODE Institute<br>
 Wipperstrasse 13, 12055 Berlin<br>
-Doors open: 18:30
+Doors open: 18:30<br>
 [RSVP here](https://thenodeinstitute.org/event/36-vvvv-worldwide-meetup)
 
 ## Online
-[Watch via Youtube](https://www.youtube.com/live/oela-hW2TWY?si=IC6psXDW-UlMg8Ol)<br>
+[Watch via YouTube](https://www.youtube.com/live/oela-hW2TWY?si=IC6psXDW-UlMg8Ol)<br>
 [Join via Zoom](https://us02web.zoom.us/j/81617527849?pwd=y3CYhP5ZkP7nJPb0n1tAebt0GzTQUu.1)
 {{< /box >}}
 
