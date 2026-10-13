@@ -30,7 +30,7 @@ Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 
 ## Basic Usage
 
-For basic usage there is not much syou need to know:
+For basic usage there is not much you need to know:
 - Open Packman using Ctrl + F3
 - Choose the "Browse..." tab
 - Find the pack you want to use
@@ -109,7 +109,7 @@ Packs don't appear out of thin air. They are made and maintained by your fellow 
 
 There is more. Remember how previously you'd have to find a pack, install it and only then get access to its help patches via the Helpbrowser?
 
-Now, when searching in the Helpbrowser, it also looks for packs that might fit you term and displays those in a separate section at the very bottom labeled "More Packs". If you find anything here, you can one-click download the pack and get instant access to its helps.
+Now, when searching in the Helpbrowser, it also looks for packs that might fit your term and displays those in a separate section at the very bottom labeled "More Packs". If you find anything here, you can one-click download the pack and get instant access to its helps.
 
 ![](packman-helpbrowser.png)
 
