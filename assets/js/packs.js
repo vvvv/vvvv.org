@@ -24,6 +24,7 @@ window.addEventListener ("load", ()=> {
     const staticAddYours =  document.getElementById('staticAddYours');
     const staticOnDemand = document.getElementById('staticOnDemand');
     const toSponsor = document.getElementById('toSponsor');
+    const commercial = document.getElementById('commercial');
     const sortDiv = document.getElementById('sortDiv'); 
     const sortDropdown = document.getElementById('sort');
     const menuItemButton = document.getElementById('staticContent')?.querySelector('[data-category-menu]');
@@ -479,7 +480,8 @@ window.addEventListener ("load", ()=> {
             
             // Inject Separators     
             const lastItem = items[items.length-1].name;
-            injectSeparators(["Packs to Sponsor", lastItem]);
+            const topSeparator = menu.has("Commercial") ? "Commercial" : "Packs to Sponsor";
+            injectSeparators([topSeparator, lastItem]);
     
             toc.querySelector(`button[data-category-menu="${menuToSelect}"]`)?.classList.remove('active');
             $(`button[data-category-menu="${menuToSelect}"]`).tab('show');
@@ -531,23 +533,25 @@ window.addEventListener ("load", ()=> {
                 break;
             case 'newest':
                 elements.sort((a,b)=>{
-                    const aLast = a.dataset.firstPublished;
-                    const bLast = b.dataset.firstPublished;
+                    const aLast = parseInt(a.dataset.firstPublished) || 0;
+                    const bLast = parseInt(b.dataset.firstPublished) || 0;
 
-                    return parseInt(bLast) - parseInt(aLast);
+                    return bLast - aLast;
                 });
                 break;
             case 'updated':
                 elements.sort((a,b)=>{
-                    const aLast = a.dataset.lastPublished;
-                    const bLast = b.dataset.lastPublished;
+                    const aLast = parseInt(a.dataset.lastPublished) || 0;
+                    const bLast = parseInt(b.dataset.lastPublished) || 0;
 
-                    return parseInt(bLast) - parseInt(aLast);
+                    return bLast - aLast;
                 });
                 break;
             case 'download':
                 elements.sort((a,b)=>{
-                    return parseInt(b.dataset.downloadcount) - parseInt(a.dataset.downloadcount);
+                    const aCount = parseInt(a.dataset.downloadcount) || 0;
+                    const bCount = parseInt(b.dataset.downloadcount) || 0;
+                    return bCount - aCount;
                 });
                 break;
         }
@@ -608,9 +612,15 @@ window.addEventListener ("load", ()=> {
 
         // Inject Packs To Sponsor
         const featured = menuItems.find(m => m.dataset.categoryMenu == 'Featured');
-        if (featured) {
+        if (featured && toSponsor) {
             featured.after(toSponsor);
             menuItems.splice(menuItems.indexOf(featured) + 1, 0, toSponsor);
+        }
+
+        // Inject Commercial
+        if (toSponsor && commercial) {
+            toSponsor.after(commercial);
+            menuItems.splice(menuItems.indexOf(toSponsor) + 1, 0, commercial);
         }
 
         for (const e of elements) {
@@ -640,8 +650,20 @@ window.addEventListener ("load", ()=> {
             menuItem: toSponsor
         };
 
+        const commercialEntry = {
+            name: "Commercial",
+            index: menuItems.findIndex(m => m.dataset.categoryMenu == 'Commercial'),
+            elements: items.all.filter(e => e.dataset.commercial),
+            children: [],
+            menuItem: commercial
+        };
+
         menuTitleMap.set('Packs to Sponsor &#9829;', 'toSponsor');
         menuKeyMap.set('toSponsor', 'Packs to Sponsor');
+
+        menuTitleMap.set('commercial', 'Commercial');
+        menuTitleMap.set('Commercial', 'Commercial');
+        menuKeyMap.set('Commercial', 'Commercial');
 
         const unsortedTitle = 'Unsorted';
 
@@ -721,6 +743,9 @@ window.addEventListener ("load", ()=> {
 
         menu.set("All", all);
         menu.set("Packs to Sponsor", packsToSponsor);
+        if (commercial) {
+            menu.set("Commercial", commercialEntry);
+        }
         menu.set("Deprecated", deprecated);
 
         return menu;

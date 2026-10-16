@@ -14,24 +14,47 @@
     {{- end -}}
 {{- end -}}
 
-{{- $latestDate := div .lastPublished 1000 | int | dateFormat "2 Jan 2006" -}}
+{{- $isCommercial := or (eq .commercial true) (eq .commercial "true") -}}
+{{- $websiteUrl := .projectURL -}}
+{{- if or (not $websiteUrl) (eq $websiteUrl "") -}}
+    {{- with .links -}}
+        {{- range . -}}
+            {{- if eq .title "Website" -}}
+                {{- $websiteUrl = .link -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+{{- $targetUrl := printf "https://www.nuget.org/packages/%s" .id -}}
+{{- if and $isCommercial $websiteUrl (ne $websiteUrl "") -}}
+    {{- $targetUrl = $websiteUrl -}}
+{{- end -}}
+
+{{- $latestDate := "" -}}
+{{- with .lastPublished -}}
+    {{- $latestDate = div . 1000 | int | dateFormat "2 Jan 2006" -}}
+{{- end -}}
 
 <article class="packItem row ml-1" data-pack="{{.id}}" 
     data-categories='{{.categories | jsonify | safeHTMLAttr}}' 
-    data-last-published="{{.lastPublished}}" 
-    data-first-published="{{.firstPublished}}"
-    data-downloadcount="{{.totalDownloads}}"
-    {{- if eq .deprecated  true }}data-deprecated="true" hidden="true"{{- end -}}
-    {{- if $toSponsor -}}data-sponsor="true"{{- end -}}
-    data-search="{{printf "%s %s %s %s %s" .id .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") | lower}}"
+    data-last-published="{{.lastPublished | default 0}}" 
+    data-first-published="{{.firstPublished | default 0}}"
+    data-downloadcount="{{.totalDownloads | default 0}}"
+    {{- if eq .deprecated  true }} data-deprecated="true" hidden="true"{{- end -}}
+    {{- if $toSponsor }} data-sponsor="true"{{- end -}}
+    {{- if $isCommercial }} data-commercial="true"{{- end -}}
+    data-search="{{printf "%s %s %s %s %s %s" .id (cond $isCommercial "commercial" "") .summary (delimit .authors " ") (delimit .owners " ") (delimit .tags " ") | lower}}"
     >
     <div class="col-1 col-md-1 pl-0 pr-2">
-        <a href="https://www.nuget.org/packages/{{.id}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
+        <a href="{{$targetUrl}}" target="_blank"><img loading="lazy" src="{{ .icon | default "/img/icons/vlnugeticon.png" }}" class="img-fluid" role="presentation"/></a>
     </div>
     <div class="d-block col-11 pl-0 col-md-11 pl-lg-4">
         <div class="row mb-1">
             <div class="col-12 col-md-9 col-lg-10 d-md-flex flex-row align-items-baseline">
-                <h3 id="{{ .id | anchorize }}"><a href="https://www.nuget.org/packages/{{.id}}" target="_blank" data-pack-info>{{.id}}</a></h3>
+                <h3 id="{{ .id | anchorize }}"><a href="{{$targetUrl}}" target="_blank" data-pack-info>{{.id}}</a></h3>
+                {{- if $isCommercial -}}
+                    <span class="badge badge-pill badge-commercial ml-md-2 my-1 my-md-0">Commercial</span>
+                {{- end -}}
                 <div class="authors ml-md-3 owners" data-pack-info>
                     {{- with .owners -}}
                         {{- range . -}}
@@ -51,6 +74,7 @@
 
         <div class="row my-3">
             <div class="col">
+                {{- if not $isCommercial -}}
                 <div class="version">
                     <div class="row">
                         <div class="col-1">
@@ -61,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+                {{- end -}}
 
                 <div class="author">
                     <div class="row">
@@ -81,6 +106,7 @@
                                 <img src="{{$link.RelPermalink}}" alt="Links" role="presentation" aria-hidden="true"/>
                             </div>
                             <div class="col">
+                                {{- $projUrl := .projectURL -}}
                                 {{- with .projectURL -}}
                                     {{- if ne . "" -}}
                                         <a href="{{.}}">Website</a>
@@ -88,7 +114,9 @@
                                 {{- end -}}
                                 {{- with .links -}}
                                     {{- range . -}}
-                                        {{- if eq .title "Sponsor!" -}}
+                                        {{- if and $projUrl (or (eq .title "Website") (eq .link $projUrl)) -}}
+                                            {{- /* Skip duplicate Website link */ -}}
+                                        {{- else if eq .title "Sponsor!" -}}
                                             <a href="{{.link}}" class="badge badge-sponsor">&#9829; {{.title}}</a>
                                         {{- else -}}
                                             <a href="{{.link}}">{{.title}}</a>
@@ -123,6 +151,7 @@
                 </div>
             </div>
             <div class="d-lg-none w-100"></div>
+            {{- if not $isCommercial -}}
             <div class="col-6 col-lg-2 links flex-break">
                 <div class="row">
                     <div class="col-1">
@@ -131,6 +160,7 @@
                     <div class="col"><span class="number">{{- .totalDownloads -}}</span></div>
                 </div>
             </div>
+            {{- end -}}
         </div>
 
 

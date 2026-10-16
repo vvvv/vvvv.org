@@ -1,3 +1,5 @@
+@use 'shared' as theme;
+
 body.sidebar-open {
   overflow: hidden;
   position: fixed;
@@ -279,6 +281,19 @@ body.sidebar-open {
             a {
                 text-decoration: none;
             }
+        }
+
+        .badge-commercial {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.2rem 0.55rem;
+            border-radius: 10rem;
+            background-color: theme.$strongOrange;
+            color: #ffffff;
+            vertical-align: middle;
+            line-height: 1.2;
         }
 
         .authors{
