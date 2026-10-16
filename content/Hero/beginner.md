@@ -1,5 +1,5 @@
 ---
-title: "vvvv Beginner Class Starts October 19th"
+title: "vvvv Beginner Class Starts November 16th"
 weight: 5
 button:
     title: Learn more...
