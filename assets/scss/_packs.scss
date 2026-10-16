@@ -299,8 +299,21 @@ body.sidebar-open {
             }
         }
 
-        .description{
+        .description {
             margin: 0.8rem 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+            overflow: hidden;
+            // cursor: pointer;
+            position: relative;
+
+            &.expanded {
+                display: block;
+                -webkit-line-clamp: unset;
+                line-clamp: unset;
+            }
         }
 
         // .version{

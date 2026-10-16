@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2024-08-20"
 title: "Introducing: Support for Industrial Cameras by IDS Imaging"
-description: "For your computer-vision needs"
+description: "For your uEye, uEye+ USB and GigE cameras"
+slug: "introducing-support-for-industrial-cameras-by-ids-imaging"
 thumb: thumb.png
 ---
 

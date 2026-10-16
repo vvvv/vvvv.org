@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2022-08-31"
-title: "Introducing: Lottie"
-description: "vvvv now plays back Lottie animation files"
+title: "Introducing: vvvv now plays back Lottie animation files"
+slug: "introducing-lottie"
+description: "For high fidelity vector animations"
 thumb: lottie.png
 ---
 

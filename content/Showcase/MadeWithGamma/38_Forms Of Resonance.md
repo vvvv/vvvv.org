@@ -1,5 +1,5 @@
 ---
-id: 38
+weight: 38
 author: Agustin Muriago, Natan Sinigaglia
 title: Forms of Resonance
 subtitle: 

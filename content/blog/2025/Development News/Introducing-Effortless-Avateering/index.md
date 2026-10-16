@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-07-18"
-title: "Introducing: Effortless Avateering"
+title: "Introducing: Effortless Avateering - Control rigged 3d models"
 description: "It can hardly get any simpler"
+slug: "introducing-effortless-avateering"
 draft: true
 ---
 

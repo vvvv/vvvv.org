@@ -1,5 +1,5 @@
 ---
-id: 27
+weight: 27
 author: Christine Mayerhofer
 title: Point of You - Immersive Projection Mapping
 subtitle: 

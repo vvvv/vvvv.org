@@ -24,27 +24,30 @@ export default defineConfig({
       followSymlinks: true // Watch to symbolic links
     }
   },
-  build: {
-    outDir: "../../static/js/vue/",
-  rollupOptions: {
-    input: {
-      main: './src/main.js'
-    },
-    output: {
-      manualChunks: {
-        vue: ['vue'],
-        icons: ['@vicons/ionicons5'],
-        lodash: ['lodash']
-      },
-      entryFileNames: `app.js`,
-      chunkFileNames: 'app-[name]-[hash].js',
-      assetFileNames: '[name].[ext]'
-    },
-    treeshake: true
+  css: {
+    devSourcemap: false,
   },
-  // cssCodeSplit: true, // Ensure CSS is split into a separate file
-  target: 'esnext',
-  minify: true,
-  sourcemap: false
+  build: {
+      outDir: "../../static/js/vue/",
+    rollupOptions: {
+      input: {
+        main: './src/main.js'
+      },
+      output: {
+        manualChunks: {
+          vue: ['vue'],
+          icons: ['@vicons/ionicons5'],
+          lodash: ['lodash']
+        },
+        entryFileNames: `app.js`,
+        chunkFileNames: 'app-[name]-[hash].js',
+        assetFileNames: '[name].[ext]'
+      },
+      treeshake: true
+    },
+    // cssCodeSplit: true, // Ensure CSS is split into a separate file
+    target: 'esnext',
+    minify: true,
+    sourcemap: false
   },
 })

@@ -1,6 +1,7 @@
 ---
 date: "2023-03-02"
-title: "Introducing: VL.StandardLibs"
+title: "Introducing: The VL.StandardLibs github repository"
+slug: "introducing-vl.standardlibs"
 description: "All VL libraries are now open-source"
 categories: "Development News"
 author: "joreg"

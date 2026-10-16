@@ -1,6 +1,8 @@
+@use 'shared' as theme;
+
 #mainNav
 {
-    background-color: $header-dark;
+    background-color: theme.$header-dark;
     
     .navbar-toggler {
         border: none;
@@ -14,7 +16,7 @@
 
     .nav-link:hover
     {
-        color: $orange;
+        color: theme.$orange;
     }
 
     .nav-item
@@ -25,7 +27,7 @@
         &.download-pill
         {
             border-radius: 6px;
-            background-color: $orange;
+            background-color: theme.$orange;
             line-height: 1em;
 
             width: fit-content;
@@ -49,7 +51,7 @@
 
             &:hover
             {
-                background-color: $orange-hover;
+                background-color: theme.$orange-hover;
             }
         }
 

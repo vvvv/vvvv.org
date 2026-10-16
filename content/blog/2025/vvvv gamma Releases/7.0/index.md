@@ -10,16 +10,19 @@ thumb: vvvv70-thumb.jpg
 ![vvvv gamma 7.0 release](header-7.png)
 <small>Artwork by Arístides García aka [lasal](https://vvvv.org/people/lasal)</small>
  
-Here is to introduce **vvvv gamma 7.1** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
+Here is to introduce **vvvv gamma 7.4** with all its pomp and glory. And make no mistake: This is not your parents vvvv!
 
 {{< box >}}
-__[Download vvvv gamma 7.1](http://vvvv.org/#Download)__  
+__[Download vvvv gamma 7.4](http://vvvv.org/#Download)__  
 
 - [Full Change Log](https://thegraybook.vvvv.org/changelog/7.x.html)
 - [Get started](https://thegraybook.vvvv.org/reference/getting-started/overview.html)  
 - [Buy a license](https://store.vvvv.org)
 
 __Bugfix releases__
+- 7.4 on July 17, 2026
+- 7.3 on June 24, 2026
+- 7.2 on May 22, 2026
 - 7.1 on March 18, 2026
 
 {{< /box >}}
@@ -238,7 +241,7 @@ The following libraries finally got a stable release and have been discussed in 
 ## Community efforts
 The big focus on [extendability](https://thegraybook.vvvv.org/reference/extending/overview.html) we have with vvvv, makes it possible for everyone to contribute to its ecosystem of libraries. And many of you do! Following is a list of profile pages on nuget.org by all individuals and groups that have published libraries for use with vvvv since the last vvvv gamma stable release. In no particular order:
 
-[texone](https://www.nuget.org/profiles/texone) - [AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia) - [anamirbast](https://www.nuget.org/profiles/anamirbast) - [tebjan](https://www.nuget.org/profiles/tebjan) - [bj-rn](https://www.nuget.org/profiles/bj-rn) - [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl) - [antokhio](https://www.nuget.org/profiles/antokhio) - [D21s](https://www.nuget.org/profiles/D21s) - [3e8.studio](https://www.nuget.org/profiles/3e8.studio) - [cnisidis](https://www.nuget.org/profiles/cnisidis) - [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt) - [sebescudie](https://www.nuget.org/profiles/sebescudie) - [mhusinsky](https://www.nuget.org/profiles/mhusinsky) - [chkworks](https://www.nuget.org/profiles/chkworks) 
+[texone](https://www.nuget.org/profiles/texone) - [AristidesGarcia](https://www.nuget.org/profiles/AristidesGarcia) - [anamirbast](https://www.nuget.org/profiles/anamirbast) - [tebjan](https://www.nuget.org/profiles/tebjan) - [bj-rn](https://www.nuget.org/profiles/bj-rn) - [phlegma](https://www.nuget.org/profiles/phlegma), [sebl](https://www.nuget.org/profiles/sebl) - [antokhio](https://www.nuget.org/profiles/antokhio) - [D21s](https://www.nuget.org/profiles/D21s) - [3e8](https://www.nuget.org/profiles/3e8.studio) - [cnisidis](https://www.nuget.org/profiles/cnisidis) - [wirmachenbunt](https://www.nuget.org/profiles/wirmachenbunt) - [sebescudie](https://www.nuget.org/profiles/sebescudie) - [mhusinsky](https://www.nuget.org/profiles/mhusinsky) - [chkworks](https://www.nuget.org/profiles/chkworks) 
 
 These contributions are extremely valuable and we bow before every single one of you! Often those contributions are also demonstrated at a [vvvv meetup](https://www.youtube.com/watch?v=Npr0K63bKZc&list=PL2KeRstDQVRQUgSEa604MaS3HtA8UgPUt) that are expertly run by [The NODE Institute](https://thenodeinstitute.org/) in collaboration with [chk](https://vvvv.org/people/chk) and [ravazquez](https://vvvv.org/people/ravazquez).
 

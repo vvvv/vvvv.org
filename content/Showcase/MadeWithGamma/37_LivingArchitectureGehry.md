@@ -1,5 +1,5 @@
 ---
-id: 37
+weight: 37
 author: Refik Anadol Studio
 title: Living Architecture:Gehry
 subtitle: 

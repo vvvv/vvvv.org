@@ -1,0 +1,28 @@
+@use 'shared' as theme;
+
+#Support
+{
+    background-color: #333;
+
+    p, ul
+    {
+        font-size: 0.9rem;
+    }
+
+    .smaller
+    {
+        font-size: smaller;
+        line-height: 2em !important;
+    }
+
+    hr.divider
+    {
+        border-color: #666;
+        border-width: 1px;
+    }
+
+    .blueColor
+    {
+        background-color: theme.$blue;
+    }
+}

@@ -4,6 +4,7 @@ author: "joreg"
 date: "2024-09-25"
 title: "Introducing: Support for ZED stereo cameras by Stereolabs"
 description: "For your depth-sensing needs"
+slug: "introducing-support-for-zed-stereo-cameras-by-stereolabs"
 thumb: thumb.jpg
 ---
 

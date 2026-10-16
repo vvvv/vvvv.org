@@ -1,5 +1,5 @@
 ---
-id: 28
+weight: 28
 author: bildwerk, Tamschick Media+Space
 title: House of Digitalization
 subtitle:

@@ -1,5 +1,5 @@
 ---
-id: 15
+weight: 15
 author: SCHNELLE BUNTE BILDER
 title: The Research Wall
 subtitle:

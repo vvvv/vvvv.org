@@ -1,5 +1,5 @@
 ---
-id: 30
+weight: 30
 author: Lunchmeat
 title: Dinosauria Museum Prague
 subtitle: 

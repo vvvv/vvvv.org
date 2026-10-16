@@ -1,5 +1,9 @@
+@use 'shared'  as theme;
+
 #Learn
 {
+
+  background-color: #fff;
 
   a
   {
@@ -8,7 +12,7 @@
 
     &:hover
     {
-      border-bottom: 1px solid $orange;  
+      border-bottom: 1px solid theme.$orange;  
     }
   }
 

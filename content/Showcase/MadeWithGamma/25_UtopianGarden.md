@@ -1,5 +1,5 @@
 ---
-id: 25
+weight: 25
 author: wirmachenbunt / flora&faunavisions
 title: Utopian Garden
 subtitle:

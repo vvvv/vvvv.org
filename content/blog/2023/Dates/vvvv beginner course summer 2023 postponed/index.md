@@ -27,7 +27,7 @@ This semester-long live class is designed as a weekly add-on to your studies or 
 
 ## About the Instructors
 
-**Christoph Ignaz Kirmaier** aka chk is a musician, multimedia artist, educator and co-founder of the Vienna and Berlin based Studio 3e8. In the past years he has worked all across large-scale corporate multimedia installations, sound design, generative graphics, electronics, animation, music videos, user experience and robotic prototypes in several companies, bands and collectives.
+**Christoph Ignaz Kirmaier** aka chk is a musician, multimedia artist, educator and co-founder of the Vienna and Berlin based studio [3e8](https://www.3e8.studio/). In the past years he has worked all across large-scale corporate multimedia installations, sound design, generative graphics, electronics, animation, music videos, user experience and robotic prototypes in several companies, bands and collectives.
 
 Two sessions will be taken over by **Rosi Grillmair** aka remony, artist and coding/”node”ing – nerd as well as long term vvvv community member. She is an excellent educator in the field of interactive media, community driven programming tools and artistic installations. Her sessions are a mix of playful lectures, hands-on tutorials and enough time for your questions and in-depth discussions.
 

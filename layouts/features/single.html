@@ -1,0 +1,16 @@
+{{ define "sidebar" }}
+  {{ partial "features/sidebar.html" (dict "current" . "context" .) }}
+{{ end }}
+
+{{ define "main" }}
+
+  {{ $pages := .CurrentSection.RegularPages.ByWeight }}
+
+  {{ range $pages }}
+      <section>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+      </section>
+  {{ end }}
+
+{{ end }}

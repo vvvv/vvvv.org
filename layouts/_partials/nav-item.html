@@ -1,0 +1,43 @@
+{{- $ctx := .ctx -}}
+{{- $selected := .selected -}}
+{{- $name := index $ctx "name" -}}
+{{- $text := index $ctx "text" -}}
+{{- $titleHidden := index $ctx "titleHiddenOnDesktop" -}}
+{{- $url := index $ctx "name" | absLangURL -}}
+{{- $selectedStyle := "" -}}
+{{- $style := "" -}}
+{{- $icon := false -}}
+
+{{- with index $ctx "icon" -}}
+    {{- if eq . "pack" -}}
+        {{- $icon = "pack-icon" -}}
+    {{- else if eq . "download" -}}
+        {{- $icon = "download-icon" -}}
+    {{- else -}}
+        {{- $icon = "extension" -}}        
+    {{- end -}}
+{{- end -}}
+
+{{- with index $ctx "style" -}}
+    {{- $style = . -}}
+{{- end -}}
+
+{{- if eq (lower $selected) (lower $name) -}}
+    {{- $selectedStyle = "selected" -}}
+{{- end -}}
+{{- with index $ctx "url" -}}
+    {{- $url = . | absLangURL -}}
+{{- end -}}
+{{- with index $ctx "localurl" -}}
+    {{- $url = . | absLangURL -}}
+{{- end -}}
+
+<li class="{{- $style -}}{{if $selectedStyle}} selected{{end}}" style="line-height: 1em;">
+    <a href="{{- $url -}}" title="{{$name}}">
+        {{- if $icon -}}
+            <div class="icon {{$icon}}"></div> <span class="title {{if $titleHidden}}hidden{{end}}">{{default $name $text}}</span>
+        {{- else -}}
+            {{- $name -}}
+        {{- end -}}
+    </a>
+</li>

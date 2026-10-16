@@ -1,5 +1,5 @@
 ---
-id: 6
+weight: 6
 author: Christine Mayerhofer
 title: Binärtransformation - Audio-Reactive Light Show
 subtitle: 

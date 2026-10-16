@@ -2,8 +2,9 @@
 categories: "Development News"
 author: "joreg"
 date: "2025-08-24"
-title: "Update: VL.CEF improvements"
-description: "For your web rendering needs"
+title: "Update: Improvements for the Web Content & JavaScript Integration via VL.CEF"
+description: "Updates to the latest version of the underlying Chromium Embedded Framework"
+slug: "update-vl.cef-improvements"
 thumb: thumb.png
 ---
 
@@ -29,7 +30,7 @@ You can make use of these changes today by installing either of the two NuGets:
 ## Sponsor credits
 
 For the sponsoring of the latest updates to this [open-source](https://github.com/vvvv/VL.CEF) development we bow to:
-- [3e8.studio](http://3e8.studio)
+- [3e8](http://3e8.studio)
 - Nils Weger aka [phlegma](https://vvvv.org/people/phlegma), Manutchehr Ghassemlou, Christine Mayerhofer aka [ravel](https://vvvv.org/people/ravel)
  
 If you also have a request for custom development, please [get in touch](mailto:devvvvs@vvvv.org)!

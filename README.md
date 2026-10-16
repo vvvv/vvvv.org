@@ -8,6 +8,7 @@ Source of [vvvv.org](http://vvvv.org)
 - The only file that is mandatory in your folder is the `index.md` file. Best copy one over from another blogpost and modify it
 - For posts of type `date` you need to enter from- and to- dates in the format: "2026-02-26T18:00:00" (defaulting to CET timezone) or "2026-02-26T18:00:00+02:00" to specify an offset from CET.
 - To preview your post locally, see the section "Local Build" below
+- Optional: To hide the post from the dates section at the community page, add ''ShowAsCommunityDate: false'' to the header section of your index.md
 - Finally make a pull-request from your fork to this repo
 
 ### Shortcodes
@@ -16,11 +17,13 @@ For embedding external media use these short codes:
 * Mastodon: `{{< mastodon "mastodon.xyz/@vvvv/109598445063555699" 550 >}}` Parameters: Link [Height (default=550)]
 * Pixelfed: `{{< pixelfed "pixelfed.social/p/madewithvvvv/509678388578111219" 550 >}}` Parameters: Link [Height (default=550)]
 * Vimeo: `{{< "vimeo" "761078720" >}}` Parameters: "Vimeo ID"
-* Youtube `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
+* Youtube: `{{< youtube "761078720" "123">}}` Parameters: "Youtube ID" "Starttime"
+* Pic (image, that hugo won't rescale): {{< pic src="foo.png" alt="bar" title="bar" width="10">}}. alt, title, width - optional. width is in px.
  
 ## Local build:
-* [Download Hugo Extended](https://github.com/gohugoio/hugo/releases/tag/v0.145.0), **Version 0.145**, unzip and place that into your programs folder,
-* Add it to your path (environment variables)
+* [Download Hugo](https://github.com/gohugoio/hugo/releases/), unzip and place that into some folder
+* [Download Dart-Sass](https://github.com/sass/dart-sass/releases/), unzip and place that into the same folder
+* Add this folder to your PATH (environment variables)
 * Powershell: 
   * `cd C:\dev\vvvv.org`
   * `hugo server`

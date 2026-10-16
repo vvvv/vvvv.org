@@ -1,5 +1,5 @@
 ---
-id: 2
+weight: 2
 author: Dominik Jančík
 title: Schéma
 subtitle:

@@ -229,6 +229,98 @@ $tag-dark:  #666;
 }
 
 #UsersForHire{
+
+  .hireTable{
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 1rem;
+
+      img {
+          display: block;
+          width: 100%;
+          height: auto;
+          max-height: 7rem;
+          object-fit: cover;
+      }
+
+      .imgDefault{
+        display: block;
+        width: 100%;
+        height: 7rem;
+        background-color: #e0e0e0;
+      }
+
+      td{
+          padding: 1.5rem 1rem;
+          border-bottom: 1px solid #e0e0e0;
+          text-align: left;
+          vertical-align: top;
+
+          .tags{
+            margin-top: 1rem;
+          }
+
+          .text{
+            b, strong{
+              font-weight: normal;
+            }
+          }
+
+          a{
+            pointer-events: none;
+          }
+
+          p{
+            padding: 0;
+            margin: 0;
+          }
+      }
+
+      tr:hover{
+        background-color: #f8f8f8;
+        cursor: pointer;
+      }
+
+      tr:last-child td{
+        border: none;
+      }
+
+      .col-pic{ width: 20%; }
+      .col-username{ width: 20%;}
+      .col-text{ width: 40%; }
+      .col-location{ width: 20%; }
+
+      @media (max-width: 768px) {
+
+        thead{
+          display: none;
+        }
+
+        tbody, tr, td {
+          display: block;
+          width: 100% !important; /* Overrides desktop percentages */
+        }
+        
+        tr {
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          padding: 10px;
+        }
+        
+        td {
+          position: relative;
+          border-bottom: none;
+          padding: 0.5rem;
+        }
+
+        img{
+          max-height: 10rem;
+        }
+      }
+  }
+
   .card{
     
     color: inherit;

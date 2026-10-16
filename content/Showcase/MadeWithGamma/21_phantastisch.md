@@ -1,5 +1,5 @@
 ---
-id: 21
+weight: 21
 author: Responsive Spaces
 title: Tegernsee Phantastisch
 subtitle:

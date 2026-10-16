@@ -21,7 +21,7 @@ The following is a list of intermediate vvvv workshops for those of you who alre
 - **[Working with REST APIs](https://thenodeinstitute.org/courses/ss23-vvvv-13-working-with-rest-apis/)** by [Seb Escudié](https://sebescudie.github.io/)
 **June 29th 2023** 6-9 PM (CET)
 
-- **[Game Logic](https://thenodeinstitute.org/courses/ss23-vvvv-game-logic/)** by [Christoph Ignaz Kirmaier](https://vimeo.com/studio3e8)
+- **[Game Logic](https://thenodeinstitute.org/courses/ss23-vvvv-game-logic/)** by [Christoph Ignaz Kirmaier](https://vimeo.com/threeeeight)
 **July 6th 2023** 6-9 PM (CET)
 
 - **[MiDi & Sequencing tools](https://thenodeinstitute.org/courses/ss23-vvvv-15-midi-sequencing-tools/)** by [Arístides García](https://www.aristidesgarcia.de)

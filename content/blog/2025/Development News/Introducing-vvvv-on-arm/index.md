@@ -3,7 +3,8 @@ categories: "Development News"
 author: "joreg"
 date: "2025-05-05"
 title: "Introducing: vvvv on Arm for Windows and Mac, Phase 1/2"
-description: "Native builds for Arm CPUs"
+description: "Native builds for Arm CPUs including Apple Silicon Macs via Parallels"
+slug: "introducing-vvvv-on-arm-for-windows-and-mac-phase-1-2"
 thumb: thumb.png
 ---
 
