@@ -32,10 +32,10 @@
                 {{end}}
               >
               {{ with .Params.button}}
-                <a href="{{.url}}" alt="{{$elem.Params.title}}" {{if .isExternal}}target="_blank"{{end}}>{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</a><br/>
+                <a href="{{.url}}" class="title" alt="{{$elem.Params.title}}" {{if .isExternal}}target="_blank"{{end}}>{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</a>
                 <a href="{{.url}}" class="button" {{if .isExternal}}target="_blank"{{end}}>{{default "Read more" .title }}</a>
               {{ else }}
-                {{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}
+                <div class="title">{{ $elem.Params.title | replaceRE "\n" "<br>" | safeHTML }}</div>
               {{ end }}
             </section>
           {{ end }}
