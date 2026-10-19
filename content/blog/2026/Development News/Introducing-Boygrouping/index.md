@@ -17,11 +17,12 @@ Debuted in 2001 with [vvvv beta](https://beta.vvvv.org/using-vvvv/boygrouping/),
 Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
 Setup is easy, **[docs are here](https://thegraybook.vvvv.org/reference/hde/boygrouping.html).**
 
-![Cyberhelvetia by MESO, 2002](image.png)
-The first ever boygroup was running at the [Cyberhelvetia pavilion](https://meso.design/en/projects/expo02-switzerland-cooperative-multisensory-media-space-for-national-expo) in 2002, with vvvv beta. 
-
 ![Dataland by Refik Anadol Studio, 2026](<Gallery A – Data Pavilion_07.png>)
-The currently largest boygroup is running at [Dataland](https://dataland.art/), spanning 42 clients, with vvvv gamma.
+The currently largest boygroup is running at [Dataland](https://dataland.art/), spanning 42 PCs powering 84 4k projectors, with vvvv gamma.
+
+
+![Cyberhelvetia by MESO, 2002](image.png)
+Blast of the past: The first ever boygroup was running at the [Cyberhelvetia pavilion](https://meso.design/en/projects/expo02-switzerland-cooperative-multisensory-media-space-for-national-expo) in 2002, with vvvv beta. 
 
 ## But?
 
