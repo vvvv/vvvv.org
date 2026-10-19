@@ -19,6 +19,8 @@ The session takes place on **November 24th** (Tuesday), **18:00 to 21:00 CET**. 
 
 Sign up here: **[Driving Particle Systems from Geospatial Data in vvvv](https://thenodeinstitute.org/courses/driving-particle-systems-from-geospatial-data-in-vvvv?utm_source=vvvv&utm_medium=blog)**
 
+{{< youtube 4P2lVKuSgbg >}}
+
 ## About the instructor
 
 **Rosi Grillmair** is an artist, creative coder and educator working with real-time processing, digital fabrication and data visualization, and has been teaching vvvv at The NODE Institute since 2022. Her works were shown at Ars Electronica, TADAEX Tehran, Medialab Prado and the Gwangju Media Arts Festival. More at [rgba.studio](https://www.rgba.studio/).
