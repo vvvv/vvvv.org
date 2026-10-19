@@ -4,6 +4,7 @@ author: "joreg"
 date: "2026-10-19"
 title: "Introducing: Distributed Rendering aka Boygrouping"
 description: "Live programming at scale"
+slug: "introducing-distributed-rendering-aka-boygrouping"
 thumb: thumb.png
 ---
 
