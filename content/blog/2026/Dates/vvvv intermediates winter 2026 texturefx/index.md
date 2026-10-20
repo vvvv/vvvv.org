@@ -20,6 +20,8 @@ Both sessions take place on **December 1st and 2nd** (Tuesday and Wednesday), **
 
 Sign up here: **[Advanced TextureFX Techniques in vvvv](https://thenodeinstitute.org/courses/advanced-texturefx-techniques-in-vvvv?utm_source=vvvv&utm_medium=blog)**
 
+{{< youtube eHhGdLxT_IU >}}
+
 ## About the instructor
 
 **Irwin Quemener** aka *lecloneur* is the creative and technical lead and co-founder of [CloneProduction](https://www.cloneproduction.net), a Shanghai studio building permanent installations into architectural spaces. He co-authored the TextureFX+ system in VL.Addons, which brings contributions from across the vvvv community together in a single library.

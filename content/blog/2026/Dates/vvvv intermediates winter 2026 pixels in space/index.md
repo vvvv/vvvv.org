@@ -20,6 +20,8 @@ Both sessions take place on **December 8th and 15th** (Tuesdays), **18:00 to 21:
 
 Sign up here: **[Pixels in Space: Projection Mapping & Immersive Setups in vvvv](https://thenodeinstitute.org/courses/pixels-in-space-projection-mapping-immersive-setups-in-vvvv?utm_source=vvvv&utm_medium=blog)**
 
+{{< youtube HLorw_Q9-1w >}}
+
 ## About the instructor
 
 **Simon Weckert** is a creative technologist specializing in large-scale projections and immersive vvvv setups. Together with Refik Anadol he turns data streams into immersive environments, exhibited at MoMA, Centre Pompidou and ZKM. More at [simonweckert.com](https://www.simonweckert.com).

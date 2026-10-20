@@ -20,6 +20,8 @@ Both sessions take place on **November 10th and 17th** (Tuesdays), **18:00 to 21
 
 Sign up here: **[Applied 2D & 3D Math for Creative Coders](https://thenodeinstitute.org/courses/applied-2d-3d-math-for-creative-coders?utm_source=vvvv&utm_medium=blog)**
 
+{{< youtube RgcjdoW4xPk >}}
+
 ## About the instructor
 
 **TobyK** is a software developer and interactive designer, and the author of the maths patches in [VL.ExtendedTutorials](https://github.com/TobyKLight/VL.ExtendedTutorials). In his own words: *"I actually wasn't born a maths prodigy, I think this makes me a better instructor because I worked it out step by step and I still remember the way up the mountain."*
