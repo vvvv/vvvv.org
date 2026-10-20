@@ -15,7 +15,7 @@ Debuted in 2001 with [vvvv beta](https://beta.vvvv.org/using-vvvv/boygrouping/),
 ![](boygrouping.png)
 
 Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
-Setup is easy, **[docs are here](https://thegraybook.vvvv.org/reference/hde/boygrouping.html).**
+Setup is trivial, **[docs are here](https://thegraybook.vvvv.org/reference/hde/boygrouping.html).**
 
 ![Dataland by Refik Anadol Studio, 2026](<Gallery A – Data Pavilion_07.png>)
 The currently largest boygroup is running at [Dataland](https://dataland.art/), spanning 42 PCs powering 84 4k projectors, with vvvv gamma.
@@ -28,9 +28,9 @@ Blast of the past: The first ever boygroup was running at the [Cyberhelvetia pav
 
 No, it is not only useful for large-scale immersive environments. Whenever you need to develop/run an app that is spanning multiple PCs, boygrouping can help. 
 
-Even if it is only about saving time on deployment while still testing, think:
+Even if it is only about saving time during production, think:
 - A museum running entirely different apps, on different PCs: You can develop them all live, from a single PC and have each client PC only run parts of a patch they are assigned to...
-- A single touch screen application that you want to develop while in fullscreen (in case you cannot remote into the PC onto a second monitor)
+- A single touch screen application that you want to develop while in fullscreen
 
 Give it a spin and let us know what you think!  
 Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!
