@@ -35,7 +35,7 @@ Even if it is only about saving time during production, think:
 
 ## Licensing
 
-What does it mean for licensing? Simple: Every client PC running vvvv in such a scenario needs a device license. You may still eventually turn to running your app as an [export](https://thegraybook.vvvv.org/reference/hde/exporting.html) but at least any development time needs to be covered by a device license per client PC.
+Every client PC dancing along in a vvvv boygroup needs a device license, in addition to the developers licenses. You may still eventually turn to running your app as an [export](https://thegraybook.vvvv.org/reference/hde/exporting.html) but at any period of time the boygrouping feature is in use, it needs to be covered by a device license per client PC. Note that for your financial convenience we offer [monthly](https://store.vvvv.org/products/vvvv-gamma-device-license-monthly) or [annual](https://store.vvvv.org/products/vvvv-gamma-device-license-annual) device licenses.
 
 So please give it a spin and let us know what you think!  
 Available for testing in **[vvvv gamma 8.0 preview builds](/download)**!  
