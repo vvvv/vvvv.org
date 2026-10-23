@@ -4,7 +4,7 @@
 $height: 600px;
 
 :root {
-  --offset-distance: 0.8;
+  --offset-distance: 0.9;
 }
 
 header {
@@ -51,12 +51,12 @@ header {
 
     .slide {
         flex-shrink: 0;
-        width: 80%;
+        width: 90%;
         height: 100%;
         overflow: hidden;
         transition: opacity 0.4s, filter 0.4s, transform 0.55s cubic-bezier(0.77, 0, 0.175, 1);
         opacity: 0.3;
-        transform-origin: left center;
+        transform-origin: center center;
         cursor: pointer;
 
         &:hover{
@@ -65,7 +65,7 @@ header {
 
         &.active {
             opacity: 1;
-            transform-origin: left center;
+            transform-origin: center center;
             cursor: default;
             filter: none;
         }
@@ -393,7 +393,7 @@ header {
     }
 
     #hero-image{
-        height: 70%;
+        height: 80%;
         max-height: 900px;
     }
 

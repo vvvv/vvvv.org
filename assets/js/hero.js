@@ -19,7 +19,7 @@ if (window.location.pathname === '/')
             photographer: attr.getElementsByClassName('photographer')[0]
         }
 
-        let offsetDistance = 0.8;
+        let offsetDistance = 0.9;
 
         const heroBox = document.getElementById('hero-box');
 
