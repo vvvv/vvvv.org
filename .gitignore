@@ -12,3 +12,8 @@
 **/package-lock.json
 **/extensions.json
 /community-app/frontend/.env
+# agent tools (local state)
+.claude/settings.local.json
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+CLAUDE.local.md
