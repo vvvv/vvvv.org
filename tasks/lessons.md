@@ -1,5 +1,12 @@
 # Lessons
 
+## 2026-11-06
+
+- Package installation instructions use the author's verified forum command.
+  The vvvv Help Browser shows examples; it does not install NuGet packages.
+- Apply owner copy edits narrowly: distinguish technical names such as mesh
+  shaders from nearby descriptive words and remove only the selected clause.
+
 ## 2026-11-05
 
 - Before revising a blog draft on a long-lived branch, compare its remote branch

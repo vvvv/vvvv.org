@@ -9,13 +9,13 @@ thumb: "thumb.png"
 draft: true
 ---
 
-Real-time path tracing is now officially available in vvvv gamma. VL.Nvidia.PathTracing may well be the best real-time path tracer in the world right now.
+Real-time path tracing is now available in vvvv gamma. VL.Nvidia.PathTracing may well be the best real-time path tracer in the world right now.
 
 ![A procedural scene rendered with VL.Nvidia.PathTracing](hero.jpg)
 
 ## GPU-generated meshes, SDFs, text and area lights
 
-Compute and mesh shaders can send GPU-generated meshes straight to the path tracer, without a CPU readback. Combine them with Stride meshes and shader-authored SDFs. Text nodes turn font and layout data into path-traced geometry. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
+Compute and mesh shaders can send GPU-generated geometry straight to the path tracer. The scene can also contain Stride meshes and shader-authored SDFs. Text nodes turn font and layout data into path-traced geometry. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
 
 ![Procedural shapes, materials and instanced geometry in the path tracer](geometry-gallery.jpg)
 
@@ -55,7 +55,13 @@ The 0.8.0 release uses RTXPT 1.9, with Shader Execution Reordering where support
 
 ## Install VL.Nvidia.PathTracing
 
-Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing/0.8.0) in the vvvv Help Browser or from NuGet. Select this package; its dependencies are installed automatically. Help Browser examples cover GPU meshes, SDFs, text, area lights and recording.
+Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing/0.8.0) with:
+
+```text
+nuget install vl.nvidia.pathtracing
+```
+
+Its dependencies are installed automatically. The Help Browser includes examples for GPU meshes, SDFs, text, area lights and recording.
 
 The package includes agent skills for its nodes, examples and shader authoring. They give coding agents package-specific context when helping build a scene.
 
