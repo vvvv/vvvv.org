@@ -45,9 +45,9 @@ Record a DirectX 12 window or standalone texture renderer at a fixed frame rate.
 
 ## DX12Bridge connects Stride to RTXPT and opens the full shader pipeline
 
-The obstacle was Stride's DirectX 11 renderer: RTXPT needs DirectX 12. We built [VL.Stride.DX12Bridge](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0) so both can work on the same GPU. It lets textures and buffers cross into DirectX 12, then brings the path-traced image back to Stride.
+Stride's renderer uses DirectX 11, while RTXPT needs DirectX 12. To bring path tracing into vvvv, I built [VL.Stride.DX12Bridge](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0). It lets the two renderers share textures and buffers, so Stride content can feed the path tracer and the finished image can return to the rest of the patch.
 
-For shaders, we kept the familiar VL.Stride workflow: shader files appear as nodes, values become pins, and compilation works both in the editor and in a running patch. DX12Bridge extends that workflow to the full DirectX 12 pipeline. You can write vertex, hull, domain, geometry, pixel and compute shaders, the newer amplification and mesh stages, and the complete DirectX Raytracing set: ray generation, miss, closest-hit, any-hit, intersection and callable. Your own rendering passes, compute simulations and ray-traced effects can all be wired into a vvvv patch.
+For shaders, I kept the familiar VL.Stride workflow: shader files appear as nodes, values become pins, and compilation works both in the editor and in a running patch. DX12Bridge extends that workflow to the full DirectX 12 pipeline. You can write vertex, hull, domain, geometry, pixel and compute shaders, the newer amplification and mesh stages, and the complete DirectX Raytracing set: ray generation, miss, closest-hit, any-hit, intersection and callable. Your own rendering passes, compute simulations and ray-traced effects can all be wired into a vvvv patch.
 
 ## RTXPT 1.9, Shader Execution Reordering and per-pixel tracing
 
@@ -70,4 +70,4 @@ Free for personal, non-commercial use. Commercial use requires a license. NVIDIA
 
 The renderer is based on [NVIDIA RTXPT](https://github.com/NVIDIA-RTX/RTXPT), a project by [Filip Strugar](https://www.linkedin.com/in/filipstrugar/).
 
-For the evolving examples and discussion, see the [vvvv forum thread](https://forum.vvvv.org/t/vl-nvidia-pathtracing-real-time-path-tracing-in-vvvv-gamma/25110).
+For more details and discussion, see the [vvvv forum thread](https://forum.vvvv.org/t/vl-nvidia-pathtracing-real-time-path-tracing-in-vvvv-gamma/25110).

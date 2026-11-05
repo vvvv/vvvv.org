@@ -20,6 +20,8 @@
 - Before replacing article prose, compare every existing outbound link with the
   revision. Preserve forum, documentation and credit links unless the owner
   explicitly removes them.
+- Match the byline's authorship in release prose. Use singular first person for
+  work the sole author did, and describe linked pages by what readers find there.
 
 ## 2026-09-21
 
