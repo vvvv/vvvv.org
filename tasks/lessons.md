@@ -8,6 +8,10 @@
   shaders from nearby descriptive words and remove only the selected clause.
 - In public copy, say what users can render. Do not describe an internal data
   transformation when the visible capability is text rendered as mesh or SDF.
+- Keep headings on the primary capability. Omit incidental constraints such as
+  recording frame rate when the reader does not need them to understand it.
+- Check release requirements against the current package documentation. Shader
+  Model 6.9 is a capability path, not a hard requirement for PathTracing.
 
 ## 2026-11-05
 

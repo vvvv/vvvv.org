@@ -8,7 +8,7 @@ Install Hugo and Dart Sass on PATH, then `hugo server` in the repository root an
 
 ## Writing blog posts and announcements
 
-Draft and revise with the `minto-content-review` skill (`.agents/skills/minto-content-review/`). Lessons from earlier posts are in `tasks/lessons.md`; read them before editing an announcement. The rules that came out of them:
+Draft and revise with the `minto-content-review` skill (`.agents/skills/minto-content-review/`). For posts by tebjan, also use `tebjan-vvvv-blog-voice` (`.agents/skills/tebjan-vvvv-blog-voice/`); its owner-specific voice and preservation rules take precedence over a fixed editorial structure. Lessons from earlier posts are in `tasks/lessons.md`; read them before editing an announcement. The rules that came out of them:
 
 - Lead with the capability the reader gets and the visible workflow or result, not the implementation. Keep internal vocabulary (buffers, primitive types, internal example numbers) out unless the reader needs it to act.
 - State a benchmark with its setup stated directly and its scope explicit. Do not turn a hardware-dependent result into a general frame-rate claim; give the durable capability and omit the number when hardware and scene decide it.

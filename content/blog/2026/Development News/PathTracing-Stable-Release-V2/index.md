@@ -13,9 +13,9 @@ Real-time path tracing is now available in vvvv gamma. VL.Nvidia.PathTracing may
 
 ![A procedural scene rendered with VL.Nvidia.PathTracing](hero.jpg)
 
-## GPU-generated meshes, SDFs, text and area lights
+## GPU-generated geometry, SDFs, text and area lights
 
-Compute and mesh shaders can send GPU-generated geometry straight to the path tracer. The scene can also contain Stride meshes and shader-authored SDFs. Text can be rendered as mesh or SDF geometry, with font, glyph and instancing support. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
+Compute and mesh shaders can send GPU-generated geometry straight to the path tracer. The scene can also contain Stride meshes and shader-authored SDFs. Text can be rendered as mesh or SDF geometry, with font, glyph and instancing support. Mesh and SDF instancers follow the same parameter pattern. For lighting, there are point and spot lights, plus sampled area lights shaped as rectangles, disks and tubes.
 
 ![Procedural shapes, materials and instanced geometry in the path tracer](geometry-gallery.jpg)
 
@@ -39,9 +39,9 @@ Streamline Frame Generation works alongside DLSS Ray Reconstruction. Choose from
 
 [VL.Nvidia.Streamline](https://www.nuget.org/packages/VL.Nvidia.Streamline/1.0.0) is how these NVIDIA features reach the path tracer. It also makes DLSS Super Resolution, Reflex and NVIDIA Image Scaling available in vvvv. Installing PathTracing brings Streamline and DX12Bridge along automatically.
 
-## Fixed-rate video recording and HDR10 output
+## Video recording and HDR10 output
 
-Record a DirectX 12 window or standalone texture renderer at a fixed frame rate. The recorder supports a fallback encoder and can recover output after an interrupted capture. For compatible displays, choose HDR10/PQ with Rec.2020 conversion and ten-bit presentation; SDR is also available. For HDR10 video, the recorder can use ten-bit H.265 or AV1 output.
+Record a DirectX 12 window or standalone texture renderer. The recorder supports a fallback encoder and can recover output after an interrupted capture. For compatible displays, choose HDR10/PQ with Rec.2020 conversion and ten-bit presentation; SDR is also available. For HDR10 video, the recorder can use ten-bit H.265 or AV1 output.
 
 ## DX12Bridge connects Stride to RTXPT and opens the full shader pipeline
 
@@ -68,7 +68,7 @@ The package includes agent skills for its nodes, examples and shader authoring. 
 ### Requirements
 
 - Windows 10 or 11 and an NVIDIA RTX GPU; Ampere (RTX 30 series) or newer is recommended.
-- NVIDIA drivers with Shader Model 6.9 support.
+- A current NVIDIA Game Ready or Studio driver.
 
 Free for personal, non-commercial use. Commercial use requires a license. NVIDIA SDK binaries have additional license terms.
 
