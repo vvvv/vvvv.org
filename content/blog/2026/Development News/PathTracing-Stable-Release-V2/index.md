@@ -53,13 +53,11 @@ For shaders, I kept the familiar VL.Stride workflow: shader files appear as node
 
 The 0.8.0 release uses RTXPT 1.9, with Shader Execution Reordering where supported. Tracing every pixel is now the default for clean DLSS Ray Reconstruction output. DLSS resolution and path-tracing quality remain independent settings in the patch.
 
-## Install PathTracing and its companion packages
+## Install VL.Nvidia.PathTracing
 
 Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing/0.8.0) in the vvvv Help Browser or from NuGet. Select this package; its dependencies are installed automatically. Help Browser examples cover GPU meshes, SDFs, text, area lights and recording.
 
 The package includes agent skills for its nodes, examples and shader authoring. They give coding agents package-specific context when helping build a scene.
-
-You can also install [VL.Stride.DX12Bridge 0.8.0](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0) or [VL.Nvidia.Streamline 1.0.0](https://www.nuget.org/packages/VL.Nvidia.Streamline/1.0.0) without PathTracing, for a patch built around DirectX 12 shaders or DLSS.
 
 ### Requirements
 

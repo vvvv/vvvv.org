@@ -22,6 +22,8 @@
   explicitly removes them.
 - Match the byline's authorship in release prose. Use singular first person for
   work the sole author did, and describe linked pages by what readers find there.
+- Do not repeat companion-package installation options after the article already
+  explains and links those packages in their own sections.
 
 ## 2026-09-21
 
