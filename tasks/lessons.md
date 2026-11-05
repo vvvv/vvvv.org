@@ -17,6 +17,9 @@
   and use the calibrated wording from the owner's earlier published post.
 - Article headings state the actual content of their section. Replace generic
   prompts such as "Try it out" with the package or capability the section covers.
+- Before replacing article prose, compare every existing outbound link with the
+  revision. Preserve forum, documentation and credit links unless the owner
+  explicitly removes them.
 
 ## 2026-09-21
 

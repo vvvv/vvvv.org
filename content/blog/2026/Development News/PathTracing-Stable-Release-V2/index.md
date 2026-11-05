@@ -55,7 +55,7 @@ The 0.8.0 release uses RTXPT 1.9, with Shader Execution Reordering where support
 
 ## Install PathTracing and its companion packages
 
-Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing) in the vvvv Help Browser or from NuGet. Select this package; its dependencies are installed automatically. Help Browser examples cover GPU meshes, SDFs, text, area lights and recording.
+Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing/0.8.0) in the vvvv Help Browser or from NuGet. Select this package; its dependencies are installed automatically. Help Browser examples cover GPU meshes, SDFs, text, area lights and recording.
 
 The package includes agent skills for its nodes, examples and shader authoring. They give coding agents package-specific context when helping build a scene.
 
@@ -68,4 +68,6 @@ You can also install [VL.Stride.DX12Bridge 0.8.0](https://www.nuget.org/packages
 
 Free for personal, non-commercial use. Commercial use requires a license. NVIDIA SDK binaries have additional license terms.
 
-The renderer is based on [NVIDIA RTXPT](https://github.com/NVIDIA-RTX/RTXPT), a project by Filip Strugar.
+The renderer is based on [NVIDIA RTXPT](https://github.com/NVIDIA-RTX/RTXPT), a project by [Filip Strugar](https://www.linkedin.com/in/filipstrugar/).
+
+For the evolving examples and discussion, see the [vvvv forum thread](https://forum.vvvv.org/t/vl-nvidia-pathtracing-real-time-path-tracing-in-vvvv-gamma/25110).
