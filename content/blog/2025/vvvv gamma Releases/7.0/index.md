@@ -27,7 +27,7 @@ __Bugfix releases__
 
 {{< /box >}}
 
-Since the full change log is not easy to digest, we'll provide you with quick rundown of our personal release highlights:
+Since the full change log is not easy to digest, we'll provide you with a quick rundown of our personal release highlights:
 
 ## Patch Editor
 

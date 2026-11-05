@@ -49,7 +49,7 @@ As of this writing, requires latest [vvvv gamma 7.0 preview](https://vvvv.org/do
     nuget install VL.DollarsMoCap
 
 {{< box >}}
-If you want to use Dollars MONO beyond it's free trial limitations, Dollars MoCap offers a **25% discount on the [Dollars MONO Lifetime License](https://store.dollarsmocap.com/products/mono)** by using the coupon code "vvvv" on checkout!
+If you want to use Dollars MONO beyond it's free trial limitations, Dollars MoCap offers a **25% discount on the [Dollars MONO Lifetime License](https://www.dollarsmocap.com/buy/mono)** by using the coupon code "vvvv" on checkout!
 {{< /box >}}
 
 

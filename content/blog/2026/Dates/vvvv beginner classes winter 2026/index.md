@@ -4,11 +4,11 @@ author: "The NODE Institute"
 date: "2026-08-20"
 title: "vvvv Beginner Classes Winter 2026/27 - Early Bird!"
 slug: "vvvv-beginner-classes-winter-2026-27-early-bird"
-description: "Your entry into visual programming starts October 19th - early bird registration until August 31st"
+description: "Your entry into visual programming starts November 16th - early bird registration until August 31st"
 where: 
     country_name: "The NODE Institute (online)"
-    from_date: "2026-10-19T18:00:00"
-    to_date: "2026-12-07T18:00:00"
+    from_date: "2026-11-16T18:00:00"
+    to_date: "2027-01-18T18:00:00"
 thumb: "ws26_vvvv_beginner-thumb.jpg"
 ShowAsCommunityDate: false
 ---
@@ -17,12 +17,12 @@ ShowAsCommunityDate: false
 
 New to patching in vvvv and VL? Then this is for you!
 
-The **vvvv Beginner Classes** at The NODE Institute start on **October 19th** and take you from opening vvvv gamma for the first time to building your own real-time systems in its own visual programming language. Eight sessions of playful patching in **Part I**, then four sessions of development foundations in **Part II**. No prior programming experience needed, and **early bird registration is open until August 31st**.
+The **vvvv Beginner Classes** at The NODE Institute start on **November 16th** and take you from opening vvvv gamma for the first time to building your own real-time systems in its own visual programming language. Eight sessions of playful patching in **Part I**, then four sessions of development foundations in **Part II**. No prior programming experience needed, and **early bird registration is open until August 31st**.
 
 Sign up here:
 
-- **[Part I: Playful Patching in vvvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog)** by [Rosi Grillmair](https://thenodeinstitute.org/instructor/rosi-grillmair?utm_source=vvvv&utm_medium=blog) and [Gabriela Gordillo](https://thenodeinstitute.org/instructor/999?utm_source=vvvv&utm_medium=blog) - 8 sessions, from October 19th
-- **[Part II: Foundations of VL Development](https://thenodeinstitute.org/courses/vvvv-beginner-class-part2-winter-2026?utm_source=vvvv&utm_medium=blog)** by [Christoph Ignaz Kirmaier](https://vvvv.org/people/chk?utm_source=vvvv&utm_medium=blog) - 4 sessions, from January 11th
+- **[Part I: Playful Patching in vvvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog)** by [Rosi Grillmair](https://thenodeinstitute.org/instructor/rosi-grillmair?utm_source=vvvv&utm_medium=blog) and [Gabriela Gordillo](https://thenodeinstitute.org/instructor/999?utm_source=vvvv&utm_medium=blog) - 8 sessions, from November 16th
+- **[Part II: Foundations of VL Development](https://thenodeinstitute.org/courses/vvvv-beginner-class-part2-winter-2026?utm_source=vvvv&utm_medium=blog)** by [Christoph Ignaz Kirmaier](https://vvvv.org/people/chk?utm_source=vvvv&utm_medium=blog) - 4 sessions, from February 1st
 
 All sessions take place on **Mondays, 18:00 to 21:00 CET**, live and online. Every session is recorded, so nothing is lost if you cannot make an evening.
 

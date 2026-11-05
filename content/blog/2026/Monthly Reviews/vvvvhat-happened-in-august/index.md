@@ -32,8 +32,8 @@ This time of the year again. Meet your fellow patchers IRL:
 [The NODE Institute's](https://thenodeinstitute.org/) winter season of vvvv courses is live. Check these:
 
 Beginners start here:
-- [Part I: Playful Patching in vvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog) from October 19
-- [Part II: Foundations of VL Development](https://thenodeinstitute.org/courses/vvvv-beginner-class-part2-winter-2026?utm_source=vvvv&utm_medium=blog) from January 11 
+- [Part I: Playful Patching in vvv gamma](https://thenodeinstitute.org/courses/vvvv-beginner-class-part1-winter-2026?utm_source=vvvv&utm_medium=blog) from November 16
+- [Part II: Foundations of VL Development](https://thenodeinstitute.org/courses/vvvv-beginner-class-part2-winter-2026?utm_source=vvvv&utm_medium=blog) from February 1 
 - **[Many more live courses](https://thenodeinstitute.org/learning-vvvv/?v=7d0db380a5b9#winter)** on a wide range of topics
   
 ## Contributions
