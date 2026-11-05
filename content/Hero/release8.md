@@ -1,14 +1,14 @@
 ---
 title: |-
     Latest release:
-    vvvv gamma 7.4
-weight: 20
+    vvvv gamma 8.0
+weight: 1
 button:
     title: Download
-    url: /download/
+    url: /blog/2026/vvvv-gamma-8.0-release/
 image: 
     src: header_70_4_3072.jpg
-    title: "7"
-    author: "Arístides García"
+    title: "8"
+    author: "Juan Hurle"
     photographer: 
 ---
