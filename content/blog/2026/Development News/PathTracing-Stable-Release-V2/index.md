@@ -2,35 +2,70 @@
 categories: "Development News"
 author: "tebjan"
 date: "2026-11-05"
-title: "Build the scene, write the shader, present the frame"
-description: "Three stable graphics packages bring real-time path tracing, a complete DirectX 12 shader pipeline and NVIDIA-enhanced output into vvvv gamma."
+title: "From Scene to Screen: VL.Nvidia.PathTracing"
+description: "Bring GPU-generated meshes, shader-authored shapes and text into a path-traced vvvv scene, then carry the result through Stride, Frame Generation, recording and HDR."
 slug: "pathtracing-from-scene-to-screen-v2"
 thumb: "thumb.png"
 draft: true
 ---
 
-Build a live, path-traced scene from meshes, GPU-generated geometry, SDFs and text. Write the DirectX 12 shaders that shape it. Present and record the result with DLSS, HDR and the rest of the output pipeline. The stable releases of VL.Nvidia.PathTracing, VL.Stride.DX12Bridge and VL.Nvidia.Streamline bring that entire workflow into vvvv gamma.
+Real-time path tracing is now officially available in vvvv gamma. VL.Nvidia.PathTracing may well be the best real-time path tracer in the world right now.
 
-![A dense field of GPU-generated forms rendered with VL.Nvidia.PathTracing](hero.jpg)
+![A procedural scene rendered with VL.Nvidia.PathTracing](hero.jpg)
 
-## Build a path-traced scene
+## GPU-generated meshes, SDFs, text and area lights
 
-VL.Nvidia.PathTracing lets you assemble objects, lights and environments as nodes and change them while the patch runs. Stride meshes, GPU-generated meshes, shader-authored SDFs and text share the same path-traced scene. GPU instancers can create and animate large populations of objects without reading their geometry back through the CPU. Area, point and spot lights give those scenes a practical lighting vocabulary.
+Compute and mesh shaders can send GPU-generated meshes straight to the path tracer, without a CPU readback. Combine them with Stride meshes and shader-authored SDFs. Text nodes turn font and layout data into path-traced geometry. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
 
-![Procedural forms, materials and instanced geometry in a path-traced scene](geometry-gallery.jpg)
+![Procedural shapes, materials and instanced geometry in the path tracer](geometry-gallery.jpg)
 
-The renderer is based on [NVIDIA RTXPT](https://github.com/NVIDIA-RTX/RTXPT), a project by [Filip Strugar](https://www.linkedin.com/in/filipstrugar/). This release moves to RTXPT 1.9, uses Shader Execution Reordering where supported, and traces every pixel by default for clean DLSS Ray Reconstruction output. DLSS resolution and the path-tracing quality profile remain independent choices in the patch.
+<!-- The film is awaiting the owner's scene design.
+<figure class="article-video">
+  <video controls loop muted playsinline preload="metadata" poster="./procedural-scene-poster.jpg" aria-label="A procedural scene rendered with VL.Nvidia.PathTracing" style="display:block;width:100%;height:auto;">
+    <source src="./procedural-scene-film.mp4" type="video/mp4">
+    Your browser does not support HTML video.
+  </video>
+  <figcaption>A procedural scene rendered in real time.</figcaption>
+</figure>
+-->
 
-## Write the DirectX 12 pipeline
+## Bring Stride textures in, and the rendered image back
 
-VL.Stride.DX12Bridge is a graphics package in its own right. An HLSL file placed beside your patch becomes a vvvv node: its entry points determine the shader stages, its creative constants and resources become pins, and edits recompile while you work. You can build your own rendering and compute passes rather than being confined to the shaders in the examples.
+File and video textures, TextureFX outputs and render targets can feed path-traced materials. Use TextureRenderer and ToDX11Texture in the same render host to bring the rendered image back into Stride.
 
-The shader pipeline covers vertex, hull, domain, geometry and pixel stages; compute; amplification and mesh shaders; and DirectX Raytracing stages including ray generation, miss, hit, intersection and callable shaders. That means a procedural mesh shader, a compute simulation or a custom ray-traced effect can all be authored directly in HLSL and wired into a patch. The bridge also shares resources and synchronization between Stride's DirectX 11 renderer and DirectX 12, so textures and results can cross back into the rest of a vvvv project. You can install DX12Bridge on its own for this work.
+## DLSS Super Resolution and Frame Generation
 
-## Present and record the frame
+Streamline Frame Generation works alongside DLSS Ray Reconstruction. Choose from five NVIDIA quality profiles independently of DLSS resolution; settings are saved with the patch. The Basic and Pro HUDs show render timings, GPU and memory use, and presented FPS including generated frames.
 
-VL.Nvidia.Streamline supplies DLSS Super Resolution and Frame Generation, plus NVIDIA Image Scaling and the other Streamline features. PathTracing uses the same stack for DLSS Ray Reconstruction and Reflex. The DX12Bridge renderer can present to a window or texture, return the image to Stride, and record fixed-rate H.264, H.265, AV1 or ProRes video. HDR10/PQ presentation and ten-bit recording are available for a scene-linear source; SDR remains an option.
+[VL.Nvidia.Streamline](https://www.nuget.org/packages/VL.Nvidia.Streamline/1.0.0) is how these NVIDIA features reach the path tracer. It also makes DLSS Super Resolution, Reflex and NVIDIA Image Scaling available in vvvv. Installing PathTracing brings Streamline and DX12Bridge along automatically.
 
-The three packages are available as [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing/0.8.0), [VL.Stride.DX12Bridge 0.8.0](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0) and [VL.Nvidia.Streamline 1.0.0](https://www.nuget.org/packages/VL.Nvidia.Streamline/1.0.0). Install `VL.Nvidia.PathTracing` to bring in its two dependencies automatically, or install DX12Bridge or Streamline for a patch that uses them independently. The package help browser includes examples and shipped agent skills for the nodes and shader authoring. Path tracing requires Windows and an NVIDIA RTX GPU; an Ampere GPU or newer and a current Shader Model 6.9 driver are recommended.
+## Fixed-rate video recording and HDR10 output
 
-For the evolving examples and discussion, see the [vvvv forum thread](https://forum.vvvv.org/t/vl-nvidia-pathtracing-real-time-path-tracing-in-vvvv-gamma/25110).
+Record a DirectX 12 window or standalone texture renderer at a fixed frame rate. The recorder supports a fallback encoder and can recover output after an interrupted capture. For compatible displays, choose HDR10/PQ with Rec.2020 conversion and ten-bit presentation; SDR is also available. For HDR10 video, the recorder can use ten-bit H.265 or AV1 output.
+
+## DX12Bridge connects Stride to RTXPT and opens the full shader pipeline
+
+The obstacle was Stride's DirectX 11 renderer: RTXPT needs DirectX 12. We built [VL.Stride.DX12Bridge](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0) so both can work on the same GPU. It lets textures and buffers cross into DirectX 12, then brings the path-traced image back to Stride.
+
+For shaders, we kept the familiar VL.Stride workflow: shader files appear as nodes, values become pins, and compilation works both in the editor and in a running patch. DX12Bridge extends that workflow to the full DirectX 12 pipeline. You can write vertex, hull, domain, geometry, pixel and compute shaders, the newer amplification and mesh stages, and the complete DirectX Raytracing set: ray generation, miss, closest-hit, any-hit, intersection and callable. Your own rendering passes, compute simulations and ray-traced effects can all be wired into a vvvv patch.
+
+## RTXPT 1.9, Shader Execution Reordering and per-pixel tracing
+
+The 0.8.0 release uses RTXPT 1.9, with Shader Execution Reordering where supported. Tracing every pixel is now the default for clean DLSS Ray Reconstruction output. DLSS resolution and path-tracing quality remain independent settings in the patch.
+
+## Install PathTracing and its companion packages
+
+Install or update [VL.Nvidia.PathTracing 0.8.0](https://www.nuget.org/packages/VL.Nvidia.PathTracing) in the vvvv Help Browser or from NuGet. Select this package; its dependencies are installed automatically. Help Browser examples cover GPU meshes, SDFs, text, area lights and recording.
+
+The package includes agent skills for its nodes, examples and shader authoring. They give coding agents package-specific context when helping build a scene.
+
+You can also install [VL.Stride.DX12Bridge 0.8.0](https://www.nuget.org/packages/VL.Stride.DX12Bridge/0.8.0) or [VL.Nvidia.Streamline 1.0.0](https://www.nuget.org/packages/VL.Nvidia.Streamline/1.0.0) without PathTracing, for a patch built around DirectX 12 shaders or DLSS.
+
+### Requirements
+
+- Windows 10 or 11 and an NVIDIA RTX GPU; Ampere (RTX 30 series) or newer is recommended.
+- NVIDIA drivers with Shader Model 6.9 support.
+
+Free for personal, non-commercial use. Commercial use requires a license. NVIDIA SDK binaries have additional license terms.
+
+The renderer is based on [NVIDIA RTXPT](https://github.com/NVIDIA-RTX/RTXPT), a project by Filip Strugar.

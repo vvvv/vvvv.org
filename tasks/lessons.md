@@ -5,6 +5,18 @@
 - Before revising a blog draft on a long-lived branch, compare its remote branch
   and current website `main` without changing the shared checkout. Reconcile
   newer site content and layouts before editing or previewing the article.
+- Preserve all owner-written article text when adding requested release coverage.
+  Add the new material around it; change only release facts that have become
+  outdated, and do not recast the author's deliberate voice or structure.
+- Name release article sections for the concrete capability the reader gets, in
+  the voice and structure of the owner's existing headings. Avoid generic
+  pipeline or frame labels.
+- Describe shader files as nodes, pins and live compilation as the established
+  VL.Stride workflow. For DX12Bridge, focus on the new DirectX 12 shader stages.
+- When the owner questions the certainty of a release claim, keep its ambition
+  and use the calibrated wording from the owner's earlier published post.
+- Article headings state the actual content of their section. Replace generic
+  prompts such as "Try it out" with the package or capability the section covers.
 
 ## 2026-09-21
 
