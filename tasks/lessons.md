@@ -6,6 +6,8 @@
   The vvvv Help Browser shows examples; it does not install NuGet packages.
 - Apply owner copy edits narrowly: distinguish technical names such as mesh
   shaders from nearby descriptive words and remove only the selected clause.
+- In public copy, say what users can render. Do not describe an internal data
+  transformation when the visible capability is text rendered as mesh or SDF.
 
 ## 2026-11-05
 

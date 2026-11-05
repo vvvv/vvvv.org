@@ -15,7 +15,7 @@ Real-time path tracing is now available in vvvv gamma. VL.Nvidia.PathTracing may
 
 ## GPU-generated meshes, SDFs, text and area lights
 
-Compute and mesh shaders can send GPU-generated geometry straight to the path tracer. The scene can also contain Stride meshes and shader-authored SDFs. Text nodes turn font and layout data into path-traced geometry. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
+Compute and mesh shaders can send GPU-generated geometry straight to the path tracer. The scene can also contain Stride meshes and shader-authored SDFs. Text can be rendered as mesh or SDF geometry, with font, glyph and instancing support. Mesh and SDF instancers share the same parameter pattern; sampled rectangle, disk and tube lights add area lighting alongside point and spot lights.
 
 ![Procedural shapes, materials and instanced geometry in the path tracer](geometry-gallery.jpg)
 
