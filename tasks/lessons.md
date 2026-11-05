@@ -1,5 +1,11 @@
 # Lessons
 
+## 2026-11-05
+
+- Before revising a blog draft on a long-lived branch, compare its remote branch
+  and current website `main` without changing the shared checkout. Reconcile
+  newer site content and layouts before editing or previewing the article.
+
 ## 2026-09-21
 
 - A concrete benchmark must not be introduced with a vague condition that the benchmark already instantiates. State the measured setup directly and keep its scope explicit.
