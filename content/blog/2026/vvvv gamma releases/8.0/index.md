@@ -4,10 +4,10 @@ title: "vvvv gamma 8.0 release"
 description: Release notes
 categories: "vvvv gamma Releases"
 author: joreg
-thumb: vvvv80-thumb.jpg
+thumb: vvvv80-thumb.png
 ---
 
-![vvvv gamma 8.0 release](header-8.png)
+![vvvv gamma 8.0 release](vvvv8-blog.jpg)
 <small>Artwork by [Juan Jurle](https://vvvv.org/people/juanhurle)</small>
  
 Here is to introduce **vvvv gamma 8.0**, ready for visual live-coding at scale powered by "Boygrouping", much simplified dependency management and much more...

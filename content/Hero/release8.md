@@ -7,7 +7,7 @@ button:
     title: Download
     url: /blog/2026/vvvv-gamma-8.0-release/
 image: 
-    src: header_70_4_3072.jpg
+    src: vvvv-8.png
     title: "8"
     author: "Juan Hurle"
     photographer: 
