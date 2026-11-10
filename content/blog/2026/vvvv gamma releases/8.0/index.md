@@ -5,10 +5,11 @@ description: Release notes
 categories: "vvvv gamma Releases"
 author: joreg
 thumb: vvvv80-thumb.png
+draft: true
 ---
 
 ![vvvv gamma 8.0 release](vvvv8-blog.jpg)
-<small>Artwork by [Juan Jurle](https://vvvv.org/people/juanhurle)</small>
+<small>Artwork by [Juan Hurlé](https://vvvv.org/people/juanhurle)</small>
  
 Here is to introduce **vvvv gamma 8.0**, ready for visual live-coding at scale powered by "Boygrouping", much simplified dependency management and much more...
 
@@ -100,6 +101,23 @@ movin
 ## Updated Libraries
   
 So the above was all new stuff. Now here are some highlights of changes to existing libraries for this release:
+
+https://www.nuget.org/packages/VL.MediaPipe
+https://www.nuget.org/packages/VL.IO.WebServer
+https://www.nuget.org/packages/VL.DollarsMoCap
+https://www.nuget.org/packages/VL.IO.OSC
+https://www.nuget.org/packages/VL.Devices.IDS
+https://www.nuget.org/packages/VL.Audio
+https://www.nuget.org/packages/VL.Audio.VST
+https://www.nuget.org/packages/VL.IO.MQTT
+https://www.nuget.org/packages/VL.Augmenta
+https://www.nuget.org/packages/VL.IO.TUIO
+https://www.nuget.org/packages/VL.ScreenRecorder
+https://www.nuget.org/packages/VL.Devices.RealSense
+https://www.nuget.org/packages/VL.CEF
+https://www.nuget.org/packages/VL.IO.ArtNet
+https://www.nuget.org/packages/VL.Video
+
 
 ### VL.Stride
 
