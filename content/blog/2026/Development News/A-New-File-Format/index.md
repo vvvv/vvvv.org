@@ -4,7 +4,7 @@ author: "gregsn"
 date: "2026-11-09"
 title: "A New File Format - Sneak Preview"
 slug: "a-new-file-format"
-description: ""
+description: "Two languages in one language"
 draft: true
 ---
 
@@ -33,14 +33,14 @@ If we'd have a better file format, we thought, agents would be able to make sens
 But can we store all the information of a vl document in a *loss-less* way and make it human readable at the same time?
 The answer is: It's tricky. 
 
-So we looked at the those documents - their model elements and properties - and tried to find a new representation for each type of element. And instead of only accepting a new loss-less representation we also allowed 
+So we looked at all the vl documents in the standard libraries - their model elements and properties - and tried to find a new representation for each type of element. And instead of only accepting a new loss-less representation we also allowed 
 * an acceptable or even desireable loss of outdated or bloated information (repair)  
 * a representation that even adds information (making things stick)
 
 ### Hybrid Development Environment
 ![Patch And Script](sideBySide.png)
 
-While the emphasis will always be on the tangability of a programming,  we didn't shy away from asking:
+While the emphasis will always be on the tangability of a programming, we didn't shy away from asking:
 Can we make the text-based version in some cases more readable then the visual one? Or at least: are there aspects where the text-based version is more to the point?
 
 ### Accumulators as an example
@@ -51,10 +51,10 @@ Here is an example where four border control points get represented by one ident
   <img src="bcps.png" alt="layout" style="width: 40; height: auto;">
 </div>
 
-The text based representation doesn't mention those four region control points, just one variable `acc1`. So it reads like: no need to fuddle the value back. Modify it deep in there. Read back outside. It's just more natural when coming from a textual way of thinking.
+The text based representation doesn't mention those four region control points, just one variable `acc1`. Modify it deep in there and read back outside. A very different form of expression which is more natural for the textual form. And still it's the same thing. It is the direct representation of all those control points and the links in between.
 
-The layout block contains all the information that is needed for the visual representation.   
-Here you see where nodes are placed and how the original border bontrol points get materialized while referring to `acc1` declared up there in the semantic part. 
+The layout block contains all the missing information that is needed for the visual representation.   
+Here you see where nodes are placed and how the original border bontrol points get materialized while referring to `acc1` declared up there in the semantic part. Most links are not mentioned here as they can be inferred already from the code.
 <div style="display: flex; gap: 1em;">
   <img src="acc1layout.png" alt="layout" style="width: 300; height: auto;">
   <img src="bcps.png" alt="layout" style="width: 40; height: auto;">
@@ -64,7 +64,7 @@ Here you see where nodes are placed and how the original border bontrol points g
 
 As we slowly tried to find representations for process nodes, stateful regions, instance operations... we tried to blend them well into a textual description of the program.
 
-![alt text](app.png)
+![Main Application](app.png)
 
 Some things are descriptive in nature, others are meant to be read like in an imperative language where a lines' position also tells us something about _when_ nodes get called.
 
@@ -79,7 +79,7 @@ There will be a grammar and introduction.
 * The node browser has several ways to find a node. Those choices were stored to file. We now only store what node we ended up with, not the way it got searched for.
 
 Regarding bits we lost about 80%. Expect the files to be much smaller.
-![alt text](filesize.png)
+![](filesize.png)
 
 ### Things to be worked on
 
