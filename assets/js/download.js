@@ -31,32 +31,49 @@ const tip = tippy('.previewButton', {
         instance._isLoaded = false;
       },
 
-    onShow(instance) {
+    async onShow(instance) {
+
+        if (instance._isLoaded) {
+            return;
+        }
 
         const buildType = instance.reference.dataset.link;
-            
-        Promise.allSettled([getLatestBuild(buildType, "")])
-        .then((result) => {
-            
-            var div=`
-            <div class="row">
-                <div class="col mx-0 mb-4">
-                    ${result[0].value}
-                </div>
-            </div>
-            `;
-            
-            document.getElementById('gammaPreviews').innerHTML = div;
-            var content = document.getElementById('previewDownloadTemplate').innerHTML;
+        let buildHtml = '';
 
-            instance.setContent(content);
-            instance._isLoaded = true;
-            var closeButton = instance.popper.getElementsByClassName('close')[0];
-            closeButton.onclick = function() {
-                instance.hide();
-            }
+        try {
+            var response = await getLatestBuild(buildType, "");
+            console.log (response);
+            buildHtml = `
+                <div class="row">
+                    <div class="col mx-0 mb-4">
+                        ${response}
+                    </div>
+                </div>`;
             
-        });
+        }  catch (error) {
+            console.error("Failed to fetch previews:", error);
+            buildHtml = `
+                <div class="row">
+                    <div class="col mx-0 mb-4 text-muted">
+                        Unable to load previews.
+                    </div>
+                </div>`;
+        }
+
+        const container = document.getElementById('gammaPreviews');
+        if (container) {
+            container.innerHTML = buildHtml;
+        }
+
+        const template = document.getElementById('previewDownloadTemplate');
+        if (template) {
+            instance.setContent(template.innerHTML);
+            instance._isLoaded = true;
+            const closeButton = instance.popper.querySelector('.close');
+            if (closeButton) {
+                closeButton.onclick = () => instance.hide();
+            }
+        }
       },
   });
 
@@ -111,47 +128,65 @@ async function getLatestBuild(buildType, branch)
 
 async function fetchData(link)
 {
-    var previews = []
-    var versionPattern = /\d{4}\.(.*?)\+/;
+    const versionPattern = /\d{4}\.(.*?)\+/;
 
-    var builds = await fetch(link)
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    .then(data => {
-        return data.getElementsByTagName("build");      
-    })
+    const doc = await fetchXML(link);
+    const builds = Array.from(doc.getElementsByTagName("build"));
 
-    for (var build of builds) {
-        
-        var buildNumber = build.getAttribute("number");
-        var id = build.getAttribute ("id");
-        var href = build.getAttribute ("href");
+    const previewPromises = builds.map(async (build) => {
+        const buildNumber = build.getAttribute("number");
+        const id = build.getAttribute ("id");
+        const href = build.getAttribute ("href");
 
-        if (href != null)
-        {
-            await fetch(getTeamcity() + href + "/artifacts/children")
-            .then(response => response.text())
-            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-            .then(data => {
-                var file = data.querySelector('file content[href$=".exe"]');
-                var stamp = data.querySelector('file[modificationTime]').getAttribute('modificationTime');           
+        if (!href) return null;
 
-                if (file != null)
-                {
-                    var exeLink = file.getAttribute('href');
+        try {
+            const details = await fetchXML(`${getTeamcity()}${href}/artifacts/children`);
 
-                    if (exeLink != null)
-                    {
-                        var shortNumber = buildNumber.match(versionPattern)[1];
-                        var changes = getTeamcity()+`/viewLog.html?buildId=${id}&tab=buildChangesDiv&user=guest`;
-                        previews.push ({link: exeLink, buildNumber: shortNumber, changesLink: changes, date: getDate(stamp)});
-                    }
-                }   
-            })
+            // Skip if no files exist (<files count="0"/>)
+            const files = details.querySelector('files');
+            const fileCount = files?.getAttribute('count') ?? '0';
+
+            if (fileCount === '0') {
+                return null;
+            }
+            
+            const file = details.querySelector('file content[href$=".exe"]');
+            const modTimeEl = details.querySelector('file[modificationTime]');
+            const stamp = modTimeEl ? modTimeEl.getAttribute('modificationTime') : null;
+            if (file) {
+                const exeLink = file.getAttribute('href');
+                if (exeLink) {
+                    const match = buildNumber ? buildNumber.match(versionPattern) : null;
+                    const shortNumber = match ? match[1] : buildNumber;
+                    const changes = `${getTeamcity()}/viewLog.html?buildId=${id}&tab=buildChangesDiv&user=guest`;
+                    return {
+                        link: exeLink,
+                        buildNumber: shortNumber,
+                        changesLink: changes,
+                        date: stamp ? getDate(stamp) : ''
+                    };
+                }
+            }
+        } catch (err) {
+            console.warn(`Failed to fetch artifacts for build ${buildNumber}:`, err);
         }
-    }
 
-    return previews;
+        return null;
+    });
+
+    const results = await Promise.all(previewPromises);
+    return results.filter(Boolean);
+}
+
+async function fetchXML(url)
+{
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP ${response.status} fetching ${url}`);
+    }
+    const text = await response.text();
+    return new window.DOMParser().parseFromString(text, "text/xml");
 }
 
 function getDate(stamp)
