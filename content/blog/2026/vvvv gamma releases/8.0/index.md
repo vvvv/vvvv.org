@@ -5,6 +5,7 @@ description: Release notes
 categories: "vvvv gamma Releases"
 author: joreg
 thumb: vvvv80-thumb.png
+draft: true
 ---
 
 ![vvvv gamma 8.0 release](vvvv8-blog.jpg)
