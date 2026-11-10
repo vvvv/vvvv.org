@@ -5,7 +5,6 @@ date: "2026-11-09"
 title: "A New File Format - Sneak Preview"
 slug: "a-new-file-format"
 description: "Two languages in one language"
-draft: true
 ---
 
 Dear patchers!
