@@ -9,6 +9,6 @@ button:
 image: 
     src: vvvv-8.png
     title: "8"
-    author: "Juan Hurle"
+    author: "Juan Hurlé"
     photographer: 
 ---

@@ -1,17 +1,16 @@
 ---
-date: "2026-11-05"
+date: "2026-11-10"
 title: "vvvv gamma 8.0 release"
 description: Release notes
 categories: "vvvv gamma Releases"
 author: joreg
 thumb: vvvv80-thumb.png
-draft: true
 ---
 
 ![vvvv gamma 8.0 release](vvvv8-blog.jpg)
 <small>Artwork by [Juan Hurlé](https://vvvv.org/people/juanhurle)</small>
  
-Here is to introduce **vvvv gamma 8.0**, ready for visual live-coding at scale powered by "Boygrouping", much simplified dependency management and much more...
+Here is to introduce **vvvv gamma 8.0**, ready for visual live-coding at scale powered by "Boygrouping", much simplified dependency management and some more...
 
 {{< box >}}
 __[Download vvvv gamma 8](http://vvvv.org/#Download)__  
@@ -27,7 +26,7 @@ So let's unwrap this release and let us give you an overview of what's new:
 ## Distributed Rendering
 
 ![Dataland by Refik Anadol Studio, 2026](<Gallery A – Data Pavilion_07.png>)
-<small>[Dataland](https://dataland.art/) by [Refik Anadol Studio](http://refikanadolstudio.com): 42 PCs powering 84 4k projectors.</small>
+<small>[Dataland](https://dataland.art/) by [Refik Anadol Studio](http://refikanadolstudio.com): 42 PCs powering 84 4k projectors for a seamless ouput.</small>
 
 With this release we're bringing vvvv gamma back up to speed when it comes to developing applications for large-scale and interactive spaces. Our very own distributed rendering system dubbed "Boygrouping" makes it a breeze to live-code an application that runs distributed over any number of PCs. Develop on the main PC, and see changes applied live, on the big screen, without the need for any kind of deployment. Saves time, nerves and leaves a lot of space for play-testing with real user-input on-site.
 
