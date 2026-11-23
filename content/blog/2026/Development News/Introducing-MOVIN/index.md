@@ -24,6 +24,8 @@ Usage in vvvv is as trivial as you'd expect. [VL.MOVIN](https://www.nuget.org/pa
     Your browser does not support the video tag.  
 </video>
 
+Many thanks to MOVIN for their great support, helping us with a swift integration!
+
 ## How do i get it?
 
 Simply [install as usually](https://thegraybook.vvvv.org/reference/hde/managing-nugets.html):
