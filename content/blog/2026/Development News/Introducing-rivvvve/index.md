@@ -1,40 +1,64 @@
 ---
 categories: "Development News"
 author: "joreg"
-date: "2026-09-16"
-title: "A new way to design and integrate User Interfaces"
-slug: "introducing-rive"
-description: "Introducing: Rive - Interactive Vector Graphics & UI"
-draft: true
+date: "2026-11-18"
+title: "Introducing: Rive - Interactive Vector Graphics & UI"
+description: "High quality and highly performant"
+thumb: thumb.png
 ---
 
 Dear patchers!
 
-Remember [Lottie](https://vvvv.org/blog/2022/introducing-lottie/)? That, but interactive and with a two-way data binding for interaction with your patches. And then some...
+Remember [Lottie](https://vvvv.org/blog/2022/introducing-lottie/) or even [Flash](https://en.wikipedia.org/wiki/Macromedia_Flash_8)? Those, on steroids and complete with a two-way data binding for interaction with your patches. And then some...
 
-Introducing: **[Rive](https://rive.app/)** "A new way to Design, build, and ship User Interfaces" ... and now a first-class citizen in vvvv!
+Enter: 
 
-Watch their intro video to get an idea of what to expect:
+[![](rive-logo.png)](https://rive.app/)
 
-{{< youtube mMpik32gkt4 >}}
+A new way to design, build and ship User Interfaces and more... and now a first-class citizen in vvvv!
+
+Watch their 2026 showreel to get an idea of what to expect:
+
+{{< youtube nRlXWz4PRow >}}
 
 Rive and vvvv play very well together in two aspects:
-- We're integrating Rive's native DX11 renderer, meaning what you get is not a texture but a resolution independent rendering of the Rive content right onto your scene
-- Rive's [Data Binding](https://rive.app/docs/editor/data-binding/overview) capabilities allow you to connect data directly to datatypes in VL 
+- We're integrating Rive's native renderer, meaning what you get is not a texture but a resolution independent rendering of the Rive content right into your scene
+- Rive's [Data Binding](https://rive.app/docs/editor/data-binding/overview) integrates perfectly with the VL way of manipulating data 
 
-Here is how this looks in a patch 
-**screenshot**
+And here is how using rive looks in a patch: 
 
-Many thanks go to Rive for their great support, helping us with a smooth integration in vvvv!
+<video width=100% controls autoplay>
+    <source src="rivvvve.mp4" type="video/mp4">
+    Your browser does not support the video tag.  
+</video>
 
-## How do i get it?
+Getting bi-directional access to data of a ViewModel internal to a rive file takes only a few clicks using the Property node. It returns a Channel and allows you to read and write data as needed. 
 
-Nothing special, just your [regular NuGet install](https://thegraybook.vvvv.org/reference/hde/managing-nugets.html):
+The pack comes with a series of help patches demonstrating, among other things, data binding with lists and images!
 
-    nuget install VL.Rive -pre
+## Feature highlights
 
-## Sponsor credits
+Of the [Rive runtime features](https://rive.app/docs/feature-support) here are the most valuable ones supported by [VL.Rive](https://www.nuget.org/packages/VL.Rive):
+
+✅ GPU Canvas  
+✅ Scripting  
+✅ Data Binding incl. Lists and Images  
+✅ Text Follow Path  
+✅ Vector Feathering  
+✅ N-Slicing  
+✅ Layouts  
+
+## How can I try it?
+
+- [Get vvvv gamma](https://vvvv.org/download/) >= 8.0 (preview)
+- Open the Help Browser (F1)
+- Select the "Learn" tab and search for "rive"
+- At the very bottom find the "Rive" entry and click the download button
+- Check the now available help patches...
+
+## Credits
+Many thanks go to Rive for their great support, helping us with a smooth integration into vvvv!
 
 For the sponsoring of this development we bow to [Refik Anadol Studio](https://refikanadol.com/).
 
-If you also have a request for custom development, [get in touch](mailto:devvvvs@vvvv.org)!
+If you also have a request for custom development, please [get in touch](mailto:devvvvs@vvvv.org)!
