@@ -3,7 +3,7 @@ title: Visual Live-Programming
 weight: 5
 ---
 
-vvvv is a visual-first and fully live-programming environment. While it is possible to develop parts of your applications also using traditional text coding, this is mostly a preference but hardly ever a necessity. 
+vvvv is a visual-first (node-based) live-programming environment. While it is possible to develop parts of your applications also using traditional text coding, this is mostly a preference but hardly ever a necessity. 
 
 {{< vimeo "478105897" 400 >}}
 
