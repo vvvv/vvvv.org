@@ -32,9 +32,11 @@ And here is how using rive looks in a patch:
     Your browser does not support the video tag.  
 </video>
 
-Getting bi-directional access to data of a ViewModel internal to a rive file takes only a few clicks using the Property node. It returns a Channel and allows you to read and write data as needed. 
+Getting bi-directional access to data of a ViewModel internal to a rive file takes only a few clicks using the Property node. It returns a Channel and allows you to read and write data as needed. The pack comes with a series of help patches demonstrating, among other things, data binding with lists and images!
 
-The pack comes with a series of help patches demonstrating, among other things, data binding with lists and images!
+These two episodes of vvvvTv dive deeper:  
+🍿S03E04: [Introduction to Rive Engine](https://youtube.com/live/onLMADROe7o)  
+🍿S03E05: [Data Binding with Rive Engine](https://youtube.com/live/XCJIkjQkIus)
 
 ## Feature highlights
 
@@ -43,10 +45,11 @@ Of the [Rive runtime features](https://rive.app/docs/feature-support) here are t
 ✅ GPU Canvas  
 ✅ Scripting  
 ✅ Data Binding incl. Lists and Images  
-✅ Text Follow Path  
 ✅ Vector Feathering  
-✅ N-Slicing  
 ✅ Layouts  
+✅ Text Input  
+✅ Text Follow Path  
+✅ N-Slicing  
 
 ## How can I try it?
 
